@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+    <utente-ultima-modifica>
+        <enabled>true</enabled>
+        <email>m.bartolozzi@inera.it</email>
+        <login>INERA</login>
+        <password>edaca669c6595f7f7df726c821d7b6ef</password>
+        <id-utenti>2</id-utenti>
+    </utente-ultima-modifica>
+    <indirizzo>Viale S. Lorenzo 8</indirizzo>
+    <accesso-riservato>false</accesso-riservato>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>282</id-contatti>
+        <valore> +39 082421678</valore>
+        <contatti-tipo>
+            <descrizione>Telefono</descrizione>
+            <id-contatti-tipo>1</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>283</id-contatti>
+        <valore> +39 082421533</valore>
+        <contatti-tipo>
+            <descrizione>Fax</descrizione>
+            <id-contatti-tipo>2</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <isil-provincia>BN</isil-provincia>
+    <denominazione-ufficiale>Biblioteca francescana Le Grazie</denominazione-ufficiale>
+    <catalogazione-data-modifica>2012-06-06T15:54:03.000+02:00</catalogazione-data-modifica>
+    <comune>
+        <denominazione>Benevento</denominazione>
+        <id-comune>1264</id-comune>
+        <codice-istat>062008</codice-istat>
+        <codice-finanze>A783</codice-finanze>
+        <provincia>
+            <denominazione>Benevento</denominazione>
+            <codice-istat>062</codice-istat>
+            <dati-province-istat>
+                <totale-abitanti>288283</totale-abitanti>
+                <id-provincia>14</id-provincia>
+            </dati-province-istat>
+            <regione>
+                <denominazione>CAMPANIA</denominazione>
+                <id-regione>4</id-regione>
+                <sigla>CP</sigla>
+                <stato>
+                    <denominazione>Italia</denominazione>
+                    <id-stato>1</id-stato>
+                    <sigla>IT</sigla>
+                </stato>
+                <dati-regioni-istat>
+                    <id-regione>4</id-regione>
+                    <id-sort>15</id-sort>
+                    <totale-abitanti>5824662</totale-abitanti>
+                    <descrizione-zona>SUD</descrizione-zona>
+                </dati-regioni-istat>
+            </regione>
+            <sigla>BN</sigla>
+            <id-provincia>14</id-provincia>
+        </provincia>
+    </comune>
+    <tipologia-funzionale>
+        <id-tipologia-funzionale>3</id-tipologia-funzionale>
+        <descrizione>Specializzata</descrizione>
+    </tipologia-funzionale>
+    <dewey-liberos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DeweyLibero">
+        <dewey>
+            <descrizione>Religione</descrizione>
+            <id-dewey>200</id-dewey>
+        </dewey>
+        <descrizione>Religione</descrizione>
+        <id>
+            <id-biblioteca>187</id-biblioteca>
+            <id-dewey>200</id-dewey>
+        </id>
+    </dewey-liberos>
+    <dewey-liberos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DeweyLibero">
+        <dewey>
+            <descrizione>Congregazioni e ordini maschili cattolico-romani. Francescani</descrizione>
+            <id-dewey>2553</id-dewey>
+        </dewey>
+        <descrizione>Francescani - studi sul francescanesimo</descrizione>
+        <id>
+            <id-biblioteca>187</id-biblioteca>
+            <id-dewey>2553</id-dewey>
+        </id>
+    </dewey-liberos>
+    <dewey-liberos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DeweyLibero">
+        <dewey>
+            <descrizione>Congregazioni e ordini religiosi nella storia della Chiesa.Francescani</descrizione>
+            <id-dewey>2713</id-dewey>
+        </dewey>
+        <descrizione>Francescani</descrizione>
+        <id>
+            <id-biblioteca>187</id-biblioteca>
+            <id-dewey>2713</id-dewey>
+        </id>
+    </dewey-liberos>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>1</id-sort>
+            <descrizione>volumi ed opuscoli*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>32000</quantita>
+        <id>
+            <id-biblioteca>187</id-biblioteca>
+            <id-patrimonio-specializzazione>20000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>37</id-sort>
+            <descrizione>incunaboli*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20100</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>42</quantita>
+        <id>
+            <id-biblioteca>187</id-biblioteca>
+            <id-patrimonio-specializzazione>20100</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>26</id-sort>
+            <descrizione>edizioni del '500*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20200</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>300</quantita>
+        <id>
+            <id-biblioteca>187</id-biblioteca>
+            <id-patrimonio-specializzazione>20200</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>8</id-sort>
+            <descrizione>periodici*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>5</id-patrimonio-specializzazione-categoria>
+                <id-sort>12</id-sort>
+                <descrizione>Pubblicazioni in serie</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>40000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>75</quantita>
+        <id>
+            <id-biblioteca>187</id-biblioteca>
+            <id-patrimonio-specializzazione>40000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>3</id-sort>
+            <descrizione>giornali*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>5</id-patrimonio-specializzazione-categoria>
+                <id-sort>12</id-sort>
+                <descrizione>Pubblicazioni in serie</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>40300</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>1</quantita>
+        <id>
+            <id-biblioteca>187</id-biblioteca>
+            <id-patrimonio-specializzazione>40300</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <gestisce-servizio-bibliografico-interno>false</gestisce-servizio-bibliografico-interno>
+    <catalogazione-data-import>2012-05-29T13:40:04.000+02:00</catalogazione-data-import>
+    <denominazioni-precedentis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DenominazioniPrecedenti">
+        <denominazione>Biblioteca del Santuario Maria Santissima delle Grazie</denominazione>
+        <id-denominazioni-precedenti>18</id-denominazioni-precedenti>
+    </denominazioni-precedentis>
+    <denominazioni-precedentis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DenominazioniPrecedenti">
+        <denominazione>Biblioteca della Basilica Madonna delle Grazie</denominazione>
+        <id-denominazioni-precedenti>19</id-denominazioni-precedenti>
+    </denominazioni-precedentis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>1</giorno>
+        <id-orario-ufficiali>1010</id-orario-ufficiali>
+        <alle>1970-01-01T18:00:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>2</giorno>
+        <id-orario-ufficiali>1011</id-orario-ufficiali>
+        <alle>1970-01-01T18:00:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>3</giorno>
+        <id-orario-ufficiali>1012</id-orario-ufficiali>
+        <alle>1970-01-01T18:00:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>4</giorno>
+        <id-orario-ufficiali>1013</id-orario-ufficiali>
+        <alle>1970-01-01T18:00:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>5</giorno>
+        <id-orario-ufficiali>1014</id-orario-ufficiali>
+        <alle>1970-01-01T18:00:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>6</giorno>
+        <id-orario-ufficiali>1015</id-orario-ufficiali>
+        <alle>1970-01-01T18:00:00.000+01:00</alle>
+    </orario-ufficialis>
+    <bilancio-patrimoniale-posseduto-under14>0</bilancio-patrimoniale-posseduto-under14>
+    <cap>82100</cap>
+    <partecipa-cataloghi-generalis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.PartecipaCataloghiGenerali">
+        <cataloghi-supporto-digitale-tipo>
+            <id-cataloghi-supporto-digitale-tipo>3</id-cataloghi-supporto-digitale-tipo>
+            <descrizione>No</descrizione>
+        </cataloghi-supporto-digitale-tipo>
+        <percentuale-schede>0</percentuale-schede>
+        <schede>true</schede>
+        <volume>false</volume>
+        <id-cataloghi-generali>204</id-cataloghi-generali>
+        <catalogo-generale-tipo>
+            <descrizione>Autore</descrizione>
+            <id-catalogo-generale-tipo>1</id-catalogo-generale-tipo>
+        </catalogo-generale-tipo>
+        <microforme>false</microforme>
+    </partecipa-cataloghi-generalis>
+    <autonomia-amministrativa>false</autonomia-amministrativa>
+    <edificio-monumentale>true</edificio-monumentale>
+    <stato-biblioteca-workflow>
+        <id-stato>3</id-stato>
+        <label>Revisione</label>
+    </stato-biblioteca-workflow>
+    <edificio-denominazione>Santuario S. Maria delle Grazie</edificio-denominazione>
+    <fondi-antichi-consistenza>
+        <descrizione>-</descrizione>
+        <id-fondi-antichi-consistenza>1</id-fondi-antichi-consistenza>
+    </fondi-antichi-consistenza>
+    <ente>
+        <ente-obiettivo>
+            <descrizione>NON SPECIFICATO</descrizione>
+            <id-ente-obiettivo>0</id-ente-obiettivo>
+        </ente-obiettivo>
+        <denominazione>Frati Minori OFM. Santuario e convento S. Maria delle Grazie di Benevento</denominazione>
+        <id-ente>167</id-ente>
+        <ente-tipologia-amministrativa>
+            <descrizione>Enti ecclesiastici</descrizione>
+            <id-ente-tipologia-amministrativa>1000</id-ente-tipologia-amministrativa>
+        </ente-tipologia-amministrativa>
+        <stato>
+            <denominazione>Italia</denominazione>
+            <id-stato>1</id-stato>
+            <sigla>IT</sigla>
+        </stato>
+    </ente>
+    <bilancio-patrimoniale-posseduto>0</bilancio-patrimoniale-posseduto>
+    <isil-numero>52</isil-numero>
+    <gestisce-servizio-bibliografico-esterno>false</gestisce-servizio-bibliografico-esterno>
+    <partecipa-cataloghi-collettivi-materiales
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.PartecipaCataloghiCollettiviMateriale">
+        <cataloghi-supporto-digitale-tipo>
+            <id-cataloghi-supporto-digitale-tipo>3</id-cataloghi-supporto-digitale-tipo>
+            <descrizione>No</descrizione>
+        </cataloghi-supporto-digitale-tipo>
+        <schede>false</schede>
+        <percentuale-volume>0</percentuale-volume>
+        <volume>true</volume>
+        <patrimonio-specializzazione>
+            <id-sort>26</id-sort>
+            <descrizione>edizioni del '500*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20200</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <cataloghi-collettivi>
+            <id-cataloghi-collettivi>6</id-cataloghi-collettivi>
+            <descrizione>Censimento nazionale delle edizioni italiane del XVI secolo</descrizione>
+            <cataloghi-collettivi-zona-tipo>
+                <descrizione>Nazionale</descrizione>
+                <id-cataloghi-collettivi-zona-tipo>3</id-cataloghi-collettivi-zona-tipo>
+            </cataloghi-collettivi-zona-tipo>
+        </cataloghi-collettivi>
+        <id-cataloghi-collettivi-materiale>44</id-cataloghi-collettivi-materiale>
+        <microforme>false</microforme>
+    </partecipa-cataloghi-collettivi-materiales>
+    <id-biblioteca>187</id-biblioteca>
+    <isil-stato>IT</isil-stato>
+</biblioteca>

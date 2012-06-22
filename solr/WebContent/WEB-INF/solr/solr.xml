@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<solr persistent="false">
+  <!--
+  adminPath: RequestHandler path to manage cores.  
+    If 'null' (or absent), cores will not be manageable via request handler
+  -->
+	<cores adminPath="/admin/cores">
+		<core name="abi" instanceDir="abi" />
+   		<core name="comune" instanceDir="comune" />
+   		<core name="provincia" instanceDir="provincia" />
+   		<core name="regione" instanceDir="regione" />
+   		<core name="dewey" instanceDir="dewey" />
+   		<core name="sistemi_biblioteche" instanceDir="sistemi_biblioteche" />
+   		<core name="sezioni_speciali" instanceDir="sezioni_speciali" />
+   		<core name="cataloghi_collettivi" instanceDir="cataloghi_collettivi" />
+   		<core name="patrimonio" instanceDir="patrimonio" />
+   		
+   		<core name="catalogo_generale_tipo" instanceDir="catalogo_generale_tipo" />
+   		<core name="destinazioni_sociali_tipo" instanceDir="destinazioni_sociali_tipo" />
+   		<core name="ente_tipologia_amministrativa" instanceDir="ente_tipologia_amministrativa" />
+   		<core name="spogli_bibliografici" instanceDir="spogli_bibliografici" />
+   		<core name="tipologia_funzionale" instanceDir="tipologia_funzionale" />
+	</cores>
+</solr>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+    <prestito-locales
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.PrestitoLocale">
+        <id-prestito-locale>113</id-prestito-locale>
+    </prestito-locales>
+    <utente-ultima-modifica>
+        <enabled>true</enabled>
+        <email>m.bartolozzi@inera.it</email>
+        <login>INERA</login>
+        <password>edaca669c6595f7f7df726c821d7b6ef</password>
+        <id-utenti>2</id-utenti>
+    </utente-ultima-modifica>
+    <indirizzo>Via A. De Gasperi</indirizzo>
+    <accesso-riservato>false</accesso-riservato>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>303</id-contatti>
+        <valore> +39 0824984009</valore>
+        <contatti-tipo>
+            <descrizione>Telefono</descrizione>
+            <id-contatti-tipo>1</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <isil-provincia>BN</isil-provincia>
+    <denominazione-ufficiale>Biblioteca comunale</denominazione-ufficiale>
+    <catalogazione-data-modifica>2012-06-06T15:54:06.000+02:00</catalogazione-data-modifica>
+    <comune>
+        <denominazione>San Marco dei Cavoti</denominazione>
+        <id-comune>1321</id-comune>
+        <codice-istat>062064</codice-istat>
+        <codice-finanze>H984</codice-finanze>
+        <provincia>
+            <denominazione>Benevento</denominazione>
+            <codice-istat>062</codice-istat>
+            <dati-province-istat>
+                <totale-abitanti>288283</totale-abitanti>
+                <id-provincia>14</id-provincia>
+            </dati-province-istat>
+            <regione>
+                <denominazione>CAMPANIA</denominazione>
+                <id-regione>4</id-regione>
+                <sigla>CP</sigla>
+                <stato>
+                    <denominazione>Italia</denominazione>
+                    <id-stato>1</id-stato>
+                    <sigla>IT</sigla>
+                </stato>
+                <dati-regioni-istat>
+                    <id-regione>4</id-regione>
+                    <id-sort>15</id-sort>
+                    <totale-abitanti>5824662</totale-abitanti>
+                    <descrizione-zona>SUD</descrizione-zona>
+                </dati-regioni-istat>
+            </regione>
+            <sigla>BN</sigla>
+            <id-provincia>14</id-provincia>
+        </provincia>
+    </comune>
+    <tipologia-funzionale>
+        <id-tipologia-funzionale>5</id-tipologia-funzionale>
+        <descrizione>Pubblica</descrizione>
+    </tipologia-funzionale>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>1</id-sort>
+            <descrizione>volumi ed opuscoli*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>2000</quantita>
+        <id>
+            <id-biblioteca>201</id-biblioteca>
+            <id-patrimonio-specializzazione>20000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>8</id-sort>
+            <descrizione>periodici*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>5</id-patrimonio-specializzazione-categoria>
+                <id-sort>12</id-sort>
+                <descrizione>Pubblicazioni in serie</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>40000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>46</quantita>
+        <id>
+            <id-biblioteca>201</id-biblioteca>
+            <id-patrimonio-specializzazione>40000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <gestisce-servizio-bibliografico-interno>true</gestisce-servizio-bibliografico-interno>
+    <catalogazione-data-import>2012-05-29T13:40:04.000+02:00</catalogazione-data-import>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T08:30:00.000+01:00</dalle>
+        <giorno>1</giorno>
+        <id-orario-ufficiali>1071</id-orario-ufficiali>
+        <alle>1970-01-01T00:30:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>1</giorno>
+        <id-orario-ufficiali>1072</id-orario-ufficiali>
+        <alle>1970-01-01T18:15:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T08:30:00.000+01:00</dalle>
+        <giorno>2</giorno>
+        <id-orario-ufficiali>1073</id-orario-ufficiali>
+        <alle>1970-01-01T00:30:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>2</giorno>
+        <id-orario-ufficiali>1074</id-orario-ufficiali>
+        <alle>1970-01-01T18:15:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T08:30:00.000+01:00</dalle>
+        <giorno>3</giorno>
+        <id-orario-ufficiali>1075</id-orario-ufficiali>
+        <alle>1970-01-01T00:30:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>3</giorno>
+        <id-orario-ufficiali>1076</id-orario-ufficiali>
+        <alle>1970-01-01T18:15:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T08:30:00.000+01:00</dalle>
+        <giorno>4</giorno>
+        <id-orario-ufficiali>1077</id-orario-ufficiali>
+        <alle>1970-01-01T00:30:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>4</giorno>
+        <id-orario-ufficiali>1078</id-orario-ufficiali>
+        <alle>1970-01-01T18:15:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T08:30:00.000+01:00</dalle>
+        <giorno>5</giorno>
+        <id-orario-ufficiali>1079</id-orario-ufficiali>
+        <alle>1970-01-01T00:30:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T15:00:00.000+01:00</dalle>
+        <giorno>5</giorno>
+        <id-orario-ufficiali>1080</id-orario-ufficiali>
+        <alle>1970-01-01T18:15:00.000+01:00</alle>
+    </orario-ufficialis>
+    <bilancio-patrimoniale-posseduto-under14>0</bilancio-patrimoniale-posseduto-under14>
+    <cap>82029</cap>
+    <partecipa-cataloghi-generalis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.PartecipaCataloghiGenerali">
+        <cataloghi-supporto-digitale-tipo>
+            <id-cataloghi-supporto-digitale-tipo>3</id-cataloghi-supporto-digitale-tipo>
+            <descrizione>No</descrizione>
+        </cataloghi-supporto-digitale-tipo>
+        <percentuale-schede>0</percentuale-schede>
+        <schede>true</schede>
+        <volume>false</volume>
+        <id-cataloghi-generali>219</id-cataloghi-generali>
+        <catalogo-generale-tipo>
+            <descrizione>Autore</descrizione>
+            <id-catalogo-generale-tipo>1</id-catalogo-generale-tipo>
+        </catalogo-generale-tipo>
+        <microforme>false</microforme>
+    </partecipa-cataloghi-generalis>
+    <autonomia-amministrativa>false</autonomia-amministrativa>
+    <stato-biblioteca-workflow>
+        <id-stato>3</id-stato>
+        <label>Revisione</label>
+    </stato-biblioteca-workflow>
+    <fondi-antichi-consistenza>
+        <descrizione>-</descrizione>
+        <id-fondi-antichi-consistenza>1</id-fondi-antichi-consistenza>
+    </fondi-antichi-consistenza>
+    <ente>
+        <ente-obiettivo>
+            <descrizione>NON SPECIFICATO</descrizione>
+            <id-ente-obiettivo>0</id-ente-obiettivo>
+        </ente-obiettivo>
+        <denominazione>Comune di San Marco dei Cavoti</denominazione>
+        <id-ente>178</id-ente>
+        <ente-tipologia-amministrativa>
+            <descrizione>Comune</descrizione>
+            <id-ente-tipologia-amministrativa>603</id-ente-tipologia-amministrativa>
+        </ente-tipologia-amministrativa>
+        <stato>
+            <denominazione>Italia</denominazione>
+            <id-stato>1</id-stato>
+            <sigla>IT</sigla>
+        </stato>
+    </ente>
+    <bilancio-patrimoniale-posseduto>0</bilancio-patrimoniale-posseduto>
+    <isil-numero>68</isil-numero>
+    <gestisce-servizio-bibliografico-esterno>false</gestisce-servizio-bibliografico-esterno>
+    <id-biblioteca>201</id-biblioteca>
+    <data-fondazione>1989</data-fondazione>
+    <isil-stato>IT</isil-stato>
+</biblioteca>

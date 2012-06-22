@@ -1,0 +1,42 @@
+<!-- INIZIO TABELLA CALCOLO PERCORSO -->
+<style>
+.drivingform {
+	FONT-SIZE: 9px; 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	z-order: 1
+}
+</style>
+<input type="hidden" id="idx"/>
+<table border=0>
+<tr>
+	<td>
+		<table border="0" cellspacing="1" cellpadding="1">
+			<tr>
+				<td align="left" >
+					<font face="Verdana" color="#7197CB"	size="1"><b>PARTENZA</b></font>
+				</td>
+				<td align="left" >
+					<input class="drivingform" type="text" name="saddress" id="saddress" value="" size="60">				
+				</td>
+			</tr>
+			<tr>
+				<td align="left" >
+					<font face="Verdana" color="#7197CB" size="1"><b>ARRIVO</b></font>
+				</td>
+				<td align="left" >
+					<input class="drivingform" type="text" name="aaddress" id="aaddress" value="" size="60">
+					
+					<input type="hidden" name="alat" id="alat" value="" size="60">
+					<input type="hidden" name="alng" id="alng" value="" size="60">									
+				</td>
+			</tr>
+			<tr>
+				<td align="left" colspan=3>
+					<input class="drivingform" type="button" name="Calcola"  value="Ottieni indicazioni stradali" onclick="calcolaPercorso();">				
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>
+<!-- FINE TABELLA CALCOLO PERCORSO -->

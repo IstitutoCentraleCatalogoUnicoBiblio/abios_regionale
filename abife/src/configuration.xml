@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration>
+
+	<gmap>
+		<key>ABQIAAAAjE9mmXphnWGc7G8D8HcfAhTwM0brOpm-All5BF6PoaKBxRWWERR6-OHbTZX43Q9QJDOtSrMIqRtArg</key>
+		<!--key>ABQIAAAAjE9mmXphnWGc7G8D8HcfAhTq6SkVNHrmde6GaH0EKisQtQ2IsxR_BWjr2fNvBAD2MaiQAiP30kKUOA</key --> <!-- anakin.inera.it -->
+		<!--key>ABQIAAAAjE9mmXphnWGc7G8D8HcfAhScaw1hfRCa6PxB_rVUq8yjtNmbVhQrY7mb2tgy3C34tesZbQ6ccPFoqw</key --> <!--esercizio -->
+	</gmap>
+	
+	<!-- Parametri per la connessione a solr-->
+	<solr>
+		<solr-url>http://abi-dev.dmz.inera.it:8080/solrpuglia</solr-url>
+		<solr-client-timeout>60000</solr-client-timeout>
+		<solr-client-commit>true</solr-client-commit>
+		<solr-client-soTimeout>60000</solr-client-soTimeout>
+		<solr-client-connectionTimeout>60000</solr-client-connectionTimeout>
+		<solr-client-defaultMaxConnectionsPerHost>100</solr-client-defaultMaxConnectionsPerHost>
+		<solr-client-maxTotalConnections>100</solr-client-maxTotalConnections>
+		<solr-client-followRedirects>false</solr-client-followRedirects>
+		<solr-client-allowCompression>true</solr-client-allowCompression>
+		<solr-client-maxRetries>0</solr-client-maxRetries>
+		<default-core>abi</default-core>
+	</solr>
+
+	<!-- xslt -->
+	<xslt>
+		<!-- SCHEDE BIBLIOTECA -->
+		<xsl name="default" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/default.xsl" />
+		<xsl name="lista_parametri" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_parametri.xsl" />
+		<xsl name="lista_risultati" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_risultati.xsl" />
+		<xsl name="header_scheda" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/header_scheda.xsl" />
+		<xsl name="lista_anagrafica" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_anagrafica.xsl" />
+		<xsl name="lista_tipologia" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_tipologia.xsl" />
+		<xsl name="lista_profilo_storico_sede" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_profilo_storico_sede.xsl" />
+		<xsl name="lista_accesso_dest_soc" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_accesso_dest_soc.xsl" />
+		<xsl name="lista_orario_uff" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_orario_uff.xsl" />
+		<xsl name="lista_orario_var" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_orario_var.xsl" />
+		<xsl name="lista_patrimonio" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_patrimonio.xsl" />
+		<xsl name="lista_descr_dewey" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_descr_dewey.xsl" />
+		<xsl name="lista_cat_gen" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_cat_gen.xsl" />
+		<xsl name="lista_cat_spec" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_cat_spec.xsl" />
+		<xsl name="lista_cat_coll" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_cat_coll.xsl" />
+		<xsl name="lista_descr_url" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_descr_url.xsl" />
+		<xsl name="lista_sezioni" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_sezioni.xsl" />
+		<xsl name="lista_prestito" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_prestito.xsl" />
+		<xsl name="lista_supplementari" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_supplementari.xsl" />
+		<xsl name="lista_personale" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/lista_personale.xsl" />	
+		
+		<!-- PAGINE MAPPE -->
+		<xsl name="mappa_regioni" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/mappa_regioni.xsl" />
+		<xsl name="mappa_province" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/mappa_province.xsl" />	
+		<xsl name="mappa_comuni" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/xslt/mappa_comuni.xsl" />
+		
+		<!-- HELP RICERCHE (autocomplete) -->
+		<xsl name="helpDewey" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/help/xslt/helpDewey.xsl" />
+		<xsl name="helpSistemi" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/help/xslt/helpSistemi.xsl" />
+		<xsl name="helpSezioni" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/help/xslt/helpSezioni.xsl" />
+		<xsl name="helpPatr" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/help/xslt/helpPatr.xsl" />
+		<xsl name="helpCatColl" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/help/xslt/helpCatColl.xsl" />
+		<xsl name="helpCodiceDewey" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/help/xslt/helpCodiceDewey.xsl" />
+		<xsl name="helpComuni" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/help/xslt/helpComuni.xsl" />
+		
+		<!-- SELECT DINAMICHE -->
+		<xsl name="regioniItalia" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/dynaselect/xslt/regioniItalia.xsl" />
+		<xsl name="select_regioni" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/dynaselect/xslt/select_regioni.xsl" />
+		<xsl name="select_destinazione_sociale" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/dynaselect/xslt/select_destinazione_sociale.xsl" />
+		<xsl name="select_ente_tipologia_amministrativa" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/dynaselect/xslt/select_ente_tipologia_amministrativa.xsl" />
+		<xsl name="select_catalogo_generale_tipo" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/dynaselect/xslt/select_catalogo_generale_tipo.xsl" />
+		<xsl name="select_spogli_bibliografici" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/dynaselect/xslt/select_spogli_bibliografici.xsl" />
+		<xsl name="select_tipologia_funzionale" url="http://abi-dev.dmz.inera.it:8080/abifepuglia/dynaselect/xslt/select_tipologia_funzionale.xsl" />
+		
+		
+	</xslt>
+	
+</configuration>

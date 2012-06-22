@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+    <prestito-locales
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.PrestitoLocale">
+        <id-prestito-locale>127</id-prestito-locale>
+    </prestito-locales>
+    <utente-ultima-modifica>
+        <enabled>true</enabled>
+        <email>m.bartolozzi@inera.it</email>
+        <login>INERA</login>
+        <password>edaca669c6595f7f7df726c821d7b6ef</password>
+        <id-utenti>2</id-utenti>
+    </utente-ultima-modifica>
+    <indirizzo>Piazza Arechi II, Palazzo De Simone</indirizzo>
+    <accesso-riservato>false</accesso-riservato>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>325</id-contatti>
+        <valore> +39 0824305216</valore>
+        <contatti-tipo>
+            <descrizione>Telefono</descrizione>
+            <id-contatti-tipo>1</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>326</id-contatti>
+        <valore> +39 0824305217</valore>
+        <contatti-tipo>
+            <descrizione>Telefono</descrizione>
+            <id-contatti-tipo>1</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>327</id-contatti>
+        <valore> +39 0824305215</valore>
+        <contatti-tipo>
+            <descrizione>Telefono</descrizione>
+            <id-contatti-tipo>1</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>328</id-contatti>
+        <valore> +39 0824305228</valore>
+        <contatti-tipo>
+            <descrizione>Fax</descrizione>
+            <id-contatti-tipo>2</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>329</id-contatti>
+        <valore>pemeis@unisannio.it</valore>
+        <contatti-tipo>
+            <descrizione>E-mail</descrizione>
+            <id-contatti-tipo>3</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>330</id-contatti>
+        <valore>http://www.economia.unisannio.it/modules.php?name=Biblioteca</valore>
+        <contatti-tipo>
+            <descrizione>Url</descrizione>
+            <id-contatti-tipo>5</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <isil-provincia>BN</isil-provincia>
+    <denominazione-ufficiale>Biblioteca del Dipartimento di studi giuridici, politici e sociali Persona, Mercato, Istituzioni - PEMEIS dell'Università degli studi del Sannio</denominazione-ufficiale>
+    <catalogazione-data-modifica>2012-06-06T15:54:09.000+02:00</catalogazione-data-modifica>
+    <comune>
+        <denominazione>Benevento</denominazione>
+        <id-comune>1264</id-comune>
+        <codice-istat>062008</codice-istat>
+        <codice-finanze>A783</codice-finanze>
+        <provincia>
+            <denominazione>Benevento</denominazione>
+            <codice-istat>062</codice-istat>
+            <dati-province-istat>
+                <totale-abitanti>288283</totale-abitanti>
+                <id-provincia>14</id-provincia>
+            </dati-province-istat>
+            <regione>
+                <denominazione>CAMPANIA</denominazione>
+                <id-regione>4</id-regione>
+                <sigla>CP</sigla>
+                <stato>
+                    <denominazione>Italia</denominazione>
+                    <id-stato>1</id-stato>
+                    <sigla>IT</sigla>
+                </stato>
+                <dati-regioni-istat>
+                    <id-regione>4</id-regione>
+                    <id-sort>15</id-sort>
+                    <totale-abitanti>5824662</totale-abitanti>
+                    <descrizione-zona>SUD</descrizione-zona>
+                </dati-regioni-istat>
+            </regione>
+            <sigla>BN</sigla>
+            <id-provincia>14</id-provincia>
+        </provincia>
+    </comune>
+    <tipologia-funzionale>
+        <id-tipologia-funzionale>2</id-tipologia-funzionale>
+        <descrizione>Istituto di insegnamento superiore</descrizione>
+    </tipologia-funzionale>
+    <orario-chiusures
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioChiusure">
+        <descrizione>Dal 01/08 al 31/08</descrizione>
+        <id-orario-chiusure>49</id-orario-chiusure>
+    </orario-chiusures>
+    <dewey-liberos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DeweyLibero">
+        <dewey>
+            <descrizione>Economia generale della produzione</descrizione>
+            <id-dewey>3385</id-dewey>
+        </dewey>
+        <descrizione>Microeconomia, economia delle imprese</descrizione>
+        <id>
+            <id-biblioteca>217</id-biblioteca>
+            <id-dewey>3385</id-dewey>
+        </id>
+    </dewey-liberos>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>1</id-sort>
+            <descrizione>volumi ed opuscoli*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>23000</quantita>
+        <id>
+            <id-biblioteca>217</id-biblioteca>
+            <id-patrimonio-specializzazione>20000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>8</id-sort>
+            <descrizione>periodici*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>5</id-patrimonio-specializzazione-categoria>
+                <id-sort>12</id-sort>
+                <descrizione>Pubblicazioni in serie</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>40000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>0</quantita>
+        <id>
+            <id-biblioteca>217</id-biblioteca>
+            <id-patrimonio-specializzazione>40000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>1</id-sort>
+            <descrizione>CD-ROM*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>11</id-patrimonio-specializzazione-categoria>
+                <id-sort>5</id-sort>
+                <descrizione>Documenti elettronici</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>58000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>0</quantita>
+        <id>
+            <id-biblioteca>217</id-biblioteca>
+            <id-patrimonio-specializzazione>58000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <gestisce-servizio-bibliografico-interno>true</gestisce-servizio-bibliografico-interno>
+    <catalogazione-data-import>2012-05-29T13:40:04.000+02:00</catalogazione-data-import>
+    <denominazioni-precedentis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DenominazioniPrecedenti">
+        <denominazione>Biblioteca DPeMeIs della Università degli studi del Sannio</denominazione>
+        <id-denominazioni-precedenti>23</id-denominazioni-precedenti>
+    </denominazioni-precedentis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T08:45:00.000+01:00</dalle>
+        <giorno>1</giorno>
+        <id-orario-ufficiali>1168</id-orario-ufficiali>
+        <alle>1970-01-01T17:15:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T08:45:00.000+01:00</dalle>
+        <giorno>2</giorno>
+        <id-orario-ufficiali>1169</id-orario-ufficiali>
+        <alle>1970-01-01T17:15:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T08:45:00.000+01:00</dalle>
+        <giorno>3</giorno>
+        <id-orario-ufficiali>1170</id-orario-ufficiali>
+        <alle>1970-01-01T17:15:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T08:45:00.000+01:00</dalle>
+        <giorno>4</giorno>
+        <id-orario-ufficiali>1171</id-orario-ufficiali>
+        <alle>1970-01-01T17:15:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T08:45:00.000+01:00</dalle>
+        <giorno>5</giorno>
+        <id-orario-ufficiali>1172</id-orario-ufficiali>
+        <alle>1970-01-01T13:30:00.000+01:00</alle>
+    </orario-ufficialis>
+    <bilancio-patrimoniale-posseduto-under14>0</bilancio-patrimoniale-posseduto-under14>
+    <cap>82100</cap>
+    <data-istituzione>1998</data-istituzione>
+    <partecipa-cataloghi-generalis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.PartecipaCataloghiGenerali">
+        <cataloghi-supporto-digitale-tipo>
+            <id-cataloghi-supporto-digitale-tipo>4</id-cataloghi-supporto-digitale-tipo>
+            <descrizione>Online</descrizione>
+        </cataloghi-supporto-digitale-tipo>
+        <percentuale-schede>0</percentuale-schede>
+        <schede>true</schede>
+        <percentuale-volume>0</percentuale-volume>
+        <volume>true</volume>
+        <id-cataloghi-generali>236</id-cataloghi-generali>
+        <catalogo-generale-tipo>
+            <descrizione>Autore</descrizione>
+            <id-catalogo-generale-tipo>1</id-catalogo-generale-tipo>
+        </catalogo-generale-tipo>
+        <microforme>false</microforme>
+    </partecipa-cataloghi-generalis>
+    <partecipa-cataloghi-generalis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.PartecipaCataloghiGenerali">
+        <cataloghi-supporto-digitale-tipo>
+            <id-cataloghi-supporto-digitale-tipo>4</id-cataloghi-supporto-digitale-tipo>
+            <descrizione>Online</descrizione>
+        </cataloghi-supporto-digitale-tipo>
+        <percentuale-schede>0</percentuale-schede>
+        <schede>true</schede>
+        <percentuale-volume>0</percentuale-volume>
+        <volume>true</volume>
+        <id-cataloghi-generali>237</id-cataloghi-generali>
+        <catalogo-generale-tipo>
+            <descrizione>Sistematico</descrizione>
+            <id-catalogo-generale-tipo>4</id-catalogo-generale-tipo>
+        </catalogo-generale-tipo>
+        <microforme>false</microforme>
+    </partecipa-cataloghi-generalis>
+    <partecipa-cataloghi-generalis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.PartecipaCataloghiGenerali">
+        <cataloghi-supporto-digitale-tipo>
+            <id-cataloghi-supporto-digitale-tipo>4</id-cataloghi-supporto-digitale-tipo>
+            <descrizione>Online</descrizione>
+        </cataloghi-supporto-digitale-tipo>
+        <percentuale-schede>0</percentuale-schede>
+        <schede>true</schede>
+        <percentuale-volume>0</percentuale-volume>
+        <volume>true</volume>
+        <id-cataloghi-generali>238</id-cataloghi-generali>
+        <catalogo-generale-tipo>
+            <descrizione>Soggetto</descrizione>
+            <id-catalogo-generale-tipo>5</id-catalogo-generale-tipo>
+        </catalogo-generale-tipo>
+        <microforme>false</microforme>
+    </partecipa-cataloghi-generalis>
+    <partecipa-cataloghi-generalis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.PartecipaCataloghiGenerali">
+        <cataloghi-supporto-digitale-tipo>
+            <id-cataloghi-supporto-digitale-tipo>4</id-cataloghi-supporto-digitale-tipo>
+            <descrizione>Online</descrizione>
+        </cataloghi-supporto-digitale-tipo>
+        <schede>false</schede>
+        <volume>false</volume>
+        <id-cataloghi-generali>239</id-cataloghi-generali>
+        <catalogo-generale-tipo>
+            <descrizione>Titoli</descrizione>
+            <id-catalogo-generale-tipo>6</id-catalogo-generale-tipo>
+        </catalogo-generale-tipo>
+        <microforme>false</microforme>
+    </partecipa-cataloghi-generalis>
+    <autonomia-amministrativa>false</autonomia-amministrativa>
+    <catalogazione-data-modifica-remota>2008-03-18T09:47:00.000+01:00</catalogazione-data-modifica-remota>
+    <edificio-monumentale>true</edificio-monumentale>
+    <stato-biblioteca-workflow>
+        <id-stato>3</id-stato>
+        <label>Revisione</label>
+    </stato-biblioteca-workflow>
+    <codicis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Codici">
+        <valore>NAP03</valore>
+        <codici-tipo>
+            <descrizione>sbn</descrizione>
+            <id-codici>5</id-codici>
+        </codici-tipo>
+        <id>
+            <id-biblioteca>217</id-biblioteca>
+            <id-codici>5</id-codici>
+        </id>
+    </codicis>
+    <edificio-denominazione>Palazzo De Simone</edificio-denominazione>
+    <fondi-antichi-consistenza>
+        <descrizione>-</descrizione>
+        <id-fondi-antichi-consistenza>1</id-fondi-antichi-consistenza>
+    </fondi-antichi-consistenza>
+    <ente>
+        <ente-obiettivo>
+            <descrizione>NON SPECIFICATO</descrizione>
+            <id-ente-obiettivo>0</id-ente-obiettivo>
+        </ente-obiettivo>
+        <denominazione>Università degli studi del Sannio</denominazione>
+        <id-ente>193</id-ente>
+        <ente-tipologia-amministrativa>
+            <descrizione>Universita' statali</descrizione>
+            <id-ente-tipologia-amministrativa>700</id-ente-tipologia-amministrativa>
+        </ente-tipologia-amministrativa>
+        <stato>
+            <denominazione>Italia</denominazione>
+            <id-stato>1</id-stato>
+            <sigla>IT</sigla>
+        </stato>
+    </ente>
+    <bilancio-patrimoniale-posseduto>0</bilancio-patrimoniale-posseduto>
+    <isil-numero>84</isil-numero>
+    <gestisce-servizio-bibliografico-esterno>false</gestisce-servizio-bibliografico-esterno>
+    <partecipa-cataloghi-collettivi-materiales
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.PartecipaCataloghiCollettiviMateriale">
+        <cataloghi-supporto-digitale-tipo>
+            <id-cataloghi-supporto-digitale-tipo>3</id-cataloghi-supporto-digitale-tipo>
+            <descrizione>No</descrizione>
+        </cataloghi-supporto-digitale-tipo>
+        <schede>false</schede>
+        <volume>false</volume>
+        <patrimonio-specializzazione>
+            <id-sort>111</id-sort>
+            <descrizione>tutti i materiali</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>0</id-patrimonio-specializzazione-categoria>
+                <id-sort>2</id-sort>
+                <descrizione>Cataloghi</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>84100</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <cataloghi-collettivi>
+            <id-cataloghi-collettivi>146</id-cataloghi-collettivi>
+            <descrizione>Catalogo collettivo del Servizio bibliotecario nazionale, http://opac.sbn.it</descrizione>
+            <cataloghi-collettivi-zona-tipo>
+                <descrizione>Nazionale</descrizione>
+                <id-cataloghi-collettivi-zona-tipo>3</id-cataloghi-collettivi-zona-tipo>
+            </cataloghi-collettivi-zona-tipo>
+        </cataloghi-collettivi>
+        <id-cataloghi-collettivi-materiale>52</id-cataloghi-collettivi-materiale>
+        <microforme>false</microforme>
+    </partecipa-cataloghi-collettivi-materiales>
+    <id-biblioteca>217</id-biblioteca>
+    <denominazioni-alternatives
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DenominazioniAlternative">
+        <denominazione>Biblioteca della Facoltà di economia (Centro autonomo di spesa) dell'Università degli studi del Sannio [dal 1997]</denominazione>
+        <id-denominazioni-alternative>16</id-denominazioni-alternative>
+    </denominazioni-alternatives>
+    <denominazioni-alternatives
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DenominazioniAlternative">
+        <denominazione>Biblioteca della Facoltà di scienze economiche e sociali della Università di Salerno, Sede gemmata di Benevento</denominazione>
+        <id-denominazioni-alternative>17</id-denominazioni-alternative>
+    </denominazioni-alternatives>
+    <denominazioni-alternatives
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DenominazioniAlternative">
+        <denominazione>Biblioteca della Facoltà di economia della Università degli studi di Salerno, Sede gemmata di Benevento</denominazione>
+        <id-denominazioni-alternative>18</id-denominazioni-alternative>
+    </denominazioni-alternatives>
+    <data-fondazione>1992</data-fondazione>
+    <isil-stato>IT</isil-stato>
+</biblioteca>

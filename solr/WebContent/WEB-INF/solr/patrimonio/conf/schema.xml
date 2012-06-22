@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<schema name="patrimonio core" version="1.2">
+
+  <types>
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="tint" class="solr.TrieIntField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+    <fieldType name="text_rev" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.ReversedWildcardFilterFactory" withOriginal="true" maxPosAsterisk="3" maxPosQuestion="2" maxFractionAsterisk="0.33"/>
+      </analyzer>
+    </fieldType>
+    <fieldType name="textstr_accent_fl" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+    	<filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.ASCIIFoldingFilterFactory"/>
+      </analyzer>
+    </fieldType>
+ </types>
+
+
+	<fields>
+		<field name="id" type="string" indexed="true" stored="true" required="true" />
+		<field name="descrizione" type="textstr_accent_fl" indexed="true"  stored="true"/>
+		<field name="id_patrimonio_specializzazione_categoria" type="tint" indexed="true" stored="true"/>
+	</fields>
+	<uniqueKey>id</uniqueKey>
+	<defaultSearchField>descrizione</defaultSearchField>
+	<solrQueryParser defaultOperator="AND"/>
+	<copyField source="descrizione" dest="id"/>
+</schema>

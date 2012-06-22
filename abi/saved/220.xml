@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+    <utente-ultima-modifica>
+        <enabled>true</enabled>
+        <email>m.bartolozzi@inera.it</email>
+        <login>INERA</login>
+        <password>edaca669c6595f7f7df726c821d7b6ef</password>
+        <id-utenti>2</id-utenti>
+    </utente-ultima-modifica>
+    <indirizzo>Piazza Municipio</indirizzo>
+    <accesso-riservato>false</accesso-riservato>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>339</id-contatti>
+        <valore> +39 082464441</valore>
+        <contatti-tipo>
+            <descrizione>Telefono</descrizione>
+            <id-contatti-tipo>1</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <isil-provincia>BN</isil-provincia>
+    <denominazione-ufficiale>Biblioteca Archeoclub d'Italia</denominazione-ufficiale>
+    <catalogazione-data-modifica>2012-06-06T15:54:10.000+02:00</catalogazione-data-modifica>
+    <comune>
+        <denominazione>Baselice</denominazione>
+        <id-comune>1263</id-comune>
+        <codice-istat>062007</codice-istat>
+        <codice-finanze>A696</codice-finanze>
+        <provincia>
+            <denominazione>Benevento</denominazione>
+            <codice-istat>062</codice-istat>
+            <dati-province-istat>
+                <totale-abitanti>288283</totale-abitanti>
+                <id-provincia>14</id-provincia>
+            </dati-province-istat>
+            <regione>
+                <denominazione>CAMPANIA</denominazione>
+                <id-regione>4</id-regione>
+                <sigla>CP</sigla>
+                <stato>
+                    <denominazione>Italia</denominazione>
+                    <id-stato>1</id-stato>
+                    <sigla>IT</sigla>
+                </stato>
+                <dati-regioni-istat>
+                    <id-regione>4</id-regione>
+                    <id-sort>15</id-sort>
+                    <totale-abitanti>5824662</totale-abitanti>
+                    <descrizione-zona>SUD</descrizione-zona>
+                </dati-regioni-istat>
+            </regione>
+            <sigla>BN</sigla>
+            <id-provincia>14</id-provincia>
+        </provincia>
+    </comune>
+    <tipologia-funzionale>
+        <id-tipologia-funzionale>3</id-tipologia-funzionale>
+        <descrizione>Specializzata</descrizione>
+    </tipologia-funzionale>
+    <dewey-liberos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DeweyLibero">
+        <dewey>
+            <descrizione>Storia generale del mondo antico fino al 499. Archeologia</descrizione>
+            <id-dewey>9301</id-dewey>
+        </dewey>
+        <descrizione>Archeologia e paletnologia, e in particolare molluschi fossili dell'ar</descrizione>
+        <id>
+            <id-biblioteca>220</id-biblioteca>
+            <id-dewey>9301</id-dewey>
+        </id>
+    </dewey-liberos>
+    <dewey-liberos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DeweyLibero">
+        <dewey>
+            <descrizione>Storia di Benevento (Prov.)</descrizione>
+            <id-dewey>945723</id-dewey>
+        </dewey>
+        <descrizione>Storia locale. Baselice e Valle del Fortore</descrizione>
+        <id>
+            <id-biblioteca>220</id-biblioteca>
+            <id-dewey>945723</id-dewey>
+        </id>
+    </dewey-liberos>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>2</id-sort>
+            <descrizione>manoscritti*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>1</id-patrimonio-specializzazione-categoria>
+                <id-sort>8</id-sort>
+                <descrizione>Manoscritti</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>10000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>15</quantita>
+        <id>
+            <id-biblioteca>220</id-biblioteca>
+            <id-patrimonio-specializzazione>10000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>1</id-sort>
+            <descrizione>volumi ed opuscoli*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>1000</quantita>
+        <id>
+            <id-biblioteca>220</id-biblioteca>
+            <id-patrimonio-specializzazione>20000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>2</id-sort>
+            <descrizione>stampati musicali</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>8</id-patrimonio-specializzazione-categoria>
+                <id-sort>7</id-sort>
+                <descrizione>Documenti musicali a stampa</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20600</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>20</quantita>
+        <id>
+            <id-biblioteca>220</id-biblioteca>
+            <id-patrimonio-specializzazione>20600</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>8</id-sort>
+            <descrizione>periodici*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>5</id-patrimonio-specializzazione-categoria>
+                <id-sort>12</id-sort>
+                <descrizione>Pubblicazioni in serie</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>40000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>0</quantita>
+        <id>
+            <id-biblioteca>220</id-biblioteca>
+            <id-patrimonio-specializzazione>40000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>3</id-sort>
+            <descrizione>cassette*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>10</id-patrimonio-specializzazione-categoria>
+                <id-sort>3</id-sort>
+                <descrizione>Documenti audiovisivi</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>50900</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>36</quantita>
+        <id>
+            <id-biblioteca>220</id-biblioteca>
+            <id-patrimonio-specializzazione>50900</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>13</id-sort>
+            <descrizione>videocassette*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>10</id-patrimonio-specializzazione-categoria>
+                <id-sort>3</id-sort>
+                <descrizione>Documenti audiovisivi</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>51000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>15</quantita>
+        <id>
+            <id-biblioteca>220</id-biblioteca>
+            <id-patrimonio-specializzazione>51000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <gestisce-servizio-bibliografico-interno>false</gestisce-servizio-bibliografico-interno>
+    <catalogazione-data-import>2012-05-29T13:40:04.000+02:00</catalogazione-data-import>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T16:00:00.000+01:00</dalle>
+        <giorno>4</giorno>
+        <id-orario-ufficiali>1192</id-orario-ufficiali>
+        <alle>1970-01-01T19:00:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T16:00:00.000+01:00</dalle>
+        <giorno>6</giorno>
+        <id-orario-ufficiali>1193</id-orario-ufficiali>
+        <alle>1970-01-01T19:00:00.000+01:00</alle>
+    </orario-ufficialis>
+    <orario-ufficialis
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.OrarioUfficiali">
+        <dalle>1970-01-01T16:00:00.000+01:00</dalle>
+        <giorno>7</giorno>
+        <id-orario-ufficiali>1194</id-orario-ufficiali>
+        <alle>1970-01-01T19:00:00.000+01:00</alle>
+    </orario-ufficialis>
+    <bilancio-patrimoniale-posseduto-under14>0</bilancio-patrimoniale-posseduto-under14>
+    <cap>82020</cap>
+    <autonomia-amministrativa>false</autonomia-amministrativa>
+    <stato-biblioteca-workflow>
+        <id-stato>3</id-stato>
+        <label>Revisione</label>
+    </stato-biblioteca-workflow>
+    <fondi-antichi-consistenza>
+        <descrizione>-</descrizione>
+        <id-fondi-antichi-consistenza>1</id-fondi-antichi-consistenza>
+    </fondi-antichi-consistenza>
+    <ente>
+        <ente-obiettivo>
+            <descrizione>NON SPECIFICATO</descrizione>
+            <id-ente-obiettivo>0</id-ente-obiettivo>
+        </ente-obiettivo>
+        <denominazione>Archeoclub d'Italia. Sede di Baselice</denominazione>
+        <id-ente>196</id-ente>
+        <ente-tipologia-amministrativa>
+            <descrizione>Accademie, associazioni, fondazioni, istituti, societa' (privati)</descrizione>
+            <id-ente-tipologia-amministrativa>1100</id-ente-tipologia-amministrativa>
+        </ente-tipologia-amministrativa>
+        <stato>
+            <denominazione>Italia</denominazione>
+            <id-stato>1</id-stato>
+            <sigla>IT</sigla>
+        </stato>
+    </ente>
+    <bilancio-patrimoniale-posseduto>0</bilancio-patrimoniale-posseduto>
+    <isil-numero>87</isil-numero>
+    <gestisce-servizio-bibliografico-esterno>false</gestisce-servizio-bibliografico-esterno>
+    <id-biblioteca>220</id-biblioteca>
+    <data-fondazione>1997</data-fondazione>
+    <isil-stato>IT</isil-stato>
+</biblioteca>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/jee 
+       http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+       
+       
+		<bean id="importLogic" class="it.inera.abi.logic.formatodiscambio.ImportLogicImpl">
+			<property name="importer" ref="importerImpl" />
+			<property name="maxImporter" value="${formatodiscambio.maximport}" />
+			<property name="importUncheckedDir" value="${formatodiscambio.import.unchecked.dir}" />
+			<property name="importCheckedDir" value="${formatodiscambio.import.checked.dir}" />
+			<property name="importScheduledDir" value="${formatodiscambio.import.scheduled.dir}" />
+			<property name="emailHostAddress" value="${formatodiscambio.email.host.address}" />
+			<property name="emailHostUsername" value="${formatodiscambio.email.host.username}" />
+			<property name="emailHostPassword" value="${formatodiscambio.email.host.password}" />
+			<property name="emailBounceAddress" value="${formatodiscambio.email.bounce.address}" />
+			<property name="emailImportAddress" value="${formatodiscambio.email.import.address}" />
+			<property name="emailImportName" value="${formatodiscambio.email.import.name}" />
+			<property name="emailCheckSubject" value="${formatodiscambio.email.check.subject}" />
+			<property name="emailCheckMsg" value="${formatodiscambio.email.check.msg}" />
+			<property name="emailImportSubject" value="${formatodiscambio.email.import.subject}" />
+			<property name="emailImportMsg" value="${formatodiscambio.email.import.msg}" />
+		</bean>
+		
+		<bean id="exportLogic" class="it.inera.abi.logic.formatodiscambio.ExportLogicImpl">
+			<property name="exporter" ref="exporterImpl" />
+			<property name="exportScheduledDir" value="${formatodiscambio.export.scheduled.dir}" />
+		</bean>
+
+		<!-- 
+			EXPORT FILE
+		 -->
+		<bean id="exporterImpl" class="it.inera.abi.logic.formatodiscambio.exports.ExporterImpl">
+			<property name="maxExport" value="${formatodiscambio.maxexport}" />
+			<property name="tmpDir" value="${formatodiscambio.tmpdir}" />
+			<property name="emailHostAddress" value="${formatodiscambio.email.host.address}" />
+			<property name="emailHostUsername" value="${formatodiscambio.email.host.username}" />
+			<property name="emailHostPassword" value="${formatodiscambio.email.host.password}" />
+			<property name="emailBounceAddress" value="${formatodiscambio.email.bounce.address}" />
+			<property name="emailExportStartAddress" value="${formatodiscambio.email.start.address}" />
+			<property name="emailExportStartName" value="${formatodiscambio.email.start.name}" />
+			<property name="emailExportStartSubject" value="${formatodiscambio.email.start.subject}" />
+			<property name="emailExportStartMsg" value="${formatodiscambio.email.start.msg}" />
+			
+			<property name="emailExportStartDifferitoSubject" value="${formatodiscambio.email.startdifferito.subject}" />
+			<property name="emailExportStartDifferitoMsg" value="${formatodiscambio.email.startdifferito.msg}" />
+			
+			<property name="emailExportErrorAddress" value="${formatodiscambio.email.error.address}" />
+			<property name="emailExportErrorName" value="${formatodiscambio.email.error.name}" />
+			<property name="emailExportErrorSubject" value="${formatodiscambio.email.error.subject}" />
+			<property name="emailExportErrorMsg" value="${formatodiscambio.email.error.msg}" />
+			<property name="emailExportAttachAddress" value="${formatodiscambio.email.attach.address}" />
+			<property name="emailExportAttachName" value="${formatodiscambio.email.attach.name}" />
+			<property name="emailExportAttachSubject" value="${formatodiscambio.email.attach.subject}" />
+			<property name="emailExportAttachMsg" value="${formatodiscambio.email.attach.msg}" />
+			<property name="emailExportAttachFiledescription" value="${formatodiscambio.email.attach.filedescription}" />
+			<property name="emailExportAttachFilename" value="${formatodiscambio.email.attach.filename}" />
+		</bean>
+		
+		<!-- 
+			JOBS PER DIFFERITO 
+		-->
+		<bean id="exportDifferito" class="it.inera.abi.logic.formatodiscambio.scheduler.ExportDifferito">
+			<property name="exportScheduledDir" value="${formatodiscambio.export.scheduled.dir}" />
+			<property name="exporter" ref="exporterImpl" />
+		</bean>
+		<bean id="importDifferito" class="it.inera.abi.logic.formatodiscambio.scheduler.ImportDifferito">
+			<property name="importScheduledDir" value="${formatodiscambio.import.scheduled.dir}" />
+			<property name="importer" ref="importerImpl" />
+			<property name="emailHostAddress" value="${formatodiscambio.email.host.address}" />
+			<property name="emailHostUsername" value="${formatodiscambio.email.host.username}" />
+			<property name="emailHostPassword" value="${formatodiscambio.email.host.password}" />
+			<property name="emailImportAddress" value="${formatodiscambio.email.import.address}" />
+			<property name="emailImportName" value="${formatodiscambio.email.import.name}" />
+			<property name="emailImportSubject" value="${formatodiscambio.email.importdifferito.subject}" />
+			<property name="emailImportMsg" value="${formatodiscambio.email.importdifferito.msg}" />
+			<property name="emailBounceAddress" value="${formatodiscambio.email.bounce.address}" />
+			<property name="importCheckedDir" value="${formatodiscambio.import.checked.dir}" />
+		</bean>
+		
+		<bean id="exportDifferitoJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+			<property name="targetObject" ref="exportDifferito" />
+		  	<property name="targetMethod" value="execute" />
+		  	<property name="concurrent" value="false" />
+		</bean>
+		
+		<bean id="importDifferitoJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+			<property name="targetObject" ref="importDifferito" />
+		  	<property name="targetMethod" value="execute" />
+		  	<property name="concurrent" value="false" />
+		</bean>
+		
+		<bean id="exportDifferitoTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		    <property name="jobDetail" ref="exportDifferitoJob" />
+		    <property name="cronExpression" value="${formatodiscambio.cronstring}" />
+		</bean>
+		
+		<bean id="importDifferitoTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		    <property name="jobDetail" ref="importDifferitoJob" />
+		    <property name="cronExpression" value="${formatodiscambio.cronstring}" />
+		</bean>
+		
+		<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		    <property name="triggers">
+		        <list>
+		            <ref bean="exportDifferitoTrigger" />
+		            <ref bean="importDifferitoTrigger" />
+		        </list>
+		    </property>
+		</bean>
+</beans>

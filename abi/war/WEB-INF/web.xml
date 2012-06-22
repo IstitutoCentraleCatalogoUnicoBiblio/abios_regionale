@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+    
+<web-app>
+	<servlet>
+    	<servlet-name>salvaPasswordServlet</servlet-name>
+    	<servlet-class>it.inera.abi.SalvaPasswordServlet</servlet-class>
+ 	</servlet>
+	<servlet-mapping>
+    	<servlet-name>salvaPasswordServlet</servlet-name>
+    	<url-pattern>/salvaPassword</url-pattern>
+  	</servlet-mapping>
+  <servlet>
+    <servlet-name>rigeneraPasswordServlet</servlet-name>
+    <servlet-class>it.inera.abi.RigeneraPasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>rigeneraPasswordServlet</servlet-name>
+    <url-pattern>/rigeneraPassword</url-pattern>
+  </servlet-mapping>
+    
+  <servlet>
+    <servlet-name>abiBootstrapServlet</servlet-name>
+    <servlet-class>it.inera.abi.AbiBootstrapServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>utentiService</servlet-name>
+    <servlet-class>it.inera.abi.gxt.server.UtentiServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>utentiService</servlet-name>
+    <url-pattern>/abi/utentiService</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>bibliotecheService</servlet-name>
+    <servlet-class>it.inera.abi.gxt.server.BibliotecheServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bibliotecheService</servlet-name>
+    <url-pattern>/abi/bibliotecheService</url-pattern>
+  </servlet-mapping>
+  
+  
+   <servlet>
+    <servlet-name>tabelleDinamicheService</servlet-name>
+    <servlet-class>it.inera.abi.gxt.server.TabelleDinamicheServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tabelleDinamicheService</servlet-name>
+    <url-pattern>/abi/tabelleDinamicheService</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>locationService</servlet-name>
+    <servlet-class>it.inera.abi.gxt.server.LocationServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>locationService</servlet-name>
+    <url-pattern>/abi/locationService</url-pattern>
+  </servlet-mapping>
+  
+  	<servlet>
+		<servlet-name>formatoScambio</servlet-name>
+		<servlet-class>it.inera.abi.gxt.server.FormatoScambioServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>formatoScambio</servlet-name>
+		<url-pattern>/abi/formatoScambio</url-pattern>
+	</servlet-mapping>
+	
+	<!-- servzio per il recupero delle informazioni utente -->
+  	<servlet>
+		<servlet-name>authServlet</servlet-name>
+		<servlet-class>it.inera.abi.gxt.server.AuthServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>authServlet</servlet-name>
+		<url-pattern>/abi/auth</url-pattern>
+	</servlet-mapping>
+	
+	<!-- servzio per il report -->
+  	<servlet>
+		<servlet-name>reportServlet</servlet-name>
+		<servlet-class>it.inera.abi.gxt.server.ReportServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reportServlet</servlet-name>
+		<url-pattern>/abi/reportservice</url-pattern>
+	</servlet-mapping>
+
+	<!-- servlet upload formato di scambio -->
+	<servlet>
+		<servlet-name>uploaderServlet</servlet-name>
+		<servlet-class>it.inera.abi.logic.formatodiscambio.imports.UploaderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>uploaderServlet</servlet-name>
+		<url-pattern>/abi/uploadservlet</url-pattern>
+	</servlet-mapping>
+	<!-- servlet download formato di scambio -->
+	<servlet>
+		<servlet-name>downloaderServlet</servlet-name>
+		<servlet-class>it.inera.abi.logic.formatodiscambio.imports.DownloaderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>downloaderServlet</servlet-name>
+		<url-pattern>/abi/downloadservlet</url-pattern>
+	</servlet-mapping>
+	
+	<!-- servlet per stampe / report -->
+	<servlet>
+		<servlet-name>pdfgeneratorservlet</servlet-name>
+		<servlet-class>it.inera.abi.logic.stampe.PdfGeneratorServlet</servlet-class>
+		<load-on-startup></load-on-startup>
+    </servlet>
+	<servlet-mapping>
+        <servlet-name>pdfgeneratorservlet</servlet-name>
+        <url-pattern>/abi/stampe.pdf</url-pattern>
+    </servlet-mapping>
+    <servlet>
+		<servlet-name>xlsgeneratorservlet</servlet-name>
+		<servlet-class>it.inera.abi.logic.stampe.XlsGeneratorServlet</servlet-class>
+		<load-on-startup></load-on-startup>
+    </servlet>
+     <servlet-mapping>
+        <servlet-name>xlsgeneratorservlet</servlet-name>
+        <url-pattern>/abi/stampe.xls</url-pattern>
+    </servlet-mapping>
+  
+	<!-- spring integration -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- pulizia dei file caricati tramite commons-upload -->
+	<listener>
+		<listener-class>
+			org.apache.commons.fileupload.servlet.FileCleanerCleanup
+		</listener-class>
+	</listener>
+  	
+  	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>abi.html</welcome-file>
+	</welcome-file-list>
+	
+	<taglib>
+		<taglib-uri>http://jakarta.apache.org/taglibs/c</taglib-uri>
+		<taglib-location>/WEB-INF/tld/c.tld</taglib-location>
+   </taglib>
+  	
+</web-app>

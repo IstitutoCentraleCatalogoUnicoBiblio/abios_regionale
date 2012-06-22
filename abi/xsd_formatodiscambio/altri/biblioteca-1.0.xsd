@@ -1,0 +1,1055 @@
+<?xml version="1.0" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>
+    ICCU - Istituto Centrale per il Catalogo Unico delle Biblioteche Italiane e per le Informazioni Bibliografiche
+    </xs:documentation>
+    <xs:documentation>
+    Laboratorio per le Informazioni Bibliografiche
+    </xs:documentation>
+    <xs:documentation>
+    Schema XML per lo scambio dei dati relativi a biblioteche italiane
+    </xs:documentation>
+    <xs:documentation>
+      Versione 1.0 del 2004-05-17
+    </xs:documentation>
+    <xs:documentation>
+    Revisione a cura di Carla Di Loreto, Ornella Napoli, Andrea Giuliano, Annamaria Mandillo
+    </xs:documentation>
+    <xs:documentation>
+    Redazione dello schema a cura di Andrea Giuliano
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element  name="biblioteca">
+    <xs:annotation>
+      <xs:documentation>
+	L'elemento "biblioteca" 柬a radice di un documento di questo	tipo. Tale elemento fa parte di un content model "xsd:all", che  non obbliga a rispettare l'ordine in cui si presentano gli elementi, a differenza di "xsd:sequence".
+      </xs:documentation>
+      <xs:documentation>
+	In tutto il resto dello schema si tende ad usare questo
+	content model, perch短eno rigido. Non dovrebbe comportare eccessivo carico per il parser.
+      </xs:documentation>
+      <xs:documentation>
+	La maggior parte degli elementi e attributi risultanto opzionali e ripetibili, ma questi aspetti saranno oggetto
+	di una revisione futura dell'intero schema alla luce delle
+	possibilit� delle richieste dei diversi partner interessati a
+	scambiare dati nel formato qui descritto.
+      </xs:documentation>
+      <xs:documentation>
+	Nei casi pi�mentari si 柲itenuto opportuno fissare l'obbligatoriet� la ripetibilit�egli elementi.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element minOccurs="0" name="anagrafica" type="anagraficaType"/>
+        <xs:element minOccurs="0" name="servizi" type="serviziType"/>
+        <xs:element minOccurs="0" name="amministrativa" type="amministrativaType"/>
+        <xs:element name="specializzazione" type="specializzazioneType" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element minOccurs="0" name="patrimonio" type="patrimonioType"/>
+        <xs:element minOccurs="0" name="cataloghi" type="cataloghiType"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="anagraficaType">
+    <xs:annotation>
+      <xs:documentation>
+	Questo tipo raggruppa tutte le informazioni di tipo strettamente	anagrafico.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="nome">
+        <xs:annotation>
+          <xs:documentation>
+	    Nomi di una biblioteca. Ơun insieme in cui solo il nome attuale 柯bbligatorio e non ripetibile, mentre quelli precedenti e quelli alternativi sono opzionali e ripetibili.
+	  </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="attuale">
+              <xs:simpleType>
+                <xs:restriction base="xs:string"/>
+              </xs:simpleType>
+            </xs:element>
+
+            <xs:element name="precedente" minOccurs="0" maxOccurs="unbounded">
+              <xs:simpleType>
+                <xs:restriction base="xs:string"/>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="alternativo" minOccurs="0" maxOccurs="unbounded">
+              <xs:simpleType>
+                <xs:restriction base="xs:string"/>
+              </xs:simpleType>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="codici">
+        <xs:annotation>
+          <xs:documentation>
+	    Codici di una biblioteca.
+	  </xs:documentation>
+          <xs:documentation>
+	    Ơun elemento che raggruppa diversi codici, di cui soltanto "iccu" 柯bbligatorio. Nessuno 柲ipetibile. I nomi degli elementi dovrebbero essere auto-esplicativi.
+	  </xs:documentation>
+          <xs:documentation>
+	    Si sfruttano qui le possibilit�fferte da XML Schema per effettuare una prima validazione dei codici attraverso opportune espressioni regolari. Ơper🨭portante capire che si tratta di una validazione superficiale: ad esempio, per i codici basati sulle sigle di provincia non viene controllato che la sigla sia corretta, ma solo del tipo "AA".
+	  </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="iccu">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[A-Z]{2}[0-9]{4}"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="acnp">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[A-Z]{2}[0-9]{3}"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="rism">
+              <xs:simpleType>
+                <xs:restriction base="xs:string"/>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="sbn">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[A-Z]{2}[A-Z0-9][A-Z0-9]{2}"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="indirizzo">
+        <xs:annotation>
+          <xs:documentation>
+	      Questo tipo descrive un indirizzo di biblioteca. Ơopzionale come tutti i suoi sotto-elementi, ma forse almeno uno dovrebbe essere reso obbligatorio, altrimenti si potrebbe istanziare un "indirizzo" vuoto.
+	    </xs:documentation>
+          <xs:documentation>
+	      Per il CAP, il comune, la provincia, la regione e lo stato valgono le osservazioni fatte circa i codici di biblioteca: la validazione si ferma alla semplice struttura.
+	    </xs:documentation>
+          <xs:documentation>
+	      Per comuni e provincie si adottano i codici ISTAT. Per lo stato si usa il codice ISO di due lettere, senza distinguere fra maiuscolo e minuscolo.
+	    </xs:documentation>
+          <xs:documentation>
+	      Al momento non viene fatto alcun controllo sulla regione, ma 柵n elemento che la base dati ricevente dovrebbe essere in grado di ricavare a partire dal solo codice ISTAT del comune, attraverso proprie tabelle di raggruppamento.
+	    </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element minOccurs="0" name="via" type="xs:string"/>
+            <xs:element minOccurs="0" name="cap">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[0-9]{5}"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="frazione" type="xs:string"/>
+            <xs:element minOccurs="0" name="comune">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[0-9]{6}"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="provincia">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[0-9]{3}"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="regione" type="xs:string"/>
+            <xs:element minOccurs="0" name="stato">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[a-zA-Z]{2}"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="contatti">
+        <xs:annotation>
+          <xs:documentation>
+	  Varie modalit�er contattare la biblioteca e il suo personale.
+	  </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="telefonico">
+              <xs:annotation>
+                <xs:documentation>
+		Un contatto di tipo telefonico. Il prefisso 柯vviamente quello internazionale.
+		</xs:documentation>
+                <xs:documentation>
+		Nelle note, opzionali e ripetibili, si dovrebbe indicare, ad esempio, se si tratta di un centralino, o del numero di una persona etc... L'attributo "tipo"	serve a distinguere un telefono da un fax.
+		</xs:documentation>
+                <xs:documentation>
+		Numero e prefisso sono obbligatori e non ripetibili, altrimenti non avrebbe senso istanziare questo elemento.
+		</xs:documentation>
+                <xs:documentation>
+		Prefisso e numero sono validati in modo molto elementare.
+		</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:all>
+                  <xs:element name="prefisso">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:pattern value="[+0-9][0-9]{2,}"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="numero">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:pattern value="[0-9]+"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="note" type="xs:string"/>
+                </xs:all>
+                <xs:attribute name="tipo" use="required">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="fax"/>
+                      <xs:enumeration value="telefono"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="altro" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>
+		I contatti di questo tipo prevedono solo le note e un valore, oltre a un attributo "tipo" che, al momento, consente di specificare solo un indirizzo e-mail, una URL o un telex. Ovviamente la stringa "valore" pu🢯ntenere qualsiasi cosa, quindi non c'柧aranzia che tale stringa sia conforme al tipo specificato.	      </xs:documentation>
+                <xs:documentation>
+		Le note sono opzionali e ripetibili, sebbene la ripetibilit�ia discutibile. Il valore 柩nvece obbligatorio e non ripetibile, altrimenti si potrebbe istanziare un elemento vuoto.
+		</xs:documentation>
+                <xs:documentation>
+		Una linea di sviluppo potrebbe prevedere dei pattern per la validazione dei valori. Questo comporterebbe per🪧uso di sotto-elementi invece che di attributi, altrimenti non sarebbe possibile vincolare i valori con pattern.
+		</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:all>
+                  <xs:element name="valore" type="xs:string"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="note" type="xs:string"/>
+                </xs:all>
+                <xs:attribute name="tipo" use="required">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="e-mail"/>
+                      <xs:enumeration value="telex"/>
+                      <xs:enumeration value="url"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+              </xs:complexType>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+
+   <xs:element minOccurs="0" name="edificio">
+        <xs:annotation>
+          <xs:documentation>
+	  Dati relativi all'edificio. Sono tutti opzionali, ma potrebbe essere pi�sato renderne obbligatorio almeno uno.
+          </xs:documentation>
+        </xs:annotation>
+
+        <xs:complexType>
+          <xs:all>
+            <xs:element minOccurs="0" name="monumentale">
+              <xs:complexType>
+                <xs:all>
+                  <xs:element minOccurs="0" name="nome" type="xs:string"/>
+                  <xs:element minOccurs="0" name="data" type="annoSecoloType"/>
+                </xs:all>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="apposito">
+              <xs:complexType>
+                <xs:all>
+                  <xs:element minOccurs="0" name="data" type="annoSecoloType"/>
+                </xs:all>
+              </xs:complexType>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+     </xs:all>
+  </xs:complexType>
+
+
+
+
+
+
+  <xs:complexType name="serviziType">
+    <xs:annotation>
+      <xs:documentation>
+      Tipo di elemento relativo ai servizi offerti da una biblioteca. Fra questi, gli orari di apertura, il prestito, le informazioni bibliografiche, tipo e condizioni di accesso e diverse altre informazioni.
+    </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" name="orarioServizio">
+        <xs:annotation>
+          <xs:documentation>
+	  Questo elemento non ripetibile raggruppa tutte le informazioni relative agli orari di accesso alla biblioteca. I sottoelementi, tutti opzionali, sono per lo pi�etibili, eccetto ovviamente l'orario ufficiale.
+	</xs:documentation>
+          <xs:documentation>
+	L'elemento serve solo da contenitore. Non 柮ecessario dal punto di vista applicativo, ma agevola la leggibilit�ello schema, che in questa parte 柰iuttosto articolato.
+	</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element minOccurs="0" name="ufficiale" type="orarioType">
+              <xs:annotation>
+                <xs:documentation>
+	    Questo elemento contiene almeno un elemento "orario" di tipo "orarioType", da non confondere con l'elemento soprastante. Si veda pi�nti la descrizione di questo tipo di elemento.
+	    </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="variazione">
+              <xs:annotation>
+                <xs:documentation>
+		    Le variazioni di orario sono espresse da eventuali elementi di questo tipo. Esso 柩dentico ad un orario ufficiale, salvo per l'aggiunta del periodo di validit� da una nota esplicativa, tipo "Settimana di Ferragosto" o simili.
+		  </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="orarioType">
+                    <xs:all>
+
+			   <xs:element name="periodo">
+				<xs:simpleType>
+				  <xs:restriction base="xs:string">
+				    <xs:pattern value="[0-9]{4}:[0-9]{4}"/>
+				  </xs:restriction>
+				</xs:simpleType>
+			   </xs:element>
+
+                      <xs:element name="note" type="xs:string"/>
+                    </xs:all>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="chiusura">
+              <xs:annotation>
+                <xs:documentation>
+		  Un periodo di chiusura 柳emplicemente un intervallo di date, pi� nota esplicativa. Entrambi i sotto-elementi sono semplici stringhe, ma per il periodo potrebbe essere necessario un pattern significativo, se qualche base dati utilizzasse questo dato per controlli automatici. Se serve solo come stringa da visualizzare sulla home page della biblioteca, questa forma di validazione 柳uperflua.
+		  </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:all>
+                   <xs:element name="periodo">
+				<xs:simpleType>
+				  <xs:restriction base="xs:string">
+				    <xs:pattern value="[0-9]{4}:[0-9]{4}"/>
+				  </xs:restriction>
+				</xs:simpleType>
+			   </xs:element>
+
+                  <xs:element name="note" type="xs:string"/>
+                </xs:all>
+              </xs:complexType>
+            </xs:element>
+
+
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+
+       <xs:element minOccurs="0" name="prestito">
+        <xs:annotation>
+          <xs:documentation>
+	       Varie informazioni relative al servizio di prestito. Ci sono diversi sotto-elementi di ovvio significato, tutti opzionali.
+	      </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element minOccurs="0" name="locale">
+              <xs:annotation>
+                <xs:documentation>
+		           A parte l'elemento "automatizzato", che serve ad indicare se il prestito avviene con procedure	automatizzate oppure no, e che pertanto 柤i tipo "siNoType", gli altri sono soltanto stringhe, anche se la durata potrebbe essere vincolata con un pattern opportuno, e gli altri due possono contenere valori controllati, che per𡦠meglio lasciare fuori dallo schema. In particolare, il materiale escluso potrebbe essere normalizzato in base alle apposite norme ISO. Qualcosa del genere andrebbe studiato anche per gli utenti ammessi.
+		        </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:all>
+                  <xs:element minOccurs="0" name="automatizzato" type="siNoType"/>
+                  <xs:element minOccurs="0" name="durata" type="xs:string"/>
+                  <xs:element minOccurs="0" name="materiale-escluso" type="xs:string"/>
+                  <xs:element minOccurs="0" name="utenti-ammessi" type="xs:string"/>
+               </xs:all>
+              </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="2" minOccurs="0" name="interbibliotecario">
+
+             <xs:annotation>
+              <xs:documentation>
+		         In questo elemento, pur opzionale, si 柲itenuto opportuno rendere obbligatorio almeno il sotto-elemento "tipo", escludendo la paradossale situazione di una biblioteca che offre il servizio, ma non sa di che tipo.
+	            </xs:documentation>
+                <xs:documentation>
+		        L'elemento 柲ipetibile al pi� volte perch矬a biblioteca pu🮦frire due tipi di prestito interbibliotecario, ed 柯pportuno che essi siano descritti in elementi separati. Tuttavia non si pu🤳cludere che vengano descritti due elementi dello stesso tipo, sebbene un applicativo dovrebbe produrne tipicamente sempre al pi�, e di tipi diversi.
+	            </xs:documentation>
+                <xs:documentation>
+		          Ovviamente l'elemento "sistema-ill" 柯pzionale e ripetibile, in quanto la biblioteca pu🯡rtecipare a pi�no.
+	            </xs:documentation>
+              </xs:annotation>
+
+             <xs:complexType>
+                <xs:all>
+                 <xs:element minOccurs="1" name="tipo" type="tipoType"/>
+                 <xs:element minOccurs="0" name="automatizzato" type="siNoType"/>
+                 <xs:element name="ruolo" type="ruoloType"/>
+                 <xs:element maxOccurs="unbounded" minOccurs="0" name="sistema-ill">
+                 <xs:complexType>
+                      <xs:all>
+                        <xs:element name="nome" type="xs:string"/>
+                        <xs:element minOccurs="0" name="note" type="xs:string"/>
+                      </xs:all>
+                  </xs:complexType>
+                  </xs:element>
+                </xs:all>
+             </xs:complexType>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+       </xs:element>
+
+     <xs:element name="informazioni-bibliografiche">
+         <xs:annotation>
+           <xs:documentation>
+	        Per segnalare la disponibilit�el servizio interno si usa l'elemento vuoto omonimo, soluzione discutibile ma funzionante. Essa ha il vantaggio di mettere questo servizio allo stesso livello del "servizio-esterno", com'柬ogico. Quest'ultimo per𡦠pi�icolato.
+	       </xs:documentation>
+         </xs:annotation>
+         <xs:complexType>
+          <xs:all>
+            <xs:element name="servizio-interno" type="xs:string" minOccurs="0"/>
+            <xs:element name="servizio-esterno" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>
+		          Se 柳pecificato il servizio esterno, sarebbe opportuno indicare almeno un "modo" di espletamento del servizio stesso. Come in altri casi, anche un elemento vuoto potrebbe essere accettato, come semplice segnalazione di un servizio disponibile. Star�oi all'applicativo ricevente decidere se ignorare tale informazione, perch矴roppo vaga, o tenerne comunque conto.
+	            </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:all>
+                  <xs:element name="modo" minOccurs="0"
+                      maxOccurs="unbounded" >
+                    <xs:simpleType name="modoType">
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="tel"/>
+                        <xs:enumeration value="fax"/>
+                        <xs:enumeration value="e-mail"/>
+                        <xs:enumeration value="web"/>
+                        <xs:enumeration value="sms"/>
+                        <xs:enumeration value="mms"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:all>
+              </xs:complexType>
+            </xs:element>
+          </xs:all>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="internet">
+        <xs:annotation>
+          <xs:documentation>
+	    Accesso a Internet da postazioni locali. La modalit�limitato" potrebbe essere fonte di equivoci. In ogni caso, la modalit� opzionale e ripetibile.
+	  </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="modo" maxOccurs="unbounded" minOccurs="0">
+              <xs:simpleType name="modoInternetType">
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="libero"/>
+                  <xs:enumeration value="a pagamento"/>
+                  <xs:enumeration value="a tempo"/>
+                  <xs:enumeration value="limitato"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+
+     <xs:element name="accesso" minOccurs="0">
+           <xs:annotation>
+             <xs:documentation>
+	       Riguarda le modalit�i accesso alla biblioteca, sia in termini logistici (e.g. portatori di handicap), sia in termini amministrativi (chi pu🠣cedere ai servizi e a quali condizioni pu🥡rlo).
+	     </xs:documentation>
+           </xs:annotation>
+      <xs:complexType>
+       <xs:all>
+
+        <xs:element name="handicap" minOccurs="0" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>
+	              La presenza di questo elemento, che pu🤳seree vuoto, segnala semplicemente la possibilit�i accesso ai portatori di handicap, ma per ora non viene qui attribuito alcun significato particolare al suo eventuale contenuto.
+	            </xs:documentation>
+              </xs:annotation>
+        </xs:element>
+        <xs:element name="categoria-ammessa" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>
+	             	Le categorie dipendono molto dalle diverse basi dati, per cui in questo schema non si 柲itenuto opportuno elencarne alcuna. Possono essere specificate pi�egorie, sotto forma di semplici stringhe non controllate.
+	            </xs:documentation>
+              </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="condizioni-accesso">
+              <xs:annotation>
+                <xs:documentation>
+		           Condizioni di accesso. Tutti i sotto-elementi sono opzionali, anche se avrebbe poco senso un elemento vuoto. I documenti, a loro volta, possono non essere specializzati. Questo potrebbe indicare la necessit�i esibire un generico documento di riconoscimento, non meglio specificato.
+	            </xs:documentation>
+                <xs:documentation>
+	               Le condizioni raggruppate andrebbero intese in AND logico. I documenti nell'apposito elemento sono invece equivalenti, cio柩n OR logico. Infine, pi�menti "condizioni-accesso", con gli opportuni sottoelementi, sono da considerarsi in OR logico.
+	            </xs:documentation>
+                <xs:documentation>
+	              Ad esempio, il tipico caso "almeno 18 anni e un documento valido" si traduce in opportuni elementi "et�e "documenti", ma senza un elemento "appuntamento". Se in alternativa la biblioteca 柡ccessibile incondizionatamente per appuntamento, va aggiunto un apposito elemento "condizioni-accesso", col solo sotto-elemento "appuntamento".
+	            </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:all>
+                 <xs:element minOccurs="0" name="eta">
+                    <xs:complexType>
+                      <xs:attribute name="min" type="xs:integer"/>
+                      <xs:attribute name="max" type="xs:integer"/>
+                    </xs:complexType>
+                 </xs:element>
+                 <xs:element minOccurs="0" name="documenti">
+                    <xs:complexType>
+                      <xs:all>
+                        <xs:element minOccurs="0" name="tipo" maxOccurs="unbounded" type="tipoDocType"/>
+                      </xs:all>
+                    </xs:complexType>
+                 </xs:element>
+                 <xs:element name="appuntamento" minOccurs="0"/>
+                </xs:all>
+              </xs:complexType>
+        </xs:element>
+
+       </xs:all>
+      </xs:complexType>
+
+     </xs:element>
+
+
+
+     </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="amministrativaType">
+    <xs:annotation>
+      <xs:documentation>
+	   Tipo di elemento recante informazioni di carattere amministrativo. Ơla parte che pi�babilmente richieder�ggiustamenti per soddisfare le esigenze di vari enti. Molti elementi sono auto-esplicativi.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="codice-fiscale" type="xs:string" minOccurs="0"/>
+      <xs:element name="partita-IVA" type="xs:string" minOccurs="0"/>
+      <xs:element name="autonoma" type="siNoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Eventuale autonomia di spesa.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ente" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+	      Dati relativi all'ente da cui la biblioteca dipende. Almeno il nome 柯bbligatorio. Inoltre, andrebbe discussa l'opportunit�i fare riferimento ad una lista controllata di enti, individuati tramite il solo codice fiscale o la partita IVA. Devono esistere certamente simili liste, e le diverse basi dati dovrebbero attenersi ad esse, almeno in parte.
+	    </xs:documentation>
+          <xs:documentation>La funzione-obiettivo corrisponde al COFOG.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="nome"/>
+            <xs:element name="tipologia-amministrativa" minOccurs="0"/>
+            <xs:element name="stato" minOccurs="0"/>
+            <xs:element name="codice-fiscale" minOccurs="0"/>
+            <xs:element name="partita-IVA"/>
+            <xs:element name="funzione-obiettivo" minOccurs="0"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="regolamento" minOccurs="0">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="norma" type="xs:string" minOccurs="0"/>
+            <xs:element name="url" type="xs:string" minOccurs="0"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deposito-legale" minOccurs="0">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="nazionale" type="siNoType" minOccurs="0"/>
+            <xs:element name="regionale" type="siNoType" minOccurs="0"/>
+            <xs:element name="anno-inizio" type="xs:string" minOccurs="0"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="strutture" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+      Questo elemento e i suoi sotto-elementi descrive sommariamente le strutture di cui la biblioteca dispone.
+      </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="scaffalature" minOccurs="0">
+              <xs:complexType>
+                <xs:all>
+                  <xs:element name="magazzino" type="xs:decimal" minOccurs="0"/>
+                  <xs:element name="pubbliche" type="xs:decimal" minOccurs="0"/>
+                </xs:all>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="postazioni" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>
+	     Le postazioni si dividono in diversi elementi, tutti opzionali. Se un elemento 柰resente, deve avere un valore, e questo 柦orse scomodo se si vuole solo indicare che la biblioteca dispone genericamente di postazioni internet o audio, senza indicare quante. Per consentire la semplice segnalazione si dovrebbe usare un costrutto pi�plesso.
+	    </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:all>
+                  <xs:element name="lettura" type="xs:integer" minOccurs="0"/>
+                  <xs:element name="video" type="xs:integer" minOccurs="0"/>
+                  <xs:element name="audio" type="xs:integer" minOccurs="0"/>
+                  <xs:element name="internet" type="xs:integer" minOccurs="0"/>
+                </xs:all>
+              </xs:complexType>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+	  <xs:element name="utenti" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+      Informazioni relative agli utenti della biblioteca.
+      </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="ultimo-anno" type="xs:integer" minOccurs="0"/>
+            <xs:element name="iscritti-prestito" type="xs:integer" minOccurs="0"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="personale" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+      Informazioni relative al personale impiegato a vario titolo nella biblioteca.
+      </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="totale" type="xs:integer" minOccurs="0"/>
+            <xs:element name="temporaneo" type="xs:integer" minOccurs="0"/>
+            <xs:element name="part-time" type="xs:integer" minOccurs="0"/>
+            <xs:element name="esterno" type="xs:integer" minOccurs="0"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="bilancio" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+      Informazioni relative al bilancio della biblioteca.
+      </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="entrate" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="uscite" minOccurs="0">
+              <xs:complexType>
+                <xs:all>
+                  <xs:element name="personale" type="xs:decimal" minOccurs="0"/>
+                  <xs:element name="funzionamento" type="xs:decimal" minOccurs="0"/>
+                  <xs:element name="automazione" type="xs:decimal" minOccurs="0"/>
+                  <xs:element name="patrimonio" type="xs:decimal" minOccurs="0"/>
+                  <xs:element name="altre" type="xs:decimal" minOccurs="0"/>
+                </xs:all>
+              </xs:complexType>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+	</xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="specializzazioneType">
+    <xs:annotation>
+      <xs:documentation>La specializzazione di una biblioteca 柳emplicemente una CDD pi� descrizione libera opzionale.</xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="cdd" type="cddType"/>
+      <xs:element name="descrizione-libera" type="xs:string" minOccurs="0"/>
+    </xs:all>
+  </xs:complexType>
+
+    <xs:complexType name="patrimonioType">
+    <xs:annotation>
+      <xs:documentation>
+      Tipo utilizzato per descrivere il patrimonio di una biblioteca. I sotto-elementi sono tutti ripetibili, e sarebbe opportuno istanziare questo elemento solo se contiene almeno un sotto-elemento non vuoto, ma si 柰referito comunque non rendere obbligatori i sotto-elementi.
+      </xs:documentation>
+      <xs:documentation>
+      L'elemento "materiale" va ripetuto per ciascun tipo di materiale. Non 柰revista una gerarchia fra i materiali, anche se alcune basi dati, fra cui quella ICCU, organizzano i materiali in gerarchie a due o pi�elli. Imporre in questo contesto una gerarchia non gestita in modo uniforme dalle base dati appare superfluo e limitante.
+      </xs:documentation>
+      <xs:documentation>
+      Anche gli elementi "fondo-speciale" e "fondo-antico" vanno ripetuti per ciascuna istanza di fondo. Inventario e catalogo topografico sono invece non ripetibili.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="materiale" type="materialeType"></xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="fondo-speciale" type="fondoSpecialeType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="fondo-antico" type="fondoAnticoType"/>
+      <xs:element minOccurs="0" name="inventarioPatrimonio" type="infCarType">
+        <xs:annotation>
+          <xs:documentation>
+	  L'inventario, opzionale, pu🤳sere informatizzato o cartaceo (oppure, ovviamente, entrambi).
+	  </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="catalogo-topografico" type="infCarType">
+        <xs:annotation>
+          <xs:documentation>
+	  Il catalogo 柴rattato esattamente come l'inventario.
+	  </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="cataloghiType">
+    <xs:annotation>
+      <xs:documentation>
+      Tipo che raccoglie i diversi cataloghi. Un elemento di questo	tipo pu🣵nque contenere i tre tipi di cataloghi qui appresso	definiti.
+      </xs:documentation>
+      <xs:documentation>
+      Tutti i tre sotto-elementi sono opzionali e ripetibili in un ordine qualsiasi. Nel definire i tre sottotipi sono sfruttate dove possibile le somiglianze fra i tre, attraverso la derivazione di un tipo da un altro.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="catalogo-generale" maxOccurs="unbounded" minOccurs="0" type="catalogoGeneraleType"/>
+      <xs:element name="catalogo-speciale" maxOccurs="unbounded" minOccurs="0" type="catalogoSpecialeType"/>
+      <xs:element name="catalogo-collettivo" maxOccurs="unbounded" minOccurs="0" type="catalogoCollettivoType"/>
+    </xs:all>
+  </xs:complexType>
+
+  <!-- Tipi secondari legati al patrimonio e ai cataloghi -->
+
+  <xs:complexType name="materialeType">
+    <xs:annotation>
+      <xs:documentation>
+  Un tipo di materiale 柤escritto semplicemente da un nome e da un posseduto. Quest'ultimo dev'essere un intero non negativo.
+  </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="nome" type="xs:string" use="required"/>
+    <xs:attribute name="posseduto" type="xs:nonNegativeInteger"/>
+  </xs:complexType>
+
+  <xs:complexType name="fondoSpecialeType">
+    <xs:annotation>
+      <xs:documentation>
+  A parte alcuni elementi dall'ovvio significato, la "descrizione" corrisponde ad una descrizione libera del fondo speciale, mentre "digitalizzazione" registra in forma libera lo stato dell'eventuale digitalizzazione del fondo.
+  </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="nome" type="xs:string"/>
+      <xs:element minOccurs="0" name="descrizione" type="xs:string"/>
+      <xs:element minOccurs="0" name="cdd" type="cddType"/>
+      <xs:element minOccurs="0" name="depositato" type="siNoType"/>
+      <xs:element minOccurs="0" name="catalogo" type="formaType"/>
+      <xs:element minOccurs="0" name="inventarioFondo" type="formaType"/>
+      <xs:element minOccurs="0" name="digitalizzazione" type="xs:string"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="catalogoType">
+    <xs:annotation>
+      <xs:documentation>
+	I cataloghi hanno diverse caratteristiche comuni. Vale la pena di definire un tipo che raccoglie queste caratteristiche, per	poi derivare da esso, tramite restriction, i diversi tipi di	cataloghi.
+      </xs:documentation>
+      <xs:documentation>
+	Tutti contengono le quattro forme "schede", "volume", "microfilm" e "digitale", ciascuna con la sua percentuale di copertura (vedi "formaType"), e tutti hanno una copertura temporale. La forma "digitale" ha un tipo particolare, "digitaleType", che aggiunge a "formaType" il solo sott-elemento "supporto".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="forme" minOccurs="0">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="schede" type="formaType" minOccurs="0"
+                maxOccurs="unbounded"/>
+            <xs:element name="volume" type="formaType" minOccurs="0"
+                maxOccurs="unbounded"/>
+            <xs:element name="microforme" type="formaType" minOccurs="0"
+                maxOccurs="unbounded"/>
+            <xs:element name="digitale" type="digitaleType" minOccurs="0"
+                maxOccurs="unbounded"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="copertura" type="xs:string" minOccurs="0"/>
+    </xs:all>
+    <xs:attribute name="tipo" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="catalogoGeneraleType">
+    <xs:annotation>
+      <xs:documentation>
+      Catalogo generale. Deriva da "catalogoType", con la sola aggiunta del "tipo" di catalogo (per autore, soggetto etc...).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="catalogoType">
+        <xs:all>
+          <xs:element name="tipo" type="xs:string"/>
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="catalogoSpecialeType">
+    <xs:annotation>
+      <xs:documentation>
+	Catalogo speciale. Deriva da "catalogoType", con l'aggiunta del "nome" del catalogo e del "materiale".
+      </xs:documentation>
+      <xs:documentation>
+	Notare come tale tipo di elemento costituisce la base per il "catalogoSpecialeType".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="catalogoType">
+        <xs:all>
+          <xs:element name="nome" type="xs:string" minOccurs="0"/>
+          <xs:element name="materiale" type="xs:string" minOccurs="0"/>
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="catalogoCollettivoType">
+    <xs:annotation>
+      <xs:documentation>
+	Catalogo collettivo. Deriva da "catalogoSpecialeType", con	l'aggiunta della "zona", a sua volta specializzata in un "nome" e in un "tipo".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="catalogoSpecialeType">
+        <xs:all>
+          <xs:element name="zona" minOccurs="0">
+            <xs:complexType>
+              <xs:all>
+                <xs:element name="nome" type="xs:string" minOccurs="0">
+                  <xs:annotation>
+                    <xs:documentation>
+		      Il nome della zona pu🤳sere ad esempio "Toscana", "Triveneto", "Centro-Sud", "Castelli Romani"...
+		    </xs:documentation>
+                  </xs:annotation>
+                </xs:element>
+                <xs:element name="tipo" type="xs:string" minOccurs="0">
+                  <xs:annotation>
+                    <xs:documentation>
+		      Il tipo della zona pu🤳sere invece "regionale", "comunale" ...
+		    </xs:documentation>
+                  </xs:annotation>
+                </xs:element>
+              </xs:all>
+            </xs:complexType>
+          </xs:element>
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="formaType">
+    <xs:annotation>
+      <xs:documentation>
+	La forma di un catalogo ha di solito un solo attributo, la percentuale di copertura, riferita al patrimonio inventariato o supposto, relativo alla forma particolare. Un'eccezione 柬a forma "digitale", che aggiunge un elemento (o attributo che sia) relativo al tipo di catalogo digitale (CD-ROM, web o altro).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="percentuale" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="digitaleType">
+    <xs:annotation>
+      <xs:documentation>
+	La forma "digitale" di un catalogo richiede l'indicazione di	un supporto. Per il momento, nel caso on-line non si pu🨮dicare la URL.
+      </xs:documentation>
+      <xs:documentation>
+	Si noti che comunque questo tipo 柤erivato da "formaType" e quindi eredita le sue caratteristiche.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="formaType">
+        <xs:all>
+          <xs:element name="supporto" type="xs:string" minOccurs="0"/>
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="infCarType">
+    <xs:annotation>
+      <xs:documentation>
+	Un elemento di questo tipo serve solo a specificare una forma cartacea e una forma informatizzata di qualcosa, tipicamente un catalogo, ma non solo. Entrambi gli elementi che definisce sono semplici siNoType.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="informatizzato" type="siNoType" minOccurs="0"/>
+      <xs:element name="cartaceo" type="siNoType" minOccurs="0"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:simpleType name="cddType">
+    <xs:annotation>
+      <xs:documentation>
+  La CDD 柶incolata a tre cifre fisse prima del punto, e al pi�re tre dopo il punto. Alcune basi dati potrebbero gestire pi�re, per cui sarebbe opportuno evitare questo limite, e lasciare ai singoli applicativi decidere se troncare o meno il dato in arrivo (o anche in partenza.)
+  </xs:documentation>
+    </xs:annotation>
+   <xs:restriction base="xs:decimal">
+        <xs:pattern value="[0-9]{3}.[0-9]{0,3}"/>
+      </xs:restriction>
+  </xs:simpleType>
+
+   <xs:simpleType name="annoSecoloType">
+    <xs:annotation>
+      <xs:documentation>
+  Un elemento di questo tipo contiene una stringa come valore, e ha un attributo "tipo" che serve ad indicare se tale valore 柵n anno o un secolo. Questo non esclude un elemento con valore "XVI" e tipo "anno", per cui sarebbe auspicabile un costrutto pi�rente.
+  </xs:documentation>
+    </xs:annotation>
+
+
+
+      <xs:restriction base="xs:string">
+              <xs:enumeration value="anno"/>
+              <xs:enumeration value="secolo"/>
+            </xs:restriction>
+
+
+
+   </xs:simpleType>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <xs:complexType name="orarioType">
+    <xs:annotation>
+      <xs:documentation>
+	Questo tipo descrive sostanzialmente l'orario ufficiale, ma 柡nche un tipo base da cui derivare le variazioni di orario. Poich矬e variazioni sono all'interno dei servizi, questo tipo base deve essere globale.
+      </xs:documentation>
+      <xs:documentation>
+	La struttura di questo tipo 柭olto semplice: un giorno della settimana, un orario iniziale e un'orario finale. Sebbene il questionario ICCU preveda una struttura pi�icolata, queste informazioni sono sufficienti a descrivere qualsiasi ragionevole situazione, e dovrebbero essere gestibili da qualsiasi base dati. Strutture pi�icolate possono essere ricondotte a questa, ripetendo opportunamente gli elementi.
+      </xs:documentation>
+      <xs:documentation>
+      Per i limiti orari si potrebbe specificare un vincolo pi�e, perch矱uello attuale accetterebbe anche un orario come "35:72".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="orario" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="giorno" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="lun"/>
+                <xs:enumeration value="mar"/>
+                <xs:enumeration value="mer"/>
+                <xs:enumeration value="gio"/>
+                <xs:enumeration value="ven"/>
+                <xs:enumeration value="sab"/>
+                <xs:enumeration value="dom"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="dalle" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[0-9]{2}:[0-9]{2}"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="alle" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[0-9]{2}:[0-9]{2}"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+
+<xs:simpleType name="fondoAnticoType">
+   <xs:restriction base="xs:string">
+        <xs:pattern value="[0-9]{4}-[0-9]{4}"/>
+      </xs:restriction>
+  </xs:simpleType>
+
+<xs:simpleType name="siNoType">
+	<xs:restriction base="xs:string">
+    	<xs:enumeration value="s"/>
+        <xs:enumeration value="n"/>
+    </xs:restriction>
+</xs:simpleType>
+
+
+
+<xs:simpleType name="ruoloType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="POS"/>
+    <xs:enumeration value="DSC"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+
+<xs:simpleType name="tipoType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="internazionale"/>
+    <xs:enumeration value="nazionale"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="tipoDocType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="documentoIdentita"/>
+    <xs:enumeration value="tesseraBiblioteca"/>
+    <xs:enumeration value="letteraPresentazione"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+</xs:schema>

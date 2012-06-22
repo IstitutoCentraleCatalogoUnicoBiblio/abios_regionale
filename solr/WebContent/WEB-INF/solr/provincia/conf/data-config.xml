@@ -1,0 +1,16 @@
+<dataConfig>
+  <dataSource type="JdbcDataSource" 
+              driver="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost/abipuglia?zeroDateTimeBehavior=convertToNull" 
+              user="abi" 
+              password="abi"/>
+  <document>
+    <entity name="provincia" pk="id_provincia" 
+    		query="SELECT p.id_provincia as id_provincia, 
+    					p.denominazione as provincia,
+    					r.id_regione as id_regione, 
+    					r.denominazione as regione
+    					FROM provincia p, regione r WHERE p.id_regione = r.id_regione"> 
+  	</entity>    
+</document>
+</dataConfig>

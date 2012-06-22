@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+    <utente-ultima-modifica>
+        <enabled>true</enabled>
+        <email>m.bartolozzi@inera.it</email>
+        <login>INERA</login>
+        <password>edaca669c6595f7f7df726c821d7b6ef</password>
+        <id-utenti>2</id-utenti>
+    </utente-ultima-modifica>
+    <indirizzo>Via Port'Arsa</indirizzo>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>382</id-contatti>
+        <valore> +39 082424461</valore>
+        <contatti-tipo>
+            <descrizione>Telefono</descrizione>
+            <id-contatti-tipo>1</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <isil-provincia>BN</isil-provincia>
+    <denominazione-ufficiale>Biblioteca scolastica del I circolo didattico</denominazione-ufficiale>
+    <catalogazione-data-modifica>2012-06-06T15:54:14.000+02:00</catalogazione-data-modifica>
+    <comune>
+        <denominazione>Benevento</denominazione>
+        <id-comune>1264</id-comune>
+        <codice-istat>062008</codice-istat>
+        <codice-finanze>A783</codice-finanze>
+        <provincia>
+            <denominazione>Benevento</denominazione>
+            <codice-istat>062</codice-istat>
+            <dati-province-istat>
+                <totale-abitanti>288283</totale-abitanti>
+                <id-provincia>14</id-provincia>
+            </dati-province-istat>
+            <regione>
+                <denominazione>CAMPANIA</denominazione>
+                <id-regione>4</id-regione>
+                <sigla>CP</sigla>
+                <stato>
+                    <denominazione>Italia</denominazione>
+                    <id-stato>1</id-stato>
+                    <sigla>IT</sigla>
+                </stato>
+                <dati-regioni-istat>
+                    <id-regione>4</id-regione>
+                    <id-sort>15</id-sort>
+                    <totale-abitanti>5824662</totale-abitanti>
+                    <descrizione-zona>SUD</descrizione-zona>
+                </dati-regioni-istat>
+            </regione>
+            <sigla>BN</sigla>
+            <id-provincia>14</id-provincia>
+        </provincia>
+    </comune>
+    <tipologia-funzionale>
+        <id-tipologia-funzionale>0</id-tipologia-funzionale>
+        <descrizione>NON SPECIFICATA</descrizione>
+    </tipologia-funzionale>
+    <gestisce-servizio-bibliografico-interno>false</gestisce-servizio-bibliografico-interno>
+    <catalogazione-data-import>2012-05-29T13:40:04.000+02:00</catalogazione-data-import>
+    <cap>82100</cap>
+    <autonomia-amministrativa>false</autonomia-amministrativa>
+    <catalogazione-data-modifica-remota>2008-04-21T11:38:00.000+02:00</catalogazione-data-modifica-remota>
+    <stato-biblioteca-workflow>
+        <id-stato>3</id-stato>
+        <label>Revisione</label>
+    </stato-biblioteca-workflow>
+    <fondi-antichi-consistenza>
+        <descrizione>-</descrizione>
+        <id-fondi-antichi-consistenza>1</id-fondi-antichi-consistenza>
+    </fondi-antichi-consistenza>
+    <ente>
+        <ente-obiettivo>
+            <descrizione>NON SPECIFICATO</descrizione>
+            <id-ente-obiettivo>0</id-ente-obiettivo>
+        </ente-obiettivo>
+        <denominazione></denominazione>
+        <id-ente>77</id-ente>
+        <ente-tipologia-amministrativa>
+            <descrizione>NON SPECIFICATA</descrizione>
+            <id-ente-tipologia-amministrativa>0</id-ente-tipologia-amministrativa>
+        </ente-tipologia-amministrativa>
+        <stato>
+            <denominazione>Italia</denominazione>
+            <id-stato>1</id-stato>
+            <sigla>IT</sigla>
+        </stato>
+    </ente>
+    <isil-numero>107</isil-numero>
+    <gestisce-servizio-bibliografico-esterno>false</gestisce-servizio-bibliografico-esterno>
+    <id-biblioteca>240</id-biblioteca>
+    <isil-stato>IT</isil-stato>
+</biblioteca>

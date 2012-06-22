@@ -1,0 +1,159 @@
+<project name="Abi" default="build" basedir=".">
+
+	<!-- === PROPERTIES === -->
+	<property environment="env" />
+	<property file="abi.properties" />
+
+	<path id="compile.path">
+		<fileset dir="./war/WEB-INF/lib">
+        	<include name="**/*.jar"/>
+		</fileset>
+		<path refid="gwt_compile.path" />
+	</path>
+
+	<path id="gwt_compile.path">
+		<fileset dir="./ant/lib">
+		        	<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="./war/WEB-INF/lib/">
+			<include name="gxt.jar"/>
+		</fileset>
+		<path refid="compile.client.path" />
+	</path>
+	
+	<path id="compile.client.path">
+		<path location="./src" />
+			<fileset dir="./src">
+	        	<include name="**/*.java"/>
+			</fileset>
+	</path>
+
+	<target name="clean" description="Rimozione files vecchio build">
+
+		<echo message="Rimozione files vecchio build:" />
+		<echo message="-->CLEAN:./war/WEB-INF/classes" />
+		<echo message="-->CLEAN:./war/abi" />
+		<delete includeEmptyDirs="true" failonerror="false" >
+			<fileset dir="./war/WEB-INF/classes" />
+			<fileset dir="./war/abi" />
+		</delete>
+		
+		<echo message="-->CLEAN:./war/statistiche" />
+		<delete failonerror="false" >
+			<fileset dir="./war/statistiche" includes="*.txt" />
+			<fileset dir="./war/statistiche" includes="*.xls" />
+			<fileset dir="./war/statistiche" includes="*.html" />
+		</delete>
+				
+	</target>
+
+	<target name="compileWebApplication" description="Compila file di logica e persistenza" depends="clean">
+		<mkdir dir="./war/WEB-INF/classes" />
+			
+		<echo message="Compilazione RANJAN path:./src/org/ranjan" />
+	
+		<javac srcdir="./src/org/ranjan" 
+		 		destdir="./war/WEB-INF/classes" 
+		 		debug="on"	
+		 		source="1.6"
+		 		target="1.6"
+		 		includes="**/*.java">
+		 	<classpath refid="compile.path" />
+		</javac>
+		
+		<echo message="Compilazione ABIAPP path:./src/it/inera/abi" />
+		
+		<javac srcdir="./src/it/inera/abi" 
+		 		destdir="./war/WEB-INF/classes" 
+		 		debug="on"	
+		 		source="1.6"
+		 		target="1.6"
+		 		includes="**/*.java">
+		 	<classpath refid="compile.path" />
+		</javac>
+			
+		  <copy todir="./war/WEB-INF/classes" overwrite="true">
+				<fileset dir="./src" includes="**/*.xsd" />
+				<fileset dir="./src" includes="**/*.dtd" />
+				<fileset dir="./src" includes="**/*.xml" />
+				<fileset dir="./src" includes="**/*.properties" />
+		  		<fileset dir="./src" includes="**/*.MF" />
+		  		<fileset dir="./src" includes="**/*.xml" />
+
+		  </copy>
+	</target>
+	
+	
+	<target name="compileGxtApplication" description="Compila applicazione Gxt" depends="compileWebApplication">
+		<echo message="Compilazione applicazione Gxt..." />
+
+		<mkdir dir="./war/abi" />
+		<mkdir dir="./ant/log" />
+
+		<echo message="GWT-Compile the sources" />
+		<!--
+			Google Web Toolkit 1.7.1
+			Compiler [-logLevel level] [-treeLogger] [-workDir dir] [-gen dir] [-style style] [-ea] [-validateOnly] [-localWorkers count] [-war dir] [-extra dir] module[s] 
+
+			where 
+			  -logLevel      The level of logging detail: ERROR, WARN, INFO, TRACE, DEBUG, SPAM, or ALL
+			  -treeLogger    Logs output in a graphical tree view
+			  -workDir       The compiler work directory (must be writeable; defaults to a system temp dir)
+			  -gen           The directory into which generated files will be written for review
+			  -style         Script output style: OBF[USCATED], PRETTY, or DETAILED (defaults to OBF)
+			  -ea            Debugging: causes the compiled output to check assert statements.
+			  -validateOnly  Validate all source code, but do not compile
+			  -localWorkers  Specifies the number of local workers to use when compiling permutations
+			  -war           The war directory to write output files into (defaults to war)
+			  -extra         The directory into which extra, non-deployed files will be written
+			and 
+			  module[s]      Specifies the name(s) of the module(s) to compile
+        -->
+		<java classname="com.google.gwt.dev.Compiler"
+		      fork="true"
+		      failonerror="true"
+		      maxmemory="512m"
+		      output="./ant/log/GWT-Compile-Abi.log"
+		      timeout="5000000">
+			<arg value="-war" />
+			<arg value="./war" />
+			<arg value="-logLevel" />
+			<arg value="INFO" />
+			<arg value="-style" />
+			<arg value="OBF" />
+			<arg value="it.inera.abi.gxt.Abi" />
+			<classpath refid="gwt_compile.path" />
+		</java>
+	</target>
+
+	<target name="createWar" depends="compileGxtApplication"> 
+	    <echo message="Creazione WAR..."/>
+				
+	    <delete file="./abiregionale.war" />
+	    <war destfile="./abiregionale.war" webxml="./war/WEB-INF/web.xml">
+	      <fileset dir="./war" excludes="**/CVS/*,**/.cvsignore,**/.nbattrs,**/.project,**/.classpath" />
+	    	
+	    </war>
+		  <echo message="abiregionale.war creato con successo..." />
+	</target>
+
+	
+	<target name="buildWar"> 
+		    <echo message="Creazione WAR..."/>
+		
+		    <delete file="./abiregionale.war" />
+			 <war destfile="./abiregionale.war" webxml="./war/WEB-INF/web.xml">
+			      <fileset dir="./war" excludes="**/CVS/*,**/.cvsignore,**/.nbattrs,**/.project,**/.classpath,**/war/WEB-INF/lib/gwt-dev.jar" />
+			</war>
+			<echo message="abiregionale.war created succesfully..." />
+	</target>
+
+	
+	<target name="build"
+		        description="Compiles and runs the GWT app"
+		        depends="clean,
+						compileWebApplication,
+						compileGxtApplication,
+						createWar">
+	</target>
+</project>

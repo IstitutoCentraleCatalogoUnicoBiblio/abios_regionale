@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<quartz xmlns="http://www.opensymphony.com/quartz/JobSchedulingData"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.opensymphony.com/quartz/JobSchedulingData
+  http://www.opensymphony.com/quartz/xml/job_scheduling_data_1_5.xsd"
+	version="1.5">
+
+	<!-- Configurazione generazione counter censite -->
+	<job>
+		<job-detail>
+			<name>counterBiblioJob</name>
+			<group>abifeJobs</group>
+			<description>Genera un nuovo file html con iornamento</description>
+			<job-class>it.inera.abife.jobs.CountBiblioJob</job-class>
+			<volatility>false</volatility>
+			<durability>false</durability>
+			<recover>false</recover>
+			<job-data-map>
+				<entry>
+					<key>htmltemplate</key>
+					<value>/var/lib/tomcat6/webapps/abife/count.template</value>
+				</entry>
+				<entry>
+					<key>htmlpath</key>
+					<value>/var/lib/tomcat6/webapps/abifepuglia/count.html</value>
+				</entry>
+			</job-data-map>
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>counterBiblioTrigger</name>
+				<group>abifeJobs</group>
+				<description>Cron trigger per counterBiblioJob</description>
+				<job-name>counterBiblioJob</job-name>
+				<job-group>abifeJobs</job-group>
+				<!-- cron-expression>0 0 7 * * ?</cron-expression-->
+				<cron-expression>0/15 * * ? * *</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+	
+</quartz>

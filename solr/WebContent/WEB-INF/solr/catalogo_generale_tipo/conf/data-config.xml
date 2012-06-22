@@ -1,0 +1,12 @@
+<dataConfig>
+  <dataSource type="JdbcDataSource" 
+              driver="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost/abipuglia?zeroDateTimeBehavior=convertToNull" 
+              user="abi" 
+              password="abi"/>
+  <document>
+    <entity name="catalogo_generale_tipo" pk="id_catalogo_generale_tipo" 
+    		query="SELECT * FROM catalogo_generale_tipo ORDER BY id_catalogo_generale_tipo"> 
+  	</entity>    
+</document>
+</dataConfig>

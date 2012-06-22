@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<biblioteche>
+	<dataExport>2012-06-05T12:44:09.456+02:00</dataExport>
+<biblioteca>
+		<anagrafica>
+			<dataAggiornamento>2010-06-19T08:17:00.431+02:00</dataAggiornamento>
+			<nome>
+				<attuale>Biblioteca Pubblica Statale annessa al Monumento nazionale
+					di Montevergine</attuale>
+				<precedente>Biblioteca di Montevergine</precedente>
+				<alternativo>Biblioteca Statale di Montevergine</alternativo>
+			</nome>
+			<codici>
+				<iccu>IT-AV0045</iccu>
+				<rism>NULL</rism>
+				<sbn>NAPMV</sbn>
+			</codici>
+			<indirizzo>
+				<via>Palazzo abbaziale di Loreto - Via Domenico Antonio Vaccaro, 1
+				</via>
+				<cap>83013</cap>
+				<comune>064049</comune>
+				<provincia>064</provincia>
+				<regione>CAMPANIA</regione>
+				<stato>IT</stato>
+			</indirizzo>
+			<contatti>
+				<telefonico tipo="telefono">
+					<prefisso>+39</prefisso>
+					<numero>0825789933</numero>
+					<note>Centralino</note>
+				</telefonico>
+				<telefonico tipo="fax">
+					<prefisso>+39</prefisso>
+					<numero>0825789086</numero>
+				</telefonico>
+				<telefonico tipo="telefono">
+					<prefisso>+39</prefisso>
+					<numero>0825787191</numero>
+					<note>Centralino</note>
+				</telefonico>
+				<altro tipo="e-mail">
+					<valore>bmn-mnv.prestito@beniculturali.it</valore>
+					<note>Prestito</note>
+				</altro>
+				<altro tipo="e-mail">
+					<valore>bmn-mnv@beniculturali.it</valore>
+					<note>Indirizzo generale</note>
+				</altro>
+				<altro tipo="url">
+					<valore>http://www.montevergine.librari.beniculturali.it</valore>
+				</altro>
+				<altro tipo="e-mail">
+					<valore>bmn-mnv.schedatura@beniculturali.it</valore>
+					<note>Amministratore del sito web</note>
+				</altro>
+				<altro tipo="e-mail">
+					<valore>bmn-mnv.reference@beniculturali.it</valore>
+					<note>Reference</note>
+				</altro>
+			</contatti>
+			<edificio>
+				<denominazione>Palazzo abbaziale di Loreto</denominazione>
+				<monumentale>s</monumentale>
+				<appositamenteCostruito>n</appositamenteCostruito>
+				<dataCostruzione tipo="anno">1750</dataCostruzione>
+			</edificio>
+			<Istituzione>
+				<dataIstituzione tipo="anno">1955</dataIstituzione>
+				<dataFondazione tipo="anno">1126</dataFondazione>
+			</Istituzione>
+		</anagrafica>
+		<cataloghi>
+			<catalogo-generale tipo="Autore">
+				<forme>
+					<schede />
+				</forme>
+				<copertura>
+					<da-anno>1600</da-anno>
+					<ad-anno>2007</ad-anno>
+				</copertura>
+			</catalogo-generale>
+			<catalogo-generale tipo="Soggetto">
+				<forme>
+					<schede />
+				</forme>
+				<copertura>
+					<da-anno>1600</da-anno>
+					<ad-anno>2007</ad-anno>
+				</copertura>
+			</catalogo-generale>
+			<catalogo-speciale>
+				<forme>
+					<schede />
+				</forme>
+				<nome>Volumi ed opuscoli</nome>
+				<materiale>edizioni del '500*</materiale>
+			</catalogo-speciale>
+			<catalogo-speciale>
+				<forme>
+					<schede />
+				</forme>
+				<nome>Volumi ed opuscoli</nome>
+				<materiale>tesi di laurea*</materiale>
+			</catalogo-speciale>
+			<catalogo-speciale>
+				<forme>
+					<volume />
+				</forme>
+				<nome>Manoscritti sciolti</nome>
+				<materiale>pergamene*</materiale>
+			</catalogo-speciale>
+			<catalogo-speciale>
+				<forme>
+					<schede />
+				</forme>
+				<nome>Pubblicazioni in serie</nome>
+				<materiale>giornali*</materiale>
+			</catalogo-speciale>
+			<catalogo-speciale>
+				<forme>
+					<schede />
+				</forme>
+				<nome>Pubblicazioni in serie</nome>
+				<materiale>periodici*</materiale>
+			</catalogo-speciale>
+			<catalogo-collettivo>
+				<forme>
+					<volume />
+				</forme>
+				<nome>Censimento nazionale delle edizioni italiane del XVI secolo
+				</nome>
+				<materiale>edizioni del '500*</materiale>
+			</catalogo-collettivo>
+			<catalogo-collettivo>
+				<nome>Catalogo collettivo del Servizio bibliotecario nazionale,
+					http://opac.sbn.it</nome>
+				<materiale>tutti i materiali</materiale>
+			</catalogo-collettivo>
+		</cataloghi>
+		<patrimonio>
+			<materiale nome="santini" posseduto="1000" />
+			<materiale nome="disegni tecnici" posseduto="15" />
+			<materiale nome="incunaboli*" posseduto="24" />
+			<materiale nome="DVD*" posseduto="4" />
+			<materiale nome="codici musicali" posseduto="3" />
+			<materiale nome="cronache" posseduto="40" />
+			<materiale nome="quadri*" posseduto="4" />
+			<materiale nome="codici*" posseduto="21" />
+			<materiale nome="dipinti*" posseduto="6" />
+			<materiale nome="disegni architettonici" posseduto="15" />
+			<materiale nome="figurine" posseduto="60" />
+			<materiale nome="dattiloscritti*" posseduto="10" />
+			<materiale nome="copertine" posseduto="10" />
+			<materiale nome="testi in lingua ebraica" posseduto="4" />
+			<materiale nome="fotoriproduzioni" posseduto="10" />
+			<materiale nome="edizioni del '500*" posseduto="2000" />
+			<materiale nome="periodici*" posseduto="348" />
+			<materiale nome="musica*" posseduto="5000" />
+			<materiale nome="carte topografiche*" posseduto="5" />
+			<materiale nome="periodici correnti" posseduto="101" />
+			<materiale nome="immagini religiose" posseduto="100" />
+			<materiale nome="fogli volanti" posseduto="100000" />
+			<materiale nome="calendari" posseduto="4" />
+			<materiale nome="CD-ROM*" posseduto="50" />
+			<materiale nome="ex libris*" posseduto="2500" />
+			<materiale nome="depliant*" posseduto="30" />
+			<materiale nome="documenti archivistici - buste" posseduto="1000" />
+			<materiale nome="manoscritti*" posseduto="580" />
+			<materiale nome="negativi fotografici*" posseduto="1000" />
+			<materiale nome="libretti per musica manoscritti*"
+				posseduto="1000" />
+			<materiale nome="autografi*" posseduto="20" />
+			<materiale nome="carteggi*" posseduto="30" />
+			<materiale nome="fotografie*" posseduto="2000" />
+			<materiale nome="fondi archivistici*" posseduto="3" />
+			<materiale nome="giornali*" posseduto="1" />
+			<materiale nome="manifesti*" posseduto="50" />
+			<materiale nome="stampati musicali" posseduto="200" />
+			<materiale nome="pergamene*" posseduto="7000" />
+			<materiale nome="periodici spenti" posseduto="247" />
+			<materiale nome="messali" posseduto="100" />
+			<materiale nome="corali*" posseduto="30" />
+			<materiale nome="ritratti*" posseduto="1" />
+			<materiale nome="spartiti" posseduto="300" />
+			<materiale nome="registri anagrafici*" posseduto="10" />
+			<materiale nome="compact disc*" posseduto="20" />
+			<materiale nome="tesi di laurea*" posseduto="176" />
+			<materiale nome="giornali correnti" posseduto="1" />
+			<materiale nome="registri di Confraternite" posseduto="3" />
+			<materiale nome="volumi ed opuscoli*" posseduto="200000" />
+			<materiale nome="antifonari pergamenacei" posseduto="10" />
+			<materiale nome="codici liturgici*" posseduto="3" />
+			<materiale nome="erbari*" posseduto="3" />
+			<materiale nome="videocassette*" posseduto="15" />
+			<materiale nome="carte geografiche e mappe*" posseduto="100" />
+			<materiale nome="cartoline*" posseduto="50" />
+			<fondo-speciale>
+				<nome>Fondo del Monte di Pieta' di Avellino</nome>
+				<descrizione>NULL</descrizione>
+				<depositato>s</depositato>
+			</fondo-speciale>
+			<fondo-speciale>
+				<nome>Fondo di cartoline, stampe e carte geografiche</nome>
+				<depositato>s</depositato>
+			</fondo-speciale>
+			<fondo-speciale>
+				<nome>Fondo Galdi</nome>
+				<descrizione>Letteratura latina</descrizione>
+				<cdd>870</cdd>
+				<depositato>s</depositato>
+				<catalogoInventario>S</catalogoInventario>
+			</fondo-speciale>
+			<fondo-speciale>
+				<nome>Fondo Russoniello</nome>
+				<descrizione>storia locale e cultura generale</descrizione>
+				<depositato>s</depositato>
+				<catalogoInventario>O</catalogoInventario>
+			</fondo-speciale>
+			<fondo-speciale>
+				<nome>Fondo Johannowskj</nome>
+				<descrizione>Letteratura straniera</descrizione>
+				<cdd>830</cdd>
+				<depositato>n</depositato>
+			</fondo-speciale>
+			<fondo-speciale>
+				<nome>Fondo degli autografi di personaggi illustri</nome>
+				<descrizione>NULL</descrizione>
+				<depositato>s</depositato>
+			</fondo-speciale>
+			<fondo-speciale>
+				<nome>Fondo Frieri</nome>
+				<descrizione>Diritto</descrizione>
+				<cdd>340</cdd>
+				<depositato>s</depositato>
+				<catalogoInventario>S</catalogoInventario>
+			</fondo-speciale>
+			<fondo-speciale>
+				<nome>Fondo Imbimbo</nome>
+				<descrizione>Opere musicali</descrizione>
+				<cdd>780</cdd>
+				<depositato>s</depositato>
+			</fondo-speciale>
+			<fondo-speciale>
+				<nome>Fondo Acocella</nome>
+				<descrizione>Storia medievale</descrizione>
+				<cdd>9401</cdd>
+				<depositato>s</depositato>
+				<catalogoInventario>V</catalogoInventario>
+			</fondo-speciale>
+			<fondi-antichi volumi="1000-5000" />
+			<inventario>
+				<informatizzato>n</informatizzato>
+				<cartaceo>s</cartaceo>
+			</inventario>
+			<catalogo-topografico>
+				<informatizzato>n</informatizzato>
+				<cartaceo>s</cartaceo>
+			</catalogo-topografico>
+		</patrimonio>
+		<specializzazione>
+			<cdd>800</cdd>
+			<descrizione-libera>Letteratura, in particolare letteratura italiana,
+				latina, romena e lad</descrizione-libera>
+		</specializzazione>
+		<servizi>
+			<orario>
+				<ufficiale>
+					<orario giorno="mar" dalle="08:15" alle="14:00" />
+					<orario giorno="mer" dalle="08:15" alle="13:30" />
+					<orario giorno="mar" dalle="14:00" alle="17:15" />
+					<orario giorno="ven" dalle="08:15" alle="13:30" />
+					<orario giorno="gio" dalle="14:00" alle="17:15" />
+					<orario giorno="sab" dalle="08:15" alle="13:30" />
+					<orario giorno="gio" dalle="08:15" alle="14:00" />
+					<orario giorno="lun" dalle="08:15" alle="13:30" />
+				</ufficiale>
+				<chiusura>
+					<periodo>dal 0816 al 0827</periodo>
+					<note>Seconda e terza settimana di agosto per lavori di
+						spolveratura e revisione. Sono assicurati i servizi di
+						informazione e di prestito dalle 10.00 alle 12.00</note>
+				</chiusura>
+				<ore-settimanali>42</ore-settimanali>
+				<ore-settimanali-pomeridiane>6</ore-settimanali-pomeridiane>
+				<settimane-apertura>50</settimane-apertura>
+			</orario>
+			<prestito>
+				<locale>
+					<automatizzato>s</automatizzato>
+					<durata>30</durata>
+					<totale-prestiti>0</totale-prestiti>
+				</locale>
+				<interbibliotecario>
+					<totale-prestiti>0</totale-prestiti>
+					<sistema-ill>
+						<nome>ILL SBN</nome>
+					</sistema-ill>
+				</interbibliotecario>
+				<materiali-esclusi-locale>
+					<materiale>Periodici</materiale>
+					<materiale>Opere generali (trattati, enciclopedie, dizionari, ecc.)
+					</materiale>
+					<materiale>Audiovisivi</materiale>
+					<materiale>Edizioni fino al 1900</materiale>
+					<materiale>Edizioni rare e di pregio</materiale>
+				</materiali-esclusi-locale>
+				<riproduzioni>
+					<tipo>Fotografie</tipo>
+					<locale>s</locale>
+					<nazionale>s</nazionale>
+					<internazionale>s</internazionale>
+				</riproduzioni>
+				<riproduzioni>
+					<tipo>Fotografie</tipo>
+					<locale>s</locale>
+					<nazionale>s</nazionale>
+					<internazionale>s</internazionale>
+				</riproduzioni>
+			</prestito>
+			<informazioni-bibliografiche>
+				<servizio-interno>s</servizio-interno>
+				<servizio-esterno>
+					<modo>Fax</modo>
+					<modo>Telefono</modo>
+					<modo>e-mail</modo>
+					<modo>Posta</modo>
+				</servizio-esterno>
+			</informazioni-bibliografiche>
+			<internet />
+			<accesso>
+				<aperta>s</aperta>
+				<handicap>n</handicap>
+				<condizioni-accesso>
+					<documenti>
+						<tipo>Tessera</tipo>
+					</documenti>
+				</condizioni-accesso>
+				<destinazioni-sociali>
+					<destinazione>
+						<valore>Tutti</valore>
+						<note>Tutti</note>
+					</destinazione>
+					<destinazione>
+						<valore>Tutti</valore>
+					</destinazione>
+				</destinazioni-sociali>
+			</accesso>
+		</servizi>
+		<amministrativa>
+			<codice-fiscale>80017380645</codice-fiscale>
+			<partita-IVA>NULL</partita-IVA>
+			<autonoma>n</autonoma>
+			<ente>
+				<nome>Ministero per i beni e le attivitÃ culturali</nome>
+				<tipologia-amministrativa>Direzione Generale per le Biblioteche, gli
+					Istituti Culturali e il Diritto d'Autore</tipologia-amministrativa>
+				<tipologia-funzionale>Specializzata</tipologia-funzionale>
+				<stato>Italia</stato>
+				<codice-fiscale />
+				<funzione-obiettivo>NON SPECIFICATO</funzione-obiettivo>
+			</ente>
+			<regolamento>
+				<norma>DPR 5 luglio 1995 n. 417</norma>
+				<url>http://www.montevergine.librari.beniculturali.it/index.php?it/184/strumenti
+				</url>
+			</regolamento>
+			<strutture>
+				<superficie>
+					<totale>1550</totale>
+					<al-pubblico>60</al-pubblico>
+				</superficie>
+			</strutture>
+			<utenti>
+				<iscritti-prestito>650</iscritti-prestito>
+			</utenti>
+			<bilancio>
+				<entrate>130000</entrate>
+				<uscite>
+					<totale>130000</totale>
+					<funzionamento>30000</funzionamento>
+					<automazione>10000</automazione>
+					<patrimonio>41000</patrimonio>
+					<altre>49000</altre>
+				</uscite>
+			</bilancio>
+		</amministrativa>
+	</biblioteca>
+</biblioteche>

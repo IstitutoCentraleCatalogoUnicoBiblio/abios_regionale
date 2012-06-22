@@ -1,0 +1,12 @@
+<dataConfig>
+  <dataSource type="JdbcDataSource" 
+              driver="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost/abipuglia?zeroDateTimeBehavior=convertToNull" 
+              user="abi" 
+              password="abi"/>
+  <document>
+    <entity name="cataloghi_collettivi" pk="id_cataloghi_collettivi" 
+    		query="SELECT * FROM cataloghi_collettivi"> 
+  	</entity>    
+</document>
+</dataConfig>

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+wgetProgram=wget
+urlCmd='http://localhost:8080/solr/abi/dataimport?command=delta-import&clean=false'
+statusCmd='http://localhost:8080//solr/abi/dataimport?command=status'
+outputDir=.
+
+
+$wgetProgram -O $outputDir/check_status_update_index.txt ${statusCmd} 2>/dev/null
+
+status=`fgrep idle $outputDir/check_status_update_index.txt`
+
+if [[ ${status} == *idle* ]] 
+then
+	$wgetProgram -O $outputDir/status_update_index.txt ${urlCmd} 2>/dev/null
+fi

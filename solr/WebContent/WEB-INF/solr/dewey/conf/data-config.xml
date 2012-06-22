@@ -1,0 +1,15 @@
+<dataConfig>
+  <dataSource type="JdbcDataSource" 
+              driver="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost/abipuglia?zeroDateTimeBehavior=convertToNull" 
+              user="abi" 
+              password="abi"/>
+  <document>
+    <entity name="dewey" pk="id_dewey" 
+    		query="SELECT IF(length(dew.id_dewey) > 3, concat(substring(dew.id_dewey,1,3),'.',substring(dew.id_dewey,4,6)), dew.id_dewey) as id_dewey, descrizione FROM dewey as dew">
+    		
+    		<field column="id_dewey" name="id_dewey" />
+    		<field column="descrizione" name="descrizione" /> 
+  	</entity>    
+</document>
+</dataConfig>

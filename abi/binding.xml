@@ -1,0 +1,68 @@
+<binding xmlns="http://www.castor.org/SourceGenerator/Binding"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.castor.org/SourceGenerator/Binding
+                C:\\Castor\\xsd\\binding.xsd"
+            defaultBinding="element">
+
+   <elementBinding name="/complexType:anagraficaType/edificio/apposito/data">
+      <java-class name="AppositoData"/>
+   </elementBinding>
+
+   <elementBinding name="/complexType:anagraficaType/edificio/monumentale/data">
+      <java-class name="MonumentaleData"/>
+   </elementBinding>
+
+   <elementBinding name="/complexType:patrimonioType/inventario">
+      <java-class name="PatrimonioInventario"/>
+   </elementBinding>
+
+   <elementBinding name="/complexType:fondoSpecialeType/inventario">
+      <java-class name="FondoSpecialeInventario"/>
+   </elementBinding>
+
+   <elementBinding name="/complexType:specializzazioneType/cdd">
+      <java-class name="SpecializzazioneCdd"/>
+   </elementBinding>
+
+   <elementBinding name="/complexType:fondoSpecialeType/cdd">
+      <java-class name="FondoSpecialeCdd"/>
+   </elementBinding>
+
+   <elementBinding name="/complexType:orarioType/orario">
+      <java-class name="Orario"/>
+   </elementBinding>
+
+   <elementBinding name="/complexType:serviziType/orario">
+      <java-class name="ServiziOrario"/>
+   </elementBinding>
+
+   <elementBinding name="/complexType:serviziType/prestito/interbibliotecario/automatizzato">
+      <java-class name="PrestitoInterbibliotecarioAutomatizzato"/>
+   </elementBinding>
+
+   <elementBinding name="/complexType:serviziType/prestito/locale/automatizzato">
+      <java-class name="PrestitoLocaleAutomatizzato"/>
+   </elementBinding>
+   
+   <elementBinding name="/complexType:catalogoSpecialeType/forme">
+      <java-class name="CatSpecForme"/>
+   </elementBinding>
+   <elementBinding name="/complexType:catalogoSpecialeType/forme/schede">
+      <java-class name="CatSpecFormeSchede"/>
+   </elementBinding>
+   <elementBinding name="/complexType:catalogoSpecialeType/forme/volume">
+      <java-class name="CatSpecFormeVolume"/>
+   </elementBinding>
+   <elementBinding name="/complexType:catalogoSpecialeType/forme/microforme">
+      <java-class name="CatSpecFormeMicroforme"/>
+   </elementBinding>
+   <elementBinding name="/complexType:catalogoSpecialeType/forme/digitale">
+      <java-class name="CatSpecFormeDigitale"/>
+   </elementBinding>
+   <elementBinding name="/complexType:catalogoSpecialeType/copertura">
+      <java-class name="CatSpecFormeCopertura"/>
+   </elementBinding>
+   
+   
+
+</binding>

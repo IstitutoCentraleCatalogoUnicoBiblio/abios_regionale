@@ -1,0 +1,99 @@
+/* =general */
+body { font-family: Verdana, Arial, Helvetica, sans-serif; font-weight:normal; color: #595959; background-color: #fff;}
+
+/* =link */
+a:link,a:visited {color:#000; text-decoration: none}
+a:hover, a:focus{text-decoration: underline}
+
+/* =bubble */
+.bubble {  width: 300px; height: auto;}
+.bubble ul{width:100%;font-size:11px; color:#595959; margin:0 0 7px 0; padding:0}
+.bubble .location { color:#269b31; font-weight:bold;text-transform:uppercase; }
+.bubble li{text-transform:uppercase; display:inline; margin:0 5px 0 0}
+.bubble-photo{width:80px; height:80px; float:left; margin:0 7px 7px 0; text-align:center}
+.bubble-photo img{ border:0;}
+.bubble-content h3{ margin:0; padding:0; font-family:Georgia, "Times New Roman", Times, serif; font-size:14px; font-weight:bold }
+.bubble-content p{color: #595959; font-size:11px ;margin:0; padding:0;}
+.bubble-footer{ clear:left;width:100%; border:1px dotted #ababab; border-width: 1px 0 0 0; margin: 5px 0 0 0}
+.bubble-footer .bubble-link {font-size:11px; float:right}
+.bubble-footer .bubble-date {font-size:11px; margin:0; padding:0}
+
+DIV#load_wait {
+	position:absolute;left:322px;top:214px;display: none;
+}
+
+.geocrumbs {
+	background-color:#339966;
+	width: 100%; 
+	line-height: 1em;
+	padding: 0;
+	border-top: 1px solid #9fb7d0;
+	border-bottom: 1px solid #9fb7d0;
+}
+.geocrumbs a {
+	color: #ffffff;
+	text-decoration: none;
+	vertical-align: middle;
+}
+.geocrumbs a:hover {
+	color: #9fb7d0;
+	text-decoration: none;
+}
+
+
+.geomenu a {
+	font-size: 10px;
+	text-decoration: none;
+	padding: 0;
+	color: rgb(80, 124, 169);
+	display:block;
+}
+
+.geomenu a:link, .geomenu a:visited, .geomenu a:hover, .geomenu a:active  {
+	background-color: #eaeaea;
+	font-weight: normal;
+}
+
+.geomenu a:link, .geomenu a:visited, .geomenu a:hover, .geomenu a:active {
+	background-color: #eaeaea;
+	font-weight: normal;
+}
+
+.geomenu {
+	height: 350px; 
+	overflow: auto;
+	border: 1px;
+	display:block;
+}
+
+#locationlabel {
+	font-size: 12px;
+	vertical-align: top;
+	color: #766961;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+#label {
+	font-size: 15px;
+	vertical-align: top;
+	color: #766961;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+.biblioentrypair {
+	font-size: 12px;
+	background-color:#A0EFA5;
+}
+
+.biblioentryodd {
+	font-size: 12px;
+	background-color:#ECECEC;
+}
+
+.labelmenu {
+	font-size: 12px;
+	vertical-align: top;
+	color: #000000;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+div#dirpanel, div#dirpanel table td {font-size:0.6em;}

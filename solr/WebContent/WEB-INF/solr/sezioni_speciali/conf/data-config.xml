@@ -1,0 +1,12 @@
+<dataConfig>
+  <dataSource type="JdbcDataSource" 
+              driver="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost/abipuglia?zeroDateTimeBehavior=convertToNull" 
+              user="abi" 
+              password="abi"/>
+  <document>
+    <entity name="sezioni_speciali" pk="id_sezioni_speciali" 
+    		query="SELECT * FROM sezioni_speciali"> 
+  	</entity>    
+</document>
+</dataConfig>

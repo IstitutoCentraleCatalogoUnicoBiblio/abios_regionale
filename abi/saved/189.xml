@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+    <utente-ultima-modifica>
+        <enabled>true</enabled>
+        <email>m.bartolozzi@inera.it</email>
+        <login>INERA</login>
+        <password>edaca669c6595f7f7df726c821d7b6ef</password>
+        <id-utenti>2</id-utenti>
+    </utente-ultima-modifica>
+    <indirizzo>Via Roma</indirizzo>
+    <accesso-riservato>false</accesso-riservato>
+    <contattis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Contatti">
+        <id-contatti>285</id-contatti>
+        <valore> +39 0824937215</valore>
+        <contatti-tipo>
+            <descrizione>Telefono</descrizione>
+            <id-contatti-tipo>1</id-contatti-tipo>
+        </contatti-tipo>
+    </contattis>
+    <isil-provincia>BN</isil-provincia>
+    <denominazione-ufficiale>Biblioteca S. Francesco</denominazione-ufficiale>
+    <catalogazione-data-modifica>2012-06-06T15:54:03.000+02:00</catalogazione-data-modifica>
+    <comune>
+        <denominazione>Circello</denominazione>
+        <id-comune>1280</id-comune>
+        <codice-istat>062024</codice-istat>
+        <codice-finanze>C719</codice-finanze>
+        <provincia>
+            <denominazione>Benevento</denominazione>
+            <codice-istat>062</codice-istat>
+            <dati-province-istat>
+                <totale-abitanti>288283</totale-abitanti>
+                <id-provincia>14</id-provincia>
+            </dati-province-istat>
+            <regione>
+                <denominazione>CAMPANIA</denominazione>
+                <id-regione>4</id-regione>
+                <sigla>CP</sigla>
+                <stato>
+                    <denominazione>Italia</denominazione>
+                    <id-stato>1</id-stato>
+                    <sigla>IT</sigla>
+                </stato>
+                <dati-regioni-istat>
+                    <id-regione>4</id-regione>
+                    <id-sort>15</id-sort>
+                    <totale-abitanti>5824662</totale-abitanti>
+                    <descrizione-zona>SUD</descrizione-zona>
+                </dati-regioni-istat>
+            </regione>
+            <sigla>BN</sigla>
+            <id-provincia>14</id-provincia>
+        </provincia>
+    </comune>
+    <tipologia-funzionale>
+        <id-tipologia-funzionale>3</id-tipologia-funzionale>
+        <descrizione>Specializzata</descrizione>
+    </tipologia-funzionale>
+    <dewey-liberos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.DeweyLibero">
+        <dewey>
+            <descrizione>Religione</descrizione>
+            <id-dewey>200</id-dewey>
+        </dewey>
+        <descrizione>Religione</descrizione>
+        <id>
+            <id-biblioteca>189</id-biblioteca>
+            <id-dewey>200</id-dewey>
+        </id>
+    </dewey-liberos>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>1</id-sort>
+            <descrizione>volumi ed opuscoli*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>1600</quantita>
+        <id>
+            <id-biblioteca>189</id-biblioteca>
+            <id-patrimonio-specializzazione>20000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>26</id-sort>
+            <descrizione>edizioni del '500*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20200</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>15</quantita>
+        <id>
+            <id-biblioteca>189</id-biblioteca>
+            <id-patrimonio-specializzazione>20200</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>27</id-sort>
+            <descrizione>edizioni del '600*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20300</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>60</quantita>
+        <id>
+            <id-biblioteca>189</id-biblioteca>
+            <id-patrimonio-specializzazione>20300</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>28</id-sort>
+            <descrizione>edizioni del '700*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20400</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>120</quantita>
+        <id>
+            <id-biblioteca>189</id-biblioteca>
+            <id-patrimonio-specializzazione>20400</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>29</id-sort>
+            <descrizione>edizioni del '800*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>4</id-patrimonio-specializzazione-categoria>
+                <id-sort>13</id-sort>
+                <descrizione>Volumi ed opuscoli</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>20500</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>510</quantita>
+        <id>
+            <id-biblioteca>189</id-biblioteca>
+            <id-patrimonio-specializzazione>20500</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <patrimonios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:java="http://java.sun.com" xsi:type="java:it.inera.abi.persistence.Patrimonio">
+        <quantita-ultimo-anno>0</quantita-ultimo-anno>
+        <patrimonio-specializzazione>
+            <id-sort>8</id-sort>
+            <descrizione>periodici*</descrizione>
+            <patrimonio-specializzazione-categoria>
+                <id-patrimonio-specializzazione-categoria>5</id-patrimonio-specializzazione-categoria>
+                <id-sort>12</id-sort>
+                <descrizione>Pubblicazioni in serie</descrizione>
+            </patrimonio-specializzazione-categoria>
+            <id-patrimonio-specializzazione>40000</id-patrimonio-specializzazione>
+        </patrimonio-specializzazione>
+        <quantita>5</quantita>
+        <id>
+            <id-biblioteca>189</id-biblioteca>
+            <id-patrimonio-specializzazione>40000</id-patrimonio-specializzazione>
+        </id>
+    </patrimonios>
+    <gestisce-servizio-bibliografico-interno>false</gestisce-servizio-bibliografico-interno>
+    <catalogazione-data-import>2012-05-29T13:40:04.000+02:00</catalogazione-data-import>
+    <bilancio-patrimoniale-posseduto-under14>0</bilancio-patrimoniale-posseduto-under14>
+    <cap>82020</cap>
+    <autonomia-amministrativa>false</autonomia-amministrativa>
+    <edificio-monumentale>true</edificio-monumentale>
+    <stato-biblioteca-workflow>
+        <id-stato>3</id-stato>
+        <label>Revisione</label>
+    </stato-biblioteca-workflow>
+    <edificio-denominazione>Convento francescano</edificio-denominazione>
+    <fondi-antichi-consistenza>
+        <descrizione>-</descrizione>
+        <id-fondi-antichi-consistenza>1</id-fondi-antichi-consistenza>
+    </fondi-antichi-consistenza>
+    <ente>
+        <ente-obiettivo>
+            <descrizione>NON SPECIFICATO</descrizione>
+            <id-ente-obiettivo>0</id-ente-obiettivo>
+        </ente-obiettivo>
+        <denominazione>Frati minori OFM. Convento S. Francesco di Circello</denominazione>
+        <id-ente>169</id-ente>
+        <ente-tipologia-amministrativa>
+            <descrizione>Enti ecclesiastici</descrizione>
+            <id-ente-tipologia-amministrativa>1000</id-ente-tipologia-amministrativa>
+        </ente-tipologia-amministrativa>
+        <stato>
+            <denominazione>Italia</denominazione>
+            <id-stato>1</id-stato>
+            <sigla>IT</sigla>
+        </stato>
+    </ente>
+    <edificio-data-costruzione>1627</edificio-data-costruzione>
+    <bilancio-patrimoniale-posseduto>0</bilancio-patrimoniale-posseduto>
+    <isil-numero>54</isil-numero>
+    <gestisce-servizio-bibliografico-esterno>false</gestisce-servizio-bibliografico-esterno>
+    <id-biblioteca>189</id-biblioteca>
+    <data-fondazione>18</data-fondazione>
+    <isil-stato>IT</isil-stato>
+</biblioteca>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?><ROWSETS>
+<ROWSET>
+  <ROW num="1">
+    <descrizione>Nazionale</descrizione>
+  </ROW>
+  <ROW num="2">
+    <descrizione>Istituto di insegnamento superiore</descrizione>
+  </ROW>
+  <ROW num="3">
+    <descrizione>Specializzata</descrizione>
+  </ROW>
+  <ROW num="4">
+    <descrizione>Importante non specializzata</descrizione>
+  </ROW>
+  <ROW num="5">
+    <descrizione>Pubblica</descrizione>
+  </ROW>
+</ROWSET>
+
+<ROWSET>
+</ROWSET>
+
+<ROWSET>
+</ROWSET>
+
+<ROWSET>
+</ROWSET>
+
+<ROWSET>
+</ROWSET>
+
+<ROWSET>
+</ROWSET>
+
+<ROWSET>
+</ROWSET>
+
+<ROWSET>
+</ROWSET>
+
+<ROWSET>
+</ROWSET>
+</ROWSETS>

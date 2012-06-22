@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ABI" default="empty">
+
+	<path id="classpath">
+		<pathelement location="${basedir}/bin"/>
+  		<fileset dir="war/WEB-INF/lib">
+    		<include name="*.jar" />
+  		</fileset>
+	</path>
+
+    <taskdef name="castor-srcgen" classpathref="classpath" classname="org.castor.anttask.CastorCodeGenTask" />
+
+	<target name="empty">
+	</target>
+
+	<target name="clean" description="Clean castor">
+		<delete>
+			<fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/" includes="*.java"/>
+		    <fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/descriptors/" includes="*.java"/>
+			<fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/types/descriptors/" includes="*.java"/>
+			<fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/types/" includes="*.java"/>
+		 </delete>
+	</target>
+
+	<target name="castor:gen:src" description="Generate Java source files from XSD." depends="clean">
+		<castor-srcgen file="xsd_formatodiscambio/biblioteca_fds.xsd"
+			todir="src"
+			package="it.inera.abi.logic.formatodiscambio.castor"
+			types="j2"
+			bindingfile="binding.xml"
+			verbose="true"
+			warnings="true" />
+	  </target>
+		
+</project>
