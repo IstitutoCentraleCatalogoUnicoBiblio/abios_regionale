@@ -1,0 +1,1 @@
+insert into geolocalizzazione (id_biblioteca) SELECT b.id_biblioteca FROM biblioteca b join comune c on b.id_comune = c.id_comune join provincia p on c.id_provincia = p.id_provincia where b.id_biblioteca not in (select g.id_biblioteca from geolocalizzazione g) and p.id_regione = 13;
