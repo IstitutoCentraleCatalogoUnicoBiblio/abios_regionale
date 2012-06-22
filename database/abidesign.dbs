@@ -1,0 +1,1934 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="abiregionaledesign" version="42" database="MySql" >
+	<schema name="abicampania" catalogname="abicampania" defo="y" >
+		<table name="accesso_modalita" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_accesso_modalita" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="PK_Table" unique="PRIMARY_KEY" >
+				<column name="id_accesso_modalita" />
+			</index>
+		</table>
+		<table name="bibliografia" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_bibliografia" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione" type="TEXT" length="65535" jt="-1" />
+			<index name="pk_bibliografia" unique="PRIMARY_KEY" >
+				<column name="id_bibliografia" />
+			</index>
+			<index name="bibliografia_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="biblioteca" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="isil_stato" type="VARCHAR" length="2" jt="12" mandatory="y" >
+				<defo>'IT'</defo>
+			</column>
+			<column name="isil_provincia" type="VARCHAR" length="2" jt="12" mandatory="y" />
+			<column name="isil_numero" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="denominazione_ufficiale" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<column name="indirizzo" type="VARCHAR" length="255" jt="12" />
+			<column name="frazione" type="VARCHAR" length="255" jt="12" />
+			<column name="cap" type="VARCHAR" length="5" jt="12" />
+			<column name="id_comune" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="codice_fiscale" type="VARCHAR" length="16" jt="12" />
+			<column name="partita_iva" type="VARCHAR" length="11" jt="12" />
+			<column name="data_fondazione" type="VARCHAR" length="20" jt="12" />
+			<column name="data_istituzione" type="VARCHAR" length="255" jt="12" />
+			<column name="edificio_denominazione" type="VARCHAR" length="255" jt="12" />
+			<column name="edificio_monumentale" type="BOOL" length="1" jt="-6" />
+			<column name="edificio_data_costruzione" type="VARCHAR" length="255" jt="12" />
+			<column name="edificio_appositamente_costruito" type="BOOL" length="1" jt="-6" />
+			<column name="autonomia_amministrativa" type="BOOL" length="1" jt="-6" />
+			<column name="struttura_gerarchica_sovraordinata" type="VARCHAR" length="255" jt="12" />
+			<column name="accesso_riservato" type="BOOL" jt="-6" />
+			<column name="accesso_handicap" type="BOOL" length="1" jt="-6" />
+			<column name="accesso_limite_eta_min" type="INT" jt="4" unsigned="y" />
+			<column name="accesso_limite_eta_max" type="INT" jt="4" unsigned="y" />
+			<column name="accesso_internet_pagamento" type="BOOL" jt="-6" />
+			<column name="accesso_internet_tempo" type="BOOL" jt="-6" />
+			<column name="accesso_internet_proxy" type="BOOL" jt="-6" />
+			<column name="inventario_cartaceo" type="BOOL" jt="-6" />
+			<column name="inventario_informatizzato" type="BOOL" length="1" jt="-6" />
+			<column name="catalogo_topografico_cartaceo" type="BOOL" jt="-6" />
+			<column name="catalogo_topografico_informatizzato" type="BOOL" length="1" jt="-6" />
+			<column name="id_fondi_antichi_consistenza" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_ente" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_tipologia_funzionale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="procedure_ill_automatizzate" type="BOOL" length="1" jt="-6" />
+			<column name="id_biblioteca_padre" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="mq_totali" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="mq_pubblici" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="ml_magazzini" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="ml_aperti" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="posti_lettura" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="posti_video" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="posti_audio" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="posti_internet" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="utenti" type="INT" jt="4" unsigned="y" />
+			<column name="utenti_under14" type="INT" length="10" jt="4" unsigned="y" >
+				<defo>0</defo>
+			</column>
+			<column name="utenti_iscritti" type="INT" jt="4" unsigned="y" />
+			<column name="utenti_iscritti_prestito_anno" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="personale_temporaneo" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="personale_esterno" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="personale_part_time" type="INT" jt="4" unsigned="y" />
+			<column name="personale_totale" type="INT" jt="4" unsigned="y" />
+			<column name="bilancio_entrate" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="bilancio_uscite" type="INT" jt="4" unsigned="y" />
+			<column name="bilancio_uscite_personale" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="bilancio_uscite_funzionamento" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="bilancio_uscite_incremento_patrimonio" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="bilancio_uscite_automazione" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="bilancio_uscite_acquisti_anno" type="INT" length="10" jt="4" unsigned="y" >
+				<defo>0</defo>
+			</column>
+			<column name="bilancio_uscite_acquisti_ultimi15" type="INT" length="10" jt="4" unsigned="y" >
+				<defo>0</defo>
+			</column>
+			<column name="bilancio_uscite_varie" type="INT" length="10" jt="4" unsigned="y" />
+			<column name="bilancio_patrimoniale_posseduto" type="INT" jt="4" />
+			<column name="bilancio_patrimoniale_posseduto_under14" type="INT" jt="4" />
+			<column name="n_ore_settimanali" type="INT" length="10" jt="4" unsigned="y" >
+				<defo>0</defo>
+			</column>
+			<column name="n_ore_settimanali_pom" type="INT" length="10" jt="4" unsigned="y" >
+				<defo>0</defo>
+			</column>
+			<column name="n_settim_apertura" type="INT" length="10" jt="4" unsigned="y" >
+				<defo>0</defo>
+			</column>
+			<column name="prestito_interbiblio_nazionale" type="BOOL" length="1" jt="-6" />
+			<column name="prestito_interbiblio_internazionale" type="BOOL" length="1" jt="-6" />
+			<column name="gestisce_servizio_bibliografico_interno" type="BOOL" length="1" jt="-6" />
+			<column name="gestisce_servizio_bibliografico_esterno" type="BOOL" length="1" jt="-6" />
+			<column name="n_prestiti_interbibliotecari_annuo" type="INT" jt="4" unsigned="y" />
+			<column name="n_prestiti_locali_annuo" type="INT" jt="4" unsigned="y" />
+			<column name="catalogazione_data_modifica" type="DATETIME" jt="93" />
+			<column name="id_utenti" type="INT" jt="4" unsigned="y" />
+			<column name="id_stato_biblioteca_workflow" type="INT" length="100" jt="4" mandatory="y" />
+			<column name="catalogazione_data_import" type="DATETIME" jt="93" />
+			<column name="catalogazione_data_modifica_remota" type="DATETIME" jt="93" />
+			<column name="catalogazione_note" type="TEXT" jt="-1" />
+			<column name="catalogazione_data_censimento" type="DATETIME" jt="93" />
+			<index name="biblioteca_FKIndex1" unique="NORMAL" >
+				<column name="id_ente" />
+			</index>
+			<index name="biblioteca_FKIndex2" unique="NORMAL" >
+				<column name="id_comune" />
+			</index>
+			<index name="biblioteca_FKIndex3" unique="NORMAL" >
+				<column name="id_biblioteca_padre" />
+			</index>
+			<index name="biblioteca_FKIndex4" unique="NORMAL" >
+				<column name="id_tipologia_funzionale" />
+			</index>
+			<index name="idx_1_fondi_antichi" unique="NORMAL" >
+				<column name="id_fondi_antichi_consistenza" />
+			</index>
+			<index name="PK_biblioteca" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="idx_1_utentemod" unique="NORMAL" >
+				<column name="id_utenti" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="comune" >
+				<fk_column name="id_comune" pk="id_comune" />
+			</fk>
+			<fk name="fk_2" to_schema="abicampania" to_table="tipologia_funzionale" >
+				<fk_column name="id_tipologia_funzionale" pk="id_tipologia_funzionale" />
+			</fk>
+			<fk name="fk_3" to_schema="abicampania" to_table="ente" >
+				<fk_column name="id_ente" pk="id_ente" />
+			</fk>
+			<fk name="fk_4" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca_padre" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="fondi_antichi_consistenza" >
+				<fk_column name="id_fondi_antichi_consistenza" pk="id_fondi_antichi_consistenza" />
+			</fk>
+			<fk name="fk_5" to_schema="abicampania" to_table="utenti" >
+				<fk_column name="id_utenti" pk="id_utenti" />
+			</fk>
+			<fk name="fk_6" to_schema="abicampania" to_table="stato_biblioteca_workflow" >
+				<fk_column name="id_stato_biblioteca_workflow" pk="id_stato" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_accesso_modalita" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_accesso_modalita" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<index name="idx_biblioteca_has_accesso_utenti_ammessi" unique="NORMAL" >
+				<column name="id_accesso_modalita" />
+			</index>
+			<index name="chiave_accessomod" unique="PRIMARY_KEY" >
+				<column name="id_accesso_modalita" />
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="accesso_modalita" >
+				<fk_column name="id_accesso_modalita" pk="id_accesso_modalita" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_dewey" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_dewey" type="VARCHAR" length="6" jt="12" mandatory="y" />
+			<index name="pk_special" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_dewey" />
+			</index>
+			<index name="biblioteca_has_dewey_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="biblioteca_has_dewey_FKIndex2" unique="NORMAL" >
+				<column name="id_dewey" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="dewey" >
+				<fk_column name="id_dewey" pk="id_dewey" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_fondi_speciali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_fondi_speciali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_biblioteca_has_fondi_speciali" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_fondi_speciali" />
+			</index>
+			<index name="biblioteca_has_fondi_speciali_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="biblioteca_has_fondi_speciali_FKIndex2" unique="NORMAL" >
+				<column name="id_fondi_speciali" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="fondi_speciali" >
+				<fk_column name="id_fondi_speciali" pk="id_fondi_speciali" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_indicizzazione_classificata" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_indicizzazione_classificata" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_biblioteca_has_indic_classificata" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_indicizzazione_classificata" />
+			</index>
+			<index name="biblioteca_has_indic_classificata_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="biblioteca_has_indic_classificata_FKIndex2" unique="NORMAL" >
+				<column name="id_indicizzazione_classificata" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="indicizzazione_classificata" >
+				<fk_column name="id_indicizzazione_classificata" pk="id_indicizzazione_classificata" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_indicizzazione_soggetto" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_indicizzazione_soggetto" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_biblioteca_has_indic_soggetto" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_indicizzazione_soggetto" />
+			</index>
+			<index name="biblioteca_has_indic_soggetto_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="biblioteca_has_indic_soggetto_FKIndex2" unique="NORMAL" >
+				<column name="id_indicizzazione_soggetto" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="indicizzazione_soggetto" >
+				<fk_column name="id_indicizzazione_soggetto" pk="id_indicizzazione_soggetto" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_norme_catalogazione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_norme_catalogazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_biblioteca_has_norme_catalogazione" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_norme_catalogazione" />
+			</index>
+			<index name="biblioteca_has_norme_catalogazione_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="biblioteca_has_norme_catalogazione_FKIndex2" unique="NORMAL" >
+				<column name="id_norme_catalogazione" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="norme_catalogazione" >
+				<fk_column name="id_norme_catalogazione" pk="id_norme_catalogazione" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_prestito_interbibliotecario" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_prestito_interbibliotecario" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_biblioteca_has_pre_pos_dsc" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_prestito_interbibliotecario" />
+			</index>
+			<index name="biblioteca_has_pre_pos_dsc_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="biblioteca_has_pre_pos_dsc_FKIndex2" unique="NORMAL" >
+				<column name="id_prestito_interbibliotecario" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="prestito_interbibliotecario" >
+				<fk_column name="id_prestito_interbibliotecario" pk="id_prestito_interbibliotecario" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_servizi_bibliotecari_carta" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id__servizi_bibliotecari_carta" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_servizi_biblio" unique="PRIMARY_KEY" >
+				<column name="id__servizi_bibliotecari_carta" />
+				<column name="id_biblioteca" />
+			</index>
+			<index name="servizi_biblio_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="idx_biblioteca_has_servizi_bibliotecari" unique="NORMAL" >
+				<column name="id__servizi_bibliotecari_carta" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="servizi_bibliotecari_carta" >
+				<fk_column name="id__servizi_bibliotecari_carta" pk="id__servizi_bibliotecari_carta" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_servizi_informazioni_bibliografiche" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_servizi_informazioni_bibliografiche_modalita" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_servizi_biblio" unique="PRIMARY_KEY" >
+				<column name="id_servizi_informazioni_bibliografiche_modalita" />
+				<column name="id_biblioteca" />
+			</index>
+			<index name="servizi_biblio_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="idx_biblioteca_has_servizi_bibliotecari" unique="NORMAL" >
+				<column name="id_servizi_informazioni_bibliografiche_modalita" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="servizi_informazioni_bibliografiche_modalita" >
+				<fk_column name="id_servizi_informazioni_bibliografiche_modalita" pk="id_servizi_informazioni_bibliografiche_modalita" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_sezioni_speciali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_sezioni_speciali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_biblioteca_has_sezioni_speciali" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_sezioni_speciali" />
+			</index>
+			<index name="biblioteca_has_sezioni_speciali_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="biblioteca_has_sezioni_speciali_FKIndex2" unique="NORMAL" >
+				<column name="id_sezioni_speciali" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="sezioni_speciali" >
+				<fk_column name="id_sezioni_speciali" pk="id_sezioni_speciali" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_sistemi_biblioteche" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_sistemi_biblioteche" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_biblioteca_has_partec_sist_biblio" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_sistemi_biblioteche" />
+			</index>
+			<index name="biblioteca_has_partec_sist_biblio_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="biblioteca_has_partec_sist_biblio_FKIndex2" unique="NORMAL" >
+				<column name="id_sistemi_biblioteche" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="sistemi_biblioteche" >
+				<fk_column name="id_sistemi_biblioteche" pk="id_sistemi_biblioteche" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_sistemi_prestito_interbibliotecario" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_sistemi_prestito_interbibliotecario" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_biblioteca_has_sist_pr_interbiblio" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_sistemi_prestito_interbibliotecario" />
+			</index>
+			<index name="biblioteca_has_sist_pr_interbiblio_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="biblioteca_has_sist_pr_interbiblio_FKIndex2" unique="NORMAL" >
+				<column name="id_sistemi_prestito_interbibliotecario" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="sistemi_prestito_interbibliotecario" >
+				<fk_column name="id_sistemi_prestito_interbibliotecario" pk="id_sistemi_prestito_interbibliotecario" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_thesaurus" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_thesaurus" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_amministrata" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_thesaurus" />
+			</index>
+			<index name="biblioteca_has_thesaurus_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="biblioteca_has_thesaurus_FKIndex2" unique="NORMAL" >
+				<column name="id_thesaurus" />
+			</index>
+			<fk name="fk_amministrata_biblioteca1" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_amministrata_thesaurus1" to_schema="abicampania" to_table="thesaurus" >
+				<fk_column name="id_thesaurus" pk="id_thesaurus" />
+			</fk>
+		</table>
+		<table name="biblioteca_has_utenti" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_utenti" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<index name="idx_bibliotecahasutenti" unique="PRIMARY_KEY" >
+				<column name="id_utenti" />
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="utenti" >
+				<fk_column name="id_utenti" pk="id_utenti" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="cataloghi_collettivi" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_cataloghi_collettivi" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<column name="id_cataloghi_collettivi_zona_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="dettaglio_zona" type="VARCHAR" length="50" jt="12" />
+			<index name="pk_catal_coll_estens" unique="PRIMARY_KEY" >
+				<column name="id_cataloghi_collettivi" />
+			</index>
+			<index name="idx_cataloghi_collettivi_estensione" unique="NORMAL" >
+				<column name="id_cataloghi_collettivi_zona_tipo" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="cataloghi_collettivi_zona_tipo" >
+				<fk_column name="id_cataloghi_collettivi_zona_tipo" pk="id_cataloghi_collettivi_zona_tipo" />
+			</fk>
+		</table>
+		<table name="cataloghi_collettivi_materiale_url" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_cataloghi_collettivi_materiale_url" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_cataloghi_collettivi_materiale" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="url" type="VARCHAR" length="255" jt="12" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_catal_coll_url" unique="PRIMARY_KEY" >
+				<column name="id_cataloghi_collettivi_materiale_url" />
+			</index>
+			<index name="idx_cataloghi_collettivi_url" unique="NORMAL" >
+				<column name="id_cataloghi_collettivi_materiale" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="partecipa_cataloghi_collettivi_materiale" >
+				<fk_column name="id_cataloghi_collettivi_materiale" pk="id_cataloghi_collettivi_materiale" />
+			</fk>
+		</table>
+		<table name="cataloghi_collettivi_zona_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_cataloghi_collettivi_zona_tipo" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="PK_Table_3" unique="PRIMARY_KEY" >
+				<column name="id_cataloghi_collettivi_zona_tipo" />
+			</index>
+		</table>
+		<table name="cataloghi_generali_url" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_cataloghi_generali_url" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_cataloghi_generali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="url" type="VARCHAR" length="255" jt="12" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_catal_gener_url" unique="PRIMARY_KEY" >
+				<column name="id_cataloghi_generali_url" />
+			</index>
+			<index name="idx_id_cataloghi_generali" unique="NORMAL" >
+				<column name="id_cataloghi_generali" />
+			</index>
+			<fk name="fk_cataloghi_generali_url" to_schema="abicampania" to_table="partecipa_cataloghi_generali" >
+				<fk_column name="id_cataloghi_generali" pk="id_cataloghi_generali" />
+			</fk>
+		</table>
+		<table name="cataloghi_speciali_materiale_url" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_cataloghi_speciali_materiale_url" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_cataloghi_speciali_materiale" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="url" type="VARCHAR" length="255" jt="12" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_catal_spec_url" unique="PRIMARY_KEY" >
+				<column name="id_cataloghi_speciali_materiale_url" />
+			</index>
+			<index name="idx_cataloghi_speciali_url" unique="NORMAL" >
+				<column name="id_cataloghi_speciali_materiale" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="partecipa_cataloghi_speciali_materiale" >
+				<fk_column name="id_cataloghi_speciali_materiale" pk="id_cataloghi_speciali_materiale" />
+			</fk>
+		</table>
+		<table name="cataloghi_supporto_digitale_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_cataloghi_supporto_digitale_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="PK_Table_3" unique="PRIMARY_KEY" >
+				<column name="id_cataloghi_supporto_digitale_tipo" />
+			</index>
+		</table>
+		<table name="catalogo_generale_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_catalogo_generale_tipo" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="PK_Table_4" unique="PRIMARY_KEY" >
+				<column name="id_catalogo_generale_tipo" />
+			</index>
+		</table>
+		<table name="codici" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_codici" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="valore" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="idx_pk_bibliotecacodici" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_codici" />
+			</index>
+			<index name="idx_biblioteca_has_codice" unique="NORMAL" >
+				<column name="id_codici" />
+			</index>
+			<index name="idx_codici" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="codici_tipo" >
+				<fk_column name="id_codici" pk="id_codici" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="codici_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_codici" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="PK_Table_4" unique="PRIMARY_KEY" >
+				<column name="id_codici" />
+			</index>
+		</table>
+		<table name="comune" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_comune" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_provincia" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="denominazione" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="codice_istat" type="VARCHAR" length="6" jt="12" />
+			<column name="codice_finanze" type="VARCHAR" length="6" jt="12" />
+			<index name="pk_comune" unique="PRIMARY_KEY" >
+				<column name="id_comune" />
+			</index>
+			<index name="comune_FKIndex1" unique="NORMAL" >
+				<column name="id_provincia" />
+			</index>
+			<fk name="fk_comune_provincia1" to_schema="abicampania" to_table="provincia" >
+				<fk_column name="id_provincia" pk="id_provincia" />
+			</fk>
+		</table>
+		<table name="comunicazioni" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_comunicazioni" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione" type="TEXT" length="65535" jt="-1" />
+			<index name="pk_comunicazioni" unique="PRIMARY_KEY" >
+				<column name="id_comunicazioni" />
+			</index>
+			<index name="comunicazioni_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="contatti" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_contatti" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_contatti_tipi" type="INT" length="6" jt="4" mandatory="y" unsigned="y" />
+			<column name="valore" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<column name="note" type="VARCHAR" length="100" jt="12" />
+			<index name="PK_contatti" unique="PRIMARY_KEY" >
+				<column name="id_contatti" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="contatti_tipo" >
+				<fk_column name="id_contatti_tipi" pk="id_contatti_tipo" />
+			</fk>
+		</table>
+		<table name="contatti_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_contatti_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="PK_Table_1" unique="PRIMARY_KEY" >
+				<column name="id_contatti_tipo" />
+			</index>
+		</table>
+		<table name="dati_province_istat" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_provincia" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="totale_abitanti" type="INT" jt="4" mandatory="y" unsigned="y" >
+				<defo>0</defo>
+			</column>
+			<index name="pk_dati_province_istat" unique="PRIMARY_KEY" >
+				<column name="id_provincia" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="provincia" >
+				<fk_column name="id_provincia" pk="id_provincia" />
+			</fk>
+		</table>
+		<table name="dati_regioni_istat" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_regione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="totale_abitanti" type="INT" jt="4" mandatory="y" unsigned="y" >
+				<defo>0</defo>
+			</column>
+			<column name="descrizione_zona" type="VARCHAR" length="20" jt="12" />
+			<column name="id_sort" type="INT" length="10" jt="4" unsigned="y" />
+			<index name="pk_dati_regioni_istat" unique="PRIMARY_KEY" >
+				<column name="id_regione" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="regione" >
+				<fk_column name="id_regione" pk="id_regione" />
+			</fk>
+		</table>
+		<table name="denominazioni_alternative" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_denominazioni_alternative" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="denominazione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_denominata_anche" unique="PRIMARY_KEY" >
+				<column name="id_denominazioni_alternative" />
+			</index>
+			<index name="denominata_anche_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="denominazioni_precedenti" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_denominazioni_precedenti" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="denominazione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_denominata_gia" unique="PRIMARY_KEY" >
+				<column name="id_denominazioni_precedenti" />
+			</index>
+			<index name="denominata_gia_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="depositi_legali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_depositi_legali_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="da_anno" type="VARCHAR" length="10" jt="12" />
+			<index name="pk_biblioteca_has_deposito_legale" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_depositi_legali_tipo" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="depositi_legali_tipo" >
+				<fk_column name="id_depositi_legali_tipo" pk="id_depositi_legali_tipo" />
+			</fk>
+		</table>
+		<table name="depositi_legali_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_depositi_legali_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="pk_deposito_legale" unique="PRIMARY_KEY" >
+				<column name="id_depositi_legali_tipo" />
+			</index>
+		</table>
+		<table name="destinazioni_sociali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_destinazioni_sociali_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="note" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_biblioteca_has_destinaz_sociale" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_destinazioni_sociali_tipo" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="destinazioni_sociali_tipo" >
+				<fk_column name="id_destinazioni_sociali_tipo" pk="id_destinazioni_sociali" />
+			</fk>
+		</table>
+		<table name="destinazioni_sociali_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_destinazioni_sociali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="pk_destinaz_sociale" unique="PRIMARY_KEY" >
+				<column name="id_destinazioni_sociali" />
+			</index>
+		</table>
+		<table name="dewey" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_dewey" type="VARCHAR" length="6" jt="12" mandatory="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="pk_dewey" unique="PRIMARY_KEY" >
+				<column name="id_dewey" />
+			</index>
+		</table>
+		<table name="dewey_libero" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_dewey" type="VARCHAR" length="6" jt="12" mandatory="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_biblioteca_has_dewey_lib" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_dewey" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="dewey" >
+				<fk_column name="id_dewey" pk="id_dewey" />
+			</fk>
+		</table>
+		<table name="ente" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_ente" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_stato" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_ente_tipologia_amministrativa" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_ente_obiettivo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="denominazione" type="VARCHAR" length="255" jt="12" />
+			<column name="partita_iva" type="VARCHAR" length="11" jt="12" />
+			<column name="codice_fiscale" type="VARCHAR" length="16" jt="12" />
+			<column name="asia_asip" type="VARCHAR" length="11" jt="12" />
+			<index name="pk_ente" unique="PRIMARY_KEY" >
+				<column name="id_ente" />
+			</index>
+			<index name="ente_FKIndex1" unique="NORMAL" >
+				<column name="id_ente_obiettivo" />
+			</index>
+			<index name="ente_FKIndex2" unique="NORMAL" >
+				<column name="id_ente_tipologia_amministrativa" />
+			</index>
+			<index name="ente_FKIndex3" unique="NORMAL" >
+				<column name="id_stato" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="ente_tipologia_amministrativa" >
+				<fk_column name="id_ente_tipologia_amministrativa" pk="id_ente_tipologia_amministrativa" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="ente_obiettivo" >
+				<fk_column name="id_ente_obiettivo" pk="id_ente_obiettivo" />
+			</fk>
+			<fk name="fk_2" to_schema="abicampania" to_table="stato" >
+				<fk_column name="id_stato" pk="id_stato" />
+			</fk>
+		</table>
+		<table name="ente_obiettivo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_ente_obiettivo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_obiettivo" unique="PRIMARY_KEY" >
+				<column name="id_ente_obiettivo" />
+			</index>
+		</table>
+		<table name="ente_tipologia_amministrativa" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_ente_tipologia_amministrativa" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="pk_tipologia_ente" unique="PRIMARY_KEY" >
+				<column name="id_ente_tipologia_amministrativa" />
+			</index>
+		</table>
+		<table name="fondi_antichi_consistenza" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_fondi_antichi_consistenza" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="pk_tipologia_funzionale" unique="PRIMARY_KEY" >
+				<column name="id_fondi_antichi_consistenza" />
+			</index>
+		</table>
+		<table name="fondi_digitali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_fondi_digitali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_fondi_digitali" unique="PRIMARY_KEY" >
+				<column name="id_fondi_digitali" />
+			</index>
+			<index name="fondi_digitali_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="fondi_speciali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_fondi_speciali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_dewey" type="VARCHAR" length="6" jt="12" />
+			<column name="denominazione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<column name="fondo_depositato" type="BOOL" length="1" jt="-6" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<column name="id_fondi_speciali_catalogazione_inventario" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="catalogazione_inventario_url" type="VARCHAR" length="255" jt="12" />
+			<column name="citazione_bibliografica" type="TEXT" jt="-1" />
+			<index name="pk_fondi_speciali" unique="PRIMARY_KEY" >
+				<column name="id_fondi_speciali" />
+			</index>
+			<index name="fondi_speciali_FKIndex1" unique="NORMAL" >
+				<column name="id_dewey" />
+			</index>
+			<index name="idx_fondi_speciali" unique="NORMAL" >
+				<column name="id_fondi_speciali_catalogazione_inventario" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="dewey" >
+				<fk_column name="id_dewey" pk="id_dewey" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="fondi_speciali_catalogazione_inventario" >
+				<fk_column name="id_fondi_speciali_catalogazione_inventario" pk="id_fondi_speciali_catalogazione_inventario" />
+			</fk>
+		</table>
+		<table name="fondi_speciali_catalogazione_inventario" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_fondi_speciali_catalogazione_inventario" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="PK_Table_3" unique="PRIMARY_KEY" >
+				<column name="id_fondi_speciali_catalogazione_inventario" />
+			</index>
+		</table>
+		<table name="geolocalizzazione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="latitudine" type="DOUBLE" jt="8" />
+			<column name="longitudine" type="DOUBLE" jt="8" />
+			<column name="precisione" type="VARCHAR" length="50" jt="12" />
+			<column name="warning" type="TEXT" jt="-1" />
+			<column name="error" type="TEXT" jt="-1" />
+			<index name="pk_id_bib" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="indicizzazione_classificata" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_indicizzazione_classificata" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_indic_classificata" unique="PRIMARY_KEY" >
+				<column name="id_indicizzazione_classificata" />
+			</index>
+		</table>
+		<table name="indicizzazione_soggetto" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_indicizzazione_soggetto" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_indic_soggetto" unique="PRIMARY_KEY" >
+				<column name="id_indicizzazione_soggetto" />
+			</index>
+		</table>
+		<table name="norme_catalogazione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_norme_catalogazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="pk_norme_catalogazione" unique="PRIMARY_KEY" >
+				<column name="id_norme_catalogazione" />
+			</index>
+		</table>
+		<table name="nuova_biblioteca" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="isil_stato" type="VARCHAR" length="2" jt="12" mandatory="y" >
+				<defo>'IT'</defo>
+			</column>
+			<column name="isil_provincia" type="VARCHAR" length="2" jt="12" mandatory="y" />
+			<column name="isil_numero" type="INT" jt="4" unsigned="y" />
+			<column name="denominazione_ufficiale" type="VARCHAR" length="255" jt="12" />
+			<column name="id_comune" type="INT" jt="4" unsigned="y" />
+			<column name="data_fondazione" type="VARCHAR" length="20" jt="12" />
+			<column name="edificio_monumentale" type="BOOL" length="1" jt="-6" />
+			<column name="edificio_data_costruzione" type="VARCHAR" length="255" jt="12" />
+			<column name="edificio_appositamente_costruito" type="BOOL" length="1" jt="-6" />
+			<column name="autonomia_amministrativa" type="BOOL" length="1" jt="-6" />
+			<column name="accesso_riservato" type="BOOL" jt="-6" />
+			<column name="accesso_handicap" type="BOOL" length="1" jt="-6" />
+			<column name="accesso_internet_pagamento" type="BOOL" jt="-6" />
+			<column name="accesso_internet_tempo" type="BOOL" jt="-6" />
+			<column name="accesso_internet_proxy" type="BOOL" jt="-6" />
+			<column name="inventario_cartaceo" type="BOOL" jt="-6" />
+			<column name="inventario_informatizzato" type="BOOL" length="1" jt="-6" />
+			<column name="catalogo_topografico_cartaceo" type="BOOL" jt="-6" />
+			<column name="catalogo_topografico_informatizzato" type="BOOL" length="1" jt="-6" />
+			<column name="id_tipologia_funzionale" type="INT" jt="4" unsigned="y" />
+			<column name="gestisce_servizio_bibliografico_interno" type="BOOL" jt="-6" />
+			<column name="gestisce_servizio_bibliografico_esterno" type="BOOL" length="1" jt="-6" />
+			<column name="login_creatore" type="INT" jt="4" unsigned="y" />
+			<column name="login_gestore" type="INT" jt="4" unsigned="y" />
+			<column name="id_stato_biblioteca_workflow" type="INT" jt="4" mandatory="y" />
+			<column name="ente_denominazione" type="VARCHAR" length="255" jt="12" />
+			<column name="ente_tipologia_amministrativa" type="VARCHAR" length="255" jt="12" />
+			<column name="ente_stato" type="VARCHAR" length="255" jt="12" />
+			<index name="biblioteca_FKIndex2" unique="NORMAL" >
+				<column name="id_comune" />
+			</index>
+			<index name="biblioteca_FKIndex4" unique="NORMAL" >
+				<column name="id_tipologia_funzionale" />
+			</index>
+			<index name="PK_biblioteca" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="idx_login_creatore" unique="NORMAL" >
+				<column name="login_creatore" />
+			</index>
+			<index name="idx_login_gestore" unique="NORMAL" >
+				<column name="login_gestore" />
+			</index>
+			<index name="idx_nuova_biblioteca" unique="NORMAL" >
+				<column name="id_stato_biblioteca_workflow" />
+			</index>
+			<fk name="fk_comune" to_schema="abicampania" to_table="comune" >
+				<fk_column name="id_comune" pk="id_comune" />
+			</fk>
+			<fk name="fk_tipologia_funzionale" to_schema="abicampania" to_table="tipologia_funzionale" >
+				<fk_column name="id_tipologia_funzionale" pk="id_tipologia_funzionale" />
+			</fk>
+			<fk name="fk_login_creatore" to_schema="abicampania" to_table="utenti" >
+				<fk_column name="login_creatore" pk="id_utenti" />
+			</fk>
+			<fk name="fk_login_gestore" to_schema="abicampania" to_table="utenti" >
+				<fk_column name="login_gestore" pk="id_utenti" />
+			</fk>
+			<fk name="fk_id_stato_biblioteca_workflow" to_schema="abicampania" to_table="stato_biblioteca_workflow" >
+				<fk_column name="id_stato_biblioteca_workflow" pk="id_stato" />
+			</fk>
+		</table>
+		<table name="orario_chiusure" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_orario_chiusure" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_periodo_chiusura" unique="PRIMARY_KEY" >
+				<column name="id_orario_chiusure" />
+			</index>
+			<index name="periodo_chiusura_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="orario_ufficiali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_orario_ufficiali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="giorno" type="INT" jt="4" mandatory="y" />
+			<column name="dalle" type="TIME" jt="92" mandatory="y" />
+			<column name="alle" type="TIME" jt="92" mandatory="y" />
+			<index name="pk_orario_ufficiale" unique="PRIMARY_KEY" >
+				<column name="id_orario_ufficiali" />
+			</index>
+			<index name="orario_ufficiale_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="orario_variazioni" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_orario_variazioni" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<column name="giorno" type="INT" jt="4" />
+			<column name="dalle" type="TIME" jt="92" />
+			<column name="alle" type="TIME" jt="92" />
+			<index name="pk_orari_variazioni" unique="PRIMARY_KEY" >
+				<column name="id_orario_variazioni" />
+			</index>
+			<index name="orari_variazioni_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="partecipa_cataloghi_collettivi_materiale" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_cataloghi_collettivi_materiale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_cataloghi_collettivi" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_patrimonio_specializzazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="schede" type="BOOL" length="1" jt="-6" />
+			<column name="volume" type="BOOL" length="1" jt="-6" />
+			<column name="microforme" type="BOOL" length="1" jt="-6" />
+			<column name="id_cataloghi_supporto_digitale_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione_volume" type="VARCHAR" length="255" jt="12" />
+			<column name="percentuale_schede" type="INT" jt="4" unsigned="y" />
+			<column name="percentuale_volume" type="INT" jt="4" unsigned="y" />
+			<column name="percentuale_microforme" type="INT" jt="4" unsigned="y" />
+			<column name="percentuale_informatizzata" type="INT" jt="4" unsigned="y" />
+			<column name="da_anno" type="INT" jt="4" unsigned="y" />
+			<column name="a_anno" type="INT" jt="4" unsigned="y" />
+			<index name="pk_catal_coll" unique="PRIMARY_KEY" >
+				<column name="id_cataloghi_collettivi_materiale" />
+			</index>
+			<index name="catal_coll_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="catal_coll_FKIndex2" unique="NORMAL" >
+				<column name="id_patrimonio_specializzazione" />
+			</index>
+			<index name="catal_coll_FKIndex3" unique="NORMAL" >
+				<column name="id_cataloghi_collettivi" />
+			</index>
+			<index name="idx_cataloghi_collettivi" unique="NORMAL" >
+				<column name="id_cataloghi_supporto_digitale_tipo" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="cataloghi_collettivi" >
+				<fk_column name="id_cataloghi_collettivi" pk="id_cataloghi_collettivi" />
+			</fk>
+			<fk name="fk_2" to_schema="abicampania" to_table="patrimonio_specializzazione" >
+				<fk_column name="id_patrimonio_specializzazione" pk="id_patrimonio_specializzazione" />
+			</fk>
+			<fk name="fk_4" to_schema="abicampania" to_table="cataloghi_supporto_digitale_tipo" >
+				<fk_column name="id_cataloghi_supporto_digitale_tipo" pk="id_cataloghi_supporto_digitale_tipo" />
+			</fk>
+		</table>
+		<table name="partecipa_cataloghi_generali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_cataloghi_generali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="schede" type="BOOL" length="1" jt="-6" />
+			<column name="volume" type="BOOL" length="1" jt="-6" />
+			<column name="microforme" type="BOOL" length="1" jt="-6" />
+			<column name="id_cataloghi_supporto_digitale_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione_volume" type="VARCHAR" length="255" jt="12" />
+			<column name="percentuale_schede" type="INT" jt="4" unsigned="y" />
+			<column name="percentuale_volume" type="INT" jt="4" unsigned="y" />
+			<column name="percentuale_microforme" type="INT" jt="4" unsigned="y" />
+			<column name="percentuale_informatizzata" type="INT" jt="4" unsigned="y" />
+			<column name="da_anno" type="INT" jt="4" unsigned="y" />
+			<column name="a_anno" type="INT" jt="4" unsigned="y" />
+			<column name="id_catalogo_generale_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_catal_gener" unique="PRIMARY_KEY" >
+				<column name="id_cataloghi_generali" />
+			</index>
+			<index name="cataloghi_gener_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="idx_cataloghi_generali" unique="NORMAL" >
+				<column name="id_cataloghi_supporto_digitale_tipo" />
+			</index>
+			<index name="idx_1_cataloghi_generali_tipo" unique="NORMAL" >
+				<column name="id_catalogo_generale_tipo" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_2" to_schema="abicampania" to_table="cataloghi_supporto_digitale_tipo" >
+				<fk_column name="id_cataloghi_supporto_digitale_tipo" pk="id_cataloghi_supporto_digitale_tipo" />
+			</fk>
+			<fk name="fk_3" to_schema="abicampania" to_table="catalogo_generale_tipo" >
+				<fk_column name="id_catalogo_generale_tipo" pk="id_catalogo_generale_tipo" />
+			</fk>
+		</table>
+		<table name="partecipa_cataloghi_speciali_materiale" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_cataloghi_speciali_materiale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_patrimonio_specializzazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="schede" type="BOOL" length="1" jt="-6" />
+			<column name="volume" type="BOOL" length="1" jt="-6" />
+			<column name="microforme" type="BOOL" length="1" jt="-6" />
+			<column name="id_cataloghi_supporto_digitale_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione_volume" type="VARCHAR" length="255" jt="12" />
+			<column name="percentuale_schede" type="INT" jt="4" unsigned="y" />
+			<column name="percentuale_volume" type="INT" jt="4" unsigned="y" />
+			<column name="percentuale_microforme" type="INT" jt="4" unsigned="y" />
+			<column name="percentuale_informatizzata" type="INT" jt="4" unsigned="y" />
+			<column name="da_anno" type="INT" jt="4" unsigned="y" />
+			<column name="a_anno" type="INT" jt="4" unsigned="y" />
+			<column name="denominazione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_catal_spec" unique="PRIMARY_KEY" >
+				<column name="id_cataloghi_speciali_materiale" />
+			</index>
+			<index name="catal_spec_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="catal_spec_FKIndex2" unique="NORMAL" >
+				<column name="id_patrimonio_specializzazione" />
+			</index>
+			<index name="idx_cataloghi_speciali" unique="NORMAL" >
+				<column name="id_cataloghi_supporto_digitale_tipo" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_2" to_schema="abicampania" to_table="patrimonio_specializzazione" >
+				<fk_column name="id_patrimonio_specializzazione" pk="id_patrimonio_specializzazione" />
+			</fk>
+			<fk name="fk_3" to_schema="abicampania" to_table="cataloghi_supporto_digitale_tipo" >
+				<fk_column name="id_cataloghi_supporto_digitale_tipo" pk="id_cataloghi_supporto_digitale_tipo" />
+			</fk>
+		</table>
+		<table name="patrimonio" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_patrimonio_specializzazione" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="quantita" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="quantita_ultimo_anno" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<index name="idx_1" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_patrimonio_specializzazione" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="patrimonio_specializzazione" >
+				<fk_column name="id_patrimonio_specializzazione" pk="id_patrimonio_specializzazione" />
+			</fk>
+		</table>
+		<table name="patrimonio_specializzazione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_patrimonio_specializzazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_patrimonio_specializzazione_categoria" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione" type="TEXT" length="65535" jt="-1" />
+			<column name="id_sort" type="INT" length="10" jt="4" unsigned="y" />
+			<index name="pk_patr_spec" unique="PRIMARY_KEY" >
+				<column name="id_patrimonio_specializzazione" />
+			</index>
+			<index name="patr_spec_FKIndex1" unique="NORMAL" >
+				<column name="id_patrimonio_specializzazione_categoria" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="patrimonio_specializzazione_categoria" >
+				<fk_column name="id_patrimonio_specializzazione_categoria" pk="id_patrimonio_specializzazione_categoria" />
+			</fk>
+		</table>
+		<table name="patrimonio_specializzazione_categoria" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_patrimonio_specializzazione_categoria" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_patrimonio_specializzazione_categoria_madre" type="INT" jt="4" unsigned="y" />
+			<column name="descrizione" type="TEXT" length="65535" jt="-1" />
+			<column name="id_sort" type="INT" length="10" jt="4" unsigned="y" />
+			<index name="pk_patr_spec_cat" unique="PRIMARY_KEY" >
+				<column name="id_patrimonio_specializzazione_categoria" />
+			</index>
+			<index name="patr_spec_cat_FKIndex1" unique="NORMAL" >
+				<column name="id_patrimonio_specializzazione_categoria_madre" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="patrimonio_specializzazione_categoria" >
+				<fk_column name="id_patrimonio_specializzazione_categoria_madre" pk="id_patrimonio_specializzazione_categoria" />
+			</fk>
+		</table>
+		<table name="prestito_interbibliotecario" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_prestito_interbibliotecario" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="nazionale" type="BOOL" length="1" jt="-6" />
+			<column name="internazionale" type="BOOL" length="1" jt="-6" />
+			<column name="id_prestito_interbibliotecario_modo" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_pre_pos_dsc" unique="PRIMARY_KEY" >
+				<column name="id_prestito_interbibliotecario" />
+			</index>
+			<index name="idx_prestito_interbibliotecario" unique="NORMAL" >
+				<column name="id_prestito_interbibliotecario_modo" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="prestito_interbibliotecario_modo" >
+				<fk_column name="id_prestito_interbibliotecario_modo" pk="id_prestito_interbibliotecario_modo" />
+			</fk>
+		</table>
+		<table name="prestito_interbibliotecario_modo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_prestito_interbibliotecario_modo" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="PK_Table_4" unique="PRIMARY_KEY" >
+				<column name="id_prestito_interbibliotecario_modo" />
+			</index>
+		</table>
+		<table name="prestito_locale" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_prestito_locale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="automatizzato" type="BOOL" length="1" jt="-6" />
+			<column name="durata_giorni" type="INT" length="10" jt="4" unsigned="y" />
+			<index name="pk_prestito_locale" unique="PRIMARY_KEY" >
+				<column name="id_prestito_locale" />
+			</index>
+			<index name="prestito_locale_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="prestito_locale_has_materiale_escluso" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_prestito_locale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_prestito_locale_materiale_escluso" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_prestito_locale_has_prest_escluso" unique="PRIMARY_KEY" >
+				<column name="id_prestito_locale" />
+				<column name="id_prestito_locale_materiale_escluso" />
+			</index>
+			<index name="prestito_locale_has_prest_escluso_FKIndex1" unique="NORMAL" >
+				<column name="id_prestito_locale" />
+			</index>
+			<index name="prestito_locale_has_prest_escluso_FKIndex2" unique="NORMAL" >
+				<column name="id_prestito_locale_materiale_escluso" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="prestito_locale" >
+				<fk_column name="id_prestito_locale" pk="id_prestito_locale" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="prestito_locale_materiale_escluso" >
+				<fk_column name="id_prestito_locale_materiale_escluso" pk="id_prestito_locale_materiale_escluso" />
+			</fk>
+		</table>
+		<table name="prestito_locale_has_utenti_ammessi" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_prestito_locale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_prestito_locale_utenti_ammessi" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_prestito_locale_has_prest_zona" unique="PRIMARY_KEY" >
+				<column name="id_prestito_locale" />
+				<column name="id_prestito_locale_utenti_ammessi" />
+			</index>
+			<index name="prestito_locale_has_prest_zona_FKIndex1" unique="NORMAL" >
+				<column name="id_prestito_locale" />
+			</index>
+			<index name="prestito_locale_has_prest_zona_FKIndex2" unique="NORMAL" >
+				<column name="id_prestito_locale_utenti_ammessi" />
+			</index>
+			<fk name="fk_1" to_schema="abicampania" to_table="prestito_locale" >
+				<fk_column name="id_prestito_locale" pk="id_prestito_locale" />
+			</fk>
+			<fk name="fk_0" to_schema="abicampania" to_table="prestito_locale_utenti_ammessi" >
+				<fk_column name="id_prestito_locale_utenti_ammessi" pk="id_prestito_locale_utenti_ammessi" />
+			</fk>
+		</table>
+		<table name="prestito_locale_materiale_escluso" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_prestito_locale_materiale_escluso" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="pk_prest_escluso" unique="PRIMARY_KEY" >
+				<column name="id_prestito_locale_materiale_escluso" />
+			</index>
+		</table>
+		<table name="prestito_locale_utenti_ammessi" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_prestito_locale_utenti_ammessi" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="pk_prest_zona" unique="PRIMARY_KEY" >
+				<column name="id_prestito_locale_utenti_ammessi" />
+			</index>
+		</table>
+		<table name="profili" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_profili" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="denominazione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_profili" unique="PRIMARY_KEY" >
+				<column name="id_profili" />
+			</index>
+		</table>
+		<table name="provincia" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_provincia" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_regione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="denominazione" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="codice_istat" type="VARCHAR" length="10" jt="12" />
+			<column name="sigla" type="VARCHAR" length="2" jt="12" />
+			<index name="pk_provincia" unique="PRIMARY_KEY" >
+				<column name="id_provincia" />
+			</index>
+			<index name="provincia_FKIndex1" unique="NORMAL" >
+				<column name="id_regione" />
+			</index>
+			<fk name="fk_provincia_regione1" to_schema="abicampania" to_table="regione" >
+				<fk_column name="id_regione" pk="id_regione" />
+			</fk>
+		</table>
+		<table name="pubblicazioni" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_pubblicazioni" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="biblioteca_has_pubblicazioni_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<index name="PK_biblioteca_has_pubblicazioni" unique="PRIMARY_KEY" >
+				<column name="id_pubblicazioni" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="regione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_regione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_stato" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="denominazione" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="sigla" type="VARCHAR" length="2" jt="12" />
+			<index name="pk_regione" unique="PRIMARY_KEY" >
+				<column name="id_regione" />
+			</index>
+			<index name="regione_FKIndex1" unique="NORMAL" >
+				<column name="id_stato" />
+			</index>
+			<fk name="fk_regione_stato1" to_schema="abicampania" to_table="stato" >
+				<fk_column name="id_stato" pk="id_stato" />
+			</fk>
+		</table>
+		<table name="regolamento" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_regolamento" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="riferimento_normativa" type="VARCHAR" length="255" jt="12" />
+			<column name="url" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_regolamento" unique="PRIMARY_KEY" >
+				<column name="id_regolamento" />
+			</index>
+			<index name="regolamento_FKIndex1" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="riproduzioni" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_riproduzioni_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="locale" type="BOOL" length="1" jt="-6" />
+			<column name="nazionale" type="BOOL" length="1" jt="-6" />
+			<column name="internazionale" type="BOOL" length="1" jt="-6" />
+			<index name="idx" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_riproduzioni_tipo" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="riproduzioni_tipo" >
+				<fk_column name="id_riproduzioni_tipo" pk="id_riproduzioni_tipo" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="riproduzioni_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_riproduzioni_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_tipo_riproduzioni" unique="PRIMARY_KEY" >
+				<column name="id_riproduzioni_tipo" />
+			</index>
+		</table>
+		<table name="servizi_bibliotecari_carta" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id__servizi_bibliotecari_carta" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="PK_Table_2" unique="PRIMARY_KEY" >
+				<column name="id__servizi_bibliotecari_carta" />
+			</index>
+		</table>
+		<table name="servizi_informazioni_bibliografiche_modalita" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_servizi_informazioni_bibliografiche_modalita" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="PK_Table_2" unique="PRIMARY_KEY" >
+				<column name="id_servizi_informazioni_bibliografiche_modalita" />
+			</index>
+		</table>
+		<table name="sezioni_speciali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_sezioni_speciali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_sezioni_speciali" unique="PRIMARY_KEY" >
+				<column name="id_sezioni_speciali" />
+			</index>
+		</table>
+		<table name="sistemi_biblioteche" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_sistemi_biblioteche" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_partec_sist_biblio" unique="PRIMARY_KEY" >
+				<column name="id_sistemi_biblioteche" />
+			</index>
+		</table>
+		<table name="sistemi_prestito_interbibliotecario" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_sistemi_prestito_interbibliotecario" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="pk_sist_pr_interbiblio" unique="PRIMARY_KEY" >
+				<column name="id_sistemi_prestito_interbibliotecario" />
+			</index>
+		</table>
+		<table name="spogli_bibliografici" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_spogli_bibliografici" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
+			<column name="descrizione_bibliografica" type="TEXT" jt="-1" mandatory="y" />
+			<index name="PK_Table_3" unique="PRIMARY_KEY" >
+				<column name="id_spogli_bibliografici" />
+			</index>
+			<index name="idx_spogli_bibliografici" unique="NORMAL" >
+				<column name="id_biblioteca" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="stato" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_stato" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="denominazione" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="sigla" type="VARCHAR" length="2" jt="12" />
+			<index name="pk_stato" unique="PRIMARY_KEY" >
+				<column name="id_stato" />
+			</index>
+		</table>
+		<table name="stato_biblioteca_workflow" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_stato" type="INT" jt="4" mandatory="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
+			<column name="label" type="VARCHAR" length="64" jt="12" mandatory="y" />
+			<index name="PK_Table_4" unique="PRIMARY_KEY" >
+				<column name="id_stato" />
+			</index>
+		</table>
+		<table name="stato_catalogazione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_stato_catalogazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_biblioteca_target" type="INT" jt="4" unsigned="y" />
+			<index name="pk_biblioteca_has_stato_catalogazione" unique="PRIMARY_KEY" >
+				<column name="id_biblioteca" />
+				<column name="id_stato_catalogazione" />
+			</index>
+			<index name="idx_stato_catalogazione" unique="NORMAL" >
+				<column name="id_biblioteca_target" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca" pk="id_biblioteca" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="stato_catalogazione_tipo" >
+				<fk_column name="id_stato_catalogazione" pk="id_stato_catalogazione_tipo" />
+			</fk>
+			<fk name="fk_2" to_schema="abicampania" to_table="biblioteca" >
+				<fk_column name="id_biblioteca_target" pk="id_biblioteca" />
+			</fk>
+		</table>
+		<table name="stato_catalogazione_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_stato_catalogazione_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="100" jt="12" />
+			<index name="pk_stato_catalogazione" unique="PRIMARY_KEY" >
+				<column name="id_stato_catalogazione_tipo" />
+			</index>
+		</table>
+		<table name="thesaurus" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_thesaurus" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="nome" type="VARCHAR" length="255" jt="12" />
+			<index name="pk_thesaurus" unique="PRIMARY_KEY" >
+				<column name="id_thesaurus" />
+			</index>
+		</table>
+		<table name="tipologia_funzionale" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_tipologia_funzionale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<index name="pk_tipologia_funzionale" unique="PRIMARY_KEY" >
+				<column name="id_tipologia_funzionale" />
+			</index>
+		</table>
+		<table name="utenti" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_utenti" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="login" type="VARCHAR" length="20" jt="12" mandatory="y" />
+			<column name="password" type="VARCHAR" length="50" jt="12" mandatory="y" />
+			<column name="nome" type="VARCHAR" length="255" jt="12" />
+			<column name="cognome" type="VARCHAR" length="255" jt="12" />
+			<column name="tel" type="VARCHAR" length="50" jt="12" />
+			<column name="fax" type="VARCHAR" length="50" jt="12" />
+			<column name="email" type="VARCHAR" length="50" jt="12" />
+			<column name="incarico" type="VARCHAR" length="50" jt="12" />
+			<column name="note" type="VARCHAR" length="255" jt="12" />
+			<column name="data_modifica_password" type="DATETIME" jt="93" >
+				<comment> <![CDATA[data di ultima generazione della password]]> </comment>
+			</column>
+			<column name="enabled" type="BOOL" jt="-6" mandatory="y" >
+				<defo>1</defo>
+			</column>
+			<column name="codice_validazione" type="VARCHAR" length="50" jt="12" />
+			<index name="PK_utenti" unique="PRIMARY_KEY" >
+				<column name="id_utenti" />
+			</index>
+			<index name="login" unique="UNIQUE" >
+				<column name="login" />
+			</index>
+		</table>
+		<table name="utenti_has_profili" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
+			<column name="id_utenti" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="id_profili" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_utenti_has_profili" unique="PRIMARY_KEY" >
+				<column name="id_utenti" />
+				<column name="id_profili" />
+			</index>
+			<index name="utenti_has_profili_FKIndex1" unique="NORMAL" >
+				<column name="id_utenti" />
+			</index>
+			<index name="utenti_has_profili_FKIndex2" unique="NORMAL" >
+				<column name="id_profili" />
+			</index>
+			<fk name="fk_0" to_schema="abicampania" to_table="utenti" >
+				<fk_column name="id_utenti" pk="id_utenti" />
+			</fk>
+			<fk name="fk_1" to_schema="abicampania" to_table="profili" >
+				<fk_column name="id_profili" pk="id_profili" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="Con_0" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.12-bin.jar" host="localhost" port="3306" instance="abicampania" user="root" />
+	<layout name="abi" tab_index="2" >
+		<entity schema="abicampania" name="bibliografia" x="663" y="611" />
+		<entity schema="abicampania" name="biblioteca" x="845" y="351" />
+		<entity schema="abicampania" name="cataloghi_collettivi" x="1586" y="624" />
+		<entity schema="abicampania" name="cataloghi_collettivi_materiale_url" x="1599" y="728" />
+		<entity schema="abicampania" name="cataloghi_collettivi_zona_tipo" x="1898" y="624" />
+		<entity schema="abicampania" name="cataloghi_generali_url" x="1573" y="1365" />
+		<entity schema="abicampania" name="cataloghi_speciali_materiale_url" x="1443" y="1170" />
+		<entity schema="abicampania" name="cataloghi_supporto_digitale_tipo" x="1950" y="832" />
+		<entity schema="abicampania" name="catalogo_generale_tipo" x="1443" y="1508" />
+		<entity schema="abicampania" name="codici" x="1274" y="91" />
+		<entity schema="abicampania" name="codici_tipo" x="1430" y="104" />
+		<entity schema="abicampania" name="comune" x="650" y="247" />
+		<entity schema="abicampania" name="comunicazioni" x="663" y="520" />
+		<entity schema="abicampania" name="contatti" x="962" y="39" />
+		<entity schema="abicampania" name="contatti_tipo" x="1105" y="52" />
+		<entity schema="abicampania" name="dati_province_istat" x="455" y="78" />
+		<entity schema="abicampania" name="dati_regioni_istat" x="312" y="65" />
+		<entity schema="abicampania" name="denominazioni_alternative" x="702" y="52" />
+		<entity schema="abicampania" name="denominazioni_precedenti" x="702" y="143" />
+		<entity schema="abicampania" name="depositi_legali" x="650" y="1287" />
+		<entity schema="abicampania" name="depositi_legali_tipo" x="442" y="1287" />
+		<entity schema="abicampania" name="destinazioni_sociali" x="520" y="1482" />
+		<entity schema="abicampania" name="destinazioni_sociali_tipo" x="260" y="1495" />
+		<entity schema="abicampania" name="dewey" x="442" y="1157" />
+		<entity schema="abicampania" name="dewey_libero" x="650" y="1157" />
+		<entity schema="abicampania" name="ente" x="260" y="377" />
+		<entity schema="abicampania" name="ente_obiettivo" x="104" y="468" />
+		<entity schema="abicampania" name="ente_tipologia_amministrativa" x="39" y="377" />
+		<entity schema="abicampania" name="fondi_antichi_consistenza" x="416" y="585" />
+		<entity schema="abicampania" name="fondi_digitali" x="559" y="1378" />
+		<entity schema="abicampania" name="geolocalizzazione" x="1261" y="1599" />
+		<entity schema="abicampania" name="nuova_biblioteca" x="91" y="572" />
+		<entity schema="abicampania" name="orario_chiusure" x="1183" y="299" />
+		<entity schema="abicampania" name="orario_ufficiali" x="1508" y="299" />
+		<entity schema="abicampania" name="orario_variazioni" x="1352" y="299" />
+		<entity schema="abicampania" name="partecipa_cataloghi_collettivi_materiale" x="1157" y="611" />
+		<entity schema="abicampania" name="partecipa_cataloghi_generali" x="1183" y="1352" />
+		<entity schema="abicampania" name="partecipa_cataloghi_speciali_materiale" x="1157" y="1092" />
+		<entity schema="abicampania" name="patrimonio" x="1183" y="923" />
+		<entity schema="abicampania" name="patrimonio_specializzazione" x="1430" y="923" />
+		<entity schema="abicampania" name="patrimonio_specializzazione_categoria" x="1742" y="923" />
+		<entity schema="abicampania" name="prestito_locale" x="1170" y="442" />
+		<entity schema="abicampania" name="prestito_locale_has_materiale_escluso" x="1339" y="429" />
+		<entity schema="abicampania" name="prestito_locale_has_utenti_ammessi" x="1339" y="507" />
+		<entity schema="abicampania" name="prestito_locale_materiale_escluso" x="1625" y="416" />
+		<entity schema="abicampania" name="prestito_locale_utenti_ammessi" x="1625" y="507" />
+		<entity schema="abicampania" name="profili" x="546" y="1742" />
+		<entity schema="abicampania" name="provincia" x="481" y="221" />
+		<entity schema="abicampania" name="pubblicazioni" x="650" y="975" />
+		<entity schema="abicampania" name="regione" x="325" y="221" />
+		<entity schema="abicampania" name="regolamento" x="637" y="702" />
+		<entity schema="abicampania" name="riproduzioni" x="650" y="832" />
+		<entity schema="abicampania" name="riproduzioni_tipo" x="429" y="845" />
+		<entity schema="abicampania" name="spogli_bibliografici" x="494" y="1066" />
+		<entity schema="abicampania" name="stato" x="169" y="221" />
+		<entity schema="abicampania" name="stato_biblioteca_workflow" x="390" y="975" />
+		<entity schema="abicampania" name="stato_catalogazione" x="1144" y="182" />
+		<entity schema="abicampania" name="stato_catalogazione_tipo" x="1352" y="182" />
+		<entity schema="abicampania" name="tipologia_funzionale" x="546" y="442" />
+		<entity schema="abicampania" name="utenti" x="910" y="1755" />
+		<entity schema="abicampania" name="utenti_has_profili" x="715" y="1742" />
+		<query name="Sql_000" tab_index="-1" >
+			<string> <![CDATA[CREATE SCHEMA abi;
+
+CREATE TABLE abi.tipo_riproduzioni ( 
+	id_tipo_riproduzioni INT UNSIGNED NOT NULL,
+	descrizione VARCHAR( 255 ) NULL,
+CONSTRAINT pk_tipo_riproduzioni PRIMARY KEY ( id_tipo_riproduzioni )
+ ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+]]> </string>
+		</query>
+		<query name="Sql_001" tab_index="-1" >
+			<string> <![CDATA[CREATE SCHEMA abi;
+
+CREATE TABLE abi.nuova_biblioteca ( 
+    id_biblioteca INT UNSIGNED NOT NULL,
+    isil_stato VARCHAR( 2 ) NOT NULL DEFAULT 'IT',
+    isil_provincia VARCHAR( 2 ) NOT NULL,
+    isil_numero INT UNSIGNED NULL,
+    denominazione_ufficiale VARCHAR( 255 ) NULL,
+    id_comune INT UNSIGNED NULL,
+    data_fondazione VARCHAR( 20 ) NULL,
+    data_istituzione VARCHAR( 255 ) NULL,
+    edificio_denominazione VARCHAR( 255 ) NULL,
+    edificio_monumentale BOOL NULL,
+    edificio_data_costruzione VARCHAR( 255 ) NULL,
+    edificio_appositamente_costruito BOOL NULL,
+    autonomia_amministrativa BOOL NULL,
+    accesso_riservato BOOL NULL,
+    accesso_handicap BOOL NULL,
+    accesso_internet_pagamento BOOL NULL,
+    accesso_internet_tempo BOOL NULL,
+    accesso_internet_proxy BOOL NULL,
+    inventario_cartaceo BOOL NULL,
+    inventario_informatizzato BOOL NULL,
+    catalogo_topografico_cartaceo BOOL NULL,
+    catalogo_topografico_informatizzato BOOL NULL,
+    id_ente INT UNSIGNED NULL,
+    id_tipologia_funzionale INT UNSIGNED NULL,
+    gestisce_servizio_bibliografico_interno BOOL NULL,
+    gestisce_servizio_bibliografico_esterno BOOL NULL,
+    login_creatore INT UNSIGNED NULL,
+    login_gestore INT UNSIGNED NULL,
+    id_stato_biblioteca_workflow INT UNSIGNED NOT NULL,
+CONSTRAINT PK_biblioteca PRIMARY KEY ( id_biblioteca )
+ ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE INDEX biblioteca_FKIndex1 ON abi.nuova_biblioteca ( id_ente );
+
+CREATE INDEX biblioteca_FKIndex2 ON abi.nuova_biblioteca ( id_comune );
+
+CREATE INDEX biblioteca_FKIndex4 ON abi.nuova_biblioteca ( id_tipologia_funzionale );
+
+CREATE INDEX idx_login_creatore ON abi.nuova_biblioteca ( login_creatore );
+
+CREATE INDEX idx_login_gestore ON abi.nuova_biblioteca ( login_gestore );
+
+CREATE INDEX idx_nuova_biblioteca ON abi.nuova_biblioteca ( id_stato_biblioteca_workflow );
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_ente ( id_ente ) REFERENCES abi.ente( id_ente ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_comune ( id_comune ) REFERENCES abi.comune( id_comune ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_tipologia_funzionale ( id_tipologia_funzionale ) REFERENCES abi.tipologia_funzionale( id_tipologia_funzionale ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_creatore ( login_creatore ) REFERENCES abi.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_gestore ( login_gestore ) REFERENCES abi.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_id_stato_biblioteca_workflow ( id_stato_biblioteca_workflow ) REFERENCES abi.stato_biblioteca_workflow( id_stato ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+]]> </string>
+		</query>
+		<query name="Sql_002" tab_index="-1" >
+			<string> <![CDATA[CREATE SCHEMA abi;
+
+CREATE TABLE abi.nuova_biblioteca ( 
+	id_biblioteca INT UNSIGNED NOT NULL,
+	isil_stato VARCHAR( 2 ) NOT NULL DEFAULT 'IT',
+	isil_provincia VARCHAR( 2 ) NOT NULL,
+	isil_numero INT UNSIGNED NULL,
+	denominazione_ufficiale VARCHAR( 255 ) NULL,
+	id_comune INT UNSIGNED NULL,
+	data_fondazione VARCHAR( 20 ) NULL,
+	data_istituzione VARCHAR( 255 ) NULL,
+	edificio_denominazione VARCHAR( 255 ) NULL,
+	edificio_monumentale BOOL NULL,
+	edificio_data_costruzione VARCHAR( 255 ) NULL,
+	edificio_appositamente_costruito BOOL NULL,
+	autonomia_amministrativa BOOL NULL,
+	accesso_riservato BOOL NULL,
+	accesso_handicap BOOL NULL,
+	accesso_internet_pagamento BOOL NULL,
+	accesso_internet_tempo BOOL NULL,
+	accesso_internet_proxy BOOL NULL,
+	inventario_cartaceo BOOL NULL,
+	inventario_informatizzato BOOL NULL,
+	catalogo_topografico_cartaceo BOOL NULL,
+	catalogo_topografico_informatizzato BOOL NULL,
+	id_ente INT UNSIGNED NULL,
+	id_tipologia_funzionale INT UNSIGNED NULL,
+	gestisce_servizio_bibliografico_interno BOOL NULL,
+	gestisce_servizio_bibliografico_esterno BOOL NULL,
+	login_creatore INT NOT NULL,
+	login_gestore INT NULL,
+CONSTRAINT PK_biblioteca PRIMARY KEY ( id_biblioteca )
+ ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE INDEX biblioteca_FKIndex1 ON abi.nuova_biblioteca ( id_ente );
+
+CREATE INDEX biblioteca_FKIndex2 ON abi.nuova_biblioteca ( id_comune );
+
+CREATE INDEX biblioteca_FKIndex4 ON abi.nuova_biblioteca ( id_tipologia_funzionale );
+
+CREATE INDEX idx_nuova_biblioteca ON abi.nuova_biblioteca ( login_creatore );
+
+CREATE INDEX idx_nuova_biblioteca ON abi.nuova_biblioteca ( login_gestore );
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_ente ( id_ente ) REFERENCES abi.ente( id_ente ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_comune ( id_comune ) REFERENCES abi.comune( id_comune ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_tipologia_funzionale ( id_tipologia_funzionale ) REFERENCES abi.tipologia_funzionale( id_tipologia_funzionale ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_creatore ( login_creatore ) REFERENCES abi.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_gestore ( login_gestore ) REFERENCES abi.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+]]> </string>
+		</query>
+		<query name="Sql_003" tab_index="-1" >
+			<string> <![CDATA[CREATE SCHEMA abi;
+
+CREATE TABLE abi.ente ( 
+	id_ente INT UNSIGNED NOT NULL,
+	id_stato INT UNSIGNED NOT NULL,
+	id_tip_ente INT UNSIGNED NOT NULL,
+	id_obiettivo INT UNSIGNED NOT NULL,
+	denominazione VARCHAR( 255 ) NULL,
+	partita_iva VARCHAR( 11 ) NULL,
+	codice_fiscale VARCHAR( 16 ) NULL,
+	asia_asip VARCHAR( 11 ) NULL,
+CONSTRAINT pk_ente PRIMARY KEY ( id_ente )
+ ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE INDEX ente_FKIndex1 ON abi.ente ( id_obiettivo );
+
+CREATE INDEX ente_FKIndex2 ON abi.ente ( id_tip_ente );
+
+CREATE INDEX ente_FKIndex3 ON abi.ente ( id_stato );
+
+CREATE TABLE abi.tipologia_ente ( 
+	id_tip_ente INT UNSIGNED NOT NULL,
+	descrizione VARCHAR( 255 ) NOT NULL,
+CONSTRAINT pk_tipologia_ente PRIMARY KEY ( id_tip_ente )
+ ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE abi.ente ADD FOREIGN KEY fk_0 ( id_tip_ente ) REFERENCES abi.tipologia_ente( id_tip_ente ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.ente ADD FOREIGN KEY fk_1 ( id_obiettivo ) REFERENCES abi.obiettivo( id_obiettivo ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.ente ADD FOREIGN KEY fk_2 ( id_stato ) REFERENCES abi.stato( id_stato ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+]]> </string>
+		</query>
+		<query name="Sql_004" tab_index="-1" >
+			<string> <![CDATA[CREATE SCHEMA abi;
+
+CREATE TABLE abi.nuova_biblioteca ( 
+	id_biblioteca INT UNSIGNED NOT NULL,
+	isil_stato VARCHAR( 2 ) NOT NULL DEFAULT 'IT',
+	isil_provincia VARCHAR( 2 ) NOT NULL,
+	isil_numero INT UNSIGNED NULL,
+	denominazione_ufficiale VARCHAR( 255 ) NULL,
+	id_comune INT UNSIGNED NULL,
+	data_fondazione VARCHAR( 20 ) NULL,
+	data_istituzione VARCHAR( 255 ) NULL,
+	edificio_denominazione VARCHAR( 255 ) NULL,
+	edificio_monumentale BOOL NULL,
+	edificio_data_costruzione VARCHAR( 255 ) NULL,
+	edificio_appositamente_costruito BOOL NULL,
+	autonomia_amministrativa BOOL NULL,
+	accesso_riservato BOOL NULL,
+	accesso_handicap BOOL NULL,
+	accesso_internet_pagamento BOOL NULL,
+	accesso_internet_tempo BOOL NULL,
+	accesso_internet_proxy BOOL NULL,
+	inventario_cartaceo BOOL NULL,
+	inventario_informatizzato BOOL NULL,
+	catalogo_topografico_cartaceo BOOL NULL,
+	catalogo_topografico_informatizzato BOOL NULL,
+	id_ente INT UNSIGNED NULL,
+	id_tipologia_funzionale INT UNSIGNED NULL,
+	gestisce_servizio_bibliografico_interno BOOL NULL,
+	gestisce_servizio_bibliografico_esterno BOOL NULL,
+	login_creatore INT NOT NULL,
+	login_gestore INT NULL,
+CONSTRAINT PK_biblioteca PRIMARY KEY ( id_biblioteca )
+ ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE INDEX biblioteca_FKIndex1 ON abi.nuova_biblioteca ( id_ente );
+
+CREATE INDEX biblioteca_FKIndex2 ON abi.nuova_biblioteca ( id_comune );
+
+CREATE INDEX biblioteca_FKIndex4 ON abi.nuova_biblioteca ( id_tipologia_funzionale );
+
+CREATE INDEX idx_login_gestore ON abi.nuova_biblioteca ( login_gestore );
+
+CREATE INDEX idx_login_creatore ON abi.nuova_biblioteca ( login_creatore );
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_ente ( id_ente ) REFERENCES abi.ente( id_ente ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_comune ( id_comune ) REFERENCES abi.comune( id_comune ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_tipologia_funzionale ( id_tipologia_funzionale ) REFERENCES abi.tipologia_funzionale( id_tipologia_funzionale ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_creatore ( login_creatore ) REFERENCES abi.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_gestore ( login_gestore ) REFERENCES abi.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+]]> </string>
+		</query>
+		<query name="Sql_005" tab_index="-1" >
+			<string> <![CDATA[CREATE SCHEMA abi;
+
+CREATE TABLE abi.nuova_biblioteca ( 
+	id_biblioteca INT UNSIGNED NOT NULL,
+	isil_stato VARCHAR( 2 ) NOT NULL DEFAULT 'IT',
+	isil_provincia VARCHAR( 2 ) NOT NULL,
+	isil_numero INT UNSIGNED NULL,
+	denominazione_ufficiale VARCHAR( 255 ) NULL,
+	id_comune INT UNSIGNED NULL,
+	data_fondazione VARCHAR( 20 ) NULL,
+	data_istituzione VARCHAR( 255 ) NULL,
+	edificio_denominazione VARCHAR( 255 ) NULL,
+	edificio_monumentale BOOL NULL,
+	edificio_data_costruzione VARCHAR( 255 ) NULL,
+	edificio_appositamente_costruito BOOL NULL,
+	autonomia_amministrativa BOOL NULL,
+	accesso_riservato BOOL NULL,
+	accesso_handicap BOOL NULL,
+	accesso_internet_pagamento BOOL NULL,
+	accesso_internet_tempo BOOL NULL,
+	accesso_internet_proxy BOOL NULL,
+	inventario_cartaceo BOOL NULL,
+	inventario_informatizzato BOOL NULL,
+	catalogo_topografico_cartaceo BOOL NULL,
+	catalogo_topografico_informatizzato BOOL NULL,
+	id_ente INT UNSIGNED NULL,
+	id_tipologia_funzionale INT UNSIGNED NULL,
+	gestisce_servizio_bibliografico_interno BOOL NULL,
+	gestisce_servizio_bibliografico_esterno BOOL NULL,
+	login_creatore INT NOT NULL,
+	login_gestore INT NULL,
+CONSTRAINT PK_biblioteca PRIMARY KEY ( id_biblioteca )
+ ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE INDEX biblioteca_FKIndex1 ON abi.nuova_biblioteca ( id_ente );
+
+CREATE INDEX biblioteca_FKIndex2 ON abi.nuova_biblioteca ( id_comune );
+
+CREATE INDEX biblioteca_FKIndex4 ON abi.nuova_biblioteca ( id_tipologia_funzionale );
+
+CREATE INDEX idx_login_creatore ON abi.nuova_biblioteca ( login_creatore );
+
+CREATE INDEX idx_login_gestore ON abi.nuova_biblioteca ( login_gestore );
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_ente ( id_ente ) REFERENCES abi.ente( id_ente ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_comune ( id_comune ) REFERENCES abi.comune( id_comune ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_tipologia_funzionale ( id_tipologia_funzionale ) REFERENCES abi.tipologia_funzionale( id_tipologia_funzionale ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_creatore ( login_creatore ) REFERENCES abi.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_gestore ( login_gestore ) REFERENCES abi.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+]]> </string>
+		</query>
+		<query name="Sql_006" tab_index="-1" >
+			<string> <![CDATA[CREATE SCHEMA abi;
+
+CREATE TABLE abi.nuova_biblioteca ( 
+	id_biblioteca INT UNSIGNED NOT NULL,
+	isil_stato VARCHAR( 2 ) NOT NULL DEFAULT 'IT',
+	isil_provincia VARCHAR( 2 ) NOT NULL,
+	isil_numero INT UNSIGNED NULL,
+	denominazione_ufficiale VARCHAR( 255 ) NULL,
+	id_comune INT UNSIGNED NULL,
+	data_fondazione VARCHAR( 20 ) NULL,
+	data_istituzione VARCHAR( 255 ) NULL,
+	edificio_denominazione VARCHAR( 255 ) NULL,
+	edificio_monumentale BOOL NULL,
+	edificio_data_costruzione VARCHAR( 255 ) NULL,
+	edificio_appositamente_costruito BOOL NULL,
+	autonomia_amministrativa BOOL NULL,
+	accesso_riservato BOOL NULL,
+	accesso_handicap BOOL NULL,
+	accesso_internet_pagamento BOOL NULL,
+	accesso_internet_tempo BOOL NULL,
+	accesso_internet_proxy BOOL NULL,
+	inventario_cartaceo BOOL NULL,
+	inventario_informatizzato BOOL NULL,
+	catalogo_topografico_cartaceo BOOL NULL,
+	catalogo_topografico_informatizzato BOOL NULL,
+	id_ente INT UNSIGNED NULL,
+	id_tipologia_funzionale INT UNSIGNED NULL,
+	gestisce_servizio_bibliografico_interno BOOL NULL,
+	gestisce_servizio_bibliografico_esterno BOOL NULL,
+	login_creatore INT NULL,
+	login_gestore INT NULL,
+CONSTRAINT PK_biblioteca PRIMARY KEY ( id_biblioteca )
+ ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE INDEX biblioteca_FKIndex1 ON abi.nuova_biblioteca ( id_ente );
+
+CREATE INDEX biblioteca_FKIndex2 ON abi.nuova_biblioteca ( id_comune );
+
+CREATE INDEX biblioteca_FKIndex4 ON abi.nuova_biblioteca ( id_tipologia_funzionale );
+
+CREATE INDEX idx_login_creatore ON abi.nuova_biblioteca ( login_creatore );
+
+CREATE INDEX idx_login_gestore ON abi.nuova_biblioteca ( login_gestore );
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_ente ( id_ente ) REFERENCES abi.ente( id_ente ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_comune ( id_comune ) REFERENCES abi.comune( id_comune ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_tipologia_funzionale ( id_tipologia_funzionale ) REFERENCES abi.tipologia_funzionale( id_tipologia_funzionale ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_creatore ( login_creatore ) REFERENCES abi.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_gestore ( login_gestore ) REFERENCES abi.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+]]> </string>
+		</query>
+	</layout>
+	<layout name="biblioteca_has" tab_index="0" >
+		<entity schema="abicampania" name="accesso_modalita" x="1469" y="39" />
+		<entity schema="abicampania" name="biblioteca" x="780" y="91" />
+		<entity schema="abicampania" name="biblioteca_has_accesso_modalita" x="1131" y="39" />
+		<entity schema="abicampania" name="biblioteca_has_dewey" x="1144" y="546" />
+		<entity schema="abicampania" name="biblioteca_has_fondi_speciali" x="1144" y="650" />
+		<entity schema="abicampania" name="biblioteca_has_indicizzazione_classificata" x="481" y="689" />
+		<entity schema="abicampania" name="biblioteca_has_indicizzazione_soggetto" x="494" y="793" />
+		<entity schema="abicampania" name="biblioteca_has_norme_catalogazione" x="494" y="910" />
+		<entity schema="abicampania" name="biblioteca_has_prestito_interbibliotecario" x="1131" y="130" />
+		<entity schema="abicampania" name="biblioteca_has_servizi_bibliotecari_carta" x="481" y="156" />
+		<entity schema="abicampania" name="biblioteca_has_servizi_informazioni_bibliografiche" x="403" y="247" />
+		<entity schema="abicampania" name="biblioteca_has_sezioni_speciali" x="533" y="351" />
+		<entity schema="abicampania" name="biblioteca_has_sistemi_biblioteche" x="507" y="481" />
+		<entity schema="abicampania" name="biblioteca_has_sistemi_prestito_interbibliotecario" x="1144" y="221" />
+		<entity schema="abicampania" name="biblioteca_has_thesaurus" x="507" y="572" />
+		<entity schema="abicampania" name="biblioteca_has_utenti" x="585" y="1014" />
+		<entity schema="abicampania" name="dewey" x="1365" y="546" />
+		<entity schema="abicampania" name="fondi_speciali" x="1378" y="650" />
+		<entity schema="abicampania" name="fondi_speciali_catalogazione_inventario" x="1677" y="650" />
+		<entity schema="abicampania" name="indicizzazione_classificata" x="260" y="689" />
+		<entity schema="abicampania" name="indicizzazione_soggetto" x="273" y="793" />
+		<entity schema="abicampania" name="norme_catalogazione" x="273" y="910" />
+		<entity schema="abicampania" name="prestito_interbibliotecario" x="1469" y="117" />
+		<entity schema="abicampania" name="prestito_interbibliotecario_modo" x="1742" y="117" />
+		<entity schema="abicampania" name="profili" x="91" y="1014" />
+		<entity schema="abicampania" name="servizi_bibliotecari_carta" x="156" y="156" />
+		<entity schema="abicampania" name="servizi_informazioni_bibliografiche_modalita" x="39" y="234" />
+		<entity schema="abicampania" name="sezioni_speciali" x="247" y="351" />
+		<entity schema="abicampania" name="sistemi_biblioteche" x="247" y="481" />
+		<entity schema="abicampania" name="sistemi_prestito_interbibliotecario" x="1560" y="221" />
+		<entity schema="abicampania" name="thesaurus" x="299" y="572" />
+		<entity schema="abicampania" name="utenti" x="429" y="1014" />
+		<entity schema="abicampania" name="utenti_has_profili" x="273" y="1014" />
+	</layout>
+	<layout name="tabelle_dinamiche" tab_index="1" >
+		<entity schema="abicampania" name="accesso_modalita" x="663" y="520" />
+		<entity schema="abicampania" name="cataloghi_collettivi" x="377" y="403" />
+		<entity schema="abicampania" name="cataloghi_collettivi_zona_tipo" x="39" y="429" />
+		<entity schema="abicampania" name="cataloghi_supporto_digitale_tipo" x="52" y="1131" />
+		<entity schema="abicampania" name="catalogo_generale_tipo" x="689" y="429" />
+		<entity schema="abicampania" name="codici_tipo" x="208" y="871" />
+		<entity schema="abicampania" name="comune" x="39" y="156" />
+		<entity schema="abicampania" name="contatti_tipo" x="52" y="871" />
+		<entity schema="abicampania" name="dati_province_istat" x="208" y="39" />
+		<entity schema="abicampania" name="dati_regioni_istat" x="390" y="39" />
+		<entity schema="abicampania" name="depositi_legali_tipo" x="52" y="1378" />
+		<entity schema="abicampania" name="destinazioni_sociali_tipo" x="468" y="520" />
+		<entity schema="abicampania" name="dewey" x="182" y="793" />
+		<entity schema="abicampania" name="ente_obiettivo" x="546" y="611" />
+		<entity schema="abicampania" name="ente_tipologia_amministrativa" x="286" y="611" />
+		<entity schema="abicampania" name="fondi_antichi_consistenza" x="52" y="1690" />
+		<entity schema="abicampania" name="fondi_speciali_catalogazione_inventario" x="52" y="1053" />
+		<entity schema="abicampania" name="indicizzazione_classificata" x="52" y="1612" />
+		<entity schema="abicampania" name="indicizzazione_soggetto" x="273" y="1612" />
+		<entity schema="abicampania" name="norme_catalogazione" x="52" y="1456" />
+		<entity schema="abicampania" name="patrimonio_specializzazione" x="39" y="286" />
+		<entity schema="abicampania" name="patrimonio_specializzazione_categoria" x="338" y="286" />
+		<entity schema="abicampania" name="prestito_interbibliotecario_modo" x="780" y="1209" />
+		<entity schema="abicampania" name="prestito_locale_materiale_escluso" x="286" y="1209" />
+		<entity schema="abicampania" name="prestito_locale_utenti_ammessi" x="52" y="1209" />
+		<entity schema="abicampania" name="provincia" x="208" y="156" />
+		<entity schema="abicampania" name="regione" x="390" y="156" />
+		<entity schema="abicampania" name="riproduzioni_tipo" x="637" y="962" />
+		<entity schema="abicampania" name="servizi_bibliotecari_carta" x="52" y="962" />
+		<entity schema="abicampania" name="servizi_informazioni_bibliografiche_modalita" x="286" y="962" />
+		<entity schema="abicampania" name="sezioni_speciali" x="52" y="1300" />
+		<entity schema="abicampania" name="sistemi_biblioteche" x="52" y="1534" />
+		<entity schema="abicampania" name="sistemi_prestito_interbibliotecario" x="533" y="1209" />
+		<entity schema="abicampania" name="stato" x="559" y="156" />
+		<entity schema="abicampania" name="stato_catalogazione_tipo" x="52" y="702" />
+		<entity schema="abicampania" name="thesaurus" x="52" y="793" />
+		<entity schema="abicampania" name="tipologia_funzionale" x="65" y="611" />
+	</layout>
+</project>
