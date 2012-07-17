@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: DataIstituzioneDescriptor.java,v 1.1 2012/06/22 13:54:50 m.bartolozzi Exp $
+ * $Id: DataIstituzioneDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.DataIstituzione;
 /**
  * Class DataIstituzioneDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:50 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class DataIstituzioneDescriptor extends it.inera.abi.logic.formatodiscambio.castor.descriptors.AnnoSecoloTypeDescriptor {
 
@@ -58,7 +58,7 @@ public class DataIstituzioneDescriptor extends it.inera.abi.logic.formatodiscamb
     public DataIstituzioneDescriptor() {
         super();
         setExtendsWithoutFlatten(new it.inera.abi.logic.formatodiscambio.castor.descriptors.AnnoSecoloTypeDescriptor());
-        _xmlName = "dataIstituzione";
+        _xmlName = "data-istituzione";
         _elementDefinition = true;
     }
 

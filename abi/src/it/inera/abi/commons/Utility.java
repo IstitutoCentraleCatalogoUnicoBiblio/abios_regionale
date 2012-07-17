@@ -42,7 +42,7 @@ public class Utility {
 		while (bibliotecaIterator.hasNext()) {
 			Biblioteca biblioteca = (Biblioteca) bibliotecaIterator.next();
 			sb.append("********************************************************************************\n");			
-			sb.append("Codice ABI   : " + biblioteca.getAnagrafica().getCodici().getIccu()).append("\n");
+			sb.append("Codice ABI   : " + biblioteca.getAnagrafica().getCodici().getIsil()).append("\n");
 			sb.append("Denominazione: " + biblioteca.getAnagrafica().getNome().getAttuale()).append("\n");
 			sb.append("--------------------------------------------------------------------------------\n");
 			ReportImport report = reports.get(biblioteca);

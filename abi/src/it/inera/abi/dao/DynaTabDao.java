@@ -11,6 +11,7 @@ import it.inera.abi.persistence.PatrimonioSpecializzazione;
 import it.inera.abi.persistence.PatrimonioSpecializzazioneCategoria;
 import it.inera.abi.persistence.PrestitoLocaleMaterialeEscluso;
 import it.inera.abi.persistence.PrestitoLocaleUtentiAmmessi;
+import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 
 import java.util.List;
 
@@ -127,4 +128,9 @@ public interface DynaTabDao {
 
 	public int existEntryVoceSingola(Class<?> dynaClass, String value);
 	
+	public void addSistemiPrestitoInterbibliotecarioTabelleDinamiche(Integer idSistemiPrestitoInterbibliotecario, String descrizione, String url, boolean modifica) throws DuplicateEntryException;
+	
+	public void removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(int idr_removeRecord) throws ConstraintKeyViolationException;
+	
+	public List<SistemiPrestitoInterbibliotecario> getSistemiPrestitoInterbibliotecario();
 }

@@ -7,6 +7,7 @@ import it.inera.abi.gxt.client.mvc.model.PatrimoniCategorieTabelleDinamicheModel
 import it.inera.abi.gxt.client.mvc.model.PatrimonioSpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
 import it.inera.abi.gxt.client.mvc.model.RegioniModel;
+import it.inera.abi.gxt.client.mvc.model.SistemiPrestitoInterbibliotecarioModel;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.StatoModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
@@ -107,5 +108,10 @@ public interface TabelleDinamicheServiceAsync {
 	void addComuneTabelleDinamiche(ComuniModel modelToSave, boolean modifica,AsyncCallback<Void> asyncCallback);
 
 	void removeComuneTabelleDinamiche(int idr_removeRecord,	AsyncCallback<Void> asyncCallback);
+	
+	void addSistemiPrestitoInterbibliotecarioTabelleDinamiche(SistemiPrestitoInterbibliotecarioModel modelToSave, boolean modifica,	AsyncCallback<Void> asyncCallback);
+	
+	void removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(int idr_removeRecord, AsyncCallback<Void> asyncCallback);
 
+	public void getSistemiPrestitoInterbibliotecario(AsyncCallback<List<SistemiPrestitoInterbibliotecarioModel>> callback);
 }

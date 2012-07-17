@@ -388,7 +388,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 		Utils.addListenerToChangeLabelColorIfModifiedSimpleComboboxString(accessoATempoField,accessoATempoLabel );
 
 		
-		accessoProxyLabel = new Text("Proxy:");
+		accessoProxyLabel = new Text("Con proxy:");
 		accessoProxyLabel.setStyleAttribute("fontSize", "14px");
 
 		accessoAProxyField = new SimpleComboBox<String>();

@@ -162,11 +162,11 @@ public interface BibliotecheService extends RemoteService {
 
 	public void removeFondiSpeciali(int id_biblioteca, int id_removeRecord);
 
-	public List<VoceUnicaModel> getDigitalizzazioneFondiByIdBiblio(int id_biblioteca);
-
-	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord, String derscrizione, boolean modifica);
-
-	public void removeFondiDigitali(int id_rimuoviFondo);
+//	public List<VoceUnicaModel> getDigitalizzazioneFondiByIdBiblio(int id_biblioteca);
+//
+//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord, String derscrizione, boolean modifica);
+//
+//	public void removeFondiDigitali(int id_rimuoviFondo);
 
 	public List<VoceUnicaModel> getEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(int id_biblioteca, int idTabellaDinamica);
 

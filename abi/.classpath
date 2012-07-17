@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="it/inera/abi/gxt/client/mvc/view/center/biblioteche/widget/ListaDigitalizzazioneFondiPanel.java|it/inera/abi/persistence/FondiDigitali.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gxt.jar" sourcepath="/home/marina/.m2/repository/com/extjs/gxt/2.2.0/gxt-2.2.0-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-servlet.jar"/>

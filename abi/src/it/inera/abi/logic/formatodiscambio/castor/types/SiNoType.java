@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: SiNoType.java,v 1.1 2012/06/22 13:55:37 m.bartolozzi Exp $
+ * $Id: SiNoType.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.types;
@@ -12,7 +12,7 @@ package it.inera.abi.logic.formatodiscambio.castor.types;
  *  "si/no" (ma non esattamente questi due...)
  *  
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:55:37 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
  */
 public enum SiNoType {
 

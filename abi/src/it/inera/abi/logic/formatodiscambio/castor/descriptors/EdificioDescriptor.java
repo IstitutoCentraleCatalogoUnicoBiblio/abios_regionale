@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: EdificioDescriptor.java,v 1.1 2012/06/22 13:54:51 m.bartolozzi Exp $
+ * $Id: EdificioDescriptor.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Edificio;
 /**
  * Class EdificioDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:51 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
  */
 public class EdificioDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 

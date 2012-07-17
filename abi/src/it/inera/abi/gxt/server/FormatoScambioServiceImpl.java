@@ -105,7 +105,7 @@ AutoinjectingRemoteServiceServlet implements FormatoScambioService {
 				while (iterator.hasNext()) {
 					InfoBiblioBean infoBiblioBean = (InfoBiblioBean) iterator.next();
 					BiblioModel biblioModel = new BiblioModel();
-					biblioModel.setCodice(infoBiblioBean.codiceIccu);
+					biblioModel.setCodice(infoBiblioBean.codiceIsil);
 					biblioModel.setDenominazione(infoBiblioBean.nome);
 					biblioModels.add(biblioModel);
 				}
@@ -133,7 +133,7 @@ AutoinjectingRemoteServiceServlet implements FormatoScambioService {
 			while (iterator.hasNext()) {
 				InfoBiblioBean infoBiblioBean = (InfoBiblioBean) iterator.next();
 				BiblioModel biblioModel = new BiblioModel();
-				biblioModel.setCodice(infoBiblioBean.codiceIccu);
+				biblioModel.setCodice(infoBiblioBean.codiceIsil);
 				biblioModel.setDenominazione(infoBiblioBean.nome);
 				biblioModels.add(biblioModel);
 			}
@@ -155,7 +155,7 @@ AutoinjectingRemoteServiceServlet implements FormatoScambioService {
 			while (iterator.hasNext()) {
 				InfoBiblioBean infoBiblioBean = (InfoBiblioBean) iterator.next();
 				BiblioModel biblioModel = new BiblioModel();
-				biblioModel.setCodice(infoBiblioBean.codiceIccu);
+				biblioModel.setCodice(infoBiblioBean.codiceIsil);
 				biblioModel.setDenominazione(infoBiblioBean.nome);
 				biblioModels.add(biblioModel);
 			}

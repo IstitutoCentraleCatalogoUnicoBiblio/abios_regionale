@@ -97,7 +97,7 @@ public class ImportDifferito {
 				//controllo codice ABI
 				String codiceAbi = null;
 				if (biblioteca != null) if (biblioteca.getAnagrafica() != null) if (biblioteca.getAnagrafica().getCodici() != null) 
-					codiceAbi = biblioteca.getAnagrafica().getCodici().getIccu();
+					codiceAbi = biblioteca.getAnagrafica().getCodici().getIsil();
 				
 				if (codiceAbi != null && !"".equalsIgnoreCase(codiceAbi)) {
 					log.info("*************************************************************************");

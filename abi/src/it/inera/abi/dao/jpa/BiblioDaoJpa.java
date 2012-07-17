@@ -28,7 +28,6 @@ import it.inera.abi.persistence.Ente;
 import it.inera.abi.persistence.EnteObiettivo;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.FondiAntichiConsistenza;
-import it.inera.abi.persistence.FondiDigitali;
 import it.inera.abi.persistence.FondiSpeciali;
 import it.inera.abi.persistence.FondiSpecialiCatalogazioneInventario;
 import it.inera.abi.persistence.Geolocalizzazione;
@@ -1598,45 +1597,45 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	}
 
-	@Override
-	@Transactional
-	public List<FondiDigitali> getDigitalizzazioneFondiByIdBiblio(
-			int id_biblioteca) {
-		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
-		List<FondiDigitali> fondiDigitalis = biblioteca.getFondiDigitalis();
-		Iterator<FondiDigitali> it = fondiDigitalis.iterator();
-		while (it.hasNext()) {
-			// Iterazione anti-lazy
-			FondiDigitali fondiDigitali = (FondiDigitali) it.next();
-		}
-		return fondiDigitalis;
-	}
-
-	@Override
-	@Transactional
-	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
-			String descrizione, boolean modifica) {
-		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
-
-		FondiDigitali fondiDigitali = new FondiDigitali();
-
-		if (modifica)
-			fondiDigitali.setIdFondiDigitali(id_newRecord);
-
-		fondiDigitali.setDescrizione(descrizione);
-		fondiDigitali.setBiblioteca(biblioteca);
-
-		em.merge(fondiDigitali);
-	}
-
-	@Override
-	@Transactional
-	public void removeFondiDigitali(int id_rimuoviFondo) {
-		FondiDigitali fondiDigitali = em.find(FondiDigitali.class,
-				id_rimuoviFondo);
-		em.remove(fondiDigitali);
-
-	}
+//	@Override
+//	@Transactional
+//	public List<FondiDigitali> getDigitalizzazioneFondiByIdBiblio(
+//			int id_biblioteca) {
+//		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+//		List<FondiDigitali> fondiDigitalis = biblioteca.getFondiDigitalis();
+//		Iterator<FondiDigitali> it = fondiDigitalis.iterator();
+//		while (it.hasNext()) {
+//			// Iterazione anti-lazy
+//			FondiDigitali fondiDigitali = (FondiDigitali) it.next();
+//		}
+//		return fondiDigitalis;
+//	}
+//
+//	@Override
+//	@Transactional
+//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
+//			String descrizione, boolean modifica) {
+//		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+//
+//		FondiDigitali fondiDigitali = new FondiDigitali();
+//
+//		if (modifica)
+//			fondiDigitali.setIdFondiDigitali(id_newRecord);
+//
+//		fondiDigitali.setDescrizione(descrizione);
+//		fondiDigitali.setBiblioteca(biblioteca);
+//
+//		em.merge(fondiDigitali);
+//	}
+//
+//	@Override
+//	@Transactional
+//	public void removeFondiDigitali(int id_rimuoviFondo) {
+//		FondiDigitali fondiDigitali = em.find(FondiDigitali.class,
+//				id_rimuoviFondo);
+//		em.remove(fondiDigitali);
+//
+//	}
 
 	/**
 	 * In base all'id tabella dinamica passato viene caricata la lista dati
@@ -2494,7 +2493,7 @@ public class BiblioDaoJpa implements BiblioDao {
 	@Override
 	@Transactional
 	public List<Biblioteca> ricercaBiblioReport(HashMap<String, Object> keys, int offset, int rows, String orderByField, String orderByDir) {
-		// TODO
+
 		Integer[] id_regioni;
 		Integer[] id_province;
 		int id_comune = 0;
@@ -3334,7 +3333,7 @@ public class BiblioDaoJpa implements BiblioDao {
 	@Override
 	@Transactional
 	public int countAllBibliotechePerReport(HashMap<String, Object> keys) {
-		// TODO
+
 		Integer[] id_regioni = null;
 		Integer[] id_province = null;
 		int id_comune = 0;
@@ -4703,7 +4702,7 @@ public class BiblioDaoJpa implements BiblioDao {
 		biblioteca.getDeweyLiberos().size();
 		biblioteca.getDeweys().size();
 		biblioteca.getFondiAntichiConsistenza(); //?
-		biblioteca.getFondiDigitalis().size();
+//		biblioteca.getFondiDigitalis().size();
 		biblioteca.getFondiSpecialis().size();
 		biblioteca.getGeolocalizzazione(); //?
 		biblioteca.getIndicizzazioneClassificatas().size();

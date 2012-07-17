@@ -195,7 +195,7 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:all>
-						<xs:element name="iccu" minOccurs="1" type="xs:string">
+						<xs:element name="isil" minOccurs="1" type="xs:string">
 							<xs:annotation>
 								<xs:documentation>
 									Il codice "iccu" può essere omesso
@@ -209,7 +209,10 @@
 									provincia, altrimenti non è
 									possibile assegnare la parte
 									iniziale del codice.
-									Nota r.eschini: tolte tutte le restirction e messo a required il codice iccu
+									Nota r.eschini: tolte tutte le restriction e messo a required il codice iccu
+								</xs:documentation>
+								<xs:documentation>
+									DEPRECATO: 'iccu' sostituito dall'elemento 'isil'.
 								</xs:documentation>
 							</xs:annotation>
 						</xs:element>
@@ -249,6 +252,11 @@
 						partire dal solo codice ISTAT del comune,
 						attraverso proprie tabelle di raggruppamento.
 					</xs:documentation>
+					<xs:documentation>
+						Inserito nuovo elemento, opzionale, coordinate contenente
+						due attributi (se specificati, devono essere valorizzati
+						entrambi), latitudine e longitudine.
+					</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:all>
@@ -276,6 +284,12 @@
 									<xs:pattern value="[a-zA-Z]{2}" />
 								</xs:restriction>
 							</xs:simpleType>
+						</xs:element>
+						<xs:element minOccurs="0" name="coordinate">
+							<xs:complexType>
+								<xs:attribute name="latitudine" use="required" type="xs:double" />
+								<xs:attribute name="longitudine" use="required" type="xs:double" />
+							</xs:complexType>
 						</xs:element>
 					</xs:all>
 				</xs:complexType>
@@ -404,7 +418,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element minOccurs="0" name="Istituzione">
+			<xs:element minOccurs="0" name="istituzione">
 				<xs:annotation>
 					<xs:documentation>
 						Data in cui è stata istituita formalmente
@@ -413,15 +427,20 @@
 						caso che la biblioteca abbia avuto nel tempo
 						gestioni amministrative diverse.
 					</xs:documentation>
+					<xs:documentation>
+						DEPRECATO: 'Istituzione' è stato sostituito dall'elemento 'istituzione'.
+						Inoltre gli elementi 'dataIstituzione' e 'dataFondazione' sono diventati 
+						rispettivamente 'data-istituzione' e 'data-fondazione'.
+					</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element minOccurs="0" name="dataIstituzione" type="annoSecoloType" />
+						<xs:element minOccurs="0" name="data-istituzione" type="annoSecoloType" />
 						<!-- 
 						<xs:element minOccurs="0" name="tipoDataFondazione" type="annoSecoloType" />
 						<xs:element minOccurs="0" name="dataFondazione" type="xs:string" />
 						 -->
-						 <xs:element minOccurs="0" name="dataFondazione" type="annoSecoloType" />
+						 <xs:element minOccurs="0" name="data-fondazione" type="annoSecoloType" />
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -807,10 +826,8 @@
 										maxOccurs="unbounded" name="sistema-ill">
 										<xs:complexType>
 											<xs:all>
-												<xs:element name="nome"
-													type="xs:string" />
-												<xs:element
-													minOccurs="0" name="note" type="xs:string" />
+												<xs:element name="nome" type="xs:string" />
+												<xs:element minOccurs="0" name="note" type="xs:string" />
 											</xs:all>
 										</xs:complexType>
 									</xs:element>
@@ -907,12 +924,18 @@
 						e ripetibile.
 						NB. MODIFICATO TIPO ENUMERATO 
 					</xs:documentation>
+					<xs:documentation>
+						L'elemento modo opzionale e ripetibile è stato
+						sostituito da tre flag: a tempo, a pagamento, con proxy.
+					</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="modo" minOccurs="0" type="xs:string" />					
-					</xs:sequence>
-				</xs:complexType>
+				    <xs:sequence>
+					  <xs:element name="a-tempo" minOccurs="0" type="siNoType"/>
+					  <xs:element name="a-pagamento" minOccurs="0" type="siNoType"/>
+					  <xs:element name="con-proxy" minOccurs="0" type="siNoType"/>
+				    </xs:sequence>
+				  </xs:complexType>
 			</xs:element>
 			<xs:element name="accesso" minOccurs="0">
 				<xs:annotation>

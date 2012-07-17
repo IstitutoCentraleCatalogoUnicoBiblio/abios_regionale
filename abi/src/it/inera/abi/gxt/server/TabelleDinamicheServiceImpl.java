@@ -12,6 +12,7 @@ import it.inera.abi.gxt.client.mvc.model.PatrimoniCategorieTabelleDinamicheModel
 import it.inera.abi.gxt.client.mvc.model.PatrimonioSpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
 import it.inera.abi.gxt.client.mvc.model.RegioniModel;
+import it.inera.abi.gxt.client.mvc.model.SistemiPrestitoInterbibliotecarioModel;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.StatoModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
@@ -29,6 +30,7 @@ import it.inera.abi.persistence.PatrimonioSpecializzazione;
 import it.inera.abi.persistence.PatrimonioSpecializzazioneCategoria;
 import it.inera.abi.persistence.PrestitoLocaleMaterialeEscluso;
 import it.inera.abi.persistence.PrestitoLocaleUtentiAmmessi;
+import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -989,5 +991,62 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 		} catch (ConstraintKeyViolationException e) {
 			throw new CostraintKeyViolationClientSideException(e.getMessage());
 		}
+	}
+	
+	@Override
+	public void addSistemiPrestitoInterbibliotecarioTabelleDinamiche(SistemiPrestitoInterbibliotecarioModel modelToSave, boolean modifica) throws DuplicatedEntryClientSideException {
+		Integer idSistemiPrestitoInterbibliotecario = null;
+		String descrizione = null;
+		String url = null;
+		
+		if (modifica) {
+			idSistemiPrestitoInterbibliotecario = modelToSave.getIdSistemiPrestitoInterbibliotecario();
+		}
+		
+		descrizione = modelToSave.getDescrizione();
+		
+		if (modelToSave.getUrl() != null) {
+			url = modelToSave.getUrl();
+		}
+		
+		try {
+			abiTabelleDinamicheLogic.addSistemiPrestitoInterbibliotecarioTabelleDinamiche(idSistemiPrestitoInterbibliotecario, descrizione, url, modifica);
+			
+		} catch (DuplicateEntryException e) {
+			throw new DuplicatedEntryClientSideException(e.getMessage()); 
+		}
+	}
+	
+	@Override
+	public void removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(int idr_removeRecord) throws CostraintKeyViolationClientSideException {
+		try {
+			abiTabelleDinamicheLogic.removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(idr_removeRecord);
+			
+		} catch (ConstraintKeyViolationException e) {
+			throw new CostraintKeyViolationClientSideException(e.getMessage());
+		}
+	}
+	
+	@Override
+	public List<SistemiPrestitoInterbibliotecarioModel> getSistemiPrestitoInterbibliotecario() {
+		/* LOAD */
+		List<SistemiPrestitoInterbibliotecario> sistemiDB = abiTabelleDinamicheLogic.getSistemiPrestitoInterbibliotecario();
+		List<SistemiPrestitoInterbibliotecarioModel> sistemiModel = new ArrayList<SistemiPrestitoInterbibliotecarioModel>();
+
+		/* MAPPING */
+		SistemiPrestitoInterbibliotecarioModel sistemiModelTmp = null;
+		
+		for (SistemiPrestitoInterbibliotecario sistemi : sistemiDB) {
+			sistemiModelTmp = new SistemiPrestitoInterbibliotecarioModel();
+			sistemiModelTmp.setIdSistemiPrestitoInterbibliotecario(sistemi.getIdSistemiPrestitoInterbibliotecario());
+			sistemiModelTmp.setDescrizione(sistemi.getDescrizione());
+			if (sistemi.getUrl() != null) {
+				sistemiModelTmp.setUrl(sistemi.getUrl());
+			}
+			
+			sistemiModel.add(sistemiModelTmp);
+		}
+
+		return sistemiModel;
 	}
 }

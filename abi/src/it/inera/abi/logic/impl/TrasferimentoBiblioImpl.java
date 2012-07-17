@@ -24,7 +24,6 @@ import it.inera.abi.persistence.DepositiLegali;
 import it.inera.abi.persistence.DestinazioniSociali;
 import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.Ente;
-import it.inera.abi.persistence.FondiDigitali;
 import it.inera.abi.persistence.FondiSpeciali;
 import it.inera.abi.persistence.IndicizzazioneClassificata;
 import it.inera.abi.persistence.IndicizzazioneSoggetto;
@@ -388,14 +387,14 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 			// ******* digitalizzazione fondi************* //TESTATO (Davide)
-			if(bibliotecaAttuale.getFondiDigitalis() != null){
-				biblioDao.removeChilds(bibliotecaAttuale.getFondiDigitalis());
-			}
-			if( bibliotecaSalvata.getFondiDigitalis()!=null){
-				for (FondiDigitali fondiDigitali : bibliotecaSalvata.getFondiDigitalis()) {
-					abiBiblioLogic.addDigitalizzazioneFondo(idbiblio, -1, fondiDigitali.getDescrizione(), false);//-1 perche tanto lo crea nuovo, no modifica
-				}
-			}
+//			if(bibliotecaAttuale.getFondiDigitalis() != null){
+//				biblioDao.removeChilds(bibliotecaAttuale.getFondiDigitalis());
+//			}
+//			if( bibliotecaSalvata.getFondiDigitalis()!=null){
+//				for (FondiDigitali fondiDigitali : bibliotecaSalvata.getFondiDigitalis()) {
+//					abiBiblioLogic.addDigitalizzazioneFondo(idbiblio, -1, fondiDigitali.getDescrizione(), false);//-1 perche tanto lo crea nuovo, no modifica
+//				}
+//			}
 
 			// ******** sistemi di indicizzazione Classificata //TESTATO (Davide)
 			if(bibliotecaAttuale.getIndicizzazioneClassificatas() != null){
@@ -845,9 +844,9 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			deweyLibero.setBiblioteca(null);
 		}
 
-		for (FondiDigitali fondiDigitali: biblioteca.getFondiDigitalis()) {
-			fondiDigitali.setBiblioteca(null);
-		}
+//		for (FondiDigitali fondiDigitali: biblioteca.getFondiDigitalis()) {
+//			fondiDigitali.setBiblioteca(null);
+//		}
 		for (FondiSpeciali fondiSpeciali: biblioteca.getFondiSpecialis()) {
 			fondiSpeciali.getFondiSpecialiCatalogazioneInventario().setFondiSpecialis(null);
 		}

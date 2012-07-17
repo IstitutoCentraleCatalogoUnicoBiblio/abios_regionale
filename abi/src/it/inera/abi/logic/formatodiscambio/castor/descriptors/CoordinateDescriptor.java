@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: MaterialiEsclusiLocaleDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
+ * $Id: CoordinateDescriptor.java,v 1.6 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -11,14 +11,14 @@ package it.inera.abi.logic.formatodiscambio.castor.descriptors;
  //- Imported classes and packages -/
 //---------------------------------/
 
-import it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusiLocale;
+import it.inera.abi.logic.formatodiscambio.castor.Coordinate;
 
 /**
- * Class MaterialiEsclusiLocaleDescriptor.
+ * Class CoordinateDescriptor.
  * 
- * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
+ * @version $Revision: 1.6 $ $Date: 2012/11/22 09:50:20 $
  */
-public class MaterialiEsclusiLocaleDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
+public class CoordinateDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
 
       //--------------------------/
@@ -55,46 +55,36 @@ public class MaterialiEsclusiLocaleDescriptor extends org.exolab.castor.xml.util
      //- Constructors -/
     //----------------/
 
-    public MaterialiEsclusiLocaleDescriptor() {
+    public CoordinateDescriptor() {
         super();
-        _xmlName = "materiali-esclusi-locale";
+        _xmlName = "coordinate";
         _elementDefinition = true;
-
-        //-- set grouping compositor
-        setCompositorAsSequence();
         org.exolab.castor.xml.util.XMLFieldDescriptorImpl  desc           = null;
         org.exolab.castor.mapping.FieldHandler             handler        = null;
         org.exolab.castor.xml.FieldValidator               fieldValidator = null;
         //-- initialize attribute descriptors
 
-        //-- initialize element descriptors
-
-        //-- _materialeList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_materialeList", "materiale", org.exolab.castor.xml.NodeType.Element);
-        desc.setImmutable(true);
+        //-- _latitudine
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.Double.TYPE, "_latitudine", "latitudine", org.exolab.castor.xml.NodeType.Attribute);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
-                MaterialiEsclusiLocale target = (MaterialiEsclusiLocale) object;
-                return target.getMateriale();
+                Coordinate target = (Coordinate) object;
+                if (!target.hasLatitudine()) { return null; }
+                return new java.lang.Double(target.getLatitudine());
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
                 throws IllegalStateException, IllegalArgumentException
             {
                 try {
-                    MaterialiEsclusiLocale target = (MaterialiEsclusiLocale) object;
-                    target.addMateriale( (java.lang.String) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    MaterialiEsclusiLocale target = (MaterialiEsclusiLocale) object;
-                    target.removeAllMateriale();
+                    Coordinate target = (Coordinate) object;
+                    // ignore null values for non optional primitives
+                    if (value == null) { return; }
+
+                    target.setLatitudine( ((java.lang.Double) value).doubleValue());
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -105,24 +95,73 @@ public class MaterialiEsclusiLocaleDescriptor extends org.exolab.castor.xml.util
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("string");
+        desc.setSchemaType("double");
         desc.setHandler(handler);
         desc.setRequired(true);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
-        addSequenceElement(desc);
 
-        //-- validation code for: _materialeList
+        //-- validation code for: _latitudine
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
         fieldValidator.setMinOccurs(1);
         { //-- local scope
-            org.exolab.castor.xml.validators.StringValidator typeValidator;
-            typeValidator = new org.exolab.castor.xml.validators.StringValidator();
+            org.exolab.castor.xml.validators.DoubleValidator typeValidator;
+            typeValidator = new org.exolab.castor.xml.validators.DoubleValidator();
             fieldValidator.setValidator(typeValidator);
-            typeValidator.setWhiteSpace("preserve");
+            typeValidator.setMinInclusive(-1.7976931348623157E308);
+            typeValidator.setMaxInclusive(1.7976931348623157E308);
         }
         desc.setValidator(fieldValidator);
+        //-- _longitudine
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.Double.TYPE, "_longitudine", "longitudine", org.exolab.castor.xml.NodeType.Attribute);
+        handler = new org.exolab.castor.xml.XMLFieldHandler() {
+            @Override
+            public java.lang.Object getValue( java.lang.Object object ) 
+                throws IllegalStateException
+            {
+                Coordinate target = (Coordinate) object;
+                if (!target.hasLongitudine()) { return null; }
+                return new java.lang.Double(target.getLongitudine());
+            }
+            @Override
+            public void setValue( java.lang.Object object, java.lang.Object value) 
+                throws IllegalStateException, IllegalArgumentException
+            {
+                try {
+                    Coordinate target = (Coordinate) object;
+                    // ignore null values for non optional primitives
+                    if (value == null) { return; }
+
+                    target.setLongitudine( ((java.lang.Double) value).doubleValue());
+                } catch (java.lang.Exception ex) {
+                    throw new IllegalStateException(ex.toString());
+                }
+            }
+            @Override
+            @SuppressWarnings("unused")
+            public java.lang.Object newInstance(java.lang.Object parent) {
+                return null;
+            }
+        };
+        desc.setSchemaType("double");
+        desc.setHandler(handler);
+        desc.setRequired(true);
+        desc.setMultivalued(false);
+        addFieldDescriptor(desc);
+
+        //-- validation code for: _longitudine
+        fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        fieldValidator.setMinOccurs(1);
+        { //-- local scope
+            org.exolab.castor.xml.validators.DoubleValidator typeValidator;
+            typeValidator = new org.exolab.castor.xml.validators.DoubleValidator();
+            fieldValidator.setValidator(typeValidator);
+            typeValidator.setMinInclusive(-1.7976931348623157E308);
+            typeValidator.setMaxInclusive(1.7976931348623157E308);
+        }
+        desc.setValidator(fieldValidator);
+        //-- initialize element descriptors
+
     }
 
 
@@ -161,7 +200,7 @@ public class MaterialiEsclusiLocaleDescriptor extends org.exolab.castor.xml.util
     @Override()
     public java.lang.Class getJavaClass(
     ) {
-        return it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusiLocale.class;
+        return it.inera.abi.logic.formatodiscambio.castor.Coordinate.class;
     }
 
     /**

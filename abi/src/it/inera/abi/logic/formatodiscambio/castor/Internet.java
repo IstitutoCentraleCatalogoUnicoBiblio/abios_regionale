@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Internet.java,v 1.1 2012/06/22 13:55:04 m.bartolozzi Exp $
+ * $Id: Internet.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -14,8 +14,11 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  e ripetibile.
  *  NB. MODIFICATO TIPO ENUMERATO 
  *  
+ *  L'elemento modo opzionale e ripetibile è stato
+ *  sostituito da tre flag: a tempo, a pagamento, con proxy.
+ *  
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:55:04 $
+ * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
  */
 @SuppressWarnings("serial")
 public class Internet implements java.io.Serializable {
@@ -26,9 +29,19 @@ public class Internet implements java.io.Serializable {
     //--------------------------/
 
     /**
-     * Field _modo.
+     * Field _aTempo.
      */
-    private java.lang.String _modo;
+    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _aTempo;
+
+    /**
+     * Field _aPagamento.
+     */
+    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _aPagamento;
+
+    /**
+     * Field _conProxy.
+     */
+    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _conProxy;
 
 
       //----------------/
@@ -45,13 +58,33 @@ public class Internet implements java.io.Serializable {
     //-----------/
 
     /**
-     * Returns the value of field 'modo'.
+     * Returns the value of field 'aPagamento'.
      * 
-     * @return the value of field 'Modo'.
+     * @return the value of field 'APagamento'.
      */
-    public java.lang.String getModo(
+    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getAPagamento(
     ) {
-        return this._modo;
+        return this._aPagamento;
+    }
+
+    /**
+     * Returns the value of field 'aTempo'.
+     * 
+     * @return the value of field 'ATempo'.
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getATempo(
+    ) {
+        return this._aTempo;
+    }
+
+    /**
+     * Returns the value of field 'conProxy'.
+     * 
+     * @return the value of field 'ConProxy'.
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getConProxy(
+    ) {
+        return this._conProxy;
     }
 
     /**
@@ -102,13 +135,33 @@ public class Internet implements java.io.Serializable {
     }
 
     /**
-     * Sets the value of field 'modo'.
+     * Sets the value of field 'aPagamento'.
      * 
-     * @param modo the value of field 'modo'.
+     * @param aPagamento the value of field 'aPagamento'.
      */
-    public void setModo(
-            final java.lang.String modo) {
-        this._modo = modo;
+    public void setAPagamento(
+            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType aPagamento) {
+        this._aPagamento = aPagamento;
+    }
+
+    /**
+     * Sets the value of field 'aTempo'.
+     * 
+     * @param aTempo the value of field 'aTempo'.
+     */
+    public void setATempo(
+            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType aTempo) {
+        this._aTempo = aTempo;
+    }
+
+    /**
+     * Sets the value of field 'conProxy'.
+     * 
+     * @param conProxy the value of field 'conProxy'.
+     */
+    public void setConProxy(
+            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType conProxy) {
+        this._conProxy = conProxy;
     }
 
     /**

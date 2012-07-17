@@ -66,6 +66,7 @@ import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.FondiAntichiConsistenza;
 import it.inera.abi.persistence.FondiSpeciali;
 import it.inera.abi.persistence.FondiSpecialiCatalogazioneInventario;
+import it.inera.abi.persistence.Geolocalizzazione;
 import it.inera.abi.persistence.OrarioChiusure;
 import it.inera.abi.persistence.OrarioUfficiali;
 import it.inera.abi.persistence.OrarioVariazioni;
@@ -129,7 +130,7 @@ public class ImporterImpl implements Importer {
 	@Transactional(rollbackFor=Exception.class)
 	public void doImport(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, Date dataExport, ReportImport reportImport, String username, boolean differito) throws Exception {
 
-		String codiceAbi = Utility.normalizzaCodiciAbi(biblioteca.getAnagrafica().getCodici().getIccu()); // normalizza il codice abi in IT-AA1234
+		String codiceAbi = Utility.normalizzaCodiciAbi(biblioteca.getAnagrafica().getCodici().getIsil()); // normalizza il codice abi in IT-AA1234
 		log.info("Codice ABI biblioteca: " + codiceAbi);
 
 		String isilSt = Utility.getIsilSt(codiceAbi);
@@ -164,9 +165,9 @@ public class ImporterImpl implements Importer {
 				biblios = new Biblioteca[1];
 				//TODO
 
-				Integer idBiblio=  createBibliotecaDefault(biblioteca, isilSt, isilNr, isilPr,reportImport);
+				Integer idBiblio = createBibliotecaDefault(biblioteca, isilSt, isilNr, isilPr,reportImport);
 
-				if(idBiblio == null) return;
+				if (idBiblio == null) return;
 
 				biblios = biblioDao.getBibliotecheByCodABI(new String[] {codiceAbi}, 0, 1);
 			}
@@ -456,6 +457,24 @@ public class ImporterImpl implements Importer {
 			String frazione = biblioteca.getAnagrafica().getIndirizzo().getFrazione();
 			bibliotecaDb.setFrazione(frazione);
 			log.debug("Modifica frazione: " + frazione);
+		}
+		
+		// Coordinate
+		if (biblioteca.getAnagrafica().getIndirizzo().getCoordinate() != null) {
+			Double latitudine = Double.valueOf(biblioteca.getAnagrafica().getIndirizzo().getCoordinate().getLatitudine());
+			Double longitudine = Double.valueOf(biblioteca.getAnagrafica().getIndirizzo().getCoordinate().getLongitudine());
+			
+			if (bibliotecaDb.getGeolocalizzazione() != null) {
+				bibliotecaDb.getGeolocalizzazione().setLatitudine(latitudine);
+				bibliotecaDb.getGeolocalizzazione().setLongitudine(longitudine);
+				
+			} else {
+				Geolocalizzazione coordinate = new Geolocalizzazione();
+				coordinate.setLatitudine(latitudine);
+				coordinate.setLongitudine(longitudine);
+				
+				bibliotecaDb.setGeolocalizzazione(coordinate);
+			}
 		}
 
 		//TIPOLOGIA AMMINISTRATIVA E FUNZIONALE
@@ -1083,7 +1102,7 @@ public class ImporterImpl implements Importer {
 				deweyLibero.setDescrizione(descrizione);
 				deweyLibero.setId(id);
 				biblioDao.saveChild(deweyLibero);
-				log.debug("Inserito nuova SPECIALIZZAZIONE cdd:" + cdd + " descrizione: " + descrizione);
+				log.debug("Inserito nuova SPECIALIZZAZIONE cdd: " + cdd + " descrizione: " + descrizione);
 				
 			} else {
 				String msg = "Dewey non trovato in patrimonio specializzazione: " + descrizione;
@@ -1098,20 +1117,39 @@ public class ImporterImpl implements Importer {
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getInternet() != null) {
 			Internet internet = biblioteca.getServizi().getInternet();
 
-			String modo = internet.getModo();					
-			if ("libero".equalsIgnoreCase(modo)) {
-				bibliotecaDb.setAccessoInternetProxy(false);
+			if (internet.getATempo() != null) {
+				if (internet.getATempo() == SiNoType.S) {
+					bibliotecaDb.setAccessoInternetTempo(true);
+					
+				} else if (internet.getATempo() == SiNoType.N) {
+					bibliotecaDb.setAccessoInternetTempo(false);
+				}
+				
+				log.debug("Modificata modalità di accesso Internet a tempo in: " + bibliotecaDb.getAccessoInternetTempo());
 			}
-			if ("a pagamento".equalsIgnoreCase(modo)) {
-				bibliotecaDb.setAccessoInternetPagamento(true);
+			
+			if (internet.getAPagamento() != null) {
+				if (internet.getAPagamento() == SiNoType.S) {
+					bibliotecaDb.setAccessoInternetPagamento(true);
+					
+				} else if (internet.getAPagamento() == SiNoType.N) {
+					bibliotecaDb.setAccessoInternetPagamento(false);
+				}
+				
+				log.debug("Modificata modalità di accesso Internet a pagamento in: " + bibliotecaDb.getAccessoInternetPagamento());
 			}
-			if ("a tempo".equalsIgnoreCase(modo)) {
-				bibliotecaDb.setAccessoInternetTempo(true);
+			
+			if (internet.getConProxy() != null) {
+				if (internet.getConProxy() == SiNoType.S) {
+					bibliotecaDb.setAccessoInternetProxy(true);
+					
+				} else if (internet.getConProxy() == SiNoType.N) {
+					bibliotecaDb.setAccessoInternetProxy(false);
+				}
+				
+				log.debug("Modificata modalità di accesso Internet con proxy in: " + bibliotecaDb.getAccessoInternetProxy());
 			}
-			if ("limitato".equalsIgnoreCase(modo)) {
-				bibliotecaDb.setAccessoInternetProxy(true);
-			}
-			log.debug("Modificata modalità di accesso Internet in: " + modo);
+			
 		}
 
 		boolean esterno = false;
@@ -1391,7 +1429,7 @@ public class ImporterImpl implements Importer {
 					
 					if (f.getCatSpecFormeVolume() != null) {
 						cataloghiSpecialiMateriale.setVolume(true);
-						if ((f.getCatSpecFormeVolume().getPercentuale()!=null) && (f.getCatSpecFormeVolume().getPercentuale().trim().length() > 0)) {
+						if ((f.getCatSpecFormeVolume().getPercentuale() != null) && (f.getCatSpecFormeVolume().getPercentuale().trim().length() > 0)) {
 							int percentualeVolume = Integer.parseInt(f.getCatSpecFormeVolume().getPercentuale());
 							cataloghiSpecialiMateriale.setPercentualeVolume(percentualeVolume);
 							
@@ -1399,7 +1437,7 @@ public class ImporterImpl implements Importer {
 							cataloghiSpecialiMateriale.setPercentualeVolume(0);
 						}
 						
-						if ((f.getCatSpecFormeVolume().getCitazioneBibliografica()!=null) && (f.getCatSpecFormeVolume().getCitazioneBibliografica().trim().length() > 0)) {
+						if ((f.getCatSpecFormeVolume().getCitazioneBibliografica() != null) && (f.getCatSpecFormeVolume().getCitazioneBibliografica().trim().length() > 0)) {
 							String volumeDescr = f.getCatSpecFormeVolume().getCitazioneBibliografica();
 							cataloghiSpecialiMateriale.setDescrizioneVolume(volumeDescr);
 						}
@@ -2021,7 +2059,7 @@ public class ImporterImpl implements Importer {
 	}
 
 	/**
-	 * Crea la nuova biboioteca sul database con i parametri passati per argomento
+	 * Crea la nuova biblioteca sul database con i parametri passati per argomento
 	 * verificando che vengano valorizzati i valori obbligatori sul database
 	 * 
 	 * @param biblioteca
@@ -2033,7 +2071,6 @@ public class ImporterImpl implements Importer {
 	 */
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	private Integer createBibliotecaDefault(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, String isilSt, String isilNr, String isilPr, ReportImport reportImport) {
-		// TODO
 		Biblioteca nuovaBiblio = new Biblioteca();
 
 		//CODICI

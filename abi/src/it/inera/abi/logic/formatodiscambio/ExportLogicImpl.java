@@ -103,7 +103,7 @@ public class ExportLogicImpl implements ExportLogic {
 			while (line != null) {
 				String[] biblioInfo = line.split("\\|\\|\\|"); //idbiblio|||codiccu|||denominazione
 				InfoBiblioBean infoBiblioBean = new InfoBiblioBean();
-				infoBiblioBean.codiceIccu = biblioInfo[1];
+				infoBiblioBean.codiceIsil = biblioInfo[1];
 				infoBiblioBean.nome = biblioInfo[2];
 				exportBean.biblioteche.add(infoBiblioBean);
 				biblioV.add(biblioInfo[0]);

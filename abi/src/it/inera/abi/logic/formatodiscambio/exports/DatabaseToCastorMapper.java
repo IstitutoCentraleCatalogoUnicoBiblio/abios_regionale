@@ -20,6 +20,7 @@ import it.inera.abi.logic.formatodiscambio.castor.CatalogoSpeciale;
 import it.inera.abi.logic.formatodiscambio.castor.CatalogoTopografico;
 import it.inera.abi.logic.formatodiscambio.castor.Chiusura;
 import it.inera.abi.logic.formatodiscambio.castor.CondizioniAccesso;
+import it.inera.abi.logic.formatodiscambio.castor.Coordinate;
 import it.inera.abi.logic.formatodiscambio.castor.Copertura;
 import it.inera.abi.logic.formatodiscambio.castor.DataCensimento;
 import it.inera.abi.logic.formatodiscambio.castor.DataCostruzione;
@@ -59,6 +60,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Specializzazione;
 import it.inera.abi.logic.formatodiscambio.castor.Strutture;
 import it.inera.abi.logic.formatodiscambio.castor.Superficie;
 import it.inera.abi.logic.formatodiscambio.castor.Telefonico;
+import it.inera.abi.logic.formatodiscambio.castor.TipoPrestito;
 import it.inera.abi.logic.formatodiscambio.castor.Ufficiale;
 import it.inera.abi.logic.formatodiscambio.castor.Uscite;
 import it.inera.abi.logic.formatodiscambio.castor.Utenti;
@@ -321,7 +323,7 @@ public class DatabaseToCastorMapper {
 				codici.setCei(codice.getValore());
 			}
 		}
-		codici.setIccu(Utility.createIccuCode(bibliotecaDb.getIsilStato(), bibliotecaDb.getIsilProvincia(), String.valueOf(bibliotecaDb.getIsilNumero())));
+		codici.setIsil(Utility.createIccuCode(bibliotecaDb.getIsilStato(), bibliotecaDb.getIsilProvincia(), String.valueOf(bibliotecaDb.getIsilNumero())));
 		//if (codicis != null && codicis.size() > 0){
 			anagrafica.setCodici(codici);
 			log.debug("Settati codici nella parte Anagrafica");
@@ -541,6 +543,19 @@ public class DatabaseToCastorMapper {
 		if((bibliotecaDb.getIndirizzo() != null)&&(bibliotecaDb.getIndirizzo().trim().length()>0))
 			indirizzo.setVia(bibliotecaDb.getIndirizzo().trim());
 
+		if (bibliotecaDb.getGeolocalizzazione() != null) {
+			if (bibliotecaDb.getGeolocalizzazione().getLatitudine() != null && 
+					bibliotecaDb.getGeolocalizzazione().getLatitudine().doubleValue() != 0.0 &&
+					bibliotecaDb.getGeolocalizzazione().getLongitudine() != null && 
+					bibliotecaDb.getGeolocalizzazione().getLongitudine().doubleValue() != 0.0) {
+				Coordinate coordinate = new Coordinate();
+				coordinate.setLatitudine(bibliotecaDb.getGeolocalizzazione().getLatitudine().doubleValue());
+				coordinate.setLongitudine(bibliotecaDb.getGeolocalizzazione().getLongitudine().doubleValue());
+				
+				indirizzo.setCoordinate(coordinate);
+			}
+		}
+		
 		anagrafica.setIndirizzo(indirizzo);
 		log.debug("Settato indirizzo nella parte Anagrafica");
 	}
@@ -1431,19 +1446,35 @@ public class DatabaseToCastorMapper {
 
 	private static void Servizi_setInternet(Servizi servizi,  Biblioteca bibliotecaDb) {
 		Internet internet = new Internet();
-		if (BooleanUtils.isTrue(bibliotecaDb.getAccessoInternetTempo())) { 
-			internet.setModo("a tempo");
+		
+		if (bibliotecaDb.getAccessoInternetTempo() != null) {
+			if (bibliotecaDb.getAccessoInternetTempo().booleanValue()) {
+				internet.setATempo(SiNoType.S);
+				
+			} else {
+				internet.setATempo(SiNoType.N);
+			}
 		}
-		if (BooleanUtils.isTrue(bibliotecaDb.getAccessoInternetPagamento())) { 
-			internet.setModo("a pagamento");
+		
+		if (bibliotecaDb.getAccessoInternetPagamento() != null) {
+			if (bibliotecaDb.getAccessoInternetPagamento().booleanValue()) {
+				internet.setAPagamento(SiNoType.S);
+				
+			} else {
+				internet.setAPagamento(SiNoType.N);
+			}
 		}
-		if (BooleanUtils.isTrue(bibliotecaDb.getAccessoInternetProxy())) { 
-			internet.setModo("limitato");
-		} else  if (BooleanUtils.isFalse(bibliotecaDb.getAccessoInternetProxy())) { 
-			internet.setModo("libero");
+		
+		if (bibliotecaDb.getAccessoInternetProxy() != null) {
+			if (bibliotecaDb.getAccessoInternetProxy().booleanValue()) {
+				internet.setConProxy(SiNoType.S);
+				
+			} else {
+				internet.setConProxy(SiNoType.N);
+			}
 		}
-//		if (internet.getModo() != null) 
-			servizi.setInternet(internet);		
+
+		servizi.setInternet(internet);		
 	}
 
 	private static void Servizi_setPrestito(Servizi servizi, Biblioteca bibliotecaDb) {
@@ -1453,29 +1484,53 @@ public class DatabaseToCastorMapper {
 		List<PrestitoInterbibliotecario> prestIntH = bibliotecaDb.getPrestitoInterbibliotecarios();
 		if (prestIntH != null) {
 			//PRESTITI INTERBIBLIOTECARI
-			if (prestIntH.size()>0) {
+			if (prestIntH.size() > 0) {
 				Interbibliotecario interbibliotecario = new Interbibliotecario();
 				//interbibliotecario.setInternazionale(SiNoType.N);
 				//interbibliotecario.setNazionale(SiNoType.N);
 				//interbibliotecario.setPrestitoInterbibliotecarioAutomatizzato(SiNoType.N);
 				BigDecimal b = new BigDecimal("0");
 				interbibliotecario.setTotalePrestiti(b);
-				//ArrayList sistILL = new ArrayList();
-				ArrayList<RuoloType> ruoli = new ArrayList<RuoloType>();
-				for (Iterator<PrestitoInterbibliotecario>  i = prestIntH.iterator(); i.hasNext();) {
-					PrestitoInterbibliotecario pib = i.next();
+				List<TipoPrestito> tipi = new ArrayList<TipoPrestito>();
+				
+				for (PrestitoInterbibliotecario pib : prestIntH) {
 					PrestitoInterbibliotecarioModo prestitoInterbibliotecarioModo = pib.getPrestitoInterbibliotecarioModo();
 					//Procedure automatizzate
-					if (BooleanUtils.isTrue(bibliotecaDb.getProcedureIllAutomatizzate()))
-						//interbibliotecario.setPrestitoInterbibliotecarioAutomatizzato(SiNoType.S);
-						//MODO (POS oppure DSC)
-						if("P".equalsIgnoreCase(prestitoInterbibliotecarioModo.getDescrizione()))
-							ruoli.add(RuoloType.POS);
-						else
-							if("D".equalsIgnoreCase(prestitoInterbibliotecarioModo.getDescrizione()))
-								ruoli.add(RuoloType.DSC);
-					//Internazionale
+					if (BooleanUtils.isTrue(bibliotecaDb.getProcedureIllAutomatizzate())) {
+						TipoPrestito tipo = new TipoPrestito();
+						
+						if (pib.getInternazionale() != null) {
+							if (pib.getInternazionale().booleanValue()) {// internazionale is true
+								tipo.setInternazionale(SiNoType.S);
+								
+							} else {// internazionale is false
+								tipo.setInternazionale(SiNoType.N);
+							}
+						}
 
+						if (pib.getNazionale() != null) {
+							if (pib.getNazionale().booleanValue()) {// nazionale is true
+								tipo.setNazionale(SiNoType.S);
+								
+							} else {// nazionale is false
+								tipo.setNazionale(SiNoType.N);
+							}
+						}
+						
+						// Ruolo
+						if (prestitoInterbibliotecarioModo != null) {
+							if (prestitoInterbibliotecarioModo.getIdPrestitoInterbibliotecarioModo().intValue() == 1) {// POS
+								tipo.setRuolo(RuoloType.POS);
+							}							
+							if (prestitoInterbibliotecarioModo.getIdPrestitoInterbibliotecarioModo().intValue() == 2) {// DSC
+								tipo.setRuolo(RuoloType.DSC);
+							}
+						}
+						
+						tipi.add(tipo);
+					}
+					
+					//Internazionale
 					/*if("S".equalsIgnoreCase(prestInt.getInternazionale()))
 						;//interbibliotecario.setInternazionale(SiNoType.S);
 					//Nazionale
@@ -1487,11 +1542,12 @@ public class DatabaseToCastorMapper {
 						interbibliotecario.setTotalePrestiti(new BigDecimal(bibliotecaDb.getNPrestitiInterbibliotecariAnnuo()));
 					} 
 				}
-				if (ruoli.size() > 0) {
-					RuoloType[] ruoloArray = new RuoloType[ruoli.size()];
-					ruoloArray = (RuoloType[])ruoli.toArray(ruoloArray);
-					//interbibliotecario.setRuolo(ruoloArray);					
+				if (tipi.size() > 0) {
+					TipoPrestito[] tipiArray = new TipoPrestito[tipi.size()];
+					tipiArray = (TipoPrestito[]) tipi.toArray(tipiArray); 
+					interbibliotecario.setTipoPrestito(tipiArray);
 					log.debug("Settati i ruoli del prestito interbibliotecario");
+					
 				} 
 				else {
 					log.debug("Non sono presenti ruoli per i prestiti interbibliotecari");

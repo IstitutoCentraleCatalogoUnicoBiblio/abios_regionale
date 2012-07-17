@@ -7,7 +7,6 @@ import it.inera.abi.gxt.client.mvc.model.FondiSpecialiModel;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ContenitoreFondiSpecialiPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ContenitoreSpecializzazionePanel;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaDigitalizzazioneFondiPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaSpecializzazioniPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.TestoFondiSpecialiPanel;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
@@ -42,7 +41,7 @@ public class SpecializzazioniFondiSpecialiPanel extends  ContentPanelForTabItem 
 	private List<TestoFondiSpecialiPanel> listaFondiSpecialiPanels;
 
 	private ListaSpecializzazioniPanel listaSpecializzazioniPanel ;
-	private ListaDigitalizzazioneFondiPanel listaDigitalizzazioneFondiPanel;
+//	private ListaDigitalizzazioneFondiPanel listaDigitalizzazioneFondiPanel;
 
 //	private ContenitoreSpecializzazionePanel creazioneSpecializzazioneFormPanel;
 
@@ -167,9 +166,9 @@ public class SpecializzazioniFondiSpecialiPanel extends  ContentPanelForTabItem 
 		Utils.setFieldSetProperties(digitalizzazioneFondiSet, "Digitalizzazione fondi");
 
 		/*DIGITALIZZAZIONE FONDI*/
-		listaDigitalizzazioneFondiPanel=new ListaDigitalizzazioneFondiPanel();
-		listaDigitalizzazioneFondiPanel.setGrid();
-		digitalizzazioneFondiSet.add(listaDigitalizzazioneFondiPanel);
+//		listaDigitalizzazioneFondiPanel=new ListaDigitalizzazioneFondiPanel();
+//		listaDigitalizzazioneFondiPanel.setGrid();
+//		digitalizzazioneFondiSet.add(listaDigitalizzazioneFondiPanel);
 		/*FINE--DIGITALIZZAZIONE FONDI*/
 
 		fondiSpeciali.add(digitalizzazioneFondiSet);
@@ -184,8 +183,8 @@ public class SpecializzazioniFondiSpecialiPanel extends  ContentPanelForTabItem 
 		listaSpecializzazioniPanel.setIdNuovaSpecializzazionePanel();
 		listaSpecializzazioniPanel.getLoader().load();
 
-		listaDigitalizzazioneFondiPanel.setIdBiblioteca(id_biblio);
-		listaDigitalizzazioneFondiPanel.getLoader().load();
+//		listaDigitalizzazioneFondiPanel.setIdBiblioteca(id_biblio);
+//		listaDigitalizzazioneFondiPanel.getLoader().load();
 
 		if(UIWorkflow.isReadOnly()==false){
 			addSpecializzazioneButton.show();

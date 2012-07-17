@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AnnoSecoloTypeDescriptor.java,v 1.1 2012/06/22 13:54:51 m.bartolozzi Exp $
+ * $Id: AnnoSecoloTypeDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.AnnoSecoloType;
 /**
  * Class AnnoSecoloTypeDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:51 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class AnnoSecoloTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 

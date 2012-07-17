@@ -138,7 +138,7 @@ public class CheckImportFile extends Thread {
 		
 		for (int i = 0; i < biblioteche.size(); i++) {
 			InfoBiblioBean infoBiblioBean = biblioteche.get(i);
-			String codiceIccu = infoBiblioBean.codiceIccu;
+			String codiceIccu = infoBiblioBean.codiceIsil;
 			stringBuffer.append("\t" + codiceIccu + "\n");
 			
 			String nome = infoBiblioBean.nome;
@@ -218,13 +218,13 @@ public class CheckImportFile extends Thread {
 			InfoBiblioBean infoBiblioBean = new InfoBiblioBean();
 			biblioteca = biblioteche.getBiblioteca(i);
 			// copia delle info della biblioteca
-			infoBiblioBean.codiceIccu = biblioteca.getAnagrafica().getCodici().getIccu();
+			infoBiblioBean.codiceIsil = biblioteca.getAnagrafica().getCodici().getIsil();
 			infoBiblioBean.nome = biblioteca.getAnagrafica().getNome().getAttuale();
 
 			// controllo codice ABI
 			String codiceAbi = null;
 			if (biblioteca != null && biblioteca.getAnagrafica() != null && biblioteca.getAnagrafica().getCodici() != null) 
-				codiceAbi = biblioteca.getAnagrafica().getCodici().getIccu();
+				codiceAbi = biblioteca.getAnagrafica().getCodici().getIsil();
 			log.debug("codiceAbi" + codiceAbi);
 			if (codiceAbi != null && !"".equalsIgnoreCase(codiceAbi)) {
 				// controllo se esiste questo codice sulla banca dati, se non esiste ritorno errore

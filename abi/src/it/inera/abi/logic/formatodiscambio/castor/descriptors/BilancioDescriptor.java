@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: BilancioDescriptor.java,v 1.1 2012/06/22 13:54:49 m.bartolozzi Exp $
+ * $Id: BilancioDescriptor.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Bilancio;
 /**
  * Class BilancioDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:49 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 public class BilancioDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 

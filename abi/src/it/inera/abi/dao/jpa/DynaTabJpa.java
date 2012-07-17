@@ -26,6 +26,7 @@ import it.inera.abi.persistence.PrestitoLocaleMaterialeEscluso;
 import it.inera.abi.persistence.PrestitoLocaleUtentiAmmessi;
 import it.inera.abi.persistence.Provincia;
 import it.inera.abi.persistence.Regione;
+import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import it.inera.abi.persistence.Stato;
 
 import java.util.ArrayList;
@@ -1489,5 +1490,105 @@ public class DynaTabJpa implements DynaTabDao {
 	@Transactional
 	public FondiAntichiConsistenza getFondiAntichiById(int idFondi) {
 		return em.find(FondiAntichiConsistenza.class, idFondi);
+	}
+	
+	@Override
+	@Transactional
+	public void addSistemiPrestitoInterbibliotecarioTabelleDinamiche(Integer idSistemiPrestitoInterbibliotecario, String descrizione, String url, boolean modifica) throws DuplicateEntryException {
+		// Controllo se sul db esiste un sistema di prestito interbibliotecario con la stessa descrizione e url
+		Number countResult = existSistemiPrestitoInterbibliotecario(idSistemiPrestitoInterbibliotecario, descrizione, url, modifica);
+		
+		if (countResult.intValue() > 0) {
+			// Se esiste già ritorno eccezione con un opportuno messaggio
+			throw new DuplicateEntryException(DUPLICATE_ENTRY_ERROR_MESSAGE);
+		}
+
+		if (modifica) {
+			SistemiPrestitoInterbibliotecario toUpdate = em.find(SistemiPrestitoInterbibliotecario.class, idSistemiPrestitoInterbibliotecario);			
+			toUpdate.setDescrizione(descrizione);
+			toUpdate.setUrl(url);
+
+			em.merge(toUpdate);
+			
+		} else {
+			SistemiPrestitoInterbibliotecario toSave = new SistemiPrestitoInterbibliotecario();
+			toSave.setDescrizione(descrizione);
+			toSave.setUrl(url);
+			
+			em.persist(toSave);	
+		}
+	}
+
+	/**
+	 * Metodo per il controllo dell'esistenza di un sistema di prestito interbibliotecario avente stessa descrizione ed url di quello che si vorrebbe creare
+	 * @param descrizione
+	 * @param url
+	 * @return
+	 */
+	@Transactional
+	private Number existSistemiPrestitoInterbibliotecario(Integer idSistemiPrestitoInterbibliotecario, String descrizione, String url, boolean modifica) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT COUNT(*) ");
+		sb.append("FROM SistemiPrestitoInterbibliotecario s ");
+		sb.append("WHERE ");
+
+		if (modifica) {
+			sb.append("s.idSistemiPrestitoInterbibliotecario != :idSistemiPrestitoInterbibliotecario AND ");
+
+		} 
+		
+		if(descrizione != null && url != null) {
+			sb.append("( s.descrizione = :descrizione OR s.url = :url ) ");
+			
+		} else {
+			if(descrizione != null && url == null) {
+				sb.append(" s.descrizione = :descrizione ");
+				
+			} else if (url != null && descrizione == null) {
+				sb.append(" s.url = :url ");		
+			}
+		}
+		
+		Query q = em.createQuery(sb.toString());
+		if (modifica) {
+			q.setParameter("idSistemiPrestitoInterbibliotecario", idSistemiPrestitoInterbibliotecario);
+		}
+
+		if(descrizione != null) {
+			q.setParameter("descrizione", descrizione);
+		}
+
+		if (url != null) {
+			q.setParameter("url", url);
+		}
+
+		Number countResult = (Number) q.getSingleResult();
+		return countResult;
+	}
+
+	@Override
+	@Transactional
+	public void removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(int idr_removeRecord) throws ConstraintKeyViolationException {
+		SistemiPrestitoInterbibliotecario toRemove = em.find(SistemiPrestitoInterbibliotecario.class, idr_removeRecord);
+
+		// Rimuovo l'oggetto SistemiPrestitoInterbibliotecario
+		em.remove(toRemove);
+	}
+	
+	@Override
+	@Transactional
+	public List<SistemiPrestitoInterbibliotecario> getSistemiPrestitoInterbibliotecario() {
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("FROM SistemiPrestitoInterbibliotecario s");
+		Query q = em.createQuery(sb.toString());
+		
+		List<SistemiPrestitoInterbibliotecario> listaSistemi = q.getResultList();
+		for (int i = 0; i < listaSistemi.size(); i++) {
+
+			listaSistemi.get(i).getDescrizione();
+
+		}
+		return listaSistemi;
 	}
 }

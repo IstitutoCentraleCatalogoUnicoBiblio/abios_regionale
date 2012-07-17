@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: CodiciDescriptor.java,v 1.1 2012/06/22 13:54:50 m.bartolozzi Exp $
+ * $Id: CodiciDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Codici;
 /**
  * Class CodiciDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:50 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
  */
 public class CodiciDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -66,8 +66,8 @@ public class CodiciDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
 
         //-- initialize element descriptors
 
-        //-- _iccu
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_iccu", "iccu", org.exolab.castor.xml.NodeType.Element);
+        //-- _isil
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_isil", "isil", org.exolab.castor.xml.NodeType.Element);
         desc.setImmutable(true);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
@@ -75,7 +75,7 @@ public class CodiciDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
                 throws IllegalStateException
             {
                 Codici target = (Codici) object;
-                return target.getIccu();
+                return target.getIsil();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -83,7 +83,7 @@ public class CodiciDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
             {
                 try {
                     Codici target = (Codici) object;
-                    target.setIccu( (java.lang.String) value);
+                    target.setIsil( (java.lang.String) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -101,7 +101,7 @@ public class CodiciDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _iccu
+        //-- validation code for: _isil
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
         fieldValidator.setMinOccurs(1);
         { //-- local scope

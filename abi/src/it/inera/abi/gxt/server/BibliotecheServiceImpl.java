@@ -48,7 +48,6 @@ import it.inera.abi.persistence.Dewey;
 import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.Ente;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
-import it.inera.abi.persistence.FondiDigitali;
 import it.inera.abi.persistence.FondiSpeciali;
 import it.inera.abi.persistence.FondiSpecialiCatalogazioneInventario;
 import it.inera.abi.persistence.NuovaBiblioteca;
@@ -1585,40 +1584,40 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 
 	}
 
-	@Override
-	public List<VoceUnicaModel> getDigitalizzazioneFondiByIdBiblio(
-			int id_biblioteca) {
-		List<VoceUnicaModel> fondiDigitaliModel = new ArrayList<VoceUnicaModel>();
-
-		List<FondiDigitali> fondiDigitalis= abiBiblioLogic.getDigitalizzazioneFondiByIdBiblio(id_biblioteca);
-
-		Iterator<FondiDigitali> it = fondiDigitalis.iterator();
-		while (it.hasNext()) {
-			//Iterazione anti-lazy
-			FondiDigitali fondiDigitali = (FondiDigitali) it.next();	
-
-			VoceUnicaModel model = new VoceUnicaModel();
-			model.setIdRecord(fondiDigitali.getIdFondiDigitali());
-			model.setEntry(fondiDigitali.getDescrizione());
-
-			fondiDigitaliModel.add(model);
-		}
-		return fondiDigitaliModel;
-	}
-
-	@Override
-	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
-			String derscrizione, boolean modifica) {
-
-		abiBiblioLogic.addDigitalizzazioneFondo( id_biblioteca,  id_newRecord, derscrizione,  modifica);
-	}
-
-	@Override
-	public void removeFondiDigitali(int id_rimuoviFondo) {
-		abiBiblioLogic.removeFondiDigitali(id_rimuoviFondo);
-
-
-	}
+//	@Override
+//	public List<VoceUnicaModel> getDigitalizzazioneFondiByIdBiblio(
+//			int id_biblioteca) {
+//		List<VoceUnicaModel> fondiDigitaliModel = new ArrayList<VoceUnicaModel>();
+//
+//		List<FondiDigitali> fondiDigitalis= abiBiblioLogic.getDigitalizzazioneFondiByIdBiblio(id_biblioteca);
+//
+//		Iterator<FondiDigitali> it = fondiDigitalis.iterator();
+//		while (it.hasNext()) {
+//			//Iterazione anti-lazy
+//			FondiDigitali fondiDigitali = (FondiDigitali) it.next();	
+//
+//			VoceUnicaModel model = new VoceUnicaModel();
+//			model.setIdRecord(fondiDigitali.getIdFondiDigitali());
+//			model.setEntry(fondiDigitali.getDescrizione());
+//
+//			fondiDigitaliModel.add(model);
+//		}
+//		return fondiDigitaliModel;
+//	}
+//
+//	@Override
+//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
+//			String derscrizione, boolean modifica) {
+//
+//		abiBiblioLogic.addDigitalizzazioneFondo( id_biblioteca,  id_newRecord, derscrizione,  modifica);
+//	}
+//
+//	@Override
+//	public void removeFondiDigitali(int id_rimuoviFondo) {
+//		abiBiblioLogic.removeFondiDigitali(id_rimuoviFondo);
+//
+//
+//	}
 
 	@Override
 	public List<VoceUnicaModel> getEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(

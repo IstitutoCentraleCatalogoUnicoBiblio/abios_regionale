@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: DocumentiDescriptor.java,v 1.1 2012/06/22 13:54:50 m.bartolozzi Exp $
+ * $Id: DocumentiDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Documenti;
 /**
  * Class DocumentiDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:50 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
  */
 public class DocumentiDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 

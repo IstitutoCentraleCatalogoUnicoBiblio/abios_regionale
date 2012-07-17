@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: MicroformeDescriptor.java,v 1.1 2012/06/22 13:54:50 m.bartolozzi Exp $
+ * $Id: MicroformeDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Microforme;
 /**
  * Class MicroformeDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:50 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class MicroformeDescriptor extends it.inera.abi.logic.formatodiscambio.castor.descriptors.FormaTypeDescriptor {
 

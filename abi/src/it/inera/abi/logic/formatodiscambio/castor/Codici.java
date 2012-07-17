@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Codici.java,v 1.1 2012/06/22 13:55:04 m.bartolozzi Exp $
+ * $Id: Codici.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -24,7 +24,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  solo del tipo "AA".
  *  
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:55:04 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
  */
 @SuppressWarnings("serial")
 public class Codici implements java.io.Serializable {
@@ -46,11 +46,11 @@ public class Codici implements java.io.Serializable {
      *  provincia, altrimenti non è
      *  possibile assegnare la parte
      *  iniziale del codice.
-     *  Nota r.eschini: tolte tutte le restirction e messo a
+     *  Nota r.eschini: tolte tutte le restriction e messo a
      * required il codice iccu
      *  
      */
-    private java.lang.String _iccu;
+    private java.lang.String _isil;
 
     /**
      * Field _acnp.
@@ -122,7 +122,7 @@ public class Codici implements java.io.Serializable {
     }
 
     /**
-     * Returns the value of field 'iccu'. The field 'iccu' has the
+     * Returns the value of field 'isil'. The field 'isil' has the
      * following description: Il codice "iccu" può essere omesso
      *  nel caso la biblioteca in esame non
      *  sia mai stata censita dall'ICCU.
@@ -134,15 +134,15 @@ public class Codici implements java.io.Serializable {
      *  provincia, altrimenti non è
      *  possibile assegnare la parte
      *  iniziale del codice.
-     *  Nota r.eschini: tolte tutte le restirction e messo a
+     *  Nota r.eschini: tolte tutte le restriction e messo a
      * required il codice iccu
      *  
      * 
-     * @return the value of field 'Iccu'.
+     * @return the value of field 'Isil'.
      */
-    public java.lang.String getIccu(
+    public java.lang.String getIsil(
     ) {
-        return this._iccu;
+        return this._isil;
     }
 
     /**
@@ -243,7 +243,7 @@ public class Codici implements java.io.Serializable {
     }
 
     /**
-     * Sets the value of field 'iccu'. The field 'iccu' has the
+     * Sets the value of field 'isil'. The field 'isil' has the
      * following description: Il codice "iccu" può essere omesso
      *  nel caso la biblioteca in esame non
      *  sia mai stata censita dall'ICCU.
@@ -255,15 +255,15 @@ public class Codici implements java.io.Serializable {
      *  provincia, altrimenti non è
      *  possibile assegnare la parte
      *  iniziale del codice.
-     *  Nota r.eschini: tolte tutte le restirction e messo a
+     *  Nota r.eschini: tolte tutte le restriction e messo a
      * required il codice iccu
      *  
      * 
-     * @param iccu the value of field 'iccu'.
+     * @param isil the value of field 'isil'.
      */
-    public void setIccu(
-            final java.lang.String iccu) {
-        this._iccu = iccu;
+    public void setIsil(
+            final java.lang.String isil) {
+        this._isil = isil;
     }
 
     /**

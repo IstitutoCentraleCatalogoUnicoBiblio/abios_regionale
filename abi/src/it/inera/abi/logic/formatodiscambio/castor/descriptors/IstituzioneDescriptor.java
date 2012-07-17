@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: IstituzioneDescriptor.java,v 1.1 2012/06/22 13:54:50 m.bartolozzi Exp $
+ * $Id: IstituzioneDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Istituzione;
 /**
  * Class IstituzioneDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:50 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class IstituzioneDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -57,7 +57,7 @@ public class IstituzioneDescriptor extends org.exolab.castor.xml.util.XMLClassDe
 
     public IstituzioneDescriptor() {
         super();
-        _xmlName = "Istituzione";
+        _xmlName = "istituzione";
         _elementDefinition = true;
 
         //-- set grouping compositor
@@ -70,7 +70,7 @@ public class IstituzioneDescriptor extends org.exolab.castor.xml.util.XMLClassDe
         //-- initialize element descriptors
 
         //-- _dataIstituzione
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.DataIstituzione.class, "_dataIstituzione", "dataIstituzione", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.DataIstituzione.class, "_dataIstituzione", "data-istituzione", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -108,7 +108,7 @@ public class IstituzioneDescriptor extends org.exolab.castor.xml.util.XMLClassDe
         }
         desc.setValidator(fieldValidator);
         //-- _dataFondazione
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.DataFondazione.class, "_dataFondazione", "dataFondazione", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.DataFondazione.class, "_dataFondazione", "data-fondazione", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 

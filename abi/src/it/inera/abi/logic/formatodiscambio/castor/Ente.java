@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Ente.java,v 1.1 2012/06/22 13:55:03 m.bartolozzi Exp $
+ * $Id: Ente.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -20,7 +20,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  La funzione-obiettivo corrisponde al COFOG.
  *  
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:55:03 $
+ * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
  */
 @SuppressWarnings("serial")
 public class Ente implements java.io.Serializable {

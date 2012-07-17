@@ -20,7 +20,6 @@ import it.inera.abi.persistence.DestinazioniSociali;
 import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.Ente;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
-import it.inera.abi.persistence.FondiDigitali;
 import it.inera.abi.persistence.FondiSpeciali;
 import it.inera.abi.persistence.OrarioChiusure;
 import it.inera.abi.persistence.OrarioUfficiali;
@@ -220,12 +219,12 @@ public interface AbiBiblioLogic {
 
 	public void removeFondiSpeciali(int id_biblioteca, int id_removeRecord);
 
-	public  List<FondiDigitali> getDigitalizzazioneFondiByIdBiblio(int id_biblioteca);
+//	public  List<FondiDigitali> getDigitalizzazioneFondiByIdBiblio(int id_biblioteca);
 
-	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
-			String derscrizione, boolean modifica);
-
-	public void removeFondiDigitali(int id_rimuoviFondo);
+//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
+//			String derscrizione, boolean modifica);
+//
+//	public void removeFondiDigitali(int id_rimuoviFondo);
 
 	public List<?> getListaVoci(int id_biblioteca, int idTabellaDinamica);
 

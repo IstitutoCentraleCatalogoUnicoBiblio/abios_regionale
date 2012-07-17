@@ -38,7 +38,6 @@ import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.Ente;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.FondiAntichiConsistenza;
-import it.inera.abi.persistence.FondiDigitali;
 import it.inera.abi.persistence.FondiSpeciali;
 import it.inera.abi.persistence.Geolocalizzazione;
 import it.inera.abi.persistence.NuovaBiblioteca;
@@ -864,25 +863,25 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Rimozione fondo speciale: id_record="+id_removeRecord+"- id_biblioteca="+id_biblioteca);
 	}
 
-	@Override
-	public List<FondiDigitali> getDigitalizzazioneFondiByIdBiblio(int id_biblioteca) {
-		return	biblioDao.getDigitalizzazioneFondiByIdBiblio(id_biblioteca);
+//	@Override
+//	public List<FondiDigitali> getDigitalizzazioneFondiByIdBiblio(int id_biblioteca) {
+//		return	biblioDao.getDigitalizzazioneFondiByIdBiblio(id_biblioteca);
+//
+//	}
 
-	}
-
-	@Override
-	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord, String derscrizione, boolean modifica) {
-		biblioDao.addDigitalizzazioneFondo(id_biblioteca,id_newRecord,derscrizione,modifica);
-
-		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica digitalizzazione fondo: "+(modifica?"id_record="+id_newRecord:"")+"- id_biblioteca="+id_biblioteca);
-	}
-
-	@Override
-	public void removeFondiDigitali(int id_rimuoviFondo) {
-		biblioDao.removeFondiDigitali(id_rimuoviFondo);
-
-		userActionLog.logActionCatalogazioneBiblioDefaultUser("Rimozione digitalizzazione fondo: id_record="+id_rimuoviFondo+"- id_biblioteca=N/A");
-	}
+//	@Override
+//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord, String derscrizione, boolean modifica) {
+//		biblioDao.addDigitalizzazioneFondo(id_biblioteca,id_newRecord,derscrizione,modifica);
+//
+//		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica digitalizzazione fondo: "+(modifica?"id_record="+id_newRecord:"")+"- id_biblioteca="+id_biblioteca);
+//	}
+//
+//	@Override
+//	public void removeFondiDigitali(int id_rimuoviFondo) {
+//		biblioDao.removeFondiDigitali(id_rimuoviFondo);
+//
+//		userActionLog.logActionCatalogazioneBiblioDefaultUser("Rimozione digitalizzazione fondo: id_record="+id_rimuoviFondo+"- id_biblioteca=N/A");
+//	}
 
 	@Override
 	public List<?> getListaVoci(int id_biblioteca, int idTabellaDinamica) {

@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: IndirizzoDescriptor.java,v 1.1 2012/06/22 13:54:50 m.bartolozzi Exp $
+ * $Id: IndirizzoDescriptor.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Indirizzo;
 /**
  * Class IndirizzoDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:50 $
+ * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
  */
 public class IndirizzoDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -368,6 +368,44 @@ public class IndirizzoDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
             fieldValidator.setValidator(typeValidator);
             typeValidator.addPattern("[a-zA-Z]{2}");
             typeValidator.setWhiteSpace("preserve");
+        }
+        desc.setValidator(fieldValidator);
+        //-- _coordinate
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Coordinate.class, "_coordinate", "coordinate", org.exolab.castor.xml.NodeType.Element);
+        handler = new org.exolab.castor.xml.XMLFieldHandler() {
+            @Override
+            public java.lang.Object getValue( java.lang.Object object ) 
+                throws IllegalStateException
+            {
+                Indirizzo target = (Indirizzo) object;
+                return target.getCoordinate();
+            }
+            @Override
+            public void setValue( java.lang.Object object, java.lang.Object value) 
+                throws IllegalStateException, IllegalArgumentException
+            {
+                try {
+                    Indirizzo target = (Indirizzo) object;
+                    target.setCoordinate( (it.inera.abi.logic.formatodiscambio.castor.Coordinate) value);
+                } catch (java.lang.Exception ex) {
+                    throw new IllegalStateException(ex.toString());
+                }
+            }
+            @Override
+            @SuppressWarnings("unused")
+            public java.lang.Object newInstance(java.lang.Object parent) {
+                return null;
+            }
+        };
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Coordinate");
+        desc.setHandler(handler);
+        desc.setMultivalued(false);
+        addFieldDescriptor(desc);
+        addSequenceElement(desc);
+
+        //-- validation code for: _coordinate
+        fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        { //-- local scope
         }
         desc.setValidator(fieldValidator);
     }

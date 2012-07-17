@@ -204,15 +204,15 @@ public interface BibliotecheServiceAsync {
 	void removeFondiSpeciali(int id_biblioteca, int id_removeRecord,
 			AsyncCallback<Void> asyncCallback);
 
-	void getDigitalizzazioneFondiByIdBiblio(int id_biblioteca,
-			AsyncCallback<List<VoceUnicaModel>> callback);
-
-	void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
-			String derscrizione, boolean modifica,
-			AsyncCallback<Void> asyncCallback);
-
-	void removeFondiDigitali(int id_rimuoviFondo,
-			AsyncCallback<Void> asyncCallback);
+//	void getDigitalizzazioneFondiByIdBiblio(int id_biblioteca,
+//			AsyncCallback<List<VoceUnicaModel>> callback);
+//
+//	void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
+//			String derscrizione, boolean modifica,
+//			AsyncCallback<Void> asyncCallback);
+//
+//	void removeFondiDigitali(int id_rimuoviFondo,
+//			AsyncCallback<Void> asyncCallback);
 
 	void getEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(
 			int id_biblioteca, int idTabellaDinamica,

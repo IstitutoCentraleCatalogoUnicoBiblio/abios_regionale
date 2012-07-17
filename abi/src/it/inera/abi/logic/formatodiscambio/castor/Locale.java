@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Locale.java,v 1.1 2012/06/22 13:55:04 m.bartolozzi Exp $
+ * $Id: Locale.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -26,7 +26,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  per gli utenti ammessi.
  *  
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:55:04 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
  */
 @SuppressWarnings("serial")
 public class Locale implements java.io.Serializable {

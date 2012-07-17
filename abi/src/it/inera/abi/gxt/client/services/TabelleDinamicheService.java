@@ -8,6 +8,7 @@ import it.inera.abi.gxt.client.mvc.model.PatrimoniCategorieTabelleDinamicheModel
 import it.inera.abi.gxt.client.mvc.model.PatrimonioSpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
 import it.inera.abi.gxt.client.mvc.model.RegioniModel;
+import it.inera.abi.gxt.client.mvc.model.SistemiPrestitoInterbibliotecarioModel;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.StatoModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
@@ -104,4 +105,10 @@ public interface TabelleDinamicheService extends RemoteService{
 
 	void removeComuneTabelleDinamiche(int idr_removeRecord) throws CostraintKeyViolationClientSideException;
 
-} 
+	void addSistemiPrestitoInterbibliotecarioTabelleDinamiche(SistemiPrestitoInterbibliotecarioModel modelToSave, boolean modifica) throws DuplicatedEntryClientSideException;
+	
+	void removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(int idr_removeRecord) throws CostraintKeyViolationClientSideException;
+	
+	public List<SistemiPrestitoInterbibliotecarioModel> getSistemiPrestitoInterbibliotecario();
+
+}

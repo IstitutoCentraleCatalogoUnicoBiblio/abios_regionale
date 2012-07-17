@@ -19,6 +19,7 @@ import it.inera.abi.persistence.PatrimonioSpecializzazione;
 import it.inera.abi.persistence.PatrimonioSpecializzazioneCategoria;
 import it.inera.abi.persistence.PrestitoLocaleMaterialeEscluso;
 import it.inera.abi.persistence.PrestitoLocaleUtentiAmmessi;
+import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 
 import java.util.List;
 
@@ -342,13 +343,23 @@ public class AbiTabelleDinamicheLogicImpl implements AbiTabelleDinamicheLogic {
 
 	}
 
+	@Override
+	public void addSistemiPrestitoInterbibliotecarioTabelleDinamiche(Integer idSistemiPrestitoInterbibliotecario, String descrizione, String url, boolean modifica) throws DuplicateEntryException {
+		dynaTabDao.addSistemiPrestitoInterbibliotecarioTabelleDinamiche(idSistemiPrestitoInterbibliotecario, descrizione, url, modifica);
+		userActionLog.logActionTabelleDinamicheDefaultUser("Salvataggio/modifica sistemi prestito interbibliotecario "+ (modifica ? ":id_record=" + idSistemiPrestitoInterbibliotecario : ""));
 
+	}
+	
+	@Override
+	public void removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(int idr_removeRecord) throws ConstraintKeyViolationException {
+		dynaTabDao.removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(idr_removeRecord);
+		userActionLog.logActionTabelleDinamicheDefaultUser("Rimozione sistemi prestito interbibliotecario: id_record=" + idr_removeRecord);
 
+	}
 
-
-
-
-
-
-
+	@Override
+	public List<SistemiPrestitoInterbibliotecario> getSistemiPrestitoInterbibliotecario() {
+		return dynaTabDao.getSistemiPrestitoInterbibliotecario();
+		
+	}
 }

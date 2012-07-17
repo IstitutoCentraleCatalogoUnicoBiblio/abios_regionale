@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Utenti.java,v 1.1 2012/06/22 13:55:04 m.bartolozzi Exp $
+ * $Id: Utenti.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -12,7 +12,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  biblioteca.
  *  
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:55:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public class Utenti implements java.io.Serializable {

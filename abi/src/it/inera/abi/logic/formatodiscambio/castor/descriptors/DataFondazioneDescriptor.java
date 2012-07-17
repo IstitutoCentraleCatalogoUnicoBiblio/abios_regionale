@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: DataFondazioneDescriptor.java,v 1.1 2012/06/22 13:54:51 m.bartolozzi Exp $
+ * $Id: DataFondazioneDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.DataFondazione;
 /**
  * Class DataFondazioneDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:51 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class DataFondazioneDescriptor extends it.inera.abi.logic.formatodiscambio.castor.descriptors.AnnoSecoloTypeDescriptor {
 
@@ -58,7 +58,7 @@ public class DataFondazioneDescriptor extends it.inera.abi.logic.formatodiscambi
     public DataFondazioneDescriptor() {
         super();
         setExtendsWithoutFlatten(new it.inera.abi.logic.formatodiscambio.castor.descriptors.AnnoSecoloTypeDescriptor());
-        _xmlName = "dataFondazione";
+        _xmlName = "data-fondazione";
         _elementDefinition = true;
     }
 

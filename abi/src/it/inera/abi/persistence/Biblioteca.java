@@ -491,9 +491,9 @@ public class Biblioteca implements Serializable {
 	@OneToMany(mappedBy="biblioteca")
 	private List<DeweyLibero> deweyLiberos;
 
-	//bi-directional many-to-one association to FondiDigitali
-	@OneToMany(mappedBy="biblioteca")
-	private List<FondiDigitali> fondiDigitalis;
+//	//bi-directional many-to-one association to FondiDigitali
+//	@OneToMany(mappedBy="biblioteca")
+//	private List<FondiDigitali> fondiDigitalis;
 
 	//uni-directional one-to-one association to Geolocalizzazione
 	@OneToOne
@@ -1371,13 +1371,13 @@ public class Biblioteca implements Serializable {
 		this.deweyLiberos = deweyLiberos;
 	}
 	
-	public List<FondiDigitali> getFondiDigitalis() {
-		return this.fondiDigitalis;
-	}
-
-	public void setFondiDigitalis(List<FondiDigitali> fondiDigitalis) {
-		this.fondiDigitalis = fondiDigitalis;
-	}
+//	public List<FondiDigitali> getFondiDigitalis() {
+//		return this.fondiDigitalis;
+//	}
+//
+//	public void setFondiDigitalis(List<FondiDigitali> fondiDigitalis) {
+//		this.fondiDigitalis = fondiDigitalis;
+//	}
 	
 	public Geolocalizzazione getGeolocalizzazione() {
 		return this.geolocalizzazione;

@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Indirizzo.java,v 1.1 2012/06/22 13:55:04 m.bartolozzi Exp $
+ * $Id: Indirizzo.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -30,8 +30,12 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  partire dal solo codice ISTAT del comune,
  *  attraverso proprie tabelle di raggruppamento.
  *  
+ *  Inserito nuovo elemento, opzionale, coordinate contenente
+ *  due attributi (se specificati, devono essere valorizzati
+ *  entrambi), latitudine e longitudine.
+ *  
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:55:04 $
+ * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
  */
 @SuppressWarnings("serial")
 public class Indirizzo implements java.io.Serializable {
@@ -76,6 +80,11 @@ public class Indirizzo implements java.io.Serializable {
      */
     private java.lang.String _stato;
 
+    /**
+     * Field _coordinate.
+     */
+    private it.inera.abi.logic.formatodiscambio.castor.Coordinate _coordinate;
+
 
       //----------------/
      //- Constructors -/
@@ -108,6 +117,16 @@ public class Indirizzo implements java.io.Serializable {
     public java.lang.String getComune(
     ) {
         return this._comune;
+    }
+
+    /**
+     * Returns the value of field 'coordinate'.
+     * 
+     * @return the value of field 'Coordinate'.
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.Coordinate getCoordinate(
+    ) {
+        return this._coordinate;
     }
 
     /**
@@ -225,6 +244,16 @@ public class Indirizzo implements java.io.Serializable {
     public void setComune(
             final java.lang.String comune) {
         this._comune = comune;
+    }
+
+    /**
+     * Sets the value of field 'coordinate'.
+     * 
+     * @param coordinate the value of field 'coordinate'.
+     */
+    public void setCoordinate(
+            final it.inera.abi.logic.formatodiscambio.castor.Coordinate coordinate) {
+        this._coordinate = coordinate;
     }
 
     /**

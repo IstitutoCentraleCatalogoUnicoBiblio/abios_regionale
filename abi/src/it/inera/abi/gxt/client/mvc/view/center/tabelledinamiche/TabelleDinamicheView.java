@@ -8,6 +8,7 @@ import it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.widget.ListaDewe
 import it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.widget.ListaPatrimonioGrandiVociTabelleDinamiche;
 import it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.widget.ListaPatrimonioPiccoleVociTabelleDinamiche;
 import it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.widget.ListaProvinceTabelleDinamiche;
+import it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.widget.ListaSistemiPrestitoInterbibliotecarioTabelleDinamiche;
 import it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.widget.ListaVoceSingolaTabelleDinamiche;
 
 import com.extjs.gxt.ui.client.Registry;
@@ -31,6 +32,7 @@ public class TabelleDinamicheView extends View {
 	private ListaPatrimonioPiccoleVociTabelleDinamiche listaPatrimonioPiccoleVoci;
 	private ListaCataloghiCollettiviTabelleDinamiche cataloghiCollettivi;
 	private ListaDeweyTabelleDinamiche listaDewey;
+	private ListaSistemiPrestitoInterbibliotecarioTabelleDinamiche listaSistemi;
 	
 	
 	public TabelleDinamicheView(Controller controller) {
@@ -86,6 +88,14 @@ public class TabelleDinamicheView extends View {
 		listaDewey.setHeading(CostantiTabelleDinamiche.DEWEY);
 		listaDewey.setGrid();
 		/* Dewey -> END */
+		
+		/* Sistemi Prestito Interbibliotecario -> INIT */
+		listaSistemi = new ListaSistemiPrestitoInterbibliotecarioTabelleDinamiche();
+		listaSistemi.setHeading(CostantiTabelleDinamiche.PRESTITO_INTERBIBLIOTECARIO_SISTEMI);
+		listaSistemi.setGrid();
+		/* Sistemi Prestito Interbibliotecario -> END */
+		
+		
 	}
 
 	@Override
@@ -97,7 +107,7 @@ public class TabelleDinamicheView extends View {
 
 		int tableId = 2;
 		if (event.getData() != null) {
-			tableId =(Integer) event.getData();
+			tableId = (Integer) event.getData();
 		}
 
 		switch (tableId) {
@@ -274,11 +284,9 @@ public class TabelleDinamicheView extends View {
 			break;
 		}
 		case 26: {/* PRESTITO_INTERBIBLIOTECARIO_SISTEMI */
-			listaVociSingole.setTableType(tableId);
-			listaVociSingole.setHeading(CostantiTabelleDinamiche.PRESTITO_INTERBIBLIOTECARIO_SISTEMI);
-
-			listaVociSingole.layout();
-			wrapper.add(listaVociSingole, center);	
+			listaSistemi.layout();
+			
+			wrapper.add(listaSistemi, center);	
 			break;
 		}
 		case 27: {/* SEZIONI_SPECIALI */
@@ -348,7 +356,7 @@ public class TabelleDinamicheView extends View {
 			listaVociSingole.layout();
 			wrapper.add(listaVociSingole, center);
 			break;
-		}	
+		}
 
 		}
 

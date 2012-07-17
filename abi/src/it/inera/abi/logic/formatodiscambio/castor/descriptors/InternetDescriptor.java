@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: InternetDescriptor.java,v 1.1 2012/06/22 13:54:51 m.bartolozzi Exp $
+ * $Id: InternetDescriptor.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Internet;
 /**
  * Class InternetDescriptor.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/06/22 13:54:51 $
+ * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
  */
 public class InternetDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -69,16 +69,15 @@ public class InternetDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
 
         //-- initialize element descriptors
 
-        //-- _modo
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_modo", "modo", org.exolab.castor.xml.NodeType.Element);
-        desc.setImmutable(true);
+        //-- _aTempo
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, "_aTempo", "a-tempo", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 Internet target = (Internet) object;
-                return target.getModo();
+                return target.getATempo();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -86,7 +85,7 @@ public class InternetDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     Internet target = (Internet) object;
-                    target.setModo( (java.lang.String) value);
+                    target.setATempo( (it.inera.abi.logic.formatodiscambio.castor.types.SiNoType) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -97,19 +96,97 @@ public class InternetDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
                 return null;
             }
         };
-        desc.setSchemaType("string");
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, handler);
+        desc.setImmutable(true);
+        desc.setSchemaType("SiNoType");
         desc.setHandler(handler);
         desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _modo
+        //-- validation code for: _aTempo
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
         { //-- local scope
-            org.exolab.castor.xml.validators.StringValidator typeValidator;
-            typeValidator = new org.exolab.castor.xml.validators.StringValidator();
-            fieldValidator.setValidator(typeValidator);
-            typeValidator.setWhiteSpace("preserve");
+        }
+        desc.setValidator(fieldValidator);
+        //-- _aPagamento
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, "_aPagamento", "a-pagamento", org.exolab.castor.xml.NodeType.Element);
+        handler = new org.exolab.castor.xml.XMLFieldHandler() {
+            @Override
+            public java.lang.Object getValue( java.lang.Object object ) 
+                throws IllegalStateException
+            {
+                Internet target = (Internet) object;
+                return target.getAPagamento();
+            }
+            @Override
+            public void setValue( java.lang.Object object, java.lang.Object value) 
+                throws IllegalStateException, IllegalArgumentException
+            {
+                try {
+                    Internet target = (Internet) object;
+                    target.setAPagamento( (it.inera.abi.logic.formatodiscambio.castor.types.SiNoType) value);
+                } catch (java.lang.Exception ex) {
+                    throw new IllegalStateException(ex.toString());
+                }
+            }
+            @Override
+            @SuppressWarnings("unused")
+            public java.lang.Object newInstance(java.lang.Object parent) {
+                return null;
+            }
+        };
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, handler);
+        desc.setImmutable(true);
+        desc.setSchemaType("SiNoType");
+        desc.setHandler(handler);
+        desc.setMultivalued(false);
+        addFieldDescriptor(desc);
+        addSequenceElement(desc);
+
+        //-- validation code for: _aPagamento
+        fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        { //-- local scope
+        }
+        desc.setValidator(fieldValidator);
+        //-- _conProxy
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, "_conProxy", "con-proxy", org.exolab.castor.xml.NodeType.Element);
+        handler = new org.exolab.castor.xml.XMLFieldHandler() {
+            @Override
+            public java.lang.Object getValue( java.lang.Object object ) 
+                throws IllegalStateException
+            {
+                Internet target = (Internet) object;
+                return target.getConProxy();
+            }
+            @Override
+            public void setValue( java.lang.Object object, java.lang.Object value) 
+                throws IllegalStateException, IllegalArgumentException
+            {
+                try {
+                    Internet target = (Internet) object;
+                    target.setConProxy( (it.inera.abi.logic.formatodiscambio.castor.types.SiNoType) value);
+                } catch (java.lang.Exception ex) {
+                    throw new IllegalStateException(ex.toString());
+                }
+            }
+            @Override
+            @SuppressWarnings("unused")
+            public java.lang.Object newInstance(java.lang.Object parent) {
+                return null;
+            }
+        };
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, handler);
+        desc.setImmutable(true);
+        desc.setSchemaType("SiNoType");
+        desc.setHandler(handler);
+        desc.setMultivalued(false);
+        addFieldDescriptor(desc);
+        addSequenceElement(desc);
+
+        //-- validation code for: _conProxy
+        fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        { //-- local scope
         }
         desc.setValidator(fieldValidator);
     }

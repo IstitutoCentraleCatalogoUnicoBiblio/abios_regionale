@@ -20,6 +20,9 @@ public class SistemiPrestitoInterbibliotecario implements Serializable {
 
 	@Column(nullable=false, length=255)
 	private String descrizione;
+	
+	@Column(length=255)
+	private String url;
 
     public SistemiPrestitoInterbibliotecario() {
     }
@@ -38,6 +41,14 @@ public class SistemiPrestitoInterbibliotecario implements Serializable {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+	
+	public String getUrl() {
+		return this.url;
+	}
+	
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
