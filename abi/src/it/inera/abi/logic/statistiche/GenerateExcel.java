@@ -128,7 +128,7 @@ public class GenerateExcel {
 				}
 			}  	      
 			// Write the output to a file
-			String filename = FilenameUtils.concat(targetDir, tavola.getName() + ".xls");
+			String filename = FilenameUtils.concat(targetDir, tavola.getSummary() + ".xls");
 			FileOutputStream fileOut = new FileOutputStream(filename);
 			wb.write(fileOut);
 			fileOut.close();

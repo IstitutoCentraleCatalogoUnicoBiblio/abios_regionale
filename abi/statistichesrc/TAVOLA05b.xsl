@@ -6,7 +6,7 @@
 
 <xsl:template match="/">
 
-<table name="TAVOLA05b" title="Tavola 5b BIBLIOTECHE PER NUMERO DI ORE DI APERTURA SETTIMANALE">
+<table name="TAVOLA05b" title="Tavola 5b BIBLIOTECHE PER NUMERO DI ORE DI APERTURA SETTIMANALE" summary="Biblioteche_per_ore_apertura_sett">
 <HEADERS>
 <column num="1" colspan="1" rowspan="2">TIPOLOGIA FUNZIONALE</column>
 <column num="2" colspan="7" rowspan="1">Fasce orarie</column>

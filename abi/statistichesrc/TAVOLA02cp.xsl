@@ -7,7 +7,7 @@
 <xsl:template match="/">
 <xsl:variable name="unique-tip-num" select="//ROW/id_amm[not(.=following::id_amm)]"/>
 <xsl:variable name="max" select="count($unique-tip-num)" />
-<table name="TAVOLA02cp" title="Tavola 2cp BIBLIOTECHE SECONDO LA REGIONE E LA TIPOLOGIA AMMINISTRATIVA">
+<table name="TAVOLA02cp" title="Tavola 2cp BIBLIOTECHE SECONDO LA REGIONE E LA TIPOLOGIA AMMINISTRATIVA" summary="Biblioteche_autonome_per_tip_amm">
 <HEADERS>
 <column num="1" colspan="1" rowspan="1">PROVINCE</column>
 <xsl:for-each select="$unique-tip-num">

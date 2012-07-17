@@ -8,7 +8,7 @@
 <xsl:variable name="unique-tip-num" select="//ROW/stato_accesso[not(.=following::stato_accesso)]" />
 
 <xsl:variable name="max" select="count($unique-tip-num)" />
-<table name="TAVOLA05a" title="Tavola 5a BIBLIOTECHE SECONDO LA MODALITA' D'ACCESSO E LA TIPOLOGIA FUNZIONALE">
+<table name="TAVOLA05a" title="Tavola 5a BIBLIOTECHE SECONDO LA MODALITA' D'ACCESSO E LA TIPOLOGIA FUNZIONALE" summary="Biblioteche_per_mod_accesso_e_tip_funz">
 <HEADERS>
 <column num="1" colspan="1" rowspan="1">TIPOLOGIA FUNZIONALE</column>
 <xsl:for-each select="$unique-tip-num">

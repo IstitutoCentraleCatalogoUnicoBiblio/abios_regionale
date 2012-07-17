@@ -55,15 +55,15 @@
   		or @name='GRAFICO01' or @name='GRAFICO02' or @name='GRAFICO03'">
 	  	<a>
 	    <xsl:attribute name="href">
-	    	<xsl:value-of select="concat('statistiche/', @name,'.xls')"/>
-	    </xsl:attribute><img src="statistiche/images/excel3.gif" border="0"/>Scarica <xsl:value-of select="concat(@name,'.xls')"/>
+	    	<xsl:value-of select="concat('statistiche/', @summary,'.xls')"/>
+	    </xsl:attribute><img src="statistiche/images/excel3.gif" border="0"/>Scarica <xsl:value-of select="concat(@summary,'.xls')"/>
 	  	</a>
 	</xsl:when>
 	<xsl:otherwise>
 		<a>
 	    <xsl:attribute name="href">
-	    	<xsl:value-of select="concat('../statistiche/', @name,'.xls')"/>
-	    </xsl:attribute><img src="../statistiche/images/excel3.gif" border="0"/>Scarica <xsl:value-of select="concat(@name,'.xls')"/>
+	    	<xsl:value-of select="concat('../statistiche/', @summary,'.xls')"/>
+	    </xsl:attribute><img src="../statistiche/images/excel3.gif" border="0"/>Scarica <xsl:value-of select="concat(@summary,'.xls')"/>
 	  	</a>
 	</xsl:otherwise>
   </xsl:choose>
@@ -249,15 +249,15 @@
   		or @name='GRAFICO01' or @name='GRAFICO02' or @name='GRAFICO03'">
 	<a>
     <xsl:attribute name="href">
-    	<xsl:value-of select="concat('statistiche/', @name,'.xls')"/>
-    </xsl:attribute><img src="statistiche/images/excel3.gif" border="0"/>Scarica <xsl:value-of select="concat(@name,'.xls')"/>
+    	<xsl:value-of select="concat('statistiche/', @summary,'.xls')"/>
+    </xsl:attribute><img src="statistiche/images/excel3.gif" border="0"/>Scarica <xsl:value-of select="concat(@summary,'.xls')"/>
   	</a>
 </xsl:when>
 <xsl:otherwise>
 	<a>
     <xsl:attribute name="href">
-    	<xsl:value-of select="concat('../statistiche/', @name,'.xls')"/>
-    </xsl:attribute><img src="../statistiche/images/excel3.gif" border="0"/>Scarica <xsl:value-of select="concat(@name,'.xls')"/>
+    	<xsl:value-of select="concat('../statistiche/', @summary,'.xls')"/>
+    </xsl:attribute><img src="../statistiche/images/excel3.gif" border="0"/>Scarica <xsl:value-of select="concat(@summary,'.xls')"/>
   	</a>
 </xsl:otherwise>
 </xsl:choose>

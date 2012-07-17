@@ -6,7 +6,7 @@
 
 <xsl:template match="/">
 
-<table name="GRAFICO03" title="GRAFICO 3 BIBLIOTECHE CENSITE PER CATALOGO">
+<table name="GRAFICO03" title="GRAFICO 3 BIBLIOTECHE CENSITE PER CATALOGO" summary="Grafico_Biblioteche_censite_per_catalogo">
 <HEADERS>
 <column num="1" colspan="1" rowspan="1">REGIONE</column>
 <column num="2" colspan="1" rowspan="1">Con catalogo</column>

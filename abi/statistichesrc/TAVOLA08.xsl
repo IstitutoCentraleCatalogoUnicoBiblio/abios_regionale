@@ -5,7 +5,7 @@
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
 <xsl:template match="/">
-<table name="TAVOLA08" title="Tavola 8 BIBLIOTECHE PER CONSISTENZA DEL PATRIMONIO">
+<table name="TAVOLA08" title="Tavola 8 BIBLIOTECHE PER CONSISTENZA DEL PATRIMONIO" summary="Biblioteche_per_consistenza_patr">
 <HEADERS>
 <column num="1" colspan="1" rowspan="2">REGIONE</column>
 <column num="2" colspan="9" rowspan="1">CONSISTENZA DEL PATRIMONIO (volumi ed opuscoli)</column>

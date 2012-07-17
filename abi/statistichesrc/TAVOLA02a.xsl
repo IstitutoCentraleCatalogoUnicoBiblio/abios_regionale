@@ -8,7 +8,7 @@
 <xsl:variable name="unique-tip-num" select="//ROW/descrizione[not(.=following::descrizione)]" />
 
 <xsl:variable name="max" select="count($unique-tip-num)" />
-<table name="TAVOLA02a" title="Tavola 2a BIBLIOTECHE CENSITE SECONDO LA TIPOLOGIA FUNZIONALE (valori %)">
+<table name="TAVOLA02a" title="Tavola 2a BIBLIOTECHE CENSITE SECONDO LA TIPOLOGIA FUNZIONALE (valori %)" summary="Biblioteche_per_tip_funzionale_perc">
 <HEADERS>
 <column num="1" colspan="1" rowspan="1">REGIONE</column>
 <xsl:for-each select="$unique-tip-num">

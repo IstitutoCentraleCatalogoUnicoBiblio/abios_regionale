@@ -67,5 +67,101 @@
 </ROWSET>
 
 <ROWSET>
+  <ROW num="1">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Accademie, associazioni, fondazioni, istituti (pubblici)</tipologia_amministrativa>
+    <tipologia_amministrativa_id>900</tipologia_amministrativa_id>
+    <count>24</count>
+  </ROW>
+  <ROW num="2">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Accademie, associazioni, fondazioni, istituti, societa' (privati)</tipologia_amministrativa>
+    <tipologia_amministrativa_id>1100</tipologia_amministrativa_id>
+    <count>10</count>
+  </ROW>
+  <ROW num="3">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Aziende ed amministrazioni dello stato ad ordinamento autonomo</tipologia_amministrativa>
+    <tipologia_amministrativa_id>400</tipologia_amministrativa_id>
+    <count>17</count>
+  </ROW>
+  <ROW num="4">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Aziende ed enti del servizio sanitario nazionale</tipologia_amministrativa>
+    <tipologia_amministrativa_id>1600</tipologia_amministrativa_id>
+    <count>2</count>
+  </ROW>
+  <ROW num="5">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Camere di commercio, industria, artigianato</tipologia_amministrativa>
+    <tipologia_amministrativa_id>500</tipologia_amministrativa_id>
+    <count>3</count>
+  </ROW>
+  <ROW num="6">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Comune</tipologia_amministrativa>
+    <tipologia_amministrativa_id>603</tipologia_amministrativa_id>
+    <count>219</count>
+  </ROW>
+  <ROW num="7">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Direzione generale per gli archivi</tipologia_amministrativa>
+    <tipologia_amministrativa_id>203</tipologia_amministrativa_id>
+    <count>9</count>
+  </ROW>
+  <ROW num="8">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Direzione generale per i beni archeologici</tipologia_amministrativa>
+    <tipologia_amministrativa_id>204</tipologia_amministrativa_id>
+    <count>6</count>
+  </ROW>
+  <ROW num="9">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Direzione Generale per le Biblioteche, gli Istituti Culturali e il Diritto d'Autore</tipologia_amministrativa>
+    <tipologia_amministrativa_id>202</tipologia_amministrativa_id>
+    <count>1</count>
+  </ROW>
+  <ROW num="10">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Enti ecclesiastici</tipologia_amministrativa>
+    <tipologia_amministrativa_id>1000</tipologia_amministrativa_id>
+    <count>76</count>
+  </ROW>
+  <ROW num="11">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Organizzazioni internazionali</tipologia_amministrativa>
+    <tipologia_amministrativa_id>1500</tipologia_amministrativa_id>
+    <count>2</count>
+  </ROW>
+  <ROW num="12">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Presidenza del consiglio dei ministri e ministeri</tipologia_amministrativa>
+    <tipologia_amministrativa_id>300</tipologia_amministrativa_id>
+    <count>9</count>
+  </ROW>
+  <ROW num="13">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Privati - Famiglie</tipologia_amministrativa>
+    <tipologia_amministrativa_id>1200</tipologia_amministrativa_id>
+    <count>3</count>
+  </ROW>
+  <ROW num="14">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Provincia</tipologia_amministrativa>
+    <tipologia_amministrativa_id>602</tipologia_amministrativa_id>
+    <count>6</count>
+  </ROW>
+  <ROW num="15">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Regione</tipologia_amministrativa>
+    <tipologia_amministrativa_id>601</tipologia_amministrativa_id>
+    <count>41</count>
+  </ROW>
+  <ROW num="16">
+    <regione>PUGLIA</regione>
+    <tipologia_amministrativa>Universita' statali</tipologia_amministrativa>
+    <tipologia_amministrativa_id>700</tipologia_amministrativa_id>
+    <count>153</count>
+  </ROW>
 </ROWSET>
 </ROWSETS>

@@ -7,6 +7,7 @@ public class TableBean {
 	private Vector<HeadersBean> headers;
 	private Vector<RowBean> rows;
 	private String name;
+	private String summary;
 
 	public TableBean() {
 		this.headers = new Vector<HeadersBean>();
@@ -35,5 +36,13 @@ public class TableBean {
 
 	public String getName() {
 		return this.name;
+	}
+	
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+	
+	public String getSummary() {
+		return this.summary;
 	}
 }

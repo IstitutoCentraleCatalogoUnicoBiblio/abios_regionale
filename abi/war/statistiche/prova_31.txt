@@ -1,20 +1,44 @@
 <?xml version="1.0"?><ROWSETS>
 <ROWSET>
+  <ROW num="1">
+    <regione>PUGLIA</regione>
+    <count_manca>24</count_manca>
+  </ROW>
 </ROWSET>
 
 <ROWSET>
+  <ROW num="1">
+    <regione1>PUGLIA</regione1>
+    <count_fino>138</count_fino>
+  </ROW>
 </ROWSET>
 
 <ROWSET>
+  <ROW num="1">
+    <regione2>PUGLIA</regione2>
+    <count_da_2001>139</count_da_2001>
+  </ROW>
 </ROWSET>
 
 <ROWSET>
+  <ROW num="1">
+    <regione3>PUGLIA</regione3>
+    <count_da_5001>97</count_da_5001>
+  </ROW>
 </ROWSET>
 
 <ROWSET>
+  <ROW num="1">
+    <regione4>PUGLIA</regione4>
+    <count_da_10001>168</count_da_10001>
+  </ROW>
 </ROWSET>
 
 <ROWSET>
+  <ROW num="1">
+    <regione5>PUGLIA</regione5>
+    <count_da_100001>10</count_da_100001>
+  </ROW>
 </ROWSET>
 
 <ROWSET>

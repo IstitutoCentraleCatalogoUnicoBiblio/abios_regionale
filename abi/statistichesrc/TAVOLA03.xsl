@@ -5,7 +5,7 @@
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
 <xsl:template match="/">
-<table name="TAVOLA03" title="Tavola 3 BIBLIOTECHE SECONDO IL SECOLO DI FONDAZIONE">
+<table name="TAVOLA03" title="Tavola 3 BIBLIOTECHE SECONDO IL SECOLO DI FONDAZIONE" summary="Biblioteche_per_secolo_di_fond">
 <ROWS>
 
 <ROW num="1">

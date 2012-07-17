@@ -8,7 +8,7 @@
 <xsl:variable name="unique-descrizione-num" select="//ROW/provincia[not(.=following::provincia)]" />
 
 <xsl:variable name="max" select="count($unique-descrizione-num)" />
-<table name="TAVOLA01a" title="Tavola 1a BIBLIOTECHE REGISTRATE IN ANAGRAFE PER PROVINCIA">
+<table name="TAVOLA01a" title="Tavola 1a BIBLIOTECHE REGISTRATE IN ANAGRAFE PER PROVINCIA" summary="Biblioteche_per_provincia">
 <HEADERS>
 <column num="1" colspan="1" rowspan="1">PROVINCE</column>
 <column num="2" colspan="1" rowspan="1">(A) Biblioteche presenti in anagrafe</column>

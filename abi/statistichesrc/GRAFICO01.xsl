@@ -7,7 +7,7 @@
 <xsl:template match="/">
 <xsl:variable name="unique-descrizione-num" select="//ROW/id_amm[not(.=following::id_amm)]"/>
 <xsl:variable name="max" select="count($unique-descrizione-num)" />
-<table name="GRAFICO01" title="Grafico 1 BIBLIOTECHE SECONDO LA TIPOLOGIA AMMINISTRATIVA">
+<table name="GRAFICO01" title="Grafico 1 BIBLIOTECHE SECONDO LA TIPOLOGIA AMMINISTRATIVA" summary="Grafico_Biblioteche_per_tip_amm">
 <ROWS>
 <xsl:for-each select="$unique-descrizione-num">
 <xsl:variable name="des" select="." />

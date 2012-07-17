@@ -8,7 +8,7 @@
 <xsl:variable name="unique-regione-num" select="//ROW/regione[not(.=following::regione)]" />
 
 <xsl:variable name="max" select="count($unique-regione-num)" />
-<table name="TAVOLA01" title="Tavola 1 BIBLIOTECHE REGISTRATE IN ANAGRAFE">
+<table name="TAVOLA01" title="Tavola 1 BIBLIOTECHE REGISTRATE IN ANAGRAFE" summary="Biblioteche_in_anagrafe">
 <HEADERS>
 <column num="1" colspan="1" rowspan="1">REGIONE</column>
 <column num="2" colspan="1" rowspan="1">(A) Biblioteche presenti in anagrafe</column>

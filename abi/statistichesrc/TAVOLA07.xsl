@@ -8,7 +8,7 @@
 <xsl:variable name="unique-descrizione-num" select="//ROW/descrizione[not(.=following::descrizione)]" />
 
 <xsl:variable name="max" select="count($unique-descrizione-num)" />
-<table name="TAVOLA07" title="Tavola 7 CONSISTENZA DEL PATRIMONIO">
+<table name="TAVOLA07" title="Tavola 7 CONSISTENZA DEL PATRIMONIO" summary="Consistenza_patrimonio">
 
 <ROWS>
 

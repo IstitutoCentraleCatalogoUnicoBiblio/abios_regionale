@@ -5,7 +5,7 @@
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
 <xsl:template match="/">
-<table name="TAVOLA06" title="Tavola 6 BIBLIOTECHE SECONDO I SERVIZI">
+<table name="TAVOLA06" title="Tavola 6 BIBLIOTECHE SECONDO I SERVIZI" summary="Biblioteche_per_servizi_offerti">
 <HEADERS>
 <column num="1" colspan="1" rowspan="2">REGIONE</column>
 <column num="2" colspan="1" rowspan="2">Informazioni bibliografiche</column>

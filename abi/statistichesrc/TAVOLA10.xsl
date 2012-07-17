@@ -5,7 +5,7 @@
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
 <xsl:template match="/">
-<table name="TAVOLA10" title="Tavola 10 BIBLIOTECHE PER TIPOLOGIA AMMINISTRATIVA E CONSISTENZA DEL PATRIMONIO">
+<table name="TAVOLA10" title="Tavola 10 BIBLIOTECHE PER TIPOLOGIA AMMINISTRATIVA E CONSISTENZA DEL PATRIMONIO" summary="Biblioteche_per_tip_amm_e_consistenza_patr">
 <HEADERS>
 <column num="1" colspan="1" rowspan="2">TIPOLOGIA AMMINISTRATIVA</column>
 <column num="2" colspan="9" rowspan="1">CONSISTENZA DEL PATRIMONIO (volumi ed opuscoli)</column>

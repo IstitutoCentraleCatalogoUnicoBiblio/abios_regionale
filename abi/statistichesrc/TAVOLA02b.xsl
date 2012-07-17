@@ -7,7 +7,7 @@
 <xsl:variable name="unique-tip-num" select="//ROW/tipologia_funzionale[not(.=following::tipologia_funzionale)]"/>
 
 <xsl:variable name="max" select="count($unique-tip-num)"/>
-<table name="TAVOLA02b" title="Tavola 2b BIBLIOTECHE SECONDO LA TIPOLOGIA FUNZIONALE ED AMMINISTRATIVA">
+<table name="TAVOLA02b" title="Tavola 2b BIBLIOTECHE SECONDO LA TIPOLOGIA FUNZIONALE ED AMMINISTRATIVA" summary="Biblioteche_per_tip_funz_e_amm">
 <HEADERS>
 <column num="1" colspan="1" rowspan="2">TIPOLOGIA AMMINISTRATIVA</column>
 <column num="2" rowspan="1">
