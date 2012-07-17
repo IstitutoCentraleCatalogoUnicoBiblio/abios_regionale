@@ -34,17 +34,9 @@
 	  	<property name="concurrent" value="false" />
 	</bean>
 	
-	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="statisticheCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 	    <property name="jobDetail" ref="generateStatisticsJob" />
 	    <property name="cronExpression" value="${stats.cron}" />
-	</bean>
-	
-	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-	    <property name="triggers">
-	        <list>
-	            <ref bean="cronTrigger" />
-	        </list>
-	    </property>
 	</bean>
 	
 </beans>

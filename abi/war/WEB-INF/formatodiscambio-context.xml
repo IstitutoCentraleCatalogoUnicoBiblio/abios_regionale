@@ -111,12 +111,4 @@
 		    <property name="cronExpression" value="${formatodiscambio.cronstring}" />
 		</bean>
 		
-		<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		    <property name="triggers">
-		        <list>
-		            <ref bean="exportDifferitoTrigger" />
-		            <ref bean="importDifferitoTrigger" />
-		        </list>
-		    </property>
-		</bean>
 </beans>

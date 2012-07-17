@@ -29,13 +29,17 @@
 	<import resource="statistiche-context.xml" />
 	<import resource="formatodiscambio-context.xml" />
 	<import resource="checkpassword-context.xml" />
+	<import resource="exportdynatabs-context.xml" />
 	
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 	    <property name="triggers">
 	        <list>
 	            <ref bean="checkPasswordTrigger" />
+	            <ref bean="exportDifferitoTrigger" />
+		        <ref bean="importDifferitoTrigger" />
+		        <ref bean="statisticheCronTrigger" />
+		        <ref bean="exportDynaTabsTrigger" />
 	        </list>
 	    </property>
 	</bean>
-		  
 </beans>

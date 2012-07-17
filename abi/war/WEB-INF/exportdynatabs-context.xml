@@ -14,16 +14,16 @@
        http://www.springframework.org/schema/jee 
        http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
 
-	<bean id="checkPassword" class="it.inera.abi.logic.checkpassword.CheckPasswordJob" />
+	<bean id="exportDynaTabs" class="it.inera.abi.logic.exportdynatabs.ExportDynaTabsImpl" />
 
-	<bean id="checkPasswordJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="checkPassword" />
-		<property name="targetMethod" value="execute" />
+	<bean id="exportDynaTabsJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="exportDynaTabs" />
+		<property name="targetMethod" value="doExport" />
 		<property name="concurrent" value="false" />
 	</bean>
 	
-	<bean id="checkPasswordTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail" ref="checkPasswordJob" />
-		<property name="cronExpression" value="${checkpassword.cronstring}" />
+	<bean id="exportDynaTabsTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="exportDynaTabsJob" />
+		<property name="cronExpression" value="${export.dynatab.cronstring}" />
 	</bean>
 </beans>
