@@ -323,7 +323,7 @@ public class DatabaseToCastorMapper {
 				codici.setCei(codice.getValore());
 			}
 		}
-		codici.setIsil(Utility.createIccuCode(bibliotecaDb.getIsilStato(), bibliotecaDb.getIsilProvincia(), String.valueOf(bibliotecaDb.getIsilNumero())));
+		codici.setIsil(Utility.buildIsil(bibliotecaDb.getIsilStato(), bibliotecaDb.getIsilProvincia(), String.valueOf(bibliotecaDb.getIsilNumero())));
 		//if (codicis != null && codicis.size() > 0){
 			anagrafica.setCodici(codici);
 			log.debug("Settati codici nella parte Anagrafica");

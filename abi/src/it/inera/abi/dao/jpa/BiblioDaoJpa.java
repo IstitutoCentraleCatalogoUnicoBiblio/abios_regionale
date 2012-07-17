@@ -4886,7 +4886,7 @@ public class BiblioDaoJpa implements BiblioDao {
 			String isilNr=""+(Integer)(params.get("isilNumero"));
 			if(isilSt!=null && isilPr!=null && isilNr!=null && (!isilSt.equals("")) && (!isilSt.equals(" ")) 
 					&& (!isilPr.equals("")) && (!isilPr.equals(" ")) && (!isilNr.equals("")) && (!isilNr.equals(" "))){
-				String idBibliotecaTarget=Utility.createIccuCode(isilSt, isilPr, isilNr);
+				String idBibliotecaTarget=Utility.buildIsil(isilSt, isilPr, isilNr);
 
 				String[] str = new String[1];
 				str[0]=idBibliotecaTarget;

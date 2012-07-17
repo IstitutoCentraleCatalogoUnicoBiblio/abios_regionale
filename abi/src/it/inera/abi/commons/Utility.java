@@ -135,50 +135,29 @@ public class Utility {
 		Integer tmp = Integer.valueOf(codABI.substring(2, 6));
 		return tmp;
 	}
+	
+	public static String buildIsil(String isilSt, String isilPr, String isilNr) {
+		StringBuilder isil = new StringBuilder();
+		if (StringUtils.isNotBlank(isilSt)) {
+			isil.append(isilSt);
+			isil.append("-");
+		}
+		isil.append(isilPr);
+		isil.append(StringUtils.leftPad(String.valueOf(isilNr), 4, '0'));
+		return isil.toString();
+	}
 
-	/**
-	 *
-	 * @param isilPr
-	 * @param isilNr
-	 * @return
-	 */
-	public static String createIccuCode(String isilSt, String isilPr, String isilNr) {
-		int fill = 4 - isilNr.length();
-		String tmp = "";
-		for (int i = 0; i < fill; i++) {
-			tmp += "0";
-		}
-		return isilSt + "-" + isilPr + tmp + isilNr;
+	public static String buildIsil(it.inera.abi.persistence.NuovaBiblioteca nuovaBiblioteca) {
+		return buildIsil(nuovaBiblioteca.getIsilStato(), nuovaBiblioteca.getIsilProvincia(), nuovaBiblioteca.getIsilNumero().toString());
 	}
-	
-	/**
-	 *
-	 * @param isilPr
-	 * @param isilNr
-	 * @return
-	 */
-	public static String createIccuCode(it.inera.abi.persistence.Biblioteca biblioteca) {
-		int fill = 4 - biblioteca.getIsilNumero().toString().length();
-		String tmp = "";
-		for (int i = 0; i < fill; i++) {
-			tmp += "0";
-		}
-		return biblioteca.getIsilStato() + "-" + biblioteca.getIsilProvincia() + tmp + biblioteca.getIsilNumero().toString();
+	public static String buildIsil(it.inera.abi.persistence.Biblioteca biblioteca) {
+		return buildIsil(biblioteca.getIsilStato(), biblioteca.getIsilProvincia(), biblioteca.getIsilNumero().toString());
 	}
-	
-	/**
-	 *
-	 * @param isilPr
-	 * @param isilNr
-	 * @return
-	 */
-	public static String createIccuCode(it.inera.abi.persistence.NuovaBiblioteca nuovaBiblioteca) {
-		int fill = 4 - nuovaBiblioteca.getIsilNumero().toString().length();
-		String tmp = "";
-		for (int i = 0; i < fill; i++) {
-			tmp += "0";
-		}
-		return nuovaBiblioteca.getIsilStato() + "-" + nuovaBiblioteca.getIsilProvincia() + tmp + nuovaBiblioteca.getIsilNumero().toString();
+	public static String buildIsil6Chars(it.inera.abi.persistence.Biblioteca biblioteca) {
+		return buildIsil(null, biblioteca.getIsilProvincia(), biblioteca.getIsilNumero().toString());
+	}
+	public static String buildIsil6Chars(it.inera.abi.persistence.NuovaBiblioteca nuovaBiblioteca) {
+		return buildIsil(null, nuovaBiblioteca.getIsilProvincia(), nuovaBiblioteca.getIsilNumero().toString());
 	}
 
 	/**

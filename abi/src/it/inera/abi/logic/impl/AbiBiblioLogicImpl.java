@@ -1390,7 +1390,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		reportMessage.append("Importate con successo:"+ok.size() +" di "+(ok.size()+ko.keySet().size())+"\n");
 		for(Integer id:ok){
 			Biblioteca biblioteca = biblioDao.getBibliotecaById(id);
-			reportMessage.append("-"+Utility.createIccuCode(biblioteca)+"\n");
+			reportMessage.append("-"+Utility.buildIsil(biblioteca)+"\n");
 		}
 
 		reportMessage.append("\n\n");
@@ -1400,7 +1400,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		for(Integer key:keySet){
 			String value = ko.get(key);
 			Biblioteca biblioteca = biblioDao.getBibliotecaById(key);
-			reportMessage.append("-"+Utility.createIccuCode(biblioteca)+" - ");
+			reportMessage.append("-"+Utility.buildIsil(biblioteca)+" - ");
 			reportMessage.append("Errore:"+value);
 		}
 
@@ -1448,7 +1448,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		// invio email
 		try {
 			String definitivaMessage = createDefinitivaMessage(messaggio, usernameRevisiore, biblioteca);
-			String subject = "Revisione biblioteca ".concat(Utility.createIccuCode(biblioteca)).concat(" accettata");
+			String subject = "Revisione biblioteca ".concat(Utility.buildIsil(biblioteca)).concat(" accettata");
 			sendEmail(subject, definitivaMessage, email, username, emailRevisore, usernameRevisiore);
 		} catch (Exception e) {
 			_log.fatal("Errore nell'invio della email", e);
@@ -1512,7 +1512,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		// invio email
 		try {
 			String respingiMessage = createRespingiMessage(messaggio, usernameRevisore, biblioteca);
-			String subject = "Revisione biblioteca ".concat(Utility.createIccuCode(biblioteca)).concat(" respinta");
+			String subject = "Revisione biblioteca ".concat(Utility.buildIsil(biblioteca)).concat(" respinta");
 			sendEmail(subject, respingiMessage, email, username, emailRevisore, usernameRevisore);
 		} catch (Exception e) {
 			_log.fatal("Errore nell'invio della email", e);
@@ -1539,7 +1539,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 
 	protected String createDefinitivaMessage(String message, String username, Biblioteca biblioteca) {
-		String iccuCode = Utility.createIccuCode(biblioteca);
+		String iccuCode = Utility.buildIsil(biblioteca);
 		StringBuffer sb = new StringBuffer();
 		sb.append("La biblioteca ");
 		sb.append(iccuCode);
@@ -1570,7 +1570,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		// invio email
 		try {
 			String revisioneMessage = createBibliotecaInRevisioneMessage(username, biblioteca);
-			String subject = "Revisione biblioteca ".concat(Utility.createIccuCode(biblioteca)).concat(".");
+			String subject = "Revisione biblioteca ".concat(Utility.buildIsil(biblioteca)).concat(".");
 			//CLICLO LA LISTA DEGLI UTENTI REVISORI
 			for(Utenti utente:utentiDao.getUsersByRole(5)){
 				sendEmail(subject, revisioneMessage, utente.getEmail(), username, "anagrafe@iccu.isbn.it", "ANAGRAFE BIBLIOTECHE ITALIANE");
@@ -1585,7 +1585,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	
 	
 	protected String createRespingiMessage(String message, String username, Biblioteca biblioteca) {
-		String iccuCode = Utility.createIccuCode(biblioteca);
+		String iccuCode = Utility.buildIsil(biblioteca);
 		StringBuffer sb = new StringBuffer();
 		sb.append("Le modifiche alla biblioteca ");
 		sb.append(iccuCode);
@@ -1634,7 +1634,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 	
 	protected String createBibliotecaInRevisioneMessage(String username, Biblioteca biblioteca) {
-		String iccuCode = Utility.createIccuCode(biblioteca);
+		String iccuCode = Utility.buildIsil(biblioteca);
 		StringBuffer sb = new StringBuffer();
 		sb.append("La biblioteca ");
 		sb.append(iccuCode.concat(" "));

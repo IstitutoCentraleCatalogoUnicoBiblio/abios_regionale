@@ -2,7 +2,11 @@ package it.inera.abi.logic.exportdynatabs;
 
 import it.inera.abi.dao.DynaTabDao;
 import it.inera.abi.dao.mapping.DtoJpaMapping;
+import it.inera.abi.persistence.CataloghiCollettivi;
 import it.inera.abi.persistence.Comune;
+import it.inera.abi.persistence.Dewey;
+import it.inera.abi.persistence.PatrimonioSpecializzazione;
+import it.inera.abi.persistence.PatrimonioSpecializzazioneCategoria;
 import it.inera.abi.persistence.Provincia;
 import it.inera.abi.persistence.Regione;
 import it.inera.abi.persistence.Stato;
@@ -50,6 +54,10 @@ public class ExportDynaTabsImpl implements ExportDynaTabs {
 			dynaClasses.put(DtoJpaMapping.STATI_INDEX, Stato.class);
 			dynaClasses.put(DtoJpaMapping.PROVINCE_INDEX, Provincia.class);
 			dynaClasses.put(DtoJpaMapping.REGIONI_INDEX, Regione.class);
+			dynaClasses.put(DtoJpaMapping.DEWEY_INDEX, Dewey.class);
+			dynaClasses.put(DtoJpaMapping.PATRIMONIO_LIBRARIO_PICCOLE_VOCI_INDEX, PatrimonioSpecializzazione.class);
+			dynaClasses.put(DtoJpaMapping.CATALOGHI_COLLETTIVI_INDEX, CataloghiCollettivi.class);
+			
 			Iterator<Class<?>> iter = dynaClasses.values().iterator();
 			while (iter.hasNext()) {
 				Class<?> dynaClass = iter.next();
@@ -64,6 +72,9 @@ public class ExportDynaTabsImpl implements ExportDynaTabs {
 					}
 					if ("Regione".equals(dynaClass.getSimpleName())) {
 						manageRegione(list.get(i));
+					}
+					if ("PatrimonioSpecializzazioneCategoria".equals(dynaClass.getSimpleName())) {
+						managePatrimonioSpecializzazioneCategoria(list.get(i));
 					}
 				}
 
@@ -175,4 +186,15 @@ public class ExportDynaTabsImpl implements ExportDynaTabs {
 		((Provincia) obj).setRegione(temp);
 		((Provincia) obj).setDatiProvinceIstat(null);
 	}
+	
+	private void managePatrimonioSpecializzazioneCategoria(Object obj) {
+		PatrimonioSpecializzazioneCategoria padre = ((PatrimonioSpecializzazioneCategoria) obj).getPatrimonioSpecializzazioneCategoria();
+		if (padre != null) {
+			PatrimonioSpecializzazioneCategoria temp = new PatrimonioSpecializzazioneCategoria();
+			temp.setIdPatrimonioSpecializzazioneCategoria(padre.getIdPatrimonioSpecializzazioneCategoria());
+			((PatrimonioSpecializzazioneCategoria) obj).setPatrimonioSpecializzazioneCategoria(temp);
+		}
+		
+	}
+	
 }

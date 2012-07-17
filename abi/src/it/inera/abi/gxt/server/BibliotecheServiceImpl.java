@@ -150,7 +150,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			// Id biblioteca
 			biblioModel.setIdBiblio(biblioteca.getIdBiblioteca());
 			// Codice iccu
-			biblioModel.setCodice(Utility.createIccuCode(biblioteca.getIsilStato(), biblioteca.getIsilProvincia(), "" + biblioteca.getIsilNumero()));
+			biblioModel.setCodice(Utility.buildIsil(biblioteca.getIsilStato(), biblioteca.getIsilProvincia(), "" + biblioteca.getIsilNumero()));
 			biblioModel.setDenominazione(biblioteca.getDenominazioneUfficiale());
 			biblioModel.setIndirizzo(biblioteca.getIndirizzo());
 			// Comune
@@ -184,7 +184,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			// Id biblioteca
 			biblioModel.setIdBiblio(biblioteca.getIdBiblioteca());
 			// Codice iccu
-			biblioModel.setCodice(Utility.createIccuCode(biblioteca.getIsilStato(), biblioteca.getIsilProvincia(), "" + biblioteca.getIsilNumero()));
+			biblioModel.setCodice(Utility.buildIsil(biblioteca.getIsilStato(), biblioteca.getIsilProvincia(), "" + biblioteca.getIsilNumero()));
 			biblioModel.setDenominazione(biblioteca.getDenominazioneUfficiale());
 			biblioModel.setIndirizzo(biblioteca.getIndirizzo());
 			// Comune
@@ -236,7 +236,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			biblioModel.setIdBiblio(entry.getIdBiblioteca());
 
 			/* Codice iccu */
-			biblioModel.setCodice(Utility.createIccuCode(entry.getIsilStato(), entry.getIsilProvincia(), "" + entry.getIsilNumero()));
+			biblioModel.setCodice(Utility.buildIsil(entry.getIsilStato(), entry.getIsilProvincia(), "" + entry.getIsilNumero()));
 			biblioModel.setDenominazione(entry.getDenominazioneUfficiale());
 			biblioModel.setIndirizzo(entry.getIndirizzo());
 
@@ -439,21 +439,15 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	@Override
 	public List<VoceUnicaModel> getDenominazioniAlternative(int id_biblioteca) {
 
-		List<DenominazioniAlternative> denominazioniAlternatives = abiBiblioLogic
-		.getDenominazioniAlternative(id_biblioteca);
+		List<DenominazioniAlternative> denominazioniAlternatives = abiBiblioLogic.getDenominazioniAlternative(id_biblioteca);
 		List<VoceUnicaModel> voceUnicaModels = new ArrayList<VoceUnicaModel>();
-		Iterator<DenominazioniAlternative> it = denominazioniAlternatives
-		.iterator();
+		Iterator<DenominazioniAlternative> it = denominazioniAlternatives.iterator();
 		while (it.hasNext()) {
-			DenominazioniAlternative denominazioniAlternative = (DenominazioniAlternative) it
-			.next();
+			DenominazioniAlternative denominazioniAlternative = (DenominazioniAlternative) it.next();
 			VoceUnicaModel voceUnicaModel = new VoceUnicaModel();
-			voceUnicaModel
-			.setEntry(denominazioniAlternative.getDenominazione());
-			voceUnicaModel.setIdBiblioteca(denominazioniAlternative
-					.getBiblioteca().getIdBiblioteca());
-			voceUnicaModel.setIdRecord(denominazioniAlternative
-					.getIdDenominazioniAlternative());
+			voceUnicaModel.setEntry(denominazioniAlternative.getDenominazione());
+			voceUnicaModel.setIdBiblioteca(denominazioniAlternative.getBiblioteca().getIdBiblioteca());
+			voceUnicaModel.setIdRecord(denominazioniAlternative.getIdDenominazioniAlternative());
 
 			voceUnicaModels.add(voceUnicaModel);
 		}
@@ -722,7 +716,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		// Id biblioteca
 		biblioModel.setIdBiblio(biblioteca.getIdBiblioteca());
 		// Codice iccu
-		biblioModel.setCodice(Utility.createIccuCode(biblioteca.getIsilStato(),	biblioteca.getIsilProvincia(), "" + biblioteca.getIsilNumero()));
+		biblioModel.setCodice(Utility.buildIsil(biblioteca.getIsilStato(),	biblioteca.getIsilProvincia(), "" + biblioteca.getIsilNumero()));
 		biblioModel.setDenominazione(biblioteca.getDenominazioneUfficiale());
 		biblioModel.setIndirizzo(biblioteca.getIndirizzo());
 		// Comune
@@ -2318,7 +2312,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			biblioModel.setIdBiblio(biblioteca.getIdBiblioteca());
 
 			// Codice iccu
-			biblioModel.setCodice(Utility.createIccuCode(
+			biblioModel.setCodice(Utility.buildIsil(
 					biblioteca.getIsilStato(), biblioteca.getIsilProvincia(),
 					"" + biblioteca.getIsilNumero()));
 			biblioModel
@@ -2361,7 +2355,10 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			int id_biblioteca) {
 		List<VoceUnicaModel> modalitaModels = new ArrayList<VoceUnicaModel>();
 
-		List<ServiziInformazioniBibliograficheModalita> bibliograficheModalitas = abiBiblioLogic.getModalitaComunicazioniBibliograficheByIdBiblio(id_biblioteca);
+		List<ServiziInformazioniBibliograficheModalita> bibliograficheModalitas =
+				abiBiblioLogic.
+				getModalitaComunicazioniBibliograficheByIdBiblio(id_biblioteca);
+		
 		Iterator<ServiziInformazioniBibliograficheModalita> it=bibliograficheModalitas.iterator();
 		while (it.hasNext()) {
 			//MAPPING ServiziInformazioniBibliograficheModalita --->VoceUnicaModel

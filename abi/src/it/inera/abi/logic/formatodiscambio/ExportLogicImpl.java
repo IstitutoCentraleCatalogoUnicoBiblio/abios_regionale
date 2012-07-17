@@ -145,7 +145,7 @@ public class ExportLogicImpl implements ExportLogic {
 			fileWriter.write(username + "\n");
 			for (int i = 0; i < idBiblios.length; i++) {
 				Biblioteca biblioteca = biblioDao.getBibliotecaById(Integer.valueOf(idBiblios[i]));
-				String iccuCod = Utility.createIccuCode(biblioteca.getIsilStato(), biblioteca.getIsilProvincia(), String.valueOf(biblioteca.getIsilNumero()));
+				String iccuCod = Utility.buildIsil(biblioteca.getIsilStato(), biblioteca.getIsilProvincia(), String.valueOf(biblioteca.getIsilNumero()));
 				fileWriter.write(idBiblios[i] + "|||" + iccuCod + "|||" + biblioteca.getDenominazioneUfficiale() + "\n");
 			}
 			fileWriter.flush();
