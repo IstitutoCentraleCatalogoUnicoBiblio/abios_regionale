@@ -643,4 +643,8 @@ public class DtoJpaMapping {
 	/*1*/	/* 35 */public static final int CATALOGHI_COLLETTIVI_ZONA_TIPO_INDEX = 35;
 	//RIMOSSO DOPPIONE TABELLA DINAMICA
 	//	/*1*/	/* 36 */public static final int STATO_CATALOGAZIONE_BIBLIOTECHE_INDEX = 36;
+	
+	public static Hashtable<Integer, Class<?>> getDynaClasses() {
+		return dynaClasses;
+	}
 }
