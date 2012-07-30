@@ -174,14 +174,6 @@ public class TabelleDinamicheView extends View {
 			wrapper.add(listaVociSingole, center);	
 			break;
 		}
-		case 11: {/* ENTI_FUNZIONI_OBIETTIVI */
-			listaVociSingole.setTableType(tableId);
-			listaVociSingole.setHeading(CostantiTabelleDinamiche.ENTI_FUNZIONI_OBIETTIVI);
-			
-			listaVociSingole.layout();
-			wrapper.add(listaVociSingole, center);	
-			break;
-		}
 		case 12: {/* TIPOLOGIE_FUNZIONALI */
 			listaVociSingole.setTableType(tableId);
 			listaVociSingole.setHeading(CostantiTabelleDinamiche.TIPOLOGIE_FUNZIONALI);
@@ -193,14 +185,6 @@ public class TabelleDinamicheView extends View {
 		case 13: {/* CATALOGAZIONE_STATI_BIBLIOTECHE */
 			listaVociSingole.setTableType(tableId);
 			listaVociSingole.setHeading(CostantiTabelleDinamiche.CATALOGAZIONE_STATI_BIBLIOTECHE);
-
-			listaVociSingole.layout();
-			wrapper.add(listaVociSingole, center);	
-			break;
-		}
-		case 14: {/* Thesaurus */
-			listaVociSingole.setTableType(tableId);
-			listaVociSingole.setHeading(CostantiTabelleDinamiche.THESAURUS);
 
 			listaVociSingole.layout();
 			wrapper.add(listaVociSingole, center);	

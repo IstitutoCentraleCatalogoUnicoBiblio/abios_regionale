@@ -57,10 +57,8 @@ public class AppEvents {
 	/* 09 */public static final EventType AccessoModalita = new EventType();
 	/* 10 */public static final EventType AccessoInternetTipologie = new EventType();
 	/* 11 */public static final EventType EntiTipologieAmministrative = new EventType();
-	/* 12 */public static final EventType EntiFunzioniObiettivi = new EventType();
 	/* 13 */public static final EventType TipologieFunzionali = new EventType();
 	/* 14 */public static final EventType CatalogazioneStatiBiblioteche = new EventType();
-	/* 15 */public static final EventType Thesaurus = new EventType();
 	/* 16 */public static final EventType Dewey = new EventType();
 	/* 17 */public static final EventType ContattiTipi = new EventType();
 	/* 18 */public static final EventType RiproduzioniTipi = new EventType();
@@ -128,10 +126,8 @@ public class AppEvents {
 		/* 09 */tabDinEvents.add(AccessoModalita);
 		/* 10 */tabDinEvents.add(AccessoInternetTipologie);
 		/* 11 */tabDinEvents.add(EntiTipologieAmministrative);
-		/* 12 */tabDinEvents.add(EntiFunzioniObiettivi);
 		/* 13 */tabDinEvents.add(TipologieFunzionali);
 		/* 14 */tabDinEvents.add(CatalogazioneStatiBiblioteche);
-		/* 15 */tabDinEvents.add(Thesaurus);
 		/* 16 */tabDinEvents.add(Dewey);
 		/* 17 */tabDinEvents.add(ContattiTipi);
 		/* 18 */tabDinEvents.add(RiproduzioniTipi);

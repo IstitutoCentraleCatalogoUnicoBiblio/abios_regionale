@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: ServiziType.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: ServiziType.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -14,7 +14,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  condizioni di accesso e diverse altre informazioni.
  *  
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
  */
 @SuppressWarnings("serial")
 public abstract class ServiziType implements java.io.Serializable {
@@ -41,6 +41,13 @@ public abstract class ServiziType implements java.io.Serializable {
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.Prestito _prestito;
+
+    /**
+     * Con questo elemento si dà la possibilità di 
+     *  inserire una lista di riproduzioni ammesse. 
+     *  
+     */
+    private it.inera.abi.logic.formatodiscambio.castor.Riproduzioni _riproduzioni;
 
     /**
      * Per segnalare la disponibilità del servizio
@@ -178,6 +185,20 @@ public abstract class ServiziType implements java.io.Serializable {
     }
 
     /**
+     * Returns the value of field 'riproduzioni'. The field
+     * 'riproduzioni' has the following description: Con questo
+     * elemento si dà la possibilità di 
+     *  inserire una lista di riproduzioni ammesse. 
+     *  
+     * 
+     * @return the value of field 'Riproduzioni'.
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.Riproduzioni getRiproduzioni(
+    ) {
+        return this._riproduzioni;
+    }
+
+    /**
      * Returns the value of field 'serviziOrario'. The field
      * 'serviziOrario' has the following description: Questo
      * elemento non ripetibile raggruppa tutte
@@ -312,6 +333,20 @@ public abstract class ServiziType implements java.io.Serializable {
     public void setPrestito(
             final it.inera.abi.logic.formatodiscambio.castor.Prestito prestito) {
         this._prestito = prestito;
+    }
+
+    /**
+     * Sets the value of field 'riproduzioni'. The field
+     * 'riproduzioni' has the following description: Con questo
+     * elemento si dà la possibilità di 
+     *  inserire una lista di riproduzioni ammesse. 
+     *  
+     * 
+     * @param riproduzioni the value of field 'riproduzioni'.
+     */
+    public void setRiproduzioni(
+            final it.inera.abi.logic.formatodiscambio.castor.Riproduzioni riproduzioni) {
+        this._riproduzioni = riproduzioni;
     }
 
     /**

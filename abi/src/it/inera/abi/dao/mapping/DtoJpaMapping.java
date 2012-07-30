@@ -9,7 +9,6 @@ import it.inera.abi.persistence.ContattiTipo;
 import it.inera.abi.persistence.DepositiLegaliTipo;
 import it.inera.abi.persistence.DestinazioniSocialiTipo;
 import it.inera.abi.persistence.Dewey;
-import it.inera.abi.persistence.EnteObiettivo;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.FondiSpecialiCatalogazioneInventario;
 import it.inera.abi.persistence.IndicizzazioneClassificata;
@@ -25,7 +24,6 @@ import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
 import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import it.inera.abi.persistence.StatoCatalogazioneTipo;
-import it.inera.abi.persistence.Thesaurus;
 import it.inera.abi.persistence.TipologiaFunzionale;
 
 import java.util.Hashtable;
@@ -76,18 +74,6 @@ public class DtoJpaMapping {
 			return eta;
 		}
 
-		if (dto.getIdTabella() == /*11*/ENTI_FUNZIONI_OBIETTIVI_INDEX) {
-			EnteObiettivo efo = new EnteObiettivo();
-			if(modifica)
-				efo.setIdEnteObiettivo(dto.getId());
-			if(dto.getValue()!=null){
-				efo.setDescrizione(dto.getValue());
-			}
-			return efo;
-		}
-
-
-
 		if (dto.getIdTabella() == /*12*/TIPOLOGIE_FUNZIONALI_INDEX) {
 			TipologiaFunzionale tpf = new TipologiaFunzionale();
 			if(modifica)
@@ -109,16 +95,6 @@ public class DtoJpaMapping {
 			}
 			return stato;
 		}	
-
-		if (dto.getIdTabella() == /*14*/THESAURUS_INDEX) {
-			Thesaurus t = new Thesaurus();
-			if(modifica)
-				t.setIdThesaurus(dto.getId());
-			if(dto.getValue()!=null){
-				t.setDescrizione(dto.getValue());
-			}
-			return t;
-		}
 
 		if (dto.getIdTabella() == /*16*/CONTATTI_TIPI_INDEX) {
 			ContattiTipo ct = new ContattiTipo();
@@ -317,11 +293,8 @@ public class DtoJpaMapping {
 			dynaClasses.put(/*7*/DESTINAZIONI_SOCIALI_TIPOLOGIE_INDEX,  DestinazioniSocialiTipo.class);
 			dynaClasses.put(/*9*/ACCESSO_MODALITA_INDEX,  AccessoModalita.class);
 			dynaClasses.put(/*10*/ENTI_TIPOLOGIE_AMMINISTRATIVE_INDEX, EnteTipologiaAmministrativa.class);			
-			dynaClasses.put(/*11*/ENTI_FUNZIONI_OBIETTIVI_INDEX, EnteObiettivo.class);			
-
 			dynaClasses.put(/*12*/TIPOLOGIE_FUNZIONALI_INDEX, TipologiaFunzionale.class);
 			dynaClasses.put(/*13*/CATALOGAZIONE_STATI_BIBLIOTECHE_INDEX, StatoCatalogazioneTipo.class);
-			dynaClasses.put(/*14*/THESAURUS_INDEX, Thesaurus.class);
 			dynaClasses.put(/*16*/CONTATTI_TIPI_INDEX, ContattiTipo.class);
 			dynaClasses.put(/*17*/RIPRODUZIONI_TIPI_INDEX, RiproduzioniTipo.class);	
 			dynaClasses.put(/*18*/SERVIZI_MODALITA_COMUNICAZIONE_INFOTMAZIONI_BIBLIOGRAFICHE_INDEX, ServiziInformazioniBibliograficheModalita.class);	
@@ -393,15 +366,6 @@ public class DtoJpaMapping {
 
 		}
 
-		if (dynaRecord instanceof EnteObiettivo) {
-			EnteObiettivo eta = (EnteObiettivo) dynaRecord;
-			dto.setId(eta.getIdEnteObiettivo());
-			dto.setValue(eta.getDescrizione());
-			dto.setIdTabella(/*11*/ENTI_FUNZIONI_OBIETTIVI_INDEX);
-
-			return dto;
-
-		}
 		if (dynaRecord instanceof TipologiaFunzionale) {
 			TipologiaFunzionale tpf = (TipologiaFunzionale) dynaRecord;
 			dto.setId(tpf.getIdTipologiaFunzionale());
@@ -419,15 +383,6 @@ public class DtoJpaMapping {
 			dto.setValue(st.getDescrizione());
 			dto.setIdTabella(/*13*/CATALOGAZIONE_STATI_BIBLIOTECHE_INDEX);
 
-			return dto;
-
-		}
-
-		if (dynaRecord instanceof Thesaurus) {
-			Thesaurus t = (Thesaurus) dynaRecord;
-			dto.setId(t.getIdThesaurus());
-			dto.setValue(t.getDescrizione());
-			dto.setIdTabella(/*14*/THESAURUS_INDEX);
 			return dto;
 
 		}
@@ -616,7 +571,6 @@ public class DtoJpaMapping {
 	/*1*/	/* 08 */public static final int ACCESSO_UTENTI_AMMESSI_INDEX =8;
 	/*1*/	/* 09 */public static final int ACCESSO_MODALITA_INDEX = 9;
 	/*1*/	/* 10 */public static final int ENTI_TIPOLOGIE_AMMINISTRATIVE_INDEX = 10;
-	/*1*/	/* 11 */public static final int ENTI_FUNZIONI_OBIETTIVI_INDEX = 11;
 	/*1*/	/* 12 */public static final int TIPOLOGIE_FUNZIONALI_INDEX =12;
 	/*1*/	/* 13 */public static final int CATALOGAZIONE_STATI_BIBLIOTECHE_INDEX = 13;
 	/*1*/	/* 14 */public static final int THESAURUS_INDEX = 14;

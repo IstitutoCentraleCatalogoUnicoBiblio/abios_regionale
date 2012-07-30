@@ -32,10 +32,8 @@
 		<class>it.inera.abi.persistence.DeweyLibero</class>
 		<class>it.inera.abi.persistence.DeweyLiberoPK</class>
 		<class>it.inera.abi.persistence.Ente</class>
-		<class>it.inera.abi.persistence.EnteObiettivo</class>
 		<class>it.inera.abi.persistence.EnteTipologiaAmministrativa</class>
 		<class>it.inera.abi.persistence.FondiAntichiConsistenza</class>
-		<!-- class>it.inera.abi.persistence.FondiDigitali</class-->
 		<class>it.inera.abi.persistence.FondiSpeciali</class>
 		<class>it.inera.abi.persistence.FondiSpecialiCatalogazioneInventario</class>
 		<class>it.inera.abi.persistence.Geolocalizzazione</class>
@@ -76,7 +74,6 @@
 		<class>it.inera.abi.persistence.StatoCatalogazione</class>
 		<class>it.inera.abi.persistence.StatoCatalogazionePK</class>
 		<class>it.inera.abi.persistence.StatoCatalogazioneTipo</class>
-		<class>it.inera.abi.persistence.Thesaurus</class>
 		<class>it.inera.abi.persistence.TipologiaFunzionale</class>
 		<class>it.inera.abi.persistence.Utenti</class>
 		<class>it.inera.abi.persistence.NuovaBiblioteca</class>

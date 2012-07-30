@@ -186,6 +186,10 @@ public class ModificaBibliotecaView extends View {
 
 		if (event.getType() == AppEvents.ReloadBiblioData) {
 			tmpBiblio = (BiblioModel) event.getData("biblioteca");
+			serviziSezioniSpecialiPanel.setBiblioteca(tmpBiblio);
+			serviziSezioniSpecialiPanel.setFieldsValues();
+			prestitoPanel.setBiblioteca(tmpBiblio);
+			prestitoPanel.setFieldsValues();
 		}
 
 		return;

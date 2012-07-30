@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: InformazioniBibliograficheDescriptor.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: InformazioniBibliograficheDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.InformazioniBibliografiche;
 /**
  * Class InformazioniBibliograficheDescriptor.
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
  */
 public class InformazioniBibliograficheDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -64,6 +64,47 @@ public class InformazioniBibliograficheDescriptor extends org.exolab.castor.xml.
         org.exolab.castor.xml.FieldValidator               fieldValidator = null;
         //-- initialize attribute descriptors
 
+        //-- _attivo
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, "_attivo", "attivo", org.exolab.castor.xml.NodeType.Attribute);
+        handler = new org.exolab.castor.xml.XMLFieldHandler() {
+            @Override
+            public java.lang.Object getValue( java.lang.Object object ) 
+                throws IllegalStateException
+            {
+                InformazioniBibliografiche target = (InformazioniBibliografiche) object;
+                return target.getAttivo();
+            }
+            @Override
+            public void setValue( java.lang.Object object, java.lang.Object value) 
+                throws IllegalStateException, IllegalArgumentException
+            {
+                try {
+                    InformazioniBibliografiche target = (InformazioniBibliografiche) object;
+                    target.setAttivo( (it.inera.abi.logic.formatodiscambio.castor.types.SiNoType) value);
+                } catch (java.lang.Exception ex) {
+                    throw new IllegalStateException(ex.toString());
+                }
+            }
+            @Override
+            @SuppressWarnings("unused")
+            public java.lang.Object newInstance(java.lang.Object parent) {
+                return null;
+            }
+        };
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, handler);
+        desc.setImmutable(true);
+        desc.setSchemaType("SiNoType");
+        desc.setHandler(handler);
+        desc.setRequired(true);
+        desc.setMultivalued(false);
+        addFieldDescriptor(desc);
+
+        //-- validation code for: _attivo
+        fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        fieldValidator.setMinOccurs(1);
+        { //-- local scope
+        }
+        desc.setValidator(fieldValidator);
         //-- initialize element descriptors
 
         //-- _servizioInterno

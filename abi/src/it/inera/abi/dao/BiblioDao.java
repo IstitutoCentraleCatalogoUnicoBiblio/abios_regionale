@@ -274,9 +274,9 @@ public interface BiblioDao {
 	
 	public int countAllBibliotechePerReport(HashMap<String, Object> keys);
 	
-	public void setServizioBibliogrficoInternoEsterno(int id_biblioteca,Boolean hasServizioBibliograficoInterno,
+	public void setServizioBibliograficoInternoEsterno(int id_biblioteca, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno,
 			Boolean hasServizioBibliograficoEsterno);
-
+			
 	public List<ServiziInformazioniBibliograficheModalita> getModalitaComunicazioniBibliograficheByIdBiblio(
 			int id_biblioteca);
 
@@ -291,7 +291,7 @@ public interface BiblioDao {
 
 	public void addSezioniSpeciali(int id_biblioteca, Integer idRecord) throws DuplicateEntryException;
 
-	public void updateModalitaAccessoInternet(int id_biblioteca,Boolean hasAccessoPagamento, Boolean hasAccessoTempo,
+	public void updateModalitaAccessoInternet(int id_biblioteca, Boolean hasAttivoAccesso, Boolean hasAccessoPagamento, Boolean hasAccessoTempo,
 			Boolean hasAccessoProxy);
 
 	public List<PrestitoLocale> getPrestitiLocaliByIdBiblio(int id_biblioteca);
@@ -351,6 +351,11 @@ public interface BiblioDao {
 	Biblioteca[] getBibliotecheByCodABI6CharsCode(String[] codABI, int firstResult,int maxResult);
 	
 	public void removePrestitoInterbibliotecarioNotUsedByOtherBibs(List<PrestitoInterbibliotecario> prestList, int idBib);
+	
+	public void removeRiproduzioniFromBiblio(Biblioteca biblioteca);
+	
+	public void removePrestitoLocaleFromBiblio(Biblioteca biblioteca);
+
 }
  
 

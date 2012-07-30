@@ -38,7 +38,6 @@ public class InfoCatalogazionePanel extends ContentPanelForTabItem {
 	private ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel listaIndicizzazioneClassificataPanel;
 	private ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel listaIndicizzazionePerSoggettoPanel;
 	private ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel listaNormeCatalogazionePanel;
-	private ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel listaThesaurusPanel;
 	private	ListaSpogliMaterialeBibliografico listaSpogliMaterialeBibliografico; 
 	private ListaPubblicazioniPanel listaPubblicazioniPanel;
 
@@ -90,22 +89,6 @@ public class InfoCatalogazionePanel extends ContentPanelForTabItem {
 		normeCatalogazione.add(normeCatalogazioneSet);
 		add(normeCatalogazione);
 		/* FINE---NORME DI CATALOGAZIONE */
-
-		/* THESAURUS */
-		LayoutContainer thesaurus = new LayoutContainer();
-		thesaurus.setStyleAttribute("padding", "5px");
-
-		FieldSet thesaurusSet = new FieldSet();
-		Utils.setFieldSetProperties(thesaurusSet, "Thesaurus");
-		thesaurusSet.setCollapsible(true);
-
-		listaThesaurusPanel = new ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel(CostantiTabelleDinamiche.THESAURUS_INDEX, CostantiTabelleDinamiche.THESAURUS);
-		listaThesaurusPanel.setGrid();
-		thesaurusSet.add(listaThesaurusPanel);
-
-		thesaurus.add(thesaurusSet);
-		add(thesaurus);
-		/* FINE---THESAURUS */
 
 		/* SPOGLI MATERIALE BIBLIOGRAFICO */
 		LayoutContainer spogliMaterialeBibliografico = new LayoutContainer();
@@ -251,8 +234,6 @@ public class InfoCatalogazionePanel extends ContentPanelForTabItem {
 		listaIndicizzazionePerSoggettoPanel.getLoader().load();
 		listaNormeCatalogazionePanel.setIdBiblioteca(biblioteca.getIdBiblio());
 		listaNormeCatalogazionePanel.getLoader().load();
-		listaThesaurusPanel.setIdBiblioteca(biblioteca.getIdBiblio());
-		listaThesaurusPanel.getLoader().load();
 		listaSpogliMaterialeBibliografico.setIdBiblioteca(biblioteca.getIdBiblio());
 		listaSpogliMaterialeBibliografico.getLoader().load();
 		listaPubblicazioniPanel.setIdBiblioteca(biblioteca.getIdBiblio());

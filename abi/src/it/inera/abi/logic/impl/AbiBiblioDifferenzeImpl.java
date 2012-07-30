@@ -29,7 +29,6 @@ import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
 import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import it.inera.abi.persistence.SpogliBibliografici;
-import it.inera.abi.persistence.Thesaurus;
 import it.inera.abi.persistence.TipologiaFunzionale;
 
 import java.io.File;
@@ -818,39 +817,6 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 		} 
 	}
 
-	private void compareThesauruses(List<Differenze> differenze, Biblioteca bibliotecaSalvata, Biblioteca bibliotecaAttuale) {
-		if (bibliotecaAttuale.getThesauruses() != null) {
-			boolean found = false;
-			for (Thesaurus thesaurusAttuale : bibliotecaAttuale.getThesauruses()) {
-				if (bibliotecaSalvata.getThesauruses() != null) {
-					for (Thesaurus thesaurusSalvata : bibliotecaAttuale.getThesauruses()) {
-						if (CompareUtils.equals(thesaurusSalvata.getDescrizione(), thesaurusAttuale.getDescrizione())) {
-							found = true;
-							break;
-						}
-					}
-				}
-				if (!found) createDifference(differenze, "Thesaurus", null, thesaurusAttuale.getDescrizione());
-				found = false;
-			}
-		} 
-		if (bibliotecaSalvata.getThesauruses() != null) {
-			boolean found = false;
-			for (Thesaurus thesaurusSalvata : bibliotecaSalvata.getThesauruses()) {
-				if (bibliotecaAttuale.getThesauruses() != null) {
-					for (Thesaurus thesaurusAttuale : bibliotecaAttuale.getThesauruses()) {
-						if (CompareUtils.equals(thesaurusSalvata.getDescrizione(), thesaurusAttuale.getDescrizione())) {
-							found = true;
-							break;
-						}
-					}
-				}
-				if (!found) createDifference(differenze, "Thesaurus", thesaurusSalvata.getDescrizione(), null);
-				found = false;
-			}
-		} 
-	}
-	
 	private void compareNormeCatalogazione(List<Differenze> differenze, Biblioteca bibliotecaSalvata, Biblioteca bibliotecaAttuale) {
 		if (bibliotecaAttuale.getNormeCatalogaziones() != null) {
 			boolean found = false;
@@ -1286,9 +1252,6 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 			
 			// ******** norme di catalogazione ***********
 			//compareNormeCatalogazione(differenze, bibliotecaSalvata, bibliotecaAttuale);
-			
-			// ******** Thesaurus **********
-			//compareThesauruses(differenze, bibliotecaSalvata, bibliotecaAttuale);
 			
 			// ******** Spogli materiale bibliografico **********
 			//compareSpogliMaterialeBibliografico(differenze, bibliotecaSalvata, bibliotecaAttuale);

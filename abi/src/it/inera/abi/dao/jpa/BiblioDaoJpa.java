@@ -25,7 +25,6 @@ import it.inera.abi.persistence.Dewey;
 import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.DeweyLiberoPK;
 import it.inera.abi.persistence.Ente;
-import it.inera.abi.persistence.EnteObiettivo;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.FondiAntichiConsistenza;
 import it.inera.abi.persistence.FondiSpeciali;
@@ -64,7 +63,6 @@ import it.inera.abi.persistence.Stato;
 import it.inera.abi.persistence.StatoBibliotecaWorkflow;
 import it.inera.abi.persistence.StatoCatalogazione;
 import it.inera.abi.persistence.StatoCatalogazionePK;
-import it.inera.abi.persistence.Thesaurus;
 import it.inera.abi.persistence.TipologiaFunzionale;
 import it.inera.abi.persistence.Utenti;
 
@@ -89,6 +87,7 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -328,6 +327,7 @@ public class BiblioDaoJpa implements BiblioDao {
 
 			if (keys.containsKey("tipologiaAmministrativa")
 					&& (keys.get("tipologiaAmministrativa") != null)) {
+				
 				String tipAmm = ((Integer) keys.get("tipologiaAmministrativa")).toString();
 				
 				if (tipAmm.length() > 1 && tipAmm.substring((tipAmm.length()-2), tipAmm.length()).equals("00")) {
@@ -336,7 +336,6 @@ public class BiblioDaoJpa implements BiblioDao {
 				} else {
 					criteria.add("b.ente.enteTipologiaAmministrativa = :enteTipologiaAmministrativa");
 				}
-				
 			}
 
 			if (keys.containsKey("importate") && keys.get("importate") != null) {
@@ -1649,10 +1648,6 @@ public class BiblioDaoJpa implements BiblioDao {
 		List<?> resultList = null;
 
 		switch (idTabellaDinamica) {
-		case DtoJpaMapping.THESAURUS_INDEX: {
-			resultList = (List<?>) biblioteca.getThesauruses();
-			break;
-		}
 		case DtoJpaMapping.CATALOGAZIONE_NORME_INDEX: {
 			resultList = (List<?>) biblioteca.getNormeCatalogaziones();
 			break;
@@ -1695,25 +1690,6 @@ public class BiblioDaoJpa implements BiblioDao {
 		List resultList = null;
 
 		switch (idTabellaDinamica) {
-		case DtoJpaMapping.THESAURUS_INDEX: {// THESAURUS
-			Thesaurus thesaurus = (Thesaurus) DtoJpaMapping
-			.dto2DynaRecord(dynaTabDTODB,true);
-			resultList = biblioteca.getThesauruses();
-
-			//Controllo che la voce sa salvare non esista già
-			Iterator<Thesaurus> it=resultList.iterator();
-			while (it.hasNext()) {
-				Thesaurus tmp = (Thesaurus) it.next();
-				if(tmp.getIdThesaurus().intValue()==thesaurus.getIdThesaurus().intValue()){
-					//Se esiste già ritorno eccezione con  opportuno messaggio
-					throw new DuplicateEntryException(DUPLICATE_ENTRY_ERROR_MESSAGE);
-				}
-			}
-
-			resultList.add(thesaurus);
-			biblioteca.setThesauruses(resultList);
-			break;
-		}
 		case DtoJpaMapping.CATALOGAZIONE_NORME_INDEX: {// NORME CATALOGAZIONE
 			NormeCatalogazione normeCatalogazione = (NormeCatalogazione) DtoJpaMapping
 			.dto2DynaRecord(dynaTabDTODB,true);
@@ -1811,17 +1787,6 @@ public class BiblioDaoJpa implements BiblioDao {
 		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
 		List resultList = null;
 		switch (idTabellaDinamica) {
-		case DtoJpaMapping.THESAURUS_INDEX: {// Thesaurus
-			Thesaurus thesaurus = em.find(Thesaurus.class, id_rimuoviRecord);
-			resultList = biblioteca.getThesauruses();
-			Iterator<?> it = resultList.iterator();
-			while (it.hasNext()) {
-				// Iterazione anti-lazy
-				Object object = (Object) it.next();
-			}
-			resultList.remove(thesaurus);
-			biblioteca.setThesauruses(resultList);
-		}
 		case DtoJpaMapping.CATALOGAZIONE_NORME_INDEX: {// NORME CATALOGAZIONE
 			NormeCatalogazione normeCatalogazione = em.find(
 					NormeCatalogazione.class, id_rimuoviRecord);
@@ -3000,7 +2965,8 @@ public class BiblioDaoJpa implements BiblioDao {
 						}
 						
 					}
-				}				
+				}
+
 			}
 
 			if (keys.containsKey("utentiUltimaModifica") && keys.get("utentiUltimaModifica") != null) {
@@ -3025,6 +2991,7 @@ public class BiblioDaoJpa implements BiblioDao {
 				}
 			}
 
+			
 			criteria.add("b.statoBibliotecaWorkflow.idStato != 4");
 			
 			if ((keys != null && keys.size() > 0) || criteria.size() > 0) {
@@ -3038,7 +3005,8 @@ public class BiblioDaoJpa implements BiblioDao {
 				}
 				sb.append(criteria.get(i));
 			}
-			
+
+
 		}
 
 		if (StringUtils.isNotBlank(orderByField) && StringUtils.isNotBlank(orderByDir)) {
@@ -3302,6 +3270,7 @@ public class BiblioDaoJpa implements BiblioDao {
 				
 					}
 				}
+
 			}
 
 			if (keys.get("utentiUltimaModifica") != null) {
@@ -3835,6 +3804,7 @@ public class BiblioDaoJpa implements BiblioDao {
 						}
 					}
 				}
+
 			}
 
 			if (keys.containsKey("utentiUltimaModifica") && keys.get("utentiUltimaModifica") != null) {
@@ -3858,9 +3828,9 @@ public class BiblioDaoJpa implements BiblioDao {
 					}
 				}
 			}
-
-			criteria.add("b.statoBibliotecaWorkflow.idStato != 4");
 			
+			criteria.add("b.statoBibliotecaWorkflow.idStato != 4");
+
 			if ((keys != null && keys.size() > 0) || criteria.size() > 0) {
 				sb.append("WHERE ");
 			}
@@ -3873,6 +3843,7 @@ public class BiblioDaoJpa implements BiblioDao {
 				}
 				sb.append(criteria.get(i));
 			}
+
 
 		}
 		Query q = em.createQuery(sb.toString());
@@ -4106,6 +4077,7 @@ public class BiblioDaoJpa implements BiblioDao {
 				
 					}
 				}
+
 			}
 
 			if (keys.get("utentiUltimaModifica") != null) {
@@ -4132,11 +4104,16 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public void setServizioBibliogrficoInternoEsterno(int id_biblioteca,Boolean hasServizioBibliograficoInterno,
+	public void setServizioBibliograficoInternoEsterno(int id_biblioteca, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno,
 			Boolean hasServizioBibliograficoEsterno) {
 		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+		biblioteca.setAttivoInformazioniBibliografiche(hasAttivoInformazioniBibliografiche);
 		biblioteca.setGestisceServizioBibliograficoInterno(hasServizioBibliograficoInterno);
 		biblioteca.setGestisceServizioBibliograficoEsterno(hasServizioBibliograficoEsterno);
+		if (BooleanUtils.isFalse(hasServizioBibliograficoEsterno)) {
+			/* Se non è presente il servizio esterno, annullo tutte le modalità salvate per la biblioteca */
+			biblioteca.getServiziInformazioniBibliograficheModalitas().clear();
+		}
 		em.merge(biblioteca);
 	}
 
@@ -4262,9 +4239,10 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public void updateModalitaAccessoInternet(int id_biblioteca,Boolean hasAccessoPagamento, Boolean hasAccessoTempo,
+	public void updateModalitaAccessoInternet(int id_biblioteca, Boolean hasAttivoAccesso, Boolean hasAccessoPagamento, Boolean hasAccessoTempo,
 			Boolean hasAccessoProxy) {
 		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+		biblioteca.setAttivoAccessoInternet(hasAttivoAccesso);
 		biblioteca.setAccessoInternetPagamento(hasAccessoPagamento);
 		biblioteca.setAccessoInternetTempo(hasAccessoTempo);
 		biblioteca.setAccessoInternetProxy(hasAccessoProxy);
@@ -4667,7 +4645,7 @@ public class BiblioDaoJpa implements BiblioDao {
 	@Transactional
 	public Vector<Biblioteca> getBibliotecheReport(List<Integer> idbibs) {
 		Vector<Biblioteca> bibvector = new Vector<Biblioteca>();
-		
+
 		if (idbibs != null && idbibs.size() != 0) {
 
 			for (Integer entry : idbibs) {
@@ -4740,7 +4718,6 @@ public class BiblioDaoJpa implements BiblioDao {
 		biblioteca.getSpogliBibliograficis().size();
 		biblioteca.getStatoBibliotecaWorkflow(); // ?
 		biblioteca.getStatoCatalogaziones().size();
-		biblioteca.getThesauruses().size();
 		biblioteca.getTipologiaFunzionale(); //?
 		biblioteca.getUtenteUltimaModifica(); //*
 		biblioteca.getUtentisGestori().size();
@@ -4991,7 +4968,29 @@ public class BiblioDaoJpa implements BiblioDao {
 		
 	}
 	
+	@Override
+	@Transactional
+	public void removeRiproduzioniFromBiblio(Biblioteca biblioteca) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(" DELETE FROM Riproduzioni r ");
+		sb.append(" WHERE r.biblioteca = :biblioteca ");
+
+		Query q = em.createQuery(sb.toString());
+		q.setParameter("biblioteca", biblioteca);
+		q.executeUpdate();
+	}
 	
+	@Override
+	@Transactional
+	public void removePrestitoLocaleFromBiblio(Biblioteca biblioteca) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(" DELETE FROM PrestitoLocale pl ");
+		sb.append(" WHERE pl.biblioteca = :biblioteca ");
+
+		Query q = em.createQuery(sb.toString());
+		q.setParameter("biblioteca", biblioteca);
+		q.executeUpdate();
+	}
 	public static void main(String[] args) {
 		String test = "Sun Jan 01 00:00:00 2012";
 		SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy",  Locale.ENGLISH);

@@ -1,4 +1,4 @@
-#Fri Jun 29 12:03:34 CEST 2012
+#Thu Jul 19 09:41:25 CEST 2012
 it.inera.abi.logic.formatodiscambio.castor.Coordinate=it.inera.abi.logic.formatodiscambio.castor.descriptors.CoordinateDescriptor
 it.inera.abi.logic.formatodiscambio.castor.Zona=it.inera.abi.logic.formatodiscambio.castor.descriptors.ZonaDescriptor
 it.inera.abi.logic.formatodiscambio.castor.Biblioteca=it.inera.abi.logic.formatodiscambio.castor.descriptors.BibliotecaDescriptor
@@ -41,6 +41,7 @@ it.inera.abi.logic.formatodiscambio.castor.Ufficiale=it.inera.abi.logic.formatod
 it.inera.abi.logic.formatodiscambio.castor.Materiale=it.inera.abi.logic.formatodiscambio.castor.descriptors.MaterialeDescriptor
 it.inera.abi.logic.formatodiscambio.castor.DigitaleType=it.inera.abi.logic.formatodiscambio.castor.descriptors.DigitaleTypeDescriptor
 it.inera.abi.logic.formatodiscambio.castor.Riproduzioni=it.inera.abi.logic.formatodiscambio.castor.descriptors.RiproduzioniDescriptor
+it.inera.abi.logic.formatodiscambio.castor.Riproduzione=it.inera.abi.logic.formatodiscambio.castor.descriptors.RiproduzioneDescriptor
 it.inera.abi.logic.formatodiscambio.castor.SezioniSpeciali=it.inera.abi.logic.formatodiscambio.castor.descriptors.SezioniSpecialiDescriptor
 it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeCopertura=it.inera.abi.logic.formatodiscambio.castor.descriptors.CatSpecFormeCoperturaDescriptor
 it.inera.abi.logic.formatodiscambio.castor.Edificio=it.inera.abi.logic.formatodiscambio.castor.descriptors.EdificioDescriptor

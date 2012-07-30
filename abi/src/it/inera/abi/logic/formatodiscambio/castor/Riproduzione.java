@@ -2,30 +2,22 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Internet.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: Riproduzione.java,v 1.1 2012/07/30 15:17:05 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * Accesso a Internet da postazioni locali. La
- *  modalità "limitato" potrebbe essere fonte di
- *  equivoci. In ogni caso, la modalità è opzionale
- *  e ripetibile.
- *  NB. MODIFICATO TIPO ENUMERATO 
- *  
- *  L'elemento modo opzionale e ripetibile è stato
- *  sostituito da tre flag: a tempo, a pagamento, con proxy.
- *  
- *  L'elemento internet diventa opzionale.
- *  
- *  Introdotto attributo 'attivo' del tipo siNoType.
+ * Con questo elemento si dà la possibilità di 
+ *  esprimere le modalità di riprodurre i vari
+ *  materiali ammessi al prestito locale, 
+ *  nazionale e/o internazionale. 
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.1 $ $Date: 2012/07/30 15:17:05 $
  */
 @SuppressWarnings("serial")
-public class Internet implements java.io.Serializable {
+public class Riproduzione implements java.io.Serializable {
 
 
       //--------------------------/
@@ -33,31 +25,31 @@ public class Internet implements java.io.Serializable {
     //--------------------------/
 
     /**
-     * Field _attivo.
+     * Field _tipo.
      */
-    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _attivo;
+    private java.lang.String _tipo;
 
     /**
-     * Field _aTempo.
+     * Field _locale.
      */
-    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _aTempo;
+    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _locale;
 
     /**
-     * Field _aPagamento.
+     * Field _nazionale.
      */
-    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _aPagamento;
+    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _nazionale;
 
     /**
-     * Field _conProxy.
+     * Field _internazionale.
      */
-    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _conProxy;
+    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _internazionale;
 
 
       //----------------/
      //- Constructors -/
     //----------------/
 
-    public Internet() {
+    public Riproduzione() {
         super();
     }
 
@@ -67,43 +59,43 @@ public class Internet implements java.io.Serializable {
     //-----------/
 
     /**
-     * Returns the value of field 'aPagamento'.
+     * Returns the value of field 'internazionale'.
      * 
-     * @return the value of field 'APagamento'.
+     * @return the value of field 'Internazionale'.
      */
-    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getAPagamento(
+    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getInternazionale(
     ) {
-        return this._aPagamento;
+        return this._internazionale;
     }
 
     /**
-     * Returns the value of field 'aTempo'.
+     * Returns the value of field 'locale'.
      * 
-     * @return the value of field 'ATempo'.
+     * @return the value of field 'Locale'.
      */
-    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getATempo(
+    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getLocale(
     ) {
-        return this._aTempo;
+        return this._locale;
     }
 
     /**
-     * Returns the value of field 'attivo'.
+     * Returns the value of field 'nazionale'.
      * 
-     * @return the value of field 'Attivo'.
+     * @return the value of field 'Nazionale'.
      */
-    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getAttivo(
+    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getNazionale(
     ) {
-        return this._attivo;
+        return this._nazionale;
     }
 
     /**
-     * Returns the value of field 'conProxy'.
+     * Returns the value of field 'tipo'.
      * 
-     * @return the value of field 'ConProxy'.
+     * @return the value of field 'Tipo'.
      */
-    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getConProxy(
+    public java.lang.String getTipo(
     ) {
-        return this._conProxy;
+        return this._tipo;
     }
 
     /**
@@ -154,43 +146,43 @@ public class Internet implements java.io.Serializable {
     }
 
     /**
-     * Sets the value of field 'aPagamento'.
+     * Sets the value of field 'internazionale'.
      * 
-     * @param aPagamento the value of field 'aPagamento'.
+     * @param internazionale the value of field 'internazionale'.
      */
-    public void setAPagamento(
-            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType aPagamento) {
-        this._aPagamento = aPagamento;
+    public void setInternazionale(
+            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType internazionale) {
+        this._internazionale = internazionale;
     }
 
     /**
-     * Sets the value of field 'aTempo'.
+     * Sets the value of field 'locale'.
      * 
-     * @param aTempo the value of field 'aTempo'.
+     * @param locale the value of field 'locale'.
      */
-    public void setATempo(
-            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType aTempo) {
-        this._aTempo = aTempo;
+    public void setLocale(
+            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType locale) {
+        this._locale = locale;
     }
 
     /**
-     * Sets the value of field 'attivo'.
+     * Sets the value of field 'nazionale'.
      * 
-     * @param attivo the value of field 'attivo'.
+     * @param nazionale the value of field 'nazionale'.
      */
-    public void setAttivo(
-            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType attivo) {
-        this._attivo = attivo;
+    public void setNazionale(
+            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType nazionale) {
+        this._nazionale = nazionale;
     }
 
     /**
-     * Sets the value of field 'conProxy'.
+     * Sets the value of field 'tipo'.
      * 
-     * @param conProxy the value of field 'conProxy'.
+     * @param tipo the value of field 'tipo'.
      */
-    public void setConProxy(
-            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType conProxy) {
-        this._conProxy = conProxy;
+    public void setTipo(
+            final java.lang.String tipo) {
+        this._tipo = tipo;
     }
 
     /**
@@ -202,12 +194,12 @@ public class Internet implements java.io.Serializable {
      * @throws org.exolab.castor.xml.ValidationException if this
      * object is an invalid instance according to the schema
      * @return the unmarshaled
-     * it.inera.abi.logic.formatodiscambio.castor.Internet
+     * it.inera.abi.logic.formatodiscambio.castor.Riproduzione
      */
-    public static it.inera.abi.logic.formatodiscambio.castor.Internet unmarshal(
+    public static it.inera.abi.logic.formatodiscambio.castor.Riproduzione unmarshal(
             final java.io.Reader reader)
     throws org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
-        return (it.inera.abi.logic.formatodiscambio.castor.Internet) org.exolab.castor.xml.Unmarshaller.unmarshal(it.inera.abi.logic.formatodiscambio.castor.Internet.class, reader);
+        return (it.inera.abi.logic.formatodiscambio.castor.Riproduzione) org.exolab.castor.xml.Unmarshaller.unmarshal(it.inera.abi.logic.formatodiscambio.castor.Riproduzione.class, reader);
     }
 
     /**

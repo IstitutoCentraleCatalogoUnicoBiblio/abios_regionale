@@ -23,7 +23,7 @@ public class ContentPanelForTabItem extends ContentPanel {
 	}
 	
 	public void fireReleoadbiblioDataEvent() {
-		Dispatcher.get().dispatch(AppEvents.ReloadBiblioData,biblioteca.getIdBiblio());
+		Dispatcher.get().dispatch(AppEvents.ReloadBiblioData, biblioteca.getIdBiblio());
 	}
 	
 	

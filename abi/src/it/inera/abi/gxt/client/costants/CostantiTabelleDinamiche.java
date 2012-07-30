@@ -18,7 +18,6 @@ public class CostantiTabelleDinamiche {
 	/*1*/    /*07 */public static final int DESTINAZIONI_SOCIALI_TIPOLOGIE_INDEX  = 7;
 	/*1*/	/* 09 */public static final int ACCESSO_MODALITA_INDEX = 9;
 	/*1*/	/* 10 */public static final int ENTI_TIPOLOGIE_AMMINISTRATIVE_INDEX = 10;
-	/*1*/	/* 11 */public static final int ENTI_FUNZIONI_OBIETTIVI_INDEX = 11;
 	/*1*/	/* 12 */public static final int TIPOLOGIE_FUNZIONALI_INDEX =12;
 	/*1*/	/* 13 */public static final int CATALOGAZIONE_STATI_BIBLIOTECHE_INDEX = 13;
 	/*1*/	/* 14 */public static final int THESAURUS_INDEX = 14;
@@ -60,13 +59,11 @@ public class CostantiTabelleDinamiche {
 	/*1*/	/* 09 */public static final String ACCESSO_MODALITA = "Accesso: modalità per l'accesso";
 	/*1*/	/* 10 */public static final String ACCESSO_INTERNET_TIPOLOGIE = "Accesso: tipologie di accesso a internet";
 	/*1*/	/* 11 */public static final String ENTI_TIPOLOGIE_AMMINISTRATIVE = "Enti: tipologie amministrative";
-	/*1*/	/* 12 */public static final String ENTI_FUNZIONI_OBIETTIVI = "Enti: funzioni/obiettivi";
 	/*1*/	/* 13 */public static final String TIPOLOGIE_FUNZIONALI = "Tipologie funzionali";
-	/*1*/	/* 14 */public static final String CATALOGAZIONE_STATI_BIBLIOTECHE = "Catalogazione: stati delle biblioteche";
-	/*1*/	/* 15 */public static final String THESAURUS = "Thesaurus";
+	/*1*/	/* 14 */public static final String CATALOGAZIONE_STATI_BIBLIOTECHE = "Catalogazione: stato della registrazione";
 	/*1*/	/* 16 */public static final String DEWEY = "Dewey";
 	/*1*/	/* 17 */public static final String CONTATTI_TIPI = "Contatti: tipi";
-	/*1*/	/* 18 */public static final String RIPRODUZIONI_TIPI = "Riproduzioni: tipi";
+	/*1*/	/* 18 */public static final String RIPRODUZIONI_TIPI = "Riproduzione: tipologie";
 	/*1*/	/* 19 */public static final String SERVIZI_MODALITA_COMUNICAZIONE_INFOTMAZIONI_BIBLIOGRAFICHE = "Servizi: modalità di comunicazione delle informazioni bibliografiche";
 	/*1*/	/* 20 */public static final String SERVIZI_BIBLIOTECARI_CARTA_SERVIZI = "Servizi: servizi bibliotecari Carta dei servizi";
 	/*1*/	/* 21 */public static final String FONDI_SPECIALI_TIPI_CATALOGAZIONE_INVENTARIO = "Fondi speciali: tipi di catalogazione inventario";
@@ -102,10 +99,8 @@ public class CostantiTabelleDinamiche {
 		/*08*/	listaEtichetteTabelleDinamiche.add(ACCESSO_MODALITA);
 		/*9*/	listaEtichetteTabelleDinamiche.add(ACCESSO_INTERNET_TIPOLOGIE);
 		/*10*/  listaEtichetteTabelleDinamiche.add(ENTI_TIPOLOGIE_AMMINISTRATIVE);
-		/*11*/	listaEtichetteTabelleDinamiche.add(ENTI_FUNZIONI_OBIETTIVI);
 		/*12*/  listaEtichetteTabelleDinamiche.add(TIPOLOGIE_FUNZIONALI);
 		/*13*/  listaEtichetteTabelleDinamiche.add(CATALOGAZIONE_STATI_BIBLIOTECHE);
-		/*14*/  listaEtichetteTabelleDinamiche.add(THESAURUS);
 		/*15*/  listaEtichetteTabelleDinamiche.add(DEWEY);
 		/*16*/  listaEtichetteTabelleDinamiche.add(CONTATTI_TIPI);
 		/*17*/  listaEtichetteTabelleDinamiche.add(RIPRODUZIONI_TIPI);
@@ -149,10 +144,8 @@ public class CostantiTabelleDinamiche {
 //	/* 08 */public static final String TABLE_ACCESSO_MODALITA = "accesso_modalita";
 //	/* 09 */public static final String TABLE_ACCESSO_INTERNET_TIPOLOGIE = "accesso_internet";
 //	/* 10 */public static final String TABLE_ENTI_TIPOLOGIE_AMMINISTRATIVE = "ente_tipologia_amministrativa";
-//	/* 11 */public static final String TABLE_ENTI_FUNZIONI_OBIETTIVI = "ente_obiettivo";
 //	/* 12 */public static final String TABLE_TIPOLOGIE_FUNZIONALI = "tipologia_funzionale";
 //	/* 13 */public static final String TABLE_CATALOGAZIONE_STATI_BIBLIOTECHE = "stato_catalogazione_tipo";
-//	/* 14 */public static final String TABLE_THESAURUS = "thesaurus";
 //	/* 15 */public static final String TABLE_DEWEY = "dewey";
 //	/* 16 */public static final String TABLE_CONTATTI_TIPI = "contatti_tipo";
 //	/* 17 */public static final String TABLE_RIPRODUZIONI_TIPI = "riproduzioni_tipo";
@@ -190,10 +183,8 @@ public class CostantiTabelleDinamiche {
 //		/*09*/	listaTabelleDataBaseTabelleDinamiche.add(TABLE_ACCESSO_MODALITA);
 //		/*10*/	listaTabelleDataBaseTabelleDinamiche.add(TABLE_ACCESSO_INTERNET_TIPOLOGIE);
 //		/*11*/  listaTabelleDataBaseTabelleDinamiche.add(TABLE_ENTI_TIPOLOGIE_AMMINISTRATIVE);
-//		/*12*/	listaTabelleDataBaseTabelleDinamiche.add(TABLE_ENTI_FUNZIONI_OBIETTIVI);
 //		/*13*/  listaTabelleDataBaseTabelleDinamiche.add(TABLE_TIPOLOGIE_FUNZIONALI);
 //		/*14*/  listaTabelleDataBaseTabelleDinamiche.add(TABLE_CATALOGAZIONE_STATI_BIBLIOTECHE);
-//		/*15*/  listaTabelleDataBaseTabelleDinamiche.add(TABLE_THESAURUS);
 //		/*16*/  listaTabelleDataBaseTabelleDinamiche.add(TABLE_DEWEY);
 //		/*17*/  listaTabelleDataBaseTabelleDinamiche.add(TABLE_CONTATTI_TIPI);
 //		/*18*/  listaTabelleDataBaseTabelleDinamiche.add(TABLE_RIPRODUZIONI_TIPI);

@@ -27,10 +27,8 @@ public class MenuEntriesFactory {
 		/*07*/		menuItems.add(new MenuItem(CostantiTabelleDinamiche.DESTINAZIONI_SOCIALI_TIPOLOGIE,CostantiTabelleDinamiche.DESTINAZIONI_SOCIALI_TIPOLOGIE_INDEX));
 		/*09*/		menuItems.add(new MenuItem(CostantiTabelleDinamiche.ACCESSO_MODALITA,CostantiTabelleDinamiche.ACCESSO_MODALITA_INDEX));
 		/*10*/		menuItems.add(new MenuItem(CostantiTabelleDinamiche.ENTI_TIPOLOGIE_AMMINISTRATIVE,CostantiTabelleDinamiche.ENTI_TIPOLOGIE_AMMINISTRATIVE_INDEX));
-		/*11*/		menuItems.add(new MenuItem(CostantiTabelleDinamiche.ENTI_FUNZIONI_OBIETTIVI,CostantiTabelleDinamiche.ENTI_FUNZIONI_OBIETTIVI_INDEX));
 		/*12*/		menuItems.add(new MenuItem(CostantiTabelleDinamiche.TIPOLOGIE_FUNZIONALI,CostantiTabelleDinamiche.TIPOLOGIE_FUNZIONALI_INDEX));
 		/*13*/		menuItems.add(new MenuItem(CostantiTabelleDinamiche.CATALOGAZIONE_STATI_BIBLIOTECHE,CostantiTabelleDinamiche.CATALOGAZIONE_STATI_BIBLIOTECHE_INDEX));
-		/*14*/		menuItems.add(new MenuItem(CostantiTabelleDinamiche.THESAURUS,CostantiTabelleDinamiche.THESAURUS_INDEX));
 		/*15*/		menuItems.add(new MenuItem(CostantiTabelleDinamiche.DEWEY,CostantiTabelleDinamiche.DEWEY_INDEX));
 		/*16*/		menuItems.add(new MenuItem(CostantiTabelleDinamiche.CONTATTI_TIPI,CostantiTabelleDinamiche.CONTATTI_TIPI_INDEX));
 		/*17*/		menuItems.add(new MenuItem(CostantiTabelleDinamiche.RIPRODUZIONI_TIPI,CostantiTabelleDinamiche.RIPRODUZIONI_TIPI_INDEX));

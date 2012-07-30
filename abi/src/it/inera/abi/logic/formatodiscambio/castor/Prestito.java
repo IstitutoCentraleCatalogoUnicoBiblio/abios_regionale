@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Prestito.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: Prestito.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -13,7 +13,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  ovvio significato, tutti opzionali.
  *  
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
  */
 @SuppressWarnings("serial")
 public class Prestito implements java.io.Serializable {
@@ -64,15 +64,6 @@ public class Prestito implements java.io.Serializable {
      */
     private it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusiLocale _materialiEsclusiLocale;
 
-    /**
-     * Con questo elemento si dà la possibilità di 
-     *  esprimere le modalità di riprodurre i vari
-     *  materiali ammessi al prestito locale, 
-     *  nazionale e/o internazionale. 
-     *  
-     */
-    private java.util.List<it.inera.abi.logic.formatodiscambio.castor.Riproduzioni> _riproduzioniList;
-
 
       //----------------/
      //- Constructors -/
@@ -80,52 +71,12 @@ public class Prestito implements java.io.Serializable {
 
     public Prestito() {
         super();
-        this._riproduzioniList = new java.util.ArrayList<it.inera.abi.logic.formatodiscambio.castor.Riproduzioni>();
     }
 
 
       //-----------/
      //- Methods -/
     //-----------/
-
-    /**
-     * 
-     * 
-     * @param vRiproduzioni
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addRiproduzioni(
-            final it.inera.abi.logic.formatodiscambio.castor.Riproduzioni vRiproduzioni)
-    throws java.lang.IndexOutOfBoundsException {
-        this._riproduzioniList.add(vRiproduzioni);
-    }
-
-    /**
-     * 
-     * 
-     * @param index
-     * @param vRiproduzioni
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addRiproduzioni(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.Riproduzioni vRiproduzioni)
-    throws java.lang.IndexOutOfBoundsException {
-        this._riproduzioniList.add(index, vRiproduzioni);
-    }
-
-    /**
-     * Method enumerateRiproduzioni.
-     * 
-     * @return an Enumeration over all possible elements of this
-     * collection
-     */
-    public java.util.Enumeration<? extends it.inera.abi.logic.formatodiscambio.castor.Riproduzioni> enumerateRiproduzioni(
-    ) {
-        return java.util.Collections.enumeration(this._riproduzioniList);
-    }
 
     /**
      * Returns the value of field 'interbibliotecario'. The field
@@ -190,53 +141,6 @@ public class Prestito implements java.io.Serializable {
     }
 
     /**
-     * Method getRiproduzioni.
-     * 
-     * @param index
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     * @return the value of the
-     * it.inera.abi.logic.formatodiscambio.castor.Riproduzioni at
-     * the given index
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Riproduzioni getRiproduzioni(
-            final int index)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._riproduzioniList.size()) {
-            throw new IndexOutOfBoundsException("getRiproduzioni: Index value '" + index + "' not in range [0.." + (this._riproduzioniList.size() - 1) + "]");
-        }
-
-        return (it.inera.abi.logic.formatodiscambio.castor.Riproduzioni) _riproduzioniList.get(index);
-    }
-
-    /**
-     * Method getRiproduzioni.Returns the contents of the
-     * collection in an Array.  <p>Note:  Just in case the
-     * collection contents are changing in another thread, we pass
-     * a 0-length Array of the correct type into the API call. 
-     * This way we <i>know</i> that the Array returned is of
-     * exactly the correct length.
-     * 
-     * @return this collection as an Array
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Riproduzioni[] getRiproduzioni(
-    ) {
-        it.inera.abi.logic.formatodiscambio.castor.Riproduzioni[] array = new it.inera.abi.logic.formatodiscambio.castor.Riproduzioni[0];
-        return (it.inera.abi.logic.formatodiscambio.castor.Riproduzioni[]) this._riproduzioniList.toArray(array);
-    }
-
-    /**
-     * Method getRiproduzioniCount.
-     * 
-     * @return the size of this collection
-     */
-    public int getRiproduzioniCount(
-    ) {
-        return this._riproduzioniList.size();
-    }
-
-    /**
      * Method isValid.
      * 
      * @return true if this object is valid according to the schema
@@ -249,17 +153,6 @@ public class Prestito implements java.io.Serializable {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Method iterateRiproduzioni.
-     * 
-     * @return an Iterator over all possible elements in this
-     * collection
-     */
-    public java.util.Iterator<? extends it.inera.abi.logic.formatodiscambio.castor.Riproduzioni> iterateRiproduzioni(
-    ) {
-        return this._riproduzioniList.iterator();
     }
 
     /**
@@ -292,37 +185,6 @@ public class Prestito implements java.io.Serializable {
             final org.xml.sax.ContentHandler handler)
     throws java.io.IOException, org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
         org.exolab.castor.xml.Marshaller.marshal(this, handler);
-    }
-
-    /**
-     */
-    public void removeAllRiproduzioni(
-    ) {
-        this._riproduzioniList.clear();
-    }
-
-    /**
-     * Method removeRiproduzioni.
-     * 
-     * @param vRiproduzioni
-     * @return true if the object was removed from the collection.
-     */
-    public boolean removeRiproduzioni(
-            final it.inera.abi.logic.formatodiscambio.castor.Riproduzioni vRiproduzioni) {
-        boolean removed = _riproduzioniList.remove(vRiproduzioni);
-        return removed;
-    }
-
-    /**
-     * Method removeRiproduzioniAt.
-     * 
-     * @param index
-     * @return the element removed from the collection
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Riproduzioni removeRiproduzioniAt(
-            final int index) {
-        java.lang.Object obj = this._riproduzioniList.remove(index);
-        return (it.inera.abi.logic.formatodiscambio.castor.Riproduzioni) obj;
     }
 
     /**
@@ -386,41 +248,6 @@ public class Prestito implements java.io.Serializable {
     public void setMaterialiEsclusiLocale(
             final it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusiLocale materialiEsclusiLocale) {
         this._materialiEsclusiLocale = materialiEsclusiLocale;
-    }
-
-    /**
-     * 
-     * 
-     * @param index
-     * @param vRiproduzioni
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void setRiproduzioni(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.Riproduzioni vRiproduzioni)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._riproduzioniList.size()) {
-            throw new IndexOutOfBoundsException("setRiproduzioni: Index value '" + index + "' not in range [0.." + (this._riproduzioniList.size() - 1) + "]");
-        }
-
-        this._riproduzioniList.set(index, vRiproduzioni);
-    }
-
-    /**
-     * 
-     * 
-     * @param vRiproduzioniArray
-     */
-    public void setRiproduzioni(
-            final it.inera.abi.logic.formatodiscambio.castor.Riproduzioni[] vRiproduzioniArray) {
-        //-- copy array
-        _riproduzioniList.clear();
-
-        for (int i = 0; i < vRiproduzioniArray.length; i++) {
-                this._riproduzioniList.add(vRiproduzioniArray[i]);
-        }
     }
 
     /**

@@ -3,7 +3,6 @@ package it.inera.abi.dao.jpa;
 import it.inera.abi.dao.EnteDao;
 import it.inera.abi.persistence.Biblioteca;
 import it.inera.abi.persistence.Ente;
-import it.inera.abi.persistence.EnteObiettivo;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.Stato;
 
@@ -30,11 +29,8 @@ public class EnteDaoJpa implements EnteDao {
 	@Override
 	@Transactional
 	public Ente createEnteIfNotExist(Stato stato,EnteTipologiaAmministrativa enteTipologiaAmministrativa,
-			EnteObiettivo enteObiettivo, String denominazione, String asiaAsip, String partitaIva, String codiceFiscale) {
-		if (enteObiettivo == null) {
-			enteObiettivo = em.find(EnteObiettivo.class, 0);
-		}
-
+			String denominazione, String asiaAsip, String partitaIva, String codiceFiscale) {
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append("SELECT  e ");
 		sb.append("FROM Ente e WHERE ");
@@ -44,8 +40,6 @@ public class EnteDaoJpa implements EnteDao {
 			criteria.add("e.stato = :stato");
 		if (enteTipologiaAmministrativa != null)
 			criteria.add("e.enteTipologiaAmministrativa = :enteTipologiaAmministrativa");
-		if (enteObiettivo != null)
-			criteria.add("e.enteObiettivo = :enteObiettivo");
 		if (denominazione != null)
 			criteria.add("e.denominazione = :denominazione");
 		else
@@ -80,8 +74,6 @@ public class EnteDaoJpa implements EnteDao {
 		if (enteTipologiaAmministrativa != null)
 			q.setParameter("enteTipologiaAmministrativa",
 					enteTipologiaAmministrativa);
-		if (enteObiettivo != null)
-			q.setParameter("enteObiettivo", enteObiettivo);
 		if (denominazione != null)
 			q.setParameter("denominazione", denominazione);
 		if (asiaAsip != null)
@@ -101,7 +93,6 @@ public class EnteDaoJpa implements EnteDao {
 			ente.setCodiceFiscale(codiceFiscale);
 			ente.setDenominazione(denominazione);
 			ente.setPartitaIva(partitaIva);
-			ente.setEnteObiettivo(enteObiettivo);
 			ente.setEnteTipologiaAmministrativa(enteTipologiaAmministrativa);
 			ente.setStato(stato);
 			em.persist(ente);
@@ -128,7 +119,6 @@ public class EnteDaoJpa implements EnteDao {
 		List<Ente> listaEnti = q.getResultList();
 		for (int i = 0; i < listaEnti.size(); i++) {
 			// Iterazione anti-lazy
-			listaEnti.get(i).getEnteObiettivo();
 			listaEnti.get(i).getEnteTipologiaAmministrativa();
 
 		}
@@ -165,12 +155,8 @@ public class EnteDaoJpa implements EnteDao {
 	@Transactional
 	public Ente createEnteIfNotExist2(Stato stato,
 			EnteTipologiaAmministrativa enteTipologiaAmministrativa,
-			EnteObiettivo enteObiettivo, String denominazione, String asiaAsip,
+			String denominazione, String asiaAsip,
 			String partitaIva, String codiceFiscale) {
-
-		if (enteObiettivo == null) {
-			enteObiettivo = em.find(EnteObiettivo.class, 0);
-		}
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("SELECT  e ");
@@ -181,8 +167,6 @@ public class EnteDaoJpa implements EnteDao {
 			criteria.add("e.stato = :stato");
 		if (enteTipologiaAmministrativa != null)
 			criteria.add("e.enteTipologiaAmministrativa = :enteTipologiaAmministrativa");
-		if (enteObiettivo != null)
-			criteria.add("e.enteObiettivo = :enteObiettivo");
 		if (denominazione != null)
 			criteria.add("e.denominazione = :denominazione");
 		else
@@ -217,8 +201,6 @@ public class EnteDaoJpa implements EnteDao {
 		if (enteTipologiaAmministrativa != null)
 			q.setParameter("enteTipologiaAmministrativa",
 					enteTipologiaAmministrativa);
-		if (enteObiettivo != null)
-			q.setParameter("enteObiettivo", enteObiettivo);
 		if (denominazione != null)
 			q.setParameter("denominazione", denominazione);
 		if (asiaAsip != null)
@@ -238,7 +220,6 @@ public class EnteDaoJpa implements EnteDao {
 			ente.setCodiceFiscale(codiceFiscale);
 			ente.setDenominazione(denominazione);
 			ente.setPartitaIva(partitaIva);
-			ente.setEnteObiettivo(enteObiettivo);
 			ente.setEnteTipologiaAmministrativa(enteTipologiaAmministrativa);
 			ente.setStato(stato);
 			em.persist(ente);

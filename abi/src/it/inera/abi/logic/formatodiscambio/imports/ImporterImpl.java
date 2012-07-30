@@ -61,7 +61,6 @@ import it.inera.abi.persistence.Dewey;
 import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.DeweyLiberoPK;
 import it.inera.abi.persistence.Ente;
-import it.inera.abi.persistence.EnteObiettivo;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.FondiAntichiConsistenza;
 import it.inera.abi.persistence.FondiSpeciali;
@@ -83,7 +82,9 @@ import it.inera.abi.persistence.PrestitoLocaleMaterialeEscluso;
 import it.inera.abi.persistence.PrestitoLocaleUtentiAmmessi;
 import it.inera.abi.persistence.Regolamento;
 import it.inera.abi.persistence.Riproduzioni;
+import it.inera.abi.persistence.RiproduzioniPK;
 import it.inera.abi.persistence.RiproduzioniTipo;
+import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
 import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
@@ -1116,78 +1117,139 @@ public class ImporterImpl implements Importer {
 		//Accesso Internet
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getInternet() != null) {
 			Internet internet = biblioteca.getServizi().getInternet();
-
-			if (internet.getATempo() != null) {
-				if (internet.getATempo() == SiNoType.S) {
-					bibliotecaDb.setAccessoInternetTempo(true);
+			
+			if (internet.getAttivo() != null) {
+				if (internet.getAttivo() == SiNoType.S) {
+					bibliotecaDb.setAttivoAccessoInternet(true);
 					
-				} else if (internet.getATempo() == SiNoType.N) {
+					/* A tempo */
+					if (internet.getATempo() != null) {
+						if (internet.getATempo() == SiNoType.S) {
+							bibliotecaDb.setAccessoInternetTempo(true);
+							
+						} else if (internet.getATempo() == SiNoType.N) {
+							bibliotecaDb.setAccessoInternetTempo(false);
+						}
+						
+					} else {
+						bibliotecaDb.setAccessoInternetTempo(null);
+					}
+					
+					/* A pagamento */
+					if (internet.getAPagamento() != null) {
+						if (internet.getAPagamento() == SiNoType.S) {
+							bibliotecaDb.setAccessoInternetPagamento(true);
+							
+						} else if (internet.getAPagamento() == SiNoType.N) {
+							bibliotecaDb.setAccessoInternetPagamento(false);
+						}
+						
+					} else {
+						bibliotecaDb.setAccessoInternetPagamento(null);
+					}
+					
+					/* Con proxy */
+					if (internet.getConProxy() != null) {
+						if (internet.getConProxy() == SiNoType.S) {
+							bibliotecaDb.setAccessoInternetProxy(true);
+							
+						} else if (internet.getConProxy() == SiNoType.N) {
+							bibliotecaDb.setAccessoInternetProxy(false);
+						}
+						
+					} else {
+						bibliotecaDb.setAccessoInternetProxy(null);
+					}
+					
+				} else if (internet.getAttivo() == SiNoType.N) {
+					bibliotecaDb.setAttivoAccessoInternet(false);
+					
 					bibliotecaDb.setAccessoInternetTempo(false);
+					bibliotecaDb.setAccessoInternetPagamento(false);
+					bibliotecaDb.setAccessoInternetProxy(false);
+					
 				}
 				
 				log.debug("Modificata modalità di accesso Internet a tempo in: " + bibliotecaDb.getAccessoInternetTempo());
-			}
-			
-			if (internet.getAPagamento() != null) {
-				if (internet.getAPagamento() == SiNoType.S) {
-					bibliotecaDb.setAccessoInternetPagamento(true);
-					
-				} else if (internet.getAPagamento() == SiNoType.N) {
-					bibliotecaDb.setAccessoInternetPagamento(false);
-				}
-				
 				log.debug("Modificata modalità di accesso Internet a pagamento in: " + bibliotecaDb.getAccessoInternetPagamento());
-			}
-			
-			if (internet.getConProxy() != null) {
-				if (internet.getConProxy() == SiNoType.S) {
-					bibliotecaDb.setAccessoInternetProxy(true);
-					
-				} else if (internet.getConProxy() == SiNoType.N) {
-					bibliotecaDb.setAccessoInternetProxy(false);
-				}
-				
 				log.debug("Modificata modalità di accesso Internet con proxy in: " + bibliotecaDb.getAccessoInternetProxy());
+				
 			}
 			
 		}
 
-		boolean esterno = false;
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getInformazioniBibliografiche() != null) {
-			if (biblioteca.getServizi().getInformazioniBibliografiche().getServizioEsterno() != null) {
-				for (int j = 0; j < biblioteca.getServizi().getInformazioniBibliografiche().getServizioEsterno().getModoCount(); j++) {
-					esterno = true;
-					// 24/06/2010: Modificato modo di accesso da enumerato a string
-					String modo = biblioteca.getServizi().getInformazioniBibliografiche().getServizioEsterno().getModo(j);
-					if (modo != null) {
-						log.debug("Inserito nuovo SERVIZIO ESTERNO: " + modo);
-					}
-					if (j == 0) {
-						bibliotecaDb.setGestisceServizioBibliograficoEsterno(null);
-						log.debug("Cancellati SERVIZI ESTERNI...");
-					}
+			if (biblioteca.getServizi().getInformazioniBibliografiche().getAttivo() == SiNoType.S) {
+				bibliotecaDb.setAttivoInformazioniBibliografiche(true);
+				log.debug("AttivoInformazioniBibliografiche(: " + true);
+
+				/* Servizio in sede */
+				if (biblioteca.getServizi().getInformazioniBibliografiche().getServizioInterno() != null 
+						&& biblioteca.getServizi().getInformazioniBibliografiche().getServizioInterno() == SiNoType.S) {
+					bibliotecaDb.setGestisceServizioBibliograficoInterno(true);
+					log.debug("GestisceServizioBibliograficoInterno: " + true);
+					
+				} else if (biblioteca.getServizi().getInformazioniBibliografiche().getServizioInterno() != null 
+						&& biblioteca.getServizi().getInformazioniBibliografiche().getServizioInterno() == SiNoType.N) {
+					bibliotecaDb.setGestisceServizioBibliograficoInterno(false);
+					log.debug("GestisceServizioBibliograficoInterno: " + false);
+					
+				} else {
+					bibliotecaDb.setGestisceServizioBibliograficoInterno(null);
 				}
-			}
-			if (esterno) {
-				bibliotecaDb.setGestisceServizioBibliograficoEsterno(true);
-				log.debug("GestisceServizioBibliograficoEsterno: " + true);
 				
-			} else {
-				bibliotecaDb.setGestisceServizioBibliograficoEsterno(false);
-				log.debug("GestisceServizioBibliograficoEsterno: " + false);
-			}
-			
-			if (biblioteca.getServizi().getInformazioniBibliografiche().getServizioInterno() == SiNoType.S) {
-				bibliotecaDb.setGestisceServizioBibliograficoInterno(true);
-				log.debug("GestisceServizioBibliograficoInterno: " + true);
+				/* Servizio esterno */
+				if (biblioteca.getServizi().getInformazioniBibliografiche().getServizioEsterno() != null) {
+					for (int j = 0; j < biblioteca.getServizi().getInformazioniBibliografiche().getServizioEsterno().getModoCount(); j++) {
+						if (j == 0) {
+							bibliotecaDb.setGestisceServizioBibliograficoEsterno(true);
+							log.debug("GestisceServizioBibliograficoEsterno: " + true);
+							
+							if (bibliotecaDb.getServiziInformazioniBibliograficheModalitas() != null 
+									&& bibliotecaDb.getServiziInformazioniBibliograficheModalitas().size() > 0) {
+								bibliotecaDb.getServiziInformazioniBibliograficheModalitas().clear();
+								log.debug("Cancellati SERVIZI ESTERNI...");
+								
+							} else {
+								bibliotecaDb.setServiziInformazioniBibliograficheModalitas(new ArrayList<ServiziInformazioniBibliograficheModalita>());
+							}
+						}
+		
+						String modo = biblioteca.getServizi().getInformazioniBibliografiche().getServizioEsterno().getModo(j);
+						
+						ServiziInformazioniBibliograficheModalita modalita = (ServiziInformazioniBibliograficheModalita) dynaTabDao.searchRecord(ServiziInformazioniBibliograficheModalita.class, modo);
+
+						if (modalita != null) {
+							bibliotecaDb.getServiziInformazioniBibliograficheModalitas().add(modalita);
+							log.debug("Aggiunto SERVIZIO ESTERNO MODALITÀ: " + modo);
+							
+						} else {
+							log.debug("SERVIZIO ESTERNO MODALITÀ non trovato: " + modo);
+						}
+					}
+					
+				} else {
+					bibliotecaDb.setGestisceServizioBibliograficoEsterno(null);
+					bibliotecaDb.getServiziInformazioniBibliograficheModalitas().clear();
+				}
 				
-			} else {
+			} else if (biblioteca.getServizi().getInformazioniBibliografiche().getAttivo() == SiNoType.N) {
+				bibliotecaDb.setAttivoInformazioniBibliografiche(false);
+				log.debug("AttivoInformazioniBibliografiche(: " + false);
+				
+				/* Servizio in sede */
 				bibliotecaDb.setGestisceServizioBibliograficoInterno(false);
 				log.debug("GestisceServizioBibliograficoInterno: " + false);
+				
+				bibliotecaDb.setGestisceServizioBibliograficoEsterno(false);
+				log.debug("GestisceServizioBibliograficoEsterno: " + false);
+				
+				bibliotecaDb.getServiziInformazioniBibliograficheModalitas().clear();
+				log.debug("Cancellati SERVIZI ESTERNI...");				
 			}
+			
 			log.debug("Modificate informazioni SERVIZI INTERNI/ESTERNI...");
 		}
-
 
 		if (biblioteca.getCataloghi() != null) {
 			//CATALOGHI GENERALI
@@ -1695,6 +1757,84 @@ public class ImporterImpl implements Importer {
 			}
 		}
 
+/* Riproduzioni */
+		if (biblioteca.getServizi() != null && biblioteca.getServizi().getRiproduzioni() != null) {
+			if (biblioteca.getServizi().getRiproduzioni().getAttivo() == SiNoType.S) {
+				bibliotecaDb.setAttivoRiproduzioni(true);
+				
+				it.inera.abi.logic.formatodiscambio.castor.Riproduzione[] riprods = biblioteca.getServizi().getRiproduzioni().getRiproduzione();
+				
+				for (int j = 0; j < riprods.length; j++) {
+					if (j == 0) {
+						biblioDao.removeChilds(bibliotecaDb.getRiproduzionis());
+						log.debug("Cancellati TUTTI METODI DI RIPRODUZIONE...");
+					}
+					
+					if ((riprods[j] != null) && (riprods[j].getTipo().trim().length() > 0)) {
+						String tipo = riprods[j].getTipo();
+						RiproduzioniTipo riproduzioniTipo = (RiproduzioniTipo) dynaTabDao.searchRecord(RiproduzioniTipo.class, tipo);
+						
+						if (tipo != null) {
+							RiproduzioniPK riproduzioniPK = new RiproduzioniPK();
+							riproduzioniPK.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
+							riproduzioniPK.setIdRiproduzioniTipo(riproduzioniTipo.getIdRiproduzioniTipo());
+							
+							Riproduzioni riproduzione = new Riproduzioni();
+							riproduzione.setId(riproduzioniPK);
+							log.debug("TIPO DI RIPRODUZIONE: " + tipo);
+							
+							if (riprods[j].getLocale() != null) {
+								if (riprods[j].getLocale() == SiNoType.S) {
+									riproduzione.setLocale(true);
+									
+								} else if (riprods[j].getLocale() == SiNoType.N) {
+									riproduzione.setLocale(false);
+									
+								}
+							}
+							
+							if (riprods[j].getNazionale() != null) {
+								if (riprods[j].getNazionale() == SiNoType.S) {
+									riproduzione.setNazionale(true);
+									
+								} else if (riprods[j].getNazionale() == SiNoType.N) {
+									riproduzione.setNazionale(false);
+									
+								}
+							}
+							
+							if (riprods[j].getInternazionale() != null) {
+								if (riprods[j].getInternazionale() == SiNoType.S) {
+									riproduzione.setInternazionale(true);
+									
+								} else if (riprods[j].getInternazionale() == SiNoType.N) {
+									riproduzione.setInternazionale(false);
+									
+								}
+							}
+							biblioDao.saveChild(riproduzione);
+							log.debug("Inserito METODO DI RIPRODUZIONE");
+							
+						} else {
+							String msg = "Riproduzioni Tipo non trovato: " + tipo;
+							reportImport.addWarn(msg);
+							log.warn(msg);
+						}
+					
+					}
+				}
+				
+			} else {
+				bibliotecaDb.setAttivoRiproduzioni(false);
+				
+				if (bibliotecaDb.getRiproduzionis() != null && bibliotecaDb.getRiproduzionis().size() > 0) {
+					bibliotecaDb.setRiproduzionis(new ArrayList<Riproduzioni>());
+					
+					log.debug("Cancellati TUTTI METODI DI RIPRODUZIONE...");
+				}
+			}
+			
+		}
 		//PRESTITO
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getPrestito() != null) {
 			if (biblioteca.getServizi().getPrestito().getInterbibliotecario() != null) {
@@ -1879,64 +2019,7 @@ public class ImporterImpl implements Importer {
 				}	
 				prestitoLocale.setBiblioteca(bibliotecaDb);
 				biblioDao.saveChild(prestitoLocale);
-
-
-				if (biblioteca.getServizi().getPrestito().getRiproduzioni() != null) {
-					it.inera.abi.logic.formatodiscambio.castor.Riproduzioni[] rip = biblioteca.getServizi().getPrestito().getRiproduzioni();
-					for (int j = 0; j < rip.length; j++) {
-						if (j == 0) {
-							bibliotecaDb.setRiproduzionis(new ArrayList<Riproduzioni>());
-							log.debug("Cancellati TUTTI METODI DI RIPRODUZIONE...");
-						}
-						
-						Riproduzioni riproduzioni = new Riproduzioni();
-						if ((rip[j] != null) && (rip[j].getTipo().trim().length() > 0)) {
-							String tipo = rip[j].getTipo();
-							RiproduzioniTipo riproduzioniTipo = (RiproduzioniTipo) dynaTabDao.searchRecord(RiproduzioniTipo.class, tipo);
-							if (tipo != null) {
-								riproduzioni.setRiproduzioniTipo(riproduzioniTipo);
-								log.debug("TIPO DI RIPRODUZIONE: " + tipo);
-								
-							} else {
-								String msg = "Riproduzioni Tipo non trovato: " + tipo;
-								reportImport.addWarn(msg);
-								log.warn(msg);
-							}
-
-						}
-
-						if (SiNoType.S.equals(rip[j].getLocale())) {
-							riproduzioni.setLocale(true);
-							log.debug("RIPRODUZIONE LOCALE: " + true);
-						}
-						if (SiNoType.N.equals(rip[j].getLocale())) {
-							riproduzioni.setLocale(false);
-							log.debug("RIPRODUZIONE LOCALE: " + false);
-						}
-
-
-						if (SiNoType.S.equals(rip[j].getNazionale())) {
-							riproduzioni.setNazionale(true);
-							log.debug("RIPRODUZIONE NAZIONALE: " + true);
-						}
-						if (SiNoType.N.equals(rip[j].getNazionale())) {
-							riproduzioni.setNazionale(false);
-							log.debug("RIPRODUZIONE NAZIONALE: " + false);
-						}
-
-
-						if (SiNoType.S.equals(rip[j].getInternazionale())) {
-							riproduzioni.setInternazionale(true);
-							log.debug("RIPRODUZIONE INTERNAZIONALE: " + true);
-						}
-						if (SiNoType.N.equals(rip[j].getInternazionale())) {
-							riproduzioni.setInternazionale(false);
-							log.debug("RIPRODUZIONE INTERNAZIONALE: " + false);
-						}
-						bibliotecaDb.getRiproduzionis().add(riproduzioni);
-						log.debug("Inserito METODO DI RIPRODUZIONE");
-					}
-				}
+				
 				log.debug("Modificato PRESTITO LOCALE...");
 			}			
 		}
@@ -2182,17 +2265,7 @@ public class ImporterImpl implements Importer {
 				codiceFiscale = biblioteca.getAmministrativa().getEnte().getCodiceFiscale();
 				log.debug("Ente codiceFiscale: " + codiceFiscale);
 			}
-			EnteObiettivo enteObiettivo = null;
-			if (biblioteca.getAmministrativa().getEnte().getFunzioneObiettivo() != null) {
-				String enteObiettivoStr = biblioteca.getAmministrativa().getEnte().getFunzioneObiettivo();
-				enteObiettivo = (EnteObiettivo)  dynaTabDao.searchRecord(EnteObiettivo.class, enteObiettivoStr);
-				if (enteObiettivo == null) {
-					String msg = "Ente obiettivo non trovato: " + enteObiettivoStr;
-					reportImport.addWarn(msg);
-					log.warn(msg);
-				}
-				log.debug("enteObiettivo: " + enteObiettivo);
-			}
+			
 			String denominazione = null;
 			if (biblioteca.getAmministrativa().getEnte().getNome() != null) {
 				denominazione = biblioteca.getAmministrativa().getEnte().getNome();
@@ -2227,7 +2300,7 @@ public class ImporterImpl implements Importer {
 			}
 			String asiaAsip = null;
 			// cerco l'ente con i dati dal XML, se lo trovo aggiungo quello altrimenti lo creo nuovo
-			Ente enteJpa = enteDao.createEnteIfNotExist(statoEnte, enteTipologiaAmministrativa, enteObiettivo, denominazione, asiaAsip, partitaIva, codiceFiscale);
+			Ente enteJpa = enteDao.createEnteIfNotExist(statoEnte, enteTipologiaAmministrativa, denominazione, asiaAsip, partitaIva, codiceFiscale);
 			bibliotecaDb.setEnte(enteJpa);
 
 

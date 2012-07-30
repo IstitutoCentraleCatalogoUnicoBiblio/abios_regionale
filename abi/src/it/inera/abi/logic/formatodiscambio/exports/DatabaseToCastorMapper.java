@@ -48,6 +48,7 @@ import it.inera.abi.logic.formatodiscambio.castor.PatrimonioInventario;
 import it.inera.abi.logic.formatodiscambio.castor.Personale;
 import it.inera.abi.logic.formatodiscambio.castor.Postazioni;
 import it.inera.abi.logic.formatodiscambio.castor.Prestito;
+import it.inera.abi.logic.formatodiscambio.castor.Riproduzione;
 import it.inera.abi.logic.formatodiscambio.castor.Scaffalature;
 import it.inera.abi.logic.formatodiscambio.castor.Schede;
 import it.inera.abi.logic.formatodiscambio.castor.Servizi;
@@ -290,6 +291,7 @@ public class DatabaseToCastorMapper {
 		DatabaseToCastorMapper.Servizi_setPrestito(servizi, bibliotecaDb);
 		DatabaseToCastorMapper.Servizi_setSezioniSpeciali(servizi, bibliotecaDb);
 		DatabaseToCastorMapper.Servizi_setSistemi(servizi, bibliotecaDb);
+		DatabaseToCastorMapper.Servizi_setRiproduzioni(servizi, bibliotecaDb);
 
 		return servizi;
 	}
@@ -1155,10 +1157,7 @@ public class DatabaseToCastorMapper {
 		Ente enteH = bibliotecaDb.getEnte();
 		if(enteH.getCodiceFiscale() != null)
 			ente.setCodiceFiscale(enteH.getCodiceFiscale());
-		if((enteH.getEnteObiettivo() != null)&&
-				(enteH.getEnteObiettivo().getDescrizione() != null)&&
-				(enteH.getEnteObiettivo().getDescrizione().trim().length()>0))
-			ente.setFunzioneObiettivo(enteH.getEnteObiettivo().getDescrizione().trim());
+		
 		if ((enteH.getDenominazione() != null) && (enteH.getDenominazione().trim().length() > 0)) {
 			ente.setNome(enteH.getDenominazione().trim());
 		} else {
@@ -1411,70 +1410,138 @@ public class DatabaseToCastorMapper {
 	}
 
 	private static void Servizi_setInformazioniBibliografiche(Servizi servizi, Biblioteca bibliotecaDb) {
-		boolean settato = false;
 		InformazioniBibliografiche ib = new InformazioniBibliografiche();
-		//SERVIZIO INTERNO
-		if (BooleanUtils.isTrue(bibliotecaDb.getGestisceServizioBibliograficoInterno())) {
-			ib.setServizioInterno(SiNoType.S);
-			settato = true;
-		} else if (BooleanUtils.isFalse(bibliotecaDb.getGestisceServizioBibliograficoInterno())) {
-			ib.setServizioInterno(SiNoType.N);
-			settato = true;
-		}
-		//SERVIZIO ESTERNO
-		if (BooleanUtils.isTrue(bibliotecaDb.getGestisceServizioBibliograficoEsterno())) {
-			ServizioEsterno servizioEsterno = new ServizioEsterno();
-			ArrayList<String> servEstC = new ArrayList<String>();
-			for (Iterator<ServiziInformazioniBibliograficheModalita> i = bibliotecaDb.getServiziInformazioniBibliograficheModalitas().iterator(); i.hasNext();){
-				ServiziInformazioniBibliograficheModalita sib = i.next();
-				servEstC.add(sib.getDescrizione());
-			}
-			if (servEstC.size() > 0) {
-				String[] modoArrayC = new String[servEstC.size()];
-				modoArrayC = (String[]) servEstC.toArray(modoArrayC);
-				servizioEsterno.setModo(modoArrayC);
-				ib.setServizioEsterno(servizioEsterno);
-				settato = true;
-				log.debug("Settati i servizi esterni nella parte servizi");
+
+		if (bibliotecaDb.getAttivoInformazioniBibliografiche() != null) {
+			if (bibliotecaDb.getAttivoInformazioniBibliografiche().booleanValue() == true) {
+				ib.setAttivo(SiNoType.S);
+
+				/* Servizio in sede */
+				if (BooleanUtils.isTrue(bibliotecaDb.getGestisceServizioBibliograficoInterno())) {
+					ib.setServizioInterno(SiNoType.S);
+
+				} else if (BooleanUtils.isFalse(bibliotecaDb.getGestisceServizioBibliograficoInterno())) {
+					ib.setServizioInterno(SiNoType.N);
+				}
+
+				/* Servizio esterno */
+				if (BooleanUtils.isTrue(bibliotecaDb.getGestisceServizioBibliograficoEsterno())) {
+					ServizioEsterno servizioEsterno = new ServizioEsterno();
+					ArrayList<String> servEstC = new ArrayList<String>();
+					for (Iterator<ServiziInformazioniBibliograficheModalita> i = bibliotecaDb.getServiziInformazioniBibliograficheModalitas().iterator(); i.hasNext();){
+						ServiziInformazioniBibliograficheModalita sib = i.next();
+						servEstC.add(sib.getDescrizione());
+					}
+					if (servEstC.size() > 0) {
+						String[] modoArrayC = new String[servEstC.size()];
+						modoArrayC = (String[]) servEstC.toArray(modoArrayC);
+						servizioEsterno.setModo(modoArrayC);
+						ib.setServizioEsterno(servizioEsterno);
+						log.debug("Settati i servizi esterni nella parte servizi");
+
+					} else {
+						log.debug("Non sono presenti servizi esterni per la biblioteca");
+					}
+				}
+
+
 			} else {
-				log.debug("Non sono presenti servizi esterni per la biblioteca");
+				ib.setAttivo(SiNoType.N);
+
+				/* Servizio in sede */
+				if (bibliotecaDb.getGestisceServizioBibliograficoInterno() != null 
+						&& bibliotecaDb.getGestisceServizioBibliograficoInterno().booleanValue() == false) {
+					ib.setServizioInterno(SiNoType.N);
+				}
+
+				/* Servizio esterno */
+				if (bibliotecaDb.getGestisceServizioBibliograficoEsterno() != null 
+						&& bibliotecaDb.getGestisceServizioBibliograficoEsterno().booleanValue() == false) {
+					/* 
+					 * Nel formato di scambio non è gestito il fatto che il servizio esterno non sia fornito;
+					 * utilizzando però l'attributo delle informazioni bibliografiche è possibile "pilotare"
+					 * la corretta valorizzazione sul database del booleano 'gestisce_servizio_bibliografico_esterno'.
+					 */
+				}
+
 			}
-		}
-		if (settato)
+
 			servizi.setInformazioniBibliografiche(ib);
+		}
+
 	}
 
-	private static void Servizi_setInternet(Servizi servizi,  Biblioteca bibliotecaDb) {
+	private static void Servizi_setInternet(Servizi servizi, Biblioteca bibliotecaDb) {
 		Internet internet = new Internet();
-		
-		if (bibliotecaDb.getAccessoInternetTempo() != null) {
-			if (bibliotecaDb.getAccessoInternetTempo().booleanValue()) {
-				internet.setATempo(SiNoType.S);
-				
-			} else {
-				internet.setATempo(SiNoType.N);
-			}
-		}
-		
-		if (bibliotecaDb.getAccessoInternetPagamento() != null) {
-			if (bibliotecaDb.getAccessoInternetPagamento().booleanValue()) {
-				internet.setAPagamento(SiNoType.S);
-				
-			} else {
-				internet.setAPagamento(SiNoType.N);
-			}
-		}
-		
-		if (bibliotecaDb.getAccessoInternetProxy() != null) {
-			if (bibliotecaDb.getAccessoInternetProxy().booleanValue()) {
-				internet.setConProxy(SiNoType.S);
-				
-			} else {
-				internet.setConProxy(SiNoType.N);
-			}
-		}
 
-		servizi.setInternet(internet);		
+		if (bibliotecaDb.getAttivoAccessoInternet() != null) {
+			if (BooleanUtils.isTrue(bibliotecaDb.getAttivoAccessoInternet())) {
+				internet.setAttivo(SiNoType.S);
+
+				/* A tempo */
+				if (bibliotecaDb.getAccessoInternetTempo() != null) {
+					if (bibliotecaDb.getAccessoInternetTempo().booleanValue()) {
+						internet.setATempo(SiNoType.S);
+
+					} else {
+						internet.setATempo(SiNoType.N);
+					}
+
+				} else {
+					internet.setATempo(null);
+				}
+
+				/* A pagamento */
+				if (bibliotecaDb.getAccessoInternetPagamento() != null) {
+					if (bibliotecaDb.getAccessoInternetPagamento().booleanValue()) {
+						internet.setAPagamento(SiNoType.S);
+
+					} else {
+						internet.setAPagamento(SiNoType.N);
+					}
+
+				} else {
+					internet.setAPagamento(null);
+				}
+
+				/* Con proxy */
+				if (bibliotecaDb.getAccessoInternetProxy() != null) {
+					if (bibliotecaDb.getAccessoInternetProxy().booleanValue()) {
+						internet.setConProxy(SiNoType.S);
+
+					} else {
+						internet.setConProxy(SiNoType.N);
+					}
+
+				} else {
+					internet.setConProxy(null);
+				}
+
+			} else if (BooleanUtils.isFalse(bibliotecaDb.getAttivoAccessoInternet())) {
+				internet.setAttivo(SiNoType.N);
+
+				/* A tempo */
+				if (bibliotecaDb.getAccessoInternetTempo() != null 
+						&& bibliotecaDb.getAccessoInternetTempo().booleanValue() == false) {
+					internet.setATempo(SiNoType.N);
+				}
+
+				/* A pagamento */
+				if (bibliotecaDb.getAccessoInternetPagamento() != null 
+						&& bibliotecaDb.getAccessoInternetPagamento().booleanValue() == false) {
+					internet.setAPagamento(SiNoType.N);
+				}
+
+				/* Con proxy */
+				if (bibliotecaDb.getAccessoInternetProxy() != null 
+						&& bibliotecaDb.getAccessoInternetProxy().booleanValue() == false) {
+					internet.setConProxy(SiNoType.N);
+				}
+
+			}
+
+			servizi.setInternet(internet);
+		}
 	}
 
 	private static void Servizi_setPrestito(Servizi servizi, Biblioteca bibliotecaDb) {
@@ -1619,33 +1686,12 @@ public class DatabaseToCastorMapper {
 				mel.setMateriale(materialiEsclusi);
 				prestito.setMaterialiEsclusiLocale(mel);
 			}
-			//RIPRODUZIONI
-			it.inera.abi.logic.formatodiscambio.castor.Riproduzioni riproduzioni = new it.inera.abi.logic.formatodiscambio.castor.Riproduzioni();
-			for(Iterator<Riproduzioni> i = bibliotecaDb.getRiproduzionis().iterator(); i.hasNext();){
-				Riproduzioni riproduzioniH = i.next();
-				if("S".equals(riproduzioniH.getInternazionale()))
-					riproduzioni.setInternazionale(SiNoType.S);
-				if("N".equals(riproduzioniH.getInternazionale()))
-					riproduzioni.setInternazionale(SiNoType.N);
-
-				if("S".equals(riproduzioniH.getLocale()))
-					riproduzioni.setLocale(SiNoType.S);
-				if("N".equals(riproduzioniH.getLocale()))
-					riproduzioni.setLocale(SiNoType.N);
-
-				if("S".equals(riproduzioniH.getNazionale()))
-					riproduzioni.setNazionale(SiNoType.S);
-				if("N".equals(riproduzioniH.getNazionale()))
-					riproduzioni.setNazionale(SiNoType.N);
-
-				riproduzioni.setTipo(riproduzioniH.getRiproduzioniTipo().getDescrizione());
-				prestito.addRiproduzioni(riproduzioni);
-			}
-
 
 		}
-		if(settato)
+
+		if (settato) {
 			servizi.setPrestito(prestito);
+		}
 	}
 
 	private static void Servizi_setOrario(Servizi servizi, Biblioteca bibliotecaDb) {
@@ -1885,6 +1931,63 @@ public class DatabaseToCastorMapper {
 		
 		if (sistemi.getSistemiItem() != null && sistemi.getSistemiItem().length > 0) {
 			servizi.setSistemi(sistemi);
+		}
+	}
+
+private static void Servizi_setRiproduzioni(Servizi servizi, Biblioteca bibliotecaDb) {
+		it.inera.abi.logic.formatodiscambio.castor.Riproduzioni riproduzioni = new it.inera.abi.logic.formatodiscambio.castor.Riproduzioni();
+
+		if (bibliotecaDb.getAttivoRiproduzioni() != null) {
+			if (bibliotecaDb.getAttivoRiproduzioni().booleanValue() == true) {
+				riproduzioni.setAttivo(SiNoType.S);
+
+				if (bibliotecaDb.getRiproduzionis() != null && bibliotecaDb.getRiproduzionis().size() > 0) {
+					for (Riproduzioni riproduzioneEntry : bibliotecaDb.getRiproduzionis()) {
+						Riproduzione riproduzione = new Riproduzione();
+
+						riproduzione.setTipo(riproduzioneEntry.getRiproduzioniTipo().getDescrizione());
+
+						if (riproduzioneEntry.getLocale() != null) {
+							if (riproduzioneEntry.getLocale().booleanValue() == true) {
+								riproduzione.setLocale(SiNoType.S);
+
+							} else if (riproduzioneEntry.getLocale().booleanValue() == false) {
+								riproduzione.setLocale(SiNoType.N);
+
+							}							
+						}
+
+						if (riproduzioneEntry.getNazionale() != null) {
+							if (riproduzioneEntry.getNazionale().booleanValue() == true) {
+								riproduzione.setNazionale(SiNoType.S);
+
+							} else if (riproduzioneEntry.getNazionale().booleanValue() == false) {
+								riproduzione.setNazionale(SiNoType.N);
+
+							}							
+						}
+
+						if (riproduzioneEntry.getInternazionale() != null) {
+							if (riproduzioneEntry.getInternazionale().booleanValue() == true) {
+								riproduzione.setInternazionale(SiNoType.S);
+
+							} else if (riproduzioneEntry.getInternazionale().booleanValue() == false) {
+								riproduzione.setInternazionale(SiNoType.N);
+
+							}							
+						}
+
+						riproduzioni.addRiproduzione(riproduzione);
+					}
+				}
+
+			} else if (bibliotecaDb.getAttivoRiproduzioni().booleanValue() == false) {
+				riproduzioni.setAttivo(SiNoType.N);
+
+			}
+
+			servizi.setRiproduzioni(riproduzioni);
+
 		}
 	}
 

@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: BibliotecaType.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: BibliotecaType.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -28,8 +28,10 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  Nei casi più elementari si è ritenuto opportuno fissare
  *  l'obbligatorietà e la ripetibilità degli elementi.
  *  
+ *  L'elemento biblioteca adesso è obbligatorio.
+ *  
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
  */
 @SuppressWarnings("serial")
 public abstract class BibliotecaType implements java.io.Serializable {

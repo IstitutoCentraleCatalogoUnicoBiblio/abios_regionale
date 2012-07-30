@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: ServiziTypeDescriptor.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: ServiziTypeDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.ServiziType;
 /**
  * Class ServiziTypeDescriptor.
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
  */
 public class ServiziTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -145,6 +145,44 @@ public class ServiziTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDe
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
+        //-- _riproduzioni
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Riproduzioni.class, "_riproduzioni", "riproduzioni", org.exolab.castor.xml.NodeType.Element);
+        handler = new org.exolab.castor.xml.XMLFieldHandler() {
+            @Override
+            public java.lang.Object getValue( java.lang.Object object ) 
+                throws IllegalStateException
+            {
+                ServiziType target = (ServiziType) object;
+                return target.getRiproduzioni();
+            }
+            @Override
+            public void setValue( java.lang.Object object, java.lang.Object value) 
+                throws IllegalStateException, IllegalArgumentException
+            {
+                try {
+                    ServiziType target = (ServiziType) object;
+                    target.setRiproduzioni( (it.inera.abi.logic.formatodiscambio.castor.Riproduzioni) value);
+                } catch (java.lang.Exception ex) {
+                    throw new IllegalStateException(ex.toString());
+                }
+            }
+            @Override
+            @SuppressWarnings("unused")
+            public java.lang.Object newInstance(java.lang.Object parent) {
+                return null;
+            }
+        };
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Riproduzioni");
+        desc.setHandler(handler);
+        desc.setMultivalued(false);
+        addFieldDescriptor(desc);
+        addSequenceElement(desc);
+
+        //-- validation code for: _riproduzioni
+        fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        { //-- local scope
+        }
+        desc.setValidator(fieldValidator);
         //-- _informazioniBibliografiche
         desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.InformazioniBibliografiche.class, "_informazioniBibliografiche", "informazioni-bibliografiche", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
@@ -174,14 +212,12 @@ public class ServiziTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDe
         };
         desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.InformazioniBibliografiche");
         desc.setHandler(handler);
-        desc.setRequired(true);
         desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
         //-- validation code for: _informazioniBibliografiche
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(1);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
@@ -214,14 +250,12 @@ public class ServiziTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDe
         };
         desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Internet");
         desc.setHandler(handler);
-        desc.setRequired(true);
         desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
         //-- validation code for: _internet
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(1);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);

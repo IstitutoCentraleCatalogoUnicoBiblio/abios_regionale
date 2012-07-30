@@ -95,7 +95,23 @@ public class BiblioModel extends BaseModel implements Serializable {
 		set("catalogoCartaceo", catalogoCartaceo);
 		set("catalogoInformatizzato", catalogoInformatizzato);
 	}
+	
+	public void setAttivoPrestitoLocale(Boolean attivoPrestitoLocale) {
+		set("attivoPrestitoLocale", attivoPrestitoLocale);
+	}
+	
+	public Boolean getAttivoPrestitoLocale() {
+		return get("attivoPrestitoLocale");
+	}
 
+	public void setAttivoRiproduzioni(Boolean attivoRiproduzioni) {
+		set("attivoRiproduzioni", attivoRiproduzioni);
+	}
+	
+	public Boolean getAttivoRiproduzioni() {
+		return get("attivoRiproduzioni");
+	}
+	
 	public void setLimiteEtaMin(Integer limiteEtaMin) {
 		set("limiteEtaMin", limiteEtaMin);
 	}
@@ -492,6 +508,14 @@ public class BiblioModel extends BaseModel implements Serializable {
 	public String getBibliografia(){
 	return	get("bibliografia");
 	}
+	
+	public void setAttivoInformazioniBibliografiche(Boolean attivoInformazioniBibliografiche) {
+		set("attivoInformazioniBibliografiche", attivoInformazioniBibliografiche);
+	}
+	
+	public Boolean getAttivoInformazioniBibliografiche() {
+		return get("attivoInformazioniBibliografiche");
+	}
 
 	public void setServizioBibliograficoEsterno(Boolean servizioBibliograficoEsterno){
 		set("servizioBibliograficoEsterno",servizioBibliograficoEsterno);
@@ -507,6 +531,14 @@ public class BiblioModel extends BaseModel implements Serializable {
 	
 	public Boolean getServizioBibliograficoInterno(){
 		return	get("servizioBibliograficoInterno");
+	}
+	
+	public void setAttivoAccessoInternet(Boolean attivoAccessoInternet) {
+		set("attivoAccessoInternet", attivoAccessoInternet);
+	}
+	
+	public Boolean getAttivoAccessoInternet() {
+		return get("attivoAccessoInternet");
 	}
 	
 	public void setAccessoInternetAPagamento(String accessoInternetAPagamento){

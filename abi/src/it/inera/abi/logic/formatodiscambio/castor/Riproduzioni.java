@@ -2,19 +2,19 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Riproduzioni.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: Riproduzioni.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * Con questo elemento si dà la possibilità di 
- *  esprimere le modalità di riprodurre i vari
- *  materiali ammessi al prestito locale, 
- *  nazionale e/o internazionale. 
+ *  inserire una lista di riproduzioni ammesse. 
+ *  
+ *  Introdotto attributo 'attivo' del tipo siNoType.
  *  
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
  */
 @SuppressWarnings("serial")
 public class Riproduzioni implements java.io.Serializable {
@@ -25,24 +25,18 @@ public class Riproduzioni implements java.io.Serializable {
     //--------------------------/
 
     /**
-     * Field _tipo.
+     * Field _attivo.
      */
-    private java.lang.String _tipo;
+    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _attivo;
 
     /**
-     * Field _locale.
+     * Con questo elemento si dà la possibilità di 
+     *  esprimere le modalità di riprodurre i vari
+     *  materiali ammessi al prestito locale, 
+     *  nazionale e/o internazionale. 
+     *  
      */
-    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _locale;
-
-    /**
-     * Field _nazionale.
-     */
-    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _nazionale;
-
-    /**
-     * Field _internazionale.
-     */
-    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _internazionale;
+    private java.util.List<it.inera.abi.logic.formatodiscambio.castor.Riproduzione> _riproduzioneList;
 
 
       //----------------/
@@ -51,6 +45,7 @@ public class Riproduzioni implements java.io.Serializable {
 
     public Riproduzioni() {
         super();
+        this._riproduzioneList = new java.util.ArrayList<it.inera.abi.logic.formatodiscambio.castor.Riproduzione>();
     }
 
 
@@ -59,43 +54,99 @@ public class Riproduzioni implements java.io.Serializable {
     //-----------/
 
     /**
-     * Returns the value of field 'internazionale'.
      * 
-     * @return the value of field 'Internazionale'.
+     * 
+     * @param vRiproduzione
+     * @throws java.lang.IndexOutOfBoundsException if the index
+     * given is outside the bounds of the collection
      */
-    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getInternazionale(
-    ) {
-        return this._internazionale;
+    public void addRiproduzione(
+            final it.inera.abi.logic.formatodiscambio.castor.Riproduzione vRiproduzione)
+    throws java.lang.IndexOutOfBoundsException {
+        this._riproduzioneList.add(vRiproduzione);
     }
 
     /**
-     * Returns the value of field 'locale'.
      * 
-     * @return the value of field 'Locale'.
+     * 
+     * @param index
+     * @param vRiproduzione
+     * @throws java.lang.IndexOutOfBoundsException if the index
+     * given is outside the bounds of the collection
      */
-    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getLocale(
-    ) {
-        return this._locale;
+    public void addRiproduzione(
+            final int index,
+            final it.inera.abi.logic.formatodiscambio.castor.Riproduzione vRiproduzione)
+    throws java.lang.IndexOutOfBoundsException {
+        this._riproduzioneList.add(index, vRiproduzione);
     }
 
     /**
-     * Returns the value of field 'nazionale'.
+     * Method enumerateRiproduzione.
      * 
-     * @return the value of field 'Nazionale'.
+     * @return an Enumeration over all possible elements of this
+     * collection
      */
-    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getNazionale(
+    public java.util.Enumeration<? extends it.inera.abi.logic.formatodiscambio.castor.Riproduzione> enumerateRiproduzione(
     ) {
-        return this._nazionale;
+        return java.util.Collections.enumeration(this._riproduzioneList);
     }
 
     /**
-     * Returns the value of field 'tipo'.
+     * Returns the value of field 'attivo'.
      * 
-     * @return the value of field 'Tipo'.
+     * @return the value of field 'Attivo'.
      */
-    public java.lang.String getTipo(
+    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getAttivo(
     ) {
-        return this._tipo;
+        return this._attivo;
+    }
+
+    /**
+     * Method getRiproduzione.
+     * 
+     * @param index
+     * @throws java.lang.IndexOutOfBoundsException if the index
+     * given is outside the bounds of the collection
+     * @return the value of the
+     * it.inera.abi.logic.formatodiscambio.castor.Riproduzione at
+     * the given index
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.Riproduzione getRiproduzione(
+            final int index)
+    throws java.lang.IndexOutOfBoundsException {
+        // check bounds for index
+        if (index < 0 || index >= this._riproduzioneList.size()) {
+            throw new IndexOutOfBoundsException("getRiproduzione: Index value '" + index + "' not in range [0.." + (this._riproduzioneList.size() - 1) + "]");
+        }
+
+        return (it.inera.abi.logic.formatodiscambio.castor.Riproduzione) _riproduzioneList.get(index);
+    }
+
+    /**
+     * Method getRiproduzione.Returns the contents of the
+     * collection in an Array.  <p>Note:  Just in case the
+     * collection contents are changing in another thread, we pass
+     * a 0-length Array of the correct type into the API call. 
+     * This way we <i>know</i> that the Array returned is of
+     * exactly the correct length.
+     * 
+     * @return this collection as an Array
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.Riproduzione[] getRiproduzione(
+    ) {
+        it.inera.abi.logic.formatodiscambio.castor.Riproduzione[] array = new it.inera.abi.logic.formatodiscambio.castor.Riproduzione[0];
+        return (it.inera.abi.logic.formatodiscambio.castor.Riproduzione[]) this._riproduzioneList.toArray(array);
+    }
+
+    /**
+     * Method getRiproduzioneCount.
+     * 
+     * @return the size of this collection
+     */
+    public int getRiproduzioneCount(
+    ) {
+        return this._riproduzioneList.size();
     }
 
     /**
@@ -111,6 +162,17 @@ public class Riproduzioni implements java.io.Serializable {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Method iterateRiproduzione.
+     * 
+     * @return an Iterator over all possible elements in this
+     * collection
+     */
+    public java.util.Iterator<? extends it.inera.abi.logic.formatodiscambio.castor.Riproduzione> iterateRiproduzione(
+    ) {
+        return this._riproduzioneList.iterator();
     }
 
     /**
@@ -146,43 +208,79 @@ public class Riproduzioni implements java.io.Serializable {
     }
 
     /**
-     * Sets the value of field 'internazionale'.
-     * 
-     * @param internazionale the value of field 'internazionale'.
      */
-    public void setInternazionale(
-            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType internazionale) {
-        this._internazionale = internazionale;
+    public void removeAllRiproduzione(
+    ) {
+        this._riproduzioneList.clear();
     }
 
     /**
-     * Sets the value of field 'locale'.
+     * Method removeRiproduzione.
      * 
-     * @param locale the value of field 'locale'.
+     * @param vRiproduzione
+     * @return true if the object was removed from the collection.
      */
-    public void setLocale(
-            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType locale) {
-        this._locale = locale;
+    public boolean removeRiproduzione(
+            final it.inera.abi.logic.formatodiscambio.castor.Riproduzione vRiproduzione) {
+        boolean removed = _riproduzioneList.remove(vRiproduzione);
+        return removed;
     }
 
     /**
-     * Sets the value of field 'nazionale'.
+     * Method removeRiproduzioneAt.
      * 
-     * @param nazionale the value of field 'nazionale'.
+     * @param index
+     * @return the element removed from the collection
      */
-    public void setNazionale(
-            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType nazionale) {
-        this._nazionale = nazionale;
+    public it.inera.abi.logic.formatodiscambio.castor.Riproduzione removeRiproduzioneAt(
+            final int index) {
+        java.lang.Object obj = this._riproduzioneList.remove(index);
+        return (it.inera.abi.logic.formatodiscambio.castor.Riproduzione) obj;
     }
 
     /**
-     * Sets the value of field 'tipo'.
+     * Sets the value of field 'attivo'.
      * 
-     * @param tipo the value of field 'tipo'.
+     * @param attivo the value of field 'attivo'.
      */
-    public void setTipo(
-            final java.lang.String tipo) {
-        this._tipo = tipo;
+    public void setAttivo(
+            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType attivo) {
+        this._attivo = attivo;
+    }
+
+    /**
+     * 
+     * 
+     * @param index
+     * @param vRiproduzione
+     * @throws java.lang.IndexOutOfBoundsException if the index
+     * given is outside the bounds of the collection
+     */
+    public void setRiproduzione(
+            final int index,
+            final it.inera.abi.logic.formatodiscambio.castor.Riproduzione vRiproduzione)
+    throws java.lang.IndexOutOfBoundsException {
+        // check bounds for index
+        if (index < 0 || index >= this._riproduzioneList.size()) {
+            throw new IndexOutOfBoundsException("setRiproduzione: Index value '" + index + "' not in range [0.." + (this._riproduzioneList.size() - 1) + "]");
+        }
+
+        this._riproduzioneList.set(index, vRiproduzione);
+    }
+
+    /**
+     * 
+     * 
+     * @param vRiproduzioneArray
+     */
+    public void setRiproduzione(
+            final it.inera.abi.logic.formatodiscambio.castor.Riproduzione[] vRiproduzioneArray) {
+        //-- copy array
+        _riproduzioneList.clear();
+
+        for (int i = 0; i < vRiproduzioneArray.length; i++) {
+                this._riproduzioneList.add(vRiproduzioneArray[i]);
+        }
     }
 
     /**

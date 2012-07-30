@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: IndirizzoDescriptor.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: IndirizzoDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Indirizzo;
 /**
  * Class IndirizzoDescriptor.
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
  */
 public class IndirizzoDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -225,12 +225,14 @@ public class IndirizzoDescriptor extends org.exolab.castor.xml.util.XMLClassDesc
         };
         desc.setSchemaType("string");
         desc.setHandler(handler);
+        desc.setRequired(true);
         desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
         //-- validation code for: _comune
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        fieldValidator.setMinOccurs(1);
         { //-- local scope
             org.exolab.castor.xml.validators.StringValidator typeValidator;
             typeValidator = new org.exolab.castor.xml.validators.StringValidator();

@@ -548,7 +548,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	public void setEnte(int id_biblioteca, Stato stato,	EnteTipologiaAmministrativa enteTipologiaAmministrativa,
 			String denominazione) {
 
-		Ente ente = enteDao.createEnteIfNotExist2(stato,enteTipologiaAmministrativa, null, denominazione, null, null,null);
+		Ente ente = enteDao.createEnteIfNotExist2(stato,enteTipologiaAmministrativa, denominazione, null, null,null);
 
 		biblioDao.setEnte(id_biblioteca, ente);
 
@@ -1083,8 +1083,8 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 
 	@Override
-	public void setServizioBibliogrficoInternoEsterno(int id_biblioteca,Boolean hasServizioBibliograficoInterno, Boolean hasServizioBibliograficoEsterno) {
-		biblioDao.setServizioBibliogrficoInternoEsterno( id_biblioteca, hasServizioBibliograficoInterno,hasServizioBibliograficoEsterno);
+	public void setServizioBibliograficoInternoEsterno(int id_biblioteca, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno, Boolean hasServizioBibliograficoEsterno) {
+		biblioDao.setServizioBibliograficoInternoEsterno(id_biblioteca, hasAttivoInformazioniBibliografiche, hasServizioBibliograficoInterno, hasServizioBibliograficoEsterno);
 
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica servizio bibliografico interno/esterno: - id_biblioteca="+id_biblioteca);
 
@@ -1134,8 +1134,8 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 
 	@Override
 	@Transactional
-	public void updateModalitaAccessoInternet(int id_biblioteca,Boolean hasAccessoPagamento, Boolean hasAccessoTempo,Boolean hasAccessoProxy) {
-		biblioDao.updateModalitaAccessoInternet( id_biblioteca, hasAccessoPagamento,  hasAccessoTempo, hasAccessoProxy);
+	public void updateModalitaAccessoInternet(int id_biblioteca, Boolean hasAttivoAccesso, Boolean hasAccessoPagamento, Boolean hasAccessoTempo, Boolean hasAccessoProxy) {
+		biblioDao.updateModalitaAccessoInternet(id_biblioteca, hasAttivoAccesso, hasAccessoPagamento, hasAccessoTempo, hasAccessoProxy);
 
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica modalità accesso internet: id_biblioteca="+id_biblioteca);
 	}
@@ -1916,5 +1916,27 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	@Override
 	public Boolean addStatoCatalogazione(HashMap<String, Object> params) {
 		return biblioDao.addStatoCatalogazione(params);		
+	}
+	@Override
+	public void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni) {
+		Biblioteca biblioteca = biblioDao.getBibliotecaById(idbib);
+		biblioteca.setAttivoRiproduzioni(attivoRiproduzioni);
+		
+		if (attivoRiproduzioni == null || (attivoRiproduzioni != null && attivoRiproduzioni.booleanValue() == false)) {
+			biblioDao.removeRiproduzioniFromBiblio(biblioteca);
+		}
+		
+		biblioDao.updateBiblioteca(biblioteca);
+	}
+	
+	@Override
+	public void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale) {
+		Biblioteca biblioteca = biblioDao.getBibliotecaById(idbib);
+		biblioteca.setAttivoPrestitoLocale(attivoPrestitoLocale);
+		
+		if (attivoPrestitoLocale == null || (attivoPrestitoLocale != null && attivoPrestitoLocale.booleanValue() == false)) {
+			biblioDao.removePrestitoLocaleFromBiblio(biblioteca);
+		}
+		biblioDao.updateBiblioteca(biblioteca);		
 	}
 }

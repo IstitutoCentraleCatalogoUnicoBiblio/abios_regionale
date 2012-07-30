@@ -218,7 +218,7 @@ public interface BibliotecheService extends RemoteService {
 //	public PagingLoadResult<BiblioModel> getBibliotecheReport(HashMap<String, Object> keys,	final PagingLoadConfig config);
 	public PagingLoadResult<BiblioModel> getBibliotecheReport(final PagingLoadConfig config);
 	
-	public void setServizioBibliogrficoInternoEsterno(int id_biblio, Boolean hasServizioBibliograficoInterno, Boolean hasServizioBibliograficoEsterno);
+	public void setServizioBibliograficoInternoEsterno(int id_biblio, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno, Boolean hasServizioBibliograficoEsterno);
 
 	public List<VoceUnicaModel> getModalitaComunicazioniBibliograficheByIdBiblio(int id_biblioteca);
 
@@ -325,5 +325,9 @@ public interface BibliotecheService extends RemoteService {
 	void aggiornaCodici(HashMap<String, Object> params, int idBiblio);
 
 	void aggiornaCodiciOthers(HashMap<String, Object> params, int idBiblio);
+	
+	void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni);
+	
+	void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale);
 
 }

@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: InformazioniBibliografiche.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: InformazioniBibliografiche.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -15,8 +15,12 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  livello del "servizio-esterno", com'è logico.
  *  Quest'ultimo però è più articolato.
  *  
+ *  L'elemento informazioni bibliografiche diventa opzionale.
+ *  
+ *  Introdotto attributo 'attivo' del tipo siNoType.
+ *  
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
  */
 @SuppressWarnings("serial")
 public class InformazioniBibliografiche implements java.io.Serializable {
@@ -25,6 +29,11 @@ public class InformazioniBibliografiche implements java.io.Serializable {
       //--------------------------/
      //- Class/Member Variables -/
     //--------------------------/
+
+    /**
+     * Field _attivo.
+     */
+    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _attivo;
 
     /**
      * Field _servizioInterno.
@@ -61,6 +70,16 @@ public class InformazioniBibliografiche implements java.io.Serializable {
       //-----------/
      //- Methods -/
     //-----------/
+
+    /**
+     * Returns the value of field 'attivo'.
+     * 
+     * @return the value of field 'Attivo'.
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getAttivo(
+    ) {
+        return this._attivo;
+    }
 
     /**
      * Returns the value of field 'servizioEsterno'. The field
@@ -141,6 +160,16 @@ public class InformazioniBibliografiche implements java.io.Serializable {
             final org.xml.sax.ContentHandler handler)
     throws java.io.IOException, org.exolab.castor.xml.MarshalException, org.exolab.castor.xml.ValidationException {
         org.exolab.castor.xml.Marshaller.marshal(this, handler);
+    }
+
+    /**
+     * Sets the value of field 'attivo'.
+     * 
+     * @param attivo the value of field 'attivo'.
+     */
+    public void setAttivo(
+            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType attivo) {
+        this._attivo = attivo;
     }
 
     /**

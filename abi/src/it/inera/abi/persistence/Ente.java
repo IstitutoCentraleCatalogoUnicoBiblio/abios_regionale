@@ -30,11 +30,6 @@ public class Ente implements Serializable {
 	@Column(name="partita_iva", length=11)
 	private String partitaIva;
 
-	//uni-directional many-to-one association to EnteObiettivo
-    @ManyToOne
-	@JoinColumn(name="id_ente_obiettivo", nullable=false)
-	private EnteObiettivo enteObiettivo;
-
 	//uni-directional many-to-one association to EnteTipologiaAmministrativa
     @ManyToOne
 	@JoinColumn(name="id_ente_tipologia_amministrativa", nullable=false)
@@ -88,14 +83,6 @@ public class Ente implements Serializable {
 		this.partitaIva = partitaIva;
 	}
 
-	public EnteObiettivo getEnteObiettivo() {
-		return this.enteObiettivo;
-	}
-
-	public void setEnteObiettivo(EnteObiettivo enteObiettivo) {
-		this.enteObiettivo = enteObiettivo;
-	}
-	
 	public EnteTipologiaAmministrativa getEnteTipologiaAmministrativa() {
 		return this.enteTipologiaAmministrativa;
 	}

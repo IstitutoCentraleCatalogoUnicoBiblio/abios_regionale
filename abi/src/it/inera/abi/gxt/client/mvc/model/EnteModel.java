@@ -22,14 +22,12 @@ public class EnteModel extends BaseModel implements Serializable,ModelComparer {
 
 	public EnteModel(int id_ente, String denominazione, String partitaIva,
 			String asiaAsip, String codiceFiscale,
-			VoceUnicaModel enteObiettivo,
 			VoceUnicaModel enteTipologiaAmministrativa, StatoModel stato) {
 		set("id_ente", id_ente);
 		set("denominazione", denominazione);
 		set("partitaIva", partitaIva);
 		set("asiaAsip", asiaAsip);
 		set("codiceFiscale", codiceFiscale);
-		set("enteObiettivo", enteObiettivo);
 		set("enteTipologiaAmministrativa", enteTipologiaAmministrativa);
 		set("stato", stato);
 
@@ -76,10 +74,6 @@ public class EnteModel extends BaseModel implements Serializable,ModelComparer {
 		return get("codiceFiscale");
 	}
 
-	public void setEnteObiettivo(VoceUnicaModel enteObiettivo) {
-		set("enteObiettivo", enteObiettivo);
-	}
-
 	public void setEnteTipologiaAmministrativa(
 			VoceUnicaModel enteTipologiaAmministrativa) {
 		set("enteTipologiaAmministrativa", enteTipologiaAmministrativa);
@@ -91,10 +85,6 @@ public class EnteModel extends BaseModel implements Serializable,ModelComparer {
 
 	public StatoModel getStato() {
 		return get("stato");
-	}
-
-	public VoceUnicaModel getEnteObiettivo() {
-		return get("enteObiettivo");
 	}
 
 	public VoceUnicaModel getEnteTipologiaAmministrativa() {

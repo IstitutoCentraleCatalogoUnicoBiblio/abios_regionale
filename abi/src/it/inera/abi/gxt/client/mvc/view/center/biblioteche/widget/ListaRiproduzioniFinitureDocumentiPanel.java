@@ -147,7 +147,7 @@ public class ListaRiproduzioniFinitureDocumentiPanel extends ContentPanel {
 		ColumnConfig tipoRiproduzioneColumn = new ColumnConfig();
 
 		tipoRiproduzioneColumn.setId("tipoDescr");
-		tipoRiproduzioneColumn.setHeader("Servizio");
+		tipoRiproduzioneColumn.setHeader("Riproduzione");
 		tipoRiproduzioneColumn.setWidth(150);
 		tipoRiproduzioneColumn.setEditor(tipoRiproduzioneEditor);
 
@@ -326,7 +326,7 @@ public class ListaRiproduzioniFinitureDocumentiPanel extends ContentPanel {
 		toolBar.setWidth(300);
 		toolBar.setBorders(false);
 
-		toolBar.add(new Text("Inserisci un servizio:"));
+		toolBar.add(new Text("Inserisci una riproduzione:"));
 		add = new Button("Aggiungi");
 		add.setIcon(Resources.ICONS.add());
 

@@ -23,6 +23,9 @@ public class Biblioteca implements Serializable {
 	@Column(name="accesso_handicap")
 	private Boolean accessoHandicap;
 
+	@Column(name="attivo_accesso_internet")
+	private Boolean attivoAccessoInternet;
+	
 	@Column(name="accesso_internet_pagamento")
 	private Boolean accessoInternetPagamento;
 
@@ -132,6 +135,9 @@ public class Biblioteca implements Serializable {
 
 	@Column(length=255)
 	private String frazione;
+	
+	@Column(name="attivo_informazioni_bibliografiche")
+	private Boolean attivoInformazioniBibliografiche;
 
 	@Column(name="gestisce_servizio_bibliografico_esterno")
 	private Boolean gestisceServizioBibliograficoEsterno;
@@ -423,19 +429,6 @@ public class Biblioteca implements Serializable {
 	@JoinColumn(name="id_stato_biblioteca_workflow", nullable=false)
 	private StatoBibliotecaWorkflow statoBibliotecaWorkflow;
 
-	//uni-directional many-to-many association to Thesaurus
-    @ManyToMany
-	@JoinTable(
-		name="biblioteca_has_thesaurus"
-		, joinColumns={
-			@JoinColumn(name="id_biblioteca", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_thesaurus", nullable=false)
-			}
-		)
-	private List<Thesaurus> thesauruses;
-
 	//uni-directional many-to-one association to TipologiaFunzionale
     @ManyToOne
 	@JoinColumn(name="id_tipologia_funzionale", nullable=false)
@@ -528,6 +521,9 @@ public class Biblioteca implements Serializable {
 	@OneToMany(mappedBy="biblioteca")
 	private List<Patrimonio> patrimonios;
 
+	@Column(name="attivo_prestito_locale")
+	private Boolean attivoPrestitoLocale;
+	
 	//bi-directional many-to-one association to PrestitoLocale
 	@OneToMany(mappedBy="biblioteca")
 	private List<PrestitoLocale> prestitoLocales;
@@ -540,6 +536,9 @@ public class Biblioteca implements Serializable {
 	@OneToMany(mappedBy="biblioteca")
 	private List<Regolamento> regolamentos;
 
+	@Column(name="attivo_riproduzioni")
+	private Boolean attivoRiproduzioni;
+	
 	//bi-directional many-to-one association to Riproduzioni
 	@OneToMany(mappedBy="biblioteca")
 	private List<Riproduzioni> riproduzionis;
@@ -571,6 +570,14 @@ public class Biblioteca implements Serializable {
 		this.accessoHandicap = accessoHandicap;
 	}
 
+public Boolean getAttivoAccessoInternet() {
+		return this.attivoAccessoInternet;
+	}
+	
+	public void setAttivoAccessoInternet(Boolean attivoAccessoInternet) {
+		this.attivoAccessoInternet = attivoAccessoInternet;
+	}
+	
 	public Boolean getAccessoInternetPagamento() {
 		return this.accessoInternetPagamento;
 	}
@@ -850,7 +857,13 @@ public class Biblioteca implements Serializable {
 	public void setFrazione(String frazione) {
 		this.frazione = frazione;
 	}
-
+	public Boolean getAttivoInformazioniBibliografiche() {
+		return this.attivoInformazioniBibliografiche;
+	}
+	
+	public void setAttivoInformazioniBibliografiche(Boolean attivoInformazioniBibliografiche) {
+		this.attivoInformazioniBibliografiche = attivoInformazioniBibliografiche;
+	}
 	public Boolean getGestisceServizioBibliograficoEsterno() {
 		return this.gestisceServizioBibliograficoEsterno;
 	}
@@ -1275,14 +1288,6 @@ public class Biblioteca implements Serializable {
 		this.statoBibliotecaWorkflow = statoBibliotecaWorkflow;
 	}
 	
-	public List<Thesaurus> getThesauruses() {
-		return this.thesauruses;
-	}
-
-	public void setThesauruses(List<Thesaurus> thesauruses) {
-		this.thesauruses = thesauruses;
-	}
-	
 	public TipologiaFunzionale getTipologiaFunzionale() {
 		return this.tipologiaFunzionale;
 	}
@@ -1442,7 +1447,13 @@ public class Biblioteca implements Serializable {
 	public void setPatrimonios(List<Patrimonio> patrimonios) {
 		this.patrimonios = patrimonios;
 	}
+		public Boolean getAttivoPrestitoLocale() {
+		return this.attivoPrestitoLocale;
+	}
 	
+	public void setAttivoPrestitoLocale(Boolean attivoPrestitoLocale) {
+		this.attivoPrestitoLocale = attivoPrestitoLocale;
+	}
 	public List<PrestitoLocale> getPrestitoLocales() {
 		return this.prestitoLocales;
 	}
@@ -1466,7 +1477,13 @@ public class Biblioteca implements Serializable {
 	public void setRegolamentos(List<Regolamento> regolamentos) {
 		this.regolamentos = regolamentos;
 	}
+	public Boolean getAttivoRiproduzioni() {
+		return this.attivoRiproduzioni;
+	}
 	
+	public void setAttivoRiproduzioni(Boolean attivoRiproduzioni) {
+		this.attivoRiproduzioni = attivoRiproduzioni;
+	}
 	public List<Riproduzioni> getRiproduzionis() {
 		return this.riproduzionis;
 	}

@@ -5,7 +5,6 @@ import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.costants.CostantiTabelleDinamiche;
-import it.inera.abi.gxt.client.mvc.model.ServiziRiproduzioniModel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPrestitoInterbibliotecarioRuoloBiliotecaPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPrestitoLocalePanel;
@@ -18,6 +17,8 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.MessageBox;
@@ -27,6 +28,9 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
+import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.RadioGroup;
@@ -45,8 +49,14 @@ public class PrestitoPanel extends ContentPanelForTabItem {
 	private ListaPrestitoInterbibliotecarioRuoloBiliotecaPanel listaPrestitoInterbibliotecarioRuoloBiliotecaPanel;
 	private ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel listaSistemiPrestitoInterbibliotecarioPanel;
 
+	private Button attivoPrestitoLocaleAggiorna;
+	private Button resetAttivoPrestitoLocale;
+	
 	private Button prestitoAggiorna;
 	private Button resetPrestiti;
+
+	private Text attivoPrestitoLocaleLabel;
+	private SimpleComboBox<String> attivoPrestitoLocaleField;
 	
 	private RadioGroup rgPrestNaz;
 	private Radio prestitoNazionaleSI;
@@ -98,7 +108,129 @@ public class PrestitoPanel extends ContentPanelForTabItem {
 		FieldSet materialeEsclusoSet = new FieldSet();
 		Utils.setFieldSetProperties(materialeEsclusoSet, "Prestito Locale");
 		materialeEsclusoSet.setCollapsible(true);
+		
+		LayoutContainer attivaPrestitoLocaleTable = new LayoutContainer(new TableLayout(3));
+		attivaPrestitoLocaleTable.setWidth(500);
+		
+		attivoPrestitoLocaleLabel = new Text("Attiva prestito locale:");
+		attivoPrestitoLocaleLabel.setStyleAttribute("fontSize", "14px");
+		attivaPrestitoLocaleTable.add(attivoPrestitoLocaleLabel, d);
+		
+		attivoPrestitoLocaleField = new SimpleComboBox<String>();
+		attivoPrestitoLocaleField.setTriggerAction(TriggerAction.ALL);
+		attivoPrestitoLocaleField.setEditable(false);
+		attivoPrestitoLocaleField.setFireChangeEventOnSetValue(true);
+		attivoPrestitoLocaleField.setWidth(200);
+		attivoPrestitoLocaleField.add("Si");
+		attivoPrestitoLocaleField.add("No");
+		attivoPrestitoLocaleField.add("Non specificato");
+		attivoPrestitoLocaleField.setSimpleValue("Non specificato");
 
+		attivoPrestitoLocaleField.addSelectionChangedListener(new SelectionChangedListener<SimpleComboValue<String>>() {
+			@Override
+			public void selectionChanged(SelectionChangedEvent<SimpleComboValue<String>> se) {
+				Utils.setFontColorStyleRed(attivoPrestitoLocaleLabel);
+
+				if ("Si".equals(se.getSelectedItem().getValue())) {
+					listaPrestitiLocaliPanel.enable();
+
+				} else if ("No".equals(se.getSelectedItem().getValue())) {
+					listaPrestitiLocaliPanel.disable();
+
+				} else {/* Non specificato */
+					listaPrestitiLocaliPanel.disable();
+				}
+
+			}
+		});
+		
+		attivaPrestitoLocaleTable.add(attivoPrestitoLocaleField, d);
+		
+		attivoPrestitoLocaleAggiorna = new Button("Aggiorna");
+		Utils.setStylesButton(attivoPrestitoLocaleAggiorna);
+		attivoPrestitoLocaleAggiorna.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
+					@Override
+					public void handleEvent(MessageBoxEvent ce) {
+						Button btn = ce.getButtonClicked();
+						if (btn.getText().equalsIgnoreCase("Si")) {
+							Boolean hasAttivoPrestitoLocale = null;
+							
+							if (attivoPrestitoLocaleField.getValue() != null) {
+								if ("Si".equals(attivoPrestitoLocaleField.getValue().getValue())) {
+									hasAttivoPrestitoLocale = true;
+									
+								} else if ("No".equals(attivoPrestitoLocaleField.getValue().getValue())) {
+									hasAttivoPrestitoLocale = false;
+									
+								} else {/* Non specificato */
+									hasAttivoPrestitoLocale = null;
+								}
+							}
+							
+							bibliotecheService.setAttivoPrestitoLocale(id_biblio, hasAttivoPrestitoLocale, new AsyncCallback<Void>() {
+								@Override
+								public void onSuccess(Void result) {
+									attivoPrestitoLocaleField.setOriginalValue(attivoPrestitoLocaleField.getValue());		
+									Utils.setFontColorStyleBlack(attivoPrestitoLocaleLabel);
+
+									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+									listaPrestitiLocaliPanel.getLoader().load();
+									fireReleoadbiblioDataEvent();
+									
+								}
+								
+								@Override
+								public void onFailure(Throwable caught) {
+									if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
+										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+								}
+							});
+						}
+					}
+				};
+				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, l);
+			}
+		});
+
+		resetAttivoPrestitoLocale = new Button("Reset");
+		Utils.setStylesButton(resetAttivoPrestitoLocale);
+		resetAttivoPrestitoLocale.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if (biblioteca.getAttivoPrestitoLocale() == null) {
+					attivoPrestitoLocaleField.setRawValue("Non specificato");
+					attivoPrestitoLocaleField.setSimpleValue("Non specificato");
+
+				} else {
+					if (biblioteca.getAttivoPrestitoLocale().booleanValue() == true) {
+						attivoPrestitoLocaleField.setRawValue("Si");
+						attivoPrestitoLocaleField.setSimpleValue("Si");
+
+					} else if  (biblioteca.getAttivoPrestitoLocale().booleanValue() == false) {
+						attivoPrestitoLocaleField.setRawValue("No");
+						attivoPrestitoLocaleField.setSimpleValue("No");
+					}
+				} 
+
+				attivoPrestitoLocaleField.setOriginalValue(attivoPrestitoLocaleField.getValue());
+				Utils.setFontColorStyleBlack(attivoPrestitoLocaleLabel);
+
+			}
+		});
+
+		TableLayout prestLocButtonsTableLayout = new TableLayout(2);
+		prestLocButtonsTableLayout.setCellPadding(5);
+		LayoutContainer prestLocButtons = new LayoutContainer(prestLocButtonsTableLayout);
+		prestLocButtons.add(attivoPrestitoLocaleAggiorna);
+		prestLocButtons.add(resetAttivoPrestitoLocale);
+
+		attivaPrestitoLocaleTable.add(prestLocButtons, d);
+
+		materialeEsclusoSet.add(attivaPrestitoLocaleTable);
+		
 		listaPrestitiLocaliPanel = new ListaPrestitoLocalePanel();
 		listaPrestitiLocaliPanel.setGrid();
 		materialeEsclusoSet.add(listaPrestitiLocaliPanel);
@@ -372,6 +504,25 @@ public class PrestitoPanel extends ContentPanelForTabItem {
 	public void setFieldsValues() {
 		listaPrestitiLocaliPanel.setIdBiblioteca(biblioteca.getIdBiblio());
 		listaPrestitiLocaliPanel.getLoader().load();
+		
+		if (biblioteca.getAttivoPrestitoLocale() == null) {
+			attivoPrestitoLocaleField.setRawValue("Non specificato");
+			listaPrestitiLocaliPanel.disable();
+
+		} else if (biblioteca.getAttivoPrestitoLocale().booleanValue() == true) {
+			attivoPrestitoLocaleField.setRawValue("Si");
+			attivoPrestitoLocaleField.setSimpleValue("Si");
+			listaPrestitiLocaliPanel.enable();
+
+		} else if (biblioteca.getAttivoPrestitoLocale().booleanValue() == false) {
+			attivoPrestitoLocaleField.setRawValue("No");
+			attivoPrestitoLocaleField.setSimpleValue("No");
+			listaPrestitiLocaliPanel.disable();
+
+		}
+		attivoPrestitoLocaleField.setOriginalValue(attivoPrestitoLocaleField.getValue());
+		Utils.setFontColorStyleBlack(attivoPrestitoLocaleLabel);
+		UIWorkflow.setReadOnly(attivoPrestitoLocaleField);
 
 		listaPrestitoInterbibliotecarioRuoloBiliotecaPanel.setIdBiblioteca(biblioteca.getIdBiblio());
 		listaPrestitoInterbibliotecarioRuoloBiliotecaPanel.getLoader().load();
@@ -446,6 +597,9 @@ public class PrestitoPanel extends ContentPanelForTabItem {
 		Utils.setFontColorStyleBlack(prestitoInternazionaleLabel);
 		Utils.setFontColorStyleBlack(procedureAutomatizzateLabel);
 
+		UIWorkflow.hideView(attivoPrestitoLocaleAggiorna);
+		UIWorkflow.hideView(resetAttivoPrestitoLocale);
+		
 		UIWorkflow.hideView(prestitoAggiorna);
 		UIWorkflow.hideView(resetPrestiti);
 		UIWorkflow.enableDisable(prestitoNazionaleSI);

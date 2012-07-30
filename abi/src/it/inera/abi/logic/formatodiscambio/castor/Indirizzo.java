@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Indirizzo.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: Indirizzo.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -35,7 +35,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  entrambi), latitudine e longitudine.
  *  
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
  */
 @SuppressWarnings("serial")
 public class Indirizzo implements java.io.Serializable {
@@ -61,7 +61,8 @@ public class Indirizzo implements java.io.Serializable {
     private java.lang.String _frazione;
 
     /**
-     * Field _comune.
+     * L'elemento comune adesso è obbligatorio.
+     *  
      */
     private java.lang.String _comune;
 
@@ -110,7 +111,10 @@ public class Indirizzo implements java.io.Serializable {
     }
 
     /**
-     * Returns the value of field 'comune'.
+     * Returns the value of field 'comune'. The field 'comune' has
+     * the following description: L'elemento comune adesso è
+     * obbligatorio.
+     *  
      * 
      * @return the value of field 'Comune'.
      */
@@ -237,7 +241,10 @@ public class Indirizzo implements java.io.Serializable {
     }
 
     /**
-     * Sets the value of field 'comune'.
+     * Sets the value of field 'comune'. The field 'comune' has the
+     * following description: L'elemento comune adesso è
+     * obbligatorio.
+     *  
      * 
      * @param comune the value of field 'comune'.
      */

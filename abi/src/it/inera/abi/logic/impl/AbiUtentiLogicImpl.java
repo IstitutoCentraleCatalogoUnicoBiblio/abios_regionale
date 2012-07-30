@@ -222,35 +222,31 @@ public class AbiUtentiLogicImpl implements AbiUtentiLogic {
 		createMailForResetPassword(utenteToReset, newPassword);
 	}
 
+	private @Value("${email.rigenera.address}") String emailRigeneraAddress;
+	private @Value("${email.rigenera.name}") String emailRigeneraName;
+
 	/**
 	 * @param utenteToReset
 	 * @param newPassword
 	 */
 	private void createMailForResetPassword(Utenti utenteToReset, String newPassword) {
-		Utenti fromUser =utentiDao.findByName(authLogic.retrieveLoggedUser().getUsername());
+//		Utenti fromUser =utentiDao.findByName(authLogic.retrieveLoggedUser().getUsername());
 		
 		String subject = "GENERAZIONE PASSWORD - ANAGRAFE BIBLIOTECHE ITALIANE";
 		
 		StringBuffer message = new StringBuffer(); 
 		message.append("Password generata con successo.\n ");
 		message.append("Nuova password: "+newPassword+"\n");
-		message.append("Si consiglia di effettuare l'accesso e sostituire la nuova password con una personalizzata diversa da quelle utilizzate precedentemente!\n\n");
+		message.append("Si consiglia di effettuare l'accesso e sostituire la nuova password con una personalizzata differente da quelle utilizzate precedentemente!\n\n");
 				
 		String nameTo="";
 		if(utenteToReset.getCognome()!=null && utenteToReset.getNome()!=null){
 			nameTo= utenteToReset.getNome().concat(" ").concat(utenteToReset.getCognome());
 		}
 		
-		
-		String emailFrom = utentiDao.findByName(authLogic.retrieveLoggedUser().getUsername()).getEmail(); 
-		String nameFrom="";
-		if(fromUser.getCognome()!=null && fromUser.getNome()!=null){
-			nameFrom= fromUser.getNome().concat(" ").concat(fromUser.getCognome());
-		}
-		
 		try {
 			userActionLog.logActionUtentiLogicDefaultUser("Invio dell'email..");
-			Utility.sendEmail( subject,  message.toString(),  utenteToReset.getEmail(), nameTo, emailFrom, nameFrom, emailHostAddress, emailHostUsername,emailHostPassword, emailBounceAddress);
+			Utility.sendEmail( subject,  message.toString(),  utenteToReset.getEmail(), nameTo, emailRigeneraAddress, emailRigeneraName, emailHostAddress, emailHostUsername,emailHostPassword, emailBounceAddress);
 		} catch (EmailException e) {
 			userActionLog.logActionUtentiLogicDefaultUser("Errore durante l'invio dell'email..");
 		}

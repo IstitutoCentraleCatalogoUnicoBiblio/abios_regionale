@@ -57,7 +57,7 @@ ContentPanelForTabItem {
 	private TextField<String> riferimentoNormativoField;
 	private TextField<String> urlField;
 	private ListaModalitaAccesoPanel listaModalitaAccesoPanel;
-	private	ListaDestinazioneSocialePanel	listaDestinazioneSocialePanel;
+	private	ListaDestinazioneSocialePanel listaDestinazioneSocialePanel;
 	public int id_biblio;
 
 	private Button modalitaAccessoAggiorna;

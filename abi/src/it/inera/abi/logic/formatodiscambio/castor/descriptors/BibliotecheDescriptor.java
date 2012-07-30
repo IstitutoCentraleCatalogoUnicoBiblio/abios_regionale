@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: BibliotecheDescriptor.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: BibliotecheDescriptor.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Biblioteche;
 /**
  * Class BibliotecheDescriptor.
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
  */
 public class BibliotecheDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -152,13 +152,14 @@ public class BibliotecheDescriptor extends org.exolab.castor.xml.util.XMLClassDe
         desc.setSchemaType("list");
         desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.Biblioteca");
         desc.setHandler(handler);
+        desc.setRequired(true);
         desc.setMultivalued(true);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
         //-- validation code for: _bibliotecaList
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
+        fieldValidator.setMinOccurs(1);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);

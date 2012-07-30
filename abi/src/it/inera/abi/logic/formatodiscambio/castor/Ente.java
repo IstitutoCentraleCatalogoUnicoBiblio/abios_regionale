@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Ente.java,v 1.2 2012/07/17 09:09:28 m.bartolozzi Exp $
+ * $Id: Ente.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -19,8 +19,10 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  
  *  La funzione-obiettivo corrisponde al COFOG.
  *  
+ *  La funzione-obiettivo è stata rimossa.
+ *  
  * 
- * @version $Revision: 1.2 $ $Date: 2012/07/17 09:09:28 $
+ * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
  */
 @SuppressWarnings("serial")
 public class Ente implements java.io.Serializable {
@@ -60,11 +62,6 @@ public class Ente implements java.io.Serializable {
      */
     private java.lang.String _partitaIVA;
 
-    /**
-     * Field _funzioneObiettivo.
-     */
-    private java.lang.String _funzioneObiettivo;
-
 
       //----------------/
      //- Constructors -/
@@ -87,16 +84,6 @@ public class Ente implements java.io.Serializable {
     public java.lang.String getCodiceFiscale(
     ) {
         return this._codiceFiscale;
-    }
-
-    /**
-     * Returns the value of field 'funzioneObiettivo'.
-     * 
-     * @return the value of field 'FunzioneObiettivo'.
-     */
-    public java.lang.String getFunzioneObiettivo(
-    ) {
-        return this._funzioneObiettivo;
     }
 
     /**
@@ -204,17 +191,6 @@ public class Ente implements java.io.Serializable {
     public void setCodiceFiscale(
             final java.lang.String codiceFiscale) {
         this._codiceFiscale = codiceFiscale;
-    }
-
-    /**
-     * Sets the value of field 'funzioneObiettivo'.
-     * 
-     * @param funzioneObiettivo the value of field
-     * 'funzioneObiettivo'.
-     */
-    public void setFunzioneObiettivo(
-            final java.lang.String funzioneObiettivo) {
-        this._funzioneObiettivo = funzioneObiettivo;
     }
 
     /**

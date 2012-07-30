@@ -305,7 +305,7 @@ public interface AbiBiblioLogic {
 	
 	public int countAllBibliotechePerReport(HashMap<String, Object> keys);
 
-	public void setServizioBibliogrficoInternoEsterno(int id_biblioteca,Boolean hasServizioBibliograficoInterno,
+	public void setServizioBibliograficoInternoEsterno(int id_biblioteca, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno, 
 			Boolean hasServizioBibliograficoEsterno);
 
 	public List<ServiziInformazioniBibliograficheModalita> getModalitaComunicazioniBibliograficheByIdBiblio(
@@ -321,7 +321,7 @@ public interface AbiBiblioLogic {
 
 	public void addSezioniSpeciali(int id_biblioteca, Integer idRecord) throws DuplicateEntryException;
 
-	public void updateModalitaAccessoInternet(int id_biblioteca,Boolean hasAccessoPagamento, Boolean hasAccessoTempo,Boolean hasAccessoProxy);
+	public void updateModalitaAccessoInternet(int id_biblioteca, Boolean hasAttivoAccesso, Boolean hasAccessoPagamento, Boolean hasAccessoTempo, Boolean hasAccessoProxy);
 
 	public List<PrestitoLocale> getPrestitiLocaliByIdBiblio(int id_biblioteca);
 
@@ -431,4 +431,7 @@ public interface AbiBiblioLogic {
 	
 	public Boolean addStatoCatalogazione(HashMap<String, Object> params);
 	
+	public void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni);
+	
+	public void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale);
 } 

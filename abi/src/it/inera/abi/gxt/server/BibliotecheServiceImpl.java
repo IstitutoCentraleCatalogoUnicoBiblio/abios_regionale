@@ -610,9 +610,6 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			tmpEnte.setCodiceFiscale(ente.getCodiceFiscale());
 			tmpEnte.setDenominazione(ente.getDenominazione());
 			tmpEnte.setPartitaIva(ente.getPartitaIva());
-			tmpEnte.setEnteObiettivo(new VoceUnicaModel(ente.getEnteObiettivo()
-					.getIdEnteObiettivo(), ente.getEnteObiettivo()
-					.getDescrizione()));
 			tmpEnte.setEnteTipologiaAmministrativa(new VoceUnicaModel(ente
 					.getEnteTipologiaAmministrativa()
 					.getIdEnteTipologiaAmministrativa(), ente
@@ -774,7 +771,6 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		tmpEnte.setPartitaIva(biblioteca.getEnte().getPartitaIva());
 		tmpEnte.setStato(new StatoModel(biblioteca.getEnte().getStato().getIdStato(), biblioteca.getEnte().getStato().getDenominazione(), biblioteca.getEnte().getStato().getSigla()));
 
-		tmpEnte.setEnteObiettivo(new VoceUnicaModel(biblioteca.getEnte().getEnteObiettivo().getIdEnteObiettivo(), biblioteca.getEnte().getEnteObiettivo().getDescrizione()));
 		tmpEnte.setEnteTipologiaAmministrativa(new VoceUnicaModel(biblioteca.getEnte().getEnteTipologiaAmministrativa().getIdEnteTipologiaAmministrativa(), biblioteca.getEnte().getEnteTipologiaAmministrativa().getDescrizione()));
 
 		biblioModel.setEnte(tmpEnte);
@@ -842,15 +838,35 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		}
 
 		//INFORMAZIONI BIBLIOGRAFICHE
-		if(	biblioteca.getGestisceServizioBibliograficoEsterno()!=null){
+		if (biblioteca.getAttivoInformazioniBibliografiche() != null) {
+			biblioModel.setAttivoInformazioniBibliografiche(biblioteca.getAttivoInformazioniBibliografiche());
+			
+		} else {
+			biblioModel.setAttivoInformazioniBibliografiche(null);
+		}
+		
+		if (biblioteca.getGestisceServizioBibliograficoEsterno() != null) {
 			biblioModel.setServizioBibliograficoEsterno(biblioteca.getGestisceServizioBibliograficoEsterno());
-		}else  biblioModel.setServizioBibliograficoEsterno(null);
+			
+		} else {
+			biblioModel.setServizioBibliograficoEsterno(null);
+		}
 
-		if(	biblioteca.getGestisceServizioBibliograficoInterno()!=null){
+		if (biblioteca.getGestisceServizioBibliograficoInterno() != null) {
 			biblioModel.setServizioBibliograficoInterno(biblioteca.getGestisceServizioBibliograficoInterno());
-		} else biblioModel.setServizioBibliograficoInterno(null);
+			
+		} else {
+			biblioModel.setServizioBibliograficoInterno(null);
+		}
 
 		//ACCESSO INTERNET
+		if (biblioteca.getAttivoAccessoInternet() != null) {
+			biblioModel.setAttivoAccessoInternet(biblioteca.getAttivoAccessoInternet());
+			
+		} else {
+			biblioModel.setAttivoAccessoInternet(null);
+		}
+		
 		if (biblioteca.getAccessoInternetPagamento()==null)
 			biblioModel.setAccessoInternetAPagamento("Non specificato");
 		else
@@ -953,6 +969,22 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			default:
 				break;
 			}
+		}
+		
+		/* Attivo riproduzioni */
+		if (biblioteca.getAttivoRiproduzioni() != null) {
+			biblioModel.setAttivoRiproduzioni(biblioteca.getAttivoRiproduzioni());
+			
+		} else {
+			biblioModel.setAttivoRiproduzioni(null);
+		}
+		
+		/* Attivo prestito locale */
+		if (biblioteca.getAttivoPrestitoLocale() != null) {
+			biblioModel.setAttivoPrestitoLocale(biblioteca.getAttivoPrestitoLocale());
+			
+		} else {
+			biblioModel.setAttivoPrestitoLocale(null);
 		}
 		
 		//STATO CATALOGAZIONE BIBLIOTECA
@@ -2345,8 +2377,8 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void setServizioBibliogrficoInternoEsterno(int id_biblioteca,Boolean hasServizioBibliograficoInterno,Boolean hasServizioBibliograficoEsterno) {
-		abiBiblioLogic.setServizioBibliogrficoInternoEsterno(id_biblioteca,hasServizioBibliograficoInterno,hasServizioBibliograficoEsterno);
+	public void setServizioBibliograficoInternoEsterno(int id_biblioteca, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno, Boolean hasServizioBibliograficoEsterno) {
+		abiBiblioLogic.setServizioBibliograficoInternoEsterno(id_biblioteca, hasAttivoInformazioniBibliografiche, hasServizioBibliograficoInterno, hasServizioBibliograficoEsterno);
 
 	}
 
@@ -2425,22 +2457,40 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 
 	@Override
 	public void updateModalitaAccessoInternet(int id_biblioteca,HashMap<String, String> keys) {
-		Boolean hasAccessoPagamento=null;
-		Boolean hasAccessoTempo=null;
-		Boolean hasAccessoProxy=null;
+		Boolean hasAttivoAccesso = null;
+		Boolean hasAccessoPagamento = null;
+		Boolean hasAccessoTempo = null;
+		Boolean hasAccessoProxy = null;
+		
+		if (keys.get("attivoAccesso").equalsIgnoreCase("null")) {
+			hasAttivoAccesso = null;
+			
+		} else {
+			hasAttivoAccesso = keys.get("attivoAccesso").equalsIgnoreCase("true") ? true : false;
+		}
 
+		if (keys.get("accessoPagamento").equalsIgnoreCase("Non specificato")) {
+			hasAccessoPagamento = null;
+			
+		} else {
+			hasAccessoPagamento = keys.get("accessoPagamento").equalsIgnoreCase("Si") ? true : false;
+		}
+		
+		if (keys.get("accessoTempo").equalsIgnoreCase("Non specificato")) {
+			hasAccessoTempo = null;
+			
+		} else {
+			hasAccessoTempo = keys.get("accessoTempo").equalsIgnoreCase("Si") ? true : false;
+		}
+		
+		if (keys.get("accessoProxy").equalsIgnoreCase("Non specificato")) {
+			hasAccessoProxy = null;
+			
+		} else {
+			hasAccessoProxy = keys.get("accessoProxy").equalsIgnoreCase("Si") ? true : false;
+		}
 
-		if(keys.get("accessoPagamento").equalsIgnoreCase("Non specificato"))
-			hasAccessoPagamento=null;
-		else hasAccessoPagamento=keys.get("accessoPagamento").equalsIgnoreCase("Si")?true:false;
-		if(keys.get("accessoTempo").equalsIgnoreCase("Non specificato"))
-			hasAccessoTempo=null;
-		else hasAccessoTempo=keys.get("accessoTempo").equalsIgnoreCase("Si")?true:false;
-		if(keys.get("accessoProxy").equalsIgnoreCase("Non specificato"))
-			hasAccessoProxy=null;
-		else hasAccessoProxy=keys.get("accessoProxy").equalsIgnoreCase("Si")?true:false;
-
-		abiBiblioLogic. updateModalitaAccessoInternet(id_biblioteca,hasAccessoPagamento,hasAccessoTempo,hasAccessoProxy);
+		abiBiblioLogic.updateModalitaAccessoInternet(id_biblioteca, hasAttivoAccesso, hasAccessoPagamento, hasAccessoTempo, hasAccessoProxy);
 	}
 
 	@Override
@@ -2747,4 +2797,13 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		return abiBiblioLogic.addStatoCatalogazione(params);
 	}
 
+	@Override
+	public void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni) {
+		abiBiblioLogic.setAttivoRiproduzioni(idbib, attivoRiproduzioni);
+	}
+	
+	@Override
+	public void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale) {
+		abiBiblioLogic.setAttivoPrestitoLocale(idbib, attivoPrestitoLocale);
+	}
 }

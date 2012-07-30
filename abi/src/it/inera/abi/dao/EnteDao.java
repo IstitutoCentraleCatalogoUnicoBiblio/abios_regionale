@@ -3,7 +3,6 @@ package it.inera.abi.dao;
 import java.util.List;
 
 import it.inera.abi.persistence.Ente;
-import it.inera.abi.persistence.EnteObiettivo;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.Stato;
 
@@ -11,7 +10,6 @@ import it.inera.abi.persistence.Stato;
 public interface EnteDao {
 	
 	public Ente createEnteIfNotExist(Stato stato, EnteTipologiaAmministrativa tipologiaAmministrativa,
-			EnteObiettivo enteObiettivo,
 	String denominazione, String asia_asip, String partita_iva, String codice_fiscale);
 
 	public List<Ente> getEntiPaginatiFilteredPerCombos(String filter, int offset,
@@ -21,7 +19,7 @@ public interface EnteDao {
 
 	public Ente createEnteIfNotExist2(Stato stato,
 			EnteTipologiaAmministrativa enteTipologiaAmministrativa,
-			EnteObiettivo enteObiettivo, String denominazione, String asiaAsip,
+			String denominazione, String asiaAsip,
 			String partitaIva, String codiceFiscale);
 
 	public Ente getEnte(String den, String tipAmm, String stato);

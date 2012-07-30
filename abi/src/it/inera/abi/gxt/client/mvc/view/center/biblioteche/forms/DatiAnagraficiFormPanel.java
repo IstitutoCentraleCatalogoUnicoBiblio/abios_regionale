@@ -617,7 +617,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		codici.setStyleAttribute("padding", "5px");
 
 		final FieldSet codiciSet = new FieldSet();
-		Utils.setFieldSetProperties(codiciSet, "Stato catalogazione - Codici");
+		Utils.setFieldSetProperties(codiciSet, "Stato della registrazione - Codici");
 
 		TableData colonnaLabel = new TableData();
 		colonnaLabel.setWidth("20%");
@@ -647,7 +647,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		LayoutContainer statoCatalogazioneTable = new LayoutContainer(new TableLayout(6));
 
 		/*********/
-		statoCatalogazioneLabel = new Text("Stato catalogazione:");
+		statoCatalogazioneLabel = new Text("Stato registrazione:");
 		statoCatalogazioneLabel.setStyleAttribute("fontSize", "14px");
 		statoCatalogazioneTable.add(statoCatalogazioneLabel, colonnaLabel);
 
@@ -669,7 +669,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 
 		statoCatalogazioneField = new ComboBoxForBeans<VoceUnicaModel>();
 
-		statoCatalogazioneField.setFieldLabel("Stato catalogazione");
+		statoCatalogazioneField.setFieldLabel("Stato registrazione");
 		statoCatalogazioneField.setWidth(250);
 		statoCatalogazioneField.setDisplayField("entry");
 		statoCatalogazioneField.setStore(statoCatalogazioneStore);

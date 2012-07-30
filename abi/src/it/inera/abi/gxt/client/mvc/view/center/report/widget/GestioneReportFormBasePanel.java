@@ -255,7 +255,7 @@ public class GestioneReportFormBasePanel extends ContentPanel {
 		
 		
 		/* STATO CATALOGAZIONE */
-		Text statoCatalog = new Text("Stato di catalogazione:");
+		Text statoCatalog = new Text("Stato registrazione:");
 		statoCatalog.setStyleAttribute("fontSize", "14px");
 		
 		RpcProxy<List<VoceUnicaModel>> proxyStatoCatalogazione = new RpcProxy<List<VoceUnicaModel>>() {

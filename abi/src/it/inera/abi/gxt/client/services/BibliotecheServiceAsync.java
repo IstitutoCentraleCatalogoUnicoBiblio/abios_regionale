@@ -285,8 +285,8 @@ public interface BibliotecheServiceAsync {
 	void removeServiziRiproduzioniForniture(int idRemove, int id_biblioteca,
 			AsyncCallback<Void> asyncCallback);
 
-	void setServizioBibliogrficoInternoEsterno(int id_biblio,Boolean hasServizioBibliograficoInterno,
-			Boolean hasServizioBibliograficoEsterno,AsyncCallback<Void> asyncCallback);
+	void setServizioBibliograficoInternoEsterno(int id_biblio, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno,
+			Boolean hasServizioBibliograficoEsterno, AsyncCallback<Void> asyncCallback);
 
 	void getModalitaComunicazioniBibliograficheByIdBiblio(int id_biblioteca,AsyncCallback<List<VoceUnicaModel>> callback);
 
@@ -383,5 +383,9 @@ public interface BibliotecheServiceAsync {
 	void aggiornaCodiciOthers(HashMap<String, Object> params, int idBiblio,	AsyncCallback<Void> asyncCallback);
 
 	void setStatoCatalogazione(HashMap<String, Object> params, AsyncCallback<Boolean> asyncCallback);
+	
+	void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni, AsyncCallback<Void> callback);
+	
+	void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale, AsyncCallback<Void> callback);
 
 }

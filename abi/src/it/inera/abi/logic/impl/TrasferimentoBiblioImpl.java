@@ -48,7 +48,6 @@ import it.inera.abi.persistence.SistemiBiblioteche;
 import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import it.inera.abi.persistence.SpogliBibliografici;
 import it.inera.abi.persistence.StatoCatalogazione;
-import it.inera.abi.persistence.Thesaurus;
 import it.inera.abi.persistence.Utenti;
 
 import java.io.File;
@@ -458,25 +457,6 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ******** Thesaurus //TESTATO (Davide)
-			if(bibliotecaAttuale.getThesauruses() != null){
-				Vector<Integer> idsThesauruses = new Vector<Integer>();
-				for (Thesaurus thesaurus : bibliotecaAttuale.getThesauruses()) {
-					idsThesauruses.add(thesaurus.getIdThesaurus());
-				}
-
-				for(Integer idThesauruses:idsThesauruses){
-					abiBiblioLogic.removeEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(idbiblio, idThesauruses, DtoJpaMapping.THESAURUS_INDEX);				}
-			}
-			if( bibliotecaSalvata.getThesauruses()!=null){
-				for (Thesaurus thesaurus : bibliotecaSalvata.getThesauruses()) {
-					DynaTabDTO dynaTabDTODB = new DynaTabDTO();
-					dynaTabDTODB.setId(thesaurus.getIdThesaurus());
-					dynaTabDTODB.setValue(thesaurus.getDescrizione());
-					dynaTabDTODB.setIdTabella(DtoJpaMapping.THESAURUS_INDEX);
-					abiBiblioLogic.addEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(dynaTabDTODB, idbiblio, DtoJpaMapping.THESAURUS_INDEX);
-				}
-			}
 			// ******** Spogli materiale bibliografico //TESTATO (Davide)
 
 			if(bibliotecaAttuale.getSpogliBibliograficis() != null){
@@ -573,7 +553,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 			// ******** Informazioni bibliografiche ***************** //TESTATO (Davide)
-			abiBiblioLogic.setServizioBibliogrficoInternoEsterno(idbiblio, bibliotecaSalvata.getGestisceServizioBibliograficoInterno(), bibliotecaSalvata.getGestisceServizioBibliograficoEsterno());
+			abiBiblioLogic.setServizioBibliograficoInternoEsterno(idbiblio, bibliotecaSalvata.getAttivoInformazioniBibliografiche(), bibliotecaSalvata.getGestisceServizioBibliograficoInterno(), bibliotecaSalvata.getGestisceServizioBibliograficoEsterno());
 
 			// ******* Tipologie comunicazione bibliografica ************ //TESTATO (Davide)
 			if(bibliotecaAttuale.getServiziInformazioniBibliograficheModalitas()!=null){
