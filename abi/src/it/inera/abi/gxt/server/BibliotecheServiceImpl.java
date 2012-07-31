@@ -22,6 +22,7 @@ import it.inera.abi.gxt.client.mvc.model.PrestitoInterbibliotecarioRuoloModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoLocaleModel;
 import it.inera.abi.gxt.client.mvc.model.RegolamentoModel;
 import it.inera.abi.gxt.client.mvc.model.ServiziRiproduzioniModel;
+import it.inera.abi.gxt.client.mvc.model.SistemiPrestitoInterbibliotecarioModel;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.StatoModel;
 import it.inera.abi.gxt.client.mvc.model.UserModel;
@@ -68,6 +69,7 @@ import it.inera.abi.persistence.Riproduzioni;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
+import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import it.inera.abi.persistence.SpogliBibliografici;
 import it.inera.abi.persistence.Stato;
 import it.inera.abi.persistence.StatoBibliotecaWorkflow;
@@ -1447,7 +1449,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	@Override
 	public void addPatrimonioSpeciale(int id_biblioteca, int id_nuovoPatr,
 			int quantita,int quantitaUltimoAnno) {
-		abiBiblioLogic.addPatrimonioSpeciale( id_biblioteca, id_nuovoPatr,
+		abiBiblioLogic.addPatrimonioSpeciale(id_biblioteca, id_nuovoPatr,
 				quantita,quantitaUltimoAnno);
 
 	}
@@ -1610,40 +1612,6 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 
 	}
 
-//	@Override
-//	public List<VoceUnicaModel> getDigitalizzazioneFondiByIdBiblio(
-//			int id_biblioteca) {
-//		List<VoceUnicaModel> fondiDigitaliModel = new ArrayList<VoceUnicaModel>();
-//
-//		List<FondiDigitali> fondiDigitalis= abiBiblioLogic.getDigitalizzazioneFondiByIdBiblio(id_biblioteca);
-//
-//		Iterator<FondiDigitali> it = fondiDigitalis.iterator();
-//		while (it.hasNext()) {
-//			//Iterazione anti-lazy
-//			FondiDigitali fondiDigitali = (FondiDigitali) it.next();	
-//
-//			VoceUnicaModel model = new VoceUnicaModel();
-//			model.setIdRecord(fondiDigitali.getIdFondiDigitali());
-//			model.setEntry(fondiDigitali.getDescrizione());
-//
-//			fondiDigitaliModel.add(model);
-//		}
-//		return fondiDigitaliModel;
-//	}
-//
-//	@Override
-//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
-//			String derscrizione, boolean modifica) {
-//
-//		abiBiblioLogic.addDigitalizzazioneFondo( id_biblioteca,  id_newRecord, derscrizione,  modifica);
-//	}
-//
-//	@Override
-//	public void removeFondiDigitali(int id_rimuoviFondo) {
-//		abiBiblioLogic.removeFondiDigitali(id_rimuoviFondo);
-//
-//
-//	}
 
 	@Override
 	public List<VoceUnicaModel> getEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(
@@ -2377,7 +2345,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void setServizioBibliograficoInternoEsterno(int id_biblioteca, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno, Boolean hasServizioBibliograficoEsterno) {
+	public void setServizioBibliograficoInternoEsterno(int id_biblioteca, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno,Boolean hasServizioBibliograficoEsterno) {
 		abiBiblioLogic.setServizioBibliograficoInternoEsterno(id_biblioteca, hasAttivoInformazioniBibliografiche, hasServizioBibliograficoInterno, hasServizioBibliograficoEsterno);
 
 	}
@@ -2387,10 +2355,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			int id_biblioteca) {
 		List<VoceUnicaModel> modalitaModels = new ArrayList<VoceUnicaModel>();
 
-		List<ServiziInformazioniBibliograficheModalita> bibliograficheModalitas =
-				abiBiblioLogic.
-				getModalitaComunicazioniBibliograficheByIdBiblio(id_biblioteca);
-		
+		List<ServiziInformazioniBibliograficheModalita> bibliograficheModalitas = abiBiblioLogic.getModalitaComunicazioniBibliograficheByIdBiblio(id_biblioteca);
 		Iterator<ServiziInformazioniBibliograficheModalita> it=bibliograficheModalitas.iterator();
 		while (it.hasNext()) {
 			//MAPPING ServiziInformazioniBibliograficheModalita --->VoceUnicaModel
@@ -2456,7 +2421,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void updateModalitaAccessoInternet(int id_biblioteca,HashMap<String, String> keys) {
+	public void updateModalitaAccessoInternet(int id_biblioteca, HashMap<String, String> keys) {
 		Boolean hasAttivoAccesso = null;
 		Boolean hasAccessoPagamento = null;
 		Boolean hasAccessoTempo = null;
@@ -2805,5 +2770,39 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	@Override
 	public void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale) {
 		abiBiblioLogic.setAttivoPrestitoLocale(idbib, attivoPrestitoLocale);
+	}
+	
+	@Override
+	public List<SistemiPrestitoInterbibliotecarioModel> getListaSistemiPrestitoInterbibliotecario(int id_biblioteca) {
+		
+		List<SistemiPrestitoInterbibliotecario> sistPrestInterbibList = abiBiblioLogic.getListaSistemiPrestitoInterbibliotecario(id_biblioteca);
+		List<SistemiPrestitoInterbibliotecarioModel> sistPrestInterbibModelList = new ArrayList<SistemiPrestitoInterbibliotecarioModel>();
+		
+		for (SistemiPrestitoInterbibliotecario sistPrestInterbibEntry : sistPrestInterbibList) {
+			SistemiPrestitoInterbibliotecarioModel sist = new SistemiPrestitoInterbibliotecarioModel();
+			sist.setIdSistemiPrestitoInterbibliotecario(sistPrestInterbibEntry.getIdSistemiPrestitoInterbibliotecario());
+			sist.setDescrizione(sistPrestInterbibEntry.getDescrizione());
+			sist.setUrl(sistPrestInterbibEntry.getUrl());
+			
+			sistPrestInterbibModelList.add(sist);
+		}
+		
+		return sistPrestInterbibModelList;
+		
+	}
+	
+	@Override
+	public void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistemaPrestitoInterbibliotecario) {
+		abiBiblioLogic.removeSistemaPrestitoInterbibliotecario(id_biblioteca, id_sistemaPrestitoInterbibliotecario);
+	}
+	
+	@Override
+	public void addSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistemaPrestitoInterbibliotecario) throws DuplicatedEntryClientSideException {
+		try {
+			abiBiblioLogic.addSistemaPrestitoInterbibliotecario(id_biblioteca, id_sistemaPrestitoInterbibliotecario);
+			
+		} catch (DuplicateEntryException e) {
+			throw new DuplicatedEntryClientSideException(e.getMessage());
+		}
 	}
 }

@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Contatti.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Contatti.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -12,7 +12,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  suo personale.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public class Contatti implements java.io.Serializable {
@@ -24,7 +24,8 @@ public class Contatti implements java.io.Serializable {
 
     /**
      * Un contatto di tipo telefonico. Il
-     *  prefisso è ovviamente quello
+     *  prefisso è
+     *  ovviamente quello
      *  internazionale.
      *  
      */
@@ -32,14 +33,16 @@ public class Contatti implements java.io.Serializable {
 
     /**
      * I contatti di questo tipo prevedono
-     *  solo le note e un valore, oltre a un
+     *  solo le
+     *  note e un valore, oltre a un
      *  attributo "tipo" che, al momento,
      *  consente di specificare solo un
      *  indirizzo e-mail, una URL o un
      *  telex. Ovviamente la stringa
      *  "valore" può contenere qualsiasi
      *  cosa, quindi non c'è garanzia che
-     *  tale stringa sia conforme al tipo
+     *  tale stringa sia conforme al
+     *  tipo
      *  specificato.
      *  
      */

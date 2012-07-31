@@ -2,19 +2,19 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Riproduzioni.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Riproduzioni.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * Con questo elemento si dà la possibilità di 
+ * Con questo elemento si dà la possibilità di
  *  inserire una lista di riproduzioni ammesse. 
  *  
  *  Introdotto attributo 'attivo' del tipo siNoType.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Riproduzioni implements java.io.Serializable {
@@ -30,10 +30,11 @@ public class Riproduzioni implements java.io.Serializable {
     private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _attivo;
 
     /**
-     * Con questo elemento si dà la possibilità di 
+     * Con questo elemento si dà la possibilità di
      *  esprimere le modalità di riprodurre i vari
-     *  materiali ammessi al prestito locale, 
-     *  nazionale e/o internazionale. 
+     *  materiali ammessi al
+     *  prestito locale,
+     *  nazionale e/o internazionale.
      *  
      */
     private java.util.List<it.inera.abi.logic.formatodiscambio.castor.Riproduzione> _riproduzioneList;

@@ -2,27 +2,30 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: ServizioEsterno.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: ServizioEsterno.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * Se è specificato il servizio
- *  esterno, sarebbe opportuno indicare
+ *  esterno, sarebbe
+ *  opportuno indicare
  *  almeno un "modo" di espletamento del
- *  servizio stesso. Come in altri casi,
+ *  servizio
+ *  stesso. Come in altri casi,
  *  anche un elemento vuoto potrebbe
  *  essere accettato, come semplice
  *  segnalazione di un servizio
  *  disponibile. Starà poi
  *  all'applicativo ricevente decidere
- *  se ignorare tale informazione,
+ *  se
+ *  ignorare tale informazione,
  *  perché troppo vaga, o tenerne
  *  comunque conto.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class ServizioEsterno implements java.io.Serializable {

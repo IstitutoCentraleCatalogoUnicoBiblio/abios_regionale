@@ -32,6 +32,7 @@ import it.inera.abi.persistence.Pubblicazioni;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
+import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import it.inera.abi.persistence.SpogliBibliografici;
 import it.inera.abi.persistence.Stato;
 import it.inera.abi.persistence.StatoBibliotecaWorkflow;
@@ -218,13 +219,6 @@ public interface AbiBiblioLogic {
 	public int createFondoSpeciale(FondiSpeciali fondoSpeciale);
 
 	public void removeFondiSpeciali(int id_biblioteca, int id_removeRecord);
-
-//	public  List<FondiDigitali> getDigitalizzazioneFondiByIdBiblio(int id_biblioteca);
-
-//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
-//			String derscrizione, boolean modifica);
-//
-//	public void removeFondiDigitali(int id_rimuoviFondo);
 
 	public List<?> getListaVoci(int id_biblioteca, int idTabellaDinamica);
 
@@ -434,4 +428,10 @@ public interface AbiBiblioLogic {
 	public void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni);
 	
 	public void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale);
+	
+	public List<SistemiPrestitoInterbibliotecario> getListaSistemiPrestitoInterbibliotecario(int id_biblioteca);
+	
+	public void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistema);
+	
+	public void addSistemaPrestitoInterbibliotecario(int id_biblioteca, Integer id_sistema) throws DuplicateEntryException;
 } 

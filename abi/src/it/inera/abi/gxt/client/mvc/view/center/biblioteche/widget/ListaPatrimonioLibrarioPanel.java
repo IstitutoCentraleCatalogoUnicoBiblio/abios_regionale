@@ -112,13 +112,15 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 				}
 				if(modifica){
 					return tipologia.getStore().findModel("denominazioneMateriale", value.toString());
-				}		else return  "Seleziona una tipologia...";	
+					
+				} else {
+					return  "Seleziona una tipologia...";
+				}
 			}
 
 			@Override
 			public Object postProcessValue(Object value) {
-
-				if(modifica==false){
+				if (modifica == false) {
 					if (value == null) {
 						return value;
 					}
@@ -259,10 +261,7 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-
-				
-				
-				tipologia.setEmptyText("Seleziona una tipologia......");
+				tipologia.setEmptyText("Seleziona una tipologia...");
 				tipologia.setEditable(true);
 				tipologia.setEnabled(true);
 				remove.disable();
@@ -281,24 +280,22 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		});
 		toolBar.add(add);
 
-		remove = new Button(" Rimuovi ",
-				new SelectionListener<ButtonEvent>() {
+		remove = new Button("Rimuovi", new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				remove.disable();
-				modifica =false;
+				modifica = false;
 				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
 
 					@Override
 					public void handleEvent(MessageBoxEvent ce) {
-
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
-							bibliotecheService.removePatrimonioSpeciale(id_biblioteca,idr_removeRecord,new AsyncCallback<Void>() {
+							bibliotecheService.removePatrimonioSpeciale(id_biblioteca, idr_removeRecord, new AsyncCallback<Void>() {
 
 								@Override
 								public void onSuccess(	Void result) {
-									loaderPatrimonioGriglia	.load();
+									loaderPatrimonioGriglia.load();
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_RIMOZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_RIMOZIONE_VOCE_TITLE);
 								}
 

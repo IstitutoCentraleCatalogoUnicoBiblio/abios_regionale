@@ -2,20 +2,24 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Chiusura.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Chiusura.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * Un periodo di chiusura è
- *  semplicemente una nota esplicativa (e
- *  del periodo di validità, attualmente deprecato e non 
+ *  semplicemente una nota
+ *  esplicativa (e
+ *  del periodo di validità, attualmente deprecato e
+ *  non
  *  considerato in import e export). La nota esplicativa
- *  può essere di qualsiasi forma. (dal-al, periodo natalizio,...).
+ *  può
+ *  essere di
+ *  qualsiasi forma. (dal-al, periodo natalizio,...).
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Chiusura implements java.io.Serializable {

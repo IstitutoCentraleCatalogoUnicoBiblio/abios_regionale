@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: DigitaleType.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: DigitaleType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,13 +10,14 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * La forma "digitale" di un catalogo richiede
  *  l'indicazione di un supporto. Per il momento, nel caso
- *  on-line non si può indicare la URL.
+ *  on-line non si
+ *  può indicare la URL.
  *  
  *  Si noti che comunque questo tipo è derivato da
  *  "formaType" e quindi eredita le sue caratteristiche.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class DigitaleType extends it.inera.abi.logic.formatodiscambio.castor.FormaType 

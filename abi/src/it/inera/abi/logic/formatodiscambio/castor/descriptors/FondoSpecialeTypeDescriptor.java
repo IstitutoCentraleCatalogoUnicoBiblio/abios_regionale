@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: FondoSpecialeTypeDescriptor.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: FondoSpecialeTypeDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.FondoSpecialeType;
 /**
  * Class FondoSpecialeTypeDescriptor.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
  */
 public class FondoSpecialeTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -278,7 +278,7 @@ public class FondoSpecialeTypeDescriptor extends org.exolab.castor.xml.util.XMLC
         }
         desc.setValidator(fieldValidator);
         //-- _catalogoInventario
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.types.CatalogoInventarioType.class, "_catalogoInventario", "catalogoInventario", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.types.CatalogoInventarioType.class, "_catalogoInventario", "catalogo-inventario", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -318,7 +318,7 @@ public class FondoSpecialeTypeDescriptor extends org.exolab.castor.xml.util.XMLC
         }
         desc.setValidator(fieldValidator);
         //-- _catalogoInventarioUrl
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_catalogoInventarioUrl", "catalogoInventarioUrl", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_catalogoInventarioUrl", "catalogo-inventario-url", org.exolab.castor.xml.NodeType.Element);
         desc.setImmutable(true);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override

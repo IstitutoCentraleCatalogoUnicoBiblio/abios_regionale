@@ -43,24 +43,31 @@
    <elementBinding name="/complexType:serviziType/prestito/locale/automatizzato">
       <java-class name="PrestitoLocaleAutomatizzato"/>
    </elementBinding>
-   
-   <elementBinding name="/complexType:catalogoSpecialeType/forme">
+                                           
+   <elementBinding name="/complexType:materialeCataloghiType/forme">
       <java-class name="CatSpecForme"/>
    </elementBinding>
-   <elementBinding name="/complexType:catalogoSpecialeType/forme/schede">
+   <elementBinding name="/complexType:materialeCataloghiType/forme/schede">
       <java-class name="CatSpecFormeSchede"/>
    </elementBinding>
-   <elementBinding name="/complexType:catalogoSpecialeType/forme/volume">
+   <elementBinding name="/complexType:materialeCataloghiType/forme/volume">
       <java-class name="CatSpecFormeVolume"/>
    </elementBinding>
-   <elementBinding name="/complexType:catalogoSpecialeType/forme/microforme">
+   <elementBinding name="/complexType:materialeCataloghiType/forme/microforme">
       <java-class name="CatSpecFormeMicroforme"/>
    </elementBinding>
-   <elementBinding name="/complexType:catalogoSpecialeType/forme/digitale">
+   <elementBinding name="/complexType:materialeCataloghiType/forme/digitale">
       <java-class name="CatSpecFormeDigitale"/>
    </elementBinding>
-   <elementBinding name="/complexType:catalogoSpecialeType/copertura">
+   <elementBinding name="/complexType:materialeCataloghiType/copertura">
       <java-class name="CatSpecFormeCopertura"/>
+   </elementBinding>
+   
+   <elementBinding name="/complexType:catalogoSpecialeType/materiali">
+   		<java-class name="CatSpecMateriali" />
+   </elementBinding>
+   <elementBinding name="/complexType:catalogoSpecialeType/materiali/materiale">
+   		<java-class name="CatSpecMateriale" />
    </elementBinding>
    
    

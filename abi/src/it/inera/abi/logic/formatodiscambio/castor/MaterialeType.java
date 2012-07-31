@@ -2,18 +2,20 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: MaterialeType.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: MaterialeType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * Un tipo di materiale è descritto semplicemente da un
+ * Un tipo di materiale è descritto semplicemente da
+ *  un
  *  nome e da un posseduto (opzionale). Quest'ultimo
- *  dev'essere un intero non negativo.
+ *  dev'essere un
+ *  intero non negativo.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class MaterialeType implements java.io.Serializable {

@@ -2,18 +2,19 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: FondoAnticoType.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: FondoAnticoType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * I fondi antichi vanno classificati in base al posseduto:
+ * I fondi antichi vanno classificati in base al
+ *  posseduto:
  *  fino a 1000, da 1000 a 5000, oltre 5000. Non è quindi
  *  possibile specificare esattamente un posseduto.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class FondoAnticoType implements java.io.Serializable {

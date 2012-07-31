@@ -8,6 +8,7 @@ import it.inera.abi.gxt.client.costants.CostantiTabelleDinamiche;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPrestitoInterbibliotecarioRuoloBiliotecaPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPrestitoLocalePanel;
+import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaSistemiPrestitoInterbibliotecarioPanel;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
 
@@ -47,7 +48,7 @@ public class PrestitoPanel extends ContentPanelForTabItem {
 	private int id_biblio;
 	private ListaPrestitoLocalePanel listaPrestitiLocaliPanel;
 	private ListaPrestitoInterbibliotecarioRuoloBiliotecaPanel listaPrestitoInterbibliotecarioRuoloBiliotecaPanel;
-	private ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel listaSistemiPrestitoInterbibliotecarioPanel;
+	private ListaSistemiPrestitoInterbibliotecarioPanel listaSistemiPrestitoInterbibliotecarioPanel;
 
 	private Button attivoPrestitoLocaleAggiorna;
 	private Button resetAttivoPrestitoLocale;
@@ -492,7 +493,7 @@ public class PrestitoPanel extends ContentPanelForTabItem {
 		Utils.setFieldSetProperties(sistemiPrestitoInterbibliotecarioSet, "Sistemi di prestito interbibliotecario");
 		sistemiPrestitoInterbibliotecarioSet.setCollapsible(true);
 
-		listaSistemiPrestitoInterbibliotecarioPanel = new ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel(CostantiTabelleDinamiche.PRESTITO_INTERBIBLIOTECARIO_SISTEMI_INDEX, CostantiTabelleDinamiche.PRESTITO_INTERBIBLIOTECARIO_SISTEMI);
+		listaSistemiPrestitoInterbibliotecarioPanel = new ListaSistemiPrestitoInterbibliotecarioPanel();
 		listaSistemiPrestitoInterbibliotecarioPanel.setGrid();
 		sistemiPrestitoInterbibliotecarioSet.add(listaSistemiPrestitoInterbibliotecarioPanel);
 

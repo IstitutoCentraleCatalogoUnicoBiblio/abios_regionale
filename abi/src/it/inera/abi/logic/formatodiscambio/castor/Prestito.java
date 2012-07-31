@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Prestito.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: Prestito.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,10 +10,11 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Varie informazioni relative al servizio di
  *  prestito. Ci sono diversi sotto-elementi di
- *  ovvio significato, tutti opzionali.
+ *  ovvio significato,
+ *  tutti opzionali.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public class Prestito implements java.io.Serializable {
@@ -25,20 +26,27 @@ public class Prestito implements java.io.Serializable {
 
     /**
      * A parte l'elemento "automatizzato",
-     *  che serve ad indicare se il prestito
+     *  che serve
+     *  ad indicare se il prestito
      *  avviene con procedure automatizzate
      *  oppure no, e che pertanto è di tipo
-     *  "siNoType", gli altri sono soltanto
+     *  "siNoType", gli altri sono
+     *  soltanto
      *  stringhe, anche se la durata
-     *  potrebbe essere vincolata con un
+     *  potrebbe essere vincolata
+     *  con un
      *  pattern opportuno, e gli altri due
-     *  possono contenere valori
+     *  possono contenere
+     *  valori
      *  controllati, che però è meglio
-     *  lasciare fuori dallo schema. In
+     *  lasciare fuori dallo
+     *  schema. In
      *  particolare, il materiale escluso
-     *  potrebbe essere normalizzato in base
+     *  potrebbe essere
+     *  normalizzato in base
      *  alle apposite norme ISO. Qualcosa
-     *  del genere andrebbe studiato anche
+     *  del genere
+     *  andrebbe studiato anche
      *  per gli utenti ammessi.
      *  
      */
@@ -46,20 +54,23 @@ public class Prestito implements java.io.Serializable {
 
     /**
      * In questo elemento, pur opzionale,
-     *  si è ritenuto opportuno rendere
+     *  si è
+     *  ritenuto opportuno rendere
      *  obbligatorio almeno il
-     *  sotto-elemento "tipo", escludendo la
+     *  sotto-elemento
+     *  "tipo", escludendo la
      *  paradossale situazione di una
-     *  biblioteca che offre il servizio, ma
+     *  biblioteca
+     *  che offre il servizio, ma
      *  non sa di che tipo.
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.Interbibliotecario _interbibliotecario;
 
     /**
-     * Con questo elemento si dà la possibilità di 
+     * Con questo elemento si dà la possibilità di
      *  inserire una lista di materiali esclusi dal
-     *  prestito locale. 
+     *  prestito locale.
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusiLocale _materialiEsclusiLocale;
@@ -82,11 +93,14 @@ public class Prestito implements java.io.Serializable {
      * Returns the value of field 'interbibliotecario'. The field
      * 'interbibliotecario' has the following description: In
      * questo elemento, pur opzionale,
-     *  si è ritenuto opportuno rendere
+     *  si è
+     *  ritenuto opportuno rendere
      *  obbligatorio almeno il
-     *  sotto-elemento "tipo", escludendo la
+     *  sotto-elemento
+     *  "tipo", escludendo la
      *  paradossale situazione di una
-     *  biblioteca che offre il servizio, ma
+     *  biblioteca
+     *  che offre il servizio, ma
      *  non sa di che tipo.
      *  
      * 
@@ -101,20 +115,27 @@ public class Prestito implements java.io.Serializable {
      * Returns the value of field 'locale'. The field 'locale' has
      * the following description: A parte l'elemento
      * "automatizzato",
-     *  che serve ad indicare se il prestito
+     *  che serve
+     *  ad indicare se il prestito
      *  avviene con procedure automatizzate
      *  oppure no, e che pertanto è di tipo
-     *  "siNoType", gli altri sono soltanto
+     *  "siNoType", gli altri sono
+     *  soltanto
      *  stringhe, anche se la durata
-     *  potrebbe essere vincolata con un
+     *  potrebbe essere vincolata
+     *  con un
      *  pattern opportuno, e gli altri due
-     *  possono contenere valori
+     *  possono contenere
+     *  valori
      *  controllati, che però è meglio
-     *  lasciare fuori dallo schema. In
+     *  lasciare fuori dallo
+     *  schema. In
      *  particolare, il materiale escluso
-     *  potrebbe essere normalizzato in base
+     *  potrebbe essere
+     *  normalizzato in base
      *  alle apposite norme ISO. Qualcosa
-     *  del genere andrebbe studiato anche
+     *  del genere
+     *  andrebbe studiato anche
      *  per gli utenti ammessi.
      *  
      * 
@@ -128,9 +149,9 @@ public class Prestito implements java.io.Serializable {
     /**
      * Returns the value of field 'materialiEsclusiLocale'. The
      * field 'materialiEsclusiLocale' has the following
-     * description: Con questo elemento si dà la possibilità di 
+     * description: Con questo elemento si dà la possibilità di
      *  inserire una lista di materiali esclusi dal
-     *  prestito locale. 
+     *  prestito locale.
      *  
      * 
      * @return the value of field 'MaterialiEsclusiLocale'.
@@ -191,11 +212,14 @@ public class Prestito implements java.io.Serializable {
      * Sets the value of field 'interbibliotecario'. The field
      * 'interbibliotecario' has the following description: In
      * questo elemento, pur opzionale,
-     *  si è ritenuto opportuno rendere
+     *  si è
+     *  ritenuto opportuno rendere
      *  obbligatorio almeno il
-     *  sotto-elemento "tipo", escludendo la
+     *  sotto-elemento
+     *  "tipo", escludendo la
      *  paradossale situazione di una
-     *  biblioteca che offre il servizio, ma
+     *  biblioteca
+     *  che offre il servizio, ma
      *  non sa di che tipo.
      *  
      * 
@@ -210,20 +234,27 @@ public class Prestito implements java.io.Serializable {
     /**
      * Sets the value of field 'locale'. The field 'locale' has the
      * following description: A parte l'elemento "automatizzato",
-     *  che serve ad indicare se il prestito
+     *  che serve
+     *  ad indicare se il prestito
      *  avviene con procedure automatizzate
      *  oppure no, e che pertanto è di tipo
-     *  "siNoType", gli altri sono soltanto
+     *  "siNoType", gli altri sono
+     *  soltanto
      *  stringhe, anche se la durata
-     *  potrebbe essere vincolata con un
+     *  potrebbe essere vincolata
+     *  con un
      *  pattern opportuno, e gli altri due
-     *  possono contenere valori
+     *  possono contenere
+     *  valori
      *  controllati, che però è meglio
-     *  lasciare fuori dallo schema. In
+     *  lasciare fuori dallo
+     *  schema. In
      *  particolare, il materiale escluso
-     *  potrebbe essere normalizzato in base
+     *  potrebbe essere
+     *  normalizzato in base
      *  alle apposite norme ISO. Qualcosa
-     *  del genere andrebbe studiato anche
+     *  del genere
+     *  andrebbe studiato anche
      *  per gli utenti ammessi.
      *  
      * 
@@ -237,9 +268,9 @@ public class Prestito implements java.io.Serializable {
     /**
      * Sets the value of field 'materialiEsclusiLocale'. The field
      * 'materialiEsclusiLocale' has the following description: Con
-     * questo elemento si dà la possibilità di 
+     * questo elemento si dà la possibilità di
      *  inserire una lista di materiali esclusi dal
-     *  prestito locale. 
+     *  prestito locale.
      *  
      * 
      * @param materialiEsclusiLocale the value of field

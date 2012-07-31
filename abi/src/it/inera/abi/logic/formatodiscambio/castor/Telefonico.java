@@ -2,33 +2,37 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Telefonico.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Telefonico.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * Un contatto di tipo telefonico. Il
- *  prefisso è ovviamente quello
+ *  prefisso è
+ *  ovviamente quello
  *  internazionale.
  *  
  *  Nelle note, opzionali e ripetibili,
- *  si dovrebbe indicare, ad esempio, se
+ *  si dovrebbe
+ *  indicare, ad esempio, se
  *  si tratta di un centralino, o del
  *  numero di una persona etc...
  *  L'attributo "tipo" serve a
  *  distinguere un telefono da un fax.
  *  
  *  Numero e prefisso sono obbligatori e
- *  non ripetibili, altrimenti non
+ *  non
+ *  ripetibili, altrimenti non
  *  avrebbe senso istanziare questo
  *  elemento.
  *  
  *  Prefisso e numero sono validati in
- *  modo molto elementare.
+ *  modo molto
+ *  elementare.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
  */
 @SuppressWarnings("serial")
 public class Telefonico implements java.io.Serializable {

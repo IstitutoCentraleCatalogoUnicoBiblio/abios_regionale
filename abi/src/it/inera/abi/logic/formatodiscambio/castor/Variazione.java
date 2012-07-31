@@ -2,23 +2,29 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Variazione.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Variazione.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * Le variazioni di orario sono
- *  espresse da eventuali elementi di
+ *  espresse da
+ *  eventuali elementi di
  *  questo tipo. Esso è identico ad un
- *  orario ufficiale (orarioType), salvo per
- *  l'aggiunta di una nota esplicativa (e
- *  del periodo di validità, attualmente deprecato e non 
+ *  orario
+ *  ufficiale (orarioType), salvo per
+ *  l'aggiunta di una nota
+ *  esplicativa (e
+ *  del periodo di validità, attualmente deprecato e
+ *  non
  *  considerato in import e export). La nota esplicativa
- *  può essere di qualsiasi forma.
+ *  può
+ *  essere di
+ *  qualsiasi forma.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Variazione extends it.inera.abi.logic.formatodiscambio.castor.OrarioType 

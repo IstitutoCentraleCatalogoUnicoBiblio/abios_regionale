@@ -1,6 +1,7 @@
 package it.inera.abi.dao;
 
 import it.inera.abi.dto.PatrimonioSubCategoryDTO;
+import it.inera.abi.dto.SistemaPrestitoInterbibliotecarioDTO;
 import it.inera.abi.persistence.CataloghiCollettivi;
 import it.inera.abi.persistence.CataloghiCollettiviMaterialeUrl;
 import it.inera.abi.persistence.CataloghiGeneraliUrl;
@@ -133,4 +134,8 @@ public interface DynaTabDao {
 	public void removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(int idr_removeRecord) throws ConstraintKeyViolationException;
 	
 	public List<SistemiPrestitoInterbibliotecario> getSistemiPrestitoInterbibliotecario();
+	
+	public int countAllSistemiPrestitoInterbibliotecarioPaginatiPerCombo(String searchValore);
+	
+	public List<SistemaPrestitoInterbibliotecarioDTO> getSistemiPrestitoInterbibliotecarioPaginatiPerCombo(String searchValore, int start, int limit);
 }

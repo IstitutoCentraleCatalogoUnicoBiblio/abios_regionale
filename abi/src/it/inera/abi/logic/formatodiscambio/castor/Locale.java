@@ -2,31 +2,38 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Locale.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Locale.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * A parte l'elemento "automatizzato",
- *  che serve ad indicare se il prestito
+ *  che serve
+ *  ad indicare se il prestito
  *  avviene con procedure automatizzate
  *  oppure no, e che pertanto è di tipo
- *  "siNoType", gli altri sono soltanto
+ *  "siNoType", gli altri sono
+ *  soltanto
  *  stringhe, anche se la durata
- *  potrebbe essere vincolata con un
+ *  potrebbe essere vincolata
+ *  con un
  *  pattern opportuno, e gli altri due
- *  possono contenere valori
+ *  possono contenere
+ *  valori
  *  controllati, che però è meglio
- *  lasciare fuori dallo schema. In
+ *  lasciare fuori dallo
+ *  schema. In
  *  particolare, il materiale escluso
- *  potrebbe essere normalizzato in base
+ *  potrebbe essere
+ *  normalizzato in base
  *  alle apposite norme ISO. Qualcosa
- *  del genere andrebbe studiato anche
+ *  del genere
+ *  andrebbe studiato anche
  *  per gli utenti ammessi.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
  */
 @SuppressWarnings("serial")
 public class Locale implements java.io.Serializable {
@@ -42,14 +49,17 @@ public class Locale implements java.io.Serializable {
     private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _prestitoLocaleAutomatizzato;
 
     /**
-     * DEPRECATO: questo elemento 
-     *  serviva per esprimere il 
-     *  materiale non ammesso (escluso) 
-     *  al prestito. Essendo stato
-     *  introdotto un nuovo elemento 
-     *  che ne permette la ripetibilità,
-     *  l'elemento è in disuso. 
-     *  Utilizzare l'elemento 
+     * DEPRECATO: questo elemento
+     *  serviva per
+     *  esprimere il
+     *  materiale non ammesso (escluso)
+     *  al prestito.
+     *  Essendo stato
+     *  introdotto un nuovo elemento
+     *  che ne permette la
+     *  ripetibilità,
+     *  l'elemento è in disuso.
+     *  Utilizzare l'elemento
      *  MATERIALI-ESCLUSI-LOCALE.
      *  
      */
@@ -70,7 +80,8 @@ public class Locale implements java.io.Serializable {
      *  conteggia il totale dei
      *  prestiti di questo tipo
      *  effettuati nel periodo
-     *  di osservazione.
+     *  di
+     *  osservazione.
      *  Dev'essere un numero.
      *  
      */
@@ -143,14 +154,17 @@ public class Locale implements java.io.Serializable {
     /**
      * Returns the value of field 'materialeEscluso'. The field
      * 'materialeEscluso' has the following description: DEPRECATO:
-     * questo elemento 
-     *  serviva per esprimere il 
-     *  materiale non ammesso (escluso) 
-     *  al prestito. Essendo stato
-     *  introdotto un nuovo elemento 
-     *  che ne permette la ripetibilità,
-     *  l'elemento è in disuso. 
-     *  Utilizzare l'elemento 
+     * questo elemento
+     *  serviva per
+     *  esprimere il
+     *  materiale non ammesso (escluso)
+     *  al prestito.
+     *  Essendo stato
+     *  introdotto un nuovo elemento
+     *  che ne permette la
+     *  ripetibilità,
+     *  l'elemento è in disuso.
+     *  Utilizzare l'elemento
      *  MATERIALI-ESCLUSI-LOCALE.
      *  
      * 
@@ -178,7 +192,8 @@ public class Locale implements java.io.Serializable {
      *  conteggia il totale dei
      *  prestiti di questo tipo
      *  effettuati nel periodo
-     *  di osservazione.
+     *  di
+     *  osservazione.
      *  Dev'essere un numero.
      *  
      * 
@@ -336,14 +351,17 @@ public class Locale implements java.io.Serializable {
     /**
      * Sets the value of field 'materialeEscluso'. The field
      * 'materialeEscluso' has the following description: DEPRECATO:
-     * questo elemento 
-     *  serviva per esprimere il 
-     *  materiale non ammesso (escluso) 
-     *  al prestito. Essendo stato
-     *  introdotto un nuovo elemento 
-     *  che ne permette la ripetibilità,
-     *  l'elemento è in disuso. 
-     *  Utilizzare l'elemento 
+     * questo elemento
+     *  serviva per
+     *  esprimere il
+     *  materiale non ammesso (escluso)
+     *  al prestito.
+     *  Essendo stato
+     *  introdotto un nuovo elemento
+     *  che ne permette la
+     *  ripetibilità,
+     *  l'elemento è in disuso.
+     *  Utilizzare l'elemento
      *  MATERIALI-ESCLUSI-LOCALE.
      *  
      * 
@@ -372,7 +390,8 @@ public class Locale implements java.io.Serializable {
      *  conteggia il totale dei
      *  prestiti di questo tipo
      *  effettuati nel periodo
-     *  di osservazione.
+     *  di
+     *  osservazione.
      *  Dev'essere un numero.
      *  
      * 

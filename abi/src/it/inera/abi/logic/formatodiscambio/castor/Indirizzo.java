@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Indirizzo.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: Indirizzo.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,32 +10,40 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Questo tipo descrive un indirizzo di biblioteca.
  *  È opzionale come tutti i suoi sotto-elementi, ma
- *  forse almeno uno dovrebbe essere reso
- *  obbligatorio, altrimenti si potrebbe istanziare
+ *  forse almeno uno
+ *  dovrebbe essere reso
+ *  obbligatorio, altrimenti si potrebbe
+ *  istanziare
  *  un "indirizzo" vuoto.
  *  
  *  Per il CAP, il comune, la provincia, la regione
- *  e lo stato valgono le osservazioni fatte circa i
- *  codici di biblioteca: la validazione si ferma
+ *  e
+ *  lo stato valgono le osservazioni fatte circa i
+ *  codici di
+ *  biblioteca: la validazione si ferma
  *  alla semplice struttura.
  *  
  *  Per comuni e provincie si adottano i codici
  *  ISTAT. Per lo stato si usa il codice ISO di due
- *  lettere, senza distinguere fra maiuscolo e
+ *  lettere, senza
+ *  distinguere fra maiuscolo e
  *  minuscolo.
  *  
  *  Al momento non viene fatto alcun controllo sulla
  *  regione, ma è un elemento che la base dati
- *  ricevente dovrebbe essere in grado di ricavare a
- *  partire dal solo codice ISTAT del comune,
+ *  ricevente dovrebbe
+ *  essere in grado di ricavare a
+ *  partire dal solo codice ISTAT del
+ *  comune,
  *  attraverso proprie tabelle di raggruppamento.
  *  
- *  Inserito nuovo elemento, opzionale, coordinate contenente
+ *  Inserito nuovo elemento, opzionale, coordinate
+ *  contenente
  *  due attributi (se specificati, devono essere valorizzati
  *  entrambi), latitudine e longitudine.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Indirizzo implements java.io.Serializable {

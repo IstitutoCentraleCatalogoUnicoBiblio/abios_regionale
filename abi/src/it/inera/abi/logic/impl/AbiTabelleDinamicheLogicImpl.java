@@ -8,6 +8,7 @@ import it.inera.abi.dao.jpa.DynaTabJpa;
 import it.inera.abi.dao.mapping.DtoJpaMapping;
 import it.inera.abi.dto.DynaTabDTO;
 import it.inera.abi.dto.PatrimonioSubCategoryDTO;
+import it.inera.abi.dto.SistemaPrestitoInterbibliotecarioDTO;
 import it.inera.abi.logic.AbiTabelleDinamicheLogic;
 import it.inera.abi.logic.UserActionLog;
 import it.inera.abi.persistence.CataloghiCollettivi;
@@ -361,5 +362,15 @@ public class AbiTabelleDinamicheLogicImpl implements AbiTabelleDinamicheLogic {
 	public List<SistemiPrestitoInterbibliotecario> getSistemiPrestitoInterbibliotecario() {
 		return dynaTabDao.getSistemiPrestitoInterbibliotecario();
 		
+	}
+	
+	@Override
+	public int countAllSistemiPrestitoInterbibliotecarioPaginatiPerCombo(String query) {
+		return 	dynaTabDao.countAllSistemiPrestitoInterbibliotecarioPaginatiPerCombo(query);
+	}
+	
+	@Override
+	public List<SistemaPrestitoInterbibliotecarioDTO> getSistemiPrestitoInterbibliotecarioPaginatiPerCombo(String query, int start, int limit) {
+		return dynaTabDao.getSistemiPrestitoInterbibliotecarioPaginatiPerCombo(query, start, limit);
 	}
 }

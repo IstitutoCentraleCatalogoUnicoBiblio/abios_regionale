@@ -110,5 +110,8 @@ public interface TabelleDinamicheService extends RemoteService{
 	void removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(int idr_removeRecord) throws CostraintKeyViolationClientSideException;
 	
 	public List<SistemiPrestitoInterbibliotecarioModel> getSistemiPrestitoInterbibliotecario();
+	
+	public PagingLoadResult<SistemiPrestitoInterbibliotecarioModel> getDescrizioneSistemiPrestitoInterbibliotecarioFiltratePerPaginazioneCombobox(
+			ModelData loadConfig);
 
 }

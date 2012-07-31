@@ -2,6 +2,7 @@ package it.inera.abi.logic.formatodiscambio.exports;
 
 import it.inera.abi.commons.Utility;
 import it.inera.abi.logic.formatodiscambio.castor.Accesso;
+import it.inera.abi.logic.formatodiscambio.castor.Alternative;
 import it.inera.abi.logic.formatodiscambio.castor.Altro;
 import it.inera.abi.logic.formatodiscambio.castor.Amministrativa;
 import it.inera.abi.logic.formatodiscambio.castor.Anagrafica;
@@ -13,6 +14,8 @@ import it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeDigitale;
 import it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeMicroforme;
 import it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeSchede;
 import it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeVolume;
+import it.inera.abi.logic.formatodiscambio.castor.CatSpecMateriale;
+import it.inera.abi.logic.formatodiscambio.castor.CatSpecMateriali;
 import it.inera.abi.logic.formatodiscambio.castor.Cataloghi;
 import it.inera.abi.logic.formatodiscambio.castor.CatalogoCollettivo;
 import it.inera.abi.logic.formatodiscambio.castor.CatalogoGenerale;
@@ -40,6 +43,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Internet;
 import it.inera.abi.logic.formatodiscambio.castor.Istituzione;
 import it.inera.abi.logic.formatodiscambio.castor.Locale;
 import it.inera.abi.logic.formatodiscambio.castor.Materiale;
+import it.inera.abi.logic.formatodiscambio.castor.Materiali;
 import it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusiLocale;
 import it.inera.abi.logic.formatodiscambio.castor.Microforme;
 import it.inera.abi.logic.formatodiscambio.castor.Nome;
@@ -47,6 +51,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Orario;
 import it.inera.abi.logic.formatodiscambio.castor.PatrimonioInventario;
 import it.inera.abi.logic.formatodiscambio.castor.Personale;
 import it.inera.abi.logic.formatodiscambio.castor.Postazioni;
+import it.inera.abi.logic.formatodiscambio.castor.Precedenti;
 import it.inera.abi.logic.formatodiscambio.castor.Prestito;
 import it.inera.abi.logic.formatodiscambio.castor.Riproduzione;
 import it.inera.abi.logic.formatodiscambio.castor.Scaffalature;
@@ -113,6 +118,9 @@ import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -160,8 +168,8 @@ public class DatabaseToCastorMapper {
 		boolean testPatrimonio = (patrimonio.getAcquistiUltimiQuindiciAnni() != null);
 		testPatrimonio = testPatrimonio || (patrimonio.getCatalogoTopografico() != null);
 		testPatrimonio = testPatrimonio || (patrimonio.getFondiAntichi() != null);
-		testPatrimonio = testPatrimonio || (patrimonio.getFondoSpeciale() != null && patrimonio.getFondoSpeciale().length > 0);
-		testPatrimonio = testPatrimonio || (patrimonio.getMateriale() != null && patrimonio.getMateriale().length > 0);
+		testPatrimonio = testPatrimonio || (patrimonio.getFondiSpeciali() != null && patrimonio.getFondiSpeciali().getFondoSpeciale() != null && patrimonio.getFondiSpeciali().getFondoSpeciale().length > 0);
+		testPatrimonio = testPatrimonio || (patrimonio.getMateriali() != null && patrimonio.getMateriali().getMateriale() != null && patrimonio.getMateriali().getMateriale().length > 0);
 		testPatrimonio = testPatrimonio || (patrimonio.getPatrimonioInventario() != null);
 		if (testPatrimonio) {
 			bibliotecaCastor.setPatrimonio(patrimonio);
@@ -585,9 +593,12 @@ public class DatabaseToCastorMapper {
 				}
 			}
 			if (denAC.size() > 0) {
-				nome.setAlternativo(denAC.toArray(new String[denAC.size()]));
+				Alternative alternative = new Alternative();
+				alternative.setAlternativo(denAC.toArray(new String[denAC.size()]));
+				nome.setAlternative(alternative);
 				log.debug("Settate denominazioni alternative nella parte Anagrafica");
 			}
+			
 		} else {
 			log.debug("Non sono presenti denominazioni alternative per la biblioteca");
 		}
@@ -604,7 +615,9 @@ public class DatabaseToCastorMapper {
 				}
 			}
 			if (denGC.size() > 0) {
-				nome.setPrecedente(denGC.toArray(new String[denGC.size()]));
+				Precedenti precedenti = new Precedenti();
+				precedenti.setPrecedente(denGC.toArray(new String[denGC.size()]));
+				nome.setPrecedenti(precedenti);
 				log.debug("Settate denominazioni precedenti nella parte Anagrafica");
 			}
 		} else {
@@ -644,98 +657,311 @@ public class DatabaseToCastorMapper {
 		 */
 		ArrayList<CatalogoCollettivo> catalColl = new ArrayList<CatalogoCollettivo>();
 		List<PartecipaCataloghiCollettiviMateriale> catCollH = bibliotecaDb.getPartecipaCataloghiCollettiviMateriales();
+
+		Collections.sort(catCollH, new Comparator<PartecipaCataloghiCollettiviMateriale>() {
+			@Override
+			public int compare(PartecipaCataloghiCollettiviMateriale o1,
+					PartecipaCataloghiCollettiviMateriale o2) {
+				return (o1.getCataloghiCollettivi().getIdCataloghiCollettivi().compareTo(o2.getCataloghiCollettivi().getIdCataloghiCollettivi()));
+			}
+		});
+
+
+		int lastIdCatColl = -1;
+		if (catCollH != null && catCollH.size() > 0) {
+			lastIdCatColl = catCollH.get(0).getCataloghiCollettivi().getIdCataloghiCollettivi().intValue();
+		}
+
 		for (Iterator<PartecipaCataloghiCollettiviMateriale> i = catCollH.iterator(); i.hasNext();) {
-			CatalogoCollettivo catalogoCollettivo = new CatalogoCollettivo();
 			PartecipaCataloghiCollettiviMateriale catH = i.next();
-			CatSpecForme catSpecForme = null;
-			//SUPPORTO (Forme) del catalogo
-			//Informatizzato
-			if (catH.getCataloghiSupportoDigitaleTipo() != null) {
-				CatSpecFormeDigitale catSpecFormeDigitale = new CatSpecFormeDigitale();
-				if (isNullSafeNotZero(catH.getPercentualeInformatizzata())){
-					catSpecFormeDigitale.setPercentuale(String.valueOf(catH.getPercentualeInformatizzata()));
+			CatalogoCollettivo catalogoCollettivo = null;
+			CatSpecMateriali catSpecMateriali = null;
+
+			if (catCollH.indexOf(catH) == 0) {
+				catalogoCollettivo = new CatalogoCollettivo();
+
+				/* NOME (Descrizione catalogo) */
+				CataloghiCollettivi ccc = catH.getCataloghiCollettivi();
+
+				if (ccc != null) {
+					catalogoCollettivo.setNome(ccc.getDescrizione());
 				}
-				if(catSpecForme == null)
-					catSpecForme = new CatSpecForme();
-				catSpecForme.setCatSpecFormeDigitale(catSpecFormeDigitale);
-			}
-			//Microforme
-			if (catH.getMicroforme() != null && catH.getMicroforme()) {
-				CatSpecFormeMicroforme catSpecFormeMicroforme = new CatSpecFormeMicroforme();
-				if (isNullSafeNotZero(catH.getPercentualeMicroforme())){
-					catSpecFormeMicroforme.setPercentuale(String.valueOf(catH.getPercentualeMicroforme()));
+
+				/* MATERIALI - Materiale */
+				ArrayList<CatSpecMateriale> materiali = new ArrayList<CatSpecMateriale>();
+				CatSpecMateriale catSpecMateriale = new CatSpecMateriale();
+				catSpecMateriale.setNome(catH.getPatrimonioSpecializzazione().getDescrizione());
+
+				/* SUPPORTO (Forme) del catalogo */
+				CatSpecForme catSpecForme = null;
+
+				/* Informatizzato */
+				if (catH.getCataloghiSupportoDigitaleTipo() != null) {
+					CatSpecFormeDigitale catSpecFormeDigitale = new CatSpecFormeDigitale();
+					if (isNullSafeNotZero(catH.getPercentualeInformatizzata())){
+						catSpecFormeDigitale.setPercentuale(String.valueOf(catH.getPercentualeInformatizzata()));
+					}
+					if(catSpecForme == null)
+						catSpecForme = new CatSpecForme();
+					catSpecForme.setCatSpecFormeDigitale(catSpecFormeDigitale);
 				}
-				if(catSpecForme == null)
-					catSpecForme = new CatSpecForme();
-				catSpecForme.setCatSpecFormeMicroforme(catSpecFormeMicroforme);
-			}
-			//Schede
-			if (catH.getSchede() != null && catH.getSchede()) {
-				CatSpecFormeSchede catSpecFormeSchede = new CatSpecFormeSchede();
-				if (isNullSafeNotZero(catH.getPercentualeSchede())){
-					catSpecFormeSchede.setPercentuale(String.valueOf(catH.getPercentualeSchede()));
-				}	
-				if(catSpecForme == null)
-					catSpecForme = new CatSpecForme();
-				catSpecForme.setCatSpecFormeSchede(catSpecFormeSchede);
-			}
-			//Volumi
-			if (catH.getVolume() != null && catH.getVolume()) {
-				CatSpecFormeVolume catSpecFormeVolume = new CatSpecFormeVolume();
-				if (isNullSafeNotZero(catH.getPercentualeVolume())){
-					catSpecFormeVolume.setPercentuale(String.valueOf(catH.getPercentualeVolume()));
+				//Microforme
+				if (catH.getMicroforme() != null && catH.getMicroforme()) {
+					CatSpecFormeMicroforme catSpecFormeMicroforme = new CatSpecFormeMicroforme();
+					if (isNullSafeNotZero(catH.getPercentualeMicroforme())){
+						catSpecFormeMicroforme.setPercentuale(String.valueOf(catH.getPercentualeMicroforme()));
+					}
+					if(catSpecForme == null)
+						catSpecForme = new CatSpecForme();
+					catSpecForme.setCatSpecFormeMicroforme(catSpecFormeMicroforme);
 				}
-				if ((catH.getDescrizioneVolume() != null) && (catH.getDescrizioneVolume().trim().length()>0))
-					catSpecFormeVolume.setCitazioneBibliografica(catH.getDescrizioneVolume().trim());
-				if(catSpecForme == null)
-					catSpecForme = new CatSpecForme();
-				catSpecForme.setCatSpecFormeVolume(catSpecFormeVolume);
-			}
-			if(catSpecForme != null)
-				catalogoCollettivo.setCatSpecForme(catSpecForme);
-			//COPERTURA del catalgo
-			if (isNullSafeNotZero(catH.getDaAnno()) && isNullSafeNotZero(catH.getAAnno()) && String.valueOf(catH.getDaAnno()).length() == 4 && String.valueOf(catH.getAAnno()).length() == 4) {
-				CatSpecFormeCopertura catSpecFormeCopertura = new CatSpecFormeCopertura();
-				catSpecFormeCopertura.setAdAnno(String.valueOf(catH.getAAnno()));
-				catSpecFormeCopertura.setDaAnno(String.valueOf(catH.getDaAnno()));
-				catalogoCollettivo.setCatSpecFormeCopertura(catSpecFormeCopertura);
+				//Schede
+				if (catH.getSchede() != null && catH.getSchede()) {
+					CatSpecFormeSchede catSpecFormeSchede = new CatSpecFormeSchede();
+					if (isNullSafeNotZero(catH.getPercentualeSchede())){
+						catSpecFormeSchede.setPercentuale(String.valueOf(catH.getPercentualeSchede()));
+					}	
+					if(catSpecForme == null)
+						catSpecForme = new CatSpecForme();
+					catSpecForme.setCatSpecFormeSchede(catSpecFormeSchede);
+				}
+				//Volumi
+				if (catH.getVolume() != null && catH.getVolume()) {
+					CatSpecFormeVolume catSpecFormeVolume = new CatSpecFormeVolume();
+					if (isNullSafeNotZero(catH.getPercentualeVolume())){
+						catSpecFormeVolume.setPercentuale(String.valueOf(catH.getPercentualeVolume()));
+					}
+					if ((catH.getDescrizioneVolume() != null) && (catH.getDescrizioneVolume().trim().length()>0))
+						catSpecFormeVolume.setCitazioneBibliografica(catH.getDescrizioneVolume().trim());
+					if(catSpecForme == null)
+						catSpecForme = new CatSpecForme();
+					catSpecForme.setCatSpecFormeVolume(catSpecFormeVolume);
+				}
+
+				if(catSpecForme != null) {
+					catSpecMateriale.setCatSpecForme(catSpecForme);
+				}
+
+				/* COPERTURA del catalogo */
+				if (isNullSafeNotZero(catH.getDaAnno()) && isNullSafeNotZero(catH.getAAnno()) && String.valueOf(catH.getDaAnno()).length() == 4 && String.valueOf(catH.getAAnno()).length() == 4) {
+					CatSpecFormeCopertura catSpecFormeCopertura = new CatSpecFormeCopertura();
+					catSpecFormeCopertura.setAdAnno(String.valueOf(catH.getAAnno()));
+					catSpecFormeCopertura.setDaAnno(String.valueOf(catH.getDaAnno()));
+					catSpecMateriale.setCatSpecFormeCopertura(catSpecFormeCopertura);
+				}
+
+				materiali.add(catSpecMateriale);
+
+				if (catCollH.indexOf(catH) == 0) {
+					catSpecMateriali = new CatSpecMateriali();
+
+				} else {
+					if (lastIdCatColl == catH.getCataloghiCollettivi().getIdCataloghiCollettivi().intValue()) {
+						catSpecMateriali = catalogoCollettivo.getCatSpecMateriali(); 
+
+					} else {
+						catSpecMateriali = new CatSpecMateriali();
+					}
+				}
+
+				CatSpecMateriale[] catSpecMateriales = new CatSpecMateriale[materiali.size()];
+				catSpecMateriales = (CatSpecMateriale[]) materiali.toArray(catSpecMateriales);
+				catSpecMateriali.setCatSpecMateriale(catSpecMateriales);
+
+				catalogoCollettivo.setCatSpecMateriali(catSpecMateriali);
+
+			} else {
+				if (lastIdCatColl == catH.getCataloghiCollettivi().getIdCataloghiCollettivi().intValue()) {
+					catalogoCollettivo = catalColl.get(catalColl.size()-1);
+
+					/* MATERIALI - Materiale */
+					CatSpecMateriale catSpecMateriale = new CatSpecMateriale();
+					catSpecMateriale.setNome(catH.getPatrimonioSpecializzazione().getDescrizione());
+
+					/* SUPPORTO (Forme) del catalogo */
+					CatSpecForme catSpecForme = null;
+
+					/* Informatizzato */
+					if (catH.getCataloghiSupportoDigitaleTipo() != null) {
+						CatSpecFormeDigitale catSpecFormeDigitale = new CatSpecFormeDigitale();
+						if (isNullSafeNotZero(catH.getPercentualeInformatizzata())){
+							catSpecFormeDigitale.setPercentuale(String.valueOf(catH.getPercentualeInformatizzata()));
+						}
+						if(catSpecForme == null)
+							catSpecForme = new CatSpecForme();
+						catSpecForme.setCatSpecFormeDigitale(catSpecFormeDigitale);
+					}
+					//Microforme
+					if (catH.getMicroforme() != null && catH.getMicroforme()) {
+						CatSpecFormeMicroforme catSpecFormeMicroforme = new CatSpecFormeMicroforme();
+						if (isNullSafeNotZero(catH.getPercentualeMicroforme())){
+							catSpecFormeMicroforme.setPercentuale(String.valueOf(catH.getPercentualeMicroforme()));
+						}
+						if(catSpecForme == null)
+							catSpecForme = new CatSpecForme();
+						catSpecForme.setCatSpecFormeMicroforme(catSpecFormeMicroforme);
+					}
+					//Schede
+					if (catH.getSchede() != null && catH.getSchede()) {
+						CatSpecFormeSchede catSpecFormeSchede = new CatSpecFormeSchede();
+						if (isNullSafeNotZero(catH.getPercentualeSchede())){
+							catSpecFormeSchede.setPercentuale(String.valueOf(catH.getPercentualeSchede()));
+						}	
+						if(catSpecForme == null)
+							catSpecForme = new CatSpecForme();
+						catSpecForme.setCatSpecFormeSchede(catSpecFormeSchede);
+					}
+					//Volumi
+					if (catH.getVolume() != null && catH.getVolume()) {
+						CatSpecFormeVolume catSpecFormeVolume = new CatSpecFormeVolume();
+						if (isNullSafeNotZero(catH.getPercentualeVolume())){
+							catSpecFormeVolume.setPercentuale(String.valueOf(catH.getPercentualeVolume()));
+						}
+						if ((catH.getDescrizioneVolume() != null) && (catH.getDescrizioneVolume().trim().length()>0))
+							catSpecFormeVolume.setCitazioneBibliografica(catH.getDescrizioneVolume().trim());
+						if(catSpecForme == null)
+							catSpecForme = new CatSpecForme();
+						catSpecForme.setCatSpecFormeVolume(catSpecFormeVolume);
+					}
+
+					if(catSpecForme != null) {
+						catSpecMateriale.setCatSpecForme(catSpecForme);
+					}
+
+					/* COPERTURA del catalogo */
+					if (isNullSafeNotZero(catH.getDaAnno()) && isNullSafeNotZero(catH.getAAnno()) && String.valueOf(catH.getDaAnno()).length() == 4 && String.valueOf(catH.getAAnno()).length() == 4) {
+						CatSpecFormeCopertura catSpecFormeCopertura = new CatSpecFormeCopertura();
+						catSpecFormeCopertura.setAdAnno(String.valueOf(catH.getAAnno()));
+						catSpecFormeCopertura.setDaAnno(String.valueOf(catH.getDaAnno()));
+						catSpecMateriale.setCatSpecFormeCopertura(catSpecFormeCopertura);
+					}
+
+					/* Recupero gli altri materiali precedentemente salvati */
+					ArrayList<CatSpecMateriale> materiali = new ArrayList<CatSpecMateriale>();
+					for (int k = 0; k < catalogoCollettivo.getCatSpecMateriali().getCatSpecMaterialeCount(); k++) {
+						CatSpecMateriale cMateriale = catalogoCollettivo.getCatSpecMateriali().getCatSpecMateriale(k);
+						materiali.add(cMateriale);
+					}
+
+					materiali.add(catSpecMateriale);
+
+					catSpecMateriali = catalogoCollettivo.getCatSpecMateriali();
+
+					CatSpecMateriale[] catSpecMateriales = new CatSpecMateriale[materiali.size()];
+					catSpecMateriales = (CatSpecMateriale[]) materiali.toArray(catSpecMateriales);
+					catSpecMateriali.setCatSpecMateriale(catSpecMateriales);
+
+					catalogoCollettivo.setCatSpecMateriali(catSpecMateriali);
+
+				} else {
+					catalogoCollettivo = new CatalogoCollettivo();
+
+					/* NOME (Descrizione catalogo) */
+					CataloghiCollettivi ccc = catH.getCataloghiCollettivi();
+
+					if (ccc != null) {
+						catalogoCollettivo.setNome(ccc.getDescrizione());
+					}
+
+					/* MATERIALI - Materiale */
+					ArrayList<CatSpecMateriale> materiali = new ArrayList<CatSpecMateriale>();
+					CatSpecMateriale catSpecMateriale = new CatSpecMateriale();
+					catSpecMateriale.setNome(catH.getPatrimonioSpecializzazione().getDescrizione());
+
+					/* SUPPORTO (Forme) del catalogo */
+					CatSpecForme catSpecForme = null;
+
+					/* Informatizzato */
+					if (catH.getCataloghiSupportoDigitaleTipo() != null) {
+						CatSpecFormeDigitale catSpecFormeDigitale = new CatSpecFormeDigitale();
+						if (isNullSafeNotZero(catH.getPercentualeInformatizzata())){
+							catSpecFormeDigitale.setPercentuale(String.valueOf(catH.getPercentualeInformatizzata()));
+						}
+						if(catSpecForme == null)
+							catSpecForme = new CatSpecForme();
+						catSpecForme.setCatSpecFormeDigitale(catSpecFormeDigitale);
+					}
+					//Microforme
+					if (catH.getMicroforme() != null && catH.getMicroforme()) {
+						CatSpecFormeMicroforme catSpecFormeMicroforme = new CatSpecFormeMicroforme();
+						if (isNullSafeNotZero(catH.getPercentualeMicroforme())){
+							catSpecFormeMicroforme.setPercentuale(String.valueOf(catH.getPercentualeMicroforme()));
+						}
+						if(catSpecForme == null)
+							catSpecForme = new CatSpecForme();
+						catSpecForme.setCatSpecFormeMicroforme(catSpecFormeMicroforme);
+					}
+					//Schede
+					if (catH.getSchede() != null && catH.getSchede()) {
+						CatSpecFormeSchede catSpecFormeSchede = new CatSpecFormeSchede();
+						if (isNullSafeNotZero(catH.getPercentualeSchede())){
+							catSpecFormeSchede.setPercentuale(String.valueOf(catH.getPercentualeSchede()));
+						}	
+						if(catSpecForme == null)
+							catSpecForme = new CatSpecForme();
+						catSpecForme.setCatSpecFormeSchede(catSpecFormeSchede);
+					}
+					//Volumi
+					if (catH.getVolume() != null && catH.getVolume()) {
+						CatSpecFormeVolume catSpecFormeVolume = new CatSpecFormeVolume();
+						if (isNullSafeNotZero(catH.getPercentualeVolume())){
+							catSpecFormeVolume.setPercentuale(String.valueOf(catH.getPercentualeVolume()));
+						}
+						if ((catH.getDescrizioneVolume() != null) && (catH.getDescrizioneVolume().trim().length()>0))
+							catSpecFormeVolume.setCitazioneBibliografica(catH.getDescrizioneVolume().trim());
+						if(catSpecForme == null)
+							catSpecForme = new CatSpecForme();
+						catSpecForme.setCatSpecFormeVolume(catSpecFormeVolume);
+					}
+
+					if(catSpecForme != null) {
+						catSpecMateriale.setCatSpecForme(catSpecForme);
+					}
+
+					/* COPERTURA del catalogo */
+					if (isNullSafeNotZero(catH.getDaAnno()) && isNullSafeNotZero(catH.getAAnno()) && String.valueOf(catH.getDaAnno()).length() == 4 && String.valueOf(catH.getAAnno()).length() == 4) {
+						CatSpecFormeCopertura catSpecFormeCopertura = new CatSpecFormeCopertura();
+						catSpecFormeCopertura.setAdAnno(String.valueOf(catH.getAAnno()));
+						catSpecFormeCopertura.setDaAnno(String.valueOf(catH.getDaAnno()));
+						catSpecMateriale.setCatSpecFormeCopertura(catSpecFormeCopertura);
+					}
+
+					materiali.add(catSpecMateriale);
+
+					if (catCollH.indexOf(catH) == 0) {
+						catSpecMateriali = new CatSpecMateriali();
+
+					} else {
+						if (lastIdCatColl == catH.getCataloghiCollettivi().getIdCataloghiCollettivi().intValue()) {
+							catSpecMateriali = catalogoCollettivo.getCatSpecMateriali(); 
+
+						} else {
+							catSpecMateriali = new CatSpecMateriali();
+						}
+					}
+
+					CatSpecMateriale[] catSpecMateriales = new CatSpecMateriale[materiali.size()];
+					catSpecMateriales = (CatSpecMateriale[]) materiali.toArray(catSpecMateriales);
+					catSpecMateriali.setCatSpecMateriale(catSpecMateriales);
+
+					catalogoCollettivo.setCatSpecMateriali(catSpecMateriali);
+				}
 			}
 
-			//MATERIALE (Descrizione piccola voce patrimoniale)
-			PatrimonioSpecializzazione ps = catH.getPatrimonioSpecializzazione();
-			String name = ps.getDescrizione();
-			if(name != null)
-				catalogoCollettivo.setMateriale(name);
-			CataloghiCollettivi ccc = catH.getCataloghiCollettivi();
+			if (catCollH.indexOf(catH) == 0) {
+				log.debug("Aggiunto catalogo collettivo: " + catalogoCollettivo.getNome());
+				catalColl.add(catalogoCollettivo);
 
-			//ZONA		
-			if(ccc != null){
-				//NOME (Descrizione catalogo)
-				catalogoCollettivo.setNome(ccc.getDescrizione());
-				/*
-				 *
-				 *
-				 *
-				Zona zona = null;
-				if(ccc.getZona() != null){
-					if(zona == null)
-						zona = new Zona();
-					if(ccc.getZona().trim().length()>0)
-						zona.setNome(ccc.getZona());
+			} else {
+				if (lastIdCatColl == catH.getCataloghiCollettivi().getIdCataloghiCollettivi().intValue()) {
+					log.debug("Aggiornato catalogo collettivo: " + catalogoCollettivo.getNome());
+
+				} else {
+					log.debug("Aggiunto catalogo collettivo: " + catalogoCollettivo.getNome());
+					catalColl.add(catalogoCollettivo);
 				}
-				if(ccc.getZonaEspansione() != null){
-					if(zona == null)
-						zona = new Zona();
-					zona.setTipo(ccc.getZonaEspansione());
-				}
-				if(zona != null)
-					catalogoCollettivo.setZona(zona);
-				 *
-				 *
-				 */
 			}
-			log.debug("Aggiunta catalogo collettivo: " + catalogoCollettivo.getNome());
-			catalColl.add(catalogoCollettivo);
+			lastIdCatColl = catH.getCataloghiCollettivi().getIdCataloghiCollettivi().intValue();
 		}
 
 		if (catalColl.size() > 0) {
@@ -849,17 +1075,23 @@ public class DatabaseToCastorMapper {
 		 */
 		ArrayList<CatalogoSpeciale> catalSpe = new ArrayList<CatalogoSpeciale>();
 		List<PartecipaCataloghiSpecialiMateriale> catalSpeH = bibliotecaDb.getPartecipaCataloghiSpecialiMateriales();
+
 		for (Iterator<PartecipaCataloghiSpecialiMateriale> i = catalSpeH.iterator(); i.hasNext();) {
 			CatalogoSpeciale catSpe = new CatalogoSpeciale();
 			PartecipaCataloghiSpecialiMateriale catSpeH = i.next();
-			//COPERTURA
-			if (isNullSafeNotZero(catSpeH.getDaAnno()) && isNullSafeNotZero(catSpeH.getAAnno()) && String.valueOf(catSpeH.getDaAnno()).length() == 4 && String.valueOf(catSpeH.getAAnno()).length() == 4) {
-				CatSpecFormeCopertura catSpecFormeCopertura = new CatSpecFormeCopertura();
-				catSpecFormeCopertura.setAdAnno(String.valueOf(catSpeH.getAAnno()));
-				catSpecFormeCopertura.setDaAnno(String.valueOf(catSpeH.getDaAnno()));
-				catSpe.setCatSpecFormeCopertura(catSpecFormeCopertura);
-			}
-			//SUPPORTO (Forme) del catalogo
+
+			/* NOME (Descrizione piccola voce di patrimonio) */
+			catSpe.setNome(catSpeH.getDenominazione());
+
+			/* MATERIALI - Materiale (Descrizione grande voce di patrimonio) */
+			ArrayList<CatSpecMateriale> materiali = new ArrayList<CatSpecMateriale>();
+
+			CatSpecMateriale catSpecMateriale = new CatSpecMateriale();
+			PatrimonioSpecializzazione ps = catSpeH.getPatrimonioSpecializzazione();
+
+			catSpecMateriale.setNome(ps.getDescrizione());
+
+			/* SUPPORTO (Forme) del catalogo */
 			CatSpecForme catSpecForme = new CatSpecForme();
 			//Informatizzato
 			if (catSpeH.getCataloghiSupportoDigitaleTipo() != null && !"Altro".equalsIgnoreCase(catSpeH.getCataloghiSupportoDigitaleTipo().getDescrizione())) {
@@ -895,15 +1127,28 @@ public class DatabaseToCastorMapper {
 					catSpecFormeVolume.setCitazioneBibliografica(catSpeH.getDescrizioneVolume());
 				catSpecForme.setCatSpecFormeVolume(catSpecFormeVolume);
 			}
-			catSpe.setCatSpecForme(catSpecForme);
-			//MATERIALE (Descrizione grande voce di patrimonio)
-			PatrimonioSpecializzazione ps = catSpeH.getPatrimonioSpecializzazione();
-			//PatrCat pc = ps.getPatrCat();
-			//String materiale = pc.getDescrizione();
-			String materiale = ps.getDescrizione();
-			catSpe.setMateriale(materiale);
-			//NOME (Descrizione piccola voce di patrimonio)
-			catSpe.setNome(catSpeH.getDenominazione());
+
+			if (catSpecForme != null) {
+				catSpecMateriale.setCatSpecForme(catSpecForme);
+			}
+
+			/* COPERTURA */
+			if (isNullSafeNotZero(catSpeH.getDaAnno()) && isNullSafeNotZero(catSpeH.getAAnno()) && String.valueOf(catSpeH.getDaAnno()).length() == 4 && String.valueOf(catSpeH.getAAnno()).length() == 4) {
+				CatSpecFormeCopertura catSpecFormeCopertura = new CatSpecFormeCopertura();
+				catSpecFormeCopertura.setAdAnno(String.valueOf(catSpeH.getAAnno()));
+				catSpecFormeCopertura.setDaAnno(String.valueOf(catSpeH.getDaAnno()));
+				catSpecMateriale.setCatSpecFormeCopertura(catSpecFormeCopertura);
+			}
+
+			materiali.add(catSpecMateriale);
+
+			if (materiali.size() > 0) {
+				CatSpecMateriali catSpecMateriali = new CatSpecMateriali();
+				CatSpecMateriale[] catSpecMateriales = new CatSpecMateriale[materiali.size()];
+				catSpecMateriales = (CatSpecMateriale[]) materiali.toArray(catSpecMateriales);
+				catSpecMateriali.setCatSpecMateriale(catSpecMateriales);
+				catSpe.setCatSpecMateriali(catSpecMateriali);
+			}
 
 			log.debug("Aggiunto catalogo speciale: " + catSpe.getNome());
 			catalSpe.add(catSpe);
@@ -1010,7 +1255,9 @@ public class DatabaseToCastorMapper {
 		if (fondiSpe.size() > 0) {
 			FondoSpeciale[] fondoSpecialeArray = new FondoSpeciale[fondiSpe.size()];
 			fondoSpecialeArray = (FondoSpeciale[]) fondiSpe.toArray(fondoSpecialeArray);
-			patrimonio.setFondoSpeciale(fondoSpecialeArray);
+			it.inera.abi.logic.formatodiscambio.castor.FondiSpeciali fondiSpeciali = new it.inera.abi.logic.formatodiscambio.castor.FondiSpeciali();
+			fondiSpeciali.setFondoSpeciale(fondoSpecialeArray);
+			patrimonio.setFondiSpeciali(fondiSpeciali);
 			log.debug("Settati fondi speciali nella parte Patrimonio");
 		} else {
 			log.debug("Non sono presenti fondi speciali per la biblioteca");
@@ -1036,7 +1283,9 @@ public class DatabaseToCastorMapper {
 		if (materiale.size() > 0) {
 			Materiale[] materialeArray = new Materiale[materiale.size()];
 			materialeArray = (Materiale[]) materiale.toArray(materialeArray);
-			patrimonio.setMateriale(materialeArray);
+			Materiali materiali = new Materiali();
+			materiali.setMateriale(materialeArray);
+			patrimonio.setMateriali(materiali);
 			log.debug("Settati materiali nella parte Patrimonio");
 		} else {
 			log.debug("Non sono presenti materiali per la biblioteca");
@@ -1145,7 +1394,9 @@ public class DatabaseToCastorMapper {
 			depLeg.add(depositoLegale);
 		}
 		if (depLeg.size() > 0) {
-			amministrativa.setDepositoLegale(depLeg.toArray(new DepositoLegale[depLeg.size()])); 
+			it.inera.abi.logic.formatodiscambio.castor.DepositiLegali deplegs = new it.inera.abi.logic.formatodiscambio.castor.DepositiLegali();
+			deplegs.setDepositoLegale(depLeg.toArray(new DepositoLegale[depLeg.size()]));
+			amministrativa.setDepositiLegali(deplegs); 
 			log.debug("Settati depositi legali nella parte Amministrativa");
 		} else {
 			log.debug("Non sono presenti depositi legali per la biblioteca");
@@ -1157,7 +1408,6 @@ public class DatabaseToCastorMapper {
 		Ente enteH = bibliotecaDb.getEnte();
 		if(enteH.getCodiceFiscale() != null)
 			ente.setCodiceFiscale(enteH.getCodiceFiscale());
-		
 		if ((enteH.getDenominazione() != null) && (enteH.getDenominazione().trim().length() > 0)) {
 			ente.setNome(enteH.getDenominazione().trim());
 		} else {
@@ -1542,6 +1792,7 @@ public class DatabaseToCastorMapper {
 
 			servizi.setInternet(internet);
 		}
+
 	}
 
 	private static void Servizi_setPrestito(Servizi servizi, Biblioteca bibliotecaDb) {

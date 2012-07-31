@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: BibliotecheDescriptor.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: BibliotecheDescriptor.java,v 1.5 2012/11/20 10:03:47 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Biblioteche;
 /**
  * Class BibliotecheDescriptor.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.5 $ $Date: 2012/11/20 10:03:47 $
  */
 public class BibliotecheDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -70,7 +70,7 @@ public class BibliotecheDescriptor extends org.exolab.castor.xml.util.XMLClassDe
         //-- initialize element descriptors
 
         //-- _dataExport
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.util.Date.class, "_dataExport", "dataExport", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.util.Date.class, "_dataExport", "data-export", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 

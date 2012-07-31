@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Istituzione.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: Istituzione.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,18 +10,21 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Data in cui è stata istituita formalmente
  *  l'attuale biblioteca. È possibile anche indicare
- *  l'anno di prima istituzione o fondazione, nel
- *  caso che la biblioteca abbia avuto nel tempo
+ *  l'anno di prima
+ *  istituzione o fondazione, nel
+ *  caso che la biblioteca abbia avuto
+ *  nel tempo
  *  gestioni amministrative diverse.
  *  
- *  DEPRECATO: 'Istituzione' è stato sostituito dall'elemento
- * 'istituzione'.
- *  Inoltre gli elementi 'dataIstituzione' e 'dataFondazione' sono
- * diventati 
- *  rispettivamente 'data-istituzione' e 'data-fondazione'.
+ *  DEPRECATO: 'Istituzione' è stato sostituito
+ *  dall'elemento 'istituzione'.
+ *  Inoltre gli elementi 'dataIstituzione'
+ *  e 'dataFondazione' sono diventati
+ *  rispettivamente
+ *  'data-istituzione' e 'data-fondazione'.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Istituzione implements java.io.Serializable {

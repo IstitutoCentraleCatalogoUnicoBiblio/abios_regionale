@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: EdificioDescriptor.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: EdificioDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Edificio;
 /**
  * Class EdificioDescriptor.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class EdificioDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -153,7 +153,7 @@ public class EdificioDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         }
         desc.setValidator(fieldValidator);
         //-- _appositamenteCostruito
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, "_appositamenteCostruito", "appositamenteCostruito", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, "_appositamenteCostruito", "appositamente-costruito", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -193,7 +193,7 @@ public class EdificioDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         }
         desc.setValidator(fieldValidator);
         //-- _dataCostruzione
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.DataCostruzione.class, "_dataCostruzione", "dataCostruzione", org.exolab.castor.xml.NodeType.Element);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.DataCostruzione.class, "_dataCostruzione", "data-costruzione", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 

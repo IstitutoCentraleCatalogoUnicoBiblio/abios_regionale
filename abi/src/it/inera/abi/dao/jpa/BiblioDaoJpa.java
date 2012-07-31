@@ -327,7 +327,7 @@ public class BiblioDaoJpa implements BiblioDao {
 
 			if (keys.containsKey("tipologiaAmministrativa")
 					&& (keys.get("tipologiaAmministrativa") != null)) {
-				
+
 				String tipAmm = ((Integer) keys.get("tipologiaAmministrativa")).toString();
 				
 				if (tipAmm.length() > 1 && tipAmm.substring((tipAmm.length()-2), tipAmm.length()).equals("00")) {
@@ -1595,46 +1595,6 @@ public class BiblioDaoJpa implements BiblioDao {
 		}
 
 	}
-
-//	@Override
-//	@Transactional
-//	public List<FondiDigitali> getDigitalizzazioneFondiByIdBiblio(
-//			int id_biblioteca) {
-//		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
-//		List<FondiDigitali> fondiDigitalis = biblioteca.getFondiDigitalis();
-//		Iterator<FondiDigitali> it = fondiDigitalis.iterator();
-//		while (it.hasNext()) {
-//			// Iterazione anti-lazy
-//			FondiDigitali fondiDigitali = (FondiDigitali) it.next();
-//		}
-//		return fondiDigitalis;
-//	}
-//
-//	@Override
-//	@Transactional
-//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
-//			String descrizione, boolean modifica) {
-//		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
-//
-//		FondiDigitali fondiDigitali = new FondiDigitali();
-//
-//		if (modifica)
-//			fondiDigitali.setIdFondiDigitali(id_newRecord);
-//
-//		fondiDigitali.setDescrizione(descrizione);
-//		fondiDigitali.setBiblioteca(biblioteca);
-//
-//		em.merge(fondiDigitali);
-//	}
-//
-//	@Override
-//	@Transactional
-//	public void removeFondiDigitali(int id_rimuoviFondo) {
-//		FondiDigitali fondiDigitali = em.find(FondiDigitali.class,
-//				id_rimuoviFondo);
-//		em.remove(fondiDigitali);
-//
-//	}
 
 	/**
 	 * In base all'id tabella dinamica passato viene caricata la lista dati
@@ -4991,6 +4951,73 @@ public class BiblioDaoJpa implements BiblioDao {
 		q.setParameter("biblioteca", biblioteca);
 		q.executeUpdate();
 	}
+	
+	@Override
+	@Transactional
+	public List<SistemiPrestitoInterbibliotecario> getListaSistemiPrestitoInterbibliotecario(int id_biblioteca) {
+		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+		List<SistemiPrestitoInterbibliotecario> sistPrestInterbibs = biblioteca.getSistemiPrestitoInterbibliotecarios();
+
+		Iterator<SistemiPrestitoInterbibliotecario> itsist = sistPrestInterbibs.iterator();
+		
+		while (itsist.hasNext()) {
+			// Iterazione anti lazy
+			SistemiPrestitoInterbibliotecario sistPrestInterbib = (SistemiPrestitoInterbibliotecario) itsist.next();
+		}
+		
+		return sistPrestInterbibs;
+	}
+	
+	@Override
+	@Transactional
+	public void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistema) {
+		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+		Integer tmpIndex = null;
+		
+		List<SistemiPrestitoInterbibliotecario> sistPrestInterbibs = biblioteca.getSistemiPrestitoInterbibliotecarios();
+		Iterator<SistemiPrestitoInterbibliotecario> it = sistPrestInterbibs.iterator();
+		while (it.hasNext()) {
+			//Iterazione anti-lazy
+			SistemiPrestitoInterbibliotecario sistPrestInterbib = (SistemiPrestitoInterbibliotecario) it.next();
+			
+			if (sistPrestInterbib.getIdSistemiPrestitoInterbibliotecario().intValue() == id_sistema) {
+				tmpIndex = sistPrestInterbibs.indexOf(sistPrestInterbib);
+			}
+		}
+		if (tmpIndex != null) {
+			sistPrestInterbibs.remove(sistPrestInterbibs.get(tmpIndex));
+		}
+
+		biblioteca.setSistemiPrestitoInterbibliotecarios(sistPrestInterbibs);
+
+		em.persist(biblioteca);
+	}
+	
+	@Override
+	@Transactional
+	public void addSistemaPrestitoInterbibliotecario(int id_biblioteca, Integer id_sistema) throws DuplicateEntryException {
+		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+		
+		SistemiPrestitoInterbibliotecario newSistPrestInterbib = em.find(SistemiPrestitoInterbibliotecario.class, id_sistema);
+
+		List<SistemiPrestitoInterbibliotecario> sistPrestInterbibs = biblioteca.getSistemiPrestitoInterbibliotecarios();
+		Iterator<SistemiPrestitoInterbibliotecario> it = sistPrestInterbibs.iterator();
+		
+		while (it.hasNext()) {
+			//Iterazione anti-lazy
+			SistemiPrestitoInterbibliotecario sistPrestInterbib = (SistemiPrestitoInterbibliotecario) it.next();
+			if (sistPrestInterbib.getIdSistemiPrestitoInterbibliotecario().intValue() == id_sistema.intValue()) {
+				throw new DuplicateEntryException(DUPLICATE_ENTRY_ERROR_MESSAGE);
+			}
+		}
+		
+		sistPrestInterbibs.add(newSistPrestInterbib);
+
+		biblioteca.setSistemiPrestitoInterbibliotecarios(sistPrestInterbibs);
+
+		em.merge(biblioteca);
+	}
+	
 	public static void main(String[] args) {
 		String test = "Sun Jan 01 00:00:00 2012";
 		SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy",  Locale.ENGLISH);

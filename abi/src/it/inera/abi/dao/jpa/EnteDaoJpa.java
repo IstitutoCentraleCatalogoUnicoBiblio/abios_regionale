@@ -30,7 +30,6 @@ public class EnteDaoJpa implements EnteDao {
 	@Transactional
 	public Ente createEnteIfNotExist(Stato stato,EnteTipologiaAmministrativa enteTipologiaAmministrativa,
 			String denominazione, String asiaAsip, String partitaIva, String codiceFiscale) {
-		
 		StringBuffer sb = new StringBuffer();
 		sb.append("SELECT  e ");
 		sb.append("FROM Ente e WHERE ");
@@ -153,11 +152,8 @@ public class EnteDaoJpa implements EnteDao {
 	
 	@Override
 	@Transactional
-	public Ente createEnteIfNotExist2(Stato stato,
-			EnteTipologiaAmministrativa enteTipologiaAmministrativa,
-			String denominazione, String asiaAsip,
-			String partitaIva, String codiceFiscale) {
-
+	public Ente createEnteIfNotExist2(Stato stato, EnteTipologiaAmministrativa enteTipologiaAmministrativa,
+			String denominazione, String asiaAsip, String partitaIva, String codiceFiscale) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("SELECT  e ");
 		sb.append("FROM Ente e WHERE ");

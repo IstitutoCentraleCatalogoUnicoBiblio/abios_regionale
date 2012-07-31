@@ -2,25 +2,29 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: ServiziOrario.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: ServiziOrario.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * Questo elemento non ripetibile raggruppa tutte
- *  le informazioni relative agli orari di accesso
- *  alla biblioteca. I sottoelementi, tutti
+ *  le
+ *  informazioni relative agli orari di accesso
+ *  alla biblioteca. I
+ *  sottoelementi, tutti
  *  opzionali, sono per lo più ripetibili, eccetto
  *  ovviamente l'orario ufficiale.
  *  
  *  L'elemento serve solo da contenitore. Non è
  *  necessario dal punto di vista applicativo, ma
- *  agevola la leggibilità dello schema, che in
- *  questa parte è piuttosto articolato.
+ *  agevola la
+ *  leggibilità dello schema, che in
+ *  questa parte è piuttosto
+ *  articolato.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class ServiziOrario implements java.io.Serializable {
@@ -32,61 +36,79 @@ public class ServiziOrario implements java.io.Serializable {
 
     /**
      * Questo elemento contiene almeno un
-     *  elemento "orario" di tipo
+     *  elemento
+     *  "orario" di tipo
      *  "orarioType", da non confondere con
-     *  l'elemento soprastante. Si veda più
+     *  l'elemento
+     *  soprastante. Si veda più
      *  avanti la descrizione di questo tipo
-     *  di elemento.
+     *  di
+     *  elemento.
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.Ufficiale _ufficiale;
 
     /**
      * Le variazioni di orario sono
-     *  espresse da eventuali elementi di
+     *  espresse da
+     *  eventuali elementi di
      *  questo tipo. Esso è identico ad un
-     *  orario ufficiale (orarioType), salvo per
-     *  l'aggiunta di una nota esplicativa (e
-     *  del periodo di validità, attualmente deprecato e non 
+     *  orario
+     *  ufficiale (orarioType), salvo per
+     *  l'aggiunta di una nota
+     *  esplicativa (e
+     *  del periodo di validità, attualmente deprecato e
+     *  non
      *  considerato in import e export). La nota esplicativa
-     *  può essere di qualsiasi forma.
+     *  può
+     *  essere di
+     *  qualsiasi forma.
      *  
      */
     private java.util.List<it.inera.abi.logic.formatodiscambio.castor.Variazione> _variazioneList;
 
     /**
      * Un periodo di chiusura è
-     *  semplicemente una nota esplicativa (e
-     *  del periodo di validità, attualmente deprecato e non 
+     *  semplicemente una nota
+     *  esplicativa (e
+     *  del periodo di validità, attualmente deprecato e
+     *  non
      *  considerato in import e export). La nota esplicativa
-     *  può essere di qualsiasi forma. (dal-al, periodo
-     * natalizio,...).
+     *  può
+     *  essere di
+     *  qualsiasi forma. (dal-al, periodo natalizio,...).
      *  
      */
     private java.util.List<it.inera.abi.logic.formatodiscambio.castor.Chiusura> _chiusuraList;
 
     /**
      * Totale delle ore di apertura
-     *  settimanali. Questo elemento può
+     *  settimanali.
+     *  Questo elemento può
      *  essere presente insieme all'orario
      *  dettagliato (di tipo orarioType), e
-     *  il suo valore può essere incoerente
+     *  il suo valore può essere
+     *  incoerente
      *  con l'orario dettagliato, ma gli
-     *  applicativi che ricevono i dati sono
+     *  applicativi che
+     *  ricevono i dati sono
      *  liberi di verificare la congruità
-     *  dei dati segnalati oppure no.
+     *  dei dati
+     *  segnalati oppure no.
      *  
      */
     private java.math.BigDecimal _oreSettimanali;
 
     /**
      * Totale delle ore di apertura
-     *  pomeridiana settimanali. Ovviamente
+     *  pomeridiana
+     *  settimanali. Ovviamente
      *  dovrebbe essere minore di
      *  ore-settimanali, ma circa la
      *  congruità di questo dato con gli
      *  altri, vale quanto già detto per
-     *  ore-settimanali: non è garantito un
+     *  ore-settimanali: non è
+     *  garantito un
      *  controllo da parte degli applicativi
      *  riceventi.
      *  
@@ -95,10 +117,12 @@ public class ServiziOrario implements java.io.Serializable {
 
     /**
      * Numero di settimane di apertura
-     *  della biblioteca in un anno. Anche
+     *  della
+     *  biblioteca in un anno. Anche
      *  per questo dato, gli applicativi
      *  riceventi non dovrebbero essere
-     *  costretti a verificare la coerenza
+     *  costretti a verificare la
+     *  coerenza
      *  con gli altri dati di questo gruppo.
      *  
      */
@@ -248,14 +272,18 @@ public class ServiziOrario implements java.io.Serializable {
      * Returns the value of field 'oreSettimanali'. The field
      * 'oreSettimanali' has the following description: Totale delle
      * ore di apertura
-     *  settimanali. Questo elemento può
+     *  settimanali.
+     *  Questo elemento può
      *  essere presente insieme all'orario
      *  dettagliato (di tipo orarioType), e
-     *  il suo valore può essere incoerente
+     *  il suo valore può essere
+     *  incoerente
      *  con l'orario dettagliato, ma gli
-     *  applicativi che ricevono i dati sono
+     *  applicativi che
+     *  ricevono i dati sono
      *  liberi di verificare la congruità
-     *  dei dati segnalati oppure no.
+     *  dei dati
+     *  segnalati oppure no.
      *  
      * 
      * @return the value of field 'OreSettimanali'.
@@ -269,12 +297,14 @@ public class ServiziOrario implements java.io.Serializable {
      * Returns the value of field 'oreSettimanaliPomeridiane'. The
      * field 'oreSettimanaliPomeridiane' has the following
      * description: Totale delle ore di apertura
-     *  pomeridiana settimanali. Ovviamente
+     *  pomeridiana
+     *  settimanali. Ovviamente
      *  dovrebbe essere minore di
      *  ore-settimanali, ma circa la
      *  congruità di questo dato con gli
      *  altri, vale quanto già detto per
-     *  ore-settimanali: non è garantito un
+     *  ore-settimanali: non è
+     *  garantito un
      *  controllo da parte degli applicativi
      *  riceventi.
      *  
@@ -290,10 +320,12 @@ public class ServiziOrario implements java.io.Serializable {
      * Returns the value of field 'settimaneApertura'. The field
      * 'settimaneApertura' has the following description: Numero di
      * settimane di apertura
-     *  della biblioteca in un anno. Anche
+     *  della
+     *  biblioteca in un anno. Anche
      *  per questo dato, gli applicativi
      *  riceventi non dovrebbero essere
-     *  costretti a verificare la coerenza
+     *  costretti a verificare la
+     *  coerenza
      *  con gli altri dati di questo gruppo.
      *  
      * 
@@ -308,11 +340,14 @@ public class ServiziOrario implements java.io.Serializable {
      * Returns the value of field 'ufficiale'. The field
      * 'ufficiale' has the following description: Questo elemento
      * contiene almeno un
-     *  elemento "orario" di tipo
+     *  elemento
+     *  "orario" di tipo
      *  "orarioType", da non confondere con
-     *  l'elemento soprastante. Si veda più
+     *  l'elemento
+     *  soprastante. Si veda più
      *  avanti la descrizione di questo tipo
-     *  di elemento.
+     *  di
+     *  elemento.
      *  
      * 
      * @return the value of field 'Ufficiale'.
@@ -538,14 +573,18 @@ public class ServiziOrario implements java.io.Serializable {
      * Sets the value of field 'oreSettimanali'. The field
      * 'oreSettimanali' has the following description: Totale delle
      * ore di apertura
-     *  settimanali. Questo elemento può
+     *  settimanali.
+     *  Questo elemento può
      *  essere presente insieme all'orario
      *  dettagliato (di tipo orarioType), e
-     *  il suo valore può essere incoerente
+     *  il suo valore può essere
+     *  incoerente
      *  con l'orario dettagliato, ma gli
-     *  applicativi che ricevono i dati sono
+     *  applicativi che
+     *  ricevono i dati sono
      *  liberi di verificare la congruità
-     *  dei dati segnalati oppure no.
+     *  dei dati
+     *  segnalati oppure no.
      *  
      * 
      * @param oreSettimanali the value of field 'oreSettimanali'.
@@ -559,12 +598,14 @@ public class ServiziOrario implements java.io.Serializable {
      * Sets the value of field 'oreSettimanaliPomeridiane'. The
      * field 'oreSettimanaliPomeridiane' has the following
      * description: Totale delle ore di apertura
-     *  pomeridiana settimanali. Ovviamente
+     *  pomeridiana
+     *  settimanali. Ovviamente
      *  dovrebbe essere minore di
      *  ore-settimanali, ma circa la
      *  congruità di questo dato con gli
      *  altri, vale quanto già detto per
-     *  ore-settimanali: non è garantito un
+     *  ore-settimanali: non è
+     *  garantito un
      *  controllo da parte degli applicativi
      *  riceventi.
      *  
@@ -581,10 +622,12 @@ public class ServiziOrario implements java.io.Serializable {
      * Sets the value of field 'settimaneApertura'. The field
      * 'settimaneApertura' has the following description: Numero di
      * settimane di apertura
-     *  della biblioteca in un anno. Anche
+     *  della
+     *  biblioteca in un anno. Anche
      *  per questo dato, gli applicativi
      *  riceventi non dovrebbero essere
-     *  costretti a verificare la coerenza
+     *  costretti a verificare la
+     *  coerenza
      *  con gli altri dati di questo gruppo.
      *  
      * 
@@ -600,11 +643,14 @@ public class ServiziOrario implements java.io.Serializable {
      * Sets the value of field 'ufficiale'. The field 'ufficiale'
      * has the following description: Questo elemento contiene
      * almeno un
-     *  elemento "orario" di tipo
+     *  elemento
+     *  "orario" di tipo
      *  "orarioType", da non confondere con
-     *  l'elemento soprastante. Si veda più
+     *  l'elemento
+     *  soprastante. Si veda più
      *  avanti la descrizione di questo tipo
-     *  di elemento.
+     *  di
+     *  elemento.
      *  
      * 
      * @param ufficiale the value of field 'ufficiale'.

@@ -2,32 +2,40 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: OrarioType.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: OrarioType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * Questo tipo descrive sostanzialmente l'orario ufficiale,
+ * Questo tipo descrive sostanzialmente l'orario
+ *  ufficiale,
  *  ma è anche un tipo base da cui derivare le variazioni di
  *  orario. Poiché le variazioni sono all'interno dei
- *  servizi, questo tipo base deve essere globale.
+ *  servizi, questo
+ *  tipo base deve essere globale.
  *  
- *  La struttura di questo tipo è molto semplice: un giorno
+ *  La struttura di questo tipo è molto semplice: un
+ *  giorno
  *  della settimana, un orario iniziale e un'orario finale.
  *  Sebbene il questionario ICCU preveda una struttura più
- *  articolata, queste informazioni sono sufficienti a
- *  descrivere qualsiasi ragionevole situazione, e
- *  dovrebbero essere gestibili da qualsiasi base dati.
+ *  articolata,
+ *  queste informazioni sono sufficienti a
+ *  descrivere qualsiasi
+ *  ragionevole situazione, e
+ *  dovrebbero essere gestibili da qualsiasi
+ *  base dati.
  *  Strutture più articolate possono essere ricondotte a
  *  questa, ripetendo opportunamente gli elementi.
  *  
- *  Per i limiti orari si potrebbe specificare un vincolo
+ *  Per i limiti orari si potrebbe specificare un
+ *  vincolo
  *  più fine, perché quello attuale accetterebbe anche un
- *  orario come "35:72".
+ *  orario
+ *  come "35:72".
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class OrarioType implements java.io.Serializable {

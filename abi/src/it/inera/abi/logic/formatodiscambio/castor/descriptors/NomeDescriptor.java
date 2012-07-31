@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: NomeDescriptor.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: NomeDescriptor.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Nome;
 /**
  * Class NomeDescriptor.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 public class NomeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -114,16 +114,15 @@ public class NomeDescriptor extends org.exolab.castor.xml.util.XMLClassDescripto
             typeValidator.setWhiteSpace("preserve");
         }
         desc.setValidator(fieldValidator);
-        //-- _precedenteList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_precedenteList", "precedente", org.exolab.castor.xml.NodeType.Element);
-        desc.setImmutable(true);
+        //-- _precedenti
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Precedenti.class, "_precedenti", "precedenti", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 Nome target = (Nome) object;
-                return target.getPrecedente();
+                return target.getPrecedenti();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -131,15 +130,7 @@ public class NomeDescriptor extends org.exolab.castor.xml.util.XMLClassDescripto
             {
                 try {
                     Nome target = (Nome) object;
-                    target.addPrecedente( (java.lang.String) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    Nome target = (Nome) object;
-                    target.removeAllPrecedente();
+                    target.setPrecedenti( (it.inera.abi.logic.formatodiscambio.castor.Precedenti) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -150,33 +141,26 @@ public class NomeDescriptor extends org.exolab.castor.xml.util.XMLClassDescripto
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("string");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Precedenti");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _precedenteList
+        //-- validation code for: _precedenti
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
-            org.exolab.castor.xml.validators.StringValidator typeValidator;
-            typeValidator = new org.exolab.castor.xml.validators.StringValidator();
-            fieldValidator.setValidator(typeValidator);
-            typeValidator.setWhiteSpace("preserve");
         }
         desc.setValidator(fieldValidator);
-        //-- _alternativoList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_alternativoList", "alternativo", org.exolab.castor.xml.NodeType.Element);
-        desc.setImmutable(true);
+        //-- _alternative
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Alternative.class, "_alternative", "alternative", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 Nome target = (Nome) object;
-                return target.getAlternativo();
+                return target.getAlternative();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -184,15 +168,7 @@ public class NomeDescriptor extends org.exolab.castor.xml.util.XMLClassDescripto
             {
                 try {
                     Nome target = (Nome) object;
-                    target.addAlternativo( (java.lang.String) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    Nome target = (Nome) object;
-                    target.removeAllAlternativo();
+                    target.setAlternative( (it.inera.abi.logic.formatodiscambio.castor.Alternative) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -203,21 +179,15 @@ public class NomeDescriptor extends org.exolab.castor.xml.util.XMLClassDescripto
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("string");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Alternative");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _alternativoList
+        //-- validation code for: _alternative
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
-            org.exolab.castor.xml.validators.StringValidator typeValidator;
-            typeValidator = new org.exolab.castor.xml.validators.StringValidator();
-            fieldValidator.setValidator(typeValidator);
-            typeValidator.setWhiteSpace("preserve");
         }
         desc.setValidator(fieldValidator);
     }

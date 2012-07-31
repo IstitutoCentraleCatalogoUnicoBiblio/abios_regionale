@@ -2,21 +2,25 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: FormaType.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: FormaType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * La forma di un catalogo ha di solito un solo attributo,
+ * La forma di un catalogo ha di solito un solo
+ *  attributo,
  *  la percentuale di copertura, riferita al patrimonio
  *  inventariato o supposto, relativo alla forma
- *  particolare. Un'eccezione è la forma "digitale", che
- *  aggiunge un elemento (o attributo che sia) relativo al
- *  tipo di catalogo digitale (CD-ROM, web o altro).
+ *  particolare.
+ *  Un'eccezione è la forma "digitale", che
+ *  aggiunge un elemento (o
+ *  attributo che sia) relativo al
+ *  tipo di catalogo digitale (CD-ROM, web
+ *  o altro).
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class FormaType implements java.io.Serializable {

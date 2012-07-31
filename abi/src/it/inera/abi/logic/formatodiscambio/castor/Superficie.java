@@ -2,20 +2,22 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Superficie.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Superficie.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * I valori dei sotto-elementi sono
- *  ovviamente da intendersi in metri
+ *  ovviamente da
+ *  intendersi in metri
  *  quadrati. Trattandosi di decimali,
- *  non sono ammessi valori come "100mq"
+ *  non sono
+ *  ammessi valori come "100mq"
  *  o "100 metri quadri".
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
  */
 @SuppressWarnings("serial")
 public class Superficie implements java.io.Serializable {

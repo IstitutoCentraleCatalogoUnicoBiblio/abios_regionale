@@ -16,6 +16,7 @@ import it.inera.abi.gxt.client.mvc.model.PatrimonioLibrarioModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoInterbibliotecarioRuoloModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoLocaleModel;
 import it.inera.abi.gxt.client.mvc.model.ServiziRiproduzioniModel;
+import it.inera.abi.gxt.client.mvc.model.SistemiPrestitoInterbibliotecarioModel;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.UserModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
@@ -161,12 +162,6 @@ public interface BibliotecheService extends RemoteService {
 	public FondiSpecialiModel addFondoSpeciale(FondiSpecialiModel modelToSave, int idBiblioteca, boolean modifica);
 
 	public void removeFondiSpeciali(int id_biblioteca, int id_removeRecord);
-
-//	public List<VoceUnicaModel> getDigitalizzazioneFondiByIdBiblio(int id_biblioteca);
-//
-//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord, String derscrizione, boolean modifica);
-//
-//	public void removeFondiDigitali(int id_rimuoviFondo);
 
 	public List<VoceUnicaModel> getEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(int id_biblioteca, int idTabellaDinamica);
 
@@ -329,5 +324,11 @@ public interface BibliotecheService extends RemoteService {
 	void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni);
 	
 	void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale);
+	
+	public List<SistemiPrestitoInterbibliotecarioModel> getListaSistemiPrestitoInterbibliotecario(int id_biblioteca);
+	
+	public void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int idSistemaPrestitoInterbibliotecario);
+	
+	public void addSistemaPrestitoInterbibliotecario(int id_biblioteca, int idSistemaPrestitoInterbibliotecario) throws DuplicatedEntryClientSideException;
 
 }

@@ -849,39 +849,6 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 			}
 		} 
 	}
-	
-//	private void compareFondiDigitali(List<Differenze> differenze, Biblioteca bibliotecaSalvata, Biblioteca bibliotecaAttuale) {
-//		if (bibliotecaAttuale.getFondiDigitalis() != null) {
-//			boolean found = false;
-//			for (FondiDigitali fondiDigitaliAttuale : bibliotecaAttuale.getFondiDigitalis()) {
-//				if (bibliotecaSalvata.getFondiDigitalis() != null) {
-//					for (FondiDigitali fondiDigitaliSalvata : bibliotecaAttuale.getFondiDigitalis()) {
-//						if (CompareUtils.equals(fondiDigitaliSalvata.getDescrizione(), fondiDigitaliAttuale.getDescrizione())) {
-//							found = true;
-//							break;
-//						}
-//					}
-//				}
-//				if (!found) createDifference(differenze, "Fondi Digitali", null, fondiDigitaliAttuale.getDescrizione());
-//				found = false;
-//			}
-//		} 
-//		if (bibliotecaSalvata.getFondiDigitalis() != null) {
-//			boolean found = false;
-//			for (FondiDigitali fondiDigitaliSalvata : bibliotecaSalvata.getFondiDigitalis()) {
-//				if (bibliotecaAttuale.getFondiDigitalis() != null) {
-//					for (FondiDigitali fondiDigitaliAttuale : bibliotecaAttuale.getFondiDigitalis()) {
-//						if (CompareUtils.equals(fondiDigitaliSalvata.getDescrizione(), fondiDigitaliAttuale.getDescrizione())) {
-//							found = true;
-//							break;
-//						}
-//					}
-//				}
-//				if (!found) createDifference(differenze, "Fondi Digitali", fondiDigitaliSalvata.getDescrizione(), null);
-//				found = false;
-//			}
-//		} 
-//	}
 
 	private void compareSistemiPrestitoInterbibliotecario(List<Differenze> differenze, Biblioteca bibliotecaSalvata, Biblioteca bibliotecaAttuale) {
 		if (bibliotecaAttuale.getSistemiPrestitoInterbibliotecarios() != null) {
@@ -1241,9 +1208,6 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 			
 			// ******* fondi speciali *************
 			
-			// ******* digitalizzazioni *************
-			//compareFondiDigitali(differenze, bibliotecaSalvata, bibliotecaAttuale);
-
 			// ******** sistemi di indicizzazione Classificata **********
 			//compareIndicizzazioneClassificata(differenze, bibliotecaSalvata, bibliotecaAttuale);
 			

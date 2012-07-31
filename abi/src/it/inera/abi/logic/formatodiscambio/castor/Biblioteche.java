@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Biblioteche.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Biblioteche.java,v 1.5 2012/11/20 10:03:47 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,7 +10,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Class Biblioteche.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.5 $ $Date: 2012/11/20 10:03:47 $
  */
 @SuppressWarnings("serial")
 public class Biblioteche implements java.io.Serializable {
@@ -21,7 +21,8 @@ public class Biblioteche implements java.io.Serializable {
     //--------------------------/
 
     /**
-     * Data della creazione del file XML (generato con un esport).
+     * Data della creazione del file XML (generato con
+     *  un esport).
      *  
      */
     private java.util.Date _dataExport;
@@ -134,7 +135,8 @@ public class Biblioteche implements java.io.Serializable {
     /**
      * Returns the value of field 'dataExport'. The field
      * 'dataExport' has the following description: Data della
-     * creazione del file XML (generato con un esport).
+     * creazione del file XML (generato con
+     *  un esport).
      *  
      * 
      * @return the value of field 'DataExport'.
@@ -271,7 +273,8 @@ public class Biblioteche implements java.io.Serializable {
     /**
      * Sets the value of field 'dataExport'. The field 'dataExport'
      * has the following description: Data della creazione del file
-     * XML (generato con un esport).
+     * XML (generato con
+     *  un esport).
      *  
      * 
      * @param dataExport the value of field 'dataExport'.

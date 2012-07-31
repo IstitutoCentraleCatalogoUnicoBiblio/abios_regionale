@@ -15,6 +15,7 @@ import it.inera.abi.gxt.client.mvc.model.PatrimonioLibrarioModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoInterbibliotecarioRuoloModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoLocaleModel;
 import it.inera.abi.gxt.client.mvc.model.ServiziRiproduzioniModel;
+import it.inera.abi.gxt.client.mvc.model.SistemiPrestitoInterbibliotecarioModel;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.UserModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
@@ -204,16 +205,6 @@ public interface BibliotecheServiceAsync {
 	void removeFondiSpeciali(int id_biblioteca, int id_removeRecord,
 			AsyncCallback<Void> asyncCallback);
 
-//	void getDigitalizzazioneFondiByIdBiblio(int id_biblioteca,
-//			AsyncCallback<List<VoceUnicaModel>> callback);
-//
-//	void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
-//			String derscrizione, boolean modifica,
-//			AsyncCallback<Void> asyncCallback);
-//
-//	void removeFondiDigitali(int id_rimuoviFondo,
-//			AsyncCallback<Void> asyncCallback);
-
 	void getEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(
 			int id_biblioteca, int idTabellaDinamica,
 			AsyncCallback<List<VoceUnicaModel>> callback);
@@ -387,5 +378,11 @@ public interface BibliotecheServiceAsync {
 	void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni, AsyncCallback<Void> callback);
 	
 	void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale, AsyncCallback<Void> callback);
+	
+	void getListaSistemiPrestitoInterbibliotecario(int id_biblioteca, AsyncCallback<List<SistemiPrestitoInterbibliotecarioModel>> callback);
+	
+	void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistemaPrestitoInterbibliotecario, AsyncCallback<Void> callback);
+	
+	void addSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistemaPrestitoInterbibliotecario, AsyncCallback<Void> callback);
 
 }

@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: SezioniSpeciali.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: SezioniSpeciali.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,13 +10,16 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Se la biblioteca ha delle sezioni speciali,
  *  queste vanno inserite in altrettanti elementi
- *  "sezione". Nella maschera di ricerca avanzata
- *  dell'anagrafe, alla voce "Sezione speciale", è
+ *  "sezione". Nella
+ *  maschera di ricerca avanzata
+ *  dell'anagrafe, alla voce "Sezione
+ *  speciale", è
  *  disponibile l'intero elenco delle sezioni
- *  speciali registrate dal sistema.
+ *  speciali
+ *  registrate dal sistema.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class SezioniSpeciali implements java.io.Serializable {

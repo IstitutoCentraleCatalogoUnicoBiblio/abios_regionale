@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: DataCostruzioneDescriptor.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: DataCostruzioneDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.DataCostruzione;
 /**
  * Class DataCostruzioneDescriptor.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class DataCostruzioneDescriptor extends it.inera.abi.logic.formatodiscambio.castor.descriptors.AnnoSecoloTypeDescriptor {
 
@@ -58,7 +58,7 @@ public class DataCostruzioneDescriptor extends it.inera.abi.logic.formatodiscamb
     public DataCostruzioneDescriptor() {
         super();
         setExtendsWithoutFlatten(new it.inera.abi.logic.formatodiscambio.castor.descriptors.AnnoSecoloTypeDescriptor());
-        _xmlName = "dataCostruzione";
+        _xmlName = "data-costruzione";
         _elementDefinition = true;
     }
 

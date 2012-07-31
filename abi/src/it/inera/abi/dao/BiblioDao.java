@@ -27,6 +27,7 @@ import it.inera.abi.persistence.Riproduzioni;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
+import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import it.inera.abi.persistence.SpogliBibliografici;
 import it.inera.abi.persistence.Utenti;
 
@@ -182,14 +183,6 @@ public interface BiblioDao {
 	public int createFondoSpeciale(FondiSpeciali fondoSpeciale);
 
 	public void removeFondiSpeciali(int id_biblioteca, int id_removeRecord);
-//
-//	public List<FondiDigitali> getDigitalizzazioneFondiByIdBiblio(
-//			int id_biblioteca);
-
-//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord,
-//			String derscrizione, boolean modifica);
-//
-//	public void removeFondiDigitali(int id_rimuoviFondo);
 
 	public List<?> getListaVoci(int id_biblioteca, int idTabellaDinamica);
 
@@ -276,7 +269,7 @@ public interface BiblioDao {
 	
 	public void setServizioBibliograficoInternoEsterno(int id_biblioteca, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno,
 			Boolean hasServizioBibliograficoEsterno);
-			
+
 	public List<ServiziInformazioniBibliograficheModalita> getModalitaComunicazioniBibliograficheByIdBiblio(
 			int id_biblioteca);
 
@@ -355,7 +348,10 @@ public interface BiblioDao {
 	public void removeRiproduzioniFromBiblio(Biblioteca biblioteca);
 	
 	public void removePrestitoLocaleFromBiblio(Biblioteca biblioteca);
-
+	
+	public List<SistemiPrestitoInterbibliotecario> getListaSistemiPrestitoInterbibliotecario(int id_biblioteca);
+	
+	public void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistema);
+	
+	public void addSistemaPrestitoInterbibliotecario(int id_biblioteca, Integer id_sistema) throws DuplicateEntryException;
 }
- 
-

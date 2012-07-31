@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AccessoDescriptor.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: AccessoDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Accesso;
 /**
  * Class AccessoDescriptor.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
  */
 public class AccessoDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -149,16 +149,15 @@ public class AccessoDescriptor extends org.exolab.castor.xml.util.XMLClassDescri
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
-        //-- _categoriaAmmessaList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_categoriaAmmessaList", "categoria-ammessa", org.exolab.castor.xml.NodeType.Element);
-        desc.setImmutable(true);
+        //-- _categorieAmmesse
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.CategorieAmmesse.class, "_categorieAmmesse", "categorie-ammesse", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 Accesso target = (Accesso) object;
-                return target.getCategoriaAmmessa();
+                return target.getCategorieAmmesse();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -166,15 +165,7 @@ public class AccessoDescriptor extends org.exolab.castor.xml.util.XMLClassDescri
             {
                 try {
                     Accesso target = (Accesso) object;
-                    target.addCategoriaAmmessa( (java.lang.String) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    Accesso target = (Accesso) object;
-                    target.removeAllCategoriaAmmessa();
+                    target.setCategorieAmmesse( (it.inera.abi.logic.formatodiscambio.castor.CategorieAmmesse) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -185,21 +176,15 @@ public class AccessoDescriptor extends org.exolab.castor.xml.util.XMLClassDescri
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("string");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.CategorieAmmesse");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _categoriaAmmessaList
+        //-- validation code for: _categorieAmmesse
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
-            org.exolab.castor.xml.validators.StringValidator typeValidator;
-            typeValidator = new org.exolab.castor.xml.validators.StringValidator();
-            fieldValidator.setValidator(typeValidator);
-            typeValidator.setWhiteSpace("preserve");
         }
         desc.setValidator(fieldValidator);
         //-- _condizioniAccessoList

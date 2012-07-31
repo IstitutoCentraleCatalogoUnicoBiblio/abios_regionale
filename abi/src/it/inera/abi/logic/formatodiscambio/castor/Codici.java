@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Codici.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Codici.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -12,19 +12,24 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  
  *  È un elemento che raggruppa diversi codici.
  *  Nessuno è ripetibile. I nomi degli elementi
- *  dovrebbero essere auto-esplicativi.
+ *  dovrebbero essere
+ *  auto-esplicativi.
  *  
  *  Si sfruttano qui le possibilità offerte da XML
  *  Schema per effettuare una prima validazione dei
- *  codici attraverso opportune espressioni
- *  regolari. È però importante capire che si tratta
+ *  codici attraverso
+ *  opportune espressioni
+ *  regolari. È però importante capire che si
+ *  tratta
  *  di una validazione superficiale: ad esempio, per
- *  i codici basati sulle sigle di provincia non
- *  viene controllato che la sigla sia corretta, ma
+ *  i codici
+ *  basati sulle sigle di provincia non
+ *  viene controllato che la sigla
+ *  sia corretta, ma
  *  solo del tipo "AA".
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Codici implements java.io.Serializable {
@@ -36,9 +41,11 @@ public class Codici implements java.io.Serializable {
 
     /**
      * Il codice "iccu" può essere omesso
-     *  nel caso la biblioteca in esame non
+     *  nel caso la
+     *  biblioteca in esame non
      *  sia mai stata censita dall'ICCU.
-     *  Essa sarà trattata come una nuova
+     *  Essa
+     *  sarà trattata come una nuova
      *  biblioteca, come avviene tramite
      *  l'applicativo web dell'ICCU. Per
      *  questo motivo, è necessario che
@@ -46,8 +53,9 @@ public class Codici implements java.io.Serializable {
      *  provincia, altrimenti non è
      *  possibile assegnare la parte
      *  iniziale del codice.
-     *  Nota r.eschini: tolte tutte le restriction e messo a
-     * required il codice iccu
+     *  Nota r.eschini:
+     *  tolte tutte le restriction e messo a required il codice
+     * iccu
      *  
      */
     private java.lang.String _isil;
@@ -124,9 +132,11 @@ public class Codici implements java.io.Serializable {
     /**
      * Returns the value of field 'isil'. The field 'isil' has the
      * following description: Il codice "iccu" può essere omesso
-     *  nel caso la biblioteca in esame non
+     *  nel caso la
+     *  biblioteca in esame non
      *  sia mai stata censita dall'ICCU.
-     *  Essa sarà trattata come una nuova
+     *  Essa
+     *  sarà trattata come una nuova
      *  biblioteca, come avviene tramite
      *  l'applicativo web dell'ICCU. Per
      *  questo motivo, è necessario che
@@ -134,8 +144,9 @@ public class Codici implements java.io.Serializable {
      *  provincia, altrimenti non è
      *  possibile assegnare la parte
      *  iniziale del codice.
-     *  Nota r.eschini: tolte tutte le restriction e messo a
-     * required il codice iccu
+     *  Nota r.eschini:
+     *  tolte tutte le restriction e messo a required il codice
+     * iccu
      *  
      * 
      * @return the value of field 'Isil'.
@@ -245,9 +256,11 @@ public class Codici implements java.io.Serializable {
     /**
      * Sets the value of field 'isil'. The field 'isil' has the
      * following description: Il codice "iccu" può essere omesso
-     *  nel caso la biblioteca in esame non
+     *  nel caso la
+     *  biblioteca in esame non
      *  sia mai stata censita dall'ICCU.
-     *  Essa sarà trattata come una nuova
+     *  Essa
+     *  sarà trattata come una nuova
      *  biblioteca, come avviene tramite
      *  l'applicativo web dell'ICCU. Per
      *  questo motivo, è necessario che
@@ -255,8 +268,9 @@ public class Codici implements java.io.Serializable {
      *  provincia, altrimenti non è
      *  possibile assegnare la parte
      *  iniziale del codice.
-     *  Nota r.eschini: tolte tutte le restriction e messo a
-     * required il codice iccu
+     *  Nota r.eschini:
+     *  tolte tutte le restriction e messo a required il codice
+     * iccu
      *  
      * 
      * @param isil the value of field 'isil'.

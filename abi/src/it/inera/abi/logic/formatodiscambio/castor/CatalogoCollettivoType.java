@@ -2,18 +2,20 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: CatalogoCollettivoType.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: CatalogoCollettivoType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * Catalogo collettivo. Deriva da "catalogoSpecialeType",
- *  con l'aggiunta della "zona", a sua volta specializzata
+ * Catalogo collettivo. Deriva da
+ *  "catalogoSpecialeType",
+ *  con l'aggiunta della "zona", a sua volta
+ *  specializzata
  *  in un "nome" e in un "tipo".
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class CatalogoCollettivoType extends it.inera.abi.logic.formatodiscambio.castor.CatalogoSpecialeType 

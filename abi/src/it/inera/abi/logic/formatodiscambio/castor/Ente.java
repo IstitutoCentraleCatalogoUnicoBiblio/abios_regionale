@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Ente.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Ente.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,10 +10,12 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Dati relativi all'ente da cui la biblioteca
  *  dipende. Almeno il nome è obbligatorio. Inoltre,
- *  andrebbe discussa l'opportunità di fare
+ *  andrebbe discussa
+ *  l'opportunità di fare
  *  riferimento ad una lista controllata di enti,
  *  individuati tramite il solo codice fiscale o la
- *  partita IVA. Devono esistere certamente simili
+ *  partita IVA. Devono
+ *  esistere certamente simili
  *  liste, e le diverse basi dati dovrebbero
  *  attenersi ad esse, almeno in parte.
  *  
@@ -22,7 +24,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  La funzione-obiettivo è stata rimossa.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Ente implements java.io.Serializable {

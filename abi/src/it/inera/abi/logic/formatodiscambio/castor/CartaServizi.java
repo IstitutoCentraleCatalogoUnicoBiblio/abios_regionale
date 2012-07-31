@@ -2,25 +2,31 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: CartaServizi.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: CartaServizi.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * Questo elemento opzionale indica se la
- *  biblioteca si è dotata di una carta dei servizi
- *  o meno, e per quali servizi specifici. Gli
+ *  biblioteca
+ *  si è dotata di una carta dei servizi
+ *  o meno, e per quali servizi
+ *  specifici. Gli
  *  eventuali singoli servizi devono essere elencati
- *  in altrettanti elementi "servizio", sotto forma
- *  di stringhe alfanumeriche. Se l'elemento è
- *  vuoto, vuol dire solo che esiste una carta dei
+ *  in
+ *  altrettanti elementi "servizio", sotto forma
+ *  di stringhe
+ *  alfanumeriche. Se l'elemento è
+ *  vuoto, vuol dire solo che esiste una
+ *  carta dei
  *  servizi, ma mancano altre informazioni. I valori
  *  andrebbero standardizzati attraverso
- *  un'opportuna lista d'autorità concordata.
+ *  un'opportuna lista d'autorità
+ *  concordata.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class CartaServizi implements java.io.Serializable {

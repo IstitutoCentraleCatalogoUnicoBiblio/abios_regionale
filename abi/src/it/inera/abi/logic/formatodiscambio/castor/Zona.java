@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Zona.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Zona.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,7 +10,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Class Zona.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public class Zona implements java.io.Serializable {
@@ -22,7 +22,8 @@ public class Zona implements java.io.Serializable {
 
     /**
      * Il nome della zona può
-     *  essere ad esempio "Toscana",
+     *  essere ad esempio
+     *  "Toscana",
      *  "Triveneto", "Centro-Sud",
      *  "Castelli Romani"...
      *  
@@ -31,7 +32,8 @@ public class Zona implements java.io.Serializable {
 
     /**
      * Il tipo della zona può
-     *  essere invece "regionale",
+     *  essere invece
+     *  "regionale",
      *  "comunale" ...
      *  
      */
@@ -54,7 +56,8 @@ public class Zona implements java.io.Serializable {
     /**
      * Returns the value of field 'nome'. The field 'nome' has the
      * following description: Il nome della zona può
-     *  essere ad esempio "Toscana",
+     *  essere ad esempio
+     *  "Toscana",
      *  "Triveneto", "Centro-Sud",
      *  "Castelli Romani"...
      *  
@@ -69,7 +72,8 @@ public class Zona implements java.io.Serializable {
     /**
      * Returns the value of field 'tipo'. The field 'tipo' has the
      * following description: Il tipo della zona può
-     *  essere invece "regionale",
+     *  essere invece
+     *  "regionale",
      *  "comunale" ...
      *  
      * 
@@ -130,7 +134,8 @@ public class Zona implements java.io.Serializable {
     /**
      * Sets the value of field 'nome'. The field 'nome' has the
      * following description: Il nome della zona può
-     *  essere ad esempio "Toscana",
+     *  essere ad esempio
+     *  "Toscana",
      *  "Triveneto", "Centro-Sud",
      *  "Castelli Romani"...
      *  
@@ -145,7 +150,8 @@ public class Zona implements java.io.Serializable {
     /**
      * Sets the value of field 'tipo'. The field 'tipo' has the
      * following description: Il tipo della zona può
-     *  essere invece "regionale",
+     *  essere invece
+     *  "regionale",
      *  "comunale" ...
      *  
      * 

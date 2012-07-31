@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AmministrativaTypeDescriptor.java,v 1.3 2012/07/30 15:17:03 m.bartolozzi Exp $
+ * $Id: AmministrativaTypeDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.AmministrativaType;
 /**
  * Class AmministrativaTypeDescriptor.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:03 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class AmministrativaTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -309,15 +309,15 @@ public class AmministrativaTypeDescriptor extends org.exolab.castor.xml.util.XML
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
-        //-- _depositoLegaleList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.DepositoLegale.class, "_depositoLegaleList", "deposito-legale", org.exolab.castor.xml.NodeType.Element);
+        //-- _depositiLegali
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.DepositiLegali.class, "_depositiLegali", "depositi-legali", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 AmministrativaType target = (AmministrativaType) object;
-                return target.getDepositoLegale();
+                return target.getDepositiLegali();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -325,15 +325,7 @@ public class AmministrativaTypeDescriptor extends org.exolab.castor.xml.util.XML
             {
                 try {
                     AmministrativaType target = (AmministrativaType) object;
-                    target.addDepositoLegale( (it.inera.abi.logic.formatodiscambio.castor.DepositoLegale) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    AmministrativaType target = (AmministrativaType) object;
-                    target.removeAllDepositoLegale();
+                    target.setDepositiLegali( (it.inera.abi.logic.formatodiscambio.castor.DepositiLegali) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -344,16 +336,14 @@ public class AmministrativaTypeDescriptor extends org.exolab.castor.xml.util.XML
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.DepositoLegale");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.DepositiLegali");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _depositoLegaleList
+        //-- validation code for: _depositiLegali
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);

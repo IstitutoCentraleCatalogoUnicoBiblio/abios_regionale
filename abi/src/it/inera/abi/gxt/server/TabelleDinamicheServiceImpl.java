@@ -5,6 +5,7 @@ import it.inera.abi.dao.DuplicateEntryException;
 import it.inera.abi.dao.mapping.DtoJpaMapping;
 import it.inera.abi.dto.DynaTabDTO;
 import it.inera.abi.dto.PatrimonioSubCategoryDTO;
+import it.inera.abi.dto.SistemaPrestitoInterbibliotecarioDTO;
 import it.inera.abi.gxt.client.mvc.model.CataloghiUrlModel;
 import it.inera.abi.gxt.client.mvc.model.ComuniModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
@@ -347,7 +348,7 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 
 		int limit = (Integer) m.get("limit");
 		int start = (Integer) m.get("offset");
-		
+
 		PagingLoadConfig config = (PagingLoadConfig)loadConfig;
 		final	String sortDir=(String)(config.getSortInfo().getSortDir()!=null?config.getSortInfo().getSortDir().toString():null);
 		final	String sortField=(String)(config.getSortInfo().getSortField()!=null?config.getSortInfo().getSortField().toString():null);
@@ -412,7 +413,7 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 
 			/* Aggiunta per form ricerca biblio in assegna biblio a utenti */
 			partecipaCataloghiCollettiviModel.setIdCatalogo(cataloghiCollettivi.getIdCataloghiCollettivi());
-			
+
 			sublist.add(partecipaCataloghiCollettiviModel);
 		}
 		return new BasePagingLoadResult<PartecipaCataloghiCollettiviModel>(sublist, start,	countAll);
@@ -787,7 +788,7 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 
 		int start = config.getOffset();
 		int limit = config.getLimit();
-		
+
 		String sortDir=(String)(config.getSortInfo().getSortDir()!=null?config.getSortInfo().getSortDir().toString():null);
 		String sortField=(String)(config.getSortInfo().getSortField()!=null?config.getSortInfo().getSortField().toString():null);
 
@@ -1048,5 +1049,38 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 		}
 
 		return sistemiModel;
+	}
+	
+	@Override
+	public PagingLoadResult<SistemiPrestitoInterbibliotecarioModel> getDescrizioneSistemiPrestitoInterbibliotecarioFiltratePerPaginazioneCombobox(
+			ModelData loadConfig) {
+		ModelData m = (ModelData) loadConfig;
+
+		String query = (String) m.get("query");
+
+		int limit = (Integer) m.get("limit");
+		int start = (Integer) m.get("offset");
+
+		int countAll = abiTabelleDinamicheLogic.countAllSistemiPrestitoInterbibliotecarioPaginatiPerCombo(query);
+
+		List<SistemiPrestitoInterbibliotecarioModel> sublist = new ArrayList<SistemiPrestitoInterbibliotecarioModel>();
+
+		List<SistemaPrestitoInterbibliotecarioDTO> listDB = abiTabelleDinamicheLogic.getSistemiPrestitoInterbibliotecarioPaginatiPerCombo(query, start, limit);
+		Iterator<SistemaPrestitoInterbibliotecarioDTO> it = listDB.iterator();
+
+		while (it.hasNext()) {
+			SistemaPrestitoInterbibliotecarioDTO DTO = (SistemaPrestitoInterbibliotecarioDTO) it.next();
+
+			SistemiPrestitoInterbibliotecarioModel model = new SistemiPrestitoInterbibliotecarioModel();
+
+			model.setIdSistemiPrestitoInterbibliotecario(DTO.getId());
+			model.setDescrizione(DTO.getDescrizione());
+			model.setUrl(DTO.getUrl());
+			
+			sublist.add(model);
+
+		}
+
+		return new BasePagingLoadResult<SistemiPrestitoInterbibliotecarioModel>(sublist, start, countAll);
 	}
 }

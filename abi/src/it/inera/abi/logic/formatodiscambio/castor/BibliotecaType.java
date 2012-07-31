@@ -2,36 +2,46 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: BibliotecaType.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: BibliotecaType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * L'elemento "biblioteca" è la radice di un documento di
+ * L'elemento "biblioteca" è la radice di un documento
+ *  di
  *  questo tipo. Tale elemento fa parte di un content model
- *  "xsd:all", che non obbliga a rispettare l'ordine in cui
- *  si presentano gli elementi, a differenza di
+ *  "xsd:all",
+ *  che non obbliga a rispettare l'ordine in cui
+ *  si presentano gli
+ *  elementi, a differenza di
  *  "xsd:sequence".
  *  
- *  In tutto il resto dello schema si tende ad usare questo
+ *  In tutto il resto dello schema si tende ad usare
+ *  questo
  *  content model, perché meno rigido. Non dovrebbe
- *  comportare eccessivo carico per il parser.
+ *  comportare
+ *  eccessivo carico per il parser.
  *  
- *  La maggior parte degli elementi e attributi risultano
+ *  La maggior parte degli elementi e attributi
+ *  risultano
  *  opzionali e ripetibili, ma questi aspetti saranno
- *  oggetto di una revisione futura dell'intero schema alla
- *  luce delle possibilità e delle richieste dei diversi
- *  partner interessati a scambiare dati nel formato qui
+ *  oggetto di
+ *  una revisione futura dell'intero schema alla
+ *  luce delle possibilità e
+ *  delle richieste dei diversi
+ *  partner interessati a scambiare dati nel
+ *  formato qui
  *  descritto.
  *  
- *  Nei casi più elementari si è ritenuto opportuno fissare
+ *  Nei casi più elementari si è ritenuto opportuno
+ *  fissare
  *  l'obbligatorietà e la ripetibilità degli elementi.
  *  
  *  L'elemento biblioteca adesso è obbligatorio.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class BibliotecaType implements java.io.Serializable {

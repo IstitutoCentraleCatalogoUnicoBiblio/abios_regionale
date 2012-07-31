@@ -56,6 +56,7 @@ import it.inera.abi.persistence.Riproduzioni;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
+import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import it.inera.abi.persistence.SpogliBibliografici;
 import it.inera.abi.persistence.Stato;
 import it.inera.abi.persistence.StatoBibliotecaWorkflow;
@@ -548,7 +549,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	public void setEnte(int id_biblioteca, Stato stato,	EnteTipologiaAmministrativa enteTipologiaAmministrativa,
 			String denominazione) {
 
-		Ente ente = enteDao.createEnteIfNotExist2(stato,enteTipologiaAmministrativa, denominazione, null, null,null);
+		Ente ente = enteDao.createEnteIfNotExist2(stato, enteTipologiaAmministrativa, denominazione, null, null, null);
 
 		biblioDao.setEnte(id_biblioteca, ente);
 
@@ -862,26 +863,6 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Rimozione fondo speciale: id_record="+id_removeRecord+"- id_biblioteca="+id_biblioteca);
 	}
-
-//	@Override
-//	public List<FondiDigitali> getDigitalizzazioneFondiByIdBiblio(int id_biblioteca) {
-//		return	biblioDao.getDigitalizzazioneFondiByIdBiblio(id_biblioteca);
-//
-//	}
-
-//	@Override
-//	public void addDigitalizzazioneFondo(int id_biblioteca, int id_newRecord, String derscrizione, boolean modifica) {
-//		biblioDao.addDigitalizzazioneFondo(id_biblioteca,id_newRecord,derscrizione,modifica);
-//
-//		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica digitalizzazione fondo: "+(modifica?"id_record="+id_newRecord:"")+"- id_biblioteca="+id_biblioteca);
-//	}
-//
-//	@Override
-//	public void removeFondiDigitali(int id_rimuoviFondo) {
-//		biblioDao.removeFondiDigitali(id_rimuoviFondo);
-//
-//		userActionLog.logActionCatalogazioneBiblioDefaultUser("Rimozione digitalizzazione fondo: id_record="+id_rimuoviFondo+"- id_biblioteca=N/A");
-//	}
 
 	@Override
 	public List<?> getListaVoci(int id_biblioteca, int idTabellaDinamica) {
@@ -1917,6 +1898,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	public Boolean addStatoCatalogazione(HashMap<String, Object> params) {
 		return biblioDao.addStatoCatalogazione(params);		
 	}
+	
 	@Override
 	public void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni) {
 		Biblioteca biblioteca = biblioDao.getBibliotecaById(idbib);
@@ -1938,5 +1920,26 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 			biblioDao.removePrestitoLocaleFromBiblio(biblioteca);
 		}
 		biblioDao.updateBiblioteca(biblioteca);		
+	}
+	
+	@Override
+	public List<SistemiPrestitoInterbibliotecario> getListaSistemiPrestitoInterbibliotecario(int id_biblioteca) {
+		return biblioDao.getListaSistemiPrestitoInterbibliotecario(id_biblioteca);
+	}
+	
+	@Override
+	public void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistema) {
+		biblioDao.removeSistemaPrestitoInterbibliotecario(id_biblioteca, id_sistema);
+
+		userActionLog.logActionCatalogazioneBiblioDefaultUser("Rimozione sistema prestito interbibliotecario: id_record="+id_sistema+" - id_biblioteca="+id_biblioteca);
+
+	}
+	
+	@Override
+	public void addSistemaPrestitoInterbibliotecario(int id_biblioteca, Integer id_sistema) throws DuplicateEntryException {
+		biblioDao.addSistemaPrestitoInterbibliotecario(id_biblioteca, id_sistema);
+
+		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica sistema prestito interbibliotecario: " + 
+				(id_sistema != null ? "id_sistema = " + id_sistema + " - " : "") + "id_biblioteca = " + id_biblioteca);
 	}
 }

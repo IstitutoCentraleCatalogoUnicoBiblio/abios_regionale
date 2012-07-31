@@ -4,6 +4,7 @@ import it.inera.abi.dao.ConstraintKeyViolationException;
 import it.inera.abi.dao.DuplicateEntryException;
 import it.inera.abi.dao.DynaTabDao;
 import it.inera.abi.dto.PatrimonioSubCategoryDTO;
+import it.inera.abi.dto.SistemaPrestitoInterbibliotecarioDTO;
 import it.inera.abi.persistence.Biblioteca;
 import it.inera.abi.persistence.CataloghiCollettivi;
 import it.inera.abi.persistence.CataloghiCollettiviMaterialeUrl;
@@ -281,6 +282,7 @@ public class DynaTabJpa implements DynaTabDao {
 
 		return countResult.intValue();
 	}
+	
 	@Override
 	@Transactional
 	public List<PatrimonioSpecializzazioneCategoria> getListaPatrimoniCategorieGrandiVociTabelleDinamiche(int offset, int limit){
@@ -1590,5 +1592,68 @@ public class DynaTabJpa implements DynaTabDao {
 
 		}
 		return listaSistemi;
+	}
+	
+	@Override
+	@Transactional
+	public int countAllSistemiPrestitoInterbibliotecarioPaginatiPerCombo(String searchValore) {
+		StringBuffer sb = new StringBuffer();
+
+		sb.append(" SELECT COUNT(*) ");
+		sb.append(" FROM SistemiPrestitoInterbibliotecario as sist ");
+
+		if (searchValore != null && searchValore.length() > 0) {
+			sb.append(" WHERE sist.descrizione LIKE :searchValore  ");
+		}
+
+		Query q = em.createQuery(sb.toString());
+
+		if (searchValore != null && searchValore.length() > 0) {
+			String tmpSearchValore = "%".concat(searchValore).concat("%");
+			q.setParameter("searchValore", tmpSearchValore);
+		}
+		Number countResult = (Number) q.getSingleResult();
+
+		return countResult.intValue();
+	}
+	
+	@Override
+	@Transactional
+	public List<SistemaPrestitoInterbibliotecarioDTO> getSistemiPrestitoInterbibliotecarioPaginatiPerCombo(String searchValore, int start, int limit) {
+		List<SistemaPrestitoInterbibliotecarioDTO> dtos = new ArrayList<SistemaPrestitoInterbibliotecarioDTO>();
+		
+		StringBuffer sb = new StringBuffer();
+
+		sb.append(" SELECT sist.idSistemiPrestitoInterbibliotecario, sist.descrizione, sist.url ");
+		sb.append(" FROM SistemiPrestitoInterbibliotecario as sist ");
+
+		if (searchValore != null && searchValore.length() > 0) {
+			sb.append("WHERE sist.descrizione LIKE :searchValore ");
+		}
+
+		Query q = em.createQuery(sb.toString());
+
+		if (searchValore != null && searchValore.length() > 0) {
+			String tmpSearchValore = "%".concat(searchValore).concat("%");
+			q.setParameter("searchValore", tmpSearchValore);
+		}
+
+		q.setMaxResults(limit);
+		q.setFirstResult(start);
+
+		List result = q.getResultList();
+
+		Iterator it = result.iterator();
+		while (it.hasNext()) {
+			Object [] tmpRecord = (Object []) it.next();
+
+			SistemaPrestitoInterbibliotecarioDTO dto = new SistemaPrestitoInterbibliotecarioDTO();
+			dto.setId((Integer) tmpRecord[0]);
+			dto.setDescrizione(""+tmpRecord[1]);
+			dto.setUrl(""+tmpRecord[2]);
+
+			dtos.add(dto);
+		}
+		return dtos;
 	}
 }

@@ -90,11 +90,12 @@
 	<xs:element name="biblioteche">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="dataExport" type="xs:dateTime"
+				<xs:element name="data-export" type="xs:dateTime"
 					minOccurs="1" maxOccurs="1">
 					<xs:annotation>
 						<xs:documentation>
-							Data della creazione del file XML (generato con un esport).
+							Data della creazione del file XML (generato con
+							un esport).
 						</xs:documentation>
 					</xs:annotation>
 				</xs:element>
@@ -167,7 +168,7 @@
 			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="dataCensimento" type="annoSecoloType"
+			<xs:element name="data-censimento" type="annoSecoloType"
 				minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>
@@ -177,7 +178,7 @@
 						</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dataAggiornamento" type="xs:dateTime"
+			<xs:element name="data-aggiornamento" type="xs:dateTime"
 				minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>
@@ -205,16 +206,47 @@
 								<xs:restriction base="xs:string" />
 							</xs:simpleType>
 						</xs:element>
-
-						<xs:element name="precedente" minOccurs="0" maxOccurs="unbounded">
-							<xs:simpleType>
-								<xs:restriction base="xs:string" />
-							</xs:simpleType>
+						<xs:element name="precedenti" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									E' stato introdotto l'elemento ripetibile
+									'precedenti' come
+									contenitore
+									delle eventuali precedenti
+									denominazioni.
+							</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="precedente" minOccurs="0"
+										maxOccurs="unbounded">
+										<xs:simpleType>
+											<xs:restriction base="xs:string" />
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
-						<xs:element name="alternativo" minOccurs="0" maxOccurs="unbounded">
-							<xs:simpleType>
-								<xs:restriction base="xs:string" />
-							</xs:simpleType>
+						<xs:element name="alternative" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									E' stato introdotto l'elemento ripetibile
+									'alternative' come
+									contenitore
+									delle eventuali denominazioni
+									alternative.
+							</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="alternativo" minOccurs="0"
+										maxOccurs="unbounded">
+										<xs:simpleType>
+											<xs:restriction base="xs:string" />
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
@@ -331,7 +363,7 @@
 							<xs:annotation>
 								<xs:documentation>
 									L'elemento comune adesso è obbligatorio.
-							</xs:documentation>
+								</xs:documentation>
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
@@ -493,11 +525,11 @@
 					<xs:sequence>
 						<xs:element minOccurs="0" name="denominazione" type="xs:string" />
 						<xs:element minOccurs="0" name="monumentale" type="siNoType" />
-						<xs:element minOccurs="0" name="appositamenteCostruito"
+						<xs:element minOccurs="0" name="appositamente-costruito"
 							type="siNoType" />
 						<!-- <xs:element minOccurs="0" name="tipoDataCostruzione" type="annoSecoloType" 
 							/> <xs:element minOccurs="0" name="dataCostruzione" type="xs:string" /> -->
-						<xs:element minOccurs="0" name="dataCostruzione" type="annoSecoloType" />
+						<xs:element minOccurs="0" name="data-costruzione" type="annoSecoloType" />
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -517,7 +549,8 @@
 						dall'elemento 'istituzione'.
 						Inoltre gli elementi 'dataIstituzione'
 						e 'dataFondazione' sono diventati
-						rispettivamente 'data-istituzione' e 'data-fondazione'.
+						rispettivamente
+						'data-istituzione' e 'data-fondazione'.
 					</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
@@ -575,10 +608,22 @@
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="materiale"
-				type="materialeType" />
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="fondo-speciale"
-				type="fondoSpecialeType" />
+			<xs:element minOccurs="0" name="materiali">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="materiale"
+							type="materialeType" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element minOccurs="0" name="fondi-speciali">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="fondo-speciale"
+							type="fondoSpecialeType" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element minOccurs="0" name="fondi-antichi" type="fondoAnticoType" />
 			<xs:element minOccurs="0" name="inventario" type="infCarType">
 				<xs:annotation>
@@ -733,7 +778,8 @@
 									del periodo di validità, attualmente deprecato e
 									non
 									considerato in import e export). La nota esplicativa
-									può essere di
+									può
+									essere di
 									qualsiasi forma.
 								</xs:documentation>
 							</xs:annotation>
@@ -759,7 +805,8 @@
 									del periodo di validità, attualmente deprecato e
 									non
 									considerato in import e export). La nota esplicativa
-									può essere di
+									può
+									essere di
 									qualsiasi forma. (dal-al, periodo natalizio,...).
 								</xs:documentation>
 							</xs:annotation>
@@ -875,11 +922,14 @@
 										<xs:annotation>
 											<xs:documentation>
 												DEPRECATO: questo elemento
-												serviva per esprimere il
+												serviva per
+												esprimere il
 												materiale non ammesso (escluso)
-												al prestito. Essendo stato
+												al prestito.
+												Essendo stato
 												introdotto un nuovo elemento
-												che ne permette la ripetibilità,
+												che ne permette la
+												ripetibilità,
 												l'elemento è in disuso.
 												Utilizzare l'elemento
 												MATERIALI-ESCLUSI-LOCALE.
@@ -1022,7 +1072,7 @@
 								</xs:documentation>
 					<xs:documentation>
 						Introdotto attributo 'attivo' del tipo siNoType.
-								</xs:documentation>
+					</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -1031,9 +1081,10 @@
 								<xs:documentation>
 									Con questo elemento si dà la possibilità di
 									esprimere le modalità di riprodurre i vari
-									materiali ammessi al prestito locale,
-									nazionale e/o internazionale.									
-											</xs:documentation>
+									materiali ammessi al
+									prestito locale,
+									nazionale e/o internazionale.
+								</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -1156,7 +1207,8 @@
 								<xs:documentation>
 									L'elemento segnala semplicemente la
 									possibilità di accedere liberamente alla
-									biblioteca. In caso contrario la biblioteca
+									biblioteca. In caso
+									contrario la biblioteca
 									risulta essere riservata.
 								</xs:documentation>
 							</xs:annotation>
@@ -1177,25 +1229,36 @@
 								</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="categoria-ammessa" type="xs:string"
-							minOccurs="0" maxOccurs="unbounded">
-							<xs:annotation>
-								<xs:documentation>
-									Le categorie dipendono molto dalle
-									diverse basi
-									dati, per cui in questo
-									schema non si è ritenuto opportuno
-									elencarne alcuna. Possono essere
-									specificate più categorie,
-									sotto
-									forma di semplici stringhe non
-									controllate. I valori qui
-									utilizzati
-									andrebbero però concordati,
-									stabilendo una lista
-									d'autorità.
-								</xs:documentation>
-							</xs:annotation>
+						<xs:element name="categorie-ammesse" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="categoria-ammessa" type="xs:string"
+										minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>
+												Le categorie dipendono molto dalle
+												diverse
+												basi
+												dati, per cui in questo
+												schema non si è ritenuto
+												opportuno
+												elencarne alcuna. Possono essere
+												specificate più
+												categorie,
+												sotto
+												forma di semplici stringhe non
+												controllate. I
+												valori qui
+												utilizzati
+												andrebbero però concordati,
+												stabilendo
+												una lista
+												d'autorità.
+									</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element minOccurs="0" name="condizioni-accesso"
 							maxOccurs="unbounded">
@@ -1437,13 +1500,19 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="deposito-legale" minOccurs="0"
-				maxOccurs="unbounded">
+			<xs:element name="depositi-legali" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="tipo" type="xs:string" minOccurs="0" />
-						<xs:element name="anno-inizio" type="xs:string"
-							minOccurs="0" />
+						<xs:element name="deposito-legale" minOccurs="0"
+							maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="tipo" type="xs:string" minOccurs="0" />
+									<xs:element name="anno-inizio" type="xs:string"
+										minOccurs="0" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -1658,7 +1727,7 @@
 			<xs:element minOccurs="0" name="cdd" type="xs:string" />
 			<xs:element minOccurs="0" name="depositato" type="siNoType" />
 			<xs:element minOccurs="0" name="digitalizzazione" type="siNoType" />
-			<xs:element minOccurs="0" name="catalogoInventario">
+			<xs:element minOccurs="0" name="catalogo-inventario">
 				<xs:simpleType>
 					<xs:annotation>
 						<xs:documentation>
@@ -1675,7 +1744,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element minOccurs="0" name="catalogoInventarioUrl"
+			<xs:element minOccurs="0" name="catalogo-inventario-url"
 				type="xs:string" />
 		</xs:all>
 	</xs:complexType>
@@ -1772,6 +1841,61 @@
 		<xs:attribute name="tipo" type="xs:string" use="required" />
 	</xs:complexType>
 
+	<xs:complexType name="materialeCataloghiType">
+		<xs:complexContent>
+			<xs:extension base="materialeType">
+				<xs:sequence>
+					<xs:element name="forme" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="schede" type="formaType" minOccurs="0" />
+								<xs:element name="volume" type="volumeType"
+									minOccurs="0" />
+								<xs:element name="microforme" type="formaType"
+									minOccurs="0" />
+								<xs:element name="digitale" type="digitaleType"
+									minOccurs="0" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="copertura" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+								La copertura bibliografica deve essere espressa
+								tramite un anno iniziale (elemento "da-anno") e
+								un anno finale
+								(elemento "ad-anno"). Entrambi
+								devono avere il formato "YYYY",
+								cioè
+								esattamente
+								quattro cifre (non è ammesso alcun altro
+								carattere).
+							</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:all>
+								<xs:element name="da-anno">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:pattern value="[0-9]{4}" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="ad-anno">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:pattern value="[0-9]{4}" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+							</xs:all>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
 	<!-- <xs:complexType name="catalogoGeneraleType"> <xs:annotation> <xs:documentation> 
 		Catalogo generale. Deriva da "catalogoType", con la sola aggiunta del "tipo" 
 		di catalogo, per il quale si dovrebbero usare solo i valori seguenti: topografico, 
@@ -1791,54 +1915,16 @@
 				per il "catalogoSpecialeType".
 			</xs:documentation>
 		</xs:annotation>
-
 		<xs:sequence>
-			<xs:element name="forme" minOccurs="0">
+			<xs:element name="nome" type="xs:string" minOccurs="0" />
+			<xs:element name="materiali" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="schede" type="formaType" minOccurs="0" />
-						<xs:element name="volume" type="volumeType" minOccurs="0" />
-						<xs:element name="microforme" type="formaType"
-							minOccurs="0" />
-						<xs:element name="digitale" type="digitaleType"
-							minOccurs="0" />
+						<xs:element name="materiale" type="materialeCataloghiType"
+							minOccurs="0" maxOccurs="unbounded" />
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="copertura" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>
-						La copertura bibliografica deve essere espressa
-						tramite un anno iniziale (elemento "da-anno") e
-						un anno finale
-						(elemento "ad-anno"). Entrambi
-						devono avere il formato "YYYY", cioè
-						esattamente
-						quattro cifre (non è ammesso alcun altro
-						carattere).
-					</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:all>
-						<xs:element name="da-anno">
-							<xs:simpleType>
-								<xs:restriction base="xs:string">
-									<xs:pattern value="[0-9]{4}" />
-								</xs:restriction>
-							</xs:simpleType>
-						</xs:element>
-						<xs:element name="ad-anno">
-							<xs:simpleType>
-								<xs:restriction base="xs:string">
-									<xs:pattern value="[0-9]{4}" />
-								</xs:restriction>
-							</xs:simpleType>
-						</xs:element>
-					</xs:all>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="nome" type="xs:string" minOccurs="0" />
-			<xs:element name="materiale" type="xs:string" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 

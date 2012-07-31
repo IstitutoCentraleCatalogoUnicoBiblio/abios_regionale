@@ -2,17 +2,18 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: SpecializzazioneType.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: SpecializzazioneType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * La specializzazione di una biblioteca è semplicemente
+ * La specializzazione di una biblioteca è
+ *  semplicemente
  *  una CDD più una descrizione libera opzionale.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class SpecializzazioneType implements java.io.Serializable {

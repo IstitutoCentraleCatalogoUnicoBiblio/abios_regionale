@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: CatalogoSpecialeType.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: CatalogoSpecialeType.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -11,11 +11,12 @@ package it.inera.abi.logic.formatodiscambio.castor;
  * Catalogo speciale. Deriva da "catalogoType", con
  *  l'aggiunta del "nome" del catalogo e del "materiale".
  *  
- *  Notare come tale tipo di elemento costituisce la base
+ *  Notare come tale tipo di elemento costituisce la
+ *  base
  *  per il "catalogoSpecialeType".
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
  */
 @SuppressWarnings("serial")
 public abstract class CatalogoSpecialeType implements java.io.Serializable {
@@ -26,30 +27,14 @@ public abstract class CatalogoSpecialeType implements java.io.Serializable {
     //--------------------------/
 
     /**
-     * Field _catSpecForme.
-     */
-    private it.inera.abi.logic.formatodiscambio.castor.CatSpecForme _catSpecForme;
-
-    /**
-     * La copertura bibliografica deve essere espressa
-     *  tramite un anno iniziale (elemento "da-anno") e
-     *  un anno finale (elemento "ad-anno"). Entrambi
-     *  devono avere il formato "YYYY", cioè esattamente
-     *  quattro cifre (non è ammesso alcun altro
-     *  carattere).
-     *  
-     */
-    private it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeCopertura _catSpecFormeCopertura;
-
-    /**
      * Field _nome.
      */
     private java.lang.String _nome;
 
     /**
-     * Field _materiale.
+     * Field _catSpecMateriali.
      */
-    private java.lang.String _materiale;
+    private it.inera.abi.logic.formatodiscambio.castor.CatSpecMateriali _catSpecMateriali;
 
 
       //----------------/
@@ -66,41 +51,13 @@ public abstract class CatalogoSpecialeType implements java.io.Serializable {
     //-----------/
 
     /**
-     * Returns the value of field 'catSpecForme'.
+     * Returns the value of field 'catSpecMateriali'.
      * 
-     * @return the value of field 'CatSpecForme'.
+     * @return the value of field 'CatSpecMateriali'.
      */
-    public it.inera.abi.logic.formatodiscambio.castor.CatSpecForme getCatSpecForme(
+    public it.inera.abi.logic.formatodiscambio.castor.CatSpecMateriali getCatSpecMateriali(
     ) {
-        return this._catSpecForme;
-    }
-
-    /**
-     * Returns the value of field 'catSpecFormeCopertura'. The
-     * field 'catSpecFormeCopertura' has the following description:
-     * La copertura bibliografica deve essere espressa
-     *  tramite un anno iniziale (elemento "da-anno") e
-     *  un anno finale (elemento "ad-anno"). Entrambi
-     *  devono avere il formato "YYYY", cioè esattamente
-     *  quattro cifre (non è ammesso alcun altro
-     *  carattere).
-     *  
-     * 
-     * @return the value of field 'CatSpecFormeCopertura'.
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeCopertura getCatSpecFormeCopertura(
-    ) {
-        return this._catSpecFormeCopertura;
-    }
-
-    /**
-     * Returns the value of field 'materiale'.
-     * 
-     * @return the value of field 'Materiale'.
-     */
-    public java.lang.String getMateriale(
-    ) {
-        return this._materiale;
+        return this._catSpecMateriali;
     }
 
     /**
@@ -129,42 +86,13 @@ public abstract class CatalogoSpecialeType implements java.io.Serializable {
     }
 
     /**
-     * Sets the value of field 'catSpecForme'.
+     * Sets the value of field 'catSpecMateriali'.
      * 
-     * @param catSpecForme the value of field 'catSpecForme'.
+     * @param catSpecMateriali the value of field 'catSpecMateriali'
      */
-    public void setCatSpecForme(
-            final it.inera.abi.logic.formatodiscambio.castor.CatSpecForme catSpecForme) {
-        this._catSpecForme = catSpecForme;
-    }
-
-    /**
-     * Sets the value of field 'catSpecFormeCopertura'. The field
-     * 'catSpecFormeCopertura' has the following description: La
-     * copertura bibliografica deve essere espressa
-     *  tramite un anno iniziale (elemento "da-anno") e
-     *  un anno finale (elemento "ad-anno"). Entrambi
-     *  devono avere il formato "YYYY", cioè esattamente
-     *  quattro cifre (non è ammesso alcun altro
-     *  carattere).
-     *  
-     * 
-     * @param catSpecFormeCopertura the value of field
-     * 'catSpecFormeCopertura'.
-     */
-    public void setCatSpecFormeCopertura(
-            final it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeCopertura catSpecFormeCopertura) {
-        this._catSpecFormeCopertura = catSpecFormeCopertura;
-    }
-
-    /**
-     * Sets the value of field 'materiale'.
-     * 
-     * @param materiale the value of field 'materiale'.
-     */
-    public void setMateriale(
-            final java.lang.String materiale) {
-        this._materiale = materiale;
+    public void setCatSpecMateriali(
+            final it.inera.abi.logic.formatodiscambio.castor.CatSpecMateriali catSpecMateriali) {
+        this._catSpecMateriali = catSpecMateriali;
     }
 
     /**

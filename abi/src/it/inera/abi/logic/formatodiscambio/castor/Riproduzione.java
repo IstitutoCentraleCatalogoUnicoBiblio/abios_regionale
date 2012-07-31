@@ -2,19 +2,20 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Riproduzione.java,v 1.1 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Riproduzione.java,v 1.5 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * Con questo elemento si dà la possibilità di 
+ * Con questo elemento si dà la possibilità di
  *  esprimere le modalità di riprodurre i vari
- *  materiali ammessi al prestito locale, 
- *  nazionale e/o internazionale. 
+ *  materiali ammessi al
+ *  prestito locale,
+ *  nazionale e/o internazionale.
  *  
  * 
- * @version $Revision: 1.1 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.5 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Riproduzione implements java.io.Serializable {

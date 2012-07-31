@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: InformazioniBibliografiche.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: InformazioniBibliografiche.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,17 +10,21 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Per segnalare la disponibilità del servizio
  *  interno si usa l'elemento vuoto omonimo,
- *  soluzione discutibile ma funzionante. Essa ha il
- *  vantaggio di mettere questo servizio allo stesso
+ *  soluzione discutibile ma
+ *  funzionante. Essa ha il
+ *  vantaggio di mettere questo servizio allo
+ *  stesso
  *  livello del "servizio-esterno", com'è logico.
- *  Quest'ultimo però è più articolato.
+ *  Quest'ultimo
+ *  però è più articolato.
  *  
- *  L'elemento informazioni bibliografiche diventa opzionale.
+ *  L'elemento informazioni bibliografiche diventa
+ *  opzionale.
  *  
  *  Introdotto attributo 'attivo' del tipo siNoType.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class InformazioniBibliografiche implements java.io.Serializable {
@@ -42,15 +46,18 @@ public class InformazioniBibliografiche implements java.io.Serializable {
 
     /**
      * Se è specificato il servizio
-     *  esterno, sarebbe opportuno indicare
+     *  esterno, sarebbe
+     *  opportuno indicare
      *  almeno un "modo" di espletamento del
-     *  servizio stesso. Come in altri casi,
+     *  servizio
+     *  stesso. Come in altri casi,
      *  anche un elemento vuoto potrebbe
      *  essere accettato, come semplice
      *  segnalazione di un servizio
      *  disponibile. Starà poi
      *  all'applicativo ricevente decidere
-     *  se ignorare tale informazione,
+     *  se
+     *  ignorare tale informazione,
      *  perché troppo vaga, o tenerne
      *  comunque conto.
      *  
@@ -85,15 +92,18 @@ public class InformazioniBibliografiche implements java.io.Serializable {
      * Returns the value of field 'servizioEsterno'. The field
      * 'servizioEsterno' has the following description: Se è
      * specificato il servizio
-     *  esterno, sarebbe opportuno indicare
+     *  esterno, sarebbe
+     *  opportuno indicare
      *  almeno un "modo" di espletamento del
-     *  servizio stesso. Come in altri casi,
+     *  servizio
+     *  stesso. Come in altri casi,
      *  anche un elemento vuoto potrebbe
      *  essere accettato, come semplice
      *  segnalazione di un servizio
      *  disponibile. Starà poi
      *  all'applicativo ricevente decidere
-     *  se ignorare tale informazione,
+     *  se
+     *  ignorare tale informazione,
      *  perché troppo vaga, o tenerne
      *  comunque conto.
      *  
@@ -176,15 +186,18 @@ public class InformazioniBibliografiche implements java.io.Serializable {
      * Sets the value of field 'servizioEsterno'. The field
      * 'servizioEsterno' has the following description: Se è
      * specificato il servizio
-     *  esterno, sarebbe opportuno indicare
+     *  esterno, sarebbe
+     *  opportuno indicare
      *  almeno un "modo" di espletamento del
-     *  servizio stesso. Come in altri casi,
+     *  servizio
+     *  stesso. Come in altri casi,
      *  anche un elemento vuoto potrebbe
      *  essere accettato, come semplice
      *  segnalazione di un servizio
      *  disponibile. Starà poi
      *  all'applicativo ricevente decidere
-     *  se ignorare tale informazione,
+     *  se
+     *  ignorare tale informazione,
      *  perché troppo vaga, o tenerne
      *  comunque conto.
      *  

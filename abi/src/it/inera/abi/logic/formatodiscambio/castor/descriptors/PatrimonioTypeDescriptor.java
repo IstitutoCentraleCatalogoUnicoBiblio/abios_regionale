@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: PatrimonioTypeDescriptor.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: PatrimonioTypeDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.PatrimonioType;
 /**
  * Class PatrimonioTypeDescriptor.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class PatrimonioTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -69,15 +69,15 @@ public class PatrimonioTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
 
         //-- initialize element descriptors
 
-        //-- _materialeList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Materiale.class, "_materialeList", "materiale", org.exolab.castor.xml.NodeType.Element);
+        //-- _materiali
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Materiali.class, "_materiali", "materiali", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 PatrimonioType target = (PatrimonioType) object;
-                return target.getMateriale();
+                return target.getMateriali();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -85,15 +85,7 @@ public class PatrimonioTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             {
                 try {
                     PatrimonioType target = (PatrimonioType) object;
-                    target.addMateriale( (it.inera.abi.logic.formatodiscambio.castor.Materiale) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    PatrimonioType target = (PatrimonioType) object;
-                    target.removeAllMateriale();
+                    target.setMateriali( (it.inera.abi.logic.formatodiscambio.castor.Materiali) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -104,28 +96,26 @@ public class PatrimonioTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.Materiale");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Materiali");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _materialeList
+        //-- validation code for: _materiali
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
-        //-- _fondoSpecialeList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale.class, "_fondoSpecialeList", "fondo-speciale", org.exolab.castor.xml.NodeType.Element);
+        //-- _fondiSpeciali
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.FondiSpeciali.class, "_fondiSpeciali", "fondi-speciali", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 PatrimonioType target = (PatrimonioType) object;
-                return target.getFondoSpeciale();
+                return target.getFondiSpeciali();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -133,15 +123,7 @@ public class PatrimonioTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             {
                 try {
                     PatrimonioType target = (PatrimonioType) object;
-                    target.addFondoSpeciale( (it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    PatrimonioType target = (PatrimonioType) object;
-                    target.removeAllFondoSpeciale();
+                    target.setFondiSpeciali( (it.inera.abi.logic.formatodiscambio.castor.FondiSpeciali) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -152,16 +134,14 @@ public class PatrimonioTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.FondiSpeciali");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _fondoSpecialeList
+        //-- validation code for: _fondiSpeciali
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);

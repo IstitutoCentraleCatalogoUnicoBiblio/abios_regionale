@@ -2,41 +2,49 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Altro.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Altro.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * I contatti di questo tipo prevedono
- *  solo le note e un valore, oltre a un
+ *  solo le
+ *  note e un valore, oltre a un
  *  attributo "tipo" che, al momento,
  *  consente di specificare solo un
  *  indirizzo e-mail, una URL o un
  *  telex. Ovviamente la stringa
  *  "valore" può contenere qualsiasi
  *  cosa, quindi non c'è garanzia che
- *  tale stringa sia conforme al tipo
+ *  tale stringa sia conforme al
+ *  tipo
  *  specificato.
  *  
  *  Le note sono opzionali e ripetibili,
- *  sebbene la ripetibilità sia
+ *  sebbene la
+ *  ripetibilità sia
  *  discutibile. Il valore è invece
- *  obbligatorio e non ripetibile,
+ *  obbligatorio e
+ *  non ripetibile,
  *  altrimenti si potrebbe istanziare un
- *  elemento vuoto.
+ *  elemento
+ *  vuoto.
  *  
  *  Una linea di sviluppo potrebbe
- *  prevedere dei pattern per la
+ *  prevedere dei
+ *  pattern per la
  *  validazione dei valori. Questo
- *  comporterebbe però l'uso di
+ *  comporterebbe però
+ *  l'uso di
  *  sotto-elementi invece che di
- *  attributi, altrimenti non sarebbe
+ *  attributi, altrimenti non
+ *  sarebbe
  *  possibile vincolare i valori con
  *  pattern.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Altro implements java.io.Serializable {

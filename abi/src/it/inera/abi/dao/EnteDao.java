@@ -17,10 +17,8 @@ public interface EnteDao {
 
 	public int countAllEntiFiltered(String filter);
 
-	public Ente createEnteIfNotExist2(Stato stato,
-			EnteTipologiaAmministrativa enteTipologiaAmministrativa,
-			String denominazione, String asiaAsip,
-			String partitaIva, String codiceFiscale);
+	public Ente createEnteIfNotExist2(Stato stato, EnteTipologiaAmministrativa enteTipologiaAmministrativa,
+			String denominazione, String asiaAsip, String partitaIva, String codiceFiscale);
 
 	public Ente getEnte(String den, String tipAmm, String stato);
 	

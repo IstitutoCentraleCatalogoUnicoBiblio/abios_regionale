@@ -41,7 +41,6 @@ public class SpecializzazioniFondiSpecialiPanel extends  ContentPanelForTabItem 
 	private List<TestoFondiSpecialiPanel> listaFondiSpecialiPanels;
 
 	private ListaSpecializzazioniPanel listaSpecializzazioniPanel ;
-//	private ListaDigitalizzazioneFondiPanel listaDigitalizzazioneFondiPanel;
 
 //	private ContenitoreSpecializzazionePanel creazioneSpecializzazioneFormPanel;
 
@@ -162,17 +161,6 @@ public class SpecializzazioniFondiSpecialiPanel extends  ContentPanelForTabItem 
 
 		fondiSpeciali.add(fondiSpecialiSet);
 
-		FieldSet digitalizzazioneFondiSet = new FieldSet();
-		Utils.setFieldSetProperties(digitalizzazioneFondiSet, "Digitalizzazione fondi");
-
-		/*DIGITALIZZAZIONE FONDI*/
-//		listaDigitalizzazioneFondiPanel=new ListaDigitalizzazioneFondiPanel();
-//		listaDigitalizzazioneFondiPanel.setGrid();
-//		digitalizzazioneFondiSet.add(listaDigitalizzazioneFondiPanel);
-		/*FINE--DIGITALIZZAZIONE FONDI*/
-
-		fondiSpeciali.add(digitalizzazioneFondiSet);
-
 		add(fondiSpeciali);
 
 	}
@@ -182,9 +170,6 @@ public class SpecializzazioniFondiSpecialiPanel extends  ContentPanelForTabItem 
 		listaSpecializzazioniPanel.setIdModificaSpecializzazionePanel();
 		listaSpecializzazioniPanel.setIdNuovaSpecializzazionePanel();
 		listaSpecializzazioniPanel.getLoader().load();
-
-//		listaDigitalizzazioneFondiPanel.setIdBiblioteca(id_biblio);
-//		listaDigitalizzazioneFondiPanel.getLoader().load();
 
 		if(UIWorkflow.isReadOnly()==false){
 			addSpecializzazioneButton.show();

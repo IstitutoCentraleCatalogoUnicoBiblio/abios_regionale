@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: DataCensimentoDescriptor.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: DataCensimentoDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.DataCensimento;
 /**
  * Class DataCensimentoDescriptor.
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class DataCensimentoDescriptor extends it.inera.abi.logic.formatodiscambio.castor.descriptors.AnnoSecoloTypeDescriptor {
 
@@ -58,7 +58,7 @@ public class DataCensimentoDescriptor extends it.inera.abi.logic.formatodiscambi
     public DataCensimentoDescriptor() {
         super();
         setExtendsWithoutFlatten(new it.inera.abi.logic.formatodiscambio.castor.descriptors.AnnoSecoloTypeDescriptor());
-        _xmlName = "dataCensimento";
+        _xmlName = "data-censimento";
         _elementDefinition = true;
     }
 

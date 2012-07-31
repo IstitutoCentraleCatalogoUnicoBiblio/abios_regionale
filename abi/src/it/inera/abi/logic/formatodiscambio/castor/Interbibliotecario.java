@@ -2,39 +2,48 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Interbibliotecario.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: Interbibliotecario.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * In questo elemento, pur opzionale,
- *  si è ritenuto opportuno rendere
+ *  si è
+ *  ritenuto opportuno rendere
  *  obbligatorio almeno il
- *  sotto-elemento "tipo", escludendo la
+ *  sotto-elemento
+ *  "tipo", escludendo la
  *  paradossale situazione di una
- *  biblioteca che offre il servizio, ma
+ *  biblioteca
+ *  che offre il servizio, ma
  *  non sa di che tipo.
  *  
  *  L'elemento è ripetibile al più due
- *  volte perché la biblioteca può
+ *  volte perché
+ *  la biblioteca può
  *  offrire due tipi di prestito
  *  interbibliotecario, ed è opportuno
- *  che essi siano descritti in elementi
+ *  che essi siano descritti in
+ *  elementi
  *  separati. Tuttavia non si può
- *  escludere che vengano descritti due
+ *  escludere che vengano
+ *  descritti due
  *  elementi dello stesso tipo, sebbene
- *  un applicativo dovrebbe produrne
+ *  un applicativo
+ *  dovrebbe produrne
  *  tipicamente sempre al più due, e di
- *  tipi diversi.
+ *  tipi
+ *  diversi.
  *  
  *  Ovviamente l'elemento "sistema-ill"
- *  è opzionale e ripetibile, in quanto
+ *  è opzionale
+ *  e ripetibile, in quanto
  *  la biblioteca può partecipare a più
  *  d'uno.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
  */
 @SuppressWarnings("serial")
 public class Interbibliotecario implements java.io.Serializable {
@@ -59,7 +68,8 @@ public class Interbibliotecario implements java.io.Serializable {
      *  conteggia il totale dei
      *  prestiti di questo tipo
      *  effettuati nel periodo
-     *  di osservazione.
+     *  di
+     *  osservazione.
      *  Dev'essere un numero.
      *  
      */
@@ -276,7 +286,8 @@ public class Interbibliotecario implements java.io.Serializable {
      *  conteggia il totale dei
      *  prestiti di questo tipo
      *  effettuati nel periodo
-     *  di osservazione.
+     *  di
+     *  osservazione.
      *  Dev'essere un numero.
      *  
      * 
@@ -507,7 +518,8 @@ public class Interbibliotecario implements java.io.Serializable {
      *  conteggia il totale dei
      *  prestiti di questo tipo
      *  effettuati nel periodo
-     *  di osservazione.
+     *  di
+     *  osservazione.
      *  Dev'essere un numero.
      *  
      * 

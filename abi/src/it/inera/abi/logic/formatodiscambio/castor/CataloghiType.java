@@ -2,23 +2,28 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: CataloghiType.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: CataloghiType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * Tipo che raccoglie i diversi cataloghi. Un elemento di
+ * Tipo che raccoglie i diversi cataloghi. Un elemento
+ *  di
  *  questo tipo può dunque contenere i tre tipi di cataloghi
- *  di seguito definiti.
+ *  di seguito
+ *  definiti.
  *  
- *  Tutti i tre sotto-elementi sono opzionali e ripetibili
+ *  Tutti i tre sotto-elementi sono opzionali e
+ *  ripetibili
  *  in un ordine qualsiasi. Nel definire i tre sottotipi
- *  sono sfruttate dove possibile le somiglianze fra i tre,
- *  attraverso la derivazione di un tipo da un altro.
+ *  sono
+ *  sfruttate dove possibile le somiglianze fra i tre,
+ *  attraverso la
+ *  derivazione di un tipo da un altro.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class CataloghiType implements java.io.Serializable {

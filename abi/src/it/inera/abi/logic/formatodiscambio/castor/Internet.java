@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Internet.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: Internet.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,9 +10,11 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Accesso a Internet da postazioni locali. La
  *  modalità "limitato" potrebbe essere fonte di
- *  equivoci. In ogni caso, la modalità è opzionale
+ *  equivoci. In ogni
+ *  caso, la modalità è opzionale
  *  e ripetibile.
- *  NB. MODIFICATO TIPO ENUMERATO 
+ *  NB. MODIFICATO TIPO
+ *  ENUMERATO 
  *  
  *  L'elemento modo opzionale e ripetibile è stato
  *  sostituito da tre flag: a tempo, a pagamento, con proxy.
@@ -22,7 +24,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  Introdotto attributo 'attivo' del tipo siNoType.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Internet implements java.io.Serializable {

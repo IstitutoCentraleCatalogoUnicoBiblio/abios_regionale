@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: FondoSpecialeType.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: FondoSpecialeType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,12 +10,14 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * A parte alcuni elementi dall'ovvio significato, la
  *  "descrizione" corrisponde ad una descrizione libera del
- *  fondo speciale, mentre "digitalizzazione" registra in
- *  forma libera lo stato dell'eventuale digitalizzazione
+ *  fondo
+ *  speciale, mentre "digitalizzazione" registra in
+ *  forma libera lo stato
+ *  dell'eventuale digitalizzazione
  *  del fondo.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class FondoSpecialeType implements java.io.Serializable {

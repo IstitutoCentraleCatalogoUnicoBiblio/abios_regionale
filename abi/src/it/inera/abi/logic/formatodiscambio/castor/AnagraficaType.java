@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AnagraficaType.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: AnagraficaType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -14,7 +14,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  L'elemento anagrafica adesso è obbligatorio.
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public abstract class AnagraficaType implements java.io.Serializable {
@@ -25,16 +25,18 @@ public abstract class AnagraficaType implements java.io.Serializable {
     //--------------------------/
 
     /**
-     * Data in cui è stata censita la biblioteca (raccolta dati).
+     * Data in cui è stata censita la biblioteca
+     *  (raccolta dati).
      *  Formato: AAAA
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.DataCensimento _dataCensimento;
 
     /**
-     * Ultima data in cui è stata modificata la biblioteca (dal
-     * gestionale) (x export ICCU).
-     *  Formato: AAAA-MM-GGTHH:mm:ss
+     * Ultima data in cui è stata modificata la
+     *  biblioteca (dal gestionale) (x export ICCU).
+     *  Formato:
+     *  AAAA-MM-GGTHH:mm:ss
      *  
      */
     private java.util.Date _dataAggiornamento;
@@ -42,7 +44,8 @@ public abstract class AnagraficaType implements java.io.Serializable {
     /**
      * Nomi di una biblioteca. È un insieme in cui solo
      *  il nome attuale è obbligatorio e non ripetibile,
-     *  mentre quelli precedenti e quelli alternativi
+     *  mentre quelli
+     *  precedenti e quelli alternativi
      *  sono opzionali e ripetibili.
      *  
      */
@@ -57,8 +60,10 @@ public abstract class AnagraficaType implements java.io.Serializable {
     /**
      * Questo tipo descrive un indirizzo di biblioteca.
      *  È opzionale come tutti i suoi sotto-elementi, ma
-     *  forse almeno uno dovrebbe essere reso
-     *  obbligatorio, altrimenti si potrebbe istanziare
+     *  forse almeno uno
+     *  dovrebbe essere reso
+     *  obbligatorio, altrimenti si potrebbe
+     *  istanziare
      *  un "indirizzo" vuoto.
      *  
      */
@@ -73,7 +78,8 @@ public abstract class AnagraficaType implements java.io.Serializable {
 
     /**
      * Dati relativi all'edificio. Sono tutti
-     *  opzionali, ma potrebbe essere più sensato
+     *  opzionali,
+     *  ma potrebbe essere più sensato
      *  renderne obbligatorio almeno uno.
      *  
      */
@@ -82,8 +88,10 @@ public abstract class AnagraficaType implements java.io.Serializable {
     /**
      * Data in cui è stata istituita formalmente
      *  l'attuale biblioteca. È possibile anche indicare
-     *  l'anno di prima istituzione o fondazione, nel
-     *  caso che la biblioteca abbia avuto nel tempo
+     *  l'anno di prima
+     *  istituzione o fondazione, nel
+     *  caso che la biblioteca abbia avuto
+     *  nel tempo
      *  gestioni amministrative diverse.
      *  
      */
@@ -132,9 +140,10 @@ public abstract class AnagraficaType implements java.io.Serializable {
     /**
      * Returns the value of field 'dataAggiornamento'. The field
      * 'dataAggiornamento' has the following description: Ultima
-     * data in cui è stata modificata la biblioteca (dal
-     * gestionale) (x export ICCU).
-     *  Formato: AAAA-MM-GGTHH:mm:ss
+     * data in cui è stata modificata la
+     *  biblioteca (dal gestionale) (x export ICCU).
+     *  Formato:
+     *  AAAA-MM-GGTHH:mm:ss
      *  
      * 
      * @return the value of field 'DataAggiornamento'.
@@ -147,7 +156,8 @@ public abstract class AnagraficaType implements java.io.Serializable {
     /**
      * Returns the value of field 'dataCensimento'. The field
      * 'dataCensimento' has the following description: Data in cui
-     * è stata censita la biblioteca (raccolta dati).
+     * è stata censita la biblioteca
+     *  (raccolta dati).
      *  Formato: AAAA
      *  
      * 
@@ -162,7 +172,8 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * Returns the value of field 'edificio'. The field 'edificio'
      * has the following description: Dati relativi all'edificio.
      * Sono tutti
-     *  opzionali, ma potrebbe essere più sensato
+     *  opzionali,
+     *  ma potrebbe essere più sensato
      *  renderne obbligatorio almeno uno.
      *  
      * 
@@ -178,8 +189,10 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * 'indirizzo' has the following description: Questo tipo
      * descrive un indirizzo di biblioteca.
      *  È opzionale come tutti i suoi sotto-elementi, ma
-     *  forse almeno uno dovrebbe essere reso
-     *  obbligatorio, altrimenti si potrebbe istanziare
+     *  forse almeno uno
+     *  dovrebbe essere reso
+     *  obbligatorio, altrimenti si potrebbe
+     *  istanziare
      *  un "indirizzo" vuoto.
      *  
      * 
@@ -195,8 +208,10 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * 'istituzione' has the following description: Data in cui è
      * stata istituita formalmente
      *  l'attuale biblioteca. È possibile anche indicare
-     *  l'anno di prima istituzione o fondazione, nel
-     *  caso che la biblioteca abbia avuto nel tempo
+     *  l'anno di prima
+     *  istituzione o fondazione, nel
+     *  caso che la biblioteca abbia avuto
+     *  nel tempo
      *  gestioni amministrative diverse.
      *  
      * 
@@ -212,7 +227,8 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * following description: Nomi di una biblioteca. È un insieme
      * in cui solo
      *  il nome attuale è obbligatorio e non ripetibile,
-     *  mentre quelli precedenti e quelli alternativi
+     *  mentre quelli
+     *  precedenti e quelli alternativi
      *  sono opzionali e ripetibili.
      *  
      * 
@@ -267,9 +283,10 @@ public abstract class AnagraficaType implements java.io.Serializable {
     /**
      * Sets the value of field 'dataAggiornamento'. The field
      * 'dataAggiornamento' has the following description: Ultima
-     * data in cui è stata modificata la biblioteca (dal
-     * gestionale) (x export ICCU).
-     *  Formato: AAAA-MM-GGTHH:mm:ss
+     * data in cui è stata modificata la
+     *  biblioteca (dal gestionale) (x export ICCU).
+     *  Formato:
+     *  AAAA-MM-GGTHH:mm:ss
      *  
      * 
      * @param dataAggiornamento the value of field
@@ -283,7 +300,8 @@ public abstract class AnagraficaType implements java.io.Serializable {
     /**
      * Sets the value of field 'dataCensimento'. The field
      * 'dataCensimento' has the following description: Data in cui
-     * è stata censita la biblioteca (raccolta dati).
+     * è stata censita la biblioteca
+     *  (raccolta dati).
      *  Formato: AAAA
      *  
      * 
@@ -298,7 +316,8 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * Sets the value of field 'edificio'. The field 'edificio' has
      * the following description: Dati relativi all'edificio. Sono
      * tutti
-     *  opzionali, ma potrebbe essere più sensato
+     *  opzionali,
+     *  ma potrebbe essere più sensato
      *  renderne obbligatorio almeno uno.
      *  
      * 
@@ -314,8 +333,10 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * has the following description: Questo tipo descrive un
      * indirizzo di biblioteca.
      *  È opzionale come tutti i suoi sotto-elementi, ma
-     *  forse almeno uno dovrebbe essere reso
-     *  obbligatorio, altrimenti si potrebbe istanziare
+     *  forse almeno uno
+     *  dovrebbe essere reso
+     *  obbligatorio, altrimenti si potrebbe
+     *  istanziare
      *  un "indirizzo" vuoto.
      *  
      * 
@@ -331,8 +352,10 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * 'istituzione' has the following description: Data in cui è
      * stata istituita formalmente
      *  l'attuale biblioteca. È possibile anche indicare
-     *  l'anno di prima istituzione o fondazione, nel
-     *  caso che la biblioteca abbia avuto nel tempo
+     *  l'anno di prima
+     *  istituzione o fondazione, nel
+     *  caso che la biblioteca abbia avuto
+     *  nel tempo
      *  gestioni amministrative diverse.
      *  
      * 
@@ -348,7 +371,8 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * following description: Nomi di una biblioteca. È un insieme
      * in cui solo
      *  il nome attuale è obbligatorio e non ripetibile,
-     *  mentre quelli precedenti e quelli alternativi
+     *  mentre quelli
+     *  precedenti e quelli alternativi
      *  sono opzionali e ripetibili.
      *  
      * 

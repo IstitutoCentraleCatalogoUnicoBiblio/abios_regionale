@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: PatrimonioType.java,v 1.3 2012/07/30 15:17:05 m.bartolozzi Exp $
+ * $Id: PatrimonioType.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,30 +10,42 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Tipo utilizzato per descrivere il patrimonio di una
  *  biblioteca. I sotto-elementi sono tutti ripetibili, e
- *  sarebbe opportuno istanziare questo elemento solo se
- *  contiene almeno un sotto-elemento non vuoto, ma si è
- *  preferito comunque non rendere obbligatori i
+ *  sarebbe
+ *  opportuno istanziare questo elemento solo se
+ *  contiene almeno un
+ *  sotto-elemento non vuoto, ma si è
+ *  preferito comunque non rendere
+ *  obbligatori i
  *  sotto-elementi.
  *  
- *  L'elemento "materiale" va ripetuto per ciascun tipo di
+ *  L'elemento "materiale" va ripetuto per ciascun tipo
+ *  di
  *  materiale. Non è prevista una gerarchia fra i materiali,
- *  anche se alcune basi dati, fra cui quella ICCU,
- *  organizzano i materiali in gerarchie a due o più
- *  livelli. Imporre in questo contesto una gerarchia non
+ *  anche se
+ *  alcune basi dati, fra cui quella ICCU,
+ *  organizzano i materiali in
+ *  gerarchie a due o più
+ *  livelli. Imporre in questo contesto una
+ *  gerarchia non
  *  gestita in modo uniforme dalle base dati appare
  *  superfluo e limitante.
  *  
  *  Anche l'elemento "fondo-speciale" va ripetuto per
  *  ciascuna istanza di fondo. Inventario e catalogo
- *  topografico sono invece non ripetibili. L'elemento
- *  "fondi-antichi", invece, serve solo a conteggiare in
- *  modo approssimativo i volumi dei diversi fondi antichi
+ *  topografico sono
+ *  invece non ripetibili. L'elemento
+ *  "fondi-antichi", invece, serve solo
+ *  a conteggiare in
+ *  modo approssimativo i volumi dei diversi fondi
+ *  antichi
  *  della biblioteca, e quindi non è ripetibile. I tre
- *  valori dell'attributo "volumi" sono da intendersi "fino
- *  a 1000", "da 1000 a 5000", e "oltre 5000".
+ *  valori
+ *  dell'attributo "volumi" sono da intendersi "fino
+ *  a 1000", "da 1000 a
+ *  5000", e "oltre 5000".
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:05 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public abstract class PatrimonioType implements java.io.Serializable {
@@ -44,14 +56,14 @@ public abstract class PatrimonioType implements java.io.Serializable {
     //--------------------------/
 
     /**
-     * Field _materialeList.
+     * Field _materiali.
      */
-    private java.util.List<it.inera.abi.logic.formatodiscambio.castor.Materiale> _materialeList;
+    private it.inera.abi.logic.formatodiscambio.castor.Materiali _materiali;
 
     /**
-     * Field _fondoSpecialeList.
+     * Field _fondiSpeciali.
      */
-    private java.util.List<it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale> _fondoSpecialeList;
+    private it.inera.abi.logic.formatodiscambio.castor.FondiSpeciali _fondiSpeciali;
 
     /**
      * Field _fondiAntichi.
@@ -75,7 +87,8 @@ public abstract class PatrimonioType implements java.io.Serializable {
 
     /**
      * Totale degli acquisti, indipendentemente dal
-     *  tipo di materiale, effettuati negli ultimi
+     *  tipo
+     *  di materiale, effettuati negli ultimi
      *  quindici anni.
      *  
      */
@@ -84,8 +97,10 @@ public abstract class PatrimonioType implements java.io.Serializable {
     /**
      * Totale del posseduto, indipendentemente dal tipo
      *  di materiale. Si pone il problema della coerenza
-     *  di questo dato con quello del posseduto per i
-     *  singoli materiali. Si presume che l'applicativo
+     *  di questo dato con
+     *  quello del posseduto per i
+     *  singoli materiali. Si presume che
+     *  l'applicativo
      *  ricevente non sia tenuto a verificare questa
      *  coerenza.
      *  
@@ -100,7 +115,8 @@ public abstract class PatrimonioType implements java.io.Serializable {
     /**
      * Totale del posseduto destinato ai minori di 16
      *  anni, indipendentemente dal tipo di materiale.
-     *  Anche per questo dato, si presume che
+     *  Anche per questo
+     *  dato, si presume che
      *  l'applicativo ricevente non sia tenuto a
      *  verificarne la coerenza con gli altri dati
      *  patrimoniali ricevuti.
@@ -120,70 +136,12 @@ public abstract class PatrimonioType implements java.io.Serializable {
 
     public PatrimonioType() {
         super();
-        this._materialeList = new java.util.ArrayList<it.inera.abi.logic.formatodiscambio.castor.Materiale>();
-        this._fondoSpecialeList = new java.util.ArrayList<it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale>();
     }
 
 
       //-----------/
      //- Methods -/
     //-----------/
-
-    /**
-     * 
-     * 
-     * @param vFondoSpeciale
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addFondoSpeciale(
-            final it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale vFondoSpeciale)
-    throws java.lang.IndexOutOfBoundsException {
-        this._fondoSpecialeList.add(vFondoSpeciale);
-    }
-
-    /**
-     * 
-     * 
-     * @param index
-     * @param vFondoSpeciale
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addFondoSpeciale(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale vFondoSpeciale)
-    throws java.lang.IndexOutOfBoundsException {
-        this._fondoSpecialeList.add(index, vFondoSpeciale);
-    }
-
-    /**
-     * 
-     * 
-     * @param vMateriale
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addMateriale(
-            final it.inera.abi.logic.formatodiscambio.castor.Materiale vMateriale)
-    throws java.lang.IndexOutOfBoundsException {
-        this._materialeList.add(vMateriale);
-    }
-
-    /**
-     * 
-     * 
-     * @param index
-     * @param vMateriale
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addMateriale(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.Materiale vMateriale)
-    throws java.lang.IndexOutOfBoundsException {
-        this._materialeList.add(index, vMateriale);
-    }
 
     /**
      */
@@ -200,32 +158,11 @@ public abstract class PatrimonioType implements java.io.Serializable {
     }
 
     /**
-     * Method enumerateFondoSpeciale.
-     * 
-     * @return an Enumeration over all possible elements of this
-     * collection
-     */
-    public java.util.Enumeration<? extends it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale> enumerateFondoSpeciale(
-    ) {
-        return java.util.Collections.enumeration(this._fondoSpecialeList);
-    }
-
-    /**
-     * Method enumerateMateriale.
-     * 
-     * @return an Enumeration over all possible elements of this
-     * collection
-     */
-    public java.util.Enumeration<? extends it.inera.abi.logic.formatodiscambio.castor.Materiale> enumerateMateriale(
-    ) {
-        return java.util.Collections.enumeration(this._materialeList);
-    }
-
-    /**
      * Returns the value of field 'acquistiUltimiQuindiciAnni'. The
      * field 'acquistiUltimiQuindiciAnni' has the following
      * description: Totale degli acquisti, indipendentemente dal
-     *  tipo di materiale, effettuati negli ultimi
+     *  tipo
+     *  di materiale, effettuati negli ultimi
      *  quindici anni.
      *  
      * 
@@ -261,96 +198,23 @@ public abstract class PatrimonioType implements java.io.Serializable {
     }
 
     /**
-     * Method getFondoSpeciale.
+     * Returns the value of field 'fondiSpeciali'.
      * 
-     * @param index
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     * @return the value of the
-     * it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale at
-     * the given index
+     * @return the value of field 'FondiSpeciali'.
      */
-    public it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale getFondoSpeciale(
-            final int index)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._fondoSpecialeList.size()) {
-            throw new IndexOutOfBoundsException("getFondoSpeciale: Index value '" + index + "' not in range [0.." + (this._fondoSpecialeList.size() - 1) + "]");
-        }
-
-        return (it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale) _fondoSpecialeList.get(index);
-    }
-
-    /**
-     * Method getFondoSpeciale.Returns the contents of the
-     * collection in an Array.  <p>Note:  Just in case the
-     * collection contents are changing in another thread, we pass
-     * a 0-length Array of the correct type into the API call. 
-     * This way we <i>know</i> that the Array returned is of
-     * exactly the correct length.
-     * 
-     * @return this collection as an Array
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale[] getFondoSpeciale(
+    public it.inera.abi.logic.formatodiscambio.castor.FondiSpeciali getFondiSpeciali(
     ) {
-        it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale[] array = new it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale[0];
-        return (it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale[]) this._fondoSpecialeList.toArray(array);
+        return this._fondiSpeciali;
     }
 
     /**
-     * Method getFondoSpecialeCount.
+     * Returns the value of field 'materiali'.
      * 
-     * @return the size of this collection
+     * @return the value of field 'Materiali'.
      */
-    public int getFondoSpecialeCount(
+    public it.inera.abi.logic.formatodiscambio.castor.Materiali getMateriali(
     ) {
-        return this._fondoSpecialeList.size();
-    }
-
-    /**
-     * Method getMateriale.
-     * 
-     * @param index
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     * @return the value of the
-     * it.inera.abi.logic.formatodiscambio.castor.Materiale at the
-     * given index
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Materiale getMateriale(
-            final int index)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._materialeList.size()) {
-            throw new IndexOutOfBoundsException("getMateriale: Index value '" + index + "' not in range [0.." + (this._materialeList.size() - 1) + "]");
-        }
-
-        return (it.inera.abi.logic.formatodiscambio.castor.Materiale) _materialeList.get(index);
-    }
-
-    /**
-     * Method getMateriale.Returns the contents of the collection
-     * in an Array.  <p>Note:  Just in case the collection contents
-     * are changing in another thread, we pass a 0-length Array of
-     * the correct type into the API call.  This way we <i>know</i>
-     * that the Array returned is of exactly the correct length.
-     * 
-     * @return this collection as an Array
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Materiale[] getMateriale(
-    ) {
-        it.inera.abi.logic.formatodiscambio.castor.Materiale[] array = new it.inera.abi.logic.formatodiscambio.castor.Materiale[0];
-        return (it.inera.abi.logic.formatodiscambio.castor.Materiale[]) this._materialeList.toArray(array);
-    }
-
-    /**
-     * Method getMaterialeCount.
-     * 
-     * @return the size of this collection
-     */
-    public int getMaterialeCount(
-    ) {
-        return this._materialeList.size();
+        return this._materiali;
     }
 
     /**
@@ -373,8 +237,10 @@ public abstract class PatrimonioType implements java.io.Serializable {
      * 'totalePosseduto' has the following description: Totale del
      * posseduto, indipendentemente dal tipo
      *  di materiale. Si pone il problema della coerenza
-     *  di questo dato con quello del posseduto per i
-     *  singoli materiali. Si presume che l'applicativo
+     *  di questo dato con
+     *  quello del posseduto per i
+     *  singoli materiali. Si presume che
+     *  l'applicativo
      *  ricevente non sia tenuto a verificare questa
      *  coerenza.
      *  
@@ -391,7 +257,8 @@ public abstract class PatrimonioType implements java.io.Serializable {
      * field 'totalePossedutoRagazzi' has the following
      * description: Totale del posseduto destinato ai minori di 16
      *  anni, indipendentemente dal tipo di materiale.
-     *  Anche per questo dato, si presume che
+     *  Anche per questo
+     *  dato, si presume che
      *  l'applicativo ricevente non sia tenuto a
      *  verificarne la coerenza con gli altri dati
      *  patrimoniali ricevuti.
@@ -441,94 +308,11 @@ public abstract class PatrimonioType implements java.io.Serializable {
     }
 
     /**
-     * Method iterateFondoSpeciale.
-     * 
-     * @return an Iterator over all possible elements in this
-     * collection
-     */
-    public java.util.Iterator<? extends it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale> iterateFondoSpeciale(
-    ) {
-        return this._fondoSpecialeList.iterator();
-    }
-
-    /**
-     * Method iterateMateriale.
-     * 
-     * @return an Iterator over all possible elements in this
-     * collection
-     */
-    public java.util.Iterator<? extends it.inera.abi.logic.formatodiscambio.castor.Materiale> iterateMateriale(
-    ) {
-        return this._materialeList.iterator();
-    }
-
-    /**
-     */
-    public void removeAllFondoSpeciale(
-    ) {
-        this._fondoSpecialeList.clear();
-    }
-
-    /**
-     */
-    public void removeAllMateriale(
-    ) {
-        this._materialeList.clear();
-    }
-
-    /**
-     * Method removeFondoSpeciale.
-     * 
-     * @param vFondoSpeciale
-     * @return true if the object was removed from the collection.
-     */
-    public boolean removeFondoSpeciale(
-            final it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale vFondoSpeciale) {
-        boolean removed = _fondoSpecialeList.remove(vFondoSpeciale);
-        return removed;
-    }
-
-    /**
-     * Method removeFondoSpecialeAt.
-     * 
-     * @param index
-     * @return the element removed from the collection
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale removeFondoSpecialeAt(
-            final int index) {
-        java.lang.Object obj = this._fondoSpecialeList.remove(index);
-        return (it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale) obj;
-    }
-
-    /**
-     * Method removeMateriale.
-     * 
-     * @param vMateriale
-     * @return true if the object was removed from the collection.
-     */
-    public boolean removeMateriale(
-            final it.inera.abi.logic.formatodiscambio.castor.Materiale vMateriale) {
-        boolean removed = _materialeList.remove(vMateriale);
-        return removed;
-    }
-
-    /**
-     * Method removeMaterialeAt.
-     * 
-     * @param index
-     * @return the element removed from the collection
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Materiale removeMaterialeAt(
-            final int index) {
-        java.lang.Object obj = this._materialeList.remove(index);
-        return (it.inera.abi.logic.formatodiscambio.castor.Materiale) obj;
-    }
-
-    /**
      * Sets the value of field 'acquistiUltimiQuindiciAnni'. The
      * field 'acquistiUltimiQuindiciAnni' has the following
      * description: Totale degli acquisti, indipendentemente dal
-     *  tipo di materiale, effettuati negli ultimi
+     *  tipo
+     *  di materiale, effettuati negli ultimi
      *  quindici anni.
      *  
      * 
@@ -566,73 +350,23 @@ public abstract class PatrimonioType implements java.io.Serializable {
     }
 
     /**
+     * Sets the value of field 'fondiSpeciali'.
      * 
-     * 
-     * @param index
-     * @param vFondoSpeciale
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
+     * @param fondiSpeciali the value of field 'fondiSpeciali'.
      */
-    public void setFondoSpeciale(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale vFondoSpeciale)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._fondoSpecialeList.size()) {
-            throw new IndexOutOfBoundsException("setFondoSpeciale: Index value '" + index + "' not in range [0.." + (this._fondoSpecialeList.size() - 1) + "]");
-        }
-
-        this._fondoSpecialeList.set(index, vFondoSpeciale);
+    public void setFondiSpeciali(
+            final it.inera.abi.logic.formatodiscambio.castor.FondiSpeciali fondiSpeciali) {
+        this._fondiSpeciali = fondiSpeciali;
     }
 
     /**
+     * Sets the value of field 'materiali'.
      * 
-     * 
-     * @param vFondoSpecialeArray
+     * @param materiali the value of field 'materiali'.
      */
-    public void setFondoSpeciale(
-            final it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale[] vFondoSpecialeArray) {
-        //-- copy array
-        _fondoSpecialeList.clear();
-
-        for (int i = 0; i < vFondoSpecialeArray.length; i++) {
-                this._fondoSpecialeList.add(vFondoSpecialeArray[i]);
-        }
-    }
-
-    /**
-     * 
-     * 
-     * @param index
-     * @param vMateriale
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void setMateriale(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.Materiale vMateriale)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._materialeList.size()) {
-            throw new IndexOutOfBoundsException("setMateriale: Index value '" + index + "' not in range [0.." + (this._materialeList.size() - 1) + "]");
-        }
-
-        this._materialeList.set(index, vMateriale);
-    }
-
-    /**
-     * 
-     * 
-     * @param vMaterialeArray
-     */
-    public void setMateriale(
-            final it.inera.abi.logic.formatodiscambio.castor.Materiale[] vMaterialeArray) {
-        //-- copy array
-        _materialeList.clear();
-
-        for (int i = 0; i < vMaterialeArray.length; i++) {
-                this._materialeList.add(vMaterialeArray[i]);
-        }
+    public void setMateriali(
+            final it.inera.abi.logic.formatodiscambio.castor.Materiali materiali) {
+        this._materiali = materiali;
     }
 
     /**
@@ -656,8 +390,10 @@ public abstract class PatrimonioType implements java.io.Serializable {
      * 'totalePosseduto' has the following description: Totale del
      * posseduto, indipendentemente dal tipo
      *  di materiale. Si pone il problema della coerenza
-     *  di questo dato con quello del posseduto per i
-     *  singoli materiali. Si presume che l'applicativo
+     *  di questo dato con
+     *  quello del posseduto per i
+     *  singoli materiali. Si presume che
+     *  l'applicativo
      *  ricevente non sia tenuto a verificare questa
      *  coerenza.
      *  
@@ -675,7 +411,8 @@ public abstract class PatrimonioType implements java.io.Serializable {
      * 'totalePossedutoRagazzi' has the following description:
      * Totale del posseduto destinato ai minori di 16
      *  anni, indipendentemente dal tipo di materiale.
-     *  Anche per questo dato, si presume che
+     *  Anche per questo
+     *  dato, si presume che
      *  l'applicativo ricevente non sia tenuto a
      *  verificarne la coerenza con gli altri dati
      *  patrimoniali ricevuti.

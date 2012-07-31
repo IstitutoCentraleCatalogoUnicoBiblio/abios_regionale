@@ -114,4 +114,7 @@ public interface TabelleDinamicheServiceAsync {
 	void removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(int idr_removeRecord, AsyncCallback<Void> asyncCallback);
 
 	public void getSistemiPrestitoInterbibliotecario(AsyncCallback<List<SistemiPrestitoInterbibliotecarioModel>> callback);
+	
+	void getDescrizioneSistemiPrestitoInterbibliotecarioFiltratePerPaginazioneCombobox(ModelData loadConfig,
+			AsyncCallback<PagingLoadResult<SistemiPrestitoInterbibliotecarioModel>> callback);
 }

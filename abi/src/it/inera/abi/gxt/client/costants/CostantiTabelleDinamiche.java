@@ -20,7 +20,6 @@ public class CostantiTabelleDinamiche {
 	/*1*/	/* 10 */public static final int ENTI_TIPOLOGIE_AMMINISTRATIVE_INDEX = 10;
 	/*1*/	/* 12 */public static final int TIPOLOGIE_FUNZIONALI_INDEX =12;
 	/*1*/	/* 13 */public static final int CATALOGAZIONE_STATI_BIBLIOTECHE_INDEX = 13;
-	/*1*/	/* 14 */public static final int THESAURUS_INDEX = 14;
 	/*1*/	/* 15 */public static final int DEWEY_INDEX = 15;
 	/*1*/	/* 16 */public static final int CONTATTI_TIPI_INDEX = 16;
 	/*1*/	/* 17 */public static final int RIPRODUZIONI_TIPI_INDEX =17;

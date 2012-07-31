@@ -2,16 +2,18 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: CondizioniAccesso.java,v 1.3 2012/07/30 15:17:04 m.bartolozzi Exp $
+ * $Id: CondizioniAccesso.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * Condizioni di accesso. Tutti i
- *  sotto-elementi sono opzionali, anche
+ *  sotto-elementi
+ *  sono opzionali, anche
  *  se avrebbe poco senso un elemento
- *  vuoto. I documenti, a loro volta,
+ *  vuoto. I
+ *  documenti, a loro volta,
  *  possono non essere specializzati.
  *  Questo potrebbe indicare la
  *  necessità di esibire un generico
@@ -19,7 +21,8 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  meglio specificato.
  *  
  *  Le condizioni raggruppate andrebbero
- *  intese in AND logico. I documenti
+ *  intese in
+ *  AND logico. I documenti
  *  nell'apposito elemento sono invece
  *  equivalenti, cioè in OR logico.
  *  Infine, più elementi
@@ -28,10 +31,13 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  considerarsi in OR logico.
  *  
  *  Ad esempio, il tipico caso "almeno
- *  18 anni e un documento valido" si
+ *  18 anni e un
+ *  documento valido" si
  *  traduce in opportuni elementi "età"
- *  e "documenti", ma senza un elemento
- *  "appuntamento". Se in alternativa la
+ *  e
+ *  "documenti", ma senza un elemento
+ *  "appuntamento". Se in
+ *  alternativa la
  *  biblioteca è accessibile
  *  incondizionatamente per
  *  appuntamento, va aggiunto un
@@ -40,7 +46,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  sotto-elemento "appuntamento".
  *  
  * 
- * @version $Revision: 1.3 $ $Date: 2012/07/30 15:17:04 $
+ * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
  */
 @SuppressWarnings("serial")
 public class CondizioniAccesso implements java.io.Serializable {

@@ -484,10 +484,6 @@ public class Biblioteca implements Serializable {
 	@OneToMany(mappedBy="biblioteca")
 	private List<DeweyLibero> deweyLiberos;
 
-//	//bi-directional many-to-one association to FondiDigitali
-//	@OneToMany(mappedBy="biblioteca")
-//	private List<FondiDigitali> fondiDigitalis;
-
 	//uni-directional one-to-one association to Geolocalizzazione
 	@OneToOne
 	@JoinColumn(name="id_biblioteca", nullable=false, insertable=false, updatable=false)
@@ -570,7 +566,7 @@ public class Biblioteca implements Serializable {
 		this.accessoHandicap = accessoHandicap;
 	}
 
-public Boolean getAttivoAccessoInternet() {
+	public Boolean getAttivoAccessoInternet() {
 		return this.attivoAccessoInternet;
 	}
 	
@@ -857,6 +853,7 @@ public Boolean getAttivoAccessoInternet() {
 	public void setFrazione(String frazione) {
 		this.frazione = frazione;
 	}
+	
 	public Boolean getAttivoInformazioniBibliografiche() {
 		return this.attivoInformazioniBibliografiche;
 	}
@@ -864,6 +861,7 @@ public Boolean getAttivoAccessoInternet() {
 	public void setAttivoInformazioniBibliografiche(Boolean attivoInformazioniBibliografiche) {
 		this.attivoInformazioniBibliografiche = attivoInformazioniBibliografiche;
 	}
+	
 	public Boolean getGestisceServizioBibliograficoEsterno() {
 		return this.gestisceServizioBibliograficoEsterno;
 	}
@@ -1376,14 +1374,6 @@ public Boolean getAttivoAccessoInternet() {
 		this.deweyLiberos = deweyLiberos;
 	}
 	
-//	public List<FondiDigitali> getFondiDigitalis() {
-//		return this.fondiDigitalis;
-//	}
-//
-//	public void setFondiDigitalis(List<FondiDigitali> fondiDigitalis) {
-//		this.fondiDigitalis = fondiDigitalis;
-//	}
-	
 	public Geolocalizzazione getGeolocalizzazione() {
 		return this.geolocalizzazione;
 	}
@@ -1447,13 +1437,15 @@ public Boolean getAttivoAccessoInternet() {
 	public void setPatrimonios(List<Patrimonio> patrimonios) {
 		this.patrimonios = patrimonios;
 	}
-		public Boolean getAttivoPrestitoLocale() {
+	
+	public Boolean getAttivoPrestitoLocale() {
 		return this.attivoPrestitoLocale;
 	}
 	
 	public void setAttivoPrestitoLocale(Boolean attivoPrestitoLocale) {
 		this.attivoPrestitoLocale = attivoPrestitoLocale;
 	}
+	
 	public List<PrestitoLocale> getPrestitoLocales() {
 		return this.prestitoLocales;
 	}
@@ -1477,6 +1469,7 @@ public Boolean getAttivoAccessoInternet() {
 	public void setRegolamentos(List<Regolamento> regolamentos) {
 		this.regolamentos = regolamentos;
 	}
+	
 	public Boolean getAttivoRiproduzioni() {
 		return this.attivoRiproduzioni;
 	}
@@ -1484,6 +1477,7 @@ public Boolean getAttivoAccessoInternet() {
 	public void setAttivoRiproduzioni(Boolean attivoRiproduzioni) {
 		this.attivoRiproduzioni = attivoRiproduzioni;
 	}
+	
 	public List<Riproduzioni> getRiproduzionis() {
 		return this.riproduzionis;
 	}

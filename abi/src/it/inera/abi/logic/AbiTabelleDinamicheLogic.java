@@ -4,6 +4,7 @@ import it.inera.abi.dao.ConstraintKeyViolationException;
 import it.inera.abi.dao.DuplicateEntryException;
 import it.inera.abi.dto.DynaTabDTO;
 import it.inera.abi.dto.PatrimonioSubCategoryDTO;
+import it.inera.abi.dto.SistemaPrestitoInterbibliotecarioDTO;
 import it.inera.abi.persistence.CataloghiCollettivi;
 import it.inera.abi.persistence.CataloghiCollettiviMaterialeUrl;
 import it.inera.abi.persistence.CataloghiGeneraliUrl;
@@ -120,5 +121,9 @@ public interface AbiTabelleDinamicheLogic {
 	public void removeSistemiPrestitoInterbibliotecarioTabelleDinamiche(int idr_removeRecord) throws ConstraintKeyViolationException;
 	
 	public List<SistemiPrestitoInterbibliotecario> getSistemiPrestitoInterbibliotecario();
+	
+	public int countAllSistemiPrestitoInterbibliotecarioPaginatiPerCombo(String query);
+	
+	public List<SistemaPrestitoInterbibliotecarioDTO> getSistemiPrestitoInterbibliotecarioPaginatiPerCombo(String query, int start, int limit);
 } 
 
