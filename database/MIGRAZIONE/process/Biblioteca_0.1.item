@@ -828,6 +828,7 @@
       <column comment="" defaultValue="" key="false" length="19" name="n_settim_apertura" nullable="true" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
       <column comment="" key="false" name="prestito_interbiblio_nazionale" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Boolean"/>
       <column comment="" key="false" name="prestito_interbiblio_internazionale" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Boolean"/>
+      <column comment="" key="false" name="attivo_informazioni_bibliografiche" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="gestisce_servizio_bibliografico_interno" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Boolean"/>
       <column comment="" key="false" name="gestisce_servizio_bibliografico_esterno" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="19" name="n_prestiti_interbibliotecari_annuo" nullable="true" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
@@ -840,14 +841,13 @@
       <column comment="" key="false" length="20" name="catalogazione_data_import" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="20" name="catalogazione_data_modifica_remota" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="catalogazione_note" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="accesso_limite_eta_min" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" name="accesso_limite_eta_max" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="attivo_accesso_internet" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_pagamento" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_tempo" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_proxy" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="bib_f">
         <mapperTableEntries name="id_biblioteca" expression="bib_i.id_bib " type="id_Long"/>
@@ -911,6 +911,7 @@
         <mapperTableEntries name="n_settim_apertura" expression="bib_i.totale_settimane_apertura " type="id_Long" nullable="true"/>
         <mapperTableEntries name="prestito_interbiblio_nazionale" expression="bib_i.prestito_int_naz.equals(&quot;-&quot;)?null:(bib_i.prestito_int_naz.equals(&quot;S&quot;)?true:false)" type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="prestito_interbiblio_internazionale" expression="bib_i.prestito_int_int.equals(&quot;-&quot;)?null:(bib_i.prestito_int_int.equals(&quot;S&quot;)?true:false)" type="id_Boolean" nullable="true"/>
+        <mapperTableEntries name="attivo_informazioni_bibliografiche" expression="(bib_i.serv_bibl_interno.equals(&quot;N&quot;)&amp;&amp;bib_i.serv_bibl_esterno.equals(&quot;N&quot;))?Boolean.FALSE:Boolean.TRUE " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="gestisce_servizio_bibliografico_interno" expression="bib_i.serv_bibl_interno.equals(&quot;S&quot;)?true:false " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="gestisce_servizio_bibliografico_esterno" expression="bib_i.serv_bibl_esterno.equals(&quot;S&quot;)?true:false" type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="n_prestiti_interbibliotecari_annuo" expression="bib_i.totale_prestiti_interbibliotecari_anno " type="id_Long" nullable="true"/>
@@ -923,8 +924,7 @@
         <mapperTableEntries name="catalogazione_data_import" expression="null" type="id_String" nullable="true"/>
         <mapperTableEntries name="catalogazione_data_modifica_remota" expression="null" type="id_String" nullable="true"/>
         <mapperTableEntries name="catalogazione_note" expression="(bib_i.note==null|| (bib_i.note != null &amp;&amp; bib_i.note.equals(&quot;NULL&quot;)))?null:bib_i.note   " type="id_String" nullable="true"/>
-        <mapperTableEntries name="accesso_limite_eta_min" expression="null" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="accesso_limite_eta_max" expression="null" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="attivo_accesso_internet" expression="null" type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_pagamento" expression="null" type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_tempo" expression="null" type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_proxy" expression="null" type="id_Boolean" nullable="true"/>
@@ -1365,6 +1365,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="attivo_informazioni_bibliografiche"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="gestisce_servizio_bibliografico_interno"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -1425,12 +1430,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="accesso_limite_eta_min"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="accesso_limite_eta_max"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="attivo_accesso_internet"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -1524,6 +1524,7 @@
       <column comment="" defaultValue="" key="false" length="19" name="n_settim_apertura" nullable="true" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
       <column comment="" key="false" name="prestito_interbiblio_nazionale" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="prestito_interbiblio_internazionale" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean"/>
+      <column comment="" key="false" name="attivo_informazioni_bibliografiche" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="gestisce_servizio_bibliografico_interno" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="gestisce_servizio_bibliografico_esterno" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="19" name="n_prestiti_interbibliotecari_annuo" nullable="true" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
@@ -1536,8 +1537,7 @@
       <column comment="" key="false" length="20" name="catalogazione_data_import" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="20" name="catalogazione_data_modifica_remota" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="catalogazione_note" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="accesso_limite_eta_min" nullable="true" pattern="" sourceType="INT" type="id_Integer"/>
-      <column comment="" key="false" name="accesso_limite_eta_max" nullable="true" pattern="" sourceType="INT" type="id_Integer"/>
+      <column comment="" key="false" name="attivo_accesso_internet" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_pagamento" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_tempo" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_proxy" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
@@ -1604,6 +1604,7 @@
       <column comment="" defaultValue="" key="false" length="19" name="n_settim_apertura" nullable="true" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
       <column comment="" key="false" name="prestito_interbiblio_nazionale" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="prestito_interbiblio_internazionale" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean"/>
+      <column comment="" key="false" name="attivo_informazioni_bibliografiche" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="gestisce_servizio_bibliografico_interno" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="gestisce_servizio_bibliografico_esterno" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="19" name="n_prestiti_interbibliotecari_annuo" nullable="true" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
@@ -1616,8 +1617,7 @@
       <column comment="" key="false" length="20" name="catalogazione_data_import" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="20" name="catalogazione_data_modifica_remota" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="catalogazione_note" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="accesso_limite_eta_min" nullable="true" pattern="" sourceType="INT" type="id_Integer"/>
-      <column comment="" key="false" name="accesso_limite_eta_max" nullable="true" pattern="" sourceType="INT" type="id_Integer"/>
+      <column comment="" key="false" name="attivo_accesso_internet" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_pagamento" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_tempo" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_proxy" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
@@ -1668,268 +1668,6 @@
     </metadata>
   </node>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="32" posY="672">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_9"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_2"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;dante.inera.it&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;abi_test2&quot;"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;postgres&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;postgres&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;biblioteca&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select id_bib, limite_eta from biblioteca b join localita l on b.id_loc = l.id_loc where l.id_reg = &quot; + context.idRegione + &quot; and SUBSTRING(limite_eta,1,1)='&lt;'&quot;"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
-    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
-    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
-    <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="id_bib"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="limite_eta"/>
-      <elementValue elementRef="TRIM" value="false"/>
-    </elementParameter>
-    <elementParameter field="TEXT" name="LABEL" value="biblioteca"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlInput_9">
-      <column comment="" defaultValue="" key="false" length="19" name="id_bib" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="3" name="limite_eta" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="672">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_5"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_XAPs0Ng9Ed-tRtwKwrEjxw-tMap_5-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="TEXT" name="LABEL" value="tMap_max"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="rg" name="max_f">
-      <column comment="" defaultValue="" key="true" length="19" name="id_biblioteca" nullable="false" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
-      <column comment="" key="false" name="accesso_limite_eta_max" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
-    </metadata>
-    <nodeData xsi:type="MapperData">
-      <uiProperties/>
-      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
-      <outputTables sizeState="INTERMEDIATE" name="max_f">
-        <mapperTableEntries name="id_biblioteca" expression="max_i.id_bib " type="id_Long"/>
-        <mapperTableEntries name="accesso_limite_eta_max" expression="Mathematical.INT(max_i.limite_eta.substring(1))  " type="id_Integer" nullable="true"/>
-      </outputTables>
-      <inputTables sizeState="INTERMEDIATE" name="max_i" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="id_bib" type="id_Long"/>
-        <mapperTableEntries name="limite_eta" type="id_String" nullable="true"/>
-      </inputTables>
-    </nodeData>
-  </node>
-  <node componentName="tMysqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="672">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMysqlOutput_5"/>
-    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="mysql-connector-java-5.1.0-bin.jar"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMysqlConnection_2"/>
-    <elementParameter field="TEXT" name="TYPE" value="MySQL"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;3306&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;abi&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;root&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;root&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;biblioteca&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
-    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_ON_DUPLICATE_KEY_UPDATE"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="mysql_id"/>
-    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
-    <elementParameter field="CHECK" name="EXTENDINSERT" value="true"/>
-    <elementParameter field="LABEL" name="NOTE" value="(Not compatible with reject links)"/>
-    <elementParameter field="TEXT" name="NB_ROWS_PER_INSERT" value="100"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="false"/>
-    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TABLE" name="ADD_COLS"/>
-    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
-    <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="id_biblioteca"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="accesso_limite_eta_max"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="USE_HINT_OPTIONS" value="false"/>
-    <elementParameter field="TABLE" name="HINT_OPTIONS"/>
-    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
-    <elementParameter field="CHECK" name="ON_DUPLICATE_KEY_UPDATE" value="false"/>
-    <elementParameter field="TABLE" name="DUPLICATED_KEYS"/>
-    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="TEXT" name="LABEL" value="mysql_biblioteca"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="rg" name="tMysqlOutput_5">
-      <column comment="" defaultValue="" key="true" length="19" name="id_biblioteca" nullable="false" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
-      <column comment="" key="false" name="accesso_limite_eta_max" nullable="true" pattern="" precision="0" sourceType="INT" type="id_Integer"/>
-    </metadata>
-    <metadata connector="REJECT" label="rg" name="REJECT">
-      <column comment="" defaultValue="" key="true" length="19" name="id_biblioteca" nullable="false" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
-      <column comment="" key="false" name="accesso_limite_eta_max" nullable="true" pattern="" precision="0" sourceType="INT" type="id_Integer"/>
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="32" posY="771">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_10"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_2"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;dante.inera.it&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;abi_test2&quot;"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;postgres&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;postgres&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;biblioteca&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select id_bib, limite_eta from biblioteca b join localita l on b.id_loc = l.id_loc where SUBSTRING(limite_eta,1,1)='>' and l.id_reg = &quot; + context.idRegione"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
-    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
-    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
-    <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="id_bib"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="limite_eta"/>
-      <elementValue elementRef="TRIM" value="false"/>
-    </elementParameter>
-    <elementParameter field="TEXT" name="LABEL" value="biblioteca"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlInput_10">
-      <column comment="" defaultValue="" key="false" length="19" name="id_bib" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="3" name="limite_eta" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="768">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_6"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_XAPs0Ng9Ed-tRtwKwrEjxw-tMap_6-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="TEXT" name="LABEL" value="tMap_min"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="rg" name="min_f">
-      <column comment="" defaultValue="" key="true" length="19" name="id_biblioteca" nullable="false" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
-      <column comment="" key="false" name="accesso_limite_eta_min" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
-    </metadata>
-    <nodeData xsi:type="MapperData">
-      <uiProperties/>
-      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
-      <outputTables sizeState="INTERMEDIATE" name="min_f">
-        <mapperTableEntries name="id_biblioteca" expression="min_i.id_bib " type="id_Long"/>
-        <mapperTableEntries name="accesso_limite_eta_min" expression="Mathematical.INT(min_i.limite_eta.substring(1))  " type="id_Integer" nullable="true"/>
-      </outputTables>
-      <inputTables sizeState="INTERMEDIATE" name="min_i" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="id_bib" type="id_Long"/>
-        <mapperTableEntries name="limite_eta" type="id_String" nullable="true"/>
-      </inputTables>
-    </nodeData>
-  </node>
-  <node componentName="tMysqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="768">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMysqlOutput_6"/>
-    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="mysql-connector-java-5.1.0-bin.jar"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMysqlConnection_2"/>
-    <elementParameter field="TEXT" name="TYPE" value="MySQL"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;3306&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;abi&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;root&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;root&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;biblioteca&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
-    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_ON_DUPLICATE_KEY_UPDATE"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="mysql_id"/>
-    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
-    <elementParameter field="CHECK" name="EXTENDINSERT" value="true"/>
-    <elementParameter field="LABEL" name="NOTE" value="(Not compatible with reject links)"/>
-    <elementParameter field="TEXT" name="NB_ROWS_PER_INSERT" value="100"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="false"/>
-    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TABLE" name="ADD_COLS"/>
-    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
-    <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="id_biblioteca"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="accesso_limite_eta_min"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="USE_HINT_OPTIONS" value="false"/>
-    <elementParameter field="TABLE" name="HINT_OPTIONS"/>
-    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
-    <elementParameter field="CHECK" name="ON_DUPLICATE_KEY_UPDATE" value="false"/>
-    <elementParameter field="TABLE" name="DUPLICATED_KEYS"/>
-    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="TEXT" name="LABEL" value="mysql_biblioteca"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="rg" name="tMysqlOutput_6">
-      <column comment="" defaultValue="" key="true" length="19" name="id_biblioteca" nullable="false" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
-      <column comment="" key="false" name="accesso_limite_eta_min" nullable="true" pattern="" precision="0" sourceType="INT" type="id_Integer"/>
-    </metadata>
-    <metadata connector="REJECT" label="rg" name="REJECT">
-      <column comment="" defaultValue="" key="true" length="19" name="id_biblioteca" nullable="false" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
-      <column comment="" key="false" name="accesso_limite_eta_min" nullable="true" pattern="" precision="0" sourceType="INT" type="id_Integer"/>
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="32" posY="896">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_11"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_2"/>
@@ -1968,7 +1706,7 @@
       <column comment="" key="false" length="1" name="accesso_internet" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="896">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="672">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_7"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
@@ -1984,6 +1722,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="rg" name="acc_internet_f">
       <column comment="" defaultValue="" key="true" length="19" name="id_biblioteca" nullable="false" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
+      <column comment="" key="false" name="attivo_accesso_internet" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_pagamento" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_tempo" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_proxy" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
@@ -1993,6 +1732,7 @@
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="acc_internet_f">
         <mapperTableEntries name="id_biblioteca" expression="acc_internet_i.id_bib " type="id_Long"/>
+        <mapperTableEntries name="attivo_accesso_internet" expression="acc_internet_i.accesso_internet.equals(&quot;-&quot;)?null:(acc_internet_i.accesso_internet.equals(&quot;L&quot;)?Boolean.FALSE:Boolean.TRUE) " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_pagamento" expression="acc_internet_i.accesso_internet.equals(&quot;P&quot;)?Boolean.TRUE:null " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_tempo" expression="acc_internet_i.accesso_internet.equals(&quot;T&quot;)?Boolean.TRUE:null " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_proxy" expression="acc_internet_i.accesso_internet.equals(&quot;S&quot;)?Boolean.TRUE:(acc_internet_i.accesso_internet.equals(&quot;L&quot;)?Boolean.FALSE:null) " type="id_Boolean" nullable="true"/>
@@ -2003,7 +1743,7 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tMysqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="896">
+  <node componentName="tMysqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="672">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMysqlOutput_7"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="mysql-connector-java-5.1.0-bin.jar"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
@@ -2032,6 +1772,11 @@
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
       <elementValue elementRef="SCHEMA_COLUMN" value="id_biblioteca"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="attivo_accesso_internet"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -2065,12 +1810,14 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="rg" name="tMysqlOutput_7">
       <column comment="" defaultValue="" key="true" length="19" name="id_biblioteca" nullable="false" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
+      <column comment="" key="false" name="attivo_accesso_internet" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_pagamento" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_tempo" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_proxy" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
     </metadata>
     <metadata connector="REJECT" label="rg" name="REJECT">
       <column comment="" defaultValue="" key="true" length="19" name="id_biblioteca" nullable="false" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
+      <column comment="" key="false" name="attivo_accesso_internet" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_pagamento" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_tempo" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_proxy" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
@@ -2210,7 +1957,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tMysqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="704" posY="896">
+  <node componentName="tMysqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="704" posY="672">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMysqlCommit_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMysqlConnection_2"/>
     <elementParameter field="CHECK" name="CLOSE" value="false"/>
@@ -2948,6 +2695,12 @@
       <elementValue elementRef="TRACE_COLUMN" value="inventario_cartaceo"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="attivo_accesso_internet"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="attivo_informazioni_bibliografiche"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -2958,7 +2711,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="bib_f"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tMysqlOutput_3" offsetLabelX="0" offsetLabelY="0" source="tMysqlOutput_3" target="tPostgresqlInput_9">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tMysqlOutput_3" offsetLabelX="0" offsetLabelY="0" source="tMysqlOutput_3" target="tPostgresqlInput_11">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
   </connection>
@@ -2983,93 +2736,6 @@
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
-  </connection>
-  <connection connectorName="FLOW" label="max_i" lineStyle="0" metaname="tPostgresqlInput_9" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_9" target="tMap_5">
-    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="id_bib"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="limite_eta"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
-    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
-    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
-    <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="max_i"/>
-  </connection>
-  <connection connectorName="FLOW" label="max_f" lineStyle="0" metaname="max_f" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tMysqlOutput_5">
-    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="id_biblioteca"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="id_biblioteca_padre"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="accesso_limite_eta_max"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
-    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
-    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
-    <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="max_f"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tMysqlOutput_5" offsetLabelX="0" offsetLabelY="0" source="tMysqlOutput_5" target="tPostgresqlInput_10">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk5"/>
-  </connection>
-  <connection connectorName="FLOW" label="min_i" lineStyle="0" metaname="tPostgresqlInput_10" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_10" target="tMap_6">
-    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="id_bib"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
-    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
-    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
-    <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="min_i"/>
-  </connection>
-  <connection connectorName="FLOW" label="min_f" lineStyle="0" metaname="min_f" offsetLabelX="0" offsetLabelY="0" source="tMap_6" target="tMysqlOutput_6">
-    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="id_biblioteca"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="id_biblioteca_padre"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="accesso_limite_eta_min"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
-    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
-    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
-    <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="min_f"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tMysqlOutput_6" offsetLabelX="0" offsetLabelY="0" source="tMysqlOutput_6" target="tPostgresqlInput_11">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk6"/>
   </connection>
   <connection connectorName="FLOW" label="acc_internet_i" lineStyle="0" metaname="tPostgresqlInput_11" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_11" target="tMap_7">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -3106,6 +2772,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="accesso_internet_tempo"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="attivo_accesso_internet"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -3162,16 +2831,6 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_4"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_9"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_10"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>

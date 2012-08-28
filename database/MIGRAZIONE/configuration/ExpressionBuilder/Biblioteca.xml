@@ -1,0 +1,100 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:expression="http:///expression.ecore">
+  <expression:EMFExpression id="null=>bib_f=>attivo_informazioni_bibliografiche" expression="(bib_i.serv_bibl_interno.equals(&quot;N&quot;)&amp;&amp;bib_i.serv_bibl_esterno.equals(&quot;N&quot;))?Boolean.FALSE:Boolean.TRUE">
+    <variables name="bib_i.id_bib" value="0" talendType="id_Long"/>
+    <variables name="bib_i.isil_st" value="null" talendType="id_String"/>
+    <variables name="bib_i.isil_pr" value="null" talendType="id_String"/>
+    <variables name="bib_i.isil_nr" value="0" talendType="id_Long"/>
+    <variables name="bib_i.denominazione" value="null" talendType="id_String"/>
+    <variables name="bib_i.indirizzo" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.frazione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.cap" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.aut_ammva" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.strut_gerarchica" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.fondazione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.data_fondazione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.anno_istituzione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.stato_accesso" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.accesso_handicap" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.inv_inform" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.catalogo_topogr" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.sup_totale" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.sup_pubblica" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.ml_magazzini" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.ml_aperti" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.posti_video" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.posti_audio" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.posti_internet" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.accesso_internet" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.n_utenti" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.n_iscritti" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.n_pers_temp" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.n_pers_est" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_bilancio" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_personale" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_funz" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_patr" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_altro" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.fondi_antichi" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.id_ente" value="0" talendType="id_Long"/>
+    <variables name="bib_i.denominaz_edificio" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.edif_monum" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.app_costruito" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.costruzione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.data_costr" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.id_tipf" value="0" talendType="id_Long"/>
+    <variables name="bib_i.id_loc" value="0" talendType="id_Long"/>
+    <variables name="bib_i.limite_eta" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.rism" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.sbn" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.acnp" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.prestito_int_naz" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.prestito_int_int" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.serv_bibl_interno" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.serv_bibl_esterno" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.codice_fiscale" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.partita_iva" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.auto_ill_dd" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.totale_automazione" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.posti_lettura" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.stato" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.data" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.user_name" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.catal_coll_loc" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.catal_coll_naz" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.catal_coll_int" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.totale_ore_settimanali" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_settimane_apertura" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_ore_settimanali_pomer" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_acquisti_15" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_acquisti_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.n_utenti_under14" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_posseduto" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_posseduto_under14" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.n_pers_part_time" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.n_utenti_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_prestiti_interbibliotecari_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.totale_prestiti_locali_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.n_pers_tot" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.data_censimento" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.data_ultima_modifica_remota" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.data_import" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.cmbs" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.cei" value="null" talendType="id_String" nullable="true"/>
+    <variables name="bib_i.totale_bilancio_entrate" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="bib_i.note" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.id_loc" value="0" talendType="id_Long"/>
+    <variables name="row2.id_com" value="0" talendType="id_Long"/>
+    <variables name="row3.id_fondi_antichi_consistenza" value="0" talendType="id_Long"/>
+    <variables name="row3.descrizione" value="null" talendType="id_String"/>
+    <variables name="row4.user_name" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row4.id_utente" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.id_stato" value="0" talendType="id_Integer"/>
+    <variables name="row1.descrizione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.label" value="null" talendType="id_String"/>
+  </expression:EMFExpression>
+  <expression:EMFExpression id="null=>acc_internet_f=>attivo_accesso_internet" expression="acc_internet_i.accesso_internet.equals(&quot;-&quot;)?null:(acc_internet_i.accesso_internet.equals(&quot;L&quot;)?Boolean.FALSE:Boolean.TRUE)">
+    <variables name="acc_internet_i.id_bib" value="0" talendType="id_Long"/>
+    <variables name="acc_internet_i.accesso_internet" value="null" talendType="id_String" nullable="true"/>
+  </expression:EMFExpression>
+</xmi:XMI>

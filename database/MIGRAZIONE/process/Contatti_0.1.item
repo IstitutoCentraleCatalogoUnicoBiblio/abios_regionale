@@ -658,7 +658,7 @@
       <column comment="" key="false" length="100" name="note" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="contatti_altro">
         <mapperTableEntries name="id_biblioteca" expression="row2.id_bib " type="id_Long"/>
@@ -963,7 +963,7 @@
       <column comment="" key="false" length="255" name="descrizione" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="tip2">
         <mapperTableEntries name="descrizione" expression="row6.tipo.equals(&quot;E&quot;)?&quot;E-mail&quot;:(row6.tipo.equals(&quot;T&quot;)?&quot;Telex&quot;:&quot;Url&quot;)  " type="id_String"/>

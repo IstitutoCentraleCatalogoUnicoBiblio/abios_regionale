@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.foundation.softwaredeployment="http:///orgomg/cwm/foundation/softwaredeployment.ecore" xmlns:orgomg.cwm.resource.relational="http:///orgomg/cwm/resource/relational.ecore">
-  <TalendMetadata:DatabaseConnection xmi:id="_aJGJwLblEeG8guagzVTH5Q" name="mysql" label="mysql" component="_aJzUYLblEeG8guagzVTH5Q" dataPackage="_aJyGQLblEeG8guagzVTH5Q" DatabaseType="MySQL" DriverClass="org.gjt.mm.mysql.Driver" URL="jdbc:mysql://localhost:3306/abicampania?noDatetimeStringSync=true" dbVersionString="MYSQL_5" Port="3306" Username="root" Password="NZNgK6DuncI=" ServerName="localhost" DatasourceName="" FileFieldName="" SID="abicampania" SqlSynthax="SQL Syntax" DbmsId="mysql_id" ProductId="MYSQL" AdditionalParams="noDatetimeStringSync=true" StandardSQL="true" SQLMode="false" UiSchema="">
+  <TalendMetadata:DatabaseConnection xmi:id="_aJGJwLblEeG8guagzVTH5Q" name="mysql" label="mysql" component="_TmvrMNC8EeGL2pRKMVLK4A" dataPackage="_P-nt8NC8EeGL2pRKMVLK4A" DatabaseType="MySQL" DriverClass="org.gjt.mm.mysql.Driver" URL="jdbc:mysql://localhost:3306/abicampania?noDatetimeStringSync=true" dbVersionString="MYSQL_5" Port="3306" Username="root" Password="NZNgK6DuncI=" ServerName="localhost" DatasourceName="" FileFieldName="" SID="abicampania" SqlSynthax="SQL Syntax" DbmsId="mysql_id" ProductId="MYSQL" AdditionalParams="noDatetimeStringSync=true" StandardSQL="true" SQLMode="false" UiSchema="">
     <taggedValue xmi:id="_aJYdoLblEeG8guagzVTH5Q" tag="Using URL" value="jdbc:mysql://localhost:3306/abicampania?noDatetimeStringSync=true"/>
     <taggedValue xmi:id="_aJZEsLblEeG8guagzVTH5Q" tag="package filter" value=""/>
     <taggedValue xmi:id="_aJnHILblEeG8guagzVTH5Q" tag="Status" value=""/>
@@ -11,6 +11,6 @@
     <taggedValue xmi:id="_aJnuNLblEeG8guagzVTH5Q" tag="otherParameter" value=""/>
     <taggedValue xmi:id="_aJqxgLblEeG8guagzVTH5Q" tag="DB IdentifierQuoteString" value="`"/>
   </TalendMetadata:DatabaseConnection>
-  <orgomg.cwm.resource.relational:Catalog xmi:id="_aJyGQLblEeG8guagzVTH5Q" name="abicampania" dataManager="_aJGJwLblEeG8guagzVTH5Q"/>
-  <orgomg.cwm.foundation.softwaredeployment:Component xmi:id="_aJzUYLblEeG8guagzVTH5Q" deployment="_aJGJwLblEeG8guagzVTH5Q"/>
+  <orgomg.cwm.resource.relational:Catalog xmi:id="_P-nt8NC8EeGL2pRKMVLK4A" name="abicampania" dataManager="_aJGJwLblEeG8guagzVTH5Q"/>
+  <orgomg.cwm.foundation.softwaredeployment:Component xmi:id="_TmvrMNC8EeGL2pRKMVLK4A" deployment="_aJGJwLblEeG8guagzVTH5Q"/>
 </xmi:XMI>
