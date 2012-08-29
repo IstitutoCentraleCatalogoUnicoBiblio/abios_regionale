@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="abidesign" version="42" database="MySql" >
 	<schema name="abicampania" catalogname="abicampania" defo="y" >
-		<table name="accesso_modalita" >
+		<table name="accesso_modalita" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_accesso_modalita" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="PK_Table" unique="PRIMARY_KEY" >
 				<column name="id_accesso_modalita" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="bibliografia" >
+		<table name="bibliografia" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_bibliografia" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione" type="TEXT" length="65535" jt="-1" />
@@ -22,12 +21,11 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca" >
+		<table name="biblioteca" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="isil_stato" type="VARCHAR" length="2" jt="12" mandatory="y" >
-				<defo>&#039;IT&#039;</defo>
+				<defo>'IT'</defo>
 			</column>
 			<column name="isil_provincia" type="VARCHAR" length="2" jt="12" mandatory="y" />
 			<column name="isil_numero" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
@@ -41,25 +39,25 @@
 			<column name="data_fondazione" type="VARCHAR" length="20" jt="12" />
 			<column name="data_istituzione" type="VARCHAR" length="255" jt="12" />
 			<column name="edificio_denominazione" type="VARCHAR" length="255" jt="12" />
-			<column name="edificio_monumentale" type="BOOL" length="1" jt="-7" />
+			<column name="edificio_monumentale" type="BOOL" length="1" jt="-6" />
 			<column name="edificio_data_costruzione" type="VARCHAR" length="255" jt="12" />
-			<column name="edificio_appositamente_costruito" type="BOOL" length="1" jt="-7" />
-			<column name="autonomia_amministrativa" type="BOOL" length="1" jt="-7" />
+			<column name="edificio_appositamente_costruito" type="BOOL" length="1" jt="-6" />
+			<column name="autonomia_amministrativa" type="BOOL" length="1" jt="-6" />
 			<column name="struttura_gerarchica_sovraordinata" type="VARCHAR" length="255" jt="12" />
-			<column name="accesso_riservato" type="BOOL" jt="-7" />
-			<column name="accesso_handicap" type="BOOL" length="1" jt="-7" />
-			<column name="attivo_accesso_internet" type="BOOL" jt="-7" />
-			<column name="accesso_internet_pagamento" type="BOOL" jt="-7" />
-			<column name="accesso_internet_tempo" type="BOOL" jt="-7" />
-			<column name="accesso_internet_proxy" type="BOOL" jt="-7" />
-			<column name="inventario_cartaceo" type="BOOL" jt="-7" />
-			<column name="inventario_informatizzato" type="BOOL" length="1" jt="-7" />
-			<column name="catalogo_topografico_cartaceo" type="BOOL" jt="-7" />
-			<column name="catalogo_topografico_informatizzato" type="BOOL" length="1" jt="-7" />
+			<column name="accesso_riservato" type="BOOL" jt="-6" />
+			<column name="accesso_handicap" type="BOOL" length="1" jt="-6" />
+			<column name="attivo_accesso_internet" type="BOOL" jt="-6" />
+			<column name="accesso_internet_pagamento" type="BOOL" jt="-6" />
+			<column name="accesso_internet_tempo" type="BOOL" jt="-6" />
+			<column name="accesso_internet_proxy" type="BOOL" jt="-6" />
+			<column name="inventario_cartaceo" type="BOOL" jt="-6" />
+			<column name="inventario_informatizzato" type="BOOL" length="1" jt="-6" />
+			<column name="catalogo_topografico_cartaceo" type="BOOL" jt="-6" />
+			<column name="catalogo_topografico_informatizzato" type="BOOL" length="1" jt="-6" />
 			<column name="id_fondi_antichi_consistenza" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_ente" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_tipologia_funzionale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
-			<column name="procedure_ill_automatizzate" type="BOOL" length="1" jt="-7" />
+			<column name="procedure_ill_automatizzate" type="BOOL" length="1" jt="-6" />
 			<column name="id_biblioteca_padre" type="INT" length="10" jt="4" unsigned="y" />
 			<column name="mq_totali" type="INT" length="10" jt="4" unsigned="y" />
 			<column name="mq_pubblici" type="INT" length="10" jt="4" unsigned="y" />
@@ -103,11 +101,11 @@
 			<column name="n_settim_apertura" type="INT" length="10" jt="4" unsigned="y" >
 				<defo>0</defo>
 			</column>
-			<column name="prestito_interbiblio_nazionale" type="BOOL" length="1" jt="-7" />
-			<column name="prestito_interbiblio_internazionale" type="BOOL" length="1" jt="-7" />
-			<column name="attivo_informazioni_bibliografiche" type="BOOL" jt="-7" />
-			<column name="gestisce_servizio_bibliografico_interno" type="BOOL" length="1" jt="-7" />
-			<column name="gestisce_servizio_bibliografico_esterno" type="BOOL" length="1" jt="-7" />
+			<column name="prestito_interbiblio_nazionale" type="BOOL" length="1" jt="-6" />
+			<column name="prestito_interbiblio_internazionale" type="BOOL" length="1" jt="-6" />
+			<column name="attivo_informazioni_bibliografiche" type="BOOL" jt="-6" />
+			<column name="gestisce_servizio_bibliografico_interno" type="BOOL" length="1" jt="-6" />
+			<column name="gestisce_servizio_bibliografico_esterno" type="BOOL" length="1" jt="-6" />
 			<column name="n_prestiti_interbibliotecari_annuo" type="INT" jt="4" unsigned="y" />
 			<column name="n_prestiti_locali_annuo" type="INT" jt="4" unsigned="y" />
 			<column name="catalogazione_data_modifica" type="DATETIME" jt="93" />
@@ -117,8 +115,11 @@
 			<column name="catalogazione_data_modifica_remota" type="DATETIME" jt="93" />
 			<column name="catalogazione_note" type="TEXT" jt="-1" />
 			<column name="catalogazione_data_censimento" type="DATETIME" jt="93" />
-			<column name="attivo_riproduzioni" type="BOOL" jt="-7" />
-			<column name="attivo_prestito_locale" type="BOOL" jt="-7" />
+			<column name="attivo_riproduzioni" type="BOOL" jt="-6" />
+			<column name="attivo_prestito_locale" type="BOOL" jt="-6" />
+			<column name="attivo_reference" type="BOOL" jt="-6" />
+			<column name="reference_locale" type="BOOL" jt="-6" />
+			<column name="reference_online" type="BOOL" jt="-6" />
 			<index name="biblioteca_FKIndex1" unique="NORMAL" >
 				<column name="id_ente" />
 			</index>
@@ -161,9 +162,8 @@
 			<fk name="fk_6" to_schema="abicampania" to_table="stato_biblioteca_workflow" >
 				<fk_column name="id_stato_biblioteca_workflow" pk="id_stato" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_accesso_modalita" >
+		<table name="biblioteca_has_accesso_modalita" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_accesso_modalita" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<index name="idx_biblioteca_has_accesso_utenti_ammessi" unique="NORMAL" >
@@ -179,9 +179,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="accesso_modalita" >
 				<fk_column name="id_accesso_modalita" pk="id_accesso_modalita" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_dewey" >
+		<table name="biblioteca_has_dewey" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_dewey" type="VARCHAR" length="6" jt="12" mandatory="y" />
 			<index name="pk_special" unique="PRIMARY_KEY" >
@@ -200,9 +199,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="dewey" >
 				<fk_column name="id_dewey" pk="id_dewey" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_fondi_speciali" >
+		<table name="biblioteca_has_fondi_speciali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_fondi_speciali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_biblioteca_has_fondi_speciali" unique="PRIMARY_KEY" >
@@ -221,9 +219,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="fondi_speciali" >
 				<fk_column name="id_fondi_speciali" pk="id_fondi_speciali" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_indicizzazione_classificata" >
+		<table name="biblioteca_has_indicizzazione_classificata" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_indicizzazione_classificata" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_biblioteca_has_indic_classificata" unique="PRIMARY_KEY" >
@@ -242,9 +239,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="indicizzazione_classificata" >
 				<fk_column name="id_indicizzazione_classificata" pk="id_indicizzazione_classificata" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_indicizzazione_soggetto" >
+		<table name="biblioteca_has_indicizzazione_soggetto" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_indicizzazione_soggetto" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_biblioteca_has_indic_soggetto" unique="PRIMARY_KEY" >
@@ -263,9 +259,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="indicizzazione_soggetto" >
 				<fk_column name="id_indicizzazione_soggetto" pk="id_indicizzazione_soggetto" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_norme_catalogazione" >
+		<table name="biblioteca_has_norme_catalogazione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_norme_catalogazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_biblioteca_has_norme_catalogazione" unique="PRIMARY_KEY" >
@@ -284,9 +279,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="norme_catalogazione" >
 				<fk_column name="id_norme_catalogazione" pk="id_norme_catalogazione" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_prestito_interbibliotecario" >
+		<table name="biblioteca_has_prestito_interbibliotecario" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_prestito_interbibliotecario" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_biblioteca_has_pre_pos_dsc" unique="PRIMARY_KEY" >
@@ -305,9 +299,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="prestito_interbibliotecario" >
 				<fk_column name="id_prestito_interbibliotecario" pk="id_prestito_interbibliotecario" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_servizi_bibliotecari_carta" >
+		<table name="biblioteca_has_servizi_bibliotecari_carta" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id__servizi_bibliotecari_carta" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_servizi_biblio" unique="PRIMARY_KEY" >
@@ -326,9 +319,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="servizi_bibliotecari_carta" >
 				<fk_column name="id__servizi_bibliotecari_carta" pk="id__servizi_bibliotecari_carta" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_servizi_informazioni_bibliografiche" >
+		<table name="biblioteca_has_servizi_informazioni_bibliografiche" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_servizi_informazioni_bibliografiche_modalita" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_servizi_biblio" unique="PRIMARY_KEY" >
@@ -347,9 +339,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="servizi_informazioni_bibliografiche_modalita" >
 				<fk_column name="id_servizi_informazioni_bibliografiche_modalita" pk="id_servizi_informazioni_bibliografiche_modalita" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_sezioni_speciali" >
+		<table name="biblioteca_has_sezioni_speciali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_sezioni_speciali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_biblioteca_has_sezioni_speciali" unique="PRIMARY_KEY" >
@@ -368,9 +359,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="sezioni_speciali" >
 				<fk_column name="id_sezioni_speciali" pk="id_sezioni_speciali" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_sistemi_biblioteche" >
+		<table name="biblioteca_has_sistemi_biblioteche" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_sistemi_biblioteche" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_biblioteca_has_partec_sist_biblio" unique="PRIMARY_KEY" >
@@ -389,9 +379,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="sistemi_biblioteche" >
 				<fk_column name="id_sistemi_biblioteche" pk="id_sistemi_biblioteche" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_sistemi_prestito_interbibliotecario" >
+		<table name="biblioteca_has_sistemi_prestito_interbibliotecario" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_sistemi_prestito_interbibliotecario" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_biblioteca_has_sist_pr_interbiblio" unique="PRIMARY_KEY" >
@@ -410,9 +399,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="sistemi_prestito_interbibliotecario" >
 				<fk_column name="id_sistemi_prestito_interbibliotecario" pk="id_sistemi_prestito_interbibliotecario" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="biblioteca_has_utenti" >
+		<table name="biblioteca_has_utenti" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_utenti" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<index name="idx_bibliotecahasutenti" unique="PRIMARY_KEY" >
@@ -425,9 +413,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="cataloghi_collettivi" >
+		<table name="cataloghi_collettivi" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_cataloghi_collettivi" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
 			<column name="id_cataloghi_collettivi_zona_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
@@ -441,9 +428,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="cataloghi_collettivi_zona_tipo" >
 				<fk_column name="id_cataloghi_collettivi_zona_tipo" pk="id_cataloghi_collettivi_zona_tipo" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="cataloghi_collettivi_materiale_url" >
+		<table name="cataloghi_collettivi_materiale_url" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_cataloghi_collettivi_materiale_url" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_cataloghi_collettivi_materiale" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="url" type="VARCHAR" length="255" jt="12" />
@@ -457,17 +443,15 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="partecipa_cataloghi_collettivi_materiale" >
 				<fk_column name="id_cataloghi_collettivi_materiale" pk="id_cataloghi_collettivi_materiale" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="cataloghi_collettivi_zona_tipo" >
+		<table name="cataloghi_collettivi_zona_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_cataloghi_collettivi_zona_tipo" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="PK_Table_3" unique="PRIMARY_KEY" >
 				<column name="id_cataloghi_collettivi_zona_tipo" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="cataloghi_generali_url" >
+		<table name="cataloghi_generali_url" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_cataloghi_generali_url" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_cataloghi_generali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="url" type="VARCHAR" length="255" jt="12" />
@@ -481,9 +465,8 @@
 			<fk name="fk_cataloghi_generali_url" to_schema="abicampania" to_table="partecipa_cataloghi_generali" >
 				<fk_column name="id_cataloghi_generali" pk="id_cataloghi_generali" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="cataloghi_speciali_materiale_url" >
+		<table name="cataloghi_speciali_materiale_url" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_cataloghi_speciali_materiale_url" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_cataloghi_speciali_materiale" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="url" type="VARCHAR" length="255" jt="12" />
@@ -497,25 +480,22 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="partecipa_cataloghi_speciali_materiale" >
 				<fk_column name="id_cataloghi_speciali_materiale" pk="id_cataloghi_speciali_materiale" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="cataloghi_supporto_digitale_tipo" >
+		<table name="cataloghi_supporto_digitale_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_cataloghi_supporto_digitale_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="PK_Table_3" unique="PRIMARY_KEY" >
 				<column name="id_cataloghi_supporto_digitale_tipo" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="catalogo_generale_tipo" >
+		<table name="catalogo_generale_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_catalogo_generale_tipo" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="PK_Table_4" unique="PRIMARY_KEY" >
 				<column name="id_catalogo_generale_tipo" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="codici" >
+		<table name="codici" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_codici" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="valore" type="VARCHAR" length="100" jt="12" mandatory="y" />
@@ -535,17 +515,15 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="codici_tipo" >
+		<table name="codici_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_codici" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="PK_Table_4" unique="PRIMARY_KEY" >
 				<column name="id_codici" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="comune" >
+		<table name="comune" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_comune" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_provincia" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="denominazione" type="VARCHAR" length="100" jt="12" mandatory="y" />
@@ -560,9 +538,8 @@
 			<fk name="fk_comune_provincia1" to_schema="abicampania" to_table="provincia" >
 				<fk_column name="id_provincia" pk="id_provincia" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="comunicazioni" >
+		<table name="comunicazioni" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_comunicazioni" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione" type="TEXT" length="65535" jt="-1" />
@@ -575,9 +552,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="contatti" >
+		<table name="contatti" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_contatti" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_contatti_tipi" type="INT" length="6" jt="4" mandatory="y" unsigned="y" />
@@ -592,17 +568,15 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="contatti_tipo" >
 				<fk_column name="id_contatti_tipi" pk="id_contatti_tipo" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="contatti_tipo" >
+		<table name="contatti_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_contatti_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="PK_Table_1" unique="PRIMARY_KEY" >
 				<column name="id_contatti_tipo" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="dati_province_istat" >
+		<table name="dati_province_istat" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_provincia" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="totale_abitanti" type="INT" jt="4" mandatory="y" unsigned="y" >
 				<defo>0</defo>
@@ -613,9 +587,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="provincia" >
 				<fk_column name="id_provincia" pk="id_provincia" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="dati_regioni_istat" >
+		<table name="dati_regioni_istat" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_regione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="totale_abitanti" type="INT" jt="4" mandatory="y" unsigned="y" >
 				<defo>0</defo>
@@ -628,9 +601,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="regione" >
 				<fk_column name="id_regione" pk="id_regione" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="denominazioni_alternative" >
+		<table name="denominazioni_alternative" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_denominazioni_alternative" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="denominazione" type="VARCHAR" length="255" jt="12" />
@@ -643,9 +615,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="denominazioni_precedenti" >
+		<table name="denominazioni_precedenti" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_denominazioni_precedenti" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="denominazione" type="VARCHAR" length="255" jt="12" />
@@ -658,9 +629,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="depositi_legali" >
+		<table name="depositi_legali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_depositi_legali_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="da_anno" type="VARCHAR" length="10" jt="12" />
@@ -674,17 +644,15 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="depositi_legali_tipo" >
 				<fk_column name="id_depositi_legali_tipo" pk="id_depositi_legali_tipo" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="depositi_legali_tipo" >
+		<table name="depositi_legali_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_depositi_legali_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="pk_deposito_legale" unique="PRIMARY_KEY" >
 				<column name="id_depositi_legali_tipo" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="destinazioni_sociali" >
+		<table name="destinazioni_sociali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_destinazioni_sociali_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="note" type="VARCHAR" length="255" jt="12" />
@@ -698,25 +666,22 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="destinazioni_sociali_tipo" >
 				<fk_column name="id_destinazioni_sociali_tipo" pk="id_destinazioni_sociali" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="destinazioni_sociali_tipo" >
+		<table name="destinazioni_sociali_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_destinazioni_sociali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="pk_destinaz_sociale" unique="PRIMARY_KEY" >
 				<column name="id_destinazioni_sociali" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="dewey" >
+		<table name="dewey" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_dewey" type="VARCHAR" length="6" jt="12" mandatory="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="pk_dewey" unique="PRIMARY_KEY" >
 				<column name="id_dewey" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="dewey_libero" >
+		<table name="dewey_libero" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_dewey" type="VARCHAR" length="6" jt="12" mandatory="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
@@ -730,9 +695,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="dewey" >
 				<fk_column name="id_dewey" pk="id_dewey" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="ente" >
+		<table name="ente" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_ente" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_stato" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_ente_tipologia_amministrativa" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
@@ -755,29 +719,26 @@
 			<fk name="fk_2" to_schema="abicampania" to_table="stato" >
 				<fk_column name="id_stato" pk="id_stato" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="ente_tipologia_amministrativa" >
+		<table name="ente_tipologia_amministrativa" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_ente_tipologia_amministrativa" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="pk_tipologia_ente" unique="PRIMARY_KEY" >
 				<column name="id_ente_tipologia_amministrativa" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="fondi_antichi_consistenza" >
+		<table name="fondi_antichi_consistenza" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_fondi_antichi_consistenza" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="pk_tipologia_funzionale" unique="PRIMARY_KEY" >
 				<column name="id_fondi_antichi_consistenza" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="fondi_speciali" >
+		<table name="fondi_speciali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_fondi_speciali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_dewey" type="VARCHAR" length="6" jt="12" />
 			<column name="denominazione" type="VARCHAR" length="255" jt="12" mandatory="y" />
-			<column name="fondo_depositato" type="BOOL" length="1" jt="-7" />
+			<column name="fondo_depositato" type="BOOL" length="1" jt="-6" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
 			<column name="id_fondi_speciali_catalogazione_inventario" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="catalogazione_inventario_url" type="VARCHAR" length="255" jt="12" />
@@ -797,17 +758,15 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="fondi_speciali_catalogazione_inventario" >
 				<fk_column name="id_fondi_speciali_catalogazione_inventario" pk="id_fondi_speciali_catalogazione_inventario" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="fondi_speciali_catalogazione_inventario" >
+		<table name="fondi_speciali_catalogazione_inventario" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_fondi_speciali_catalogazione_inventario" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="PK_Table_3" unique="PRIMARY_KEY" >
 				<column name="id_fondi_speciali_catalogazione_inventario" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="geolocalizzazione" >
+		<table name="geolocalizzazione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="latitudine" type="DOUBLE" jt="8" />
 			<column name="longitudine" type="DOUBLE" jt="8" />
@@ -820,58 +779,54 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="indicizzazione_classificata" >
+		<table name="indicizzazione_classificata" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_indicizzazione_classificata" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
 			<index name="pk_indic_classificata" unique="PRIMARY_KEY" >
 				<column name="id_indicizzazione_classificata" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="indicizzazione_soggetto" >
+		<table name="indicizzazione_soggetto" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_indicizzazione_soggetto" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
 			<index name="pk_indic_soggetto" unique="PRIMARY_KEY" >
 				<column name="id_indicizzazione_soggetto" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="norme_catalogazione" >
+		<table name="norme_catalogazione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_norme_catalogazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="pk_norme_catalogazione" unique="PRIMARY_KEY" >
 				<column name="id_norme_catalogazione" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="nuova_biblioteca" >
+		<table name="nuova_biblioteca" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="isil_stato" type="VARCHAR" length="2" jt="12" mandatory="y" >
-				<defo>&#039;IT&#039;</defo>
+				<defo>'IT'</defo>
 			</column>
 			<column name="isil_provincia" type="VARCHAR" length="2" jt="12" mandatory="y" />
 			<column name="isil_numero" type="INT" jt="4" unsigned="y" />
 			<column name="denominazione_ufficiale" type="VARCHAR" length="255" jt="12" />
 			<column name="id_comune" type="INT" jt="4" unsigned="y" />
 			<column name="data_fondazione" type="VARCHAR" length="20" jt="12" />
-			<column name="edificio_monumentale" type="BOOL" length="1" jt="-7" />
+			<column name="edificio_monumentale" type="BOOL" length="1" jt="-6" />
 			<column name="edificio_data_costruzione" type="VARCHAR" length="255" jt="12" />
-			<column name="edificio_appositamente_costruito" type="BOOL" length="1" jt="-7" />
-			<column name="autonomia_amministrativa" type="BOOL" length="1" jt="-7" />
-			<column name="accesso_riservato" type="BOOL" jt="-7" />
-			<column name="accesso_handicap" type="BOOL" length="1" jt="-7" />
-			<column name="accesso_internet_pagamento" type="BOOL" jt="-7" />
-			<column name="accesso_internet_tempo" type="BOOL" jt="-7" />
-			<column name="accesso_internet_proxy" type="BOOL" jt="-7" />
-			<column name="inventario_cartaceo" type="BOOL" jt="-7" />
-			<column name="inventario_informatizzato" type="BOOL" length="1" jt="-7" />
-			<column name="catalogo_topografico_cartaceo" type="BOOL" jt="-7" />
-			<column name="catalogo_topografico_informatizzato" type="BOOL" length="1" jt="-7" />
+			<column name="edificio_appositamente_costruito" type="BOOL" length="1" jt="-6" />
+			<column name="autonomia_amministrativa" type="BOOL" length="1" jt="-6" />
+			<column name="accesso_riservato" type="BOOL" jt="-6" />
+			<column name="accesso_handicap" type="BOOL" length="1" jt="-6" />
+			<column name="accesso_internet_pagamento" type="BOOL" jt="-6" />
+			<column name="accesso_internet_tempo" type="BOOL" jt="-6" />
+			<column name="accesso_internet_proxy" type="BOOL" jt="-6" />
+			<column name="inventario_cartaceo" type="BOOL" jt="-6" />
+			<column name="inventario_informatizzato" type="BOOL" length="1" jt="-6" />
+			<column name="catalogo_topografico_cartaceo" type="BOOL" jt="-6" />
+			<column name="catalogo_topografico_informatizzato" type="BOOL" length="1" jt="-6" />
 			<column name="id_tipologia_funzionale" type="INT" jt="4" unsigned="y" />
-			<column name="gestisce_servizio_bibliografico_interno" type="BOOL" jt="-7" />
-			<column name="gestisce_servizio_bibliografico_esterno" type="BOOL" length="1" jt="-7" />
+			<column name="gestisce_servizio_bibliografico_interno" type="BOOL" jt="-6" />
+			<column name="gestisce_servizio_bibliografico_esterno" type="BOOL" length="1" jt="-6" />
 			<column name="login_creatore" type="INT" jt="4" unsigned="y" />
 			<column name="login_gestore" type="INT" jt="4" unsigned="y" />
 			<column name="id_stato_biblioteca_workflow" type="INT" jt="4" mandatory="y" />
@@ -911,9 +866,8 @@
 			<fk name="fk_id_stato_biblioteca_workflow" to_schema="abicampania" to_table="stato_biblioteca_workflow" >
 				<fk_column name="id_stato_biblioteca_workflow" pk="id_stato" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="orario_chiusure" >
+		<table name="orario_chiusure" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_orario_chiusure" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
@@ -926,9 +880,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="orario_ufficiali" >
+		<table name="orario_ufficiali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_orario_ufficiali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="giorno" type="INT" jt="4" mandatory="y" />
@@ -943,9 +896,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="orario_variazioni" >
+		<table name="orario_variazioni" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_orario_variazioni" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
@@ -961,16 +913,15 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="partecipa_cataloghi_collettivi_materiale" >
+		<table name="partecipa_cataloghi_collettivi_materiale" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_cataloghi_collettivi_materiale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_cataloghi_collettivi" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_patrimonio_specializzazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
-			<column name="schede" type="BOOL" length="1" jt="-7" />
-			<column name="volume" type="BOOL" length="1" jt="-7" />
-			<column name="microforme" type="BOOL" length="1" jt="-7" />
+			<column name="schede" type="BOOL" length="1" jt="-6" />
+			<column name="volume" type="BOOL" length="1" jt="-6" />
+			<column name="microforme" type="BOOL" length="1" jt="-6" />
 			<column name="id_cataloghi_supporto_digitale_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione_volume" type="VARCHAR" length="255" jt="12" />
 			<column name="percentuale_schede" type="INT" jt="4" unsigned="y" />
@@ -1006,14 +957,13 @@
 			<fk name="fk_4" to_schema="abicampania" to_table="cataloghi_supporto_digitale_tipo" >
 				<fk_column name="id_cataloghi_supporto_digitale_tipo" pk="id_cataloghi_supporto_digitale_tipo" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="partecipa_cataloghi_generali" >
+		<table name="partecipa_cataloghi_generali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_cataloghi_generali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
-			<column name="schede" type="BOOL" length="1" jt="-7" />
-			<column name="volume" type="BOOL" length="1" jt="-7" />
-			<column name="microforme" type="BOOL" length="1" jt="-7" />
+			<column name="schede" type="BOOL" length="1" jt="-6" />
+			<column name="volume" type="BOOL" length="1" jt="-6" />
+			<column name="microforme" type="BOOL" length="1" jt="-6" />
 			<column name="id_cataloghi_supporto_digitale_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione_volume" type="VARCHAR" length="255" jt="12" />
 			<column name="percentuale_schede" type="INT" jt="4" unsigned="y" />
@@ -1044,15 +994,14 @@
 			<fk name="fk_3" to_schema="abicampania" to_table="catalogo_generale_tipo" >
 				<fk_column name="id_catalogo_generale_tipo" pk="id_catalogo_generale_tipo" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="partecipa_cataloghi_speciali_materiale" >
+		<table name="partecipa_cataloghi_speciali_materiale" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_cataloghi_speciali_materiale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_patrimonio_specializzazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
-			<column name="schede" type="BOOL" length="1" jt="-7" />
-			<column name="volume" type="BOOL" length="1" jt="-7" />
-			<column name="microforme" type="BOOL" length="1" jt="-7" />
+			<column name="schede" type="BOOL" length="1" jt="-6" />
+			<column name="volume" type="BOOL" length="1" jt="-6" />
+			<column name="microforme" type="BOOL" length="1" jt="-6" />
 			<column name="id_cataloghi_supporto_digitale_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione_volume" type="VARCHAR" length="255" jt="12" />
 			<column name="percentuale_schede" type="INT" jt="4" unsigned="y" />
@@ -1083,9 +1032,8 @@
 			<fk name="fk_3" to_schema="abicampania" to_table="cataloghi_supporto_digitale_tipo" >
 				<fk_column name="id_cataloghi_supporto_digitale_tipo" pk="id_cataloghi_supporto_digitale_tipo" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="patrimonio" >
+		<table name="patrimonio" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_patrimonio_specializzazione" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="quantita" type="INT" jt="4" mandatory="y" unsigned="y" />
@@ -1100,9 +1048,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="patrimonio_specializzazione" >
 				<fk_column name="id_patrimonio_specializzazione" pk="id_patrimonio_specializzazione" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="patrimonio_specializzazione" >
+		<table name="patrimonio_specializzazione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_patrimonio_specializzazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_patrimonio_specializzazione_categoria" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione" type="TEXT" length="65535" jt="-1" />
@@ -1116,9 +1063,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="patrimonio_specializzazione_categoria" >
 				<fk_column name="id_patrimonio_specializzazione_categoria" pk="id_patrimonio_specializzazione_categoria" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="patrimonio_specializzazione_categoria" >
+		<table name="patrimonio_specializzazione_categoria" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_patrimonio_specializzazione_categoria" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_patrimonio_specializzazione_categoria_madre" type="INT" jt="4" unsigned="y" />
 			<column name="descrizione" type="TEXT" length="65535" jt="-1" />
@@ -1132,12 +1078,11 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="patrimonio_specializzazione_categoria" >
 				<fk_column name="id_patrimonio_specializzazione_categoria_madre" pk="id_patrimonio_specializzazione_categoria" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="prestito_interbibliotecario" >
+		<table name="prestito_interbibliotecario" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_prestito_interbibliotecario" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
-			<column name="nazionale" type="BOOL" length="1" jt="-7" />
-			<column name="internazionale" type="BOOL" length="1" jt="-7" />
+			<column name="nazionale" type="BOOL" length="1" jt="-6" />
+			<column name="internazionale" type="BOOL" length="1" jt="-6" />
 			<column name="id_prestito_interbibliotecario_modo" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_pre_pos_dsc" unique="PRIMARY_KEY" >
 				<column name="id_prestito_interbibliotecario" />
@@ -1148,20 +1093,18 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="prestito_interbibliotecario_modo" >
 				<fk_column name="id_prestito_interbibliotecario_modo" pk="id_prestito_interbibliotecario_modo" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="prestito_interbibliotecario_modo" >
+		<table name="prestito_interbibliotecario_modo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_prestito_interbibliotecario_modo" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="PK_Table_4" unique="PRIMARY_KEY" >
 				<column name="id_prestito_interbibliotecario_modo" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="prestito_locale" >
+		<table name="prestito_locale" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_prestito_locale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
-			<column name="automatizzato" type="BOOL" length="1" jt="-7" />
+			<column name="automatizzato" type="BOOL" length="1" jt="-6" />
 			<column name="durata_giorni" type="INT" length="10" jt="4" unsigned="y" />
 			<index name="pk_prestito_locale" unique="PRIMARY_KEY" >
 				<column name="id_prestito_locale" />
@@ -1172,9 +1115,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="prestito_locale_has_materiale_escluso" >
+		<table name="prestito_locale_has_materiale_escluso" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_prestito_locale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_prestito_locale_materiale_escluso" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_prestito_locale_has_prest_escluso" unique="PRIMARY_KEY" >
@@ -1193,9 +1135,8 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="prestito_locale_materiale_escluso" >
 				<fk_column name="id_prestito_locale_materiale_escluso" pk="id_prestito_locale_materiale_escluso" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="prestito_locale_has_utenti_ammessi" >
+		<table name="prestito_locale_has_utenti_ammessi" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_prestito_locale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_prestito_locale_utenti_ammessi" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_prestito_locale_has_prest_zona" unique="PRIMARY_KEY" >
@@ -1214,33 +1155,29 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="prestito_locale_utenti_ammessi" >
 				<fk_column name="id_prestito_locale_utenti_ammessi" pk="id_prestito_locale_utenti_ammessi" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="prestito_locale_materiale_escluso" >
+		<table name="prestito_locale_materiale_escluso" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_prestito_locale_materiale_escluso" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="pk_prest_escluso" unique="PRIMARY_KEY" >
 				<column name="id_prestito_locale_materiale_escluso" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="prestito_locale_utenti_ammessi" >
+		<table name="prestito_locale_utenti_ammessi" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_prestito_locale_utenti_ammessi" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="pk_prest_zona" unique="PRIMARY_KEY" >
 				<column name="id_prestito_locale_utenti_ammessi" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="profili" >
+		<table name="profili" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_profili" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="denominazione" type="VARCHAR" length="255" jt="12" />
 			<index name="pk_profili" unique="PRIMARY_KEY" >
 				<column name="id_profili" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="provincia" >
+		<table name="provincia" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_provincia" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_regione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="denominazione" type="VARCHAR" length="100" jt="12" mandatory="y" />
@@ -1255,9 +1192,8 @@
 			<fk name="fk_provincia_regione1" to_schema="abicampania" to_table="regione" >
 				<fk_column name="id_regione" pk="id_regione" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="pubblicazioni" >
+		<table name="pubblicazioni" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_pubblicazioni" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
@@ -1270,9 +1206,8 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="regione" >
+		<table name="regione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_regione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_stato" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="denominazione" type="VARCHAR" length="100" jt="12" mandatory="y" />
@@ -1286,9 +1221,8 @@
 			<fk name="fk_regione_stato1" to_schema="abicampania" to_table="stato" >
 				<fk_column name="id_stato" pk="id_stato" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="regolamento" >
+		<table name="regolamento" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_regolamento" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="riferimento_normativa" type="VARCHAR" length="255" jt="12" />
@@ -1302,14 +1236,13 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="riproduzioni" >
+		<table name="riproduzioni" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_riproduzioni_tipo" type="INT" jt="4" mandatory="y" unsigned="y" />
-			<column name="locale" type="BOOL" length="1" jt="-7" />
-			<column name="nazionale" type="BOOL" length="1" jt="-7" />
-			<column name="internazionale" type="BOOL" length="1" jt="-7" />
+			<column name="locale" type="BOOL" length="1" jt="-6" />
+			<column name="nazionale" type="BOOL" length="1" jt="-6" />
+			<column name="internazionale" type="BOOL" length="1" jt="-6" />
 			<index name="idx" unique="PRIMARY_KEY" >
 				<column name="id_biblioteca" />
 				<column name="id_riproduzioni_tipo" />
@@ -1320,58 +1253,51 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="riproduzioni_tipo" >
+		<table name="riproduzioni_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_riproduzioni_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
 			<index name="pk_tipo_riproduzioni" unique="PRIMARY_KEY" >
 				<column name="id_riproduzioni_tipo" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="servizi_bibliotecari_carta" >
+		<table name="servizi_bibliotecari_carta" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id__servizi_bibliotecari_carta" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="PK_Table_2" unique="PRIMARY_KEY" >
 				<column name="id__servizi_bibliotecari_carta" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="servizi_informazioni_bibliografiche_modalita" >
+		<table name="servizi_informazioni_bibliografiche_modalita" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_servizi_informazioni_bibliografiche_modalita" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="PK_Table_2" unique="PRIMARY_KEY" >
 				<column name="id_servizi_informazioni_bibliografiche_modalita" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="sezioni_speciali" >
+		<table name="sezioni_speciali" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_sezioni_speciali" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
 			<index name="pk_sezioni_speciali" unique="PRIMARY_KEY" >
 				<column name="id_sezioni_speciali" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="sistemi_biblioteche" >
+		<table name="sistemi_biblioteche" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_sistemi_biblioteche" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
 			<index name="pk_partec_sist_biblio" unique="PRIMARY_KEY" >
 				<column name="id_sistemi_biblioteche" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="sistemi_prestito_interbibliotecario" >
+		<table name="sistemi_prestito_interbibliotecario" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_sistemi_prestito_interbibliotecario" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<column name="url" type="VARCHAR" length="255" jt="12" />
 			<index name="pk_sist_pr_interbiblio" unique="PRIMARY_KEY" >
 				<column name="id_sistemi_prestito_interbibliotecario" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="spogli_bibliografici" >
+		<table name="spogli_bibliografici" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_spogli_bibliografici" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" />
 			<column name="descrizione_bibliografica" type="TEXT" jt="-1" mandatory="y" />
@@ -1384,27 +1310,24 @@
 			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="stato" >
+		<table name="stato" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_stato" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="denominazione" type="VARCHAR" length="100" jt="12" mandatory="y" />
 			<column name="sigla" type="VARCHAR" length="2" jt="12" />
 			<index name="pk_stato" unique="PRIMARY_KEY" >
 				<column name="id_stato" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="stato_biblioteca_workflow" >
+		<table name="stato_biblioteca_workflow" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_stato" type="INT" jt="4" mandatory="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" />
 			<column name="label" type="VARCHAR" length="64" jt="12" mandatory="y" />
 			<index name="PK_Table_4" unique="PRIMARY_KEY" >
 				<column name="id_stato" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="stato_catalogazione" >
+		<table name="stato_catalogazione" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_stato_catalogazione" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_biblioteca_target" type="INT" jt="4" unsigned="y" />
@@ -1424,25 +1347,22 @@
 			<fk name="fk_2" to_schema="abicampania" to_table="biblioteca" >
 				<fk_column name="id_biblioteca_target" pk="id_biblioteca" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="stato_catalogazione_tipo" >
+		<table name="stato_catalogazione_tipo" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_stato_catalogazione_tipo" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="100" jt="12" />
 			<index name="pk_stato_catalogazione" unique="PRIMARY_KEY" >
 				<column name="id_stato_catalogazione_tipo" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="tipologia_funzionale" >
+		<table name="tipologia_funzionale" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_tipologia_funzionale" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<index name="pk_tipologia_funzionale" unique="PRIMARY_KEY" >
 				<column name="id_tipologia_funzionale" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="utenti" >
+		<table name="utenti" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_utenti" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="login" type="VARCHAR" length="20" jt="12" mandatory="y" />
 			<column name="password" type="VARCHAR" length="50" jt="12" mandatory="y" />
@@ -1456,7 +1376,7 @@
 			<column name="data_modifica_password" type="DATETIME" jt="93" >
 				<comment> <![CDATA[data di ultima generazione della password]]> </comment>
 			</column>
-			<column name="enabled" type="BOOL" jt="-7" mandatory="y" >
+			<column name="enabled" type="BOOL" jt="-6" mandatory="y" >
 				<defo>1</defo>
 			</column>
 			<column name="codice_validazione" type="VARCHAR" length="50" jt="12" />
@@ -1466,9 +1386,8 @@
 			<index name="login" unique="UNIQUE" >
 				<column name="login" />
 			</index>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
-		<table name="utenti_has_profili" >
+		<table name="utenti_has_profili" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_utenti" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<column name="id_profili" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_utenti_has_profili" unique="PRIMARY_KEY" >
@@ -1487,11 +1406,10 @@
 			<fk name="fk_1" to_schema="abicampania" to_table="profili" >
 				<fk_column name="id_profili" pk="id_profili" />
 			</fk>
-			<storage> <![CDATA[engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci]]> </storage>
 		</table>
 	</schema>
-	<connector name="Con_0" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.12-bin.jar" host="localhost" port="3306" instance="abicampania" user="root" schema_mapping="" />
-	<layout name="abi" >
+	<connector name="Con_0" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.12-bin.jar" host="localhost" port="3306" instance="abicampania" user="root" />
+	<layout name="abi" tab_index="0" >
 		<entity schema="abicampania" name="bibliografia" x="663" y="611" />
 		<entity schema="abicampania" name="biblioteca" x="845" y="351" />
 		<entity schema="abicampania" name="cataloghi_collettivi" x="1586" y="624" />
@@ -1551,7 +1469,7 @@
 		<entity schema="abicampania" name="tipologia_funzionale" x="546" y="442" />
 		<entity schema="abicampania" name="utenti" x="910" y="1755" />
 		<entity schema="abicampania" name="utenti_has_profili" x="715" y="1742" />
-		<query name="Sql_000" >
+		<query name="Sql_000" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abi;
 
 CREATE TABLE abi.tipo_riproduzioni ( 
@@ -1562,7 +1480,7 @@ CONSTRAINT pk_tipo_riproduzioni PRIMARY KEY ( id_tipo_riproduzioni )
 
 ]]> </string>
 		</query>
-		<query name="Sql_001" >
+		<query name="Sql_001" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abi;
 
 CREATE TABLE abi.nuova_biblioteca ( 
@@ -1624,7 +1542,7 @@ ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_id_stato_biblioteca_workflow
 
 ]]> </string>
 		</query>
-		<query name="Sql_002" >
+		<query name="Sql_002" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abi;
 
 CREATE TABLE abi.nuova_biblioteca ( 
@@ -1681,7 +1599,7 @@ ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_gestore ( login_gestor
 
 ]]> </string>
 		</query>
-		<query name="Sql_003" >
+		<query name="Sql_003" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abi;
 
 CREATE TABLE abi.ente ( 
@@ -1716,7 +1634,7 @@ ALTER TABLE abi.ente ADD FOREIGN KEY fk_2 ( id_stato ) REFERENCES abi.stato( id_
 
 ]]> </string>
 		</query>
-		<query name="Sql_004" >
+		<query name="Sql_004" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abi;
 
 CREATE TABLE abi.nuova_biblioteca ( 
@@ -1773,7 +1691,7 @@ ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_gestore ( login_gestor
 
 ]]> </string>
 		</query>
-		<query name="Sql_005" >
+		<query name="Sql_005" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abi;
 
 CREATE TABLE abi.nuova_biblioteca ( 
@@ -1830,7 +1748,7 @@ ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_gestore ( login_gestor
 
 ]]> </string>
 		</query>
-		<query name="Sql_006" >
+		<query name="Sql_006" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abi;
 
 CREATE TABLE abi.nuova_biblioteca ( 
@@ -1887,7 +1805,7 @@ ALTER TABLE abi.nuova_biblioteca ADD FOREIGN KEY fk_login_gestore ( login_gestor
 
 ]]> </string>
 		</query>
-		<query name="Sql_007" >
+		<query name="Sql_007" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abicampania;
 
 CREATE TABLE abicampania.accesso_modalita ( 
@@ -2984,7 +2902,7 @@ ALTER TABLE abicampania.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) R
 
 ]]> </string>
 		</query>
-		<query name="Sql_008" >
+		<query name="Sql_008" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abicampania;
 
 CREATE TABLE abicampania.accesso_modalita ( 
@@ -4085,7 +4003,7 @@ ALTER TABLE abicampania.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) R
 
 ]]> </string>
 		</query>
-		<query name="Sql_009" >
+		<query name="Sql_009" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abipuglia;
 
 CREATE TABLE abipuglia.accesso_modalita ( 
@@ -5187,7 +5105,7 @@ ALTER TABLE abipuglia.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) REF
 ]]> </string>
 		</query>
 	</layout>
-	<layout name="biblioteca_has" >
+	<layout name="biblioteca_has" tab_index="-1" >
 		<entity schema="abicampania" name="accesso_modalita" x="1469" y="39" />
 		<entity schema="abicampania" name="biblioteca" x="780" y="91" />
 		<entity schema="abicampania" name="biblioteca_has_accesso_modalita" x="1131" y="39" />
@@ -5219,7 +5137,7 @@ ALTER TABLE abipuglia.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) REF
 		<entity schema="abicampania" name="sistemi_prestito_interbibliotecario" x="1560" y="221" />
 		<entity schema="abicampania" name="utenti" x="429" y="1014" />
 		<entity schema="abicampania" name="utenti_has_profili" x="273" y="1014" />
-		<query name="Sql_000" >
+		<query name="Sql_000" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abicampania;
 
 CREATE TABLE abicampania.accesso_modalita ( 
@@ -6318,7 +6236,7 @@ ALTER TABLE abicampania.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) R
 
 ]]> </string>
 		</query>
-		<query name="Sql_001" >
+		<query name="Sql_001" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abicampania;
 
 CREATE TABLE abicampania.accesso_modalita ( 
@@ -7417,7 +7335,7 @@ ALTER TABLE abicampania.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) R
 ]]> </string>
 		</query>
 	</layout>
-	<layout name="tabelle_dinamiche" >
+	<layout name="tabelle_dinamiche" tab_index="-1" >
 		<entity schema="abicampania" name="accesso_modalita" x="663" y="520" />
 		<entity schema="abicampania" name="cataloghi_collettivi" x="377" y="403" />
 		<entity schema="abicampania" name="cataloghi_collettivi_zona_tipo" x="39" y="429" />
@@ -7453,7 +7371,7 @@ ALTER TABLE abicampania.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) R
 		<entity schema="abicampania" name="stato" x="559" y="156" />
 		<entity schema="abicampania" name="stato_catalogazione_tipo" x="52" y="702" />
 		<entity schema="abicampania" name="tipologia_funzionale" x="65" y="611" />
-		<query name="Sql_000" >
+		<query name="Sql_000" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abicampania;
 
 CREATE TABLE abicampania.accesso_modalita ( 
