@@ -37,8 +37,7 @@ CREATE TABLE abiregionale.biblioteca (
     struttura_gerarchica_sovraordinata VARCHAR( 255 ) NULL,
     accesso_riservato BOOL NULL,
     accesso_handicap BOOL NULL,
-    accesso_limite_eta_min INT UNSIGNED NULL,
-    accesso_limite_eta_max INT UNSIGNED NULL,
+    attivo_accesso_internet BOOL NULL,
     accesso_internet_pagamento BOOL NULL,
     accesso_internet_tempo BOOL NULL,
     accesso_internet_proxy BOOL NULL,
@@ -83,6 +82,7 @@ CREATE TABLE abiregionale.biblioteca (
     n_settim_apertura INT UNSIGNED NULL DEFAULT 0,
     prestito_interbiblio_nazionale BOOL NULL,
     prestito_interbiblio_internazionale BOOL NULL,
+    attivo_informazioni_bibliografiche BOOL NULL,
     gestisce_servizio_bibliografico_interno BOOL NULL,
     gestisce_servizio_bibliografico_esterno BOOL NULL,
     n_prestiti_interbibliotecari_annuo INT UNSIGNED NULL,
@@ -94,6 +94,11 @@ CREATE TABLE abiregionale.biblioteca (
     catalogazione_data_modifica_remota DATETIME NULL,
     catalogazione_note TEXT NULL,
     catalogazione_data_censimento DATETIME NULL,
+    attivo_riproduzioni BOOL NULL,
+    attivo_prestito_locale BOOL NULL,
+    attivo_reference BOOL NULL,
+    reference_locale BOOL NULL,
+    reference_online BOOL NULL,
 CONSTRAINT PK_biblioteca PRIMARY KEY ( id_biblioteca )
  ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -226,16 +231,6 @@ CONSTRAINT pk_biblioteca_has_sist_pr_interbiblio PRIMARY KEY ( id_biblioteca, id
 CREATE INDEX biblioteca_has_sist_pr_interbiblio_FKIndex1 ON abiregionale.biblioteca_has_sistemi_prestito_interbibliotecario ( id_biblioteca );
 
 CREATE INDEX biblioteca_has_sist_pr_interbiblio_FKIndex2 ON abiregionale.biblioteca_has_sistemi_prestito_interbibliotecario ( id_sistemi_prestito_interbibliotecario );
-
-CREATE TABLE abiregionale.biblioteca_has_thesaurus ( 
-    id_biblioteca INT UNSIGNED NOT NULL,
-    id_thesaurus INT UNSIGNED NOT NULL,
-CONSTRAINT pk_amministrata PRIMARY KEY ( id_biblioteca, id_thesaurus )
- ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE INDEX biblioteca_has_thesaurus_FKIndex1 ON abiregionale.biblioteca_has_thesaurus ( id_biblioteca );
-
-CREATE INDEX biblioteca_has_thesaurus_FKIndex2 ON abiregionale.biblioteca_has_thesaurus ( id_thesaurus );
 
 CREATE TABLE abiregionale.biblioteca_has_utenti ( 
     id_utenti INT UNSIGNED NOT NULL,
@@ -428,7 +423,6 @@ CREATE TABLE abiregionale.ente (
     id_ente INT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_stato INT UNSIGNED NOT NULL,
     id_ente_tipologia_amministrativa INT UNSIGNED NOT NULL,
-    id_ente_obiettivo INT UNSIGNED NOT NULL,
     denominazione VARCHAR( 255 ) NULL,
     partita_iva VARCHAR( 11 ) NULL,
     codice_fiscale VARCHAR( 16 ) NULL,
@@ -436,17 +430,9 @@ CREATE TABLE abiregionale.ente (
 CONSTRAINT pk_ente PRIMARY KEY ( id_ente )
  ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE INDEX ente_FKIndex1 ON abiregionale.ente ( id_ente_obiettivo );
-
 CREATE INDEX ente_FKIndex2 ON abiregionale.ente ( id_ente_tipologia_amministrativa );
 
 CREATE INDEX ente_FKIndex3 ON abiregionale.ente ( id_stato );
-
-CREATE TABLE abiregionale.ente_obiettivo ( 
-    id_ente_obiettivo INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    descrizione VARCHAR( 100 ) NOT NULL,
-CONSTRAINT pk_obiettivo PRIMARY KEY ( id_ente_obiettivo )
- ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE abiregionale.ente_tipologia_amministrativa ( 
     id_ente_tipologia_amministrativa INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -459,15 +445,6 @@ CREATE TABLE abiregionale.fondi_antichi_consistenza (
     descrizione VARCHAR( 255 ) NOT NULL,
 CONSTRAINT pk_tipologia_funzionale PRIMARY KEY ( id_fondi_antichi_consistenza )
  ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE abiregionale.fondi_digitali ( 
-    id_fondi_digitali INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    id_biblioteca INT UNSIGNED NOT NULL,
-    descrizione VARCHAR( 255 ) NULL,
-CONSTRAINT pk_fondi_digitali PRIMARY KEY ( id_fondi_digitali )
- ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE INDEX fondi_digitali_FKIndex1 ON abiregionale.fondi_digitali ( id_biblioteca );
 
 CREATE TABLE abiregionale.fondi_speciali ( 
     id_fondi_speciali INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -844,6 +821,7 @@ CONSTRAINT pk_partec_sist_biblio PRIMARY KEY ( id_sistemi_biblioteche )
 CREATE TABLE abiregionale.sistemi_prestito_interbibliotecario ( 
     id_sistemi_prestito_interbibliotecario INT UNSIGNED NOT NULL AUTO_INCREMENT,
     descrizione VARCHAR( 255 ) NOT NULL,
+    url VARCHAR( 255 ) NULL,
 CONSTRAINT pk_sist_pr_interbiblio PRIMARY KEY ( id_sistemi_prestito_interbibliotecario )
  ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -883,12 +861,6 @@ CREATE TABLE abiregionale.stato_catalogazione_tipo (
     id_stato_catalogazione_tipo INT UNSIGNED NOT NULL AUTO_INCREMENT,
     descrizione VARCHAR( 100 ) NULL,
 CONSTRAINT pk_stato_catalogazione PRIMARY KEY ( id_stato_catalogazione_tipo )
- ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE abiregionale.thesaurus ( 
-    id_thesaurus INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    nome VARCHAR( 255 ) NULL,
-CONSTRAINT pk_thesaurus PRIMARY KEY ( id_thesaurus )
  ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE abiregionale.tipologia_funzionale ( 
@@ -991,10 +963,6 @@ ALTER TABLE abiregionale.biblioteca_has_sistemi_prestito_interbibliotecario ADD 
 
 ALTER TABLE abiregionale.biblioteca_has_sistemi_prestito_interbibliotecario ADD FOREIGN KEY fk_1 ( id_sistemi_prestito_interbibliotecario ) REFERENCES abiregionale.sistemi_prestito_interbibliotecario( id_sistemi_prestito_interbibliotecario ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-ALTER TABLE abiregionale.biblioteca_has_thesaurus ADD FOREIGN KEY fk_amministrata_biblioteca1 ( id_biblioteca ) REFERENCES abiregionale.biblioteca( id_biblioteca ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE abiregionale.biblioteca_has_thesaurus ADD FOREIGN KEY fk_amministrata_thesaurus1 ( id_thesaurus ) REFERENCES abiregionale.thesaurus( id_thesaurus ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 ALTER TABLE abiregionale.biblioteca_has_utenti ADD FOREIGN KEY fk_0 ( id_utenti ) REFERENCES abiregionale.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE abiregionale.biblioteca_has_utenti ADD FOREIGN KEY fk_1 ( id_biblioteca ) REFERENCES abiregionale.biblioteca( id_biblioteca ) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -1041,11 +1009,7 @@ ALTER TABLE abiregionale.dewey_libero ADD FOREIGN KEY fk_1 ( id_dewey ) REFERENC
 
 ALTER TABLE abiregionale.ente ADD FOREIGN KEY fk_0 ( id_ente_tipologia_amministrativa ) REFERENCES abiregionale.ente_tipologia_amministrativa( id_ente_tipologia_amministrativa ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-ALTER TABLE abiregionale.ente ADD FOREIGN KEY fk_1 ( id_ente_obiettivo ) REFERENCES abiregionale.ente_obiettivo( id_ente_obiettivo ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 ALTER TABLE abiregionale.ente ADD FOREIGN KEY fk_2 ( id_stato ) REFERENCES abiregionale.stato( id_stato ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE abiregionale.fondi_digitali ADD FOREIGN KEY fk_0 ( id_biblioteca ) REFERENCES abiregionale.biblioteca( id_biblioteca ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE abiregionale.fondi_speciali ADD FOREIGN KEY fk_0 ( id_dewey ) REFERENCES abiregionale.dewey( id_dewey ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -1132,5 +1096,3 @@ ALTER TABLE abiregionale.stato_catalogazione ADD FOREIGN KEY fk_2 ( id_bibliotec
 ALTER TABLE abiregionale.utenti_has_profili ADD FOREIGN KEY fk_0 ( id_utenti ) REFERENCES abiregionale.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE abiregionale.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) REFERENCES abiregionale.profili( id_profili ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-
