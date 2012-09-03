@@ -97,12 +97,12 @@
       <column comment="" defaultValue="" key="false" length="10" name="id_sort" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="patr_spec_f">
         <mapperTableEntries name="id_patrimonio_specializzazione" expression="patr_spec_i.id_pats " type="id_String"/>
         <mapperTableEntries name="id_patrimonio_specializzazione_categoria" expression="patr_spec_i.id_patc " type="id_Long"/>
-        <mapperTableEntries name="descrizione" expression="patr_spec_i.descrizione " type="id_String" nullable="true"/>
+        <mapperTableEntries name="descrizione" expression="patr_spec_i.descrizione.indexOf(&quot;*&quot;) != -1 ?&#xA;patr_spec_i.descrizione.substring(0, patr_spec_i.descrizione.indexOf(&quot;*&quot;)) :&#xA;patr_spec_i.descrizione&#xA; " type="id_String" nullable="true"/>
         <mapperTableEntries name="id_sort" expression="patr_spec_i.id_sort " type="id_Integer" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="patr_spec_i" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
