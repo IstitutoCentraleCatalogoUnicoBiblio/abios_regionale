@@ -99,6 +99,7 @@ CREATE TABLE abiregionale.biblioteca (
     attivo_reference BOOL NULL,
     reference_locale BOOL NULL,
     reference_online BOOL NULL,
+    attivo_document_delivery BOOL NULL,
 CONSTRAINT PK_biblioteca PRIMARY KEY ( id_biblioteca )
  ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -131,6 +132,16 @@ CONSTRAINT pk_special PRIMARY KEY ( id_biblioteca, id_dewey )
 CREATE INDEX biblioteca_has_dewey_FKIndex1 ON abiregionale.biblioteca_has_dewey ( id_biblioteca );
 
 CREATE INDEX biblioteca_has_dewey_FKIndex2 ON abiregionale.biblioteca_has_dewey ( id_dewey );
+
+CREATE TABLE abiregionale.biblioteca_has_document_delivery ( 
+    id_biblioteca INT UNSIGNED NOT NULL,
+    id_riproduzioni_tipo INT UNSIGNED NOT NULL,
+CONSTRAINT pk_bib_has_doc_del PRIMARY KEY ( id_biblioteca, id_riproduzioni_tipo )
+ ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE INDEX idx_bib_has_doc_del1 ON abiregionale.biblioteca_has_document_delivery ( id_biblioteca );
+
+CREATE INDEX idx_bib_has_doc_del2 ON abiregionale.biblioteca_has_document_delivery ( id_riproduzioni_tipo );
 
 CREATE TABLE abiregionale.biblioteca_has_fondi_speciali ( 
     id_biblioteca INT UNSIGNED NOT NULL,
@@ -922,6 +933,10 @@ ALTER TABLE abiregionale.biblioteca_has_accesso_modalita ADD FOREIGN KEY fk_1 ( 
 ALTER TABLE abiregionale.biblioteca_has_dewey ADD FOREIGN KEY fk_0 ( id_biblioteca ) REFERENCES abiregionale.biblioteca( id_biblioteca ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE abiregionale.biblioteca_has_dewey ADD FOREIGN KEY fk_1 ( id_dewey ) REFERENCES abiregionale.dewey( id_dewey ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abiregionale.biblioteca_has_document_delivery ADD FOREIGN KEY fk_ripro_tipo ( id_riproduzioni_tipo ) REFERENCES abiregionale.riproduzioni_tipo( id_riproduzioni_tipo ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE abiregionale.biblioteca_has_document_delivery ADD FOREIGN KEY fk_biblioteca ( id_biblioteca ) REFERENCES abiregionale.biblioteca( id_biblioteca ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE abiregionale.biblioteca_has_fondi_speciali ADD FOREIGN KEY fk_0 ( id_biblioteca ) REFERENCES abiregionale.biblioteca( id_biblioteca ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
