@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="abidesign" version="42" database="MySql" >
-	<schema name="abicampania" catalogname="abicampania" defo="y" >
+	<schema name="abipuglia" catalogname="abipuglia" defo="y" >
 		<table name="accesso_modalita" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_accesso_modalita" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="descrizione" type="VARCHAR" length="255" jt="12" mandatory="y" />
@@ -18,7 +18,7 @@
 			<index name="bibliografia_FKIndex1" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -122,6 +122,7 @@
 			<column name="reference_online" type="BOOL" jt="-6" />
 			<column name="attivo_document_delivery" type="BOOL" jt="-6" />
 			<column name="attivo_deposito_legale" type="BOOL" jt="-6" />
+			<column name="fonte" type="VARCHAR" length="255" jt="12" />
 			<index name="biblioteca_FKIndex1" unique="NORMAL" >
 				<column name="id_ente" />
 			</index>
@@ -143,25 +144,25 @@
 			<index name="idx_1_utentemod" unique="NORMAL" >
 				<column name="id_utenti" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="comune" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="comune" >
 				<fk_column name="id_comune" pk="id_comune" />
 			</fk>
-			<fk name="fk_2" to_schema="abicampania" to_table="tipologia_funzionale" >
+			<fk name="fk_2" to_schema="abipuglia" to_table="tipologia_funzionale" >
 				<fk_column name="id_tipologia_funzionale" pk="id_tipologia_funzionale" />
 			</fk>
-			<fk name="fk_3" to_schema="abicampania" to_table="ente" >
+			<fk name="fk_3" to_schema="abipuglia" to_table="ente" >
 				<fk_column name="id_ente" pk="id_ente" />
 			</fk>
-			<fk name="fk_4" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_4" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca_padre" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="fondi_antichi_consistenza" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="fondi_antichi_consistenza" >
 				<fk_column name="id_fondi_antichi_consistenza" pk="id_fondi_antichi_consistenza" />
 			</fk>
-			<fk name="fk_5" to_schema="abicampania" to_table="utenti" >
+			<fk name="fk_5" to_schema="abipuglia" to_table="utenti" >
 				<fk_column name="id_utenti" pk="id_utenti" />
 			</fk>
-			<fk name="fk_6" to_schema="abicampania" to_table="stato_biblioteca_workflow" >
+			<fk name="fk_6" to_schema="abipuglia" to_table="stato_biblioteca_workflow" >
 				<fk_column name="id_stato_biblioteca_workflow" pk="id_stato" />
 			</fk>
 		</table>
@@ -175,10 +176,10 @@
 				<column name="id_accesso_modalita" />
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="accesso_modalita" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="accesso_modalita" >
 				<fk_column name="id_accesso_modalita" pk="id_accesso_modalita" />
 			</fk>
 		</table>
@@ -195,10 +196,10 @@
 			<index name="biblioteca_has_dewey_FKIndex2" unique="NORMAL" >
 				<column name="id_dewey" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="dewey" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="dewey" >
 				<fk_column name="id_dewey" pk="id_dewey" />
 			</fk>
 		</table>
@@ -215,10 +216,10 @@
 			<index name="idx_bib_has_doc_del2" unique="NORMAL" >
 				<column name="id_riproduzioni_tipo" />
 			</index>
-			<fk name="fk_ripro_tipo" to_schema="abicampania" to_table="riproduzioni_tipo" >
+			<fk name="fk_ripro_tipo" to_schema="abipuglia" to_table="riproduzioni_tipo" >
 				<fk_column name="id_riproduzioni_tipo" pk="id_riproduzioni_tipo" />
 			</fk>
-			<fk name="fk_biblioteca" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_biblioteca" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -235,10 +236,10 @@
 			<index name="biblioteca_has_fondi_speciali_FKIndex2" unique="NORMAL" >
 				<column name="id_fondi_speciali" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="fondi_speciali" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="fondi_speciali" >
 				<fk_column name="id_fondi_speciali" pk="id_fondi_speciali" />
 			</fk>
 		</table>
@@ -255,10 +256,10 @@
 			<index name="biblioteca_has_indic_classificata_FKIndex2" unique="NORMAL" >
 				<column name="id_indicizzazione_classificata" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="indicizzazione_classificata" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="indicizzazione_classificata" >
 				<fk_column name="id_indicizzazione_classificata" pk="id_indicizzazione_classificata" />
 			</fk>
 		</table>
@@ -275,10 +276,10 @@
 			<index name="biblioteca_has_indic_soggetto_FKIndex2" unique="NORMAL" >
 				<column name="id_indicizzazione_soggetto" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="indicizzazione_soggetto" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="indicizzazione_soggetto" >
 				<fk_column name="id_indicizzazione_soggetto" pk="id_indicizzazione_soggetto" />
 			</fk>
 		</table>
@@ -295,10 +296,10 @@
 			<index name="biblioteca_has_norme_catalogazione_FKIndex2" unique="NORMAL" >
 				<column name="id_norme_catalogazione" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="norme_catalogazione" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="norme_catalogazione" >
 				<fk_column name="id_norme_catalogazione" pk="id_norme_catalogazione" />
 			</fk>
 		</table>
@@ -315,10 +316,10 @@
 			<index name="biblioteca_has_pre_pos_dsc_FKIndex2" unique="NORMAL" >
 				<column name="id_prestito_interbibliotecario" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="prestito_interbibliotecario" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="prestito_interbibliotecario" >
 				<fk_column name="id_prestito_interbibliotecario" pk="id_prestito_interbibliotecario" />
 			</fk>
 		</table>
@@ -335,10 +336,10 @@
 			<index name="idx_biblioteca_has_servizi_bibliotecari" unique="NORMAL" >
 				<column name="id__servizi_bibliotecari_carta" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="servizi_bibliotecari_carta" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="servizi_bibliotecari_carta" >
 				<fk_column name="id__servizi_bibliotecari_carta" pk="id__servizi_bibliotecari_carta" />
 			</fk>
 		</table>
@@ -355,10 +356,10 @@
 			<index name="idx_biblioteca_has_servizi_bibliotecari" unique="NORMAL" >
 				<column name="id_servizi_informazioni_bibliografiche_modalita" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="servizi_informazioni_bibliografiche_modalita" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="servizi_informazioni_bibliografiche_modalita" >
 				<fk_column name="id_servizi_informazioni_bibliografiche_modalita" pk="id_servizi_informazioni_bibliografiche_modalita" />
 			</fk>
 		</table>
@@ -375,10 +376,10 @@
 			<index name="biblioteca_has_sezioni_speciali_FKIndex2" unique="NORMAL" >
 				<column name="id_sezioni_speciali" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="sezioni_speciali" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="sezioni_speciali" >
 				<fk_column name="id_sezioni_speciali" pk="id_sezioni_speciali" />
 			</fk>
 		</table>
@@ -395,10 +396,10 @@
 			<index name="biblioteca_has_partec_sist_biblio_FKIndex2" unique="NORMAL" >
 				<column name="id_sistemi_biblioteche" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="sistemi_biblioteche" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="sistemi_biblioteche" >
 				<fk_column name="id_sistemi_biblioteche" pk="id_sistemi_biblioteche" />
 			</fk>
 		</table>
@@ -415,10 +416,10 @@
 			<index name="biblioteca_has_sist_pr_interbiblio_FKIndex2" unique="NORMAL" >
 				<column name="id_sistemi_prestito_interbibliotecario" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="sistemi_prestito_interbibliotecario" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="sistemi_prestito_interbibliotecario" >
 				<fk_column name="id_sistemi_prestito_interbibliotecario" pk="id_sistemi_prestito_interbibliotecario" />
 			</fk>
 		</table>
@@ -429,10 +430,10 @@
 				<column name="id_utenti" />
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="utenti" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="utenti" >
 				<fk_column name="id_utenti" pk="id_utenti" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -447,7 +448,7 @@
 			<index name="idx_cataloghi_collettivi_estensione" unique="NORMAL" >
 				<column name="id_cataloghi_collettivi_zona_tipo" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="cataloghi_collettivi_zona_tipo" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="cataloghi_collettivi_zona_tipo" >
 				<fk_column name="id_cataloghi_collettivi_zona_tipo" pk="id_cataloghi_collettivi_zona_tipo" />
 			</fk>
 		</table>
@@ -462,7 +463,7 @@
 			<index name="idx_cataloghi_collettivi_url" unique="NORMAL" >
 				<column name="id_cataloghi_collettivi_materiale" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="partecipa_cataloghi_collettivi_materiale" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="partecipa_cataloghi_collettivi_materiale" >
 				<fk_column name="id_cataloghi_collettivi_materiale" pk="id_cataloghi_collettivi_materiale" />
 			</fk>
 		</table>
@@ -484,7 +485,7 @@
 			<index name="idx_id_cataloghi_generali" unique="NORMAL" >
 				<column name="id_cataloghi_generali" />
 			</index>
-			<fk name="fk_cataloghi_generali_url" to_schema="abicampania" to_table="partecipa_cataloghi_generali" >
+			<fk name="fk_cataloghi_generali_url" to_schema="abipuglia" to_table="partecipa_cataloghi_generali" >
 				<fk_column name="id_cataloghi_generali" pk="id_cataloghi_generali" />
 			</fk>
 		</table>
@@ -499,7 +500,7 @@
 			<index name="idx_cataloghi_speciali_url" unique="NORMAL" >
 				<column name="id_cataloghi_speciali_materiale" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="partecipa_cataloghi_speciali_materiale" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="partecipa_cataloghi_speciali_materiale" >
 				<fk_column name="id_cataloghi_speciali_materiale" pk="id_cataloghi_speciali_materiale" />
 			</fk>
 		</table>
@@ -531,10 +532,10 @@
 			<index name="idx_codici" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="codici_tipo" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="codici_tipo" >
 				<fk_column name="id_codici" pk="id_codici" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -557,7 +558,7 @@
 			<index name="comune_FKIndex1" unique="NORMAL" >
 				<column name="id_provincia" />
 			</index>
-			<fk name="fk_comune_provincia1" to_schema="abicampania" to_table="provincia" >
+			<fk name="fk_comune_provincia1" to_schema="abipuglia" to_table="provincia" >
 				<fk_column name="id_provincia" pk="id_provincia" />
 			</fk>
 		</table>
@@ -571,7 +572,7 @@
 			<index name="comunicazioni_FKIndex1" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -584,10 +585,10 @@
 			<index name="PK_contatti" unique="PRIMARY_KEY" >
 				<column name="id_contatti" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="contatti_tipo" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="contatti_tipo" >
 				<fk_column name="id_contatti_tipi" pk="id_contatti_tipo" />
 			</fk>
 		</table>
@@ -606,7 +607,7 @@
 			<index name="pk_dati_province_istat" unique="PRIMARY_KEY" >
 				<column name="id_provincia" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="provincia" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="provincia" >
 				<fk_column name="id_provincia" pk="id_provincia" />
 			</fk>
 		</table>
@@ -620,7 +621,7 @@
 			<index name="pk_dati_regioni_istat" unique="PRIMARY_KEY" >
 				<column name="id_regione" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="regione" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="regione" >
 				<fk_column name="id_regione" pk="id_regione" />
 			</fk>
 		</table>
@@ -634,7 +635,7 @@
 			<index name="denominata_anche_FKIndex1" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -648,7 +649,7 @@
 			<index name="denominata_gia_FKIndex1" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -660,10 +661,10 @@
 				<column name="id_biblioteca" />
 				<column name="id_depositi_legali_tipo" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="depositi_legali_tipo" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="depositi_legali_tipo" >
 				<fk_column name="id_depositi_legali_tipo" pk="id_depositi_legali_tipo" />
 			</fk>
 		</table>
@@ -682,10 +683,10 @@
 				<column name="id_biblioteca" />
 				<column name="id_destinazioni_sociali_tipo" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="destinazioni_sociali_tipo" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="destinazioni_sociali_tipo" >
 				<fk_column name="id_destinazioni_sociali_tipo" pk="id_destinazioni_sociali" />
 			</fk>
 		</table>
@@ -711,10 +712,10 @@
 				<column name="id_biblioteca" />
 				<column name="id_dewey" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="dewey" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="dewey" >
 				<fk_column name="id_dewey" pk="id_dewey" />
 			</fk>
 		</table>
@@ -735,10 +736,10 @@
 			<index name="ente_FKIndex3" unique="NORMAL" >
 				<column name="id_stato" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="ente_tipologia_amministrativa" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="ente_tipologia_amministrativa" >
 				<fk_column name="id_ente_tipologia_amministrativa" pk="id_ente_tipologia_amministrativa" />
 			</fk>
-			<fk name="fk_2" to_schema="abicampania" to_table="stato" >
+			<fk name="fk_2" to_schema="abipuglia" to_table="stato" >
 				<fk_column name="id_stato" pk="id_stato" />
 			</fk>
 		</table>
@@ -774,10 +775,10 @@
 			<index name="idx_fondi_speciali" unique="NORMAL" >
 				<column name="id_fondi_speciali_catalogazione_inventario" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="dewey" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="dewey" >
 				<fk_column name="id_dewey" pk="id_dewey" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="fondi_speciali_catalogazione_inventario" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="fondi_speciali_catalogazione_inventario" >
 				<fk_column name="id_fondi_speciali_catalogazione_inventario" pk="id_fondi_speciali_catalogazione_inventario" />
 			</fk>
 		</table>
@@ -798,7 +799,7 @@
 			<index name="pk_id_bib" unique="PRIMARY_KEY" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -873,19 +874,19 @@
 			<index name="idx_nuova_biblioteca" unique="NORMAL" >
 				<column name="id_stato_biblioteca_workflow" />
 			</index>
-			<fk name="fk_comune" to_schema="abicampania" to_table="comune" >
+			<fk name="fk_comune" to_schema="abipuglia" to_table="comune" >
 				<fk_column name="id_comune" pk="id_comune" />
 			</fk>
-			<fk name="fk_tipologia_funzionale" to_schema="abicampania" to_table="tipologia_funzionale" >
+			<fk name="fk_tipologia_funzionale" to_schema="abipuglia" to_table="tipologia_funzionale" >
 				<fk_column name="id_tipologia_funzionale" pk="id_tipologia_funzionale" />
 			</fk>
-			<fk name="fk_login_creatore" to_schema="abicampania" to_table="utenti" >
+			<fk name="fk_login_creatore" to_schema="abipuglia" to_table="utenti" >
 				<fk_column name="login_creatore" pk="id_utenti" />
 			</fk>
-			<fk name="fk_login_gestore" to_schema="abicampania" to_table="utenti" >
+			<fk name="fk_login_gestore" to_schema="abipuglia" to_table="utenti" >
 				<fk_column name="login_gestore" pk="id_utenti" />
 			</fk>
-			<fk name="fk_id_stato_biblioteca_workflow" to_schema="abicampania" to_table="stato_biblioteca_workflow" >
+			<fk name="fk_id_stato_biblioteca_workflow" to_schema="abipuglia" to_table="stato_biblioteca_workflow" >
 				<fk_column name="id_stato_biblioteca_workflow" pk="id_stato" />
 			</fk>
 		</table>
@@ -899,7 +900,7 @@
 			<index name="periodo_chiusura_FKIndex1" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -915,7 +916,7 @@
 			<index name="orario_ufficiale_FKIndex1" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -932,7 +933,7 @@
 			<index name="orari_variazioni_FKIndex1" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -967,16 +968,16 @@
 			<index name="idx_cataloghi_collettivi" unique="NORMAL" >
 				<column name="id_cataloghi_supporto_digitale_tipo" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="cataloghi_collettivi" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="cataloghi_collettivi" >
 				<fk_column name="id_cataloghi_collettivi" pk="id_cataloghi_collettivi" />
 			</fk>
-			<fk name="fk_2" to_schema="abicampania" to_table="patrimonio_specializzazione" >
+			<fk name="fk_2" to_schema="abipuglia" to_table="patrimonio_specializzazione" >
 				<fk_column name="id_patrimonio_specializzazione" pk="id_patrimonio_specializzazione" />
 			</fk>
-			<fk name="fk_4" to_schema="abicampania" to_table="cataloghi_supporto_digitale_tipo" >
+			<fk name="fk_4" to_schema="abipuglia" to_table="cataloghi_supporto_digitale_tipo" >
 				<fk_column name="id_cataloghi_supporto_digitale_tipo" pk="id_cataloghi_supporto_digitale_tipo" />
 			</fk>
 		</table>
@@ -1007,13 +1008,13 @@
 			<index name="idx_1_cataloghi_generali_tipo" unique="NORMAL" >
 				<column name="id_catalogo_generale_tipo" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_2" to_schema="abicampania" to_table="cataloghi_supporto_digitale_tipo" >
+			<fk name="fk_2" to_schema="abipuglia" to_table="cataloghi_supporto_digitale_tipo" >
 				<fk_column name="id_cataloghi_supporto_digitale_tipo" pk="id_cataloghi_supporto_digitale_tipo" />
 			</fk>
-			<fk name="fk_3" to_schema="abicampania" to_table="catalogo_generale_tipo" >
+			<fk name="fk_3" to_schema="abipuglia" to_table="catalogo_generale_tipo" >
 				<fk_column name="id_catalogo_generale_tipo" pk="id_catalogo_generale_tipo" />
 			</fk>
 		</table>
@@ -1045,13 +1046,13 @@
 			<index name="idx_cataloghi_speciali" unique="NORMAL" >
 				<column name="id_cataloghi_supporto_digitale_tipo" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_2" to_schema="abicampania" to_table="patrimonio_specializzazione" >
+			<fk name="fk_2" to_schema="abipuglia" to_table="patrimonio_specializzazione" >
 				<fk_column name="id_patrimonio_specializzazione" pk="id_patrimonio_specializzazione" />
 			</fk>
-			<fk name="fk_3" to_schema="abicampania" to_table="cataloghi_supporto_digitale_tipo" >
+			<fk name="fk_3" to_schema="abipuglia" to_table="cataloghi_supporto_digitale_tipo" >
 				<fk_column name="id_cataloghi_supporto_digitale_tipo" pk="id_cataloghi_supporto_digitale_tipo" />
 			</fk>
 		</table>
@@ -1064,10 +1065,10 @@
 				<column name="id_biblioteca" />
 				<column name="id_patrimonio_specializzazione" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="patrimonio_specializzazione" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="patrimonio_specializzazione" >
 				<fk_column name="id_patrimonio_specializzazione" pk="id_patrimonio_specializzazione" />
 			</fk>
 		</table>
@@ -1082,7 +1083,7 @@
 			<index name="patr_spec_FKIndex1" unique="NORMAL" >
 				<column name="id_patrimonio_specializzazione_categoria" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="patrimonio_specializzazione_categoria" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="patrimonio_specializzazione_categoria" >
 				<fk_column name="id_patrimonio_specializzazione_categoria" pk="id_patrimonio_specializzazione_categoria" />
 			</fk>
 		</table>
@@ -1097,7 +1098,7 @@
 			<index name="patr_spec_cat_FKIndex1" unique="NORMAL" >
 				<column name="id_patrimonio_specializzazione_categoria_madre" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="patrimonio_specializzazione_categoria" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="patrimonio_specializzazione_categoria" >
 				<fk_column name="id_patrimonio_specializzazione_categoria_madre" pk="id_patrimonio_specializzazione_categoria" />
 			</fk>
 		</table>
@@ -1112,7 +1113,7 @@
 			<index name="idx_prestito_interbibliotecario" unique="NORMAL" >
 				<column name="id_prestito_interbibliotecario_modo" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="prestito_interbibliotecario_modo" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="prestito_interbibliotecario_modo" >
 				<fk_column name="id_prestito_interbibliotecario_modo" pk="id_prestito_interbibliotecario_modo" />
 			</fk>
 		</table>
@@ -1134,7 +1135,7 @@
 			<index name="prestito_locale_FKIndex1" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -1151,10 +1152,10 @@
 			<index name="prestito_locale_has_prest_escluso_FKIndex2" unique="NORMAL" >
 				<column name="id_prestito_locale_materiale_escluso" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="prestito_locale" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="prestito_locale" >
 				<fk_column name="id_prestito_locale" pk="id_prestito_locale" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="prestito_locale_materiale_escluso" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="prestito_locale_materiale_escluso" >
 				<fk_column name="id_prestito_locale_materiale_escluso" pk="id_prestito_locale_materiale_escluso" />
 			</fk>
 		</table>
@@ -1171,10 +1172,10 @@
 			<index name="prestito_locale_has_prest_zona_FKIndex2" unique="NORMAL" >
 				<column name="id_prestito_locale_utenti_ammessi" />
 			</index>
-			<fk name="fk_1" to_schema="abicampania" to_table="prestito_locale" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="prestito_locale" >
 				<fk_column name="id_prestito_locale" pk="id_prestito_locale" />
 			</fk>
-			<fk name="fk_0" to_schema="abicampania" to_table="prestito_locale_utenti_ammessi" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="prestito_locale_utenti_ammessi" >
 				<fk_column name="id_prestito_locale_utenti_ammessi" pk="id_prestito_locale_utenti_ammessi" />
 			</fk>
 		</table>
@@ -1211,7 +1212,7 @@
 			<index name="provincia_FKIndex1" unique="NORMAL" >
 				<column name="id_regione" />
 			</index>
-			<fk name="fk_provincia_regione1" to_schema="abicampania" to_table="regione" >
+			<fk name="fk_provincia_regione1" to_schema="abipuglia" to_table="regione" >
 				<fk_column name="id_regione" pk="id_regione" />
 			</fk>
 		</table>
@@ -1225,7 +1226,7 @@
 			<index name="PK_biblioteca_has_pubblicazioni" unique="PRIMARY_KEY" >
 				<column name="id_pubblicazioni" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -1240,7 +1241,7 @@
 			<index name="regione_FKIndex1" unique="NORMAL" >
 				<column name="id_stato" />
 			</index>
-			<fk name="fk_regione_stato1" to_schema="abicampania" to_table="stato" >
+			<fk name="fk_regione_stato1" to_schema="abipuglia" to_table="stato" >
 				<fk_column name="id_stato" pk="id_stato" />
 			</fk>
 		</table>
@@ -1255,7 +1256,7 @@
 			<index name="regolamento_FKIndex1" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -1269,10 +1270,10 @@
 				<column name="id_biblioteca" />
 				<column name="id_riproduzioni_tipo" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="riproduzioni_tipo" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="riproduzioni_tipo" >
 				<fk_column name="id_riproduzioni_tipo" pk="id_riproduzioni_tipo" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -1329,7 +1330,7 @@
 			<index name="idx_spogli_bibliografici" unique="NORMAL" >
 				<column name="id_biblioteca" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -1360,13 +1361,13 @@
 			<index name="idx_stato_catalogazione" unique="NORMAL" >
 				<column name="id_biblioteca_target" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca" pk="id_biblioteca" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="stato_catalogazione_tipo" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="stato_catalogazione_tipo" >
 				<fk_column name="id_stato_catalogazione" pk="id_stato_catalogazione_tipo" />
 			</fk>
-			<fk name="fk_2" to_schema="abicampania" to_table="biblioteca" >
+			<fk name="fk_2" to_schema="abipuglia" to_table="biblioteca" >
 				<fk_column name="id_biblioteca_target" pk="id_biblioteca" />
 			</fk>
 		</table>
@@ -1422,75 +1423,75 @@
 			<index name="utenti_has_profili_FKIndex2" unique="NORMAL" >
 				<column name="id_profili" />
 			</index>
-			<fk name="fk_0" to_schema="abicampania" to_table="utenti" >
+			<fk name="fk_0" to_schema="abipuglia" to_table="utenti" >
 				<fk_column name="id_utenti" pk="id_utenti" />
 			</fk>
-			<fk name="fk_1" to_schema="abicampania" to_table="profili" >
+			<fk name="fk_1" to_schema="abipuglia" to_table="profili" >
 				<fk_column name="id_profili" pk="id_profili" />
 			</fk>
 		</table>
 	</schema>
-	<connector name="Con_0" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.12-bin.jar" host="localhost" port="3306" instance="abicampania" user="root" />
+	<connector name="Con_0" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.12-bin.jar" host="localhost" port="3306" instance="abipuglia" user="root" />
 	<layout name="abi" tab_index="1" >
-		<entity schema="abicampania" name="bibliografia" x="663" y="611" />
-		<entity schema="abicampania" name="biblioteca" x="845" y="351" />
-		<entity schema="abicampania" name="cataloghi_collettivi" x="1586" y="624" />
-		<entity schema="abicampania" name="cataloghi_collettivi_materiale_url" x="1599" y="728" />
-		<entity schema="abicampania" name="cataloghi_collettivi_zona_tipo" x="1898" y="624" />
-		<entity schema="abicampania" name="cataloghi_generali_url" x="1573" y="1365" />
-		<entity schema="abicampania" name="cataloghi_speciali_materiale_url" x="1443" y="1170" />
-		<entity schema="abicampania" name="cataloghi_supporto_digitale_tipo" x="1950" y="832" />
-		<entity schema="abicampania" name="catalogo_generale_tipo" x="1443" y="1508" />
-		<entity schema="abicampania" name="codici" x="1274" y="91" />
-		<entity schema="abicampania" name="codici_tipo" x="1430" y="104" />
-		<entity schema="abicampania" name="comune" x="650" y="247" />
-		<entity schema="abicampania" name="comunicazioni" x="663" y="520" />
-		<entity schema="abicampania" name="contatti" x="962" y="39" />
-		<entity schema="abicampania" name="contatti_tipo" x="1105" y="52" />
-		<entity schema="abicampania" name="dati_province_istat" x="455" y="78" />
-		<entity schema="abicampania" name="dati_regioni_istat" x="312" y="65" />
-		<entity schema="abicampania" name="denominazioni_alternative" x="702" y="52" />
-		<entity schema="abicampania" name="denominazioni_precedenti" x="702" y="143" />
-		<entity schema="abicampania" name="depositi_legali" x="650" y="1287" />
-		<entity schema="abicampania" name="depositi_legali_tipo" x="442" y="1287" />
-		<entity schema="abicampania" name="destinazioni_sociali" x="520" y="1482" />
-		<entity schema="abicampania" name="destinazioni_sociali_tipo" x="260" y="1495" />
-		<entity schema="abicampania" name="dewey" x="442" y="1157" />
-		<entity schema="abicampania" name="dewey_libero" x="650" y="1157" />
-		<entity schema="abicampania" name="ente" x="260" y="377" />
-		<entity schema="abicampania" name="ente_tipologia_amministrativa" x="39" y="377" />
-		<entity schema="abicampania" name="fondi_antichi_consistenza" x="416" y="585" />
-		<entity schema="abicampania" name="geolocalizzazione" x="1261" y="1599" />
-		<entity schema="abicampania" name="nuova_biblioteca" x="91" y="572" />
-		<entity schema="abicampania" name="orario_chiusure" x="1183" y="299" />
-		<entity schema="abicampania" name="orario_ufficiali" x="1508" y="299" />
-		<entity schema="abicampania" name="orario_variazioni" x="1352" y="299" />
-		<entity schema="abicampania" name="partecipa_cataloghi_collettivi_materiale" x="1157" y="611" />
-		<entity schema="abicampania" name="partecipa_cataloghi_generali" x="1183" y="1352" />
-		<entity schema="abicampania" name="partecipa_cataloghi_speciali_materiale" x="1157" y="1092" />
-		<entity schema="abicampania" name="patrimonio" x="1183" y="923" />
-		<entity schema="abicampania" name="patrimonio_specializzazione" x="1430" y="923" />
-		<entity schema="abicampania" name="patrimonio_specializzazione_categoria" x="1742" y="923" />
-		<entity schema="abicampania" name="prestito_locale" x="1170" y="442" />
-		<entity schema="abicampania" name="prestito_locale_has_materiale_escluso" x="1339" y="429" />
-		<entity schema="abicampania" name="prestito_locale_has_utenti_ammessi" x="1339" y="507" />
-		<entity schema="abicampania" name="prestito_locale_materiale_escluso" x="1625" y="416" />
-		<entity schema="abicampania" name="prestito_locale_utenti_ammessi" x="1625" y="507" />
-		<entity schema="abicampania" name="profili" x="546" y="1742" />
-		<entity schema="abicampania" name="provincia" x="481" y="221" />
-		<entity schema="abicampania" name="pubblicazioni" x="650" y="975" />
-		<entity schema="abicampania" name="regione" x="325" y="221" />
-		<entity schema="abicampania" name="regolamento" x="637" y="702" />
-		<entity schema="abicampania" name="riproduzioni" x="650" y="832" />
-		<entity schema="abicampania" name="riproduzioni_tipo" x="429" y="845" />
-		<entity schema="abicampania" name="spogli_bibliografici" x="494" y="1066" />
-		<entity schema="abicampania" name="stato" x="169" y="221" />
-		<entity schema="abicampania" name="stato_biblioteca_workflow" x="390" y="975" />
-		<entity schema="abicampania" name="stato_catalogazione" x="1144" y="182" />
-		<entity schema="abicampania" name="stato_catalogazione_tipo" x="1352" y="182" />
-		<entity schema="abicampania" name="tipologia_funzionale" x="546" y="442" />
-		<entity schema="abicampania" name="utenti" x="910" y="1755" />
-		<entity schema="abicampania" name="utenti_has_profili" x="715" y="1742" />
+		<entity schema="abipuglia" name="bibliografia" x="663" y="611" />
+		<entity schema="abipuglia" name="biblioteca" x="845" y="351" />
+		<entity schema="abipuglia" name="cataloghi_collettivi" x="1586" y="624" />
+		<entity schema="abipuglia" name="cataloghi_collettivi_materiale_url" x="1599" y="728" />
+		<entity schema="abipuglia" name="cataloghi_collettivi_zona_tipo" x="1898" y="624" />
+		<entity schema="abipuglia" name="cataloghi_generali_url" x="1573" y="1365" />
+		<entity schema="abipuglia" name="cataloghi_speciali_materiale_url" x="1443" y="1170" />
+		<entity schema="abipuglia" name="cataloghi_supporto_digitale_tipo" x="1950" y="832" />
+		<entity schema="abipuglia" name="catalogo_generale_tipo" x="1443" y="1508" />
+		<entity schema="abipuglia" name="codici" x="1274" y="91" />
+		<entity schema="abipuglia" name="codici_tipo" x="1430" y="104" />
+		<entity schema="abipuglia" name="comune" x="650" y="247" />
+		<entity schema="abipuglia" name="comunicazioni" x="663" y="520" />
+		<entity schema="abipuglia" name="contatti" x="962" y="39" />
+		<entity schema="abipuglia" name="contatti_tipo" x="1105" y="52" />
+		<entity schema="abipuglia" name="dati_province_istat" x="455" y="78" />
+		<entity schema="abipuglia" name="dati_regioni_istat" x="312" y="65" />
+		<entity schema="abipuglia" name="denominazioni_alternative" x="702" y="52" />
+		<entity schema="abipuglia" name="denominazioni_precedenti" x="702" y="143" />
+		<entity schema="abipuglia" name="depositi_legali" x="650" y="1287" />
+		<entity schema="abipuglia" name="depositi_legali_tipo" x="442" y="1287" />
+		<entity schema="abipuglia" name="destinazioni_sociali" x="520" y="1482" />
+		<entity schema="abipuglia" name="destinazioni_sociali_tipo" x="260" y="1495" />
+		<entity schema="abipuglia" name="dewey" x="442" y="1157" />
+		<entity schema="abipuglia" name="dewey_libero" x="650" y="1157" />
+		<entity schema="abipuglia" name="ente" x="260" y="377" />
+		<entity schema="abipuglia" name="ente_tipologia_amministrativa" x="39" y="377" />
+		<entity schema="abipuglia" name="fondi_antichi_consistenza" x="416" y="585" />
+		<entity schema="abipuglia" name="geolocalizzazione" x="1261" y="1599" />
+		<entity schema="abipuglia" name="nuova_biblioteca" x="91" y="572" />
+		<entity schema="abipuglia" name="orario_chiusure" x="1183" y="299" />
+		<entity schema="abipuglia" name="orario_ufficiali" x="1508" y="299" />
+		<entity schema="abipuglia" name="orario_variazioni" x="1352" y="299" />
+		<entity schema="abipuglia" name="partecipa_cataloghi_collettivi_materiale" x="1157" y="611" />
+		<entity schema="abipuglia" name="partecipa_cataloghi_generali" x="1183" y="1352" />
+		<entity schema="abipuglia" name="partecipa_cataloghi_speciali_materiale" x="1157" y="1092" />
+		<entity schema="abipuglia" name="patrimonio" x="1183" y="923" />
+		<entity schema="abipuglia" name="patrimonio_specializzazione" x="1430" y="923" />
+		<entity schema="abipuglia" name="patrimonio_specializzazione_categoria" x="1742" y="923" />
+		<entity schema="abipuglia" name="prestito_locale" x="1170" y="442" />
+		<entity schema="abipuglia" name="prestito_locale_has_materiale_escluso" x="1339" y="429" />
+		<entity schema="abipuglia" name="prestito_locale_has_utenti_ammessi" x="1339" y="507" />
+		<entity schema="abipuglia" name="prestito_locale_materiale_escluso" x="1625" y="416" />
+		<entity schema="abipuglia" name="prestito_locale_utenti_ammessi" x="1625" y="507" />
+		<entity schema="abipuglia" name="profili" x="546" y="1742" />
+		<entity schema="abipuglia" name="provincia" x="481" y="221" />
+		<entity schema="abipuglia" name="pubblicazioni" x="650" y="975" />
+		<entity schema="abipuglia" name="regione" x="325" y="221" />
+		<entity schema="abipuglia" name="regolamento" x="637" y="702" />
+		<entity schema="abipuglia" name="riproduzioni" x="650" y="832" />
+		<entity schema="abipuglia" name="riproduzioni_tipo" x="429" y="845" />
+		<entity schema="abipuglia" name="spogli_bibliografici" x="494" y="1066" />
+		<entity schema="abipuglia" name="stato" x="169" y="221" />
+		<entity schema="abipuglia" name="stato_biblioteca_workflow" x="390" y="975" />
+		<entity schema="abipuglia" name="stato_catalogazione" x="1144" y="182" />
+		<entity schema="abipuglia" name="stato_catalogazione_tipo" x="1352" y="182" />
+		<entity schema="abipuglia" name="tipologia_funzionale" x="546" y="442" />
+		<entity schema="abipuglia" name="utenti" x="910" y="1755" />
+		<entity schema="abipuglia" name="utenti_has_profili" x="715" y="1742" />
 		<query name="Sql_000" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abi;
 
@@ -7348,39 +7349,39 @@ ALTER TABLE abicampania.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) R
 		</query>
 	</layout>
 	<layout name="biblioteca_has" tab_index="0" >
-		<entity schema="abicampania" name="accesso_modalita" x="1469" y="39" />
-		<entity schema="abicampania" name="biblioteca" x="780" y="91" />
-		<entity schema="abicampania" name="biblioteca_has_accesso_modalita" x="1131" y="39" />
-		<entity schema="abicampania" name="biblioteca_has_dewey" x="1144" y="546" />
-		<entity schema="abicampania" name="biblioteca_has_document_delivery" x="533" y="585" />
-		<entity schema="abicampania" name="biblioteca_has_fondi_speciali" x="1144" y="650" />
-		<entity schema="abicampania" name="biblioteca_has_indicizzazione_classificata" x="481" y="689" />
-		<entity schema="abicampania" name="biblioteca_has_indicizzazione_soggetto" x="494" y="793" />
-		<entity schema="abicampania" name="biblioteca_has_norme_catalogazione" x="494" y="910" />
-		<entity schema="abicampania" name="biblioteca_has_prestito_interbibliotecario" x="1131" y="130" />
-		<entity schema="abicampania" name="biblioteca_has_servizi_bibliotecari_carta" x="481" y="156" />
-		<entity schema="abicampania" name="biblioteca_has_servizi_informazioni_bibliografiche" x="403" y="247" />
-		<entity schema="abicampania" name="biblioteca_has_sezioni_speciali" x="533" y="351" />
-		<entity schema="abicampania" name="biblioteca_has_sistemi_biblioteche" x="507" y="481" />
-		<entity schema="abicampania" name="biblioteca_has_sistemi_prestito_interbibliotecario" x="1144" y="221" />
-		<entity schema="abicampania" name="biblioteca_has_utenti" x="585" y="1014" />
-		<entity schema="abicampania" name="dewey" x="1365" y="546" />
-		<entity schema="abicampania" name="fondi_speciali" x="1378" y="650" />
-		<entity schema="abicampania" name="fondi_speciali_catalogazione_inventario" x="1677" y="650" />
-		<entity schema="abicampania" name="indicizzazione_classificata" x="260" y="689" />
-		<entity schema="abicampania" name="indicizzazione_soggetto" x="273" y="793" />
-		<entity schema="abicampania" name="norme_catalogazione" x="273" y="910" />
-		<entity schema="abicampania" name="prestito_interbibliotecario" x="1469" y="117" />
-		<entity schema="abicampania" name="prestito_interbibliotecario_modo" x="1742" y="117" />
-		<entity schema="abicampania" name="profili" x="91" y="1014" />
-		<entity schema="abicampania" name="riproduzioni_tipo" x="286" y="585" />
-		<entity schema="abicampania" name="servizi_bibliotecari_carta" x="156" y="156" />
-		<entity schema="abicampania" name="servizi_informazioni_bibliografiche_modalita" x="39" y="234" />
-		<entity schema="abicampania" name="sezioni_speciali" x="247" y="351" />
-		<entity schema="abicampania" name="sistemi_biblioteche" x="247" y="481" />
-		<entity schema="abicampania" name="sistemi_prestito_interbibliotecario" x="1560" y="221" />
-		<entity schema="abicampania" name="utenti" x="429" y="1014" />
-		<entity schema="abicampania" name="utenti_has_profili" x="273" y="1014" />
+		<entity schema="abipuglia" name="accesso_modalita" x="1469" y="39" />
+		<entity schema="abipuglia" name="biblioteca" x="780" y="91" />
+		<entity schema="abipuglia" name="biblioteca_has_accesso_modalita" x="1131" y="39" />
+		<entity schema="abipuglia" name="biblioteca_has_dewey" x="1144" y="546" />
+		<entity schema="abipuglia" name="biblioteca_has_document_delivery" x="533" y="585" />
+		<entity schema="abipuglia" name="biblioteca_has_fondi_speciali" x="1144" y="650" />
+		<entity schema="abipuglia" name="biblioteca_has_indicizzazione_classificata" x="481" y="689" />
+		<entity schema="abipuglia" name="biblioteca_has_indicizzazione_soggetto" x="494" y="793" />
+		<entity schema="abipuglia" name="biblioteca_has_norme_catalogazione" x="494" y="910" />
+		<entity schema="abipuglia" name="biblioteca_has_prestito_interbibliotecario" x="1131" y="130" />
+		<entity schema="abipuglia" name="biblioteca_has_servizi_bibliotecari_carta" x="481" y="156" />
+		<entity schema="abipuglia" name="biblioteca_has_servizi_informazioni_bibliografiche" x="403" y="247" />
+		<entity schema="abipuglia" name="biblioteca_has_sezioni_speciali" x="533" y="351" />
+		<entity schema="abipuglia" name="biblioteca_has_sistemi_biblioteche" x="507" y="481" />
+		<entity schema="abipuglia" name="biblioteca_has_sistemi_prestito_interbibliotecario" x="1144" y="221" />
+		<entity schema="abipuglia" name="biblioteca_has_utenti" x="585" y="1014" />
+		<entity schema="abipuglia" name="dewey" x="1365" y="546" />
+		<entity schema="abipuglia" name="fondi_speciali" x="1378" y="650" />
+		<entity schema="abipuglia" name="fondi_speciali_catalogazione_inventario" x="1677" y="650" />
+		<entity schema="abipuglia" name="indicizzazione_classificata" x="260" y="689" />
+		<entity schema="abipuglia" name="indicizzazione_soggetto" x="273" y="793" />
+		<entity schema="abipuglia" name="norme_catalogazione" x="273" y="910" />
+		<entity schema="abipuglia" name="prestito_interbibliotecario" x="1469" y="117" />
+		<entity schema="abipuglia" name="prestito_interbibliotecario_modo" x="1742" y="117" />
+		<entity schema="abipuglia" name="profili" x="91" y="1014" />
+		<entity schema="abipuglia" name="riproduzioni_tipo" x="286" y="585" />
+		<entity schema="abipuglia" name="servizi_bibliotecari_carta" x="156" y="156" />
+		<entity schema="abipuglia" name="servizi_informazioni_bibliografiche_modalita" x="39" y="234" />
+		<entity schema="abipuglia" name="sezioni_speciali" x="247" y="351" />
+		<entity schema="abipuglia" name="sistemi_biblioteche" x="247" y="481" />
+		<entity schema="abipuglia" name="sistemi_prestito_interbibliotecario" x="1560" y="221" />
+		<entity schema="abipuglia" name="utenti" x="429" y="1014" />
+		<entity schema="abipuglia" name="utenti_has_profili" x="273" y="1014" />
 		<query name="Sql_000" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abicampania;
 
@@ -11814,41 +11815,41 @@ ALTER TABLE abicampania.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) R
 		</query>
 	</layout>
 	<layout name="tabelle_dinamiche" tab_index="-1" >
-		<entity schema="abicampania" name="accesso_modalita" x="663" y="520" />
-		<entity schema="abicampania" name="cataloghi_collettivi" x="377" y="403" />
-		<entity schema="abicampania" name="cataloghi_collettivi_zona_tipo" x="39" y="429" />
-		<entity schema="abicampania" name="cataloghi_supporto_digitale_tipo" x="52" y="1131" />
-		<entity schema="abicampania" name="catalogo_generale_tipo" x="689" y="429" />
-		<entity schema="abicampania" name="codici_tipo" x="208" y="871" />
-		<entity schema="abicampania" name="comune" x="39" y="156" />
-		<entity schema="abicampania" name="contatti_tipo" x="52" y="871" />
-		<entity schema="abicampania" name="dati_province_istat" x="208" y="39" />
-		<entity schema="abicampania" name="dati_regioni_istat" x="390" y="39" />
-		<entity schema="abicampania" name="depositi_legali_tipo" x="52" y="1378" />
-		<entity schema="abicampania" name="destinazioni_sociali_tipo" x="468" y="520" />
-		<entity schema="abicampania" name="dewey" x="182" y="793" />
-		<entity schema="abicampania" name="ente_tipologia_amministrativa" x="286" y="611" />
-		<entity schema="abicampania" name="fondi_antichi_consistenza" x="52" y="1690" />
-		<entity schema="abicampania" name="fondi_speciali_catalogazione_inventario" x="52" y="1053" />
-		<entity schema="abicampania" name="indicizzazione_classificata" x="52" y="1612" />
-		<entity schema="abicampania" name="indicizzazione_soggetto" x="273" y="1612" />
-		<entity schema="abicampania" name="norme_catalogazione" x="52" y="1456" />
-		<entity schema="abicampania" name="patrimonio_specializzazione" x="39" y="286" />
-		<entity schema="abicampania" name="patrimonio_specializzazione_categoria" x="338" y="286" />
-		<entity schema="abicampania" name="prestito_interbibliotecario_modo" x="780" y="1209" />
-		<entity schema="abicampania" name="prestito_locale_materiale_escluso" x="286" y="1209" />
-		<entity schema="abicampania" name="prestito_locale_utenti_ammessi" x="52" y="1209" />
-		<entity schema="abicampania" name="provincia" x="208" y="156" />
-		<entity schema="abicampania" name="regione" x="390" y="156" />
-		<entity schema="abicampania" name="riproduzioni_tipo" x="637" y="962" />
-		<entity schema="abicampania" name="servizi_bibliotecari_carta" x="52" y="962" />
-		<entity schema="abicampania" name="servizi_informazioni_bibliografiche_modalita" x="286" y="962" />
-		<entity schema="abicampania" name="sezioni_speciali" x="52" y="1300" />
-		<entity schema="abicampania" name="sistemi_biblioteche" x="52" y="1534" />
-		<entity schema="abicampania" name="sistemi_prestito_interbibliotecario" x="533" y="1209" />
-		<entity schema="abicampania" name="stato" x="559" y="156" />
-		<entity schema="abicampania" name="stato_catalogazione_tipo" x="52" y="702" />
-		<entity schema="abicampania" name="tipologia_funzionale" x="65" y="611" />
+		<entity schema="abipuglia" name="accesso_modalita" x="663" y="520" />
+		<entity schema="abipuglia" name="cataloghi_collettivi" x="377" y="403" />
+		<entity schema="abipuglia" name="cataloghi_collettivi_zona_tipo" x="39" y="429" />
+		<entity schema="abipuglia" name="cataloghi_supporto_digitale_tipo" x="52" y="1131" />
+		<entity schema="abipuglia" name="catalogo_generale_tipo" x="689" y="429" />
+		<entity schema="abipuglia" name="codici_tipo" x="208" y="871" />
+		<entity schema="abipuglia" name="comune" x="39" y="156" />
+		<entity schema="abipuglia" name="contatti_tipo" x="52" y="871" />
+		<entity schema="abipuglia" name="dati_province_istat" x="208" y="39" />
+		<entity schema="abipuglia" name="dati_regioni_istat" x="390" y="39" />
+		<entity schema="abipuglia" name="depositi_legali_tipo" x="52" y="1378" />
+		<entity schema="abipuglia" name="destinazioni_sociali_tipo" x="468" y="520" />
+		<entity schema="abipuglia" name="dewey" x="182" y="793" />
+		<entity schema="abipuglia" name="ente_tipologia_amministrativa" x="286" y="611" />
+		<entity schema="abipuglia" name="fondi_antichi_consistenza" x="52" y="1690" />
+		<entity schema="abipuglia" name="fondi_speciali_catalogazione_inventario" x="52" y="1053" />
+		<entity schema="abipuglia" name="indicizzazione_classificata" x="52" y="1612" />
+		<entity schema="abipuglia" name="indicizzazione_soggetto" x="273" y="1612" />
+		<entity schema="abipuglia" name="norme_catalogazione" x="52" y="1456" />
+		<entity schema="abipuglia" name="patrimonio_specializzazione" x="39" y="286" />
+		<entity schema="abipuglia" name="patrimonio_specializzazione_categoria" x="338" y="286" />
+		<entity schema="abipuglia" name="prestito_interbibliotecario_modo" x="780" y="1209" />
+		<entity schema="abipuglia" name="prestito_locale_materiale_escluso" x="286" y="1209" />
+		<entity schema="abipuglia" name="prestito_locale_utenti_ammessi" x="52" y="1209" />
+		<entity schema="abipuglia" name="provincia" x="208" y="156" />
+		<entity schema="abipuglia" name="regione" x="390" y="156" />
+		<entity schema="abipuglia" name="riproduzioni_tipo" x="637" y="962" />
+		<entity schema="abipuglia" name="servizi_bibliotecari_carta" x="52" y="962" />
+		<entity schema="abipuglia" name="servizi_informazioni_bibliografiche_modalita" x="286" y="962" />
+		<entity schema="abipuglia" name="sezioni_speciali" x="52" y="1300" />
+		<entity schema="abipuglia" name="sistemi_biblioteche" x="52" y="1534" />
+		<entity schema="abipuglia" name="sistemi_prestito_interbibliotecario" x="533" y="1209" />
+		<entity schema="abipuglia" name="stato" x="559" y="156" />
+		<entity schema="abipuglia" name="stato_catalogazione_tipo" x="52" y="702" />
+		<entity schema="abipuglia" name="tipologia_funzionale" x="65" y="611" />
 		<query name="Sql_000" tab_index="-1" >
 			<string> <![CDATA[CREATE SCHEMA abicampania;
 

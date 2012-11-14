@@ -101,6 +101,7 @@ CREATE TABLE abiregionale.biblioteca (
     reference_online BOOL NULL,
     attivo_document_delivery BOOL NULL,
     attivo_deposito_legale BOOL NULL,
+    fonte VARCHAR( 255 ) NULL,
 CONSTRAINT PK_biblioteca PRIMARY KEY ( id_biblioteca )
  ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
