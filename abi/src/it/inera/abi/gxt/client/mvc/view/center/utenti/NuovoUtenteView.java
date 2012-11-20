@@ -1,7 +1,6 @@
 package it.inera.abi.gxt.client.mvc.view.center.utenti;
 
 import it.inera.abi.gxt.client.AppEvents;
-import it.inera.abi.gxt.client.costants.CostantiGestioneUtenti;
 import it.inera.abi.gxt.client.mvc.model.forms.ProfiliUtente;
 import it.inera.abi.gxt.client.mvc.view.AppView;
 import it.inera.abi.gxt.client.mvc.view.center.utenti.widget.FormCompletoUtenteCreazioneModifica;
@@ -12,10 +11,14 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.View;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
+/**
+ * View utilizzata per l'inizializzazione del pannello di creazione
+ * di un nuovo utente e la relativa gestione degli eventi
+ *
+ */
 public class NuovoUtenteView extends View {
 
 	private LayoutContainer nuovoUtentePanel = null;

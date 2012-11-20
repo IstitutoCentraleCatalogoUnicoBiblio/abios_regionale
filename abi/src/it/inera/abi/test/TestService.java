@@ -1,15 +1,10 @@
 package it.inera.abi.test;
 
-import it.inera.abi.logic.AbiBiblioLogic;
-import it.inera.abi.logic.AbiBiblioDifferenze;
-import it.inera.abi.logic.impl.Differenze;
-
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+/**
+ * Classe di test generica per i servizi disponibili (crea biblioteca, 
+ * calcola le differenze, ecc...) 
+ *
+ */
 public class TestService {
 
 	public static void main(String[] args) {
@@ -21,7 +16,6 @@ public class TestService {
 //			String diffs = abiBiblioLogic.differenze(4782);
 //			System.out.println(diffs);
 //		} catch (Exception e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 		

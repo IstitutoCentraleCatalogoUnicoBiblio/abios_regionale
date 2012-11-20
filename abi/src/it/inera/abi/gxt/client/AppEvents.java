@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.extjs.gxt.ui.client.event.EventType;
 
+/** 
+ * Classe contenente tutti i possibili eventi relativi all'applicativo ABI
+ * (autenticazione, ricerca generica, ricerca via codice, tabelle dinamiche, ecc...)
+ *  
+ */
 public class AppEvents {
 
 	public static final EventType AuthRequest = new EventType(); // Sicurezza

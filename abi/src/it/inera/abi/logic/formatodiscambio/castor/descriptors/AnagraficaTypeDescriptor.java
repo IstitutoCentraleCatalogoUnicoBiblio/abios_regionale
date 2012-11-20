@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AnagraficaTypeDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
+ * $Id: AnagraficaTypeDescriptor.java,v 1.6 2012/11/20 12:35:35 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.AnagraficaType;
 /**
  * Class AnagraficaTypeDescriptor.
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
+ * @version $Revision: 1.6 $ $Date: 2012/11/20 12:35:35 $
  */
 public class AnagraficaTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -59,6 +59,9 @@ public class AnagraficaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
         super();
         _xmlName = "anagraficaType";
         _elementDefinition = false;
+
+        //-- set grouping compositor
+        setCompositorAsSequence();
         org.exolab.castor.xml.util.XMLFieldDescriptorImpl  desc           = null;
         org.exolab.castor.mapping.FieldHandler             handler        = null;
         org.exolab.castor.xml.FieldValidator               fieldValidator = null;
@@ -147,15 +150,15 @@ public class AnagraficaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             fieldValidator.setValidator(typeValidator);
         }
         desc.setValidator(fieldValidator);
-        //-- _nome
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Nome.class, "_nome", "nome", org.exolab.castor.xml.NodeType.Element);
+        //-- _nomi
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Nomi.class, "_nomi", "nomi", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 AnagraficaType target = (AnagraficaType) object;
-                return target.getNome();
+                return target.getNomi();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -163,7 +166,7 @@ public class AnagraficaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             {
                 try {
                     AnagraficaType target = (AnagraficaType) object;
-                    target.setNome( (it.inera.abi.logic.formatodiscambio.castor.Nome) value);
+                    target.setNomi( (it.inera.abi.logic.formatodiscambio.castor.Nomi) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -174,14 +177,14 @@ public class AnagraficaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
                 return null;
             }
         };
-        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Nome");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Nomi");
         desc.setHandler(handler);
         desc.setRequired(true);
         desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _nome
+        //-- validation code for: _nomi
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
         fieldValidator.setMinOccurs(1);
         { //-- local scope

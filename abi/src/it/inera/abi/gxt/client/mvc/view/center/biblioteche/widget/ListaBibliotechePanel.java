@@ -55,6 +55,11 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica della lista di biblioteche 
+ * filtrate secondo parametri di ricerca settati in precedenza
+ *
+ */
 public class ListaBibliotechePanel extends ContentPanel {
 
 	private BasePagingLoader<PagingLoadResult<ModelData>> loader = null;

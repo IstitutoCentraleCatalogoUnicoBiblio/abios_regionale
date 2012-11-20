@@ -6,6 +6,10 @@ import it.inera.abi.persistence.Stato;
 
 import java.util.List;
 
+/**
+ * Interfaccia DAO per l'entità Contatti
+ *
+ */
 public interface ContattiDao {
 
 	public void saveContatti(Contatti contatto);

@@ -29,6 +29,11 @@ import com.extjs.gxt.ui.client.util.Theme;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 
+/**
+ * Classe che implementa EntryPoint permettendo l'inizializzazione e l'avvio dei 
+ * principali controller e servizi dell'applicativo ABI 
+ *
+ */
 public class Abi implements EntryPoint {
 
 	public static final String USERLOGGED = "userlogged"; // key per utente loggato nel registry

@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: CatalogoSpecialeType.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
+ * $Id: CatalogoSpecialeType.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -11,12 +11,11 @@ package it.inera.abi.logic.formatodiscambio.castor;
  * Catalogo speciale. Deriva da "catalogoType", con
  *  l'aggiunta del "nome" del catalogo e del "materiale".
  *  
- *  Notare come tale tipo di elemento costituisce la
- *  base
+ *  Notare come tale tipo di elemento costituisce la base
  *  per il "catalogoSpecialeType".
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public abstract class CatalogoSpecialeType implements java.io.Serializable {

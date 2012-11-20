@@ -7,6 +7,11 @@ import it.inera.abi.persistence.Stato;
 
 import java.util.List;
 
+/**
+ * Classe contenente la logica delle principali operazioni riguardanti
+ * Stati, Regioni, Province e Comuni
+ *
+ */
 public interface AbiLocationLogic {
 
 	/** Servizi Regioni **/

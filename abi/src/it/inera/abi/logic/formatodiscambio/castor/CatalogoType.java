@@ -2,32 +2,26 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: CatalogoType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
+ * $Id: CatalogoType.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
  * I cataloghi hanno diverse caratteristiche comuni.
- *  Vale
- *  la pena di definire un tipo che raccoglie queste
+ *  Vale la pena di definire un tipo che raccoglie queste
  *  caratteristiche, per poi derivare da esso, tramite
- *  restriction, i
- *  diversi tipi di cataloghi.
+ *  restriction, i diversi tipi di cataloghi.
  *  
  *  Tutti contengono le quattro forme "schede",
- *  "volume",
- *  "microfilm" e "digitale", ciascuna con la sua
- *  percentuale di
- *  copertura (vedi "formaType"), e tutti
+ *  "volume", "microfilm" e "digitale", ciascuna con la sua
+ *  percentuale di copertura (vedi "formaType"), e tutti
  *  hanno una copertura temporale.
- *  La forma "digitale" ha un
- *  tipo particolare, "digitaleType", che
- *  aggiunge a
- *  "formaType" il solo sott-elemento "supporto".
+ *  La forma "digitale" ha un tipo particolare, "digitaleType", che
+ *  aggiunge a "formaType" il solo sotto-elemento "supporto".
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public abstract class CatalogoType implements java.io.Serializable {
@@ -50,12 +44,9 @@ public abstract class CatalogoType implements java.io.Serializable {
     /**
      * La copertura bibliografica deve essere espressa
      *  tramite un anno iniziale (elemento "da-anno") e
-     *  un anno finale
-     *  (elemento "ad-anno"). Entrambi
-     *  devono avere il formato "YYYY", cioè
-     *  esattamente
-     *  quattro cifre (non è ammesso alcun altro
-     *  carattere).
+     *  un anno finale (elemento "ad-anno"). Entrambi
+     *  devono avere il formato "YYYY", cioè esattamente
+     *  quattro cifre (non è ammesso alcun altro carattere).
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.Copertura _copertura;
@@ -79,12 +70,9 @@ public abstract class CatalogoType implements java.io.Serializable {
      * 'copertura' has the following description: La copertura
      * bibliografica deve essere espressa
      *  tramite un anno iniziale (elemento "da-anno") e
-     *  un anno finale
-     *  (elemento "ad-anno"). Entrambi
-     *  devono avere il formato "YYYY", cioè
-     *  esattamente
-     *  quattro cifre (non è ammesso alcun altro
-     *  carattere).
+     *  un anno finale (elemento "ad-anno"). Entrambi
+     *  devono avere il formato "YYYY", cioè esattamente
+     *  quattro cifre (non è ammesso alcun altro carattere).
      *  
      * 
      * @return the value of field 'Copertura'.
@@ -134,12 +122,9 @@ public abstract class CatalogoType implements java.io.Serializable {
      * has the following description: La copertura bibliografica
      * deve essere espressa
      *  tramite un anno iniziale (elemento "da-anno") e
-     *  un anno finale
-     *  (elemento "ad-anno"). Entrambi
-     *  devono avere il formato "YYYY", cioè
-     *  esattamente
-     *  quattro cifre (non è ammesso alcun altro
-     *  carattere).
+     *  un anno finale (elemento "ad-anno"). Entrambi
+     *  devono avere il formato "YYYY", cioè esattamente
+     *  quattro cifre (non è ammesso alcun altro carattere).
      *  
      * 
      * @param copertura the value of field 'copertura'.

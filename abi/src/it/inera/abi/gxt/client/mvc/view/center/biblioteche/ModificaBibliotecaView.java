@@ -52,6 +52,11 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * View utilizzata per l'inizializzazione del pannello di modifica della biblioteca,
+ * comprensiva di tutte le schede specifiche e la relativa gestione degli eventi
+ *
+ */
 public class ModificaBibliotecaView extends View {
 
 	private ContentPanel mainModficaBiblioPanel = null;
@@ -190,6 +195,8 @@ public class ModificaBibliotecaView extends View {
 			serviziSezioniSpecialiPanel.setFieldsValues();
 			prestitoPanel.setBiblioteca(tmpBiblio);
 			prestitoPanel.setFieldsValues();
+			bilancioDepositoLegalePanel.setBiblioteca(tmpBiblio);
+			bilancioDepositoLegalePanel.setFieldsValues();
 		}
 
 		return;
@@ -568,7 +575,7 @@ public class ModificaBibliotecaView extends View {
 
 	/**
 	 * Toolbar per la gestione delle modifiche della biblioteca, segue il flusso del workflow
-	 * @return
+	 * 
 	 */
 	protected ToolBar updateToolbar() {
 		// Visualizza solo i pulsanti per i ruoli che hanno questi permessi 

@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AccessoDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
+ * $Id: AccessoDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Accesso;
 /**
  * Class AccessoDescriptor.
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class AccessoDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -149,15 +149,15 @@ public class AccessoDescriptor extends org.exolab.castor.xml.util.XMLClassDescri
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
-        //-- _categorieAmmesse
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.CategorieAmmesse.class, "_categorieAmmesse", "categorie-ammesse", org.exolab.castor.xml.NodeType.Element);
+        //-- _modalitaAccesso
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.ModalitaAccesso.class, "_modalitaAccesso", "modalita-accesso", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 Accesso target = (Accesso) object;
-                return target.getCategorieAmmesse();
+                return target.getModalitaAccesso();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -165,7 +165,7 @@ public class AccessoDescriptor extends org.exolab.castor.xml.util.XMLClassDescri
             {
                 try {
                     Accesso target = (Accesso) object;
-                    target.setCategorieAmmesse( (it.inera.abi.logic.formatodiscambio.castor.CategorieAmmesse) value);
+                    target.setModalitaAccesso( (it.inera.abi.logic.formatodiscambio.castor.ModalitaAccesso) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -176,62 +176,14 @@ public class AccessoDescriptor extends org.exolab.castor.xml.util.XMLClassDescri
                 return null;
             }
         };
-        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.CategorieAmmesse");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.ModalitaAccesso");
         desc.setHandler(handler);
         desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _categorieAmmesse
+        //-- validation code for: _modalitaAccesso
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        { //-- local scope
-        }
-        desc.setValidator(fieldValidator);
-        //-- _condizioniAccessoList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.CondizioniAccesso.class, "_condizioniAccessoList", "condizioni-accesso", org.exolab.castor.xml.NodeType.Element);
-        handler = new org.exolab.castor.xml.XMLFieldHandler() {
-            @Override
-            public java.lang.Object getValue( java.lang.Object object ) 
-                throws IllegalStateException
-            {
-                Accesso target = (Accesso) object;
-                return target.getCondizioniAccesso();
-            }
-            @Override
-            public void setValue( java.lang.Object object, java.lang.Object value) 
-                throws IllegalStateException, IllegalArgumentException
-            {
-                try {
-                    Accesso target = (Accesso) object;
-                    target.addCondizioniAccesso( (it.inera.abi.logic.formatodiscambio.castor.CondizioniAccesso) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    Accesso target = (Accesso) object;
-                    target.removeAllCondizioniAccesso();
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            @Override
-            @SuppressWarnings("unused")
-            public java.lang.Object newInstance(java.lang.Object parent) {
-                return null;
-            }
-        };
-        desc.setSchemaType("list");
-        desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.CondizioniAccesso");
-        desc.setHandler(handler);
-        desc.setMultivalued(true);
-        addFieldDescriptor(desc);
-        addSequenceElement(desc);
-
-        //-- validation code for: _condizioniAccessoList
-        fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);

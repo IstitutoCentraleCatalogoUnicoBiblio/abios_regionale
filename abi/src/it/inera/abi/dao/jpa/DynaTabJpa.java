@@ -41,6 +41,10 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+/** 
+ * Implementazione classe DAO per l'entità Tabelle Dinamiche
+ *
+ */
 @Repository
 public class DynaTabJpa implements DynaTabDao {
 
@@ -288,7 +292,7 @@ public class DynaTabJpa implements DynaTabDao {
 	public List<PatrimonioSpecializzazioneCategoria> getListaPatrimoniCategorieGrandiVociTabelleDinamiche(int offset, int limit){
 		StringBuffer sb = new StringBuffer();
 
-		sb.append(" FROM PatrimonioSpecializzazioneCategoria ");
+		sb.append(" FROM PatrimonioSpecializzazioneCategoria ORDER BY descrizione ASC ");
 		Query q = em.createQuery(sb.toString());
 
 		q.setMaxResults(limit);
@@ -1125,22 +1129,28 @@ public class DynaTabJpa implements DynaTabDao {
 		StringBuffer sb = new StringBuffer();
 		sb.append(" FROM PatrimonioSpecializzazione p");
 
-		if(sortField!=null){
-			if(sortField.equals("categoriaDescrizione")){
+		if (sortField != null) {
+			if (sortField.equals("categoriaDescrizione")) {
 				sb.append(" ORDER BY p.descrizione");
-			}else if(sortField.equals("categoriaMadreDescrizione")){
+				
+			} else if (sortField.equals("categoriaMadreDescrizione")) {
 				sb.append(" ORDER BY p.patrimonioSpecializzazioneCategoria.descrizione");
 			}
-			if(sortDir!=null){
-				sb.append(" "+sortDir);
+			
+			if (sortDir != null) {
+				sb.append(" " + sortDir);
 			}
+			
+		} else {
+			sb.append(" ORDER BY p.patrimonioSpecializzazioneCategoria.descrizione, p.descrizione ASC ");
 		}
+		
 		Query q = em.createQuery(sb.toString());
 
 		q.setMaxResults(limit);
 		q.setFirstResult(start);
 
-		List<PatrimonioSpecializzazione> result= q.getResultList();
+		List<PatrimonioSpecializzazione> result = q.getResultList();
 
 		return result;
 	}

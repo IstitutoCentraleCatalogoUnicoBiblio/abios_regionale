@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Classe Model per la rappresentazione dei cataloghi collettivi
+ *
+ */
 public class CataloghiCollettiviModel extends BaseModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5262312580159445672L;
 
 	public CataloghiCollettiviModel() {

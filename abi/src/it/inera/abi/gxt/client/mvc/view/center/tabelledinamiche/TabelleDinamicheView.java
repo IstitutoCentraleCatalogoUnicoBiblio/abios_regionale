@@ -19,6 +19,11 @@ import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 
+/**
+ * View utilizzata per l'inizializzazione delle liste corrispondenti alle
+ * tabelle dinamiche e la relativa gestione degli eventi  
+ *
+ */
 public class TabelleDinamicheView extends View {
 
 	public static final int GRID_ROWS_NUMBER = 30;

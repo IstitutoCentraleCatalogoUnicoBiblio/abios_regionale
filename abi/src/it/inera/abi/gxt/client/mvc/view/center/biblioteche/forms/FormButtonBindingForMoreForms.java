@@ -8,12 +8,13 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.google.gwt.user.client.Timer;
 
 /**
- * Monitors the valid state of a list of forms and enabled / disabled all buttons.
+ * Classe utilizzata per il monitoraggio dello stato di una lista di form
+ * e dei relativi bottoni abilita / disabilita
+ * 
  */
 public class FormButtonBindingForMoreForms /*xtends FormButtonBinding */{
 

@@ -31,6 +31,11 @@ import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
+/**
+ * View utilizzata per l'inizializzazione del menu delle biblioteche e
+ * la relativa gestione degli eventi associati (ricerche, ecc...)
+ *
+ */
 public class GestioneBibliotecheMenuView extends View {
 
 	private ContentPanel gestioneBiblioteche;
@@ -48,7 +53,7 @@ public class GestioneBibliotecheMenuView extends View {
 
 	protected void initUI() {
 
-		// se l'utente non ha ruolo di gestion biblioteche esco
+		/* se l'utente non ha ruolo di gestion biblioteche esco */
 		if (!UIAuth.isMenuBibliotecaEnable()) return; 
 
 		ContentPanel west = (ContentPanel) Registry.get(AppView.WEST_PANEL);

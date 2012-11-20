@@ -37,6 +37,11 @@ import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * al patrimonio librario
+ *
+ */
 public class PatrimonioLibrarioPanel extends ContentPanelForTabItem {
 
 	private TableData d;

@@ -19,6 +19,11 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.FillLayout;
 import com.google.gwt.core.client.GWT;
 
+/**
+ * View utilizzata per l'inizializzazione delle tavole delle statistiche e la 
+ * relativa gestione degli eventi  
+ *
+ */
 public class StatisticheView extends View {
 
 	private AppEvent event = null;

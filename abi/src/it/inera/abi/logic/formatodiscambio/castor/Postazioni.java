@@ -2,29 +2,23 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Postazioni.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
+ * $Id: Postazioni.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * Le postazioni si dividono in diversi
- *  elementi,
- *  tutti opzionali. Se un
- *  elemento è presente, deve avere un
- *  valore, e questo è forse scomodo se
- *  si vuole solo indicare che
- *  la
- *  biblioteca dispone genericamente di
- *  postazioni internet o
- *  audio, senza
- *  indicare quante. Per consentire la
- *  semplice
- *  segnalazione si dovrebbe
+ * Le postazioni si dividono in diversi elementi, tutti opzionali.
+ *  Se un elemento è presente, deve avere un valore, e questo è
+ * forse 
+ *  scomodo se si vuole solo indicare che la biblioteca dispone 
+ *  genericamente di postazioni internet o audio, senza
+ *  indicare quante. Per consentire la semplice segnalazione si
+ * dovrebbe
  *  usare un costrutto più complesso.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Postazioni implements java.io.Serializable {

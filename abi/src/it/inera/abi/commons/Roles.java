@@ -12,7 +12,6 @@ import java.util.List;
  * I seguenti servizi sono accedibili da tutti gli utenti autenticati
  * /abi/locationService
  * /abi/auth
- * @author reschini
  *
  */
 public class Roles {
@@ -70,7 +69,7 @@ public class Roles {
 	/**
 	 * Controlla se un utente ha il ruolo specificato
 	 * @param role
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean isUserInRole(String role, Utenti utente) {
 		

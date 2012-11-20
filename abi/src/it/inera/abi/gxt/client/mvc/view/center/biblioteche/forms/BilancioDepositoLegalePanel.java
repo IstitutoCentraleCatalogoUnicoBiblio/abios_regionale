@@ -14,14 +14,18 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
+import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
@@ -31,7 +35,13 @@ import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * al bilancio (entrate e uscite) ed al deposito legale
+ *
+ */
 public class BilancioDepositoLegalePanel extends ContentPanelForTabItem {
+	
 	private int id_biblio;
 	private NumberField usciteTotaleField;
 	private NumberField uscitePersonaleField;
@@ -45,6 +55,12 @@ public class BilancioDepositoLegalePanel extends ContentPanelForTabItem {
 	private Button resetBilancio;
 	
 	private BibliotecheServiceAsync bibliotecheService;
+	
+	private Button attivoDepositoLegaleAggiorna;
+	private Button resetAttivoDepositoLegale;
+	
+	private Text attivoDepositoLegaleLabel;
+	private SimpleComboBox<String> attivoDepositoLegaleField;
 	
 	private ListaDepositiLegaliPanel listaDepositiLegaliPanel;
 	
@@ -306,6 +322,125 @@ public class BilancioDepositoLegalePanel extends ContentPanelForTabItem {
 		Utils.setFieldSetProperties(depositoLegaleSet, "Deposito legale");
 		depositoLegaleSet.setCollapsible(true);
 
+		LayoutContainer attivaDepositoLegaleTable = new LayoutContainer(new TableLayout(3));
+		attivaDepositoLegaleTable.setWidth(500);
+
+		attivoDepositoLegaleLabel = new Text("Attiva deposito legale:");
+		attivoDepositoLegaleLabel.setStyleAttribute("fontSize", "14px");
+		attivaDepositoLegaleTable.add(attivoDepositoLegaleLabel, d);
+
+		attivoDepositoLegaleField = new SimpleComboBox<String>();
+		attivoDepositoLegaleField.setTriggerAction(TriggerAction.ALL);
+		attivoDepositoLegaleField.setEditable(false);
+		attivoDepositoLegaleField.setFireChangeEventOnSetValue(true);
+		attivoDepositoLegaleField.setWidth(200);
+		attivoDepositoLegaleField.add("Si");
+		attivoDepositoLegaleField.add("No");
+		attivoDepositoLegaleField.add("Non specificato");
+		attivoDepositoLegaleField.setSimpleValue("Non specificato");
+		
+		attivoDepositoLegaleField.addSelectionChangedListener(new SelectionChangedListener<SimpleComboValue<String>>() {
+			@Override
+			public void selectionChanged(SelectionChangedEvent<SimpleComboValue<String>> se) {
+				Utils.setFontColorStyleRed(attivoDepositoLegaleLabel);
+
+				if ("Si".equals(se.getSelectedItem().getValue())) {
+					listaDepositiLegaliPanel.enable();
+
+				} else if ("No".equals(se.getSelectedItem().getValue())) {
+					listaDepositiLegaliPanel.disable();
+
+				} else {/* Non specificato */
+					listaDepositiLegaliPanel.disable();
+				}
+
+			}
+		});
+
+		attivaDepositoLegaleTable.add(attivoDepositoLegaleField, d);
+		
+		attivoDepositoLegaleAggiorna = new Button("Aggiorna");
+		Utils.setStylesButton(attivoDepositoLegaleAggiorna);
+		attivoDepositoLegaleAggiorna.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
+					@Override
+					public void handleEvent(MessageBoxEvent ce) {
+						Button btn = ce.getButtonClicked();
+						if (btn.getText().equalsIgnoreCase("Si")) {
+							Boolean hasAttivoDepositoLegale = null;
+
+							if (attivoDepositoLegaleField.getValue() != null) {
+								if ("Si".equals(attivoDepositoLegaleField.getValue().getValue())) {
+									hasAttivoDepositoLegale = true;
+
+								} else if ("No".equals(attivoDepositoLegaleField.getValue().getValue())) {
+									hasAttivoDepositoLegale = false;
+
+								} else {/* Non specificato */
+									hasAttivoDepositoLegale = null;
+								}
+
+								attivoDepositoLegaleField.setSimpleValue(attivoDepositoLegaleField.getValue().getValue());
+							}
+
+							bibliotecheService.setAttivoDepositoLegale(id_biblio, hasAttivoDepositoLegale, new AsyncCallback<Void>() {
+								@Override
+								public void onSuccess(Void result) {
+									Utils.setFontColorStyleBlack(attivoDepositoLegaleLabel);
+
+									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+									listaDepositiLegaliPanel.getLoader().load();
+									fireReleoadbiblioDataEvent();
+
+								}
+
+								@Override
+								public void onFailure(Throwable caught) {
+									if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
+										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+								}
+							});
+						}
+					}
+				};
+				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, l);
+			}
+		});
+		
+		resetAttivoDepositoLegale = new Button("Reset");
+		Utils.setStylesButton(resetAttivoDepositoLegale);
+		resetAttivoDepositoLegale.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if (biblioteca.getAttivoDepositoLegale() == null) {
+					attivoDepositoLegaleField.setSimpleValue("Non specificato");
+
+				} else {
+					if (biblioteca.getAttivoDepositoLegale().booleanValue() == true) {
+						attivoDepositoLegaleField.setSimpleValue("Si");
+
+					} else if  (biblioteca.getAttivoDepositoLegale().booleanValue() == false) {
+						attivoDepositoLegaleField.setSimpleValue("No");
+					}
+				} 
+
+				Utils.setFontColorStyleBlack(attivoDepositoLegaleLabel);
+
+			}
+		});
+
+		TableLayout deplegButtonsTableLayout = new TableLayout(2);
+		deplegButtonsTableLayout.setCellPadding(5);
+		LayoutContainer deplegButtons = new LayoutContainer(deplegButtonsTableLayout);
+		deplegButtons.add(attivoDepositoLegaleAggiorna);
+		deplegButtons.add(resetAttivoDepositoLegale);
+
+		attivaDepositoLegaleTable.add(deplegButtons, d);
+		
+		depositoLegaleSet.add(attivaDepositoLegaleTable);
+		
 		listaDepositiLegaliPanel = new ListaDepositiLegaliPanel();
 		listaDepositiLegaliPanel.setGrid();
 
@@ -315,9 +450,30 @@ public class BilancioDepositoLegalePanel extends ContentPanelForTabItem {
 		/* FINE---DEPOSITO LEGALE */
 	}
 	
-	public void setFieldsValues(){
+	public void setFieldsValues() {
+		/* Deposito Legale */
 		listaDepositiLegaliPanel.setIdBiblioteca(biblioteca.getIdBiblio());
 		listaDepositiLegaliPanel.getLoader().load();
+		
+		if (biblioteca.getAttivoDepositoLegale() == null) {
+			attivoDepositoLegaleField.setSimpleValue("Non specificato");
+			listaDepositiLegaliPanel.disable();
+
+		} else if (biblioteca.getAttivoDepositoLegale().booleanValue() == true) {
+			attivoDepositoLegaleField.setSimpleValue("Si");
+			listaDepositiLegaliPanel.enable();
+
+		} else if (biblioteca.getAttivoDepositoLegale().booleanValue() == false) {
+			attivoDepositoLegaleField.setSimpleValue("No");
+			listaDepositiLegaliPanel.disable();
+
+		}
+		Utils.setFontColorStyleBlack(attivoDepositoLegaleLabel);
+		UIWorkflow.setReadOnly(attivoDepositoLegaleField);
+		
+		UIWorkflow.hideView(attivoDepositoLegaleAggiorna);
+		UIWorkflow.hideView(resetAttivoDepositoLegale);
+		/* FINE -> Deposito Legale */
 		
 		usciteTotaleField.setValue(biblioteca.getUsciteTotali());
 		usciteTotaleField.setOriginalValue(biblioteca.getUsciteTotali());
@@ -356,15 +512,17 @@ public class BilancioDepositoLegalePanel extends ContentPanelForTabItem {
 		UIWorkflow.setReadOnly(entrateTotaliField);
 		UIWorkflow.hideView(bilancioAggiorna);
 		UIWorkflow.hideView(resetBilancio);
-		if(UIWorkflow.isReadOnly()==false){
+		
+		if (UIWorkflow.isReadOnly() == false) {
 			addKeyListenerForEnter();
-		}else{
+			
+		} else {
 			removeKeyListenerForEnter();
 		}
 	}
 
 	public void setIdBiblio(int idBiblio) {
-	this.id_biblio=idBiblio;
+		this.id_biblio = idBiblio;
 	}
 	
 	protected void addKeyListenerForEnter() {

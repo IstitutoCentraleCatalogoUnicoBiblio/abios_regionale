@@ -5,7 +5,6 @@ import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.AppEvents;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.FileCaricatiListModel;
-import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.FormatoScambioServiceAsync;
 
@@ -20,22 +19,23 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica della lista di file caricati
+ * non controllati da importare
+ *
+ */
 public class FileCaricatiNonControllatiListPanel extends ContentPanel {
 
 	private Grid<FileCaricatiListModel> grid = null;

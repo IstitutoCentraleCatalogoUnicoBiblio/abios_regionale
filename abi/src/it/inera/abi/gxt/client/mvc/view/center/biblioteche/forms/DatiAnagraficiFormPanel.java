@@ -57,6 +57,12 @@ import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * ai dati anagrafici della biblioteca (denominazioni, codice isil, località,
+ * codice fiscale, ecc...)
+ *
+ */
 public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 
 	private int id_biblio;
@@ -482,11 +488,17 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 					g.setCap(biblioteca.getCap()!=null?biblioteca.getCap():"");
 					g.setCitta(biblioteca.getComune()!=null?biblioteca.getComune().getDenominazione():"");
 					g.setStato(biblioteca.getStato()!=null?biblioteca.getStato():"");
+					if (biblioteca.getGeoX() != null) {
+						g.setLatitudine(biblioteca.getGeoX());
+					}
+					if (biblioteca.getGeoY() != null) {
+						g.setLongitudine(biblioteca.getGeoY());
+					}
 
 					g.show();
 				}
 			});
-
+			
 			g.addListener(Events.Update, new Listener<BaseEvent>() {
 
 				@Override
@@ -1313,7 +1325,6 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 	}
 
 	private void removeKeyListenerForEnter() {
-		// TODO Auto-generated method stub
 		Utils.removeKeyListenerForEnter( formDenominazioni);
 		Utils.removeKeyListenerForEnter( formIndirizzo);
 		Utils.removeKeyListenerForEnter( formStatoCatalogazione);
@@ -1322,7 +1333,6 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 	}
 
 	private void addKeyListenerForEnter() {
-		// TODO Auto-generated method stub
 		Utils.addKeyListenerForEnter(aggiornaDenominazione, formDenominazioni);
 		Utils.addKeyListenerForEnter(aggiornaIndirizzo, formIndirizzo);
 		Utils.addKeyListenerForEnter(statoCatalogazioneAggiorna, formStatoCatalogazione);

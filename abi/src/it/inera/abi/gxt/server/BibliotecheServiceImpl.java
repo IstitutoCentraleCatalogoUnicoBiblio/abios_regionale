@@ -12,7 +12,6 @@ import it.inera.abi.gxt.client.mvc.model.DepositiLegaliModel;
 import it.inera.abi.gxt.client.mvc.model.DestinazioneSocialeModel;
 import it.inera.abi.gxt.client.mvc.model.EnteModel;
 import it.inera.abi.gxt.client.mvc.model.FondiSpecialiModel;
-import it.inera.abi.gxt.client.mvc.model.NuovaBiblioModel;
 import it.inera.abi.gxt.client.mvc.model.OrariModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiGeneraliModel;
@@ -51,7 +50,6 @@ import it.inera.abi.persistence.Ente;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.FondiSpeciali;
 import it.inera.abi.persistence.FondiSpecialiCatalogazioneInventario;
-import it.inera.abi.persistence.NuovaBiblioteca;
 import it.inera.abi.persistence.OrarioChiusure;
 import it.inera.abi.persistence.OrarioUfficiali;
 import it.inera.abi.persistence.OrarioVariazioni;
@@ -66,6 +64,7 @@ import it.inera.abi.persistence.PrestitoLocale;
 import it.inera.abi.persistence.Pubblicazioni;
 import it.inera.abi.persistence.Regolamento;
 import it.inera.abi.persistence.Riproduzioni;
+import it.inera.abi.persistence.RiproduzioniTipo;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
@@ -88,6 +87,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -96,15 +97,19 @@ import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 
+/**
+ * Implementazione dei servizi relativi ai dati delle biblioteche (lato server)
+ * 
+ */
 public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet implements BibliotecheService {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 5047407610235114598L;
 
 	private AbiBiblioLogic abiBiblioLogic;
 	@Autowired private TrasferimentoBiblioteca trasferimentoBiblioteca;
-
+	
+	private Log _log = LogFactory.getLog(BibliotecheServiceImpl.class);
+	
 	@Autowired
 	@Required
 	public void setAbiBiblioService(AbiBiblioLogic abiBiblioLogic) {
@@ -119,7 +124,8 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	public PagingLoadResult<BiblioModel> getBiblioteche(final PagingLoadConfig config) {
 		HashMap<String, Object> keys = config.get("keys");
 		if (config.get("viacodice") != null && ((Boolean) config.get("viacodice"))) {
-			return ricercaBiblioViaCodice((String) keys.get("codiceStato"), (String) keys.get("codiceProvincia"), (String) keys.get("codiceNumero"));			
+			String codiceIsil = (String) keys.get("codiceIsil");
+			return ricercaBiblioViaCodice(Utility.getIsilSt(codiceIsil), Utility.getIsilPr(codiceIsil), Utility.getIsilNr(codiceIsil).toString());	
 		} else {
 			return getBiblioteche(keys, config);
 		}
@@ -793,10 +799,6 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		if ((Boolean) biblioteca.getAccessoRiservato() != null) {
 			biblioModel.setAccessoRiservato(biblioteca.getAccessoRiservato());
 		}
-		if (biblioteca.getAccessoLimiteEtaMin() != null)
-			biblioModel.setLimiteEtaMin(biblioteca.getAccessoLimiteEtaMin());
-		if (biblioteca.getAccessoLimiteEtaMax() != null)
-			biblioModel.setLimiteEtaMax(biblioteca.getAccessoLimiteEtaMax());
 
 		// Accesso portatori handicap
 		if(biblioteca.getAccessoHandicap() != null){
@@ -981,12 +983,50 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			biblioModel.setAttivoRiproduzioni(null);
 		}
 		
+		/* Attivo document delivery */
+		if (biblioteca.getAttivoDocumentDelivery() != null) {
+			biblioModel.setAttivoDocumentDelivery(biblioteca.getAttivoDocumentDelivery());
+			
+		} else {
+			biblioModel.setAttivoDocumentDelivery(null);
+		}
+		
 		/* Attivo prestito locale */
 		if (biblioteca.getAttivoPrestitoLocale() != null) {
 			biblioModel.setAttivoPrestitoLocale(biblioteca.getAttivoPrestitoLocale());
 			
 		} else {
 			biblioModel.setAttivoPrestitoLocale(null);
+		}
+		
+		/* Reference */
+		if (biblioteca.getAttivoReference() != null) {
+			biblioModel.setAttivoReference(biblioteca.getAttivoReference());
+			
+		} else {
+			biblioModel.setAttivoReference(null);
+		}
+		
+		if (biblioteca.getReferenceLocale() != null) {
+			biblioModel.setReferenceLocale(biblioteca.getReferenceLocale());
+			
+		} else {
+			biblioModel.setReferenceLocale(null);
+		}
+		
+		if (biblioteca.getReferenceOnline() != null) {
+			biblioModel.setReferenceOnline(biblioteca.getReferenceOnline());
+			
+		} else {
+			biblioModel.setReferenceOnline(null);
+		}
+		
+		/* Attivo deposito legale */
+		if (biblioteca.getAttivoDepositoLegale() != null) {
+			biblioModel.setAttivoDepositoLegale(biblioteca.getAttivoDepositoLegale());
+			
+		} else {
+			biblioModel.setAttivoDepositoLegale(null);
 		}
 		
 		//STATO CATALOGAZIONE BIBLIOTECA
@@ -1071,12 +1111,6 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 
 	}
 	
-	@Override
-	public void setLimiteEtaAccesso(int idBiblio, HashMap<String, Object> params) {
-		abiBiblioLogic.setLimiteEtaAccesso(idBiblio, params);
-
-	}
-
 	@Override
 	public List<VoceUnicaModel> getModalitaAccessoByIdBiblioteca(
 			int id_biblioteca) {
@@ -2633,7 +2667,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 
 
 	/**
-	 * Mette in cancellata la biblioteca
+	 * Mette in occupata la biblioteca
 	 */
 	@Override
 	public void setOccupata(int id_biblio) {
@@ -2725,16 +2759,21 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void ripristina(List<Integer> bibliotecheSelectedIds) {
-		abiBiblioLogic.ripristinaImportate(bibliotecheSelectedIds);
+	public Integer ripristina(List<Integer> bibliotecheSelectedIds) {
+		
+		int numBibInError = abiBiblioLogic.ripristinaImportate(bibliotecheSelectedIds);
 		
 		for (Integer entry : bibliotecheSelectedIds) {
 			try {
 				trasferimentoBiblioteca.backupXml(entry);
 			} catch (Exception e) {
-				throw new RuntimeException(new Error(e.getMessage()));
+				_log.warn("Errore durante il backup xml della biblioteca con id " + entry + ", errore: " + e.getMessage());
+				//throw new RuntimeException(new Error(e.getMessage()));
+				
 			}
 		}
+		
+		return numBibInError;
 	}
 
 	@Override
@@ -2804,5 +2843,55 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		} catch (DuplicateEntryException e) {
 			throw new DuplicatedEntryClientSideException(e.getMessage());
 		}
+	}
+	
+	@Override
+	public void setReference(int id_biblio, Boolean hasAttivoReference, Boolean hasReferenceLocale, Boolean hasReferenceOnline) {
+		abiBiblioLogic.setReference(id_biblio, hasAttivoReference, hasReferenceLocale, hasReferenceOnline);
+	}
+	
+	@Override
+	public void setAttivoDocumentDelivery(int idbib, Boolean attivoDocumentDelivery) {
+		abiBiblioLogic.setAttivoDocumentDelivery(idbib, attivoDocumentDelivery);
+	}
+	
+	@Override
+	public List<VoceUnicaModel> getDocumentDeliveryByIdBiblio(int id_biblioteca) {
+		List<VoceUnicaModel> documentDeliveryModels = new ArrayList<VoceUnicaModel>();
+
+		List<RiproduzioniTipo> documentDeliveries = abiBiblioLogic.getDocumentDeliveryByIdBiblio(id_biblioteca);
+		Iterator<RiproduzioniTipo> it = documentDeliveries.iterator();
+		
+		while (it.hasNext()) {
+			//MAPPING RiproduzioniTipo ---> VoceUnicaModel
+			RiproduzioniTipo docDel = (RiproduzioniTipo) it.next();	
+			VoceUnicaModel model = new VoceUnicaModel();
+			model.setIdRecord(docDel.getIdRiproduzioniTipo());
+			model.setEntry(docDel.getDescrizione());
+
+			documentDeliveryModels.add(model);
+		}
+
+		return documentDeliveryModels;
+	}
+
+	@Override
+	public void addDocumentDelivery(int id_biblioteca, int idDocumentDelivery) throws DuplicatedEntryClientSideException {
+		try {
+			abiBiblioLogic.addDocumentDelivery(id_biblioteca, idDocumentDelivery);
+			
+		} catch (DuplicateEntryException e) {
+			throw new DuplicatedEntryClientSideException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void removeDocumentDelivery(int id_biblioteca, int idRemove) {
+		abiBiblioLogic.removeDocumentDelivery(id_biblioteca, idRemove);
+	}
+	
+	@Override
+	public void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale) {
+		abiBiblioLogic.setAttivoDepositoLegale(idbib, attivoDepositoLegale);
 	}
 }

@@ -35,12 +35,6 @@ public class Biblioteca implements Serializable {
 	@Column(name="accesso_internet_tempo")
 	private Boolean accessoInternetTempo;
 
-	@Column(name="accesso_limite_eta_max")
-	private Integer accessoLimiteEtaMax;
-
-	@Column(name="accesso_limite_eta_min")
-	private Integer accessoLimiteEtaMin;
-
 	@Column(name="accesso_riservato")
 	private Boolean accessoRiservato;
 
@@ -239,6 +233,15 @@ public class Biblioteca implements Serializable {
 
 	@Column(name="utenti_under14")
 	private Integer utentiUnder14;
+	
+	@Column(name="attivo_reference")
+	private Boolean attivoReference;
+
+	@Column(name="reference_locale")
+	private Boolean referenceLocale;
+
+	@Column(name="reference_online")
+	private Boolean referenceOnline;
 
 	//bi-directional many-to-one association to Bibliografia
 	@OneToMany(mappedBy="biblioteca")
@@ -472,6 +475,9 @@ public class Biblioteca implements Serializable {
 	@OneToMany(mappedBy="biblioteca")
 	private List<DenominazioniPrecedenti> denominazioniPrecedentis;
 
+	@Column(name="attivo_deposito_legale")
+	private Boolean attivoDepositoLegale;
+	
 	//bi-directional many-to-one association to DepositiLegali
 	@OneToMany(mappedBy="biblioteca")
 	private List<DepositiLegali> depositiLegalis;
@@ -516,10 +522,10 @@ public class Biblioteca implements Serializable {
 	//bi-directional many-to-one association to Patrimonio
 	@OneToMany(mappedBy="biblioteca")
 	private List<Patrimonio> patrimonios;
-
+	
 	@Column(name="attivo_prestito_locale")
 	private Boolean attivoPrestitoLocale;
-	
+
 	//bi-directional many-to-one association to PrestitoLocale
 	@OneToMany(mappedBy="biblioteca")
 	private List<PrestitoLocale> prestitoLocales;
@@ -531,13 +537,29 @@ public class Biblioteca implements Serializable {
 	//bi-directional many-to-one association to Regolamento
 	@OneToMany(mappedBy="biblioteca")
 	private List<Regolamento> regolamentos;
-
+	
 	@Column(name="attivo_riproduzioni")
 	private Boolean attivoRiproduzioni;
 	
 	//bi-directional many-to-one association to Riproduzioni
 	@OneToMany(mappedBy="biblioteca")
 	private List<Riproduzioni> riproduzionis;
+	
+	@Column(name="attivo_document_delivery")
+	private Boolean attivoDocumentDelivery;
+	
+	//uni-directional many-to-many association to Riproduzioni
+    @ManyToMany
+	@JoinTable(
+		name="biblioteca_has_document_delivery"
+		, joinColumns={
+			@JoinColumn(name="id_biblioteca", nullable=false)
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_riproduzioni_tipo", nullable=false)
+			}
+		)
+	private List<RiproduzioniTipo> documentDeliveries;
 
 	//bi-directional many-to-one association to SpogliBibliografici
 	@OneToMany(mappedBy="biblioteca")
@@ -596,22 +618,6 @@ public class Biblioteca implements Serializable {
 
 	public void setAccessoInternetTempo(Boolean accessoInternetTempo) {
 		this.accessoInternetTempo = accessoInternetTempo;
-	}
-
-	public Integer getAccessoLimiteEtaMax() {
-		return this.accessoLimiteEtaMax;
-	}
-
-	public void setAccessoLimiteEtaMax(Integer accessoLimiteEtaMax) {
-		this.accessoLimiteEtaMax = accessoLimiteEtaMax;
-	}
-
-	public Integer getAccessoLimiteEtaMin() {
-		return this.accessoLimiteEtaMin;
-	}
-
-	public void setAccessoLimiteEtaMin(Integer accessoLimiteEtaMin) {
-		this.accessoLimiteEtaMin = accessoLimiteEtaMin;
 	}
 
 	public Boolean getAccessoRiservato() {
@@ -1133,6 +1139,30 @@ public class Biblioteca implements Serializable {
 	public void setUtentiUnder14(Integer utentiUnder14) {
 		this.utentiUnder14 = utentiUnder14;
 	}
+	
+	public Boolean getAttivoReference() {
+		return this.attivoReference;
+	}
+	
+	public void setAttivoReference(Boolean attivoReference) {
+		this.attivoReference = attivoReference;
+	}
+	
+	public Boolean getReferenceLocale() {
+		return this.referenceLocale;
+	}
+
+	public void setReferenceLocale(Boolean referenceLocale) {
+		this.referenceLocale = referenceLocale;
+	}
+
+	public Boolean getReferenceOnline() {
+		return this.referenceOnline;
+	}
+
+	public void setReferenceOnline(Boolean referenceOnline) {
+		this.referenceOnline = referenceOnline;
+	}
 
 	public List<Bibliografia> getBibliografias() {
 		return this.bibliografias;
@@ -1350,6 +1380,14 @@ public class Biblioteca implements Serializable {
 		this.denominazioniPrecedentis = denominazioniPrecedentis;
 	}
 	
+	public Boolean getAttivoDepositoLegale() {
+		return this.attivoDepositoLegale;
+	}
+	
+	public void setAttivoDepositoLegale(Boolean attivoDepositoLegale) {
+		this.attivoDepositoLegale = attivoDepositoLegale;
+	}
+	
 	public List<DepositiLegali> getDepositiLegalis() {
 		return this.depositiLegalis;
 	}
@@ -1480,6 +1518,22 @@ public class Biblioteca implements Serializable {
 	
 	public List<Riproduzioni> getRiproduzionis() {
 		return this.riproduzionis;
+	}
+	
+	public Boolean getAttivoDocumentDelivery() {
+		return this.attivoDocumentDelivery;
+	}
+	
+	public void setAttivoDocumentDelivery(Boolean attivoDocumentDelivery) {
+		this.attivoDocumentDelivery = attivoDocumentDelivery;
+	}
+	
+	public List<RiproduzioniTipo> getDocumentDeliveries() {
+		return this.documentDeliveries;
+	}
+
+	public void setDocumentDeliveries(List<RiproduzioniTipo> documentDeliveries) {
+		this.documentDeliveries = documentDeliveries;
 	}
 
 	public void setRiproduzionis(List<Riproduzioni> riproduzionis) {

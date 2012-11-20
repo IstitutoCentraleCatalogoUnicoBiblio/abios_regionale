@@ -12,6 +12,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 /**
  * Expose Spring services to GWT app
  * From http://pgt.de/2009/07/17/non-invasive-gwt-and-spring-integration-reloaded/
+ * 
  */
 public abstract class AutoinjectingRemoteServiceServlet extends RemoteServiceServlet {
 

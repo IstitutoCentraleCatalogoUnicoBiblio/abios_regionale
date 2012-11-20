@@ -26,9 +26,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.xml.sax.SAXException;
 
 /**
+ * Classe per la generazione delle statistiche in excel
  * 
- * @author reschini
- *
  */
 public class GenerateExcel {
 

@@ -2,15 +2,17 @@ package it.inera.abi.gxt.client.mvc.model;
 
 import java.util.List;
 
+/**
+ * Estensione di <code>PartecipaCataloghiGenericaModel</code> per i cataloghi speciali
+ *
+ */
 public class PartecipaCataloghiSpecialiModel extends PartecipaCataloghiGenericaModel {
-	/**
-	 * 
-	 */
+
 	List<String> urlList;
 	private static final long serialVersionUID = -2325734764512980625L;
 
 	public PartecipaCataloghiSpecialiModel() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public PartecipaCataloghiSpecialiModel(String denominazione,

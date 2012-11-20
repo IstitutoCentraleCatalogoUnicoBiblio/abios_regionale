@@ -7,6 +7,10 @@ import it.inera.abi.persistence.Utenti;
 import java.util.HashMap;
 import java.util.List;
 
+/** 
+ * Interfaccia DAO per l'entità Utenti
+ *
+ */
 public interface UtentiDao {
 
 	public List<Utenti> ricercaUtenti(HashMap<String, Object> parametri,int offset, int rows, String orderByField,
@@ -20,20 +24,15 @@ public interface UtentiDao {
 	
 	public List<Profili> getListProfile();
 
-//	public void addProfilo(Profili profilo);
-
 	public void removeUtente(int id_utenti);
 	
 	public Utenti getDataUtente(int id_utenti);
 	
-	//public List<Utenti> ricercaUtenti(HashMap<String,String> keys);
-	
-	/*DAL FORMATO DI SCAMBIO*/
 	/**
 	 * Ritorna true se la biblioteca puo essere gestita dal utente
 	 * @param codiceAbi
 	 * @param loginUtente
-	 * @return
+	 * @return boolean
 	 * @throws DaoException
 	 */
 	public boolean isUtenteManageBiblioByCodAbiSenzaStato(String codiceAbi, String loginUtente);
@@ -43,7 +42,7 @@ public interface UtentiDao {
 	/**
 	 * Per la sicurezza
 	 * @param username
-	 * @return
+	 * @return Utenti
 	 */
 	public Utenti findByName(String username);
 	

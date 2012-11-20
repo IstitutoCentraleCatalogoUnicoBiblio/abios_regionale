@@ -69,7 +69,9 @@
    <elementBinding name="/complexType:catalogoSpecialeType/materiali/materiale">
    		<java-class name="CatSpecMateriale" />
    </elementBinding>
-   
+   <elementBinding name="/complexType:serviziType/document-delivery/forme">
+   		<java-class name="DocDelForme" />
+   </elementBinding>
    
 
 </binding>

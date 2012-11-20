@@ -15,6 +15,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 
+/**
+ * Implementazione dei servizi di autenticazione (lato server)
+ * 
+ */
 @SuppressWarnings("serial")
 public class AuthServiceImpl extends AutoinjectingRemoteServiceServlet implements AuthService {
 	
@@ -31,7 +35,7 @@ public class AuthServiceImpl extends AutoinjectingRemoteServiceServlet implement
 			return null;
 		} else {
 			String username = user.getUsername();
-			Utenti utente = authLogic.retriveUtente(username);
+			Utenti utente = authLogic.retrieveUtente(username);
 			 
 			List<Profili> profiliSet = utente.getProfilis();
 			List<ProfiliModel> subjectModels = new ArrayList<ProfiliModel>(); 

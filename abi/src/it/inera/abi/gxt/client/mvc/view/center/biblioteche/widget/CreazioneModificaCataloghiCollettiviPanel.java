@@ -39,12 +39,16 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Estensione della classe widget <code>CreazioneModificaCataloghiGenericaPanel</code> 
+ * per la visualizzazione / modifica delle informazioni relative ai cataloghi collettivi
+ *
+ */
 public class CreazioneModificaCataloghiCollettiviPanel extends CreazioneModificaCataloghiGenericaPanel{
 
 	/*Label cataloghi collettivi*/

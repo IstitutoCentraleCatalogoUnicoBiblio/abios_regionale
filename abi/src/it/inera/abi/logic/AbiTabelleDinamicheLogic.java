@@ -18,6 +18,11 @@ import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 
 import java.util.List;
 
+/**
+ * Classe contenente la logica delle principali operazioni riguardanti
+ * le Tabelle Dinamiche
+ *
+ */
 public interface AbiTabelleDinamicheLogic {
 
 	public List<?> getListaVoci(int id_tabella);

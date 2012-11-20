@@ -10,17 +10,21 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Interfaccia Async di <code>FormatoScambioService</code>
+ * 
+ */
 public interface FormatoScambioServiceAsync {
 
-	/*
-	 * IMPORT
-	 */	
+	/* IMPORT */	
 	public void browseUncheckedFileImport(AsyncCallback<List<FileCaricatiListModel>> callback);
 
 	void browseCheckedFileImport(AsyncCallback<List<FileCaricatiListModel>> callback);
 	
 	void dettaglioCheckedFileImport(String filename, PagingLoadConfig config, AsyncCallback<PagingLoadResult<BiblioModel>> callback);
+	
 	void dettaglioScheduledFileImport(String filename, PagingLoadConfig config, AsyncCallback<PagingLoadResult<BiblioModel>> callback);
+	
 	void dettaglioScheduledFileExport(String filename, PagingLoadConfig config, AsyncCallback<PagingLoadResult<BiblioModel>> callback);
 
 	void browseScheduledImport(AsyncCallback<List<FileCaricatiListModel>> callback);
@@ -35,16 +39,12 @@ public interface FormatoScambioServiceAsync {
 
 	void importFile(String filename, boolean differito,	AsyncCallback<Void> callback);
 	
-	/*
-	 * EXPORT
-	 */
+	/* EXPORT */
 	void browseScheduledExport(AsyncCallback<List<FileCaricatiListModel>> callback);
 
 	void deleteScheduledExportFile(String filename, AsyncCallback<Void> callback);
 	
-	
 	/* Metodo per il servizio del formato di scambio */
 	public void retrieveBiblioFormatoDiScambio(List<Integer> idbibselected, HashMap<String, Object> labels, AsyncCallback<Void> callback);
-
 	
 }

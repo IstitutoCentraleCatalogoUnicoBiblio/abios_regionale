@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: UsciteDescriptor.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
+ * $Id: UsciteDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Uscite;
 /**
  * Class UsciteDescriptor.
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class UsciteDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -59,6 +59,9 @@ public class UsciteDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
         super();
         _xmlName = "uscite";
         _elementDefinition = true;
+
+        //-- set grouping compositor
+        setCompositorAsSequence();
         org.exolab.castor.xml.util.XMLFieldDescriptorImpl  desc           = null;
         org.exolab.castor.mapping.FieldHandler             handler        = null;
         org.exolab.castor.xml.FieldValidator               fieldValidator = null;

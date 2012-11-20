@@ -16,6 +16,10 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+/**
+ * Servlet per il salvataggio e la validazione della password dell'utente
+ *
+ */
 public class SalvaPasswordServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -7175912593873560505L;

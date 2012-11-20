@@ -56,7 +56,13 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette la gestione (modifica, aggiungi, rimuovi) 
+ * della tabella dinamica delle specializzazioni del patrimonio
+ * 
+ */
 public class ListaPatrimonioPiccoleVociTabelleDinamiche extends ContentPanel {
+	
 	private TabelleDinamicheServiceAsync tabelleDinamicheService;
 	private boolean modifica;
 	private int pageSize;

@@ -1,7 +1,7 @@
 package it.inera.abi.logic.exportdynatabs;
 
 /**
- *  Interfaccia per export tabelle dinamiche
+ *  Interfaccia per eseguire l'export delle Tabelle Dinamiche
  * 
  */
 public interface ExportDynaTabs {

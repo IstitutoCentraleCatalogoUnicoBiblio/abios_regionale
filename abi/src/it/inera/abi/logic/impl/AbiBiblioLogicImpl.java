@@ -53,6 +53,7 @@ import it.inera.abi.persistence.PrestitoLocale;
 import it.inera.abi.persistence.Pubblicazioni;
 import it.inera.abi.persistence.Regolamento;
 import it.inera.abi.persistence.Riproduzioni;
+import it.inera.abi.persistence.RiproduzioniTipo;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
@@ -84,6 +85,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Classe che implementa la logica delle principali operazioni di ricerca/modifica delle biblioteche
+ *
+ */
 @Service
 public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 
@@ -145,7 +150,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 			DenominazioniAlternativeDao denominazioniAlternativeDao) {
 		this.denominazioniAlternativeDao = denominazioniAlternativeDao;
 	}
-	
+
 	@Override
 	public List<Biblioteca> ricercaBiblio(HashMap<String, Object> keys,	int offset, int rows, String orderByField, String orderByDir) {
 		/* Se si tratta dell'utente con ruolo VEDI_TUTTE vengono selezionate tutte le biblioteche */
@@ -227,7 +232,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 			//Iterazione anti-lazy
 			Codici codici = (Codici) itCodici.next();
 		}
-		
+
 		List<StatoCatalogazione> catalogaziones = biblioteca.getStatoCatalogaziones();
 		Iterator<StatoCatalogazione> itStati =catalogaziones.iterator();
 		while (itStati.hasNext()) {
@@ -607,21 +612,6 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 				+( params.get("accessoRiservato")!=null?" accesso_riservato="+(Boolean) params.get("accessoRiservato"):"")
 				+" - id_biblioteca="+idBiblio);
 
-	}
-	
-	@Override
-	@Transactional
-	public void setLimiteEtaAccesso(int idBiblio, HashMap<String, Object> params) {
-		Biblioteca biblioteca = biblioDao.getBibliotecaById(idBiblio);
-		biblioteca.setAccessoLimiteEtaMin((Integer)params.get("limiteEtaMin"));
-		biblioteca.setAccessoLimiteEtaMax((Integer)params.get("limiteEtaMax"));
-
-		biblioDao.updateBiblioteca(biblioteca);
-
-		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica informazioni accesso:"
-				+ (params.get("limiteEtaMin")!=null?" limit_eta_min="+(Integer) params.get("limiteEtaMin"):"")
-				+ (params.get("limiteEtaMax")!=null?" limit_eta_max="+(Integer) params.get("limiteEtaMax"):"")
-				+" - id_biblioteca="+idBiblio);
 	}
 
 	@Override
@@ -1129,8 +1119,6 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	@Override
 	public PrestitoLocale addPrestitoLocaleToBiblio(int id_biblioteca,Integer idPrestito, Integer durataGiorni, Boolean automatizzato, boolean modifica) {
 		return biblioDao.addPrestitoLocaleToBiblio(id_biblioteca,idPrestito, durataGiorni, automatizzato,modifica);
-		//TODO 		userActionLog.logAction("Salvataggio/modifica modalità accesso internet: id_biblioteca="+id_biblioteca);
-		//TODO materiale escluso, utenti ammessi
 	}
 
 	@Override
@@ -1225,7 +1213,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		String username = authLogic.retrieveLoggedUser().getUsername();
 		setOccupataByUsername(id, username);
 	}
-	
+
 	@Override
 	@Transactional
 	public void setOccupataByUsername(int id, String username) {
@@ -1260,7 +1248,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		String username = authLogic.retrieveLoggedUser().getUsername();
 		setInRevisioneByUsername(id, sendEmailToRevisori, username);
 	}
-	
+
 	@Override
 	@Transactional
 	public void setInRevisioneByUsername(int id, boolean sendEmailToRevisori, String username) {
@@ -1277,7 +1265,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		if ((emailRevisoriEnabled != null && emailRevisoriEnabled) && sendEmailToRevisori) {//Invia un email di avviso a tutti gli utenti con ruolo "Revisore"
 			sendMailBibliotecainRevisione(id);
 		}
-		
+
 		userActionLog.logActionStatoBibliotecaDefaultUser("Stato biblioteca con id="+biblioteca.getIdBiblioteca()+" impostato a: "+StatiBiblioteca.REVISIONE, username);
 	}
 
@@ -1306,7 +1294,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		try {
 			trasferimentoBiblioteca.backupXml(id);
 		} catch (Exception e) {
-			_log.fatal("Errore nel eseguire il backup del file di salvataggio della biblioteca", e);
+			_log.warn("Errore nel eseguire il backup del file di salvataggio della biblioteca: " + e.getMessage());
 			//throw new RuntimeException(new Error(e.getMessage()));
 		}
 
@@ -1336,27 +1324,29 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		}
 		sendMailReportBibliotecheImportate(ok, ko);
 	}
-	
+
 	@Override
 	@Transactional
-	public void ripristinaImportate(List<Integer> bibliotecheSelectedIds) {
-		
+	public int ripristinaImportate(List<Integer> bibliotecheSelectedIds) {
+		int numBibInError = 0;
 		for(Integer idBiblio : bibliotecheSelectedIds) {
 			try {
 				trasferimentoBiblioteca.ripristina(idBiblio);
+				Biblioteca biblioteca = biblioDao.getBibliotecaById(idBiblio);
+				biblioDao.setNuovoStato(biblioteca, StatiBiblioteca.DEFINITIVA);
+				userActionLog.logActionStatoBibliotecaDefaultUser("Stato biblioteca con id="+biblioteca.getIdBiblioteca()+" impostato a: "+StatiBiblioteca.DEFINITIVA+" per RIPRISTINO");
+				
 			} catch (Exception e) {
-				_log.error("Errore nel ripristinare la biblioteca con id "+idBiblio, e);
-				throw new RuntimeException(new Error(e.getMessage()));
+				_log.warn("Errore nel ripristinare la biblioteca con id " + idBiblio + ", errore: " + e.getMessage());
+				numBibInError++;
+				//throw new RuntimeException(new Error(e.getMessage()));
 			}
-	
-			Biblioteca biblioteca = biblioDao.getBibliotecaById(idBiblio);
-			biblioDao.setNuovoStato(biblioteca, StatiBiblioteca.DEFINITIVA);
-			userActionLog.logActionStatoBibliotecaDefaultUser("Stato biblioteca con id="+biblioteca.getIdBiblioteca()+" impostato a: "+StatiBiblioteca.DEFINITIVA+" per RIPRISTINO");
-		
+			
 		}
 		
+		return numBibInError;
 	}
-	
+
 	@Transactional
 	public void sendMailReportBibliotecheImportate(Vector<Integer> ok,HashMap<Integer,String> ko) {
 		// utente revisore
@@ -1404,7 +1394,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	public void setDefinitiva(int idBiblioteca, String messaggio) {
 
 		setDefinitiva(idBiblioteca);
-		
+
 		sendMailBibliotecaResaDefinitiva(idBiblioteca, messaggio);
 	}
 
@@ -1500,7 +1490,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 			//throw new RuntimeException(e.getMessage());
 		}
 	}
-	
+
 	@Override
 	public String differenze(int idbiblio) {
 		try {
@@ -1536,7 +1526,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 
 		return sb.toString();
 	}
-	
+
 	/**
 	 * @param idBiblioteca
 	 * @param messaggio
@@ -1556,15 +1546,15 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 			for(Utenti utente:utentiDao.getUsersByRole(5)){
 				sendEmail(subject, revisioneMessage, utente.getEmail(), username, "anagrafe@iccu.isbn.it", "ANAGRAFE BIBLIOTECHE ITALIANE");
 			}
-		
-			
+
+
 		} catch (Exception e) {
 			_log.fatal("Errore nell'invio della email", e);
 			//throw new RuntimeException(e.getMessage());
 		}
 	}
-	
-	
+
+
 	protected String createRespingiMessage(String message, String username, Biblioteca biblioteca) {
 		String iccuCode = Utility.buildIsil(biblioteca);
 		StringBuffer sb = new StringBuffer();
@@ -1598,7 +1588,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		}
 		return sb.toString();
 	}
-	
+
 	protected String createNuovaBibliotecaInRevisioneMessage(String username, NuovaBiblioteca nuovaBiblioteca) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("La nuova biblioteca ");
@@ -1613,7 +1603,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		sb.append(".");
 		return sb.toString();
 	}
-	
+
 	protected String createBibliotecaInRevisioneMessage(String username, Biblioteca biblioteca) {
 		String iccuCode = Utility.buildIsil(biblioteca);
 		StringBuffer sb = new StringBuffer();
@@ -1631,7 +1621,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 
 		return sb.toString();
 	}
-	
+
 	/* Metodo di ricerca biblioteche tramite codice */
 	public Biblioteca ricercaBiblioViaCodice(String stato, String provincia, String numero) {
 		String[] s = new String[1];
@@ -1903,30 +1893,30 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	public void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni) {
 		Biblioteca biblioteca = biblioDao.getBibliotecaById(idbib);
 		biblioteca.setAttivoRiproduzioni(attivoRiproduzioni);
-		
+
 		if (attivoRiproduzioni == null || (attivoRiproduzioni != null && attivoRiproduzioni.booleanValue() == false)) {
 			biblioDao.removeRiproduzioniFromBiblio(biblioteca);
 		}
-		
+
 		biblioDao.updateBiblioteca(biblioteca);
 	}
-	
+
 	@Override
 	public void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale) {
 		Biblioteca biblioteca = biblioDao.getBibliotecaById(idbib);
 		biblioteca.setAttivoPrestitoLocale(attivoPrestitoLocale);
-		
+
 		if (attivoPrestitoLocale == null || (attivoPrestitoLocale != null && attivoPrestitoLocale.booleanValue() == false)) {
 			biblioDao.removePrestitoLocaleFromBiblio(biblioteca);
 		}
 		biblioDao.updateBiblioteca(biblioteca);		
 	}
-	
+
 	@Override
 	public List<SistemiPrestitoInterbibliotecario> getListaSistemiPrestitoInterbibliotecario(int id_biblioteca) {
 		return biblioDao.getListaSistemiPrestitoInterbibliotecario(id_biblioteca);
 	}
-	
+
 	@Override
 	public void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistema) {
 		biblioDao.removeSistemaPrestitoInterbibliotecario(id_biblioteca, id_sistema);
@@ -1934,12 +1924,63 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Rimozione sistema prestito interbibliotecario: id_record="+id_sistema+" - id_biblioteca="+id_biblioteca);
 
 	}
-	
+
 	@Override
 	public void addSistemaPrestitoInterbibliotecario(int id_biblioteca, Integer id_sistema) throws DuplicateEntryException {
 		biblioDao.addSistemaPrestitoInterbibliotecario(id_biblioteca, id_sistema);
 
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica sistema prestito interbibliotecario: " + 
 				(id_sistema != null ? "id_sistema = " + id_sistema + " - " : "") + "id_biblioteca = " + id_biblioteca);
+	}
+
+	@Override
+	public void setReference(int id_biblio, Boolean hasAttivoReference, Boolean hasReferenceLocale, Boolean hasReferenceOnline) {
+		biblioDao.setReference(id_biblio, hasAttivoReference, hasReferenceLocale, hasReferenceOnline);
+
+		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica reference: - id_biblioteca="+id_biblio);
+	}
+	
+	@Override
+	public void setAttivoDocumentDelivery(int idbib, Boolean attivoDocumentDelivery) {
+		Biblioteca biblioteca = biblioDao.getBibliotecaById(idbib);
+		biblioteca.setAttivoDocumentDelivery(attivoDocumentDelivery);
+
+		if (attivoDocumentDelivery == null || (attivoDocumentDelivery != null && attivoDocumentDelivery.booleanValue() == false)) {
+			biblioDao.removeDocumentDeliveryFromBiblio(biblioteca);
+		}
+
+		biblioDao.updateBiblioteca(biblioteca);
+	}
+	
+	@Override
+	public List<RiproduzioniTipo> getDocumentDeliveryByIdBiblio( int id_biblioteca) {
+		return biblioDao.getDocumentDeliveryByIdBiblio(id_biblioteca);
+	}
+
+	@Override
+	public void addDocumentDelivery(int id_biblioteca, Integer idDocumentDelivery) throws DuplicateEntryException {
+		biblioDao.addDocumentDelivery(id_biblioteca, idDocumentDelivery);
+
+		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica document delivery: "+(idDocumentDelivery!=null?"id_document_delivery="+idDocumentDelivery:"")+" - id_biblioteca="+id_biblioteca);
+
+	}
+
+	@Override
+	public void removeDocumentDelivery(int id_biblioteca, int idRemove) {
+		biblioDao.removeDocumentDelivery(id_biblioteca, idRemove);
+
+		userActionLog.logActionCatalogazioneBiblioDefaultUser("Rimozione document delivery: id_document_delivery="+idRemove+" - id_biblioteca="+id_biblioteca);
+	}
+	
+	@Override
+	public void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale) {
+		Biblioteca biblioteca = biblioDao.getBibliotecaById(idbib);
+		biblioteca.setAttivoDepositoLegale(attivoDepositoLegale);
+
+		if (attivoDepositoLegale == null || (attivoDepositoLegale != null && attivoDepositoLegale.booleanValue() == false)) {
+			biblioDao.removeDepositiLegaliFromBiblio(biblioteca);
+		}
+
+		biblioDao.updateBiblioteca(biblioteca);
 	}
 }

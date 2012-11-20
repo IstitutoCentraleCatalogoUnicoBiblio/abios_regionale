@@ -3,7 +3,12 @@
 	<!-- === PROPERTIES === -->
 	<property environment="env" />
 	<property file="abi.properties" />
-
+	
+	<property name="impl.title"  value="ABI - Anagrafe delle Biblioteche Italiane"/>
+	<property name="src.dir"  value="src"/>
+	<property name="docs.dir" value="docs"/>
+	
+	
 	<path id="compile.path">
 		<fileset dir="./war/WEB-INF/lib">
         	<include name="**/*.jar"/>
@@ -27,7 +32,7 @@
 	        	<include name="**/*.java"/>
 			</fileset>
 	</path>
-
+	
 	<target name="clean" description="Rimozione files vecchio build">
 
 		<echo message="Rimozione files vecchio build:" />
@@ -49,7 +54,7 @@
 
 	<target name="compileWebApplication" description="Compila file di logica e persistenza" depends="clean">
 		<mkdir dir="./war/WEB-INF/classes" />
-			
+		
 		<echo message="Compilazione RANJAN path:./src/org/ranjan" />
 	
 		<javac srcdir="./src/org/ranjan" 
@@ -71,7 +76,7 @@
 		 		includes="**/*.java">
 		 	<classpath refid="compile.path" />
 		</javac>
-			
+		
 		  <copy todir="./war/WEB-INF/classes" overwrite="true">
 				<fileset dir="./src" includes="**/*.xsd" />
 				<fileset dir="./src" includes="**/*.dtd" />
@@ -156,4 +161,24 @@
 						compileGxtApplication,
 						createWar">
 	</target>
+	
+	<target name="clean-javadoc" description="Elimina javadoc creati">
+		<mkdir dir="${docs.dir}"/>
+		<delete includeemptydirs="true">
+		    <fileset dir="${docs.dir}" includes="**/*"/>
+		</delete>
+	</target>
+	
+	<target name="javadoc" description="Creazione javadoc" depends="clean-javadoc">
+		<javadoc
+			destdir="${docs.dir}"
+		  	author="true"
+			version="true"
+			use="true"
+			windowtitle="${impl.title}">
+		    <fileset dir="${src.dir}" />
+			<classpath refid="compile.path"/>
+		  </javadoc>
+	</target>
+	
 </project>

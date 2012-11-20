@@ -16,6 +16,10 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+/**
+ * Servlet per il download dei file importati
+ *
+ */
 public class DownloaderServlet extends HttpServlet {
 
 	@Autowired private ImportLogic importLogic;

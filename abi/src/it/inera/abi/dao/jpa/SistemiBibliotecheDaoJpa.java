@@ -12,12 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 import it.inera.abi.dao.SistemiBibliotecheDao;
 import it.inera.abi.persistence.SistemiBiblioteche;
 
+/**
+ * Implementazione classe DAO per l'entità Sistemi di Biblioteche
+ *
+ */
 @Repository
 public class SistemiBibliotecheDaoJpa implements SistemiBibliotecheDao {
 
 	@PersistenceContext
 	private EntityManager em;
-//TODO da migrare nelle tabelle dinamiche generiche DynaTabJpa
+	//TODO da migrare nelle tabelle dinamiche generiche DynaTabJpa
 	@Override
 	@Transactional
 	public int countAllSistemiBiblioteche() {

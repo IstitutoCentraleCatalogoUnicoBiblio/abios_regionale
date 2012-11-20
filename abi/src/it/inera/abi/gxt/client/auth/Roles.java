@@ -69,7 +69,7 @@ public class Roles {
 	/**
 	 * Controlla se un utente ha il ruolo specificato
 	 * @param role
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean isUserInRole(String role) {
 		UtentiAuthModel utentiAuthModel = UIAuth.getUtentiAuthModel();

@@ -5,11 +5,14 @@ import java.util.List;
 import it.inera.abi.persistence.Comune;
 import it.inera.abi.persistence.Provincia;
 
+/**
+ * Interfaccia DAO per l'entità Comune
+ *
+ */
 public interface ComuneDao {
 	
 	public void saveComune(Comune comune);
 	
-	/*DAL FORMATO DI SCAMBIO*/
 	public Comune getComuneByCodIstat(String codIstatComune);
 
 	public String getDenominazioneComuneByCodIstat(String codIstatComune);
@@ -29,5 +32,4 @@ public interface ComuneDao {
 
 	void assegnaComuniAProvincia(int idProvincia, List<Integer> idComunis);
 
-	
 }

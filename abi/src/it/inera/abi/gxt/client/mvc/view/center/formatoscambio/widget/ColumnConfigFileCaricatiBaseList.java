@@ -6,6 +6,10 @@ import java.util.List;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.google.gwt.i18n.client.DateTimeFormat;
 
+/**
+ * Classe che definisce la struttura della griglia di base per i file caricati
+ *
+ */
 public class ColumnConfigFileCaricatiBaseList {
 	
 	public static List<ColumnConfig> getFormatoScambioBaseColumnConfig(boolean nbib, boolean dimensione, boolean scheduling) {

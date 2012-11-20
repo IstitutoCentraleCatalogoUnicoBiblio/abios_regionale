@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per rappresentare le specializzazioni del patrimonio
+ *
+ */
 public class PatrimonioSpecializzazioneModel extends BaseModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public PatrimonioSpecializzazioneModel() {
 
 	}
-
 
 	public PatrimonioSpecializzazioneModel(Integer id_patrimonio,String denominazioneMateriale, int condition) {
 		set("id_record", id_patrimonio);

@@ -6,6 +6,10 @@ import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+/**
+ * Classe di utility per la generazione delle stampe
+ *
+ */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class StampeUtils {
 	

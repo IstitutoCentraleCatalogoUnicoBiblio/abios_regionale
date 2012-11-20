@@ -2,17 +2,16 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Contatti.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
+ * $Id: Contatti.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * Varie modalità per contattare la biblioteca e il
- *  suo personale.
+ * Varie modalità per contattare la biblioteca e il suo personale.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Contatti implements java.io.Serializable {
@@ -23,30 +22,20 @@ public class Contatti implements java.io.Serializable {
     //--------------------------/
 
     /**
-     * Un contatto di tipo telefonico. Il
-     *  prefisso è
-     *  ovviamente quello
-     *  internazionale.
+     * E' stato introdotto l'elemento ripetibile
+     *  'telefonici' come contenitore degli 
+     *  eventuali contatti telefonici.
      *  
      */
-    private java.util.List<it.inera.abi.logic.formatodiscambio.castor.Telefonico> _telefonicoList;
+    private it.inera.abi.logic.formatodiscambio.castor.Telefonici _telefonici;
 
     /**
-     * I contatti di questo tipo prevedono
-     *  solo le
-     *  note e un valore, oltre a un
-     *  attributo "tipo" che, al momento,
-     *  consente di specificare solo un
-     *  indirizzo e-mail, una URL o un
-     *  telex. Ovviamente la stringa
-     *  "valore" può contenere qualsiasi
-     *  cosa, quindi non c'è garanzia che
-     *  tale stringa sia conforme al
-     *  tipo
-     *  specificato.
+     * E' stato introdotto l'elemento ripetibile
+     *  'altri' come contenitore degli eventuali
+     *  altri contatti telefonici.
      *  
      */
-    private java.util.List<it.inera.abi.logic.formatodiscambio.castor.Altro> _altroList;
+    private it.inera.abi.logic.formatodiscambio.castor.Altri _altri;
 
 
       //----------------/
@@ -55,8 +44,6 @@ public class Contatti implements java.io.Serializable {
 
     public Contatti() {
         super();
-        this._telefonicoList = new java.util.ArrayList<it.inera.abi.logic.formatodiscambio.castor.Telefonico>();
-        this._altroList = new java.util.ArrayList<it.inera.abi.logic.formatodiscambio.castor.Altro>();
     }
 
 
@@ -65,173 +52,33 @@ public class Contatti implements java.io.Serializable {
     //-----------/
 
     /**
+     * Returns the value of field 'altri'. The field 'altri' has
+     * the following description: E' stato introdotto l'elemento
+     * ripetibile
+     *  'altri' come contenitore degli eventuali
+     *  altri contatti telefonici.
+     *  
      * 
-     * 
-     * @param vAltro
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
+     * @return the value of field 'Altri'.
      */
-    public void addAltro(
-            final it.inera.abi.logic.formatodiscambio.castor.Altro vAltro)
-    throws java.lang.IndexOutOfBoundsException {
-        this._altroList.add(vAltro);
-    }
-
-    /**
-     * 
-     * 
-     * @param index
-     * @param vAltro
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addAltro(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.Altro vAltro)
-    throws java.lang.IndexOutOfBoundsException {
-        this._altroList.add(index, vAltro);
-    }
-
-    /**
-     * 
-     * 
-     * @param vTelefonico
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addTelefonico(
-            final it.inera.abi.logic.formatodiscambio.castor.Telefonico vTelefonico)
-    throws java.lang.IndexOutOfBoundsException {
-        this._telefonicoList.add(vTelefonico);
-    }
-
-    /**
-     * 
-     * 
-     * @param index
-     * @param vTelefonico
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addTelefonico(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.Telefonico vTelefonico)
-    throws java.lang.IndexOutOfBoundsException {
-        this._telefonicoList.add(index, vTelefonico);
-    }
-
-    /**
-     * Method enumerateAltro.
-     * 
-     * @return an Enumeration over all possible elements of this
-     * collection
-     */
-    public java.util.Enumeration<? extends it.inera.abi.logic.formatodiscambio.castor.Altro> enumerateAltro(
+    public it.inera.abi.logic.formatodiscambio.castor.Altri getAltri(
     ) {
-        return java.util.Collections.enumeration(this._altroList);
+        return this._altri;
     }
 
     /**
-     * Method enumerateTelefonico.
+     * Returns the value of field 'telefonici'. The field
+     * 'telefonici' has the following description: E' stato
+     * introdotto l'elemento ripetibile
+     *  'telefonici' come contenitore degli 
+     *  eventuali contatti telefonici.
+     *  
      * 
-     * @return an Enumeration over all possible elements of this
-     * collection
+     * @return the value of field 'Telefonici'.
      */
-    public java.util.Enumeration<? extends it.inera.abi.logic.formatodiscambio.castor.Telefonico> enumerateTelefonico(
+    public it.inera.abi.logic.formatodiscambio.castor.Telefonici getTelefonici(
     ) {
-        return java.util.Collections.enumeration(this._telefonicoList);
-    }
-
-    /**
-     * Method getAltro.
-     * 
-     * @param index
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     * @return the value of the
-     * it.inera.abi.logic.formatodiscambio.castor.Altro at the
-     * given index
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Altro getAltro(
-            final int index)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._altroList.size()) {
-            throw new IndexOutOfBoundsException("getAltro: Index value '" + index + "' not in range [0.." + (this._altroList.size() - 1) + "]");
-        }
-
-        return (it.inera.abi.logic.formatodiscambio.castor.Altro) _altroList.get(index);
-    }
-
-    /**
-     * Method getAltro.Returns the contents of the collection in an
-     * Array.  <p>Note:  Just in case the collection contents are
-     * changing in another thread, we pass a 0-length Array of the
-     * correct type into the API call.  This way we <i>know</i>
-     * that the Array returned is of exactly the correct length.
-     * 
-     * @return this collection as an Array
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Altro[] getAltro(
-    ) {
-        it.inera.abi.logic.formatodiscambio.castor.Altro[] array = new it.inera.abi.logic.formatodiscambio.castor.Altro[0];
-        return (it.inera.abi.logic.formatodiscambio.castor.Altro[]) this._altroList.toArray(array);
-    }
-
-    /**
-     * Method getAltroCount.
-     * 
-     * @return the size of this collection
-     */
-    public int getAltroCount(
-    ) {
-        return this._altroList.size();
-    }
-
-    /**
-     * Method getTelefonico.
-     * 
-     * @param index
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     * @return the value of the
-     * it.inera.abi.logic.formatodiscambio.castor.Telefonico at the
-     * given index
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Telefonico getTelefonico(
-            final int index)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._telefonicoList.size()) {
-            throw new IndexOutOfBoundsException("getTelefonico: Index value '" + index + "' not in range [0.." + (this._telefonicoList.size() - 1) + "]");
-        }
-
-        return (it.inera.abi.logic.formatodiscambio.castor.Telefonico) _telefonicoList.get(index);
-    }
-
-    /**
-     * Method getTelefonico.Returns the contents of the collection
-     * in an Array.  <p>Note:  Just in case the collection contents
-     * are changing in another thread, we pass a 0-length Array of
-     * the correct type into the API call.  This way we <i>know</i>
-     * that the Array returned is of exactly the correct length.
-     * 
-     * @return this collection as an Array
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Telefonico[] getTelefonico(
-    ) {
-        it.inera.abi.logic.formatodiscambio.castor.Telefonico[] array = new it.inera.abi.logic.formatodiscambio.castor.Telefonico[0];
-        return (it.inera.abi.logic.formatodiscambio.castor.Telefonico[]) this._telefonicoList.toArray(array);
-    }
-
-    /**
-     * Method getTelefonicoCount.
-     * 
-     * @return the size of this collection
-     */
-    public int getTelefonicoCount(
-    ) {
-        return this._telefonicoList.size();
+        return this._telefonici;
     }
 
     /**
@@ -247,28 +94,6 @@ public class Contatti implements java.io.Serializable {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Method iterateAltro.
-     * 
-     * @return an Iterator over all possible elements in this
-     * collection
-     */
-    public java.util.Iterator<? extends it.inera.abi.logic.formatodiscambio.castor.Altro> iterateAltro(
-    ) {
-        return this._altroList.iterator();
-    }
-
-    /**
-     * Method iterateTelefonico.
-     * 
-     * @return an Iterator over all possible elements in this
-     * collection
-     */
-    public java.util.Iterator<? extends it.inera.abi.logic.formatodiscambio.castor.Telefonico> iterateTelefonico(
-    ) {
-        return this._telefonicoList.iterator();
     }
 
     /**
@@ -304,135 +129,33 @@ public class Contatti implements java.io.Serializable {
     }
 
     /**
+     * Sets the value of field 'altri'. The field 'altri' has the
+     * following description: E' stato introdotto l'elemento
+     * ripetibile
+     *  'altri' come contenitore degli eventuali
+     *  altri contatti telefonici.
+     *  
+     * 
+     * @param altri the value of field 'altri'.
      */
-    public void removeAllAltro(
-    ) {
-        this._altroList.clear();
+    public void setAltri(
+            final it.inera.abi.logic.formatodiscambio.castor.Altri altri) {
+        this._altri = altri;
     }
 
     /**
+     * Sets the value of field 'telefonici'. The field 'telefonici'
+     * has the following description: E' stato introdotto
+     * l'elemento ripetibile
+     *  'telefonici' come contenitore degli 
+     *  eventuali contatti telefonici.
+     *  
+     * 
+     * @param telefonici the value of field 'telefonici'.
      */
-    public void removeAllTelefonico(
-    ) {
-        this._telefonicoList.clear();
-    }
-
-    /**
-     * Method removeAltro.
-     * 
-     * @param vAltro
-     * @return true if the object was removed from the collection.
-     */
-    public boolean removeAltro(
-            final it.inera.abi.logic.formatodiscambio.castor.Altro vAltro) {
-        boolean removed = _altroList.remove(vAltro);
-        return removed;
-    }
-
-    /**
-     * Method removeAltroAt.
-     * 
-     * @param index
-     * @return the element removed from the collection
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Altro removeAltroAt(
-            final int index) {
-        java.lang.Object obj = this._altroList.remove(index);
-        return (it.inera.abi.logic.formatodiscambio.castor.Altro) obj;
-    }
-
-    /**
-     * Method removeTelefonico.
-     * 
-     * @param vTelefonico
-     * @return true if the object was removed from the collection.
-     */
-    public boolean removeTelefonico(
-            final it.inera.abi.logic.formatodiscambio.castor.Telefonico vTelefonico) {
-        boolean removed = _telefonicoList.remove(vTelefonico);
-        return removed;
-    }
-
-    /**
-     * Method removeTelefonicoAt.
-     * 
-     * @param index
-     * @return the element removed from the collection
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Telefonico removeTelefonicoAt(
-            final int index) {
-        java.lang.Object obj = this._telefonicoList.remove(index);
-        return (it.inera.abi.logic.formatodiscambio.castor.Telefonico) obj;
-    }
-
-    /**
-     * 
-     * 
-     * @param index
-     * @param vAltro
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void setAltro(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.Altro vAltro)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._altroList.size()) {
-            throw new IndexOutOfBoundsException("setAltro: Index value '" + index + "' not in range [0.." + (this._altroList.size() - 1) + "]");
-        }
-
-        this._altroList.set(index, vAltro);
-    }
-
-    /**
-     * 
-     * 
-     * @param vAltroArray
-     */
-    public void setAltro(
-            final it.inera.abi.logic.formatodiscambio.castor.Altro[] vAltroArray) {
-        //-- copy array
-        _altroList.clear();
-
-        for (int i = 0; i < vAltroArray.length; i++) {
-                this._altroList.add(vAltroArray[i]);
-        }
-    }
-
-    /**
-     * 
-     * 
-     * @param index
-     * @param vTelefonico
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void setTelefonico(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.Telefonico vTelefonico)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._telefonicoList.size()) {
-            throw new IndexOutOfBoundsException("setTelefonico: Index value '" + index + "' not in range [0.." + (this._telefonicoList.size() - 1) + "]");
-        }
-
-        this._telefonicoList.set(index, vTelefonico);
-    }
-
-    /**
-     * 
-     * 
-     * @param vTelefonicoArray
-     */
-    public void setTelefonico(
-            final it.inera.abi.logic.formatodiscambio.castor.Telefonico[] vTelefonicoArray) {
-        //-- copy array
-        _telefonicoList.clear();
-
-        for (int i = 0; i < vTelefonicoArray.length; i++) {
-                this._telefonicoList.add(vTelefonicoArray[i]);
-        }
+    public void setTelefonici(
+            final it.inera.abi.logic.formatodiscambio.castor.Telefonici telefonici) {
+        this._telefonici = telefonici;
     }
 
     /**

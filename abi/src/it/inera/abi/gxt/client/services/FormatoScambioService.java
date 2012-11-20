@@ -12,18 +12,22 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+/**
+ * Interfaccia dei servizi relativi al formato di scambio (lato client)
+ * 
+ */
 @RemoteServiceRelativePath(Abi.FORMATO_SCAMBIO)
 public interface FormatoScambioService extends RemoteService {
 
-	/*
-	 * IMPORT
-	 */	
+	/* IMPORT */	
 	public List<FileCaricatiListModel> browseUncheckedFileImport();
 	
 	public List<FileCaricatiListModel> browseCheckedFileImport();
 	
 	public PagingLoadResult<BiblioModel> dettaglioCheckedFileImport(String filename, PagingLoadConfig config);
+	
 	public PagingLoadResult<BiblioModel> dettaglioScheduledFileImport(String filename, PagingLoadConfig config);
+	
 	public PagingLoadResult<BiblioModel> dettaglioScheduledFileExport(String filename, PagingLoadConfig config);
 
 	public List<FileCaricatiListModel> browseScheduledImport();
@@ -38,13 +42,10 @@ public interface FormatoScambioService extends RemoteService {
 	
 	public void importFile(String filename, boolean differito);
 	
-	/*
-	 * EXPORT
-	 */	
+	/* EXPORT */	
 	public List<FileCaricatiListModel> browseScheduledExport();	
 	
 	public void deleteScheduledExportFile(String filename);
-	
 	
 	/* Metodo per il servizio del formato di scambio */
 	public void retrieveBiblioFormatoDiScambio(List<Integer> idbibselected, HashMap<String, Object> labels);

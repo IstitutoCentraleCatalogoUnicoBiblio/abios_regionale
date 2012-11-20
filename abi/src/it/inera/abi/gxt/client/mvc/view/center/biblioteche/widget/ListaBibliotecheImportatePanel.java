@@ -59,8 +59,12 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica della lista di biblioteche 
+ * importate e filtrate secondo parametri di ricerca settati in precedenza
+ *
+ */
 public class ListaBibliotecheImportatePanel extends ContentPanel {
-
 
 	private ColumnConfig columnPluginImportate;
 	private BasePagingLoader<PagingLoadResult<ModelData>> loader = null;
@@ -525,33 +529,37 @@ public class ListaBibliotecheImportatePanel extends ContentPanel {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
+				final LayoutContainer wrapper = (LayoutContainer) Registry.get(AppView.CENTER_PANEL);
+				wrapper.mask("Rendi Definitive in corso...", "x-mask-loading");
 				bibliotecheService.setDefinitiva(bibliotecheSelectedIds, new AsyncCallback<Void>() {
 					@Override
 					public void onSuccess(Void result) {
 						MessageBox.info("Avviso", "Le biblioteche selezionate sono state rese definitive con successo!", null);				
 
-						if (bibliotecheSelectedIds.size() == (store.getModels().size())) {
-							checkPlugin.deselectAll();
-							Utils.removeIdsOfBibliosInAuctualListOnDeselectAll(bibliotecheSelectedIds, store);
+						if (bibliotecheSelectedIds.size() == loader.getTotalCount()) {
+							bibliotecheSelectedIds.clear();
 							definitiva.disable();
+							ripristina.disable();
 							checkFromWhereIncomingAndFireEvent();
-						}
-						else {
-							checkPlugin.deselectAll();
-							Utils.removeIdsOfBibliosInAuctualListOnDeselectAll(bibliotecheSelectedIds, store);
+							
+						} else {
+							bibliotecheSelectedIds.clear();
 							definitiva.disable();
-							loader.load();	
+							ripristina.disable();
+							loader.load();
 						}
+						
+						wrapper.unmask();
 					}
 					@Override
 					public void onFailure(Throwable caught) {
 						if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
 							AbiMessageBox.messageErrorAlertBox("Si è verificato un errore nel rendere definitiva la biblioteca", "Errore");
+							bibliotecheSelectedIds.clear();
 							loader.load();
-							checkPlugin.deselectAll();
-							//							bibliotecheSelectedIds.clear();
-							Utils.removeIdsOfBibliosInAuctualListOnDeselectAll(bibliotecheSelectedIds, store);
 						}
+						
+						wrapper.unmask();
 					}
 				});
 			}
@@ -560,35 +568,46 @@ public class ListaBibliotecheImportatePanel extends ContentPanel {
 		ripristina.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				bibliotecheService.ripristina(bibliotecheSelectedIds, new AsyncCallback<Void>() {
+				final LayoutContainer wrapper = (LayoutContainer) Registry.get(AppView.CENTER_PANEL);
+				wrapper.mask("Ripristino in corso...", "x-mask-loading");
+				bibliotecheService.ripristina(bibliotecheSelectedIds, new AsyncCallback<Integer>() {
 					@Override
-					public void onSuccess(Void result) {
-						MessageBox.info("Avviso", "Le biblioteche selezionate sono state ripristinate con successo!", null);				
-
-						if (bibliotecheSelectedIds.size() == (store.getModels().size())) {
-							checkPlugin.deselectAll();
-							Utils.removeIdsOfBibliosInAuctualListOnDeselectAll(bibliotecheSelectedIds, store);
+					public void onSuccess(Integer result) {
+						if (result > 0) {
+							/* Almeno una biblioteca ha dato errore */
+							int diff = bibliotecheSelectedIds.size() - result;
+							MessageBox.info("Avviso", "Sono state ripristinate " + diff + " su " +
+									bibliotecheSelectedIds.size() + " biblioteche selezionate: " +
+											"file di salvataggio non trovato...", null);
+						} else {
+							MessageBox.info("Avviso", "Le biblioteche selezionate sono state ripristinate con successo!", null);
+						}
+						
+						if (bibliotecheSelectedIds.size() == loader.getTotalCount()) {
+							bibliotecheSelectedIds.clear();
 							definitiva.disable();
 							ripristina.disable();
 							checkFromWhereIncomingAndFireEvent();
-						}
-						else {
-							checkPlugin.deselectAll();
-							Utils.removeIdsOfBibliosInAuctualListOnDeselectAll(bibliotecheSelectedIds, store);
+							
+						} else {
+							bibliotecheSelectedIds.clear();
 							definitiva.disable();
 							ripristina.disable();
 							loader.load();	
 						}
+						
+						wrapper.unmask();
 					}
 					
 					@Override
 					public void onFailure(Throwable caught) {
 						if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
 							AbiMessageBox.messageErrorAlertBox("Si è verificato un errore nel ripristinare la biblioteca", "Errore");
+							bibliotecheSelectedIds.clear();
 							loader.load();
-							checkPlugin.deselectAll();
-							Utils.removeIdsOfBibliosInAuctualListOnDeselectAll(bibliotecheSelectedIds, store);
 						}
+						
+						wrapper.unmask();
 					}
 				});
 			}

@@ -8,6 +8,10 @@ import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 
+/**
+ * Controller per la gestione dei report (ricerca, lista risultati, stampe)
+ *
+ */
 public class GestioneReportController extends Controller {
 
 	private GestioneReportMenuView menuView;

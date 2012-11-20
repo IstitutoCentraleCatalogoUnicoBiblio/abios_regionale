@@ -5,12 +5,10 @@ import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.BiblioModel;
 import it.inera.abi.gxt.client.mvc.model.FileCaricatiListModel;
-import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.FormatoScambioServiceAsync;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.Registry;
@@ -24,20 +22,21 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.BoxComponent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica della lista di export
+ * in schedulazione
+ *
+ */
 public class ExportSchedulatiListPanel extends ContentPanel {
 
 	private Grid<FileCaricatiListModel> grid = null;

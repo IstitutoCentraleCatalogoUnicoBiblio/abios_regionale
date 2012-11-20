@@ -11,6 +11,12 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+/**
+ * Servlet per il controllo e l'eventuale creazione delle directory 'saved'
+ * e 'backup' per il salvataggio delle biblioteche e delle directory relative 
+ * ai file del formato di scambio
+ *
+ */
 public class AbiBootstrapServlet extends HttpServlet {
 
 	private @Value("${formatodiscambio.tmpdir}") String formatodiscambioTmpdir;

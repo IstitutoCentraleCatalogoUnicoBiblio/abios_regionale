@@ -11,7 +11,6 @@ import it.inera.abi.gxt.client.resources.Resources;
 import java.util.HashMap;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
@@ -19,8 +18,13 @@ import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.CardLayout;
-import com.google.gwt.event.shared.GwtEvent;
 
+/**
+ * View utilizzata per l'inizializzazione del pannello di ricerca generica
+ * delle biblioteche, le liste dei risultati (con particolare riferimento alle
+ * biblioteche importate) e la relativa gestione degli eventi
+ *
+ */
 public class RicercaBiblioGenericaView extends View {
 
 	private ContentPanel mainPanel;
@@ -142,6 +146,10 @@ public class RicercaBiblioGenericaView extends View {
 			}
 			
 			wrapper.layout(true);
+			Boolean isMasked = event.getData(CostantiGestioneBiblio.ISMASKED);
+			if (isMasked != null && isMasked.booleanValue() == true) {
+				wrapper.unmask();
+			}
 			
 		}
 		

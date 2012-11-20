@@ -14,6 +14,10 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Controller per l'inizializzazione dell'applicativo e l'autenticazione da parte dell'utente 
+ *
+ */
 public class AppController extends Controller {
 
 	private AppView appView;

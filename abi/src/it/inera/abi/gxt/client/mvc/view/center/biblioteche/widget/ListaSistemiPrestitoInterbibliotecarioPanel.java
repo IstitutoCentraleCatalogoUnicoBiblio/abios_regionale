@@ -51,7 +51,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica delle informazioni
+ * relative alla lista dei sistemi di prestito interbibliotecario
+ *
+ */
 public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
+	
 	private BibliotecheServiceAsync bibliotecheService;
 	private TabelleDinamicheServiceAsync tabelleDinamicheService = Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
 
@@ -349,9 +355,10 @@ public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
 								id_nuovoSist = store.getAt(0).getIdSistemiPrestitoInterbibliotecario();
 								descr = store.getAt(0).getDescrizione();
 
-								try {
+								if (store.getAt(0).getUrl() != null && store.getAt(0).getUrl().length() > 0) {
 									url = store.getAt(0).getUrl();
-								} catch (NullPointerException npe) {
+									
+								} else {
 									url = "";
 								}
 
@@ -359,9 +366,10 @@ public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
 								id_nuovoSist = grid.getSelectionModel().getSelectedItem().getIdSistemiPrestitoInterbibliotecario();
 								descr = grid.getSelectionModel().getSelectedItem().getDescrizione();
 
-								try {
+								if (grid.getSelectionModel().getSelectedItem().getUrl() != null && grid.getSelectionModel().getSelectedItem().getUrl().length() > 0) {
 									url = grid.getSelectionModel().getSelectedItem().getUrl();
-								} catch (NullPointerException npe) {
+									
+								} else {
 									url = "";
 								}
 

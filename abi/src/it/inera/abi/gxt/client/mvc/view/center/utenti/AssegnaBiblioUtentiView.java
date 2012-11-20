@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.data.BasePagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
@@ -19,10 +18,13 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.CardLayout;
 
+/**
+ * View utilizzata per l'inizializzazione dei pannelli per
+ * assegnare biblioteche agli utenti e la relativa gestione degli eventi
+ *
+ */
 public class AssegnaBiblioUtentiView extends View {
 
 	private ContentPanel mainPanel;

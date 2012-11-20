@@ -1,6 +1,5 @@
 package it.inera.abi.gxt.client.mvc.view.south;
 
-import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.auth.UtentiAuthModel;
 import it.inera.abi.gxt.client.mvc.view.center.utenti.widget.ModificaAccountWindow;
@@ -15,12 +14,16 @@ import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 
+/**
+ * Classe per la modifica dei dati dell'utente attualmente loggato
+ * e per il logout
+ *
+ */
 public class UserPanel extends LayoutContainer {
 
 	protected Label userDisplay = null;
@@ -29,7 +32,7 @@ public class UserPanel extends LayoutContainer {
 	public UserPanel() {
 		modificaAccountWindow = new ModificaAccountWindow();
 		ToolBar toolbar = getToolbar();
-		/*setta il font-weight del testo a bold*/
+		/* setta il font-weight del testo a bold */
 		toolbar.addStyleName("font-weight-style");
 		add(toolbar);
 	}
@@ -40,9 +43,9 @@ public class UserPanel extends LayoutContainer {
 		userDisplay = new Label("Utente:");
 
 		UtentiAuthModel utentiAuthModel = UIAuth.getUtentiAuthModel();
-		// aggiorno la label con il nome dell'utente loggato
+		/* aggiorno la label con il nome dell'utente loggato */
 		if (utentiAuthModel != null) {
-			// metto solo la login
+			/* metto solo la login */
 			String userLabel = "<B>Utente operativo:</B>&nbsp;" + utentiAuthModel.getUserLogin();
 			userDisplay.setText(userLabel);
 		}
@@ -78,7 +81,6 @@ public class UserPanel extends LayoutContainer {
 
 					public void handleEvent(final MessageBoxEvent be) {
 						if (be.getButtonClicked() != null && Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-//							Window.Location.assign("/j_spring_security_logout");
 							Window.Location.assign(GWT.getHostPageBaseURL() + "j_spring_security_logout");
 						}
 					}

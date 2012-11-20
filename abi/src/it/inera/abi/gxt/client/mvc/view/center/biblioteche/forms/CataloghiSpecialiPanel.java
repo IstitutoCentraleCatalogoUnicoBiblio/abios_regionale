@@ -7,9 +7,16 @@ import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * ai cataloghi speciali
+ *
+ */
 public class CataloghiSpecialiPanel extends ContentPanelForTabItem {
+	
 	private int id_biblio;
 	private ListaCataloghiSpecialiPanel listaCataloghiSpecialiPanel;
+	
 	public CataloghiSpecialiPanel() {
 		super();
 		setMonitorWindowResize(true);

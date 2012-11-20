@@ -4,11 +4,13 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello generico utilizzato per rappresentare le tabelle dinamiche costituite da
+ * (id_record, descrizione)
+ *
+ */
 public class VoceUnicaModel extends BaseModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public VoceUnicaModel() {

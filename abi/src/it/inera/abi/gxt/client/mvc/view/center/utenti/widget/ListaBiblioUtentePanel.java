@@ -53,6 +53,11 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette la visualizzazione / modifica delle 
+ * biblioteche assegnate ad un utente
+ *
+ */
 public class ListaBiblioUtentePanel extends ContentPanel {
 	 
 	private UserModel userFromDB = null;
@@ -284,8 +289,7 @@ public class ListaBiblioUtentePanel extends ContentPanel {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
-				// TODO Auto-generated method stub
-				int i =0;
+				int i = 0;
 			}
 		});
 	}

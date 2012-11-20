@@ -46,6 +46,11 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette di selezionare uno o più utenti ai quali assegnare
+ * una o più biblioteche
+ *
+ */
 public class AssegnaUtentiPanel extends ContentPanel {
 
 	private Grid<UserModel> grid = null;

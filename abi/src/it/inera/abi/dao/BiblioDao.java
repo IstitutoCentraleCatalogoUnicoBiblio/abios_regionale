@@ -24,6 +24,7 @@ import it.inera.abi.persistence.PrestitoLocale;
 import it.inera.abi.persistence.Pubblicazioni;
 import it.inera.abi.persistence.Regolamento;
 import it.inera.abi.persistence.Riproduzioni;
+import it.inera.abi.persistence.RiproduzioniTipo;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
@@ -36,7 +37,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
-
+/**
+ * Interfaccia DAO per l'entità Biblioteca
+ *
+ */
 public interface BiblioDao {
 		
 	public Biblioteca getBibliotecaById(int id);
@@ -68,7 +72,9 @@ public interface BiblioDao {
 	/*DAL FORMATO DI SCAMBIO */
 	/**
 	 * Seleziona un'array di biblioteca tramite l'id(db) delle biblioteche
-	 * @param id Array di id delle biblioteche
+	 * @param idBib Array di id delle biblioteche
+	 * @param firstResult
+	 * @param maxResult
 	 * @return Array di biblioteche
 	 * @throws DaoException
 	 */
@@ -76,7 +82,9 @@ public interface BiblioDao {
 
 	/**
 	 * Seleziona un'array di biblioteca tramite codice ABI delle biblioteche
-	 * @param id Array di id delle biblioteche
+	 * @param codABI Array di codici isil delle biblioteche
+	 * @param firstResult
+	 * @param maxResult
 	 * @return Array di biblioteche
 	 * @throws DaoException
 	 */
@@ -354,4 +362,18 @@ public interface BiblioDao {
 	public void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistema);
 	
 	public void addSistemaPrestitoInterbibliotecario(int id_biblioteca, Integer id_sistema) throws DuplicateEntryException;
+	
+	public void setReference(int id_biblio, Boolean hasAttivoReference, Boolean hasReferenceLocale, Boolean hasReferenceOnline);
+	
+	public List<RiproduzioniTipo> getDocumentDeliveryByIdBiblio(int id_biblioteca);
+
+	public void addDocumentDelivery(int id_biblioteca, Integer idDocumentDelivery) throws DuplicateEntryException;
+
+	public void removeDocumentDelivery(int id_biblioteca, Integer idRecord);
+	
+	public void removeDocumentDeliveryFromBiblio(Biblioteca id_biblioteca);
+	
+	public void removeDepositiLegaliFromBiblio(Biblioteca biblioteca);
+	
+	public void removeModalitaAccessoFromBiblio(Biblioteca biblioteca);
 }

@@ -62,7 +62,12 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la ricerca generica delle biblioteche
+ *
+ */
 public class RicercaBiblioGenericaPanel extends FormPanel {
+	
 	private HashMap<String, Object> keys = new HashMap<String, Object>();
 
 	protected ComboBox<ProvinceModel> provincia;

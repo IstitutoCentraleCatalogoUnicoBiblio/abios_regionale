@@ -35,9 +35,13 @@ import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * alla sede e ad informazioni supplementari
+ *
+ */
 public class SedeInformazioniSupplPanel extends ContentPanelForTabItem {
 	private TableData d3;
 	private TableData dataToRight;

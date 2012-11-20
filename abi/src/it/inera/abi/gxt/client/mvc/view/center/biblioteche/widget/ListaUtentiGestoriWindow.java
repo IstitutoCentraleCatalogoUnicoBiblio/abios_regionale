@@ -2,8 +2,6 @@ package it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget;
 
 import it.inera.abi.gxt.client.mvc.model.BiblioModel;
 
-import com.extjs.gxt.ui.client.data.BasePagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
@@ -14,8 +12,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitData;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
 /**
- * Permette di visualizzare gli utenti che gestiscono la biblioteca
- * @author reschini
+ * Permette di visualizzare gli utenti che gestiscono la biblioteca selezionata
  *
  */
 public class ListaUtentiGestoriWindow extends Window {

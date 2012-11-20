@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per rappresentare le regioni
+ *
+ */
 public class RegioniModel extends BaseModel implements Serializable {
 	public RegioniModel() {
 

@@ -2,38 +2,29 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Locale.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
+ * $Id: Locale.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * A parte l'elemento "automatizzato",
- *  che serve
- *  ad indicare se il prestito
- *  avviene con procedure automatizzate
- *  oppure no, e che pertanto è di tipo
- *  "siNoType", gli altri sono
- *  soltanto
- *  stringhe, anche se la durata
- *  potrebbe essere vincolata
- *  con un
- *  pattern opportuno, e gli altri due
- *  possono contenere
- *  valori
- *  controllati, che però è meglio
- *  lasciare fuori dallo
- *  schema. In
- *  particolare, il materiale escluso
- *  potrebbe essere
- *  normalizzato in base
- *  alle apposite norme ISO. Qualcosa
- *  del genere
- *  andrebbe studiato anche
- *  per gli utenti ammessi.
+ * A parte l'elemento "automatizzato", che serve ad indicare se il
+ * prestito
+ *  avviene con procedure automatizzate oppure no, e che pertanto è
+ * di tipo
+ *  "siNoType", gli altri sono soltanto stringhe, anche se la
+ * durata
+ *  potrebbe essere vincolata con un pattern opportuno, e gli altri
+ * due
+ *  possono contenere valori controllati, che però è meglio
+ *  lasciare fuori dallo schema. In particolare, il materiale
+ * escluso
+ *  potrebbe essere normalizzato in base alle apposite norme ISO. 
+ *  Qualcosa del genere andrebbe studiato anche per gli utenti
+ * ammessi.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Locale implements java.io.Serializable {
@@ -44,26 +35,22 @@ public class Locale implements java.io.Serializable {
     //--------------------------/
 
     /**
+     * Field _attivo.
+     */
+    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _attivo;
+
+    /**
      * Field _prestitoLocaleAutomatizzato.
      */
     private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _prestitoLocaleAutomatizzato;
 
     /**
-     * DEPRECATO: questo elemento
-     *  serviva per
-     *  esprimere il
-     *  materiale non ammesso (escluso)
-     *  al prestito.
-     *  Essendo stato
-     *  introdotto un nuovo elemento
-     *  che ne permette la
-     *  ripetibilità,
-     *  l'elemento è in disuso.
-     *  Utilizzare l'elemento
-     *  MATERIALI-ESCLUSI-LOCALE.
+     * E' stato introdotto l'elemento ripetibile
+     *  'materiali-esclusi' come contenitore
+     *  degli eventuali materiali.
      *  
      */
-    private java.lang.String _materialeEscluso;
+    private it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusi _materialiEsclusi;
 
     /**
      * Field _durata.
@@ -142,6 +129,16 @@ public class Locale implements java.io.Serializable {
     }
 
     /**
+     * Returns the value of field 'attivo'.
+     * 
+     * @return the value of field 'Attivo'.
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getAttivo(
+    ) {
+        return this._attivo;
+    }
+
+    /**
      * Returns the value of field 'durata'.
      * 
      * @return the value of field 'Durata'.
@@ -152,27 +149,18 @@ public class Locale implements java.io.Serializable {
     }
 
     /**
-     * Returns the value of field 'materialeEscluso'. The field
-     * 'materialeEscluso' has the following description: DEPRECATO:
-     * questo elemento
-     *  serviva per
-     *  esprimere il
-     *  materiale non ammesso (escluso)
-     *  al prestito.
-     *  Essendo stato
-     *  introdotto un nuovo elemento
-     *  che ne permette la
-     *  ripetibilità,
-     *  l'elemento è in disuso.
-     *  Utilizzare l'elemento
-     *  MATERIALI-ESCLUSI-LOCALE.
+     * Returns the value of field 'materialiEsclusi'. The field
+     * 'materialiEsclusi' has the following description: E' stato
+     * introdotto l'elemento ripetibile
+     *  'materiali-esclusi' come contenitore
+     *  degli eventuali materiali.
      *  
      * 
-     * @return the value of field 'MaterialeEscluso'.
+     * @return the value of field 'MaterialiEsclusi'.
      */
-    public java.lang.String getMaterialeEscluso(
+    public it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusi getMaterialiEsclusi(
     ) {
-        return this._materialeEscluso;
+        return this._materialiEsclusi;
     }
 
     /**
@@ -339,6 +327,16 @@ public class Locale implements java.io.Serializable {
     }
 
     /**
+     * Sets the value of field 'attivo'.
+     * 
+     * @param attivo the value of field 'attivo'.
+     */
+    public void setAttivo(
+            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType attivo) {
+        this._attivo = attivo;
+    }
+
+    /**
      * Sets the value of field 'durata'.
      * 
      * @param durata the value of field 'durata'.
@@ -349,27 +347,18 @@ public class Locale implements java.io.Serializable {
     }
 
     /**
-     * Sets the value of field 'materialeEscluso'. The field
-     * 'materialeEscluso' has the following description: DEPRECATO:
-     * questo elemento
-     *  serviva per
-     *  esprimere il
-     *  materiale non ammesso (escluso)
-     *  al prestito.
-     *  Essendo stato
-     *  introdotto un nuovo elemento
-     *  che ne permette la
-     *  ripetibilità,
-     *  l'elemento è in disuso.
-     *  Utilizzare l'elemento
-     *  MATERIALI-ESCLUSI-LOCALE.
+     * Sets the value of field 'materialiEsclusi'. The field
+     * 'materialiEsclusi' has the following description: E' stato
+     * introdotto l'elemento ripetibile
+     *  'materiali-esclusi' come contenitore
+     *  degli eventuali materiali.
      *  
      * 
-     * @param materialeEscluso the value of field 'materialeEscluso'
+     * @param materialiEsclusi the value of field 'materialiEsclusi'
      */
-    public void setMaterialeEscluso(
-            final java.lang.String materialeEscluso) {
-        this._materialeEscluso = materialeEscluso;
+    public void setMaterialiEsclusi(
+            final it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusi materialiEsclusi) {
+        this._materialiEsclusi = materialiEsclusi;
     }
 
     /**

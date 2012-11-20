@@ -7,6 +7,10 @@ import java.util.Date;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per i dati di una singola biblioteca
+ *
+ */
 public class BiblioModel extends BaseModel implements Serializable {
 
 	public static final String IDBIBLIO = "idbiblio";
@@ -63,7 +67,7 @@ public class BiblioModel extends BaseModel implements Serializable {
 			String struttura_gerarchica_sovraordinata,
 			VoceUnicaModel tipologiaFunzionale, String dataFondazione,
 			String dataIstituzione, Boolean accessoRiservato,
-			Integer limiteEtaMin, Integer limiteEtaMax,Boolean inventarioInformatizzato,Boolean inventarioCartaceo,Boolean catalogoInformatizzato,Boolean catalogoCartaceo) {
+			Boolean inventarioInformatizzato,Boolean inventarioCartaceo,Boolean catalogoInformatizzato,Boolean catalogoCartaceo) {
 		set("idbiblio", idbiblio);
 		set("codice", codice);
 		set("denominazione", denominazione);
@@ -88,8 +92,6 @@ public class BiblioModel extends BaseModel implements Serializable {
 		set("dataIstituzione", dataIstituzione);
 		set("accessoRiservato", accessoRiservato);
 
-		set("limiteEtaMin", limiteEtaMin);
-		set("limiteEtaMax", limiteEtaMax);
 		set("inventarioInformatizzato", inventarioInformatizzato);
 		set("inventarioCartaceo", inventarioCartaceo);
 		set("catalogoCartaceo", catalogoCartaceo);
@@ -112,20 +114,12 @@ public class BiblioModel extends BaseModel implements Serializable {
 		return get("attivoRiproduzioni");
 	}
 	
-	public void setLimiteEtaMin(Integer limiteEtaMin) {
-		set("limiteEtaMin", limiteEtaMin);
+	public void setAttivoDocumentDelivery(Boolean attivoDocumentDelivery) {
+		set("attivoDocumentDelivery", attivoDocumentDelivery);
 	}
-
-	public Integer getLimiteEtaMin() {
-		return get("limiteEtaMin");
-	}
-
-	public void setLimiteEtaMax(Integer limiteEtaMax) {
-		set("limiteEtaMax", limiteEtaMax);
-	}
-
-	public Integer getLimiteEtaMax() {
-		return get("limiteEtaMax");
+	
+	public Boolean getAttivoDocumentDelivery() {
+		return get("attivoDocumentDelivery");
 	}
 
 	public void setAutonomiaAmministrativa(Boolean autonomiaAmministrativa) {
@@ -863,4 +857,35 @@ public class BiblioModel extends BaseModel implements Serializable {
 		return get("statoCatalogazioneModel");
 	}
 	
+	public void setAttivoReference(Boolean attivoReference) {
+		set("attivoReference", attivoReference);
+	}
+	
+	public Boolean getAttivoReference() {
+		return get("attivoReference");
+	}
+
+	public void setReferenceLocale(Boolean referenceLocale) {
+		set("referenceLocale", referenceLocale);
+	}
+	
+	public Boolean getReferenceLocale() {
+		return get("referenceLocale");
+	}
+	
+	public void setReferenceOnline(Boolean referenceOnline) {
+		set("referenceOnline", referenceOnline);
+	}
+	
+	public Boolean getReferenceOnline() {
+		return	get("referenceOnline");
+	}
+	
+	public void setAttivoDepositoLegale(Boolean attivoDepositoLegale) {
+		set("attivoDepositoLegale", attivoDepositoLegale);
+	}
+	
+	public Boolean getAttivoDepositoLegale() {
+		return get("attivoDepositoLegale");
+	}
 }

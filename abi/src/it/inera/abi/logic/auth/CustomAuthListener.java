@@ -6,6 +6,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
 import org.springframework.security.authentication.event.AbstractAuthenticationFailureEvent;
 
+/**
+ * Classe contenente il listener sugli eventi relativi all'autenticazione
+ *
+ */
 public class CustomAuthListener implements ApplicationListener<AbstractAuthenticationEvent> {
 	
 	private static final Log logger = LogFactory.getLog(CustomAuthListener.class);

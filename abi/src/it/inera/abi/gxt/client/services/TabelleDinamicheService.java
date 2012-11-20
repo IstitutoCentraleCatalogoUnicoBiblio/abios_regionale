@@ -7,10 +7,8 @@ import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimoniCategorieTabelleDinamicheModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimonioSpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
-import it.inera.abi.gxt.client.mvc.model.RegioniModel;
 import it.inera.abi.gxt.client.mvc.model.SistemiPrestitoInterbibliotecarioModel;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
-import it.inera.abi.gxt.client.mvc.model.StatoModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.models.CataloghiCollettiviModel;
 
@@ -22,6 +20,10 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+/**
+ * Interfaccia dei servizi relativi alle tabelle dinamiche (lato client)
+ * 
+ */
 @RemoteServiceRelativePath(Abi.TABELLE_DINAMICHE_SERVICE)
 public interface TabelleDinamicheService extends RemoteService{
 	

@@ -4,7 +4,6 @@ import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
-import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.view.RowEditorCustom;
 import it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.TabelleDinamicheView;
 import it.inera.abi.gxt.client.resources.Resources;
@@ -29,15 +28,12 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.GridEvent;
-import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
@@ -51,7 +47,13 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette la gestione (modifica, aggiungi, rimuovi) 
+ * della tabella dinamica dei dewey
+ * 
+ */
 public class ListaDeweyTabelleDinamiche extends ContentPanel {
+	
 	private TabelleDinamicheServiceAsync tabelleDinamicheService;
 	private boolean modifica;
 	private int pageSize;

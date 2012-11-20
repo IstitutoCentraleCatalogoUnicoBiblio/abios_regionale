@@ -5,6 +5,10 @@ import it.inera.abi.logic.statistiche.GenerateStatistics;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+/**
+ * Classe per la generazione delle statistiche
+ *
+ */
 public class GeneraStatistiche {
 
 	/**

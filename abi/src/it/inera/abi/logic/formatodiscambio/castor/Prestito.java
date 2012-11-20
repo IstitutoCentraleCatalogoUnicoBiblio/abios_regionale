@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Prestito.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
+ * $Id: Prestito.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -14,7 +14,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  tutti opzionali.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Prestito implements java.io.Serializable {
@@ -25,29 +25,21 @@ public class Prestito implements java.io.Serializable {
     //--------------------------/
 
     /**
-     * A parte l'elemento "automatizzato",
-     *  che serve
-     *  ad indicare se il prestito
-     *  avviene con procedure automatizzate
-     *  oppure no, e che pertanto è di tipo
-     *  "siNoType", gli altri sono
-     *  soltanto
-     *  stringhe, anche se la durata
-     *  potrebbe essere vincolata
-     *  con un
-     *  pattern opportuno, e gli altri due
-     *  possono contenere
-     *  valori
-     *  controllati, che però è meglio
-     *  lasciare fuori dallo
-     *  schema. In
-     *  particolare, il materiale escluso
-     *  potrebbe essere
-     *  normalizzato in base
-     *  alle apposite norme ISO. Qualcosa
-     *  del genere
-     *  andrebbe studiato anche
-     *  per gli utenti ammessi.
+     * A parte l'elemento "automatizzato", che serve ad indicare se
+     * il prestito
+     *  avviene con procedure automatizzate oppure no, e che
+     * pertanto è di tipo
+     *  "siNoType", gli altri sono soltanto stringhe, anche se la
+     * durata
+     *  potrebbe essere vincolata con un pattern opportuno, e gli
+     * altri due
+     *  possono contenere valori controllati, che però è meglio
+     *  lasciare fuori dallo schema. In particolare, il materiale
+     * escluso
+     *  potrebbe essere normalizzato in base alle apposite norme
+     * ISO. 
+     *  Qualcosa del genere andrebbe studiato anche per gli utenti
+     * ammessi.
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.Locale _locale;
@@ -114,29 +106,20 @@ public class Prestito implements java.io.Serializable {
     /**
      * Returns the value of field 'locale'. The field 'locale' has
      * the following description: A parte l'elemento
-     * "automatizzato",
-     *  che serve
-     *  ad indicare se il prestito
-     *  avviene con procedure automatizzate
-     *  oppure no, e che pertanto è di tipo
-     *  "siNoType", gli altri sono
-     *  soltanto
-     *  stringhe, anche se la durata
-     *  potrebbe essere vincolata
-     *  con un
-     *  pattern opportuno, e gli altri due
-     *  possono contenere
-     *  valori
-     *  controllati, che però è meglio
-     *  lasciare fuori dallo
-     *  schema. In
-     *  particolare, il materiale escluso
-     *  potrebbe essere
-     *  normalizzato in base
-     *  alle apposite norme ISO. Qualcosa
-     *  del genere
-     *  andrebbe studiato anche
-     *  per gli utenti ammessi.
+     * "automatizzato", che serve ad indicare se il prestito
+     *  avviene con procedure automatizzate oppure no, e che
+     * pertanto è di tipo
+     *  "siNoType", gli altri sono soltanto stringhe, anche se la
+     * durata
+     *  potrebbe essere vincolata con un pattern opportuno, e gli
+     * altri due
+     *  possono contenere valori controllati, che però è meglio
+     *  lasciare fuori dallo schema. In particolare, il materiale
+     * escluso
+     *  potrebbe essere normalizzato in base alle apposite norme
+     * ISO. 
+     *  Qualcosa del genere andrebbe studiato anche per gli utenti
+     * ammessi.
      *  
      * 
      * @return the value of field 'Locale'.
@@ -234,28 +217,20 @@ public class Prestito implements java.io.Serializable {
     /**
      * Sets the value of field 'locale'. The field 'locale' has the
      * following description: A parte l'elemento "automatizzato",
-     *  che serve
-     *  ad indicare se il prestito
-     *  avviene con procedure automatizzate
-     *  oppure no, e che pertanto è di tipo
-     *  "siNoType", gli altri sono
-     *  soltanto
-     *  stringhe, anche se la durata
-     *  potrebbe essere vincolata
-     *  con un
-     *  pattern opportuno, e gli altri due
-     *  possono contenere
-     *  valori
-     *  controllati, che però è meglio
-     *  lasciare fuori dallo
-     *  schema. In
-     *  particolare, il materiale escluso
-     *  potrebbe essere
-     *  normalizzato in base
-     *  alle apposite norme ISO. Qualcosa
-     *  del genere
-     *  andrebbe studiato anche
-     *  per gli utenti ammessi.
+     * che serve ad indicare se il prestito
+     *  avviene con procedure automatizzate oppure no, e che
+     * pertanto è di tipo
+     *  "siNoType", gli altri sono soltanto stringhe, anche se la
+     * durata
+     *  potrebbe essere vincolata con un pattern opportuno, e gli
+     * altri due
+     *  possono contenere valori controllati, che però è meglio
+     *  lasciare fuori dallo schema. In particolare, il materiale
+     * escluso
+     *  potrebbe essere normalizzato in base alle apposite norme
+     * ISO. 
+     *  Qualcosa del genere andrebbe studiato anche per gli utenti
+     * ammessi.
      *  
      * 
      * @param locale the value of field 'locale'.

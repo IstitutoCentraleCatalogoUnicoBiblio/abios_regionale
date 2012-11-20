@@ -4,6 +4,11 @@ import com.extjs.gxt.ui.client.widget.HtmlContainer;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
+/**
+ * Classe che permette di visualizzare nel dettaglio gli errori 
+ * all'interno del file controllato
+ *
+ */
 public class ErroreFileControllatoWindow extends Window {
 	
 	protected HtmlContainer info = null;

@@ -31,9 +31,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 
 /**
- * Endpoint per i servizi del formato di scambio
- * 
- * @author reschini
+ * Implementazione dei servizi relativi al formato di scambio (lato server)
  * 
  */
 public class FormatoScambioServiceImpl extends

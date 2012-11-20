@@ -9,7 +9,6 @@ import it.inera.abi.gxt.client.mvc.view.center.formatoscambio.widget.ImportSched
 import java.util.List;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.View;
@@ -19,6 +18,11 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
+/**
+ * View utilizzata per l'inizializzazione del pannello contenente la lista degli
+ * import in schedulazione e la relativa gestione degli eventi  
+ *
+ */
 public class ImportSchedulatiView extends View {
 	
 	private ContentPanel mainPanel;

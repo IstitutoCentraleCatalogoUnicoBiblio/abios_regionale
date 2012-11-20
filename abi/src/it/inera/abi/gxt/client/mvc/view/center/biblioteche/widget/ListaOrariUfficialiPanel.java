@@ -50,7 +50,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica delle informazioni
+ * relative alla lista degli orari ufficiali
+ *
+ */
 public class ListaOrariUfficialiPanel extends ContentPanel {
+	
 	private ToolBar toolBar;
 	private String day;
 	private int id_day;

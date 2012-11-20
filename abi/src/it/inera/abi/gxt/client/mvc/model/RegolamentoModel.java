@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per rappresentare i regolamenti associati alla biblioteca
+ *
+ */
 public class RegolamentoModel extends BaseModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2155928509043707435L;
 
 	public RegolamentoModel() {

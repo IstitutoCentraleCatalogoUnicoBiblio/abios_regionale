@@ -43,13 +43,17 @@ import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
-import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * alle tipologie: amministrativa e funzionale
+ *
+ */
 public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabItem {
 
 	private boolean firstLoad = true;

@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: MaterialeCataloghiType.java,v 1.1 2012/07/31 15:00:08 m.bartolozzi Exp $
+ * $Id: MaterialeCataloghiType.java,v 1.4 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,7 +10,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Class MaterialeCataloghiType.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/07/31 15:00:08 $
+ * @version $Revision: 1.4 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public abstract class MaterialeCataloghiType extends it.inera.abi.logic.formatodiscambio.castor.MaterialeType 
@@ -30,13 +30,9 @@ implements java.io.Serializable
     /**
      * La copertura bibliografica deve essere espressa
      *  tramite un anno iniziale (elemento "da-anno") e
-     *  un anno finale
-     *  (elemento "ad-anno"). Entrambi
-     *  devono avere il formato "YYYY",
-     *  cioè
-     *  esattamente
-     *  quattro cifre (non è ammesso alcun altro
-     *  carattere).
+     *  un anno finale (elemento "ad-anno"). Entrambi
+     *  devono avere il formato "YYYY", cioè esattamente
+     *  quattro cifre (non è ammesso alcun altro carattere).
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeCopertura _catSpecFormeCopertura;
@@ -70,13 +66,9 @@ implements java.io.Serializable
      * field 'catSpecFormeCopertura' has the following description:
      * La copertura bibliografica deve essere espressa
      *  tramite un anno iniziale (elemento "da-anno") e
-     *  un anno finale
-     *  (elemento "ad-anno"). Entrambi
-     *  devono avere il formato "YYYY",
-     *  cioè
-     *  esattamente
-     *  quattro cifre (non è ammesso alcun altro
-     *  carattere).
+     *  un anno finale (elemento "ad-anno"). Entrambi
+     *  devono avere il formato "YYYY", cioè esattamente
+     *  quattro cifre (non è ammesso alcun altro carattere).
      *  
      * 
      * @return the value of field 'CatSpecFormeCopertura'.
@@ -116,13 +108,9 @@ implements java.io.Serializable
      * 'catSpecFormeCopertura' has the following description: La
      * copertura bibliografica deve essere espressa
      *  tramite un anno iniziale (elemento "da-anno") e
-     *  un anno finale
-     *  (elemento "ad-anno"). Entrambi
-     *  devono avere il formato "YYYY",
-     *  cioè
-     *  esattamente
-     *  quattro cifre (non è ammesso alcun altro
-     *  carattere).
+     *  un anno finale (elemento "ad-anno"). Entrambi
+     *  devono avere il formato "YYYY", cioè esattamente
+     *  quattro cifre (non è ammesso alcun altro carattere).
      *  
      * 
      * @param catSpecFormeCopertura the value of field

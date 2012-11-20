@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: CatSpecFormeCopertura.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
+ * $Id: CatSpecFormeCopertura.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,16 +10,12 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * La copertura bibliografica deve essere espressa
  *  tramite un anno iniziale (elemento "da-anno") e
- *  un anno finale
- *  (elemento "ad-anno"). Entrambi
- *  devono avere il formato "YYYY",
- *  cioè
- *  esattamente
- *  quattro cifre (non è ammesso alcun altro
- *  carattere).
+ *  un anno finale (elemento "ad-anno"). Entrambi
+ *  devono avere il formato "YYYY", cioè esattamente
+ *  quattro cifre (non è ammesso alcun altro carattere).
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class CatSpecFormeCopertura implements java.io.Serializable {

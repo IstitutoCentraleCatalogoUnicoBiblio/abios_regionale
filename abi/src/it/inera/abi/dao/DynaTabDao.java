@@ -16,11 +16,15 @@ import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 
 import java.util.List;
 
+/** 
+ * Interfaccia DAO per l'entità Tabelle Dinamiche
+ *
+ */
 public interface DynaTabDao {
 	
 	public List<?> loadAll(Class<?> test);
 	
-		public void saveRecord(Object obj);
+	public void saveRecord(Object obj);
 	
 	public Object loadRecord(Class<?> test, int id);
 	
@@ -53,8 +57,6 @@ public interface DynaTabDao {
 	public List<CataloghiCollettivi> getCataloghiCollettiviPossibiliFiltered(
 			String query, Integer idZonaEspansione, String dettaglioZona,
 			int start, int limit, String sortField, String sortDir);
-	
-	
 
 	public void addCataloghiMaterialeUrl(Integer idCatalogoMaterialeUrl,
 			Integer idPartecipaCatalogoMateriale, String url,

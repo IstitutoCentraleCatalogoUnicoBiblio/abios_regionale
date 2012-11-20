@@ -2,6 +2,10 @@ package it.inera.abi.logic.statistiche.model.excel;
 
 import java.util.Vector;
 
+/**
+ * Classe per la rappresentazione tabellare excel delle statistiche
+ *
+ */
 public class TableBean {
 
 	private Vector<HeadersBean> headers;

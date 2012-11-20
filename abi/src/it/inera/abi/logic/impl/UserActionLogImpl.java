@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
- * Registra sul relativo file di log, le azioni degli utenti di backend
- * @author reschini
+ * Implementazione per il log delle operazioni eseguite dall'utente di backend
  *
  */
 @Repository

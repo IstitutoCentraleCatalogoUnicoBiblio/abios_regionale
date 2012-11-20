@@ -4,46 +4,48 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per rappresentare le categorie delle specializzazioni del patrimonio
+ *
+ */
 public class PatrimoniCategorieTabelleDinamicheModel extends BaseModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7344501152185004205L;
 
 	public PatrimoniCategorieTabelleDinamicheModel() {
-		
+
 	}
-	
-	public void setIdCategoria(Integer idCategoria){
+
+	public void setIdCategoria(Integer idCategoria) {
 		set("idCategoria",idCategoria);
 	}
-	public Integer getIdCategoria(){
+
+	public Integer getIdCategoria() {
 		return get("idCategoria");
 	}
-	
-	public void setCategoriaDescrizione(String categoriaDescrizione){
+
+	public void setCategoriaDescrizione(String categoriaDescrizione) {
 		set("categoriaDescrizione",categoriaDescrizione);
 	}
-	
-	public String getCategoriaDescrizione(){
-	return	get("categoriaDescrizione");
+
+	public String getCategoriaDescrizione() {
+		return	get("categoriaDescrizione");
 	}
-	
-	public void setIdCategoriaMadre(Integer idCategoriaMadre){
+
+	public void setIdCategoriaMadre(Integer idCategoriaMadre) {
 		set("idCategoriaMadre",idCategoriaMadre);
 	}
-	public Integer getIdCategoriaMadre(){
+	
+	public Integer getIdCategoriaMadre() {
 		return get("idCategoriaMadre");
 	}
-	
-	public void setCategoriaMadreDescrizione(String categoriaMadreDescrizione){
+
+	public void setCategoriaMadreDescrizione(String categoriaMadreDescrizione) {
 		set("categoriaMadreDescrizione",categoriaMadreDescrizione);
 	}
-	
-	public String getCategoriaMadreDescrizione(){
-	return	get("categoriaMadreDescrizione");
+
+	public String getCategoriaMadreDescrizione() {
+		return	get("categoriaMadreDescrizione");
 	}
-	
-	
+
 }

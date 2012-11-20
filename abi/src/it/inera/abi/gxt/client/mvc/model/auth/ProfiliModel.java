@@ -2,6 +2,10 @@ package it.inera.abi.gxt.client.mvc.model.auth;
 
 import com.extjs.gxt.ui.client.data.BaseModelData;
 
+/**
+ * Modello utilizzato per rappresentare i profili utente
+ *
+ */
 public class ProfiliModel extends BaseModelData {
 
 	private static final long serialVersionUID = -9097049998905234640L;

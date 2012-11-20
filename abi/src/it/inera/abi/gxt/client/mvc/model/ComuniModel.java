@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per i dati di un singolo comune
+ *
+ */
 public class ComuniModel extends BaseModel implements Serializable {
 
 	public ComuniModel() {
@@ -41,8 +45,6 @@ public class ComuniModel extends BaseModel implements Serializable {
 	public void setDenominazioneProvincia(String denominazioneProvincia) {
 		set("denominazioneProvincia",denominazioneProvincia);
 	}
-
-	/**/
 
 	public int getIdComune() {
 		return (Integer) get("id_comune");

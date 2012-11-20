@@ -4,6 +4,10 @@ import it.inera.abi.persistence.DenominazioniPrecedenti;
 
 import java.util.List;
 
+/**
+ * Interfaccia DAO per l'entità Denominazioni Precedenti
+ *
+ */
 public interface DenominazioniPrecedentiDao {
 
 	public List<DenominazioniPrecedenti> getDenominazioniPrecedenti(int id_biblioteca);

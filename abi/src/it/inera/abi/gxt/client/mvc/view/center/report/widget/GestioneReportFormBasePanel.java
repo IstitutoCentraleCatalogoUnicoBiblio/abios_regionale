@@ -7,7 +7,6 @@ import it.inera.abi.gxt.client.mvc.model.ComuniModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimonioSpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
-import it.inera.abi.gxt.client.mvc.model.RegioniModel;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.UserModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
@@ -60,6 +59,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RadioButton;
 
+/**
+ * Classe generica che permette di impostare i parametri per le ricerche 
+ * nel formato di scambio
+ *
+ */
 public class GestioneReportFormBasePanel extends ContentPanel {
 	
 	protected HashMap<String, Object> keys = new HashMap<String, Object>();
@@ -131,7 +135,7 @@ public class GestioneReportFormBasePanel extends ContentPanel {
 		caratteristicheBiblio.add(locGeoFields);
 	
 		tipdeststatFields = new FieldSet();
-		Utils.setFieldSetProperties(tipdeststatFields, "Tipologie - Destinazione sociale - Stati catalogazione");
+		Utils.setFieldSetProperties(tipdeststatFields, "Tipologie - Destinazione sociale - Stato della registrazione");
 		tipdeststatFields.setExpanded(false);
 		
 		
@@ -1435,7 +1439,6 @@ public class GestioneReportFormBasePanel extends ContentPanel {
 		
 		/* CONTROLLO DAL GIORNO - AL GIORNO */
 		if (dalGiorno.getValue() != null && alGiorno.getValue() != null) {
-			
 			/* Entrambi i campi data sono stati riempiti */
 			List<String> dates = new ArrayList<String>(2);
 			dates.add(0, String.valueOf(((Date) dalGiorno.getValue()).getTime()));

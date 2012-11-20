@@ -16,6 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
+/**
+ * Classe che implementa la logica delle principali operazioni riguardanti
+ * Stati, Regioni, Province e Comuni
+ *
+ */
 @Service
 public class AbiLocationLogicImpl implements AbiLocationLogic {
 

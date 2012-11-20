@@ -2,7 +2,8 @@ package it.inera.abi.logic.formatodiscambio.exports;
 
 import it.inera.abi.commons.Utility;
 import it.inera.abi.logic.formatodiscambio.castor.Accesso;
-import it.inera.abi.logic.formatodiscambio.castor.Alternative;
+import it.inera.abi.logic.formatodiscambio.castor.Alternativi;
+import it.inera.abi.logic.formatodiscambio.castor.Altri;
 import it.inera.abi.logic.formatodiscambio.castor.Altro;
 import it.inera.abi.logic.formatodiscambio.castor.Amministrativa;
 import it.inera.abi.logic.formatodiscambio.castor.Anagrafica;
@@ -17,12 +18,13 @@ import it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeVolume;
 import it.inera.abi.logic.formatodiscambio.castor.CatSpecMateriale;
 import it.inera.abi.logic.formatodiscambio.castor.CatSpecMateriali;
 import it.inera.abi.logic.formatodiscambio.castor.Cataloghi;
+import it.inera.abi.logic.formatodiscambio.castor.CataloghiGenerali;
+import it.inera.abi.logic.formatodiscambio.castor.CataloghiSpeciali;
 import it.inera.abi.logic.formatodiscambio.castor.CatalogoCollettivo;
 import it.inera.abi.logic.formatodiscambio.castor.CatalogoGenerale;
 import it.inera.abi.logic.formatodiscambio.castor.CatalogoSpeciale;
 import it.inera.abi.logic.formatodiscambio.castor.CatalogoTopografico;
 import it.inera.abi.logic.formatodiscambio.castor.Chiusura;
-import it.inera.abi.logic.formatodiscambio.castor.CondizioniAccesso;
 import it.inera.abi.logic.formatodiscambio.castor.Coordinate;
 import it.inera.abi.logic.formatodiscambio.castor.Copertura;
 import it.inera.abi.logic.formatodiscambio.castor.DataCensimento;
@@ -31,7 +33,8 @@ import it.inera.abi.logic.formatodiscambio.castor.DataFondazione;
 import it.inera.abi.logic.formatodiscambio.castor.DataIstituzione;
 import it.inera.abi.logic.formatodiscambio.castor.DepositoLegale;
 import it.inera.abi.logic.formatodiscambio.castor.Digitale;
-import it.inera.abi.logic.formatodiscambio.castor.Documenti;
+import it.inera.abi.logic.formatodiscambio.castor.DocDelForme;
+import it.inera.abi.logic.formatodiscambio.castor.DocumentDelivery;
 import it.inera.abi.logic.formatodiscambio.castor.Edificio;
 import it.inera.abi.logic.formatodiscambio.castor.FondiAntichi;
 import it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale;
@@ -44,15 +47,17 @@ import it.inera.abi.logic.formatodiscambio.castor.Istituzione;
 import it.inera.abi.logic.formatodiscambio.castor.Locale;
 import it.inera.abi.logic.formatodiscambio.castor.Materiale;
 import it.inera.abi.logic.formatodiscambio.castor.Materiali;
-import it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusiLocale;
+import it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusi;
 import it.inera.abi.logic.formatodiscambio.castor.Microforme;
-import it.inera.abi.logic.formatodiscambio.castor.Nome;
+import it.inera.abi.logic.formatodiscambio.castor.ModalitaAccesso;
+import it.inera.abi.logic.formatodiscambio.castor.Nomi;
 import it.inera.abi.logic.formatodiscambio.castor.Orario;
 import it.inera.abi.logic.formatodiscambio.castor.PatrimonioInventario;
 import it.inera.abi.logic.formatodiscambio.castor.Personale;
 import it.inera.abi.logic.formatodiscambio.castor.Postazioni;
 import it.inera.abi.logic.formatodiscambio.castor.Precedenti;
 import it.inera.abi.logic.formatodiscambio.castor.Prestito;
+import it.inera.abi.logic.formatodiscambio.castor.Reference;
 import it.inera.abi.logic.formatodiscambio.castor.Riproduzione;
 import it.inera.abi.logic.formatodiscambio.castor.Scaffalature;
 import it.inera.abi.logic.formatodiscambio.castor.Schede;
@@ -63,8 +68,10 @@ import it.inera.abi.logic.formatodiscambio.castor.SistemaIll;
 import it.inera.abi.logic.formatodiscambio.castor.Sistemi;
 import it.inera.abi.logic.formatodiscambio.castor.SistemiItem;
 import it.inera.abi.logic.formatodiscambio.castor.Specializzazione;
+import it.inera.abi.logic.formatodiscambio.castor.Specializzazioni;
 import it.inera.abi.logic.formatodiscambio.castor.Strutture;
 import it.inera.abi.logic.formatodiscambio.castor.Superficie;
+import it.inera.abi.logic.formatodiscambio.castor.Telefonici;
 import it.inera.abi.logic.formatodiscambio.castor.Telefonico;
 import it.inera.abi.logic.formatodiscambio.castor.TipoPrestito;
 import it.inera.abi.logic.formatodiscambio.castor.Ufficiale;
@@ -79,7 +86,6 @@ import it.inera.abi.logic.formatodiscambio.castor.types.OrarioGiornoType;
 import it.inera.abi.logic.formatodiscambio.castor.types.RuoloType;
 import it.inera.abi.logic.formatodiscambio.castor.types.SiNoType;
 import it.inera.abi.logic.formatodiscambio.castor.types.TelefonicoTipoType;
-import it.inera.abi.logic.formatodiscambio.exports.DatabaseToCastorMapper;
 import it.inera.abi.persistence.AccessoModalita;
 import it.inera.abi.persistence.Biblioteca;
 import it.inera.abi.persistence.CataloghiCollettivi;
@@ -88,8 +94,8 @@ import it.inera.abi.persistence.Codici;
 import it.inera.abi.persistence.Contatti;
 import it.inera.abi.persistence.DenominazioniAlternative;
 import it.inera.abi.persistence.DenominazioniPrecedenti;
-import it.inera.abi.persistence.DestinazioniSociali;
 import it.inera.abi.persistence.DepositiLegali;
+import it.inera.abi.persistence.DestinazioniSociali;
 import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.Ente;
 import it.inera.abi.persistence.FondiSpeciali;
@@ -109,6 +115,7 @@ import it.inera.abi.persistence.PrestitoLocaleMaterialeEscluso;
 import it.inera.abi.persistence.PrestitoLocaleUtentiAmmessi;
 import it.inera.abi.persistence.Regolamento;
 import it.inera.abi.persistence.Riproduzioni;
+import it.inera.abi.persistence.RiproduzioniTipo;
 import it.inera.abi.persistence.ServiziBibliotecariCarta;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
@@ -118,7 +125,6 @@ import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -130,7 +136,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-
+/**
+ * Classe contenente il mapping dei dati presenti nel database in formato castor
+ *
+ */
 public class DatabaseToCastorMapper {
 
 	private static Log log = LogFactory.getLog(DatabaseToCastorMapper.class);
@@ -150,21 +159,21 @@ public class DatabaseToCastorMapper {
 		bibliotecaCastor.setAmministrativa(amministrativa);
 		log.info("AMMMINISTRATIVA classes have been setted");
 
-		
+
 		Cataloghi cataloghi = DatabaseToCastorMapper.createCataloghi(bibliotecaDb);
-		
-		if (cataloghi.getCatalogoCollettivo().length > 0 || 
-				cataloghi.getCatalogoGenerale().length > 0 || 
-				cataloghi.getCatalogoSpeciale().length > 0) {
+
+		if ((cataloghi.getCataloghiCollettivi() != null && cataloghi.getCataloghiCollettivi().getCatalogoCollettivoCount() > 0) || 
+				(cataloghi.getCataloghiGenerali() != null && cataloghi.getCataloghiGenerali().getCatalogoGeneraleCount() > 0) || 
+				(cataloghi.getCataloghiSpeciali() != null && cataloghi.getCataloghiSpeciali().getCatalogoSpecialeCount() > 0)) {
 			log.info("Setting CATALOGHI classes");
 			bibliotecaCastor.setCataloghi(cataloghi);
 			log.info("CATALOGHI classes have been setted");	
 		}
-		
+
 
 		log.info("Setting PATRIMONIO classes");
 		it.inera.abi.logic.formatodiscambio.castor.Patrimonio patrimonio = DatabaseToCastorMapper.createPatrimonio(bibliotecaDb);
-		
+
 		boolean testPatrimonio = (patrimonio.getAcquistiUltimiQuindiciAnni() != null);
 		testPatrimonio = testPatrimonio || (patrimonio.getCatalogoTopografico() != null);
 		testPatrimonio = testPatrimonio || (patrimonio.getFondiAntichi() != null);
@@ -175,7 +184,7 @@ public class DatabaseToCastorMapper {
 			bibliotecaCastor.setPatrimonio(patrimonio);
 			log.info("PATRIMONIO classes have been setted");
 		}
-		
+
 
 		log.info("Setting SERVIZI classes");
 		Servizi servizi = DatabaseToCastorMapper.createServizi(bibliotecaDb);
@@ -183,9 +192,11 @@ public class DatabaseToCastorMapper {
 		log.info("SERVIZI classes have been setted");
 
 		log.info("Setting SPECIALIZZAZIONI classes");
-		Specializzazione[] specializzazioni = createSpecializzazioni(bibliotecaDb);
-		if (specializzazioni != null) {
-			bibliotecaCastor.setSpecializzazione(specializzazioni);
+		Specializzazione[] specializzazioneArray = createSpecializzazioni(bibliotecaDb);
+		if (specializzazioneArray != null) {
+			Specializzazioni specializzazioni = new Specializzazioni();
+			specializzazioni.setSpecializzazione(specializzazioneArray);
+			bibliotecaCastor.setSpecializzazioni(specializzazioni);
 		}
 		log.info("Setting SPECIALIZZAZIONI classes");
 
@@ -300,6 +311,8 @@ public class DatabaseToCastorMapper {
 		DatabaseToCastorMapper.Servizi_setSezioniSpeciali(servizi, bibliotecaDb);
 		DatabaseToCastorMapper.Servizi_setSistemi(servizi, bibliotecaDb);
 		DatabaseToCastorMapper.Servizi_setRiproduzioni(servizi, bibliotecaDb);
+		DatabaseToCastorMapper.Servizi_setReference(servizi, bibliotecaDb);
+		DatabaseToCastorMapper.Servizi_setDocumentDelivery(servizi, bibliotecaDb);
 
 		return servizi;
 	}
@@ -335,10 +348,10 @@ public class DatabaseToCastorMapper {
 		}
 		codici.setIsil(Utility.buildIsil(bibliotecaDb.getIsilStato(), bibliotecaDb.getIsilProvincia(), String.valueOf(bibliotecaDb.getIsilNumero())));
 		//if (codicis != null && codicis.size() > 0){
-			anagrafica.setCodici(codici);
-			log.debug("Settati codici nella parte Anagrafica");
+		anagrafica.setCodici(codici);
+		log.debug("Settati codici nella parte Anagrafica");
 		//}
-		
+
 	}
 
 	private static void Anagrafica_setContatti(Anagrafica anagrafica, Biblioteca bibliotecaDb) {
@@ -397,26 +410,33 @@ public class DatabaseToCastorMapper {
 		if (telefoniC.size() > 0) {
 			Telefonico[] telC = new Telefonico[telefoniC.size()];
 			telC = (Telefonico[]) telefoniC.toArray(telC);
-			contatti.setTelefonico(telC);
-			log.debug("Settati contatti  telefonici nella parte Anagrafica");
+			Telefonici telefonici = new Telefonici();
+			telefonici.setTelefonico(telC);
+			contatti.setTelefonici(telefonici);
+			log.debug("Settati contatti telefonici nella parte Anagrafica");
+			
 		} else {
 			log.debug("Non sono presenti contatti telefonici per la biblioteca");
 		}
+		
 		/*
 		 * ANAGRAFICA: Contatti altro
 		 */
 		if (altriC.size() > 0) {
 			Altro[] altC = new Altro[altriC.size()];
 			altC = (Altro[]) altriC.toArray(altC);
-			contatti.setAltro(altC);
+			Altri altri = new Altri();
+			altri.setAltro(altC);
+			contatti.setAltri(altri);
 			log.debug("Settati altri contatti nella parte Anagrafica");
+			
 		} else {
 			log.debug("Non sono presenti altri contatti per la biblioteca");
 		}
+		
 		if ((telefoniC != null && telefoniC.size() > 0) || (altriC != null && altriC.size() > 0)) {
 			anagrafica.setContatti(contatti);
 		}
-		
 
 	}
 
@@ -534,7 +554,7 @@ public class DatabaseToCastorMapper {
 			anagrafica.setEdificio(edificio);
 			log.debug("Settato edificio nella parte Anagrafica");
 		}
-		
+
 	}
 
 	private static void Anagrafica_setIndirizzo(Anagrafica anagrafica, Biblioteca bibliotecaDb) {
@@ -561,11 +581,11 @@ public class DatabaseToCastorMapper {
 				Coordinate coordinate = new Coordinate();
 				coordinate.setLatitudine(bibliotecaDb.getGeolocalizzazione().getLatitudine().doubleValue());
 				coordinate.setLongitudine(bibliotecaDb.getGeolocalizzazione().getLongitudine().doubleValue());
-				
+
 				indirizzo.setCoordinate(coordinate);
 			}
 		}
-		
+
 		anagrafica.setIndirizzo(indirizzo);
 		log.debug("Settato indirizzo nella parte Anagrafica");
 	}
@@ -575,10 +595,10 @@ public class DatabaseToCastorMapper {
 		/*
 		 * ANAGRAFICA: Denominazioni
 		 */
-		Nome nome = new Nome();
+		Nomi nomi = new Nomi();
 		// Attuale
 		if ((bibliotecaDb.getDenominazioneUfficiale() != null) && (bibliotecaDb.getDenominazioneUfficiale().trim().length() > 0))
-			nome.setAttuale(bibliotecaDb.getDenominazioneUfficiale().trim());
+			nomi.setAttuale(bibliotecaDb.getDenominazioneUfficiale().trim());
 
 		// Anche
 		List<DenominazioniAlternative> denAnche = bibliotecaDb.getDenominazioniAlternatives();
@@ -593,12 +613,12 @@ public class DatabaseToCastorMapper {
 				}
 			}
 			if (denAC.size() > 0) {
-				Alternative alternative = new Alternative();
-				alternative.setAlternativo(denAC.toArray(new String[denAC.size()]));
-				nome.setAlternative(alternative);
+				Alternativi alternativi = new Alternativi();
+				alternativi.setAlternativo(denAC.toArray(new String[denAC.size()]));
+				nomi.setAlternativi(alternativi);
 				log.debug("Settate denominazioni alternative nella parte Anagrafica");
 			}
-			
+
 		} else {
 			log.debug("Non sono presenti denominazioni alternative per la biblioteca");
 		}
@@ -617,14 +637,14 @@ public class DatabaseToCastorMapper {
 			if (denGC.size() > 0) {
 				Precedenti precedenti = new Precedenti();
 				precedenti.setPrecedente(denGC.toArray(new String[denGC.size()]));
-				nome.setPrecedenti(precedenti);
+				nomi.setPrecedenti(precedenti);
 				log.debug("Settate denominazioni precedenti nella parte Anagrafica");
 			}
 		} else {
 			log.debug("Non sono presenti denominazioni precedenti per la biblioteca");
 		}
-		anagrafica.setNome(nome);
-		log.debug("Settate denominazioni (normale, giù e anche) nella parte Anagrafica");
+		anagrafica.setNomi(nomi);
+		log.debug("Settate denominazioni (normale, già e anche) nella parte Anagrafica");
 	}
 
 	private static void Anagrafica_setDate(Anagrafica anagrafica, Biblioteca bibliotecaDb) {
@@ -965,9 +985,11 @@ public class DatabaseToCastorMapper {
 		}
 
 		if (catalColl.size() > 0) {
-			CatalogoCollettivo[] cataloghiCollettivi = new CatalogoCollettivo[catalColl.size()];
-			cataloghiCollettivi = (CatalogoCollettivo[]) catalColl.toArray(cataloghiCollettivi);
-			cataloghi.setCatalogoCollettivo(cataloghiCollettivi);
+			CatalogoCollettivo[] cataloghiCollettiviArray = new CatalogoCollettivo[catalColl.size()];
+			cataloghiCollettiviArray = (CatalogoCollettivo[]) catalColl.toArray(cataloghiCollettiviArray);
+			it.inera.abi.logic.formatodiscambio.castor.CataloghiCollettivi cataloghiCollettivi = new it.inera.abi.logic.formatodiscambio.castor.CataloghiCollettivi();
+			cataloghiCollettivi.setCatalogoCollettivo(cataloghiCollettiviArray);
+			cataloghi.setCataloghiCollettivi(cataloghiCollettivi);
 			log.debug("Settati cataloghi collettivi nella parte Cataloghi");
 		} else {
 			log.debug("Non sono presenti cataloghi collettivi per la biblioteca");
@@ -1000,21 +1022,21 @@ public class DatabaseToCastorMapper {
 				}
 				/* Supporto */
 				dig.setSupporto(catGenH.getCataloghiSupportoDigitaleTipo().getDescrizione());
-				
+
 				/* Se supporto = 'Online', lista url */
 				if (catGenH.getCataloghiSupportoDigitaleTipo().getDescrizione().equalsIgnoreCase("Online") 
 						&& catGenH.getCataloghiGeneraliUrls() != null && catGenH.getCataloghiGeneraliUrls().size() > 0) {
 					String[] surlList = new String[catGenH.getCataloghiGeneraliUrls().size()];
-					
+
 					int curl = 0;
 					for (CataloghiGeneraliUrl entry : catGenH.getCataloghiGeneraliUrls()) {
 						surlList[curl] = entry.getUrl();
 						curl++;
 					}
-					
+
 					dig.setUrl(surlList);
 				}
-				
+
 				if (forme == null)
 					forme = new Forme();
 				forme.setDigitale(dig);
@@ -1060,9 +1082,11 @@ public class DatabaseToCastorMapper {
 			catalGen.add(catGen);
 		}
 		if (catalGen.size() > 0) {
-			CatalogoGenerale[] cataloghiGenerali = new CatalogoGenerale[catalGen.size()];
-			cataloghiGenerali = (CatalogoGenerale[]) catalGen.toArray(cataloghiGenerali);
-			cataloghi.setCatalogoGenerale(cataloghiGenerali);
+			CatalogoGenerale[] cataloghiGeneraliArray = new CatalogoGenerale[catalGen.size()];
+			cataloghiGeneraliArray = (CatalogoGenerale[]) catalGen.toArray(cataloghiGeneraliArray);
+			CataloghiGenerali cataloghiGenerali = new CataloghiGenerali();
+			cataloghiGenerali.setCatalogoGenerale(cataloghiGeneraliArray);
+			cataloghi.setCataloghiGenerali(cataloghiGenerali);
 			log.debug("Settati cataloghi generali nella parte Cataloghi");
 		} else {
 			log.debug("Non sono presenti cataloghi generali per la biblioteca");
@@ -1154,9 +1178,11 @@ public class DatabaseToCastorMapper {
 			catalSpe.add(catSpe);
 		}
 		if (catalSpe.size() > 0) {
-			CatalogoSpeciale[] cataloghiSpeciali = new CatalogoSpeciale[catalSpe.size()];
-			cataloghiSpeciali = (CatalogoSpeciale[]) catalSpe.toArray(cataloghiSpeciali);
-			cataloghi.setCatalogoSpeciale(cataloghiSpeciali);
+			CatalogoSpeciale[] cataloghiSpecialiArray = new CatalogoSpeciale[catalSpe.size()];
+			cataloghiSpecialiArray = (CatalogoSpeciale[]) catalSpe.toArray(cataloghiSpecialiArray);
+			CataloghiSpeciali cataloghiSpeciali = new CataloghiSpeciali();
+			cataloghiSpeciali.setCatalogoSpeciale(cataloghiSpecialiArray);
+			cataloghi.setCataloghiSpeciali(cataloghiSpeciali);
 			log.debug("Settati cataloghi speciali nella parte Cataloghi");
 		} else {
 			log.debug("Non sono presenti cataloghi speciali per la biblioteca");
@@ -1380,27 +1406,45 @@ public class DatabaseToCastorMapper {
 
 		List<DepositiLegali> depositiLegalis = bibliotecaDb.getDepositiLegalis();
 
-		for (Iterator<DepositiLegali> i = depositiLegalis.iterator(); i.hasNext();){ 
-			DepositoLegale depositoLegale = new DepositoLegale();
-			DepositiLegali dep = i.next(); 
-			String descr = dep.getDepositiLegaliTipo().getDescrizione();
-			String daAnno  = dep.getDaAnno();
-			if (daAnno != null) {
-				depositoLegale.setAnnoInizio(daAnno);
+		if (BooleanUtils.isTrue(bibliotecaDb.getAttivoDepositoLegale())) {
+			for (Iterator<DepositiLegali> i = depositiLegalis.iterator(); i.hasNext();) { 
+				DepositoLegale depositoLegale = new DepositoLegale();
+				DepositiLegali dep = i.next(); 
+				String descr = dep.getDepositiLegaliTipo().getDescrizione();
+				String daAnno  = dep.getDaAnno();
+				if (daAnno != null) {
+					depositoLegale.setAnnoInizio(daAnno);
+				}
+				if ((descr != null) && (descr.length() > 0)) {
+					depositoLegale.setTipo(descr);
+				}
+				
+				depLeg.add(depositoLegale);
 			}
-			if ((descr != null) && (descr.length() > 0)) {
-				depositoLegale.setTipo(descr);
-			}
-			depLeg.add(depositoLegale);
-		}
-		if (depLeg.size() > 0) {
+			
 			it.inera.abi.logic.formatodiscambio.castor.DepositiLegali deplegs = new it.inera.abi.logic.formatodiscambio.castor.DepositiLegali();
-			deplegs.setDepositoLegale(depLeg.toArray(new DepositoLegale[depLeg.size()]));
-			amministrativa.setDepositiLegali(deplegs); 
-			log.debug("Settati depositi legali nella parte Amministrativa");
-		} else {
-			log.debug("Non sono presenti depositi legali per la biblioteca");
+			deplegs.setAttivo(SiNoType.S);
+			log.debug("AttivoDepositoLegale: " + true);
+			
+			if (depLeg.size() > 0) {
+				deplegs.setDepositoLegale(depLeg.toArray(new DepositoLegale[depLeg.size()]));
+				log.debug("Settati depositi legali nella parte Amministrativa");
+				
+			} else {
+				log.debug("Non sono presenti depositi legali per la biblioteca");
+			}
+			
+			amministrativa.setDepositiLegali(deplegs);
+			
+		} else if (BooleanUtils.isFalse(bibliotecaDb.getAttivoDepositoLegale())) {
+			it.inera.abi.logic.formatodiscambio.castor.DepositiLegali deplegs = new it.inera.abi.logic.formatodiscambio.castor.DepositiLegali();
+			deplegs.setAttivo(SiNoType.N);
+			log.debug("AttivoDepositoLegale: " + true);
+			
+			amministrativa.setDepositiLegali(deplegs);
+			
 		}
+		
 	}
 
 	private static void Amministrativa_setEnte(Amministrativa amministrativa, Biblioteca bibliotecaDb) {
@@ -1424,7 +1468,7 @@ public class DatabaseToCastorMapper {
 				(enteH.getStato().getSigla()!=null)&&
 				(enteH.getStato().getSigla().trim().length()>0))
 			ente.setStato(enteH.getStato().getSigla().trim());
-		
+
 		if((enteH.getEnteTipologiaAmministrativa().getDescrizione() != null)&&(enteH.getEnteTipologiaAmministrativa().getDescrizione().trim().length()>0))
 			ente.setTipologiaAmministrativa(enteH.getEnteTipologiaAmministrativa().getDescrizione().trim());
 		if((bibliotecaDb.getTipologiaFunzionale().getDescrizione() != null)&&(bibliotecaDb.getTipologiaFunzionale().getDescrizione().trim().length()>0))
@@ -1580,57 +1624,53 @@ public class DatabaseToCastorMapper {
 	}
 
 	private static void Servizi_setAccesso(Servizi servizi, Biblioteca bibliotecaDb) {
-		
+
 		boolean init = false;
-		
+
 		Accesso accesso = new Accesso();
-		boolean settato = false;
+		
 		if (bibliotecaDb.getAccessoHandicap() != null) {
-			
 			if (BooleanUtils.isTrue(bibliotecaDb.getAccessoHandicap())) {
 				accesso.setHandicap(SiNoType.S);
 				init = true;
+				
 			} else if (BooleanUtils.isFalse(bibliotecaDb.getAccessoHandicap())) {
 				accesso.setHandicap(SiNoType.N);
 				init = true;
 			}
-//			init = true;
-//			accesso.setHandicap(bibliotecaDb.getAccessoHandicap().toString());	
 		}
-		//Condizioni di accesso (Documenti)
-		ArrayList<String> condAccC = new ArrayList<String>();
+		
+		// Modalità di accesso
+		ArrayList<String> modalitaAccessoList = new ArrayList<String>();
 		for(Iterator<AccessoModalita> i = bibliotecaDb.getAccessoModalitas().iterator(); i.hasNext();){
 			AccessoModalita accessoModalita = i.next();
-			condAccC.add(accessoModalita.getDescrizione());
+			modalitaAccessoList.add(accessoModalita.getDescrizione());
 			init = true;
 		}
-		CondizioniAccesso[] caArray = new CondizioniAccesso[1];
-		if (condAccC.size() > 0) {
-			String[] modoArrayC = new String[condAccC.size()];
-			modoArrayC = (String[]) condAccC.toArray(modoArrayC);			
-			CondizioniAccesso ca = new CondizioniAccesso();
-			Documenti documenti = new Documenti();
-			documenti.setTipo(modoArrayC);
-			ca.setDocumenti(documenti);
-			settato = true;
+
+		if (modalitaAccessoList.size() > 0) {
+			String[] modalitaAccessoArray = new String[modalitaAccessoList.size()];
+			modalitaAccessoArray = (String[]) modalitaAccessoList.toArray(modalitaAccessoArray);
+			
+			ModalitaAccesso modalita = new ModalitaAccesso();
+			modalita.setModo(modalitaAccessoArray);
+			
+			accesso.setModalitaAccesso(modalita);
 			init = true;
-			log.debug("Settate condizioni di accesso nella parte servizi");
+			log.debug("Settate modalità di accesso nella parte servizi");
 		} else {
 			log.debug("Non sono presenti condizioni di accesso per la biblioteca");
 		}
-		if (settato)
-			accesso.setCondizioniAccesso(caArray);
-
+		
 		// Accesso riservato
 		if (BooleanUtils.isTrue(bibliotecaDb.getAccessoRiservato())){
 			accesso.setAperta(SiNoType.N);
 			init = true;
+			
 		} else if (BooleanUtils.isFalse(bibliotecaDb.getAccessoRiservato())){
 			accesso.setAperta(SiNoType.S);
 			init = true;
 		}
-
-
 
 		it.inera.abi.logic.formatodiscambio.castor.DestinazioniSociali ds = new it.inera.abi.logic.formatodiscambio.castor.DestinazioniSociali();
 		for (Iterator<DestinazioniSociali> i = bibliotecaDb.getDestinazioniSocialis().iterator();i.hasNext();) {
@@ -1810,17 +1850,17 @@ public class DatabaseToCastorMapper {
 				BigDecimal b = new BigDecimal("0");
 				interbibliotecario.setTotalePrestiti(b);
 				List<TipoPrestito> tipi = new ArrayList<TipoPrestito>();
-				
+
 				for (PrestitoInterbibliotecario pib : prestIntH) {
 					PrestitoInterbibliotecarioModo prestitoInterbibliotecarioModo = pib.getPrestitoInterbibliotecarioModo();
 					//Procedure automatizzate
 					if (BooleanUtils.isTrue(bibliotecaDb.getProcedureIllAutomatizzate())) {
 						TipoPrestito tipo = new TipoPrestito();
-						
+
 						if (pib.getInternazionale() != null) {
 							if (pib.getInternazionale().booleanValue()) {// internazionale is true
 								tipo.setInternazionale(SiNoType.S);
-								
+
 							} else {// internazionale is false
 								tipo.setInternazionale(SiNoType.N);
 							}
@@ -1829,12 +1869,12 @@ public class DatabaseToCastorMapper {
 						if (pib.getNazionale() != null) {
 							if (pib.getNazionale().booleanValue()) {// nazionale is true
 								tipo.setNazionale(SiNoType.S);
-								
+
 							} else {// nazionale is false
 								tipo.setNazionale(SiNoType.N);
 							}
 						}
-						
+
 						// Ruolo
 						if (prestitoInterbibliotecarioModo != null) {
 							if (prestitoInterbibliotecarioModo.getIdPrestitoInterbibliotecarioModo().intValue() == 1) {// POS
@@ -1844,10 +1884,10 @@ public class DatabaseToCastorMapper {
 								tipo.setRuolo(RuoloType.DSC);
 							}
 						}
-						
+
 						tipi.add(tipo);
 					}
-					
+
 					//Internazionale
 					/*if("S".equalsIgnoreCase(prestInt.getInternazionale()))
 						;//interbibliotecario.setInternazionale(SiNoType.S);
@@ -1865,7 +1905,7 @@ public class DatabaseToCastorMapper {
 					tipiArray = (TipoPrestito[]) tipi.toArray(tipiArray); 
 					interbibliotecario.setTipoPrestito(tipiArray);
 					log.debug("Settati i ruoli del prestito interbibliotecario");
-					
+
 				} 
 				else {
 					log.debug("Non sono presenti ruoli per i prestiti interbibliotecari");
@@ -1891,51 +1931,74 @@ public class DatabaseToCastorMapper {
 			} else {
 				log.debug("Non sono presenti prestiti interbibliotecari per la biblioteca");
 			}
-			ArrayList<String> mat = new ArrayList<String>();
-			//PRESTITO LOCALE 
-			for (Iterator<PrestitoLocale> i = bibliotecaDb.getPrestitoLocales().iterator(); i.hasNext();) {
+			
+			/* PRESTITO LOCALE */
+			if (bibliotecaDb.getAttivoPrestitoLocale() != null) {
 				Locale locale = new Locale();
-				PrestitoLocale pl = i.next();
-				settato = true;
-				//Durata
-				if (isNullSafeNotZero(pl.getDurataGiorni()))
-					locale.setDurata(String.valueOf(pl.getDurataGiorni())); 
-				//Automatizzato
-				if (BooleanUtils.isTrue(pl.getAutomatizzato()))
-					locale.setPrestitoLocaleAutomatizzato(SiNoType.S);
-				if (BooleanUtils.isFalse(pl.getAutomatizzato()))
-					locale.setPrestitoLocaleAutomatizzato(SiNoType.N);
-				//Totale prestiti locali ultimo anno
-				if (isNullSafeNotZero(bibliotecaDb.getNPrestitiLocaliAnnuo()))
-					locale.setTotalePrestiti(new BigDecimal(bibliotecaDb.getNPrestitiLocaliAnnuo())); 
-				//Tipologie di utenti ammessi
-				String[] utentiAmmessi = new String[pl.getPrestitoLocaleUtentiAmmessis().size()];
-				int counter = 0;
-				for (PrestitoLocaleUtentiAmmessi entry : pl.getPrestitoLocaleUtentiAmmessis()) { 
-					String descr = entry.getDescrizione();
-					if (descr != null && descr.length() > 0) {
-						utentiAmmessi[counter] = descr;
-						counter++;
+
+				if (bibliotecaDb.getAttivoPrestitoLocale().booleanValue() == true) {
+					locale.setAttivo(SiNoType.S);
+					for (Iterator<PrestitoLocale> i = bibliotecaDb.getPrestitoLocales().iterator(); i.hasNext();) {
+						PrestitoLocale pl = i.next();
+
+						/* Automatizzato */
+						if (BooleanUtils.isTrue(pl.getAutomatizzato())) {
+							locale.setPrestitoLocaleAutomatizzato(SiNoType.S);
+
+						} else if (BooleanUtils.isFalse(pl.getAutomatizzato())) {
+							locale.setPrestitoLocaleAutomatizzato(SiNoType.N);
+						}
+
+						/* Materiali esclusi */
+						if (pl.getPrestitoLocaleMaterialeEscluso() != null && pl.getPrestitoLocaleMaterialeEscluso().size() > 0) {
+							MaterialiEsclusi materialiEsclusi = new MaterialiEsclusi();
+							List<PrestitoLocaleMaterialeEscluso> materialiEsclusiList = pl.getPrestitoLocaleMaterialeEscluso();
+
+							for (PrestitoLocaleMaterialeEscluso entryMatEscl : materialiEsclusiList) {
+								materialiEsclusi.addMaterialeEscluso(entryMatEscl.getDescrizione());
+							}
+
+							if (materialiEsclusi.getMaterialeEsclusoCount() > 0) {
+								locale.setMaterialiEsclusi(materialiEsclusi);
+							}
+						}
+
+						/* Durata */
+						if (isNullSafeNotZero(pl.getDurataGiorni())) {
+							locale.setDurata(String.valueOf(pl.getDurataGiorni()));
+						}
+
+						/* Utenti ammessi */
+						if (pl.getPrestitoLocaleUtentiAmmessis() != null && pl.getPrestitoLocaleUtentiAmmessis().size() > 0) {
+							String[] utentiAmmessi = new String[pl.getPrestitoLocaleUtentiAmmessis().size()];
+							int counter = 0;
+							List<PrestitoLocaleUtentiAmmessi> utentiAmmessiList = pl.getPrestitoLocaleUtentiAmmessis();
+
+							for (PrestitoLocaleUtentiAmmessi entryUtentiAmmessi : utentiAmmessiList) { 
+								if (entryUtentiAmmessi.getDescrizione() != null && entryUtentiAmmessi.getDescrizione().length() > 0) {
+									utentiAmmessi[counter] = entryUtentiAmmessi.getDescrizione();
+									counter++;
+								}
+							}
+
+							if (utentiAmmessi.length > 0) {
+								locale.setUtentiAmmessi(utentiAmmessi);
+							}
+						}
+
+						/* Totale prestiti locali ultimo anno */
+						if (isNullSafeNotZero(bibliotecaDb.getNPrestitiLocaliAnnuo())) {
+							locale.setTotalePrestiti(new BigDecimal(bibliotecaDb.getNPrestitiLocaliAnnuo()));
+						}
+							
 					}
-					
+
+				} else if (bibliotecaDb.getAttivoPrestitoLocale().booleanValue() == false) {
+					locale.setAttivo(SiNoType.N);
 				}
-				if(utentiAmmessi.length > 0) {
-					locale.setUtentiAmmessi(utentiAmmessi);
-				}
-				//MATERIALI ESCLUSI PRESTITO LOCALE
-				for(Iterator<PrestitoLocaleMaterialeEscluso>  ii =  pl.getPrestitoLocaleMaterialeEscluso().iterator(); ii.hasNext();){
-					PrestitoLocaleMaterialeEscluso pe = ii.next();
-					mat.add(pe.getDescrizione());
-				}
+				
 				prestito.setLocale(locale);
-				settato = true;	
-			}
-			MaterialiEsclusiLocale mel = new MaterialiEsclusiLocale();
-			if(mat.size() > 0){
-				String[] materialiEsclusi = new String[mat.size()];
-				materialiEsclusi = (String[])mat.toArray(materialiEsclusi);
-				mel.setMateriale(materialiEsclusi);
-				prestito.setMaterialiEsclusiLocale(mel);
+				settato = true;
 			}
 
 		}
@@ -1946,9 +2009,9 @@ public class DatabaseToCastorMapper {
 	}
 
 	private static void Servizi_setOrario(Servizi servizi, Biblioteca bibliotecaDb) {
-		
+
 		boolean init = false;
-		
+
 		ServiziOrario serviziOrario = new ServiziOrario();
 
 		//Chiusura
@@ -1960,7 +2023,8 @@ public class DatabaseToCastorMapper {
 				chiusura.setNote(chiusoH.getDescrizione().trim());
 			else
 				chiusura.setNote("Non presenti");
-			chiusura.setPeriodo(chiusoH.getDescrizione().trim());
+			if ((chiusoH.getDescrizione() != null) && (chiusoH.getDescrizione().trim().length() > 0)) 
+				chiusura.setPeriodo(chiusoH.getDescrizione().trim()); // serve? se descrizione == null senza l'if va in errore
 			chiusureH.add(chiusura);
 		}
 		if (chiusureH.size() > 0) {
@@ -2019,45 +2083,45 @@ public class DatabaseToCastorMapper {
 
 
 		//Variazioni orario
-//		ArrayList<Orario> var = new ArrayList<Orario>();
-//		for (Iterator<OrarioVariazioni> i = bibliotecaDb.getOrarioVariazionis().iterator(); i.hasNext();) {
-//
-//			OrarioVariazioni varH =  i.next();
-//			if (varH != null) {
-//				Orario orario = new Orario();
-//
-//				if (varH.getAlle() != null) orario.setAlle(DateFormatUtils.format(varH.getAlle(), "HH:mm"));
-//
-//				if (varH.getDalle() != null) orario.setDalle(DateFormatUtils.format(varH.getDalle(), "HH:mm"));
-//
-//				if (varH.getGiorno() != null) {
-//					if (1 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.LUN);
-//					if (2 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.MAR);
-//					if (3 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.MER);
-//					if (4 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.GIO);
-//					if (5 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.VEN);
-//					if (6 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.SAB);
-//					if (7 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.DOM);
-//				}
-//				var.add(orario);
-//			}
-//		}
-//		if (var.size() > 0){
-//			init = true;
-//			Orario[] orarioArray = new Orario[var.size()];
-//			orarioArray = (Orario[])var.toArray(orarioArray);
-//			Variazione variazione = new Variazione();
-//			variazione.setOrario(orarioArray);
-//			serviziOrario.addVariazione(variazione);
-//		}
-		
+		//		ArrayList<Orario> var = new ArrayList<Orario>();
+		//		for (Iterator<OrarioVariazioni> i = bibliotecaDb.getOrarioVariazionis().iterator(); i.hasNext();) {
+		//
+		//			OrarioVariazioni varH =  i.next();
+		//			if (varH != null) {
+		//				Orario orario = new Orario();
+		//
+		//				if (varH.getAlle() != null) orario.setAlle(DateFormatUtils.format(varH.getAlle(), "HH:mm"));
+		//
+		//				if (varH.getDalle() != null) orario.setDalle(DateFormatUtils.format(varH.getDalle(), "HH:mm"));
+		//
+		//				if (varH.getGiorno() != null) {
+		//					if (1 == varH.getGiorno())
+		//						orario.setGiorno(OrarioGiornoType.LUN);
+		//					if (2 == varH.getGiorno())
+		//						orario.setGiorno(OrarioGiornoType.MAR);
+		//					if (3 == varH.getGiorno())
+		//						orario.setGiorno(OrarioGiornoType.MER);
+		//					if (4 == varH.getGiorno())
+		//						orario.setGiorno(OrarioGiornoType.GIO);
+		//					if (5 == varH.getGiorno())
+		//						orario.setGiorno(OrarioGiornoType.VEN);
+		//					if (6 == varH.getGiorno())
+		//						orario.setGiorno(OrarioGiornoType.SAB);
+		//					if (7 == varH.getGiorno())
+		//						orario.setGiorno(OrarioGiornoType.DOM);
+		//				}
+		//				var.add(orario);
+		//			}
+		//		}
+		//		if (var.size() > 0){
+		//			init = true;
+		//			Orario[] orarioArray = new Orario[var.size()];
+		//			orarioArray = (Orario[])var.toArray(orarioArray);
+		//			Variazione variazione = new Variazione();
+		//			variazione.setOrario(orarioArray);
+		//			serviziOrario.addVariazione(variazione);
+		//		}
+
 		ArrayList<Variazione> var = new ArrayList<Variazione>();
 		for (Iterator<OrarioVariazioni> i = bibliotecaDb.getOrarioVariazionis().iterator(); i.hasNext();) {
 
@@ -2065,47 +2129,47 @@ public class DatabaseToCastorMapper {
 			if (varH != null) {
 				Variazione variazione = new Variazione();
 				Orario orario = new Orario();
-				
-//				if (varH.getAlle() != null) orario.setAlle(DateFormatUtils.format(varH.getAlle(), "HH:mm"));
-//
-//				if (varH.getDalle() != null) orario.setDalle(DateFormatUtils.format(varH.getDalle(), "HH:mm"));
-//
-//				if (varH.getGiorno() != null) {
-//					if (1 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.LUN);
-//					if (2 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.MAR);
-//					if (3 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.MER);
-//					if (4 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.GIO);
-//					if (5 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.VEN);
-//					if (6 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.SAB);
-//					if (7 == varH.getGiorno())
-//						orario.setGiorno(OrarioGiornoType.DOM);
-//				}
-//				
-//				variazione.addOrario(orario);
-//				if ((varH.getDescrizione() != null) && (varH.getDescrizione().trim().length() > 0)) {
-//					variazione.setNote(varH.getDescrizione());
-//					variazione.setPeriodo(varH.getDescrizione());
-//				}
-//				else {
-//					variazione.setNote("Non presenti");
-//				}
-//				var.add(variazione);
-				
+
+				//				if (varH.getAlle() != null) orario.setAlle(DateFormatUtils.format(varH.getAlle(), "HH:mm"));
+				//
+				//				if (varH.getDalle() != null) orario.setDalle(DateFormatUtils.format(varH.getDalle(), "HH:mm"));
+				//
+				//				if (varH.getGiorno() != null) {
+				//					if (1 == varH.getGiorno())
+				//						orario.setGiorno(OrarioGiornoType.LUN);
+				//					if (2 == varH.getGiorno())
+				//						orario.setGiorno(OrarioGiornoType.MAR);
+				//					if (3 == varH.getGiorno())
+				//						orario.setGiorno(OrarioGiornoType.MER);
+				//					if (4 == varH.getGiorno())
+				//						orario.setGiorno(OrarioGiornoType.GIO);
+				//					if (5 == varH.getGiorno())
+				//						orario.setGiorno(OrarioGiornoType.VEN);
+				//					if (6 == varH.getGiorno())
+				//						orario.setGiorno(OrarioGiornoType.SAB);
+				//					if (7 == varH.getGiorno())
+				//						orario.setGiorno(OrarioGiornoType.DOM);
+				//				}
+				//				
+				//				variazione.addOrario(orario);
+				//				if ((varH.getDescrizione() != null) && (varH.getDescrizione().trim().length() > 0)) {
+				//					variazione.setNote(varH.getDescrizione());
+				//					variazione.setPeriodo(varH.getDescrizione());
+				//				}
+				//				else {
+				//					variazione.setNote("Non presenti");
+				//				}
+				//				var.add(variazione);
+
 				if (varH.getDalle() != null && varH.getAlle() != null && varH.getGiorno() != null 
 						&& (varH.getDescrizione() != null && varH.getDescrizione().trim().length() > 0)) {
 					/* SI EFFETTUA IL CONTROLLO SE TUTTI I CAMPI DELLA VARIAZIONE SONO VALORIZZATI; QUESTO È DOVUTO
 					 * AL FATTO CHE I DATI MIGRATI DAL VECCHIO DB POSSONO AVERE I CAMPI GIORNO, DALLE E ALLE NULLI. */
-					
+
 					orario.setDalle(DateFormatUtils.format(varH.getDalle(), "HH:mm"));
-					
+
 					orario.setAlle(DateFormatUtils.format(varH.getAlle(), "HH:mm"));
-					
+
 					if (1 == varH.getGiorno())
 						orario.setGiorno(OrarioGiornoType.LUN);
 					if (2 == varH.getGiorno())
@@ -2120,12 +2184,12 @@ public class DatabaseToCastorMapper {
 						orario.setGiorno(OrarioGiornoType.SAB);
 					if (7 == varH.getGiorno())
 						orario.setGiorno(OrarioGiornoType.DOM);
-					
+
 					variazione.addOrario(orario);
-					
+
 					variazione.setNote(varH.getDescrizione());
 					variazione.setPeriodo(varH.getDescrizione());
-					
+
 					var.add(variazione);
 				}
 			}
@@ -2135,9 +2199,9 @@ public class DatabaseToCastorMapper {
 			Variazione[] variazioneArray = new Variazione[var.size()];
 			variazioneArray = (Variazione[]) var.toArray(variazioneArray);
 			serviziOrario.setVariazione(variazioneArray);
-			
-			
-			
+
+
+
 			Chiusura[] chiusuraArray = new Chiusura[chiusureH.size()];
 			chiusuraArray = (Chiusura[]) chiusureH.toArray(chiusuraArray);
 			serviziOrario.setChiusura(chiusuraArray);
@@ -2160,17 +2224,17 @@ public class DatabaseToCastorMapper {
 	}
 
 	private static void Servizi_setSistemi(Servizi servizi, Biblioteca bibliotecaDb) {
-//		ArrayList<Sistemi> sist = new ArrayList<Sistemi>();
-//		for (Iterator<SistemiBiblioteche> i = bibliotecaDb.getSistemiBiblioteches().iterator(); i.hasNext();) {
-//			SistemiBiblioteche sistemaH = i.next(); 
-//			Sistemi sistema = new Sistemi();
-//			sistema.setSistema(sistemaH.getDescrizione());
-//			sist.add(sistema);
-//		}
-//		if (sist.size() > 0) {
-//			servizi.setSistemi(sist.toArray(new Sistemi[sist.size()]));
-//		}	
-		
+		//		ArrayList<Sistemi> sist = new ArrayList<Sistemi>();
+		//		for (Iterator<SistemiBiblioteche> i = bibliotecaDb.getSistemiBiblioteches().iterator(); i.hasNext();) {
+		//			SistemiBiblioteche sistemaH = i.next(); 
+		//			Sistemi sistema = new Sistemi();
+		//			sistema.setSistema(sistemaH.getDescrizione());
+		//			sist.add(sistema);
+		//		}
+		//		if (sist.size() > 0) {
+		//			servizi.setSistemi(sist.toArray(new Sistemi[sist.size()]));
+		//		}	
+
 		/* Nuova modifica ticket 0001300 */
 		Sistemi sistemi = new Sistemi();
 		for (Iterator<SistemiBiblioteche> i = bibliotecaDb.getSistemiBiblioteches().iterator(); i.hasNext();) {
@@ -2179,13 +2243,13 @@ public class DatabaseToCastorMapper {
 			sistItem.setSistema(sistemaH.getDescrizione());
 			sistemi.addSistemiItem(sistItem);
 		}
-		
+
 		if (sistemi.getSistemiItem() != null && sistemi.getSistemiItem().length > 0) {
 			servizi.setSistemi(sistemi);
 		}
 	}
 
-private static void Servizi_setRiproduzioni(Servizi servizi, Biblioteca bibliotecaDb) {
+	private static void Servizi_setRiproduzioni(Servizi servizi, Biblioteca bibliotecaDb) {
 		it.inera.abi.logic.formatodiscambio.castor.Riproduzioni riproduzioni = new it.inera.abi.logic.formatodiscambio.castor.Riproduzioni();
 
 		if (bibliotecaDb.getAttivoRiproduzioni() != null) {
@@ -2239,6 +2303,81 @@ private static void Servizi_setRiproduzioni(Servizi servizi, Biblioteca bibliote
 
 			servizi.setRiproduzioni(riproduzioni);
 
+		}
+	}
+	
+	private static void Servizi_setReference(Servizi servizi, Biblioteca bibliotecaDb) {
+		Reference ref = new Reference();
+
+		if (bibliotecaDb.getAttivoReference() != null) {
+			if (bibliotecaDb.getAttivoReference().booleanValue() == true) {
+				ref.setAttivo(SiNoType.S);
+
+				/* Reference locale */
+				if (BooleanUtils.isTrue(bibliotecaDb.getReferenceLocale())) {
+					ref.setLocale(SiNoType.S);
+
+				} else if (BooleanUtils.isFalse(bibliotecaDb.getReferenceLocale())) {
+					ref.setLocale(SiNoType.N);
+				}
+
+				/* Reference online */
+				if (BooleanUtils.isTrue(bibliotecaDb.getReferenceOnline())) {
+					ref.setOnline(SiNoType.S);
+					
+				} else if (BooleanUtils.isFalse(bibliotecaDb.getReferenceOnline())) {
+					ref.setOnline(SiNoType.N);
+				}
+
+
+			} else {
+				ref.setAttivo(SiNoType.N);
+
+				/* Reference locale */
+				if (bibliotecaDb.getReferenceLocale() != null 
+						&& bibliotecaDb.getReferenceLocale().booleanValue() == false) {
+					ref.setLocale(SiNoType.N);
+				}
+
+				/* Reference online */
+				if (bibliotecaDb.getReferenceOnline() != null 
+						&& bibliotecaDb.getReferenceOnline().booleanValue() == false) {
+					ref.setOnline(SiNoType.N);
+				}
+
+			}
+
+			servizi.setReference(ref);
+		}
+
+	}
+	
+	private static void Servizi_setDocumentDelivery(Servizi servizi, Biblioteca bibliotecaDb) {
+		DocumentDelivery docDel = new DocumentDelivery();
+
+		if (bibliotecaDb.getAttivoDocumentDelivery() != null) {
+			if (BooleanUtils.isTrue(bibliotecaDb.getAttivoDocumentDelivery().booleanValue())) {
+				docDel.setAttivo(SiNoType.S);
+
+				/* Tipologie */
+				DocDelForme forme = new DocDelForme();
+				if (bibliotecaDb.getDocumentDeliveries() != null && bibliotecaDb.getDocumentDeliveries().size() > 0) {
+					
+					for (RiproduzioniTipo documentDelivery : bibliotecaDb.getDocumentDeliveries()) {
+						forme.addForma(documentDelivery.getDescrizione());
+						
+					}
+				}
+				
+				if (forme.getFormaCount() > 0) {
+					docDel.setDocDelForme(forme);
+				}
+
+			} else if (BooleanUtils.isFalse(bibliotecaDb.getAttivoDocumentDelivery().booleanValue())) {
+				docDel.setAttivo(SiNoType.N);
+			}
+			
+			servizi.setDocumentDelivery(docDel);
 		}
 	}
 

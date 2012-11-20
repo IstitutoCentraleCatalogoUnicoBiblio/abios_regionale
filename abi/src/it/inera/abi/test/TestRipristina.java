@@ -5,7 +5,12 @@ import it.inera.abi.logic.TrasferimentoBiblioteca;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * Classe di test per il ripristina di una biblioteca
+ *
+ */
 public class TestRipristina {
+	
 	public static void main(String[] args)  throws Exception  {
 		ApplicationContext appCtxt = new ClassPathXmlApplicationContext("applicationContext.xml");
 		TrasferimentoBiblioteca trasferimentoBiblioteca = appCtxt.getBean(TrasferimentoBiblioteca.class);

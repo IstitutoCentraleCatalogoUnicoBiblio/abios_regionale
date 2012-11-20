@@ -41,7 +41,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica delle informazioni
+ * relative alla lista dei periodi di chiusura
+ *
+ */
 public class ListaPeriodiChiusuraPanel extends ContentPanel {
+	
 	private int id_biblioteca;
 	private RowEditorCustom<VoceUnicaModel> re;
 	private boolean modifica =false;

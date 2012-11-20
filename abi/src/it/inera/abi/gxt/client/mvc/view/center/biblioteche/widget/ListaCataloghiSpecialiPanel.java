@@ -34,7 +34,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe, estensione di <code>ListaCataloghiGenericaPanel</code>, 
+ * per la visualizzazione / modifica della lista dei cataloghi speciali
+ *
+ */
 public class ListaCataloghiSpecialiPanel extends ListaCataloghiGenericaPanel {
+	
 	private ListStore<PartecipaCataloghiSpecialiModel> partecipaCataloghiSpecialiGrigliaStore;
 
 	private BaseListLoader<ListLoadResult<PartecipaCataloghiSpecialiModel>> partecipaCataloghiSpecialiLoader;

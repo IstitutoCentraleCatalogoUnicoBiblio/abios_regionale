@@ -6,6 +6,10 @@ import it.inera.abi.logic.formatodiscambio.imports.ImportFileBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * Classe per il testing dell'import
+ *
+ */
 public class TestImportFormatoDiscambio {
 	public static void main(String[] args) throws Exception {
 		ApplicationContext appCtxt = new ClassPathXmlApplicationContext("applicationContext.xml");

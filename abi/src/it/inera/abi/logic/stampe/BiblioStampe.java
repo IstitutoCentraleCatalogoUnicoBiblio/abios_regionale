@@ -3,6 +3,10 @@ package it.inera.abi.logic.stampe;
 import java.util.Hashtable;
 import java.util.Vector;
 
+/**
+ * Classe che rappresenta le informazioni stampate di una biblioteca
+ *
+ */
 @SuppressWarnings({"rawtypes"})
 public class BiblioStampe {
 	

@@ -14,6 +14,10 @@ import it.inera.abi.persistence.Comune;
 import it.inera.abi.persistence.Provincia;
 import it.inera.abi.persistence.Stato;
 
+/**
+ * Implementazione classe DAO per l'entità Stato
+ *
+ */
 @Repository
 public class StatoDaoJpa implements StatoDao {
 

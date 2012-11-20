@@ -1,7 +1,6 @@
 package it.inera.abi.gxt.client.mvc.view.center.formatoscambio;
 
 import it.inera.abi.gxt.client.AppEvents;
-import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.view.AppView;
 import it.inera.abi.gxt.client.mvc.view.center.formatoscambio.widget.GestioneReportFormFormatoScambioPanel;
@@ -13,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.View;
@@ -21,6 +19,11 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.CardLayout;
 
+/**
+ * View utilizzata per l'inizializzazione dei pannelli riguardanti la ricerca
+ * per l'export, la lista dei risultati e l'invio dell'export, e la relativa gestione degli eventi  
+ *
+ */
 public class RicercaBiblioPerExportView extends View {
 
 	private ContentPanel mainPanel;

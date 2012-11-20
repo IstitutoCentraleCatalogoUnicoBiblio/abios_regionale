@@ -36,7 +36,6 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
@@ -52,11 +51,13 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * La classe rappresenta una specializzazione di un oggetto Panel per il caricamento dati 
- * all'interno di un oggetto Grid. La classe viene riutilizzata in tutti i casi in cui i
- * dati della griglia appartengano al modello base VoceUnicaModel contenuti nelle tabelle dinamiche e non.
- * */
+ * Classe per la visualizzazione / modifica delle informazioni
+ * relative alla lista di contenuti delle tabelle dinamiche con struttura
+ * (id_record, descrizione)
+ *
+ */
 public class ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel extends ContentPanel {
+	
 	/**
 	 * Variabile per il servizio di operazioni delle tabelle dinamiche
 	 * */

@@ -8,6 +8,10 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+/**
+ * Interfaccia dei servizi relativi ai report (lato client)
+ * 
+ */
 @RemoteServiceRelativePath(Abi.REPORTSERVICE)
 public interface ReportService extends RemoteService {
 

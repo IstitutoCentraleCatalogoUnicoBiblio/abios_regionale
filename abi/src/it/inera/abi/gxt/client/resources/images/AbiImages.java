@@ -3,6 +3,10 @@ package it.inera.abi.gxt.client.resources.images;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ImageBundle;
 
+/**
+ * Interfaccia che definisce i prototipi GXT di immagine 
+ *
+ */
 @SuppressWarnings("deprecation")
 public interface AbiImages extends ImageBundle {
 

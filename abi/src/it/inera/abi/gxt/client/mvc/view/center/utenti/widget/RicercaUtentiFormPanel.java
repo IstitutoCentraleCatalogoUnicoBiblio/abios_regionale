@@ -1,6 +1,5 @@
 package it.inera.abi.gxt.client.mvc.view.center.utenti.widget;
 
-
 import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.mvc.model.auth.ProfiliModel;
@@ -45,7 +44,13 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class RicercaUtentiFormPanel extends FormPanel{
+/**
+ * Form che permette di filtrare gli utenti visualizzati in base a 
+ * determinati filtri di ricerca (username, incarico, email, ruolo, ecc...) 
+ *
+ */
+public class RicercaUtentiFormPanel extends FormPanel {
+	
 	private EventType eventToForwordOnSearch = null;
 
 	protected final TextField<String> username;

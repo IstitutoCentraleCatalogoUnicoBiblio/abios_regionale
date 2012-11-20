@@ -1,11 +1,15 @@
 package it.inera.abi.logic.checkpassword;
 
-import it.inera.abi.commons.Utility;
 import it.inera.abi.persistence.Utenti;
 
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Classe contenente le operazioni di logica per il controllo e 
+ * gestione delle password
+ * 
+ */
 public interface CheckPassword {
 
 	/**

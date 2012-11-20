@@ -1,12 +1,14 @@
 package it.inera.abi.test;
 
-import it.inera.abi.dao.BiblioDao;
 import it.inera.abi.logic.AbiBiblioLogic;
-import it.inera.abi.persistence.Biblioteca;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * Classe di test per il caricamento e la messa in Revisione di una biblioteca
+ *
+ */
 public class TestCaricaBiblioteca {
 	
 	public static void main(String[] args) {

@@ -7,7 +7,6 @@ import it.inera.abi.gxt.client.mvc.model.DepositiLegaliModel;
 import it.inera.abi.gxt.client.mvc.model.DestinazioneSocialeModel;
 import it.inera.abi.gxt.client.mvc.model.EnteModel;
 import it.inera.abi.gxt.client.mvc.model.FondiSpecialiModel;
-import it.inera.abi.gxt.client.mvc.model.NuovaBiblioModel;
 import it.inera.abi.gxt.client.mvc.model.OrariModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiGeneraliModel;
@@ -31,12 +30,15 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+/**
+ * Interfaccia dei servizi relativi ai dati delle biblioteche (lato client)
+ * 
+ */
 @RemoteServiceRelativePath(Abi.BIBLIOTECHE_SERVICE)
 public interface BibliotecheService extends RemoteService {
 
 	/* Servizio per la restituzione delle biblioteche: hashmap keys passate dentro al config */
 	public PagingLoadResult<BiblioModel> getBiblioteche(final PagingLoadConfig config);
-	
 	
 	/* Servizio per la restituzione delle biblioteche assegnate ad un utente */
 	public PagingLoadResult<BiblioModel> getBibliotecheUtente(final PagingLoadConfig config);
@@ -97,11 +99,9 @@ public interface BibliotecheService extends RemoteService {
 
 	public void setTipologiaFunzionale(int idBiblio, VoceUnicaModel value);
 
-	public	void setInfoFondazione(int idBiblio, HashMap<String, Object> params);
+	public void setInfoFondazione(int idBiblio, HashMap<String, Object> params);
 
-	public	void setModalitaAccesso(int idBiblio, HashMap<String, Object> params);
-	
-	public	void setLimiteEtaAccesso(int idBiblio, HashMap<String, Object> params);
+	public void setModalitaAccesso(int idBiblio, HashMap<String, Object> params);
 	
 	public List<VoceUnicaModel> getModalitaAccessoByIdBiblioteca(int id_biblioteca);
 
@@ -117,7 +117,7 @@ public interface BibliotecheService extends RemoteService {
 
 	public void setAccessoHandicap(int idBiblio, Boolean b);
 
-	public	void setRegolamento(HashMap<String, String> params, int idBiblio);
+	public void setRegolamento(HashMap<String, String> params, int idBiblio);
 
 	public List<OrariModel> getOrariUfficialiByDay(int id_biblioteca, int id_day);
 
@@ -125,7 +125,7 @@ public interface BibliotecheService extends RemoteService {
 
 	public void removeOrarioUfficiale(int id_orarioToRemove);
 
-	public	List<OrariModel> getVariazioniOrari(int id_biblioteca);
+	public List<OrariModel> getVariazioniOrari(int id_biblioteca);
 
 	public void addNuovaVariazioneOrario(int id_biblioteca, OrariModel toSave, boolean modifica);
 	
@@ -248,19 +248,18 @@ public interface BibliotecheService extends RemoteService {
 	public void setInfoUtenti(int id_biblio, HashMap<String, Object> utentiValues);
 
 	public void setInfoBilancio(int id_biblio, HashMap<String, Object> bilancioValues);
-
 	
 	public List<DepositiLegaliModel> getDepositiLegaliByIdBiblio(int id_biblioteca);
 
 	public void addDepositoLegaleToBiblio(int id_biblioteca, int id_nuovoTipoDeposito, String anno, boolean modifica);
 
-	public 	void removeDepositoLegaleFromBiblio(int id_biblioteca, int id_rimuoviDepositoLegale);
+	public void removeDepositoLegaleFromBiblio(int id_biblioteca, int id_rimuoviDepositoLegale);
 
 	public void inserisciNoteCatalogazione(int id_biblio, String value);
 
 	public void inserisciComunicazioniCatalogazione(int id_biblio, String value);
 
-	Boolean setStatoCatalogazione(HashMap<String, Object> params);
+	public Boolean setStatoCatalogazione(HashMap<String, Object> params);
 	
 	/**
 	 * ----------------------------- CHIAMATE PER WORKFLOW BIBLIOTECHE
@@ -270,14 +269,17 @@ public interface BibliotecheService extends RemoteService {
 	 * Mette in occupata la biblioteca
 	 */
 	public void setOccupata(int id);
+	
 	/**
 	 * Mette in cancellata la biblioteca
 	 */
 	public void setCancellata(int id);
+	
 	/**
 	 * Mette in revisione la biblioteca
 	 */
 	public void setInRevisione(int id);
+	
 	/**
 	 * Mette in definitiva la biblioteca
 	 */
@@ -313,7 +315,7 @@ public interface BibliotecheService extends RemoteService {
 
 	void setDefinitiva(List<Integer> bibliotecheSelectedIds);
 	
-	void ripristina(List<Integer> bibliotecheSelectedIds);
+	Integer ripristina(List<Integer> bibliotecheSelectedIds);
 
 	void respingiRevisione(List<Integer> bibliotecheSelectedIds);
 
@@ -330,5 +332,17 @@ public interface BibliotecheService extends RemoteService {
 	public void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int idSistemaPrestitoInterbibliotecario);
 	
 	public void addSistemaPrestitoInterbibliotecario(int id_biblioteca, int idSistemaPrestitoInterbibliotecario) throws DuplicatedEntryClientSideException;
+	
+	public void setReference(int id_biblio, Boolean hasAttivoReference, Boolean hasReferenceLocale, Boolean hasReferenceOnline);
+	
+	public void setAttivoDocumentDelivery(int idbib, Boolean attivoDocumentDelivery);
+	
+	public List<VoceUnicaModel> getDocumentDeliveryByIdBiblio(int id_biblioteca);
+
+	public void addDocumentDelivery(int id_biblioteca, int idDocumentDelivery) throws DuplicatedEntryClientSideException;
+
+	public void removeDocumentDelivery(int id_biblioteca, int idRemove);
+	
+	public void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale);
 
 }

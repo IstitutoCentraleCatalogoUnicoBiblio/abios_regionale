@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: CataloghiTypeDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
+ * $Id: CataloghiTypeDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.CataloghiType;
 /**
  * Class CataloghiTypeDescriptor.
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class CataloghiTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -69,15 +69,15 @@ public class CataloghiTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
 
         //-- initialize element descriptors
 
-        //-- _catalogoGeneraleList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.CatalogoGenerale.class, "_catalogoGeneraleList", "catalogo-generale", org.exolab.castor.xml.NodeType.Element);
+        //-- _cataloghiGenerali
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.CataloghiGenerali.class, "_cataloghiGenerali", "cataloghi-generali", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 CataloghiType target = (CataloghiType) object;
-                return target.getCatalogoGenerale();
+                return target.getCataloghiGenerali();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -85,15 +85,7 @@ public class CataloghiTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
             {
                 try {
                     CataloghiType target = (CataloghiType) object;
-                    target.addCatalogoGenerale( (it.inera.abi.logic.formatodiscambio.castor.CatalogoGenerale) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    CataloghiType target = (CataloghiType) object;
-                    target.removeAllCatalogoGenerale();
+                    target.setCataloghiGenerali( (it.inera.abi.logic.formatodiscambio.castor.CataloghiGenerali) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -104,28 +96,26 @@ public class CataloghiTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.CatalogoGenerale");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.CataloghiGenerali");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _catalogoGeneraleList
+        //-- validation code for: _cataloghiGenerali
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
-        //-- _catalogoSpecialeList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.CatalogoSpeciale.class, "_catalogoSpecialeList", "catalogo-speciale", org.exolab.castor.xml.NodeType.Element);
+        //-- _cataloghiSpeciali
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.CataloghiSpeciali.class, "_cataloghiSpeciali", "cataloghi-speciali", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 CataloghiType target = (CataloghiType) object;
-                return target.getCatalogoSpeciale();
+                return target.getCataloghiSpeciali();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -133,15 +123,7 @@ public class CataloghiTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
             {
                 try {
                     CataloghiType target = (CataloghiType) object;
-                    target.addCatalogoSpeciale( (it.inera.abi.logic.formatodiscambio.castor.CatalogoSpeciale) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    CataloghiType target = (CataloghiType) object;
-                    target.removeAllCatalogoSpeciale();
+                    target.setCataloghiSpeciali( (it.inera.abi.logic.formatodiscambio.castor.CataloghiSpeciali) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -152,28 +134,26 @@ public class CataloghiTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.CatalogoSpeciale");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.CataloghiSpeciali");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _catalogoSpecialeList
+        //-- validation code for: _cataloghiSpeciali
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
-        //-- _catalogoCollettivoList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.CatalogoCollettivo.class, "_catalogoCollettivoList", "catalogo-collettivo", org.exolab.castor.xml.NodeType.Element);
+        //-- _cataloghiCollettivi
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.CataloghiCollettivi.class, "_cataloghiCollettivi", "cataloghi-collettivi", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 CataloghiType target = (CataloghiType) object;
-                return target.getCatalogoCollettivo();
+                return target.getCataloghiCollettivi();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -181,15 +161,7 @@ public class CataloghiTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
             {
                 try {
                     CataloghiType target = (CataloghiType) object;
-                    target.addCatalogoCollettivo( (it.inera.abi.logic.formatodiscambio.castor.CatalogoCollettivo) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    CataloghiType target = (CataloghiType) object;
-                    target.removeAllCatalogoCollettivo();
+                    target.setCataloghiCollettivi( (it.inera.abi.logic.formatodiscambio.castor.CataloghiCollettivi) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -200,16 +172,14 @@ public class CataloghiTypeDescriptor extends org.exolab.castor.xml.util.XMLClass
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.CatalogoCollettivo");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.CataloghiCollettivi");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _catalogoCollettivoList
+        //-- validation code for: _cataloghiCollettivi
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);

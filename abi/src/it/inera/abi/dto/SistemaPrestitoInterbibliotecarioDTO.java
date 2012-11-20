@@ -2,19 +2,17 @@ package it.inera.abi.dto;
 
 import java.io.Serializable;
 
+/**
+ * Classe DTO che rappresenta il Sistema del Prestito Interbibliotecario  
+ *
+ */
 public class SistemaPrestitoInterbibliotecarioDTO implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1911083792779703877L;
 	private int id;
 	private String descrizione;
 	private String url;
 	
-	/**
-	 * Default constructor
-	 */
 	public SistemaPrestitoInterbibliotecarioDTO() {
 		
 	}

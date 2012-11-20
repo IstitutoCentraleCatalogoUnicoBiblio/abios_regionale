@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per i dati relativi ad un singolo fondo speciale
+ *
+ */
 public class FondiSpecialiModel extends BaseModel  implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2894339042127124027L;
 
 	public FondiSpecialiModel() {
@@ -31,7 +33,7 @@ public class FondiSpecialiModel extends BaseModel  implements Serializable{
 		set("idCatalogoInventario",idCatalogoInventario);
 	}
 
-	public void setIdFondiSpeciali(int idFondoSpeciale){
+	public void setIdFondiSpeciali(int idFondoSpeciale) {
 		set("idFondoSpeciale",idFondoSpeciale);
 	}
 	
@@ -58,6 +60,7 @@ public class FondiSpecialiModel extends BaseModel  implements Serializable{
 	public void setUrlOnline(String urlOnline) {
 		set("urlOnline", urlOnline);
 	}
+	
 	public void setCitazioneBibliografica(String citazioneBibliografica) {
 		set("citazioneBibliografica", citazioneBibliografica);
 	}
@@ -78,12 +81,11 @@ public class FondiSpecialiModel extends BaseModel  implements Serializable{
 		return get("fondoDepositato");
 	}
 
-
-	public void setIdCatalogoInventario(Integer idCatalogoInventario){
+	public void setIdCatalogoInventario(Integer idCatalogoInventario) {
 		set("idCatalogoInventario",idCatalogoInventario);
 	}
 	
-	public Integer getIdCatalogoInventario(){
+	public Integer getIdCatalogoInventario() {
 		return get("idCatalogoInventario");
 	}
 	
@@ -95,19 +97,19 @@ public class FondiSpecialiModel extends BaseModel  implements Serializable{
 		return get("urlOnline");
 	}
 	
-	public String getDewey(){
+	public String getDewey() {
 		return get("dewey");
 	}
 
-	public void setDewey(String dewey){
+	public void setDewey(String dewey) {
 		set("dewey",dewey);
 	}
 	
-	public String getDeweyDescr(){
+	public String getDeweyDescr() {
 		return get("descrizioneDewey");
 	}
 
-	public void setDeweyDescr(String deweyDescr){
+	public void setDeweyDescr(String deweyDescr) {
 		set("descrizioneDewey",deweyDescr);
 	}
 

@@ -2,19 +2,18 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: VolumeType.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
+ * $Id: VolumeType.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * La forma "volumeType" deriva dalla generica
- *  "formaType"
+ * La forma "volumeType" deriva dalla generica "formaType"
  *  con l'aggiunta della citazione bibliografica, specifica
  *  di questa forma. La citazione è comunque opzionale.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public abstract class VolumeType extends it.inera.abi.logic.formatodiscambio.castor.FormaType 

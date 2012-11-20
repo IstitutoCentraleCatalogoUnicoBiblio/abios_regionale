@@ -10,7 +10,6 @@ import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.services.TabelleDinamicheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
-//import it.inera.abi.gxt.client.workflow.UIWorkflow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +43,17 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.EditorGrid.ClicksToEdit;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowEditor;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica delle informazioni
+ * relative alla lista dei sistemi di biblioteche
+ *
+ */
 public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 
 	private int id_biblioteca;

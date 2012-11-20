@@ -2,11 +2,15 @@ package it.inera.abi.dto;
 
 import java.io.Serializable;
 
+/**
+ * Classe DTO che rappresenta una generica Tabella Dinamica
+ *
+ */
 public class DynaTabDTO implements Serializable {
 	
 	private static final long serialVersionUID = -9170184921370355285L;
 	
-	private int idTabella; // identifica la tabella
+	private int idTabella; 
 	
 	/**
 	 * identificano il record
@@ -15,9 +19,8 @@ public class DynaTabDTO implements Serializable {
 	private String value;
 	
 	public DynaTabDTO() {
+		
 	}
-	
-	
 	
 	public DynaTabDTO(int idTabella, int id, String value) {
 		this.idTabella = idTabella;
@@ -25,17 +28,18 @@ public class DynaTabDTO implements Serializable {
 		this.value = value;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getValue() {
 		return value;
 	}
+	
 	public void setValue(String value) {
 		this.value = value;
 	}
@@ -52,8 +56,6 @@ public class DynaTabDTO implements Serializable {
 		return serialVersionUID;
 	}
 
-
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -66,7 +68,5 @@ public class DynaTabDTO implements Serializable {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 	
 }

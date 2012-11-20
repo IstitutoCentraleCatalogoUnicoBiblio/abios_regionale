@@ -15,10 +15,10 @@
 
 	<target name="clean" description="Clean castor">
 		<delete>
-			<fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/" includes="*.java"/>
-		    <fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/descriptors/" includes="*.java"/>
-			<fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/types/descriptors/" includes="*.java"/>
-			<fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/types/" includes="*.java"/>
+			<fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/" includes="*.java" excludes="*.html"/>
+		    <fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/descriptors/" includes="*.java" excludes="*.html"/>
+			<fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/types/descriptors/" includes="*.java" excludes="*.html"/>
+			<fileset dir="src/it/inera/abi/logic/formatodiscambio/castor/types/" includes="*.java" excludes="*.html"/>
 		 </delete>
 	</target>
 

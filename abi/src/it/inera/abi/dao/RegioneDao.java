@@ -5,10 +5,11 @@ import it.inera.abi.persistence.Regione;
 
 import java.util.List;
 
-
+/** 
+ * Interfaccia DAO per l'entità Regione
+ *
+ */
 public interface RegioneDao {
-	
-	/*DAL FORMATO DI SCAMBIO*/
 	
 	public String getDenominazioneRegioneByCodIstatProvincia(String codIstatProvincia);
 

@@ -5,6 +5,10 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.MessageBox.MessageBoxType;
 
+/**
+ * Classe di utilità per message box personalizzate in base all'operazione eseguita 
+ *
+ */
 public class AbiMessageBox {
 
 	public static final String CONFERMA_RIMOZIONE_VOCE_MESSAGE="La voce verrà rimossa definitivamente dal database. Continuare?";
@@ -43,6 +47,9 @@ public class AbiMessageBox {
 	public static final String UPLOAD_TITLE = "AVVISO UPLOAD";
 	public static final String UPLOAD_MESSAGE = "Il file è stato caricato con successo!";
 	public static final String UPLOAD_ERROR_MESSAGE = "ATTENZIONE: si è verificato un errore durante il caricamento del file.";
+	
+	public static final String CHECK_RICERCA_VIA_CODICE_TITLE = "AVVISO RICERCA VIA CODICE";
+	public static final String CHECK_RICERCA_VIA_CODICE_MESSAGE = "ATTENZIONE: il codice inserito non raggiunge la lunghezza richiesta.";
 	
 	public static final int INFO_BOX_DELAY =5000;//Ritardo in millisecondi
 	public static final int INFO_BOX_WIDTH=300;

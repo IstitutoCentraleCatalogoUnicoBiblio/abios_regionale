@@ -50,12 +50,15 @@ import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione della lista di risultati
+ * delle ricerche nel formato di scambio
+ *
+ */
 public class GestioneReportRisultatiPanel extends ContentPanel {
 	
 	private PagingLoader<PagingLoadResult<ModelData>> loader = null;
@@ -252,7 +255,6 @@ public class GestioneReportRisultatiPanel extends ContentPanel {
 							
 							@Override
 							public void onSuccess(Void result) {
-								// TODO Auto-generated method stub
 								AppEvent event = new AppEvent(AppEvents.VisualizzaStampaReport);
 								params.put("idBibs", biblioSelected);
 								event.setData("parameters", params);

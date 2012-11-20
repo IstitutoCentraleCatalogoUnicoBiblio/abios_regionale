@@ -14,6 +14,10 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+/**
+ * Interfaccia dei servizi relativi alla località: regioni, province e comuni (lato client)
+ * 
+ */
 @RemoteServiceRelativePath(Abi.LOCATION_SERVICE)
 public interface LocationService extends RemoteService {
 

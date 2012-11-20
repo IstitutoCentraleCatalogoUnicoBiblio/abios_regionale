@@ -5,9 +5,7 @@ import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.AppEvents;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.SpecializzazioniFondiSpecialiPanel;
 import it.inera.abi.gxt.client.resources.Resources;
-import it.inera.abi.gxt.client.resources.icons.AbiIcons;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.services.DuplicatedEntryClientSideException;
 import it.inera.abi.gxt.client.services.TabelleDinamicheServiceAsync;
@@ -31,7 +29,6 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
@@ -45,7 +42,13 @@ import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class TestoSpecializzazionePanel extends FormPanel{
+/**
+ * Classe widget per il caricamento / aggiornamento delle informazioni relative
+ * ai dewey
+ *
+ */
+public class TestoSpecializzazionePanel extends FormPanel {
+
 	private int idBiblio;
 	private SpecializzazioneModel model;
 	boolean modifica;

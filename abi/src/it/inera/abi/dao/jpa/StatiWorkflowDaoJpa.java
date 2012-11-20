@@ -13,6 +13,10 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Implementazione classe DAO per l'entità Stato Biblioteca Workflow
+ *
+ */
 @Repository
 public class StatiWorkflowDaoJpa implements StatiWorkflowDao {
 	@PersistenceContext

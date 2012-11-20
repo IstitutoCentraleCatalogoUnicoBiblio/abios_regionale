@@ -3,7 +3,6 @@ package it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget;
 import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.auth.UIAuth;
-import it.inera.abi.gxt.client.mvc.model.CataloghiUrlModel;
 import it.inera.abi.gxt.client.mvc.model.ContattiModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.view.RowEditorCustom;
@@ -48,6 +47,10 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica della lista dei contatti
+ *
+ */
 public class ListaContattiPanel extends ContentPanel {
 	private int id_biblio;
 	private ListStore<ContattiModel> store;

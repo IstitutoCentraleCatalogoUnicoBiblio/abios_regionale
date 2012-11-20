@@ -11,12 +11,10 @@ import it.inera.abi.persistence.Provincia;
 import it.inera.abi.persistence.Regione;
 import it.inera.abi.persistence.Stato;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -29,9 +27,11 @@ import org.apache.commons.io.IOUtils;
 import org.exolab.castor.xml.Marshaller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-@Component
+/**
+ * Implementazione della procedura di export delle Tabelle Dinamiche
+ *
+ */
 public class ExportDynaTabsImpl implements ExportDynaTabs {
 
 	@Value("${export.dynatab.path.to.export}")

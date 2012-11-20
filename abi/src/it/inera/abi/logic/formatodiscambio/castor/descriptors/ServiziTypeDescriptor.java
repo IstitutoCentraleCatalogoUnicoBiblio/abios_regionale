@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: ServiziTypeDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
+ * $Id: ServiziTypeDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.ServiziType;
 /**
  * Class ServiziTypeDescriptor.
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class ServiziTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -369,6 +369,82 @@ public class ServiziTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDe
         addSequenceElement(desc);
 
         //-- validation code for: _sezioniSpeciali
+        fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        { //-- local scope
+        }
+        desc.setValidator(fieldValidator);
+        //-- _reference
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Reference.class, "_reference", "reference", org.exolab.castor.xml.NodeType.Element);
+        handler = new org.exolab.castor.xml.XMLFieldHandler() {
+            @Override
+            public java.lang.Object getValue( java.lang.Object object ) 
+                throws IllegalStateException
+            {
+                ServiziType target = (ServiziType) object;
+                return target.getReference();
+            }
+            @Override
+            public void setValue( java.lang.Object object, java.lang.Object value) 
+                throws IllegalStateException, IllegalArgumentException
+            {
+                try {
+                    ServiziType target = (ServiziType) object;
+                    target.setReference( (it.inera.abi.logic.formatodiscambio.castor.Reference) value);
+                } catch (java.lang.Exception ex) {
+                    throw new IllegalStateException(ex.toString());
+                }
+            }
+            @Override
+            @SuppressWarnings("unused")
+            public java.lang.Object newInstance(java.lang.Object parent) {
+                return null;
+            }
+        };
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Reference");
+        desc.setHandler(handler);
+        desc.setMultivalued(false);
+        addFieldDescriptor(desc);
+        addSequenceElement(desc);
+
+        //-- validation code for: _reference
+        fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        { //-- local scope
+        }
+        desc.setValidator(fieldValidator);
+        //-- _documentDelivery
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.DocumentDelivery.class, "_documentDelivery", "document-delivery", org.exolab.castor.xml.NodeType.Element);
+        handler = new org.exolab.castor.xml.XMLFieldHandler() {
+            @Override
+            public java.lang.Object getValue( java.lang.Object object ) 
+                throws IllegalStateException
+            {
+                ServiziType target = (ServiziType) object;
+                return target.getDocumentDelivery();
+            }
+            @Override
+            public void setValue( java.lang.Object object, java.lang.Object value) 
+                throws IllegalStateException, IllegalArgumentException
+            {
+                try {
+                    ServiziType target = (ServiziType) object;
+                    target.setDocumentDelivery( (it.inera.abi.logic.formatodiscambio.castor.DocumentDelivery) value);
+                } catch (java.lang.Exception ex) {
+                    throw new IllegalStateException(ex.toString());
+                }
+            }
+            @Override
+            @SuppressWarnings("unused")
+            public java.lang.Object newInstance(java.lang.Object parent) {
+                return null;
+            }
+        };
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.DocumentDelivery");
+        desc.setHandler(handler);
+        desc.setMultivalued(false);
+        addFieldDescriptor(desc);
+        addSequenceElement(desc);
+
+        //-- validation code for: _documentDelivery
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
         { //-- local scope
         }

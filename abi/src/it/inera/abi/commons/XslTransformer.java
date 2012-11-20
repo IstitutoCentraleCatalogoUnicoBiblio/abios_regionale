@@ -10,6 +10,10 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 
+/**
+ * Classe che effettua le trasformazioni xsl
+ * 
+ */
 public final class XslTransformer {
 
 	public static String transform(String body, String xsltPath) throws TransformerException  {

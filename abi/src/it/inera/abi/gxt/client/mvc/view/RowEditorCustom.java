@@ -8,6 +8,11 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.RowEditor;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 
+/**
+ * Estensione custom della classe <code>RowEditor</code> che permette di cambiare
+ * l'ordine dei bottoni di salvataggio e reset delle modifiche effettuate
+ *
+ */
 public class RowEditorCustom<M extends ModelData> extends RowEditor<M> {
 	
 	public RowEditorCustom() {

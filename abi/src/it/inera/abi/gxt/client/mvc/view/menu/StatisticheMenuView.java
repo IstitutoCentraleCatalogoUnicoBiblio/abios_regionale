@@ -28,6 +28,11 @@ import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 
+/**
+ * View utilizzata per l'inizializzazione del menu delle statistiche e
+ * la relativa gestione degli eventi associati
+ *
+ */
 public class StatisticheMenuView extends View {
 
 	private ContentPanel statistiche;
@@ -37,7 +42,7 @@ public class StatisticheMenuView extends View {
 	}
 
 	protected void initUI() {
-		 // se l'utente non ha ruolo di statistiche esco
+		 /* se l'utente non ha ruolo di statistiche esco */
         if (!UIAuth.isMenuStatisticheEnable()) return;
 		ContentPanel west = (ContentPanel) Registry.get(AppView.WEST_PANEL);
 		statistiche = new ContentPanel();

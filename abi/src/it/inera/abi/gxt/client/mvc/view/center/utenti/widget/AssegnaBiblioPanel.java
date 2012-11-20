@@ -53,6 +53,11 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette di selezionare una o più biblioteche da assegnare 
+ * ad uno o più utenti selezionati in precedenza
+ *
+ */
 public class AssegnaBiblioPanel extends ContentPanel {
 
 	private Grid<BiblioModel> grid = null;

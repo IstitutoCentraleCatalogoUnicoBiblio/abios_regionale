@@ -1,6 +1,5 @@
 package it.inera.abi.logic.formatodiscambio.scheduler;
 
-
 import it.inera.abi.commons.Utility;
 import it.inera.abi.logic.formatodiscambio.castor.Biblioteca;
 import it.inera.abi.logic.formatodiscambio.castor.Biblioteche;
@@ -27,6 +26,10 @@ import org.apache.commons.mail.MultiPartEmail;
 import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.ValidationException;
 
+/**
+ * Classe che esegue il job per l'import differito 
+ *
+ */
 public class ImportDifferito {
 
 	private Log log = LogFactory.getLog(ImportDifferito.class);

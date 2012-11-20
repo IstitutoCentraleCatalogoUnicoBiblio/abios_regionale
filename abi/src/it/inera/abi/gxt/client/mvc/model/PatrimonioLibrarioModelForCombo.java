@@ -2,11 +2,13 @@ package it.inera.abi.gxt.client.mvc.model;
 
 import java.io.Serializable;
 
+/**
+ * Modello utilizzato in combobox per rappresentare il patrimonio librario
+ *
+ */
 public class PatrimonioLibrarioModelForCombo extends PatrimonioLibrarioModel implements
 Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 4112933911080102308L;
 
 	public PatrimonioLibrarioModelForCombo() {

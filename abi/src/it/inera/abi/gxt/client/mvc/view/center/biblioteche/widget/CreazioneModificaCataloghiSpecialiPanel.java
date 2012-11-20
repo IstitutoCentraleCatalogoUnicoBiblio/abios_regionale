@@ -5,11 +5,9 @@ import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiSpecialiModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimonioSpecializzazioneModel;
 import it.inera.abi.gxt.client.resources.Resources;
-import it.inera.abi.gxt.client.services.EntryNotFoundClientSideException;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
 
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
-import com.extjs.gxt.ui.client.data.LoadEvent;
 import com.extjs.gxt.ui.client.data.Loader;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.ModelReader;
@@ -38,6 +36,11 @@ import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Estensione della classe widget <code>CreazioneModificaCataloghiGenericaPanel</code> 
+ * per la visualizzazione / modifica delle informazioni relative ai cataloghi speciali
+ *
+ */
 public class CreazioneModificaCataloghiSpecialiPanel extends CreazioneModificaCataloghiGenericaPanel{
 
 	/*Label cataloghi collettivi*/

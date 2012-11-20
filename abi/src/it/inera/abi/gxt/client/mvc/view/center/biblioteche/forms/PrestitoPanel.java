@@ -4,8 +4,6 @@ import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.auth.UIAuth;
-import it.inera.abi.gxt.client.costants.CostantiTabelleDinamiche;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPrestitoInterbibliotecarioRuoloBiliotecaPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPrestitoLocalePanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaSistemiPrestitoInterbibliotecarioPanel;
@@ -13,36 +11,35 @@ import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.MessageBox.MessageBoxType;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
-import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
-import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.RadioGroup;
+import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
+import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RadioButton;
 
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * al prestito ed ai relativi sistemi
+ *
+ */
 public class PrestitoPanel extends ContentPanelForTabItem {
 
 	private int id_biblio;

@@ -1,6 +1,5 @@
 package it.inera.abi.logic.auth;
 
-
 import it.inera.abi.dao.UtentiDao;
 import it.inera.abi.persistence.Utenti;
 
@@ -12,6 +11,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Classe contenente le operazioni di logica per il caricamento dei dati
+ * di un utente tramite lo username
+ *
+ */
 @Service("userDetailsLogic") 
 public class UserDetailsLogicImpl implements UserDetailsService {
 

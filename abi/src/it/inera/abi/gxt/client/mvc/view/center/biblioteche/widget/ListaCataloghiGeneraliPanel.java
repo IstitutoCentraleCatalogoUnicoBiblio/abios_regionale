@@ -23,7 +23,6 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Component;
-import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -34,6 +33,11 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe, estensione di <code>ListaCataloghiGenericaPanel</code>, 
+ * per la visualizzazione / modifica della lista dei cataloghi generali
+ *
+ */
 public class ListaCataloghiGeneraliPanel extends ListaCataloghiGenericaPanel {
 
 	private ToolBar toolBar;

@@ -1,12 +1,14 @@
 package it.inera.abi.test;
 
-import java.io.File;
-
 import it.inera.abi.logic.TrasferimentoBiblioteca;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * Classe di test per il salvataggio di una biblioteca
+ *
+ */
 public class TestSalvaCaricaBiblioteca {
 	
 	public static void main(String[] args)  throws Exception  {

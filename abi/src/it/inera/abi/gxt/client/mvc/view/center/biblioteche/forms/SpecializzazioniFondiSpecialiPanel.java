@@ -1,12 +1,9 @@
 package it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms;
 
 import it.inera.abi.gxt.client.Abi;
-import it.inera.abi.gxt.client.AppEvents;
 import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.mvc.model.FondiSpecialiModel;
-import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ContenitoreFondiSpecialiPanel;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ContenitoreSpecializzazionePanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaSpecializzazioniPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.TestoFondiSpecialiPanel;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
@@ -35,6 +32,11 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * ai fondi speciali e alle sue specializzazioni
+ *
+ */
 public class SpecializzazioniFondiSpecialiPanel extends  ContentPanelForTabItem {
 	private int id_biblio;
 //	private List<ContenitoreSpecializzazionePanel> listaSpecializzazioniPanels;

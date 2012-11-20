@@ -12,6 +12,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Classe contenente l'operazione di mapping dell'utente e dei suoi profili
+ *
+ */
 @Service("assembler")
 public class Assembler {
 

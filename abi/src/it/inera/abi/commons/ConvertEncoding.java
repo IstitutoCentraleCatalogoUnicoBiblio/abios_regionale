@@ -13,7 +13,10 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
-/** A program to convert from one character encoding to another */
+/**
+ * Classe che permette il passaggio da un character encoding ad un altro
+ * 
+ */
 public class ConvertEncoding {
 	public static void main(String[] args) {
 		String from = null, to = null;

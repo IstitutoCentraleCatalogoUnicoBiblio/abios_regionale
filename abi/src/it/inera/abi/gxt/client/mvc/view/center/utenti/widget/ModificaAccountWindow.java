@@ -3,7 +3,6 @@ package it.inera.abi.gxt.client.mvc.view.center.utenti.widget;
 import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.auth.UIAuth;
-import it.inera.abi.gxt.client.mvc.model.UserModel;
 import it.inera.abi.gxt.client.mvc.model.forms.UtenteCompletoFormModel;
 import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.UtentiServiceAsync;
@@ -13,9 +12,7 @@ import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.util.Margins;
-import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.layout.FitData;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
@@ -23,7 +20,13 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette la visualizzazione della form di modifica delle 
+ * informazioni principali dell'utente attualmente loggato
+ *
+ */
 public class ModificaAccountWindow extends Window {
+
 	private UtentiServiceAsync utentiServiceAsync;
 	private Window _instance;
 	

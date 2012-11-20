@@ -4,12 +4,13 @@ import it.inera.abi.gxt.client.AppEvents;
 import it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.TabelleDinamicheView;
 import it.inera.abi.gxt.client.mvc.view.menu.TabelleDinamicheMenuView;
 
-import java.util.List;
-
-import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 
+/**
+ * Controller per la gestione delle tabelle dinamiche
+ *
+ */
 public class TabelleDinamicheController extends Controller {
 
 	private TabelleDinamicheMenuView menuView;

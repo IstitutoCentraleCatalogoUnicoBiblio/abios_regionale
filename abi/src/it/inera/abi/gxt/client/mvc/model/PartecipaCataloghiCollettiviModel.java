@@ -2,13 +2,16 @@ package it.inera.abi.gxt.client.mvc.model;
 
 import java.util.List;
 
+/**
+ * Estensione di <code>PartecipaCataloghiGenericaModel</code> per i cataloghi collettivi
+ *
+ */
 public class PartecipaCataloghiCollettiviModel extends PartecipaCataloghiGenericaModel {
-	/**Variabili per serializzazione*/
+	
+	/** Variabili per serializzazione */
 	VoceUnicaModel zonaEspansione;
 	List<String> urlList;
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4146088434688813504L;
 
 	public PartecipaCataloghiCollettiviModel() {

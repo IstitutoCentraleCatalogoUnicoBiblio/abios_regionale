@@ -48,7 +48,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette la gestione (modifica, aggiungi, rimuovi) 
+ * della tabella dinamica delle province
+ * 
+ */
 public class ListaProvinceTabelleDinamiche extends ContentPanel {
+	
 	public TabelleDinamicheServiceAsync tabelleDinamicheService;
 	private boolean modifica;
 	private Grid<ProvinceModel> grid;

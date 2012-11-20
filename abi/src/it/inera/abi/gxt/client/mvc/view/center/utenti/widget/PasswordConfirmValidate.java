@@ -4,6 +4,12 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 
+/**
+ * Classe che implementa la validazione della password e della conferma
+ * della password inserite all'interno del pannello di modifica dei dati
+ * dell'utente  
+ *
+ */
 public class PasswordConfirmValidate implements Validator {
 	
     TextField<String> passwordCnf;

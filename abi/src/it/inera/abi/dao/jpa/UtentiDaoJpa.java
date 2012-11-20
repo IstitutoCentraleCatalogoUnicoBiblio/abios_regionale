@@ -22,6 +22,10 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Implementazione classe DAO per l'entità Utenti
+ *
+ */
 @Repository
 public class UtentiDaoJpa implements UtentiDao {
 
@@ -494,7 +498,7 @@ public class UtentiDaoJpa implements UtentiDao {
 	/**
 	 * per l'autenticazione
 	 * il BINARY si mette per il case insensitive 
-	 * @author reschini
+	 * 
 	 */
 	@Override
 	@Transactional

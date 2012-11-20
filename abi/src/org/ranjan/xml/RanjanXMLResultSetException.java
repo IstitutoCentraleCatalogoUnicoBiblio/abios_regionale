@@ -1,12 +1,6 @@
 package org.ranjan.xml;
 
-/*
- * @author Amit Kirdatt
- * @date 06/08/2002
- */
-
-
-/*
+/**
  * Signals that an error occured while 
  * building XML 
  */
@@ -25,7 +19,7 @@ public class RanjanXMLResultSetException extends Exception
   /**
     * An Exception with 
     *
-    * @param String message - The message to 
+    * @param message - The message to 
     */
   public RanjanXMLResultSetException(String message)
   {

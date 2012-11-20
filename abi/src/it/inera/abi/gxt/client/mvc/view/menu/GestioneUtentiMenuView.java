@@ -29,6 +29,11 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
+/**
+ * View utilizzata per l'inizializzazione del menu degli utenti e
+ * la relativa gestione degli eventi associati
+ *
+ */
 public class GestioneUtentiMenuView extends View {
 
 	private TreePanel<MenuItem> tree;
@@ -40,7 +45,7 @@ public class GestioneUtentiMenuView extends View {
 
 	protected void initUI() {
 		
-		// se l'utente non ha ruolo di gestione utenti esco
+		/* se l'utente non ha ruolo di gestione utenti esco */
 		if (!UIAuth.isMenuUtentiEnable()) return; 
 		
 		ContentPanel west = (ContentPanel) Registry.get(AppView.WEST_PANEL);

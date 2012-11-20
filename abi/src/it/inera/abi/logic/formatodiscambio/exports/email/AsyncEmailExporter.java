@@ -6,6 +6,10 @@ import it.inera.abi.logic.formatodiscambio.exports.ExporterImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * Thread per l'export online 
+ *
+ */
 public class AsyncEmailExporter extends Thread {
 
 	private Log log = LogFactory.getLog(AsyncEmailExporter.class);

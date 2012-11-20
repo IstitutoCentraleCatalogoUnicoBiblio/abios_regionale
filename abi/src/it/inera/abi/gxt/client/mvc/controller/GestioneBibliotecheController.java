@@ -16,12 +16,17 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Controller per la gestione delle biblioteche (ricerche, lista biblioteche, 
+ * modifica, ecc...)
+ *
+ */
 public class GestioneBibliotecheController extends Controller {
 
 	private GestioneBibliotecheMenuView menuView;
 	
-	
 	private RicercaBiblioGenericaView ricercaBiblioGenericaView;
+
 	private RicercaBiblioViaCodiceView ricercaBiblioViaCodiceView;
 	
 	private ModificaBibliotecaView modificaBibliotecaView;

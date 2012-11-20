@@ -38,7 +38,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette l'assegnazione ad un utente di una o più 
+ * biblioteche di un altro utente
+ *
+ */
 public class AssegnaBiblioDaUtentiWindow extends Window {
+	
 	private FormPanel formDaUtente;
 	private Window _instance;
 	private int id_utente = 0;

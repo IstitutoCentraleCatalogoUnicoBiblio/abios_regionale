@@ -1,12 +1,8 @@
 package it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.auth.UIAuth;
-import it.inera.abi.gxt.client.mvc.model.RegioniModel;
 import it.inera.abi.gxt.client.mvc.model.SistemiPrestitoInterbibliotecarioModel;
 import it.inera.abi.gxt.client.mvc.view.RowEditorCustom;
 import it.inera.abi.gxt.client.mvc.view.TextFieldCustom;
@@ -14,6 +10,9 @@ import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.CostraintKeyViolationClientSideException;
 import it.inera.abi.gxt.client.services.DuplicatedEntryClientSideException;
 import it.inera.abi.gxt.client.services.TabelleDinamicheServiceAsync;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.Scroll;
@@ -36,13 +35,18 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid.ClicksToEdit;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowEditor;
-import com.extjs.gxt.ui.client.widget.grid.EditorGrid.ClicksToEdit;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette la gestione (modifica, aggiungi, rimuovi) 
+ * della tabella dinamica dei sistemi di prestito interbibliotecario
+ * 
+ */
 public class ListaSistemiPrestitoInterbibliotecarioTabelleDinamiche extends ContentPanel {
 	
 	public TabelleDinamicheServiceAsync tabelleDinamicheService;

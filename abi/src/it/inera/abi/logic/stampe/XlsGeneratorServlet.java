@@ -29,6 +29,10 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+/**
+ * Servlet per la generazione delle stampe in formato XLS
+ *
+ */
 @SuppressWarnings({"rawtypes", "unchecked","deprecation"})
 public class XlsGeneratorServlet extends HttpServlet {
 

@@ -54,6 +54,7 @@ import it.inera.abi.persistence.Regione;
 import it.inera.abi.persistence.Regolamento;
 import it.inera.abi.persistence.Riproduzioni;
 import it.inera.abi.persistence.RiproduzioniPK;
+import it.inera.abi.persistence.RiproduzioniTipo;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
@@ -66,9 +67,6 @@ import it.inera.abi.persistence.StatoCatalogazionePK;
 import it.inera.abi.persistence.TipologiaFunzionale;
 import it.inera.abi.persistence.Utenti;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -76,7 +74,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
@@ -94,6 +91,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Implementazione classe DAO per l'entità Biblioteca
+ *
+ */
 @Repository
 public class BiblioDaoJpa implements BiblioDao {
 	public static final String DUPLICATE_ENTRY_ERROR_MESSAGE="ATTENZIONE: la voce potrebbe essere già presente nel database";
@@ -819,7 +820,6 @@ public class BiblioDaoJpa implements BiblioDao {
 	@Transactional
 	public List<Biblioteca> getPuntiDiServizioDecentratiPossibili(
 			String isil_provincia, String filter, int rows, int offset) {
-		Biblioteca bibliotecaPadre = new Biblioteca();
 		StringBuffer sb = new StringBuffer();
 		sb.append(" SELECT  b ");
 		sb.append(" FROM Biblioteca b ");
@@ -901,8 +901,7 @@ public class BiblioDaoJpa implements BiblioDao {
 		while (its.hasNext()) {
 
 			// Iterazione anti-lazy
-			SistemiBiblioteche sistemaBiblioteche = (SistemiBiblioteche) its
-			.next();
+			SistemiBiblioteche sistemaBiblioteche = (SistemiBiblioteche) its.next();
 
 		}
 
@@ -1380,7 +1379,6 @@ public class BiblioDaoJpa implements BiblioDao {
 		StringBuffer sb = new StringBuffer();
 		sb.append(" FROM FondiSpeciali f ");
 
-		int idFondo = 0;
 		int idFondiSpecialiCatalogazioneInventario = 0;
 
 		String denominazione = new String();
@@ -1392,11 +1390,6 @@ public class BiblioDaoJpa implements BiblioDao {
 		boolean fondoDepositato = false;
 
 		List<String> criteria = new ArrayList<String>();
-
-		// if(fondoSpeciale.getIdFondiSpeciali()!=null){
-		// idFondo=fondoSpeciale.getIdFondiSpeciali();
-		// criteria.add(" f.idFondiSpeciali = :idfondiSpeciali ");
-		// }
 
 		if (fondoSpeciale.getDenominazione() != null) {
 			denominazione = fondoSpeciale.getDenominazione();
@@ -4640,7 +4633,6 @@ public class BiblioDaoJpa implements BiblioDao {
 		biblioteca.getDeweyLiberos().size();
 		biblioteca.getDeweys().size();
 		biblioteca.getFondiAntichiConsistenza(); //?
-//		biblioteca.getFondiDigitalis().size();
 		biblioteca.getFondiSpecialis().size();
 		biblioteca.getGeolocalizzazione(); //?
 		biblioteca.getIndicizzazioneClassificatas().size();
@@ -4681,6 +4673,7 @@ public class BiblioDaoJpa implements BiblioDao {
 		biblioteca.getTipologiaFunzionale(); //?
 		biblioteca.getUtenteUltimaModifica(); //*
 		biblioteca.getUtentisGestori().size();
+		biblioteca.getDocumentDeliveries().size();
 		return biblioteca;
 	}
 
@@ -4817,13 +4810,13 @@ public class BiblioDaoJpa implements BiblioDao {
 		statoCatalogazione.setBiblioteca(biblioteca);
 		statoCatalogazione.setId(statoCatalogazionePK);
 
-		if(idStatoCatalogazione.intValue()==7){//Stato biblioteca confluita
+		if (idStatoCatalogazione.intValue()==7) {//Stato biblioteca confluita
 			String isilSt=(String)params.get("isilStato");
 			String isilPr=(String)params.get("isilProvincia");
 			String isilNr=""+(Integer)(params.get("isilNumero"));
 			if(isilSt!=null && isilPr!=null && isilNr!=null && (!isilSt.equals("")) && (!isilSt.equals(" ")) 
 					&& (!isilPr.equals("")) && (!isilPr.equals(" ")) && (!isilNr.equals("")) && (!isilNr.equals(" "))){
-				String idBibliotecaTarget=Utility.buildIsil(isilSt, isilPr, isilNr);
+				String idBibliotecaTarget = Utility.buildIsil(isilSt, isilPr, isilNr);
 
 				String[] str = new String[1];
 				str[0]=idBibliotecaTarget;
@@ -5018,20 +5011,110 @@ public class BiblioDaoJpa implements BiblioDao {
 		em.merge(biblioteca);
 	}
 	
-	public static void main(String[] args) {
-		String test = "Sun Jan 01 00:00:00 2012";
-		SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy",  Locale.ENGLISH);
-		try {
-			Date date = format.parse(test);
+	@Override
+	@Transactional
+	public void setReference(int id_biblio, Boolean hasAttivoReference, Boolean hasReferenceLocale, Boolean hasReferenceOnline) {
+		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblio);
+		biblioteca.setAttivoReference(hasAttivoReference);
+		biblioteca.setReferenceLocale(hasReferenceLocale);
+		biblioteca.setReferenceOnline(hasReferenceOnline);
+
+		em.merge(biblioteca);
+	}
+	
+	@Override
+	@Transactional
+	public List<RiproduzioniTipo> getDocumentDeliveryByIdBiblio(int id_biblioteca) {
+		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+
+		List<RiproduzioniTipo> documentDeliveries = biblioteca.getDocumentDeliveries();
+		Iterator<RiproduzioniTipo> it = documentDeliveries.iterator();
 		
-			Calendar d = new GregorianCalendar();
-			d.setTime(date);
-			System.out.println(date);
-			
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		while (it.hasNext()) {
+			//Iterazione anti-lazy
+			RiproduzioniTipo docDel = (RiproduzioniTipo) it.next();	
 		}
+
+		return documentDeliveries;
+	}
+
+	@Override
+	@Transactional
+	public void addDocumentDelivery(int id_biblioteca, Integer idDocumentDelivery) throws DuplicateEntryException {
+		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+		
+		RiproduzioniTipo newDocDel = em.find(RiproduzioniTipo.class, idDocumentDelivery);
+
+		List<RiproduzioniTipo> documentDeliveries = biblioteca.getDocumentDeliveries();
+		Iterator<RiproduzioniTipo> it = documentDeliveries.iterator();
+		
+		while (it.hasNext()) {
+			//Iterazione anti-lazy
+			RiproduzioniTipo documentDelivery = (RiproduzioniTipo) it.next();
+			
+			if (documentDelivery.getIdRiproduzioniTipo().intValue() == idDocumentDelivery.intValue()) {
+				throw new DuplicateEntryException(DUPLICATE_ENTRY_ERROR_MESSAGE);
+			}
+		}
+
+		documentDeliveries.add(newDocDel);
+		biblioteca.setDocumentDeliveries(documentDeliveries);
+		em.merge(biblioteca);
+	}
+
+
+
+	@Override
+	@Transactional
+	public void removeDocumentDelivery(int id_biblioteca, Integer idRecord) {
+		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+		
+		Integer tmpIndex = null;
+		
+		List<RiproduzioniTipo> documentDeliveries = biblioteca.getDocumentDeliveries();
+		Iterator<RiproduzioniTipo> it = documentDeliveries.iterator();
+		
+		while (it.hasNext()) {
+			//Iterazione anti-lazy
+			RiproduzioniTipo docDel = (RiproduzioniTipo) it.next();	
+			if (docDel.getIdRiproduzioniTipo().intValue() == idRecord.intValue()) {
+				tmpIndex = documentDeliveries.indexOf(docDel);
+			}
+		}
+		
+		if (tmpIndex != null) {
+			documentDeliveries.remove(documentDeliveries.get(tmpIndex));
+		}
+
+		biblioteca.setDocumentDeliveries(documentDeliveries);
+		em.merge(biblioteca);
+	}
+	
+	@Override
+	@Transactional
+	public void removeDocumentDeliveryFromBiblio(Biblioteca biblioteca) {
+		biblioteca.setDocumentDeliveries(new ArrayList<RiproduzioniTipo>());
+		em.merge(biblioteca);
+		
+	}
+	
+	@Override
+	@Transactional
+	public void removeDepositiLegaliFromBiblio(Biblioteca biblioteca) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(" DELETE FROM DepositiLegali dl ");
+		sb.append(" WHERE dl.biblioteca = :biblioteca ");
+
+		Query q = em.createQuery(sb.toString());
+		q.setParameter("biblioteca", biblioteca);
+		q.executeUpdate();
+	}
+	
+	@Override
+	@Transactional
+	public void removeModalitaAccessoFromBiblio(Biblioteca biblioteca) {
+		biblioteca.setAccessoModalitas(new ArrayList<AccessoModalita>());
+		em.merge(biblioteca);
 		
 	}
 }

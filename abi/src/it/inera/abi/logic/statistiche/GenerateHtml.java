@@ -15,7 +15,10 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
+/**
+ * Classe per la generazione dell'html delle statistiche
+ * 
+ */
 public class GenerateHtml {
 
 	private Log _log = LogFactory.getLog(GenerateHtml.class);

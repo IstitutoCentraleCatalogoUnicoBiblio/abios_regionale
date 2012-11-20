@@ -18,8 +18,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 
 /**
- * Permette di inviare un msg all'utente in fase di accettazione o respinta della revisione
- * @author reschini
+ * Permette di accettare o respingere la revisione di una biblioteca
  *
  */
 public abstract class RevisioneWindow extends Window {

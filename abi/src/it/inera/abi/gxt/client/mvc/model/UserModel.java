@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per rappresentare gli utenti
+ *
+ */
 public class UserModel extends BaseModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5308608394761194251L;
 
 	public UserModel() {

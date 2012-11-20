@@ -6,7 +6,6 @@ import it.inera.abi.gxt.client.mvc.model.DepositiLegaliModel;
 import it.inera.abi.gxt.client.mvc.model.DestinazioneSocialeModel;
 import it.inera.abi.gxt.client.mvc.model.EnteModel;
 import it.inera.abi.gxt.client.mvc.model.FondiSpecialiModel;
-import it.inera.abi.gxt.client.mvc.model.NuovaBiblioModel;
 import it.inera.abi.gxt.client.mvc.model.OrariModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiGeneraliModel;
@@ -29,8 +28,11 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Interfaccia Async di <code>BibliotecheService</code>
+ * 
+ */
 public interface BibliotecheServiceAsync {
-	
 	/* Servizio per la restituzione delle biblioteche: hashmap keys passate dentro al config */
 	void getBiblioteche(final PagingLoadConfig config,
 			AsyncCallback<PagingLoadResult<BiblioModel>> callback);
@@ -63,8 +65,7 @@ public interface BibliotecheServiceAsync {
 
 	void saveDenominazioneAlternativa(VoceUnicaModel nuovaDenominazione, boolean modifica, AsyncCallback<Void> callback);
 
-	void aggiornaDenominazioneUfficiale(String denominazione,int id_biblioteca,
-			AsyncCallback<Void> callback);
+	void aggiornaDenominazioneUfficiale(String denominazione, int id_biblioteca, AsyncCallback<Void> callback);
 
 	void aggiornaIndirizzo(HashMap<String, Object> param, int id_biblioteca,
 			AsyncCallback<Void> callback);
@@ -117,7 +118,6 @@ public interface BibliotecheServiceAsync {
 
 	void setModalitaAccesso(int idBiblio, HashMap<String, Object> params,	AsyncCallback<Void> asyncCallback);
 
-	void setLimiteEtaAccesso(int idBiblio, HashMap<String, Object> params,	AsyncCallback<Void> asyncCallback);
 	void getModalitaAccessoByIdBiblioteca(int id_biblioteca,
 			AsyncCallback<List<VoceUnicaModel>> callback);
 
@@ -146,7 +146,7 @@ public interface BibliotecheServiceAsync {
 
 	void addNuovoOrarioGiornaliero(int id_biblioteca, int id_day,
 			OrariModel toSave, boolean modifica, AsyncCallback<Void> asyncCallback);
-	
+
 	void addNuovoOrarioGiornalieroCustom(int id_biblio, Vector<Integer> id_days,
 			OrariModel toSave, AsyncCallback<Void> asyncCallback);
 
@@ -155,11 +155,12 @@ public interface BibliotecheServiceAsync {
 
 	void getVariazioniOrari(int id_biblioteca,
 			AsyncCallback<List<OrariModel>> callback);
+
 	void addNuovaVariazioneOrario(int id_biblioteca, OrariModel toSave,boolean modifica,
 			AsyncCallback<Void> asyncCallback);
 	
-	
 	void addNuovaVariazioneOrarioCustom(int id_biblioteca, Vector<Integer> id_days, OrariModel toSave, AsyncCallback<Void> callback);
+	
 	void removeVariazioneOrario(int id_variazioneOrarioToRemove,
 			AsyncCallback<Void> asyncCallback);
 
@@ -229,11 +230,9 @@ public interface BibliotecheServiceAsync {
 
 	void getlistaPubblicazioniByIdBiblio(int id_biblioteca,	AsyncCallback<List<VoceUnicaModel>> callback);
 
-	void addPubblicazioni(VoceUnicaModel modelToSave, int id_biblioteca,boolean modifica
-			,AsyncCallback<Void> asyncCallback);
+	void addPubblicazioni(VoceUnicaModel modelToSave, int id_biblioteca,boolean modifica, AsyncCallback<Void> asyncCallback);
 
-	void removePubblicazioni(int id_rimuoviPubblicazione,
-			AsyncCallback<Void> asyncCallback);
+	void removePubblicazioni(int id_rimuoviPubblicazione, AsyncCallback<Void> asyncCallback);
 
 	void inserisciBibliograficaInfoCatalogazione(int id_biblio, String value,
 			AsyncCallback<Void> asyncCallback);
@@ -263,6 +262,7 @@ public interface BibliotecheServiceAsync {
 	void addPartecipaCatalogoGenerale(int id_biblioteca,
 			PartecipaCataloghiGeneraliModel tmpCatalogo, boolean modifica,
 			AsyncCallback<Void> asyncCallback);
+
 	void getBibliotecheReport(final PagingLoadConfig config,
 			AsyncCallback<PagingLoadResult<BiblioModel>> callback);
 
@@ -276,8 +276,8 @@ public interface BibliotecheServiceAsync {
 	void removeServiziRiproduzioniForniture(int idRemove, int id_biblioteca,
 			AsyncCallback<Void> asyncCallback);
 
-	void setServizioBibliograficoInternoEsterno(int id_biblio, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno,
-			Boolean hasServizioBibliograficoEsterno, AsyncCallback<Void> asyncCallback);
+	void setServizioBibliograficoInternoEsterno(int id_biblio, Boolean hasAttivoInformazioniBibliografiche, Boolean hasServizioBibliograficoInterno, Boolean hasServizioBibliograficoEsterno, 
+			AsyncCallback<Void> asyncCallback);
 
 	void getModalitaComunicazioniBibliograficheByIdBiblio(int id_biblioteca,AsyncCallback<List<VoceUnicaModel>> callback);
 
@@ -350,7 +350,7 @@ public interface BibliotecheServiceAsync {
 	void respingiRevisione(int id_biblio, String messaggio, AsyncCallback<Void> callback);
 
 	void differenze(int id_biblio, AsyncCallback<String> callback);
-	
+
 	void setInventarioCartaceo(int idBiblio, Boolean b, AsyncCallback<Void> callback);
 
 	void setInventarioInformatizzato(int idBiblio, Boolean b, AsyncCallback<Void> callback);
@@ -365,7 +365,7 @@ public interface BibliotecheServiceAsync {
 
 	void setDefinitiva(List<Integer> bibliotecheSelectedIds, AsyncCallback<Void> asyncCallback);
 	
-	void ripristina(List<Integer> bibliotecheSelectedIds, AsyncCallback<Void> asyncCallback);
+	void ripristina(List<Integer> bibliotecheSelectedIds, AsyncCallback<Integer> asyncCallback);
 
 	void respingiRevisione(List<Integer> bibliotecheSelectedIds, AsyncCallback<Void> asyncCallback);
 
@@ -384,5 +384,17 @@ public interface BibliotecheServiceAsync {
 	void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistemaPrestitoInterbibliotecario, AsyncCallback<Void> callback);
 	
 	void addSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistemaPrestitoInterbibliotecario, AsyncCallback<Void> callback);
+	
+	void setReference(int id_biblio, Boolean hasAttivoReference, Boolean hasReferenceLocale, Boolean hasReferenceOnline, AsyncCallback<Void> callback);
+	
+	void setAttivoDocumentDelivery(int idbib, Boolean attivoDocumentDelivery, AsyncCallback<Void> callback);
+	
+	void getDocumentDeliveryByIdBiblio(int id_biblioteca, AsyncCallback<List<VoceUnicaModel>> callback);
+
+	void addDocumentDelivery(int id_biblioteca, int idDocumentDelivery, AsyncCallback<Void> callback);
+
+	void removeDocumentDelivery(int id_biblioteca, int idRemove, AsyncCallback<Void> callback);
+	
+	void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale, AsyncCallback<Void> callback);
 
 }

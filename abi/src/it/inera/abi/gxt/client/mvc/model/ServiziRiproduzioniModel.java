@@ -2,7 +2,12 @@ package it.inera.abi.gxt.client.mvc.model;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per rappresentare le riproduzioni
+ *
+ */
 public class ServiziRiproduzioniModel extends BaseModel {
+
 	public ServiziRiproduzioniModel() {
 
 	}
@@ -50,11 +55,11 @@ public class ServiziRiproduzioniModel extends BaseModel {
 	
 
 	
-	public void setIdTipo(Integer idTipo){
+	public void setIdTipo(Integer idTipo) {
 		set("idTipo",idTipo);
 	}
 	
-	public Integer getIdTipo(){
+	public Integer getIdTipo() {
 		return get("idTipo");
 	}
 }

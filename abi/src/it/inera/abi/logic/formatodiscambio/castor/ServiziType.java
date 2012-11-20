@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: ServiziType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
+ * $Id: ServiziType.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -16,7 +16,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  altre informazioni.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public abstract class ServiziType implements java.io.Serializable {
@@ -122,6 +122,22 @@ public abstract class ServiziType implements java.io.Serializable {
      */
     private it.inera.abi.logic.formatodiscambio.castor.SezioniSpeciali _sezioniSpeciali;
 
+    /**
+     * Servizio di reference: se disponibile, può essere locale o 
+     *  online (email, telefono, fax, ecc...).
+     *  Presente attributo 'attivo' del tipo siNoType.
+     *  
+     */
+    private it.inera.abi.logic.formatodiscambio.castor.Reference _reference;
+
+    /**
+     * Servizio di document delivery: se attivo, può avere una o 
+     *  più tipologie.
+     *  Presente attributo 'attivo' del tipo siNoType.
+     *  
+     */
+    private it.inera.abi.logic.formatodiscambio.castor.DocumentDelivery _documentDelivery;
+
 
       //----------------/
      //- Constructors -/
@@ -153,6 +169,21 @@ public abstract class ServiziType implements java.io.Serializable {
     public it.inera.abi.logic.formatodiscambio.castor.Accesso getAccesso(
     ) {
         return this._accesso;
+    }
+
+    /**
+     * Returns the value of field 'documentDelivery'. The field
+     * 'documentDelivery' has the following description: Servizio
+     * di document delivery: se attivo, può avere una o 
+     *  più tipologie.
+     *  Presente attributo 'attivo' del tipo siNoType.
+     *  
+     * 
+     * @return the value of field 'DocumentDelivery'.
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.DocumentDelivery getDocumentDelivery(
+    ) {
+        return this._documentDelivery;
     }
 
     /**
@@ -209,6 +240,21 @@ public abstract class ServiziType implements java.io.Serializable {
     public it.inera.abi.logic.formatodiscambio.castor.Prestito getPrestito(
     ) {
         return this._prestito;
+    }
+
+    /**
+     * Returns the value of field 'reference'. The field
+     * 'reference' has the following description: Servizio di
+     * reference: se disponibile, può essere locale o 
+     *  online (email, telefono, fax, ecc...).
+     *  Presente attributo 'attivo' del tipo siNoType.
+     *  
+     * 
+     * @return the value of field 'Reference'.
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.Reference getReference(
+    ) {
+        return this._reference;
     }
 
     /**
@@ -323,6 +369,21 @@ public abstract class ServiziType implements java.io.Serializable {
     }
 
     /**
+     * Sets the value of field 'documentDelivery'. The field
+     * 'documentDelivery' has the following description: Servizio
+     * di document delivery: se attivo, può avere una o 
+     *  più tipologie.
+     *  Presente attributo 'attivo' del tipo siNoType.
+     *  
+     * 
+     * @param documentDelivery the value of field 'documentDelivery'
+     */
+    public void setDocumentDelivery(
+            final it.inera.abi.logic.formatodiscambio.castor.DocumentDelivery documentDelivery) {
+        this._documentDelivery = documentDelivery;
+    }
+
+    /**
      * Sets the value of field 'informazioniBibliografiche'. The
      * field 'informazioniBibliografiche' has the following
      * description: Per segnalare la disponibilità del servizio
@@ -377,6 +438,21 @@ public abstract class ServiziType implements java.io.Serializable {
     public void setPrestito(
             final it.inera.abi.logic.formatodiscambio.castor.Prestito prestito) {
         this._prestito = prestito;
+    }
+
+    /**
+     * Sets the value of field 'reference'. The field 'reference'
+     * has the following description: Servizio di reference: se
+     * disponibile, può essere locale o 
+     *  online (email, telefono, fax, ecc...).
+     *  Presente attributo 'attivo' del tipo siNoType.
+     *  
+     * 
+     * @param reference the value of field 'reference'.
+     */
+    public void setReference(
+            final it.inera.abi.logic.formatodiscambio.castor.Reference reference) {
+        this._reference = reference;
     }
 
     /**

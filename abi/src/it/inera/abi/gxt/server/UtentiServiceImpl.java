@@ -26,12 +26,14 @@ import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 
+/**
+ * Implementazione dei servizi relativi agli utenti (lato server)
+ * 
+ */
 public class UtentiServiceImpl extends AutoinjectingRemoteServiceServlet implements UtentiService {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -9199572903000227961L;
+
 	private AbiUtentiLogic abiUtentiLogic;
 
 	@Autowired

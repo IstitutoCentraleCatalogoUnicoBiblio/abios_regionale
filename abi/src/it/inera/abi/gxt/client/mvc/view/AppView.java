@@ -25,6 +25,11 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
+/**
+ * View utilizzata per istanziare i pannelli principali dell'applicativo
+ * (north, south, west, center)
+ *
+ */
 public class AppView extends View {
 
 	public static final String VIEWPORT = "viewport";

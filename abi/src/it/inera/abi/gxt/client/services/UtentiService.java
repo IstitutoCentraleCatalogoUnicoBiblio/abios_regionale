@@ -6,7 +6,6 @@ import it.inera.abi.gxt.client.mvc.model.auth.ProfiliModel;
 import it.inera.abi.gxt.client.mvc.model.forms.ProfiliUtente;
 import it.inera.abi.gxt.client.mvc.model.forms.UtenteCompletoFormModel;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.data.ModelData;
@@ -15,6 +14,10 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+/**
+ * Interfaccia dei servizi relativi agli utenti (lato client)
+ * 
+ */
 @RemoteServiceRelativePath(Abi.UTENTI_SERVICE)
 public interface UtentiService extends RemoteService {
 

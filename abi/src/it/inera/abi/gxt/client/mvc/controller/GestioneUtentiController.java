@@ -5,7 +5,6 @@ import it.inera.abi.gxt.client.AppEvents;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.forms.ProfiliUtente;
 import it.inera.abi.gxt.client.mvc.model.forms.UtenteCompletoFormModel;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.RicercaBiblioGenericaView;
 import it.inera.abi.gxt.client.mvc.view.center.utenti.AssegnaBiblioUtentiView;
 import it.inera.abi.gxt.client.mvc.view.center.utenti.ListaUtentiView;
 import it.inera.abi.gxt.client.mvc.view.center.utenti.NuovoUtenteView;
@@ -18,9 +17,12 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Controller per la gestione degli utenti (lista, crea nuovo utente, ecc...)
+ *
+ */
 public class GestioneUtentiController extends Controller {
 
 	private GestioneUtentiMenuView menuView;

@@ -34,6 +34,11 @@ import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Estensione della classe widget <code>CreazioneModificaCataloghiGenericaPanel</code> 
+ * per la visualizzazione / modifica delle informazioni relative ai cataloghi generali
+ *
+ */
 public class CreazioneModificaCataloghiGeneraliPanel extends CreazioneModificaCataloghiGenericaPanel{
 
 	/*Label cataloghi generali*/

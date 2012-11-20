@@ -47,7 +47,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica delle informazioni
+ * relative alla lista degli spogli del materiale bibliografico
+ *
+ */
 public class ListaSpogliMaterialeBibliografico extends ContentPanel{
+	
 	private int id_biblioteca;
 	private boolean modifica;
 	private BaseListLoader<ListLoadResult<VoceUnicaModel>> spogliMarerialeGrigliaLoader;

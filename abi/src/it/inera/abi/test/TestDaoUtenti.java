@@ -8,11 +8,12 @@ import it.inera.abi.persistence.Utenti;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * Classe di test per il caricamento degli utenti in base al ruolo
+ *
+ */
 public class TestDaoUtenti {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		ApplicationContext appCtxt = new ClassPathXmlApplicationContext("applicationContext.xml");
 		UtentiDao utentiDao = appCtxt.getBean(UtentiDao.class);

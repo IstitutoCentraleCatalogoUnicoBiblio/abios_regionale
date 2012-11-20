@@ -2,6 +2,10 @@ package it.inera.abi.logic.statistiche.model.excel;
 
 import java.util.Vector;
 
+/**
+ * Classe per la rappresentazione delle righe excel
+ *
+ */
 public class RowBean {
 
 	private Vector<String> columns;

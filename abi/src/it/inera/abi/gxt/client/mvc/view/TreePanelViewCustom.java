@@ -1,7 +1,5 @@
 package it.inera.abi.gxt.client.mvc.view;
 
-import it.inera.abi.gxt.client.Utils;
-
 import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.core.El;
 import com.extjs.gxt.ui.client.data.ModelData;
@@ -12,20 +10,12 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
- * Classe che estende TreePanelView per cambiare il width dell'immagine dell'appertura del tree
- *  sb.append(jointElement == null ? "<img src=\"" + GXT.BLANK_IMAGE_URL
- *		          + "\" style=\"width: 16px\" class=\"x-tree3-node-joint\" />" : DOM.toString(jointElement));
- *
- * in
- * 
- *  sb.append(jointElement == null ? "<img src=\"" + GXT.BLANK_IMAGE_URL
- *		          + "\" style=\"width: 2px\" class=\"x-tree3-node-joint\" />" : DOM.toString(jointElement));
- *
- * @author reschini
+ * Estensione custom della classe <code>TreePanelView</code> che modifica
+ * l'ampiezza dell'immagine di apertura del TreePanel
  *
  */
 public class TreePanelViewCustom extends TreePanelView {
-	private static final int intervalloBr=21;
+	private static final int intervalloBr = 21;
 
 	@Override
 	public String getTemplate(ModelData m, String id, String text, AbstractImagePrototype icon, boolean checkable,

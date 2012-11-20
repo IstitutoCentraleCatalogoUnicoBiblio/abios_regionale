@@ -5,6 +5,10 @@ import java.util.List;
 import it.inera.abi.persistence.Comune;
 import it.inera.abi.persistence.Stato;
 
+/** 
+ * Interfaccia DAO per l'entità Stato
+ *
+ */
 public interface StatoDao {
 
 	public void saveStato(Stato stato);

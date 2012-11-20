@@ -2,28 +2,20 @@ package it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms;
 
 import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.Utils;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.CreazioneModificaCataloghiCollettiviPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaCataloghiCollettiviPanel;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.services.TabelleDinamicheServiceAsync;
-import it.inera.abi.gxt.client.workflow.UIWorkflow;
-
-import java.util.List;
-import java.util.Vector;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.Window;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * ai cataloghi collettivi
+ *
+ */
 public class CataloghiCollettiviPanel extends ContentPanelForTabItem {
 	private	ListaCataloghiCollettiviPanel listaCataloghiCollettiviPanel;
 

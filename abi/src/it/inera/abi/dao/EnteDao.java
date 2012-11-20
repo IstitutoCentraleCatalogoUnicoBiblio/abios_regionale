@@ -6,7 +6,10 @@ import it.inera.abi.persistence.Ente;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.Stato;
 
-
+/** 
+ * Interfaccia DAO per l'entità Ente
+ *
+ */
 public interface EnteDao {
 	
 	public Ente createEnteIfNotExist(Stato stato, EnteTipologiaAmministrativa tipologiaAmministrativa,

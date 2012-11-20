@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: DepositiLegali.java,v 1.1 2012/07/31 15:00:07 m.bartolozzi Exp $
+ * $Id: DepositiLegali.java,v 1.4 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,7 +10,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Class DepositiLegali.
  * 
- * @version $Revision: 1.1 $ $Date: 2012/07/31 15:00:07 $
+ * @version $Revision: 1.4 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class DepositiLegali implements java.io.Serializable {
@@ -19,6 +19,11 @@ public class DepositiLegali implements java.io.Serializable {
       //--------------------------/
      //- Class/Member Variables -/
     //--------------------------/
+
+    /**
+     * Field _attivo.
+     */
+    private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _attivo;
 
     /**
      * Field _depositoLegaleList.
@@ -77,6 +82,16 @@ public class DepositiLegali implements java.io.Serializable {
     public java.util.Enumeration<? extends it.inera.abi.logic.formatodiscambio.castor.DepositoLegale> enumerateDepositoLegale(
     ) {
         return java.util.Collections.enumeration(this._depositoLegaleList);
+    }
+
+    /**
+     * Returns the value of field 'attivo'.
+     * 
+     * @return the value of field 'Attivo'.
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.types.SiNoType getAttivo(
+    ) {
+        return this._attivo;
     }
 
     /**
@@ -213,6 +228,16 @@ public class DepositiLegali implements java.io.Serializable {
             final int index) {
         java.lang.Object obj = this._depositoLegaleList.remove(index);
         return (it.inera.abi.logic.formatodiscambio.castor.DepositoLegale) obj;
+    }
+
+    /**
+     * Sets the value of field 'attivo'.
+     * 
+     * @param attivo the value of field 'attivo'.
+     */
+    public void setAttivo(
+            final it.inera.abi.logic.formatodiscambio.castor.types.SiNoType attivo) {
+        this._attivo = attivo;
     }
 
     /**

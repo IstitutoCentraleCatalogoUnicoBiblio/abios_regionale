@@ -31,7 +31,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette l'assegnazione di una biblioteca, tramite codice ISIL,
+ * ad un utente
+ *
+ */
 public class AssegnaBiblioDaCodiceWindow extends Window {
+	
 	private FormPanel formDaCodice;
 	private Window _instance;
 	

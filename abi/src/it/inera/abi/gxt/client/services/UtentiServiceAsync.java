@@ -5,7 +5,6 @@ import it.inera.abi.gxt.client.mvc.model.auth.ProfiliModel;
 import it.inera.abi.gxt.client.mvc.model.forms.ProfiliUtente;
 import it.inera.abi.gxt.client.mvc.model.forms.UtenteCompletoFormModel;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.data.ModelData;
@@ -13,6 +12,10 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Interfaccia Async di <code>UtentiService</code>
+ * 
+ */
 public interface UtentiServiceAsync {
 
 	void saveUtente(UtenteCompletoFormModel nuovoUtente,boolean modifica, AsyncCallback callback);

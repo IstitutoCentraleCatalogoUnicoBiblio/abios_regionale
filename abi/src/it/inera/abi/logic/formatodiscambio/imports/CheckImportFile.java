@@ -22,6 +22,10 @@ import org.apache.commons.mail.SimpleEmail;
 import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.ValidationException;
 
+/**
+ * Thread che esegue il controllo del file importato 
+ *
+ */
 public class CheckImportFile extends Thread {
 
 	private Log log = LogFactory.getLog(CheckImportFile.class);
@@ -219,7 +223,7 @@ public class CheckImportFile extends Thread {
 			biblioteca = biblioteche.getBiblioteca(i);
 			// copia delle info della biblioteca
 			infoBiblioBean.codiceIsil = biblioteca.getAnagrafica().getCodici().getIsil();
-			infoBiblioBean.nome = biblioteca.getAnagrafica().getNome().getAttuale();
+			infoBiblioBean.nome = biblioteca.getAnagrafica().getNomi().getAttuale();
 
 			// controllo codice ABI
 			String codiceAbi = null;

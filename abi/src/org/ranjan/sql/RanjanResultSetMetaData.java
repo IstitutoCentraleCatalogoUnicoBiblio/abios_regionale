@@ -1,10 +1,5 @@
 package org.ranjan.sql;
 
-/**
-  * @author Amit Kirdatt
-  * @date 06/08/2002
-  */
-
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -22,10 +17,10 @@ public class RanjanResultSetMetaData
   /**
     * Get the column names in an ArrayList
     *
-    * @param ResultSet aResultSet - The ResultSet for which we wanna get the
+    * @param aResultSet - The ResultSet for which we wanna get the
     *                               column names for.
     *
-    * @return ArrayList t_ArrayList - Column names in an ArrayList
+    * @return ArrayList<String> - Column names in an ArrayList
     *
     */
   public ArrayList<String> getColumnNames(ResultSet aResultSet) 

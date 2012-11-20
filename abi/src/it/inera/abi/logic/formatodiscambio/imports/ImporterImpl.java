@@ -12,11 +12,12 @@ import it.inera.abi.logic.formatodiscambio.castor.Altro;
 import it.inera.abi.logic.formatodiscambio.castor.CatSpecForme;
 import it.inera.abi.logic.formatodiscambio.castor.CatSpecFormeCopertura;
 import it.inera.abi.logic.formatodiscambio.castor.CatSpecMateriale;
+import it.inera.abi.logic.formatodiscambio.castor.CataloghiGenerali;
+import it.inera.abi.logic.formatodiscambio.castor.CataloghiSpeciali;
 import it.inera.abi.logic.formatodiscambio.castor.CatalogoCollettivo;
 import it.inera.abi.logic.formatodiscambio.castor.CatalogoGenerale;
 import it.inera.abi.logic.formatodiscambio.castor.CatalogoSpeciale;
 import it.inera.abi.logic.formatodiscambio.castor.Chiusura;
-import it.inera.abi.logic.formatodiscambio.castor.CondizioniAccesso;
 import it.inera.abi.logic.formatodiscambio.castor.Copertura;
 import it.inera.abi.logic.formatodiscambio.castor.DepositoLegale;
 import it.inera.abi.logic.formatodiscambio.castor.Destinazione;
@@ -25,10 +26,12 @@ import it.inera.abi.logic.formatodiscambio.castor.Forme;
 import it.inera.abi.logic.formatodiscambio.castor.Interbibliotecario;
 import it.inera.abi.logic.formatodiscambio.castor.Internet;
 import it.inera.abi.logic.formatodiscambio.castor.Materiale;
+import it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusi;
 import it.inera.abi.logic.formatodiscambio.castor.Orario;
 import it.inera.abi.logic.formatodiscambio.castor.Sistemi;
 import it.inera.abi.logic.formatodiscambio.castor.SistemiItem;
 import it.inera.abi.logic.formatodiscambio.castor.Specializzazione;
+import it.inera.abi.logic.formatodiscambio.castor.Specializzazioni;
 import it.inera.abi.logic.formatodiscambio.castor.Telefonico;
 import it.inera.abi.logic.formatodiscambio.castor.TipoPrestito;
 import it.inera.abi.logic.formatodiscambio.castor.Variazione;
@@ -93,7 +96,6 @@ import it.inera.abi.persistence.Stato;
 import it.inera.abi.persistence.StatoBibliotecaWorkflow;
 import it.inera.abi.persistence.TipologiaFunzionale;
 
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -109,6 +111,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Classe che implementa l'import online e differito 
+ *
+ */
 @Service
 public class ImporterImpl implements Importer {
 
@@ -165,7 +171,6 @@ public class ImporterImpl implements Importer {
 		} else {
 			if (biblios == null || biblios.length != 1) {
 				biblios = new Biblioteca[1];
-				//TODO
 
 				Integer idBiblio = createBibliotecaDefault(biblioteca, isilSt, isilNr, isilPr,reportImport);
 
@@ -225,10 +230,10 @@ public class ImporterImpl implements Importer {
 		setDenominazioneUfficiale(biblioteca, reportImport, bibliotecaDb, regionale/*TRUE*/);
 
 		// Nuove denominazioni alternative
-		if (biblioteca.getAnagrafica().getNome() != null) {
-			if (biblioteca.getAnagrafica().getNome().getAlternative() != null) {
-				for (int j = 0; j < biblioteca.getAnagrafica().getNome().getAlternative().getAlternativoCount(); j++) {
-					String denoAlt = (String) biblioteca.getAnagrafica().getNome().getAlternative().getAlternativo(j);
+		if (biblioteca.getAnagrafica().getNomi() != null) {
+			if (biblioteca.getAnagrafica().getNomi().getAlternativi() != null) {
+				for (int j = 0; j < biblioteca.getAnagrafica().getNomi().getAlternativi().getAlternativoCount(); j++) {
+					String denoAlt = (String) biblioteca.getAnagrafica().getNomi().getAlternativi().getAlternativo(j);
 					if (j == 0) {
 						//Cancella tutte le denominazioni alternative che verranno sostituite con le nuove 
 						if (bibliotecaDb.getDenominazioniAlternatives() != null) {
@@ -254,10 +259,10 @@ public class ImporterImpl implements Importer {
 		}
 
 		//Nuove denominazioni precedenti
-		if (biblioteca.getAnagrafica().getNome() != null) {
-			if (biblioteca.getAnagrafica().getNome().getPrecedenti() != null) {
-				for (int j = 0; j < biblioteca.getAnagrafica().getNome().getPrecedenti().getPrecedenteCount(); j++) {
-					String denoPrec = (String)biblioteca.getAnagrafica().getNome().getPrecedenti().getPrecedente(j);
+		if (biblioteca.getAnagrafica().getNomi() != null) {
+			if (biblioteca.getAnagrafica().getNomi().getPrecedenti() != null) {
+				for (int j = 0; j < biblioteca.getAnagrafica().getNomi().getPrecedenti().getPrecedenteCount(); j++) {
+					String denoPrec = (String)biblioteca.getAnagrafica().getNomi().getPrecedenti().getPrecedente(j);
 					if (j == 0) {
 						if (bibliotecaDb.getDenominazioniPrecedentis() != null) {
 							//Cancella tutte le denominazioni precedenti che verranno sostituite con le nuove
@@ -287,79 +292,83 @@ public class ImporterImpl implements Importer {
 		if (biblioteca.getAnagrafica().getContatti() != null) {
 			boolean giaCancellati = false;
 			//Nuovi contatti telefonici
-			for (int j = 0; j < biblioteca.getAnagrafica().getContatti().getTelefonicoCount(); j++) {
-				Telefonico t = (Telefonico) biblioteca.getAnagrafica().getContatti().getTelefonico(j);
+			if (biblioteca.getAnagrafica().getContatti().getTelefonici() != null) {
+				for (int j = 0; j < biblioteca.getAnagrafica().getContatti().getTelefonici().getTelefonicoCount(); j++) {
+					Telefonico t = (Telefonico) biblioteca.getAnagrafica().getContatti().getTelefonici().getTelefonico(j);
 
-				if (j == 0) {
-					if (bibliotecaDb.getContattis() != null) {
-						biblioDao.removeChilds(bibliotecaDb.getContattis());
-						giaCancellati = true; // in modo tale che in contatti altri non debba cancellare di nuovo
-						log.debug("Cancellati CONTATTI TELEFONICI... ");
+					if (j == 0) {
+						if (bibliotecaDb.getContattis() != null) {
+							biblioDao.removeChilds(bibliotecaDb.getContattis());
+							giaCancellati = true; // in modo tale che in contatti altri non debba cancellare di nuovo
+							log.debug("Cancellati CONTATTI TELEFONICI... ");
+						}
 					}
-				}
 
-				// Carico il TipoContatto dal db
-				ContattiTipo contattiTipo = null;
-				if (t.getTipo().equals(TelefonicoTipoType.FAX)) {
-					contattiTipo = (ContattiTipo) dynaTabDao.searchRecord(ContattiTipo.class, "Fax");
-				}
+					// Carico il TipoContatto dal db
+					ContattiTipo contattiTipo = null;
+					if (t.getTipo().equals(TelefonicoTipoType.FAX)) {
+						contattiTipo = (ContattiTipo) dynaTabDao.searchRecord(ContattiTipo.class, "Fax");
+					}
 
-				if (t.getTipo().equals(TelefonicoTipoType.TELEFONO)) {
-					contattiTipo = (ContattiTipo) dynaTabDao.searchRecord(ContattiTipo.class, "Telefono");
-				}
-				if (contattiTipo != null) {
-					Contatti temp = new Contatti();
-					temp.setValore(t.getPrefisso() + " " +  t.getNumero());
-					temp.setContattiTipo(contattiTipo);
-					temp.setBiblioteca(bibliotecaDb);
-					biblioDao.saveChild(temp);
-					log.debug("Inserito nuovo CONTATTO TELEFONICO: " + t.getPrefisso() + "-" + t.getNumero());
-				}  else {
-					String msg = "Tipo di contatto telefonico non trovato: " + t.getTipo();
-					reportImport.addWarn(msg);
-					log.warn(msg);
+					if (t.getTipo().equals(TelefonicoTipoType.TELEFONO)) {
+						contattiTipo = (ContattiTipo) dynaTabDao.searchRecord(ContattiTipo.class, "Telefono");
+					}
+					if (contattiTipo != null) {
+						Contatti temp = new Contatti();
+						temp.setValore(t.getPrefisso() + " " +  t.getNumero());
+						temp.setContattiTipo(contattiTipo);
+						temp.setBiblioteca(bibliotecaDb);
+						biblioDao.saveChild(temp);
+						log.debug("Inserito nuovo CONTATTO TELEFONICO: " + t.getPrefisso() + "-" + t.getNumero());
+					}  else {
+						String msg = "Tipo di contatto telefonico non trovato: " + t.getTipo();
+						reportImport.addWarn(msg);
+						log.warn(msg);
+					}
 				}
 			}
 
 			//Nuovi altri contatti
-			for (int j = 0; j < biblioteca.getAnagrafica().getContatti().getAltroCount(); j++) {
+			if (biblioteca.getAnagrafica().getContatti().getAltri() != null) {
+				for (int j = 0; j < biblioteca.getAnagrafica().getContatti().getAltri().getAltroCount(); j++) {
 
-				if (j == 0 && !giaCancellati) {
-					if (bibliotecaDb.getContattis() != null) {
-						//Cancella tutti gli altri contatti che verranno sostituiti con i nuovi solo se non li ho gia cancellati prima
-						biblioDao.removeChilds(bibliotecaDb.getContattis());
-						log.debug("Cancellati ALTRI CONTATTI... ");
+					if (j == 0 && !giaCancellati) {
+						if (bibliotecaDb.getContattis() != null) {
+							//Cancella tutti gli altri contatti che verranno sostituiti con i nuovi solo se non li ho gia cancellati prima
+							biblioDao.removeChilds(bibliotecaDb.getContattis());
+							log.debug("Cancellati ALTRI CONTATTI... ");
+						}
+					}
+
+					Altro a = (Altro) biblioteca.getAnagrafica().getContatti().getAltri().getAltro(j);
+
+					// Carico il TipoContatto dal db
+					ContattiTipo contattiTipo = null;
+					if (a.getTipo().equals(AltroTipoType.E_MAIL)) {
+						contattiTipo = (ContattiTipo) dynaTabDao.searchRecord(ContattiTipo.class, "E-mail");
+					}
+					if (a.getTipo().equals(AltroTipoType.TELEX)) {
+						contattiTipo = (ContattiTipo) dynaTabDao.searchRecord(ContattiTipo.class, "Telex");
+					}
+					if (a.getTipo().equals(AltroTipoType.URL)) {
+						contattiTipo = (ContattiTipo) dynaTabDao.searchRecord(ContattiTipo.class, "Url");
+					}
+					if (contattiTipo != null) {
+						Contatti temp = new Contatti();
+						temp.setValore(a.getValore());
+						temp.setNote(a.getNote());
+						temp.setContattiTipo(contattiTipo);
+						temp.setBiblioteca(bibliotecaDb);
+						biblioDao.saveChild(temp);
+						log.debug("Inserito nuovo ALTRO CONTATTO: " + a.getValore());
+
+					} else {
+						String msg = "Tipo di altro contatto non trovato: " + a.getTipo();
+						reportImport.addWarn(msg);
+						log.warn(msg);
 					}
 				}
-
-				Altro a = (Altro) biblioteca.getAnagrafica().getContatti().getAltro(j);
-
-				// Carico il TipoContatto dal db
-				ContattiTipo contattiTipo = null;
-				if (a.getTipo().equals(AltroTipoType.E_MAIL)) {
-					contattiTipo = (ContattiTipo) dynaTabDao.searchRecord(ContattiTipo.class, "E-mail");
-				}
-				if (a.getTipo().equals(AltroTipoType.TELEX)) {
-					contattiTipo = (ContattiTipo) dynaTabDao.searchRecord(ContattiTipo.class, "Telex");
-				}
-				if (a.getTipo().equals(AltroTipoType.URL)) {
-					contattiTipo = (ContattiTipo) dynaTabDao.searchRecord(ContattiTipo.class, "Url");
-				}
-				if (contattiTipo != null) {
-					Contatti temp = new Contatti();
-					temp.setValore(a.getValore());
-					temp.setNote(a.getNote());
-					temp.setContattiTipo(contattiTipo);
-					temp.setBiblioteca(bibliotecaDb);
-					biblioDao.saveChild(temp);
-					log.debug("Inserito nuovo ALTRO CONTATTO: " + a.getValore());
-					
-				} else {
-					String msg = "Tipo di altro contatto non trovato: " + a.getTipo();
-					reportImport.addWarn(msg);
-					log.warn(msg);
-				}
-			}			
+			}
 		}
 
 		// Gestione codici
@@ -367,7 +376,7 @@ public class ImporterImpl implements Importer {
 			if (bibliotecaDb.getCodicis() != null) {
 				biblioDao.removeChilds(bibliotecaDb.getCodicis());
 			}
-			
+
 			if (biblioteca.getAnagrafica().getCodici().getSbn() != null) {
 				String valore = biblioteca.getAnagrafica().getCodici().getSbn();
 				Codici codice = new Codici();
@@ -380,7 +389,7 @@ public class ImporterImpl implements Importer {
 				biblioDao.saveChild(codice);
 				log.debug("SBN = " + valore);
 			}
-			
+
 			if (biblioteca.getAnagrafica().getCodici().getRism() != null) {
 				String valore = biblioteca.getAnagrafica().getCodici().getRism();
 				Codici codice = new Codici();
@@ -393,7 +402,7 @@ public class ImporterImpl implements Importer {
 				biblioDao.saveChild(codice);
 				log.debug("RISM = "  + valore);
 			}
-			
+
 			if (biblioteca.getAnagrafica().getCodici().getAcnp() != null) {
 				String valore = biblioteca.getAnagrafica().getCodici().getAcnp();
 				Codici codice = new Codici();
@@ -406,7 +415,7 @@ public class ImporterImpl implements Importer {
 				biblioDao.saveChild(codice);
 				log.debug("ACNP = " + valore);
 			}
-			
+
 			if (biblioteca.getAnagrafica().getCodici().getCei() != null) {
 				String valore = biblioteca.getAnagrafica().getCodici().getCei();
 				Codici codice = new Codici();
@@ -419,7 +428,7 @@ public class ImporterImpl implements Importer {
 				biblioDao.saveChild(codice);
 				log.debug("CEI = " + valore);
 			}
-			
+
 			if (biblioteca.getAnagrafica().getCodici().getCmbs() != null) {
 				String valore = biblioteca.getAnagrafica().getCodici().getCmbs();
 				Codici codice = new Codici();
@@ -464,21 +473,21 @@ public class ImporterImpl implements Importer {
 			bibliotecaDb.setFrazione(frazione);
 			log.debug("Modifica frazione: " + frazione);
 		}
-		
+
 		// Coordinate
 		if (biblioteca.getAnagrafica().getIndirizzo().getCoordinate() != null) {
 			Double latitudine = Double.valueOf(biblioteca.getAnagrafica().getIndirizzo().getCoordinate().getLatitudine());
 			Double longitudine = Double.valueOf(biblioteca.getAnagrafica().getIndirizzo().getCoordinate().getLongitudine());
-			
+
 			if (bibliotecaDb.getGeolocalizzazione() != null) {
 				bibliotecaDb.getGeolocalizzazione().setLatitudine(latitudine);
 				bibliotecaDb.getGeolocalizzazione().setLongitudine(longitudine);
-				
+
 			} else {
 				Geolocalizzazione coordinate = new Geolocalizzazione();
 				coordinate.setLatitudine(latitudine);
 				coordinate.setLongitudine(longitudine);
-				
+
 				bibliotecaDb.setGeolocalizzazione(coordinate);
 			}
 		}
@@ -488,7 +497,7 @@ public class ImporterImpl implements Importer {
 		if (biblioteca.getAmministrativa().getAutonoma() != null) {
 			if (biblioteca.getAmministrativa().getAutonoma() == SiNoType.S) {
 				bibliotecaDb.setAutonomiaAmministrativa(true);
-				
+
 			} else {
 				bibliotecaDb.setAutonomiaAmministrativa(false);
 			}
@@ -525,12 +534,12 @@ public class ImporterImpl implements Importer {
 				bibliotecaDb.setEdificioDenominazione(edificioDenominazione);
 				log.debug("Modificato edificio Denominazione: " + edificioDenominazione);
 			}
-			
+
 			//Appositamente costruito (Si/No)
 			if (biblioteca.getAnagrafica().getEdificio().getAppositamenteCostruito() == SiNoType.S) {
 				bibliotecaDb.setEdificioAppositamenteCostruito(true);
 				log.debug("Modificato edificio appositamente costruito: " + true);
-				
+
 			} else if (biblioteca.getAnagrafica().getEdificio().getAppositamenteCostruito() == SiNoType.N) {
 				bibliotecaDb.setEdificioAppositamenteCostruito(false);
 				log.debug("Modificato edificio appositamente costruito: " + false);
@@ -540,7 +549,7 @@ public class ImporterImpl implements Importer {
 			if (biblioteca.getAnagrafica().getEdificio().getMonumentale() == SiNoType.S) {
 				bibliotecaDb.setEdificioMonumentale(true);
 				log.debug("Modificato edificio Monumentale: " + true);
-				
+
 			} else if (biblioteca.getAnagrafica().getEdificio().getMonumentale() == SiNoType.N) {
 				bibliotecaDb.setEdificioMonumentale(false);
 				log.debug("Modificato edificio Monumentale: " + false);
@@ -557,32 +566,32 @@ public class ImporterImpl implements Importer {
 		//Sistemi di biblioteche
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getSistemi() != null) {
 			Sistemi sistemi = (Sistemi) biblioteca.getServizi().getSistemi();
-			
+
 			if (bibliotecaDb.getSistemiBiblioteches() != null) {
 				bibliotecaDb.getSistemiBiblioteches().clear();
 				log.debug("Cancellati SISTEMI DI BIBLIOTECHE...");
-				
+
 			} else {
 				bibliotecaDb.setSistemiBiblioteches(new ArrayList<SistemiBiblioteche>());
 			}
-				
+
 			for (int j = 0; j < biblioteca.getServizi().getSistemi().getSistemiItemCount(); j++) {	
 				SistemiItem s_i = (SistemiItem) sistemi.getSistemiItem(j);
 
 				String searchValore = s_i.getSistema();
 				SistemiBiblioteche sistemiBiblioteche = (SistemiBiblioteche) dynaTabDao.searchRecord(SistemiBiblioteche.class, searchValore);
-				
+
 				if (sistemiBiblioteche != null) {
 					if (!bibliotecaDb.getSistemiBiblioteches().contains(sistemiBiblioteche)) {
 						bibliotecaDb.getSistemiBiblioteches().add(sistemiBiblioteche);
 						log.debug("Inserito nuovo SISTEMA: " + s_i.getSistema());
-						
+
 					} else {
 						String msg = "Sistemi biblioteche duplicato: " + searchValore;
 						reportImport.addWarn(msg);
 						log.warn(msg);
 					}
-					
+
 				} else {
 					String msg = "Sistemi biblioteche non trovato: " + searchValore;
 					reportImport.addWarn(msg);
@@ -590,7 +599,7 @@ public class ImporterImpl implements Importer {
 				}
 			}
 		}
-		
+
 		//ACCESSO E DESTINAZIONE SOCIALE
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getAccesso() != null) {
 			if (biblioteca.getServizi().getAccesso().getDestinazioniSociali() != null) {
@@ -611,7 +620,7 @@ public class ImporterImpl implements Importer {
 						if ((dest[j].getNote() != null) && (dest[j].getNote().trim().length() > 0)) {
 							note = dest[j].getNote().trim();
 						}
-						
+
 						DestinazioniSocialiTipo destinazioniSocialiTipo = (DestinazioniSocialiTipo) dynaTabDao.searchRecord(DestinazioniSocialiTipo.class, valore);
 						if (destinazioniSocialiTipo != null) {
 							DestinazioniSociali destinazioniSociali = new DestinazioniSociali();
@@ -619,7 +628,7 @@ public class ImporterImpl implements Importer {
 							destinazioniSociali.setNote(note);
 							bibliotecaDb.getDestinazioniSocialis().add(destinazioniSociali);
 							log.debug("Inserito DESTINAZIONE SOCIALE valore: " + valore + " note:" + note);
-							
+
 						} else {
 							String msg = "Destinazione sociale non trovata: " + valore;
 							reportImport.addWarn(msg);
@@ -629,11 +638,11 @@ public class ImporterImpl implements Importer {
 					}
 				}
 			}
-			
+
 			if (biblioteca.getServizi().getAccesso().getAperta() != null) {
 				if (biblioteca.getServizi().getAccesso().getAperta().equals(SiNoType.S)) {
 					bibliotecaDb.setAccessoRiservato(false);
-					
+
 				} else if (biblioteca.getServizi().getAccesso().getAperta().equals(SiNoType.N)) {
 					bibliotecaDb.setAccessoRiservato(true);
 				}
@@ -645,50 +654,46 @@ public class ImporterImpl implements Importer {
 				if (biblioteca.getServizi().getAccesso().getHandicap() == SiNoType.S) {
 					bibliotecaDb.setAccessoHandicap(true);
 					log.debug("Modificato accesso handicap: " + true);
-					
+
 				} else if (biblioteca.getServizi().getAccesso().getHandicap() == SiNoType.N) {
 					bibliotecaDb.setAccessoHandicap(false);
 					log.debug("Modificato accesso handicap: " + false);
 				}
 			}
 
-			//Condizioni di accesso
-			if (biblioteca.getServizi().getAccesso().getCondizioniAccesso() != null) {
-				CondizioniAccesso[] ca = biblioteca.getServizi().getAccesso().getCondizioniAccesso();
-				for (int j = 0; j < ca.length; j++) {
+			// Modalità di accesso
+			if (biblioteca.getServizi().getAccesso().getModalitaAccesso() != null) {
+				String[] ma = biblioteca.getServizi().getAccesso().getModalitaAccesso().getModo();
+				for (int j = 0; j < ma.length; j++) {
 					if (j == 0) {
 						if (bibliotecaDb.getAccessoModalitas() != null) {
 							bibliotecaDb.getAccessoModalitas().clear();
 							log.debug("Cancellati TUTTE LE CONDIZIONI DI ACCESSO...");
-							
+
 						} else {
 							bibliotecaDb.setAccessoModalitas(new ArrayList<AccessoModalita>());
 						}
 					}
-					
-					CondizioniAccesso c = ca[j];
-					String[] tipi = c.getDocumenti().getTipo();
-					for (int k = 0; k < tipi.length; k++) {
-						String tipo = tipi[k];
-						AccessoModalita accessoModalita = (AccessoModalita) dynaTabDao.searchRecord(AccessoModalita.class, tipo);
-						if (accessoModalita != null) {
-							if (!bibliotecaDb.getAccessoModalitas().contains(accessoModalita)) {
-								bibliotecaDb.getAccessoModalitas().add(accessoModalita);
-								log.debug("Inserita CONDIZIONE DI ACCESSO: " + tipo);	
-								
-							} else {
-								String msg = "Accesso Modalita duplicato: " + tipo;
-								reportImport.addWarn(msg);
-								log.warn(msg);
-							}
-							
+
+					AccessoModalita accessoModalita = (AccessoModalita) dynaTabDao.searchRecord(AccessoModalita.class, ma[j]);
+
+					if (accessoModalita != null) {
+						if (!bibliotecaDb.getAccessoModalitas().contains(accessoModalita)) {
+							bibliotecaDb.getAccessoModalitas().add(accessoModalita);
+							log.debug("Inserita CONDIZIONE DI ACCESSO: " + ma[j]);	
+
 						} else {
-							String msg = "Condizione di accesso non trovata: " + tipo;
+							String msg = "Accesso Modalita duplicato: " + ma[j];
 							reportImport.addWarn(msg);
 							log.warn(msg);
 						}
 
+					} else {
+						String msg = "Condizione di accesso non trovata: " + ma[j];
+						reportImport.addWarn(msg);
+						log.warn(msg);
 					}
+
 				}
 			}
 		}
@@ -828,7 +833,7 @@ public class ImporterImpl implements Importer {
 							log.debug("Cancellati ORARI UFFICIALI... ");
 						}
 					}
-					
+
 					Orario o = (Orario) biblioteca.getServizi().getServiziOrario().getUfficiale().getOrario(j);
 					int giorno = giornoCastorToHibernate(o.getGiorno());
 					String fascia = fasciaOraria(o.getDalle(), o.getAlle());
@@ -842,7 +847,7 @@ public class ImporterImpl implements Importer {
 						orarioUfficiali.setBiblioteca(bibliotecaDb);
 						biblioDao.saveChild(orarioUfficiali);
 						log.debug("Inserito orario ufficiale giorno:" + giorno + "dalle:" + dalle + "alle:" + alle + "fascia:" + fascia);
-						
+
 					} else {
 						String msg = "Errore nel calcolo del giorno dell' orario ufficiale " + o.getGiorno();
 						reportImport.addWarn(msg);
@@ -860,7 +865,7 @@ public class ImporterImpl implements Importer {
 							log.debug("Cancellati VARIAZIONI ORARI... ");
 						}
 					}
-					
+
 					Variazione v = biblioteca.getServizi().getServiziOrario().getVariazione(j);
 					for (int i = 0; i < v.getOrarioCount(); i++) {
 						Orario o = v.getOrario(i);
@@ -877,7 +882,7 @@ public class ImporterImpl implements Importer {
 							orarioVariazioni.setBiblioteca(bibliotecaDb);
 							biblioDao.saveChild(orarioVariazioni);
 							log.debug("Inserito orario ufficiale giorno:" + giorno + "dalle:" + dalle + "alle:" + alle + "fascia:" + fascia);
-							
+
 						} else {
 							String msg = "Errore nel calcolo del giorno dell' orario variazione " + o.getGiorno();
 							reportImport.addWarn(msg);
@@ -897,7 +902,7 @@ public class ImporterImpl implements Importer {
 							log.debug("Cancellate CHIUSURE... ");
 						}
 					}
-					
+
 					Chiusura chiusura = biblioteca.getServizi().getServiziOrario().getChiusura(j);
 					if (chiusura.getNote() != null && !"".equals(chiusura.getNote())) {
 						String note =  chiusura.getNote();
@@ -1047,7 +1052,7 @@ public class ImporterImpl implements Importer {
 				if (biblioteca.getPatrimonio().getPatrimonioInventario().getCartaceo() == SiNoType.S) {
 					bibliotecaDb.setInventarioCartaceo(true);
 					log.debug("Modificato INVENTARIO CARTACEO: "+ true);
-					
+
 				} else if (biblioteca.getPatrimonio().getPatrimonioInventario().getCartaceo() == SiNoType.N) {
 					bibliotecaDb.setInventarioCartaceo(false);
 					log.debug("Modificato INVENTARIO CARTACEO: "+ false);
@@ -1056,7 +1061,7 @@ public class ImporterImpl implements Importer {
 				if (biblioteca.getPatrimonio().getPatrimonioInventario().getCartaceo() == SiNoType.S) {
 					bibliotecaDb.setInventarioInformatizzato(true);
 					log.debug("Modificato INVENTARIO INFORMATIZZATO: "+ true);
-					
+
 				} else if (biblioteca.getPatrimonio().getPatrimonioInventario().getCartaceo() == SiNoType.N) {
 					bibliotecaDb.setInventarioInformatizzato(false);
 					log.debug("Modificato INVENTARIO INFORMATIZZATO: "+ false);
@@ -1069,16 +1074,16 @@ public class ImporterImpl implements Importer {
 				if (biblioteca.getPatrimonio().getCatalogoTopografico().getCartaceo() == SiNoType.S) {
 					bibliotecaDb.setCatalogoTopograficoCartaceo(true);
 					log.debug("Modificato CATALOGO TOPOGRAFICO CARTACEO: " + true);
-					
+
 				} else if (biblioteca.getPatrimonio().getCatalogoTopografico().getCartaceo() == SiNoType.N) {
 					bibliotecaDb.setCatalogoTopograficoCartaceo(false);
 					log.debug("Modificato CATALOGO TOPOGRAFICO CARTACEO: " + false);
 				}
-				
+
 				if (biblioteca.getPatrimonio().getCatalogoTopografico().getInformatizzato() == SiNoType.S) {
 					bibliotecaDb.setCatalogoTopograficoInformatizzato(true);
 					log.debug("Modificato CATALOGO TOPOGRAFICO INFORMATIZZATO: " + true);
-					
+
 				} else if (biblioteca.getPatrimonio().getCatalogoTopografico().getInformatizzato() == SiNoType.N) {
 					bibliotecaDb.setCatalogoTopograficoInformatizzato(false);
 					log.debug("Modificato CATALOGO TOPOGRAFICO INFORMATIZZATO: " + false);
@@ -1089,101 +1094,104 @@ public class ImporterImpl implements Importer {
 
 
 		//Specializzazioni (Dewey)
-		for (int j = 0; j < biblioteca.getSpecializzazioneCount(); j++) {
-			Specializzazione s = (Specializzazione) biblioteca.getSpecializzazione(j);
-			String cdd = s.getSpecializzazioneCdd();
-			String descrizione = s.getDescrizioneLibera();
-			if (j == 0) {
-				if (bibliotecaDb.getDeweyLiberos() != null) {
-					biblioDao.removeChilds(bibliotecaDb.getDeweyLiberos());
-					log.debug("Cancellate SPECIALIZZAZIONI...");
+		if (biblioteca.getSpecializzazioni() != null) {
+			Specializzazioni specializzazioni = biblioteca.getSpecializzazioni();
+			for (int j = 0; j < specializzazioni.getSpecializzazioneCount(); j++) {
+				Specializzazione s = (Specializzazione) specializzazioni.getSpecializzazione(j);
+				String cdd = s.getSpecializzazioneCdd();
+				String descrizione = s.getDescrizioneLibera();
+				if (j == 0) {
+					if (bibliotecaDb.getDeweyLiberos() != null) {
+						biblioDao.removeChilds(bibliotecaDb.getDeweyLiberos());
+						log.debug("Cancellate SPECIALIZZAZIONI...");
+					}
 				}
-			}
-			
-			cdd = StringUtils.replace(cdd, ".", "");
-			Dewey dewey = (Dewey) dynaTabDao.loadRecord(Dewey.class, cdd);
-			if (dewey != null) {
-				DeweyLiberoPK id = new DeweyLiberoPK();
-				id.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
-				id.setIdDewey(dewey.getIdDewey());
 
-				DeweyLibero deweyLibero = new DeweyLibero();
-				deweyLibero.setDescrizione(descrizione);
-				deweyLibero.setId(id);
-				biblioDao.saveChild(deweyLibero);
-				log.debug("Inserito nuova SPECIALIZZAZIONE cdd: " + cdd + " descrizione: " + descrizione);
-				
-			} else {
-				String msg = "Dewey non trovato in patrimonio specializzazione: " + descrizione;
-				reportImport.addWarn(msg);
-				log.warn(msg);
-			}
+				cdd = StringUtils.replace(cdd, ".", "");
+				Dewey dewey = (Dewey) dynaTabDao.loadRecord(Dewey.class, cdd);
+				if (dewey != null) {
+					DeweyLiberoPK id = new DeweyLiberoPK();
+					id.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
+					id.setIdDewey(dewey.getIdDewey());
 
+					DeweyLibero deweyLibero = new DeweyLibero();
+					deweyLibero.setDescrizione(descrizione);
+					deweyLibero.setId(id);
+					biblioDao.saveChild(deweyLibero);
+					log.debug("Inserito nuova SPECIALIZZAZIONE cdd: " + cdd + " descrizione: " + descrizione);
+
+				} else {
+					String msg = "Dewey non trovato in patrimonio specializzazione: " + descrizione;
+					reportImport.addWarn(msg);
+					log.warn(msg);
+				}
+
+			}
 		}
 
 		//SERVIZI E SEZIONI SPECIALI
 		//Accesso Internet
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getInternet() != null) {
 			Internet internet = biblioteca.getServizi().getInternet();
-			
+
 			if (internet.getAttivo() != null) {
 				if (internet.getAttivo() == SiNoType.S) {
 					bibliotecaDb.setAttivoAccessoInternet(true);
-					
+
 					/* A tempo */
 					if (internet.getATempo() != null) {
 						if (internet.getATempo() == SiNoType.S) {
 							bibliotecaDb.setAccessoInternetTempo(true);
-							
+
 						} else if (internet.getATempo() == SiNoType.N) {
 							bibliotecaDb.setAccessoInternetTempo(false);
 						}
-						
+
 					} else {
 						bibliotecaDb.setAccessoInternetTempo(null);
 					}
-					
+
 					/* A pagamento */
 					if (internet.getAPagamento() != null) {
 						if (internet.getAPagamento() == SiNoType.S) {
 							bibliotecaDb.setAccessoInternetPagamento(true);
-							
+
 						} else if (internet.getAPagamento() == SiNoType.N) {
 							bibliotecaDb.setAccessoInternetPagamento(false);
 						}
-						
+
 					} else {
 						bibliotecaDb.setAccessoInternetPagamento(null);
 					}
-					
+
 					/* Con proxy */
 					if (internet.getConProxy() != null) {
 						if (internet.getConProxy() == SiNoType.S) {
 							bibliotecaDb.setAccessoInternetProxy(true);
-							
+
 						} else if (internet.getConProxy() == SiNoType.N) {
 							bibliotecaDb.setAccessoInternetProxy(false);
 						}
-						
+
 					} else {
 						bibliotecaDb.setAccessoInternetProxy(null);
 					}
-					
+
 				} else if (internet.getAttivo() == SiNoType.N) {
 					bibliotecaDb.setAttivoAccessoInternet(false);
-					
+
 					bibliotecaDb.setAccessoInternetTempo(false);
 					bibliotecaDb.setAccessoInternetPagamento(false);
 					bibliotecaDb.setAccessoInternetProxy(false);
-					
+
 				}
-				
+
 				log.debug("Modificata modalità di accesso Internet a tempo in: " + bibliotecaDb.getAccessoInternetTempo());
 				log.debug("Modificata modalità di accesso Internet a pagamento in: " + bibliotecaDb.getAccessoInternetPagamento());
 				log.debug("Modificata modalità di accesso Internet con proxy in: " + bibliotecaDb.getAccessoInternetProxy());
-				
+
 			}
-			
+
 		}
 
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getInformazioniBibliografiche() != null) {
@@ -1196,547 +1204,565 @@ public class ImporterImpl implements Importer {
 						&& biblioteca.getServizi().getInformazioniBibliografiche().getServizioInterno() == SiNoType.S) {
 					bibliotecaDb.setGestisceServizioBibliograficoInterno(true);
 					log.debug("GestisceServizioBibliograficoInterno: " + true);
-					
+
 				} else if (biblioteca.getServizi().getInformazioniBibliografiche().getServizioInterno() != null 
 						&& biblioteca.getServizi().getInformazioniBibliografiche().getServizioInterno() == SiNoType.N) {
 					bibliotecaDb.setGestisceServizioBibliograficoInterno(false);
 					log.debug("GestisceServizioBibliograficoInterno: " + false);
-					
+
 				} else {
 					bibliotecaDb.setGestisceServizioBibliograficoInterno(null);
 				}
-				
+
 				/* Servizio esterno */
 				if (biblioteca.getServizi().getInformazioniBibliografiche().getServizioEsterno() != null) {
 					for (int j = 0; j < biblioteca.getServizi().getInformazioniBibliografiche().getServizioEsterno().getModoCount(); j++) {
 						if (j == 0) {
 							bibliotecaDb.setGestisceServizioBibliograficoEsterno(true);
 							log.debug("GestisceServizioBibliograficoEsterno: " + true);
-							
+
 							if (bibliotecaDb.getServiziInformazioniBibliograficheModalitas() != null 
 									&& bibliotecaDb.getServiziInformazioniBibliograficheModalitas().size() > 0) {
 								bibliotecaDb.getServiziInformazioniBibliograficheModalitas().clear();
 								log.debug("Cancellati SERVIZI ESTERNI...");
-								
+
 							} else {
 								bibliotecaDb.setServiziInformazioniBibliograficheModalitas(new ArrayList<ServiziInformazioniBibliograficheModalita>());
 							}
 						}
-		
+
 						String modo = biblioteca.getServizi().getInformazioniBibliografiche().getServizioEsterno().getModo(j);
-						
+
 						ServiziInformazioniBibliograficheModalita modalita = (ServiziInformazioniBibliograficheModalita) dynaTabDao.searchRecord(ServiziInformazioniBibliograficheModalita.class, modo);
 
 						if (modalita != null) {
 							bibliotecaDb.getServiziInformazioniBibliograficheModalitas().add(modalita);
 							log.debug("Aggiunto SERVIZIO ESTERNO MODALITÀ: " + modo);
-							
+
 						} else {
 							log.debug("SERVIZIO ESTERNO MODALITÀ non trovato: " + modo);
 						}
 					}
-					
+
 				} else {
 					bibliotecaDb.setGestisceServizioBibliograficoEsterno(null);
-					bibliotecaDb.getServiziInformazioniBibliograficheModalitas().clear();
+					biblioDao.removeModalitaAccessoFromBiblio(bibliotecaDb);
 				}
-				
+
 			} else if (biblioteca.getServizi().getInformazioniBibliografiche().getAttivo() == SiNoType.N) {
 				bibliotecaDb.setAttivoInformazioniBibliografiche(false);
 				log.debug("AttivoInformazioniBibliografiche(: " + false);
-				
+
 				/* Servizio in sede */
 				bibliotecaDb.setGestisceServizioBibliograficoInterno(false);
 				log.debug("GestisceServizioBibliograficoInterno: " + false);
-				
+
 				bibliotecaDb.setGestisceServizioBibliograficoEsterno(false);
 				log.debug("GestisceServizioBibliograficoEsterno: " + false);
-				
+
 				bibliotecaDb.getServiziInformazioniBibliograficheModalitas().clear();
 				log.debug("Cancellati SERVIZI ESTERNI...");				
 			}
-			
+
 			log.debug("Modificate informazioni SERVIZI INTERNI/ESTERNI...");
 		}
 
 		if (biblioteca.getCataloghi() != null) {
-			//CATALOGHI GENERALI
-			for (int j = 0; j < biblioteca.getCataloghi().getCatalogoGeneraleCount(); j++) {
-				CatalogoGenerale cg = biblioteca.getCataloghi().getCatalogoGenerale(j);
-				if (j == 0) {
-					if (bibliotecaDb.getPartecipaCataloghiGeneralis() != null) {
-						List<PartecipaCataloghiGenerali> pcg = bibliotecaDb.getPartecipaCataloghiGeneralis();
-						for (PartecipaCataloghiGenerali entry : pcg) {
-							if (entry.getCataloghiGeneraliUrls() != null && entry.getCataloghiGeneraliUrls().size() > 0) {
-								biblioDao.removeChilds(entry.getCataloghiGeneraliUrls());
+			/* CATALOGHI GENERALI */
+			if (biblioteca.getCataloghi().getCataloghiGenerali() != null) {
+				CataloghiGenerali cataloghiGenerali = biblioteca.getCataloghi().getCataloghiGenerali();
+
+				for (int j = 0; j < cataloghiGenerali.getCatalogoGeneraleCount(); j++) {
+					CatalogoGenerale cg = cataloghiGenerali.getCatalogoGenerale(j);
+					if (j == 0) {
+						if (bibliotecaDb.getPartecipaCataloghiGeneralis() != null) {
+							List<PartecipaCataloghiGenerali> pcg = bibliotecaDb.getPartecipaCataloghiGeneralis();
+							for (PartecipaCataloghiGenerali entry : pcg) {
+								if (entry.getCataloghiGeneraliUrls() != null && entry.getCataloghiGeneraliUrls().size() > 0) {
+									biblioDao.removeChilds(entry.getCataloghiGeneraliUrls());
+								}
 							}
+							biblioDao.removeChilds(bibliotecaDb.getPartecipaCataloghiGeneralis());
+							log.debug("Cancellati CATALOGHI GENERALI...");
 						}
-						biblioDao.removeChilds(bibliotecaDb.getPartecipaCataloghiGeneralis());
-						log.debug("Cancellati CATALOGHI GENERALI...");
 					}
-				}
 
-				PartecipaCataloghiGenerali cataloghiGenerali = new PartecipaCataloghiGenerali();
-				boolean isPersistable = true;
-				Copertura c = cg.getCopertura();
-				if (c != null) {
-					if ((c.getDaAnno() != null) && (c.getDaAnno().trim().length() > 0)) {
-						String daAnno = c.getDaAnno();
-						cataloghiGenerali.setDaAnno(Integer.parseInt(daAnno));
-					}
-					if ((c.getAdAnno() != null) && (c.getAdAnno().trim().length() > 0)) {
-						String aAnno = c.getAdAnno();
-						cataloghiGenerali.setAAnno(Integer.parseInt(aAnno));
-					}
-				}
-				if ((cg.getTipo() != null) && (cg.getTipo().trim().length() > 0)) {
-					String tipoCatalogo = cg.getTipo();
-					CatalogoGeneraleTipo catalogoGeneraleTipo = (CatalogoGeneraleTipo) dynaTabDao.searchRecord(CatalogoGeneraleTipo.class, tipoCatalogo);
-					if (catalogoGeneraleTipo != null) {
-						cataloghiGenerali.setCatalogoGeneraleTipo(catalogoGeneraleTipo);	
-
-					} else {
-						String msg = "Catalogo Generale Tipo non trovato:" + cg.getTipo();
-						reportImport.addWarn(msg);
-						log.warn(msg);
-						isPersistable = false;
-					}
-				}  else {
-					String msg = "Catalogo Generale Tipo non specificato";
-					isPersistable = false;
-					log.warn(msg);
-				}
-
-				CataloghiSupportoDigitaleTipo cataloghiSupportoDigitaleTipo = null;
-				String supportoDigitale = null;
-				Forme f = cg.getForme();
-				if (f != null && f.getDigitale() != null) {
-					if ((f.getDigitale().getSupporto() != null) && (f.getDigitale().getSupporto().trim().length() > 0)) {
-						supportoDigitale = f.getDigitale().getSupporto().trim();
-						cataloghiSupportoDigitaleTipo = (CataloghiSupportoDigitaleTipo) dynaTabDao.searchRecord(CataloghiSupportoDigitaleTipo.class, supportoDigitale);
-						cataloghiGenerali.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
-					}
-					if (f.getDigitale().getUrl() != null && f.getDigitale().getUrl().length > 0) {
-						List<CataloghiGeneraliUrl> lcg = new ArrayList<CataloghiGeneraliUrl>();
-
-						for (int iu = 0; iu < f.getDigitale().getUrl().length; iu++) {
-							CataloghiGeneraliUrl cgurl = new CataloghiGeneraliUrl();
-							cgurl.setUrl(f.getDigitale().getUrl(iu));
-							cgurl.setPartecipaCataloghiGenerali(cataloghiGenerali);
-							lcg.add(cgurl);
+					PartecipaCataloghiGenerali partecipaCataloghiGenerali = new PartecipaCataloghiGenerali();
+					boolean isPersistable = true;
+					Copertura c = cg.getCopertura();
+					if (c != null) {
+						if ((c.getDaAnno() != null) && (c.getDaAnno().trim().length() > 0)) {
+							String daAnno = c.getDaAnno();
+							partecipaCataloghiGenerali.setDaAnno(Integer.parseInt(daAnno));
 						}
-						cataloghiGenerali.setCataloghiGeneraliUrls(lcg);
+						if ((c.getAdAnno() != null) && (c.getAdAnno().trim().length() > 0)) {
+							String aAnno = c.getAdAnno();
+							partecipaCataloghiGenerali.setAAnno(Integer.parseInt(aAnno));
+						}
 					}
-					if ((f.getDigitale().getPercentuale() != null) && (f.getDigitale().getPercentuale().trim().length() > 0)) {
-						int percentualeInformatizzata = Integer.parseInt(f.getDigitale().getPercentuale());
-						cataloghiGenerali.setPercentualeInformatizzata(percentualeInformatizzata);
-					}
-				}
-				if (supportoDigitale == null || cataloghiSupportoDigitaleTipo == null) {
-					String msg = null;
-					if (supportoDigitale == null) {
-						msg = "Supporto digitale non specificato in partecipa a cataloghi generali, sarà settato a No";	
-					} else {
-						msg = "Supporto digitale non trovato in partecipa a cataloghi generali, sarà settato a No: " + supportoDigitale;	
-					}
-
-					reportImport.addWarn(msg);
-					log.warn(msg);
-
-					supportoDigitale = "No";
-					cataloghiSupportoDigitaleTipo = (CataloghiSupportoDigitaleTipo) dynaTabDao.searchRecord(CataloghiSupportoDigitaleTipo.class, supportoDigitale);
-					cataloghiGenerali.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
-				}
-
-				if (f != null) {
-					if (f.getMicroforme() != null) {
-						cataloghiGenerali.setMicroforme(true);
-						if ((f.getMicroforme().getPercentuale() != null) && (f.getMicroforme().getPercentuale().trim().length() > 0)) {
-							int percentualeMicroforme = Integer.parseInt(f.getMicroforme().getPercentuale());
-							cataloghiGenerali.setPercentualeMicroforme(percentualeMicroforme);
+					if ((cg.getTipo() != null) && (cg.getTipo().trim().length() > 0)) {
+						String tipoCatalogo = cg.getTipo();
+						CatalogoGeneraleTipo catalogoGeneraleTipo = (CatalogoGeneraleTipo) dynaTabDao.searchRecord(CatalogoGeneraleTipo.class, tipoCatalogo);
+						if (catalogoGeneraleTipo != null) {
+							partecipaCataloghiGenerali.setCatalogoGeneraleTipo(catalogoGeneraleTipo);	
 
 						} else {
-							cataloghiGenerali.setPercentualeMicroforme(0);
-						}
-
-					} else {
-						cataloghiGenerali.setMicroforme(false);
-					}
-
-					if (f.getSchede() != null) {
-						cataloghiGenerali.setSchede(true);
-						if ((f.getSchede().getPercentuale() != null) && (f.getSchede().getPercentuale().trim().length() > 0)) {
-							int percentualeSchede = Integer.parseInt(f.getSchede().getPercentuale());
-							cataloghiGenerali.setPercentualeSchede(percentualeSchede);
-
-						} else {
-							cataloghiGenerali.setPercentualeSchede(0);
-						}
-
-					} else {
-						cataloghiGenerali.setSchede(false);
-					}
-
-					if (f.getVolume() != null) {
-						cataloghiGenerali.setVolume(true);
-						if ((f.getVolume().getPercentuale() != null) && (f.getVolume().getPercentuale().trim().length() > 0)) {
-							int percentualeVolume = Integer.parseInt(f.getVolume().getPercentuale());
-							cataloghiGenerali.setPercentualeVolume(percentualeVolume);
-
-						} else {
-							cataloghiGenerali.setPercentualeVolume(0);
-						}
-
-						if ((f.getVolume().getCitazioneBibliografica() != null) && (f.getVolume().getCitazioneBibliografica().trim().length() > 0)) {
-							String descrizioneVolume = f.getVolume().getCitazioneBibliografica();
-							cataloghiGenerali.setDescrizioneVolume(descrizioneVolume);
-						}
-
-					} else {
-						cataloghiGenerali.setVolume(false);
-					}
-
-					if (isPersistable) {
-						cataloghiGenerali.setBiblioteca(bibliotecaDb);
-						biblioDao.saveChild(cataloghiGenerali);
-						List<CataloghiGeneraliUrl> ltemp = (List<CataloghiGeneraliUrl>) cataloghiGenerali.getCataloghiGeneraliUrls();
-						if (ltemp != null) {
-							for (CataloghiGeneraliUrl entry : ltemp) {
-								biblioDao.saveChild(entry);
-							}
-						}
-						log.debug("Inserito nuovo CATALOGO GENERALE");
-
-					} else {
-						log.debug("Il CATALOGO GENERALE non è salvabile");
-					}
-				}
-
-
-
-			}
-
-			/* CATALOGHI SPECIALI */
-			for (int j = 0; j < biblioteca.getCataloghi().getCatalogoSpecialeCount(); j++) {
-				CatalogoSpeciale cs = biblioteca.getCataloghi().getCatalogoSpeciale(j);
-
-				if (j == 0) {
-					if (bibliotecaDb.getPartecipaCataloghiSpecialiMateriales() != null) {
-						List<PartecipaCataloghiSpecialiMateriale> pcsm = bibliotecaDb.getPartecipaCataloghiSpecialiMateriales();
-						for (PartecipaCataloghiSpecialiMateriale entry : pcsm) {
-							if (entry.getCataloghiSpecialiMaterialeUrls() != null && entry.getCataloghiSpecialiMaterialeUrls().size() > 0) {
-								biblioDao.removeChilds(entry.getCataloghiSpecialiMaterialeUrls());
-							}
-						}
-
-						biblioDao.removeChilds(bibliotecaDb.getPartecipaCataloghiSpecialiMateriales());
-						log.debug("Cancellati CATALOGHI SPECIALI...");
-					}
-				}
-
-				PartecipaCataloghiSpecialiMateriale cataloghiSpecialiMateriale = new PartecipaCataloghiSpecialiMateriale();
-
-				boolean isPersistable = true;
-
-				CataloghiSupportoDigitaleTipo cataloghiSupportoDigitaleTipo = null;
-				String supportoDigitale = null;
-				CatSpecForme f = cs.getCatSpecMateriali().getCatSpecMateriale(0).getCatSpecForme();	
-				if (f != null && f.getCatSpecFormeDigitale() != null) {
-					if ((f.getCatSpecFormeDigitale().getSupporto() != null) && (f.getCatSpecFormeDigitale().getSupporto().trim().length() > 0)) {
-						supportoDigitale = f.getCatSpecFormeDigitale().getSupporto().trim();
-						cataloghiSupportoDigitaleTipo = (CataloghiSupportoDigitaleTipo) dynaTabDao.searchRecord(CataloghiSupportoDigitaleTipo.class, supportoDigitale);
-						cataloghiSpecialiMateriale.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
-					}
-					if ((f.getCatSpecFormeDigitale().getPercentuale() != null) && (f.getCatSpecFormeDigitale().getPercentuale().trim().length() > 0)) {
-						int percentualeInformatizzata = Integer.parseInt(f.getCatSpecFormeDigitale().getPercentuale());
-						cataloghiSpecialiMateriale.setPercentualeInformatizzata(percentualeInformatizzata);
-					}
-				}
-				if (supportoDigitale == null || cataloghiSupportoDigitaleTipo == null) {
-					String msg = null;
-					if (supportoDigitale == null) {
-						msg = "Supporto digitale non specificato in partecipa a cataloghi speciali, sarà settato a No";
-					} else {
-						msg = "Supporto digitale non trovato in partecipa a cataloghi speciali, sarà settato a No: " + supportoDigitale;	
-					}
-
-					reportImport.addWarn(msg);
-					log.warn(msg);
-
-					supportoDigitale = "No";
-					cataloghiSupportoDigitaleTipo = (CataloghiSupportoDigitaleTipo) dynaTabDao.searchRecord(CataloghiSupportoDigitaleTipo.class, supportoDigitale);
-					cataloghiSpecialiMateriale.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
-				}
-
-				if (f != null) {
-					if (f.getCatSpecFormeMicroforme() != null) {
-						cataloghiSpecialiMateriale.setMicroforme(true);
-						if ((f.getCatSpecFormeMicroforme().getPercentuale() != null) && (f.getCatSpecFormeMicroforme().getPercentuale().trim().length() > 0)) {
-							int percentualeMicroforme = Integer.parseInt(f.getCatSpecFormeMicroforme().getPercentuale());
-							cataloghiSpecialiMateriale.setPercentualeMicroforme(percentualeMicroforme);
-							
-						} else {
-							cataloghiSpecialiMateriale.setPercentualeMicroforme(0);
-						}
-						
-					} else {
-						cataloghiSpecialiMateriale.setMicroforme(false);
-					}
-					
-					if (f.getCatSpecFormeSchede() != null) {
-						cataloghiSpecialiMateriale.setSchede(true);
-						if ((f.getCatSpecFormeSchede().getPercentuale() != null) && (f.getCatSpecFormeSchede().getPercentuale().trim().length() > 0)) {
-							int percentualeSchede = Integer.parseInt(f.getCatSpecFormeSchede().getPercentuale());
-							cataloghiSpecialiMateriale.setPercentualeSchede(percentualeSchede);
-							
-						} else {
-							cataloghiSpecialiMateriale.setPercentualeSchede(0);
-						}
-						
-					} else {
-						cataloghiSpecialiMateriale.setSchede(false);
-					}
-					
-					if (f.getCatSpecFormeVolume() != null) {
-						cataloghiSpecialiMateriale.setVolume(true);
-						if ((f.getCatSpecFormeVolume().getPercentuale() != null) && (f.getCatSpecFormeVolume().getPercentuale().trim().length() > 0)) {
-							int percentualeVolume = Integer.parseInt(f.getCatSpecFormeVolume().getPercentuale());
-							cataloghiSpecialiMateriale.setPercentualeVolume(percentualeVolume);
-							
-						} else {
-							cataloghiSpecialiMateriale.setPercentualeVolume(0);
-						}
-						
-						if ((f.getCatSpecFormeVolume().getCitazioneBibliografica() != null) && (f.getCatSpecFormeVolume().getCitazioneBibliografica().trim().length() > 0)) {
-							String volumeDescr = f.getCatSpecFormeVolume().getCitazioneBibliografica();
-							cataloghiSpecialiMateriale.setDescrizioneVolume(volumeDescr);
-						}
-						
-					} else {
-						cataloghiSpecialiMateriale.setVolume(false);
-					}
-				}
-
-
-				CatSpecFormeCopertura fsp = cs.getCatSpecMateriali().getCatSpecMateriale(0).getCatSpecFormeCopertura();
-				if (fsp != null) {
-					if ((fsp.getDaAnno() != null) && (fsp.getDaAnno().trim().length() > 0)) {
-						int daAnno = Integer.parseInt(fsp.getDaAnno());
-						cataloghiSpecialiMateriale.setDaAnno(daAnno);
-					}
-					if ((fsp.getAdAnno() != null) && (fsp.getAdAnno().trim().length() > 0)) {
-						int aAnno = Integer.parseInt(fsp.getAdAnno());
-						cataloghiSpecialiMateriale.setAAnno(aAnno);
-					}
-				}
-				if ((cs.getCatSpecMateriali().getCatSpecMaterialeCount() > 0) && (cs.getCatSpecMateriali().getCatSpecMateriale(0).getNome().trim().length() > 0)) {
-					String materiale = cs.getCatSpecMateriali().getCatSpecMateriale(0).getNome();
-					PatrimonioSpecializzazione patrimonioSpecializzazione = (PatrimonioSpecializzazione) 
-					dynaTabDao.searchRecord(PatrimonioSpecializzazione.class, materiale);
-					if (patrimonioSpecializzazione != null) {
-						cataloghiSpecialiMateriale.setPatrimonioSpecializzazione(patrimonioSpecializzazione);
-						
-					} else {
-						String msg = "Patrimonio specializzazione non trovato: " + materiale;
-						reportImport.addWarn(msg);
-						log.warn(msg);
-						isPersistable = false;
-					}
-					
-				}  else {
-					String msg = "Patrimonio specializzazione non specificato";
-					log.warn(msg);
-					isPersistable = false;
-				}
-				if ((cs.getNome() != null) && (cs.getNome().trim().length() > 0)) {
-					String denominazione = cs.getNome();
-					cataloghiSpecialiMateriale.setDenominazione(denominazione);
-					log.debug("Inserito nuovo CATALOGO SPECIALE denominazione: " + denominazione);
-				}
-				if (isPersistable) {
-					cataloghiSpecialiMateriale.setBiblioteca(bibliotecaDb);
-					biblioDao.saveChild(cataloghiSpecialiMateriale);
-					log.debug("Inserito nuovo CATALOGO SPECIALE");
-					
-				} else {
-					log.debug("Il catalogo speciale non è salvabile");
-				}
-			}
-
-			/* CATALOGHI COLLETTIVI */
-			for (int j = 0; j < biblioteca.getCataloghi().getCatalogoCollettivoCount(); j++) {
-				if (j == 0) {
-					if (bibliotecaDb.getPartecipaCataloghiCollettiviMateriales() != null) {
-						List<PartecipaCataloghiCollettiviMateriale> pccm = bibliotecaDb.getPartecipaCataloghiCollettiviMateriales();
-						for (PartecipaCataloghiCollettiviMateriale entry : pccm) {
-							if (entry.getCataloghiCollettiviMaterialeUrls() != null && entry.getCataloghiCollettiviMaterialeUrls().size() > 0) {
-								biblioDao.removeChilds(entry.getCataloghiCollettiviMaterialeUrls());
-							}
-						}
-						biblioDao.removeChilds(bibliotecaDb.getPartecipaCataloghiCollettiviMateriales());
-						log.debug("Cancellati CATALOGHI COLLETTIVI...");
-					}
-				}
-
-				boolean isPersistable = true;
-
-				CatalogoCollettivo cc = biblioteca.getCataloghi().getCatalogoCollettivo(j);
-				
-				for (int k = 0; k < cc.getCatSpecMateriali().getCatSpecMaterialeCount(); k++) {
-					PartecipaCataloghiCollettiviMateriale partecipaCataloghiCollettiviMateriale = new PartecipaCataloghiCollettiviMateriale();
-					
-					if ((cc.getNome() != null) && (cc.getNome().trim().length() > 0)) {
-						String denominazione = cc.getNome();
-						CataloghiCollettivi cataloghiCollettivi = (CataloghiCollettivi) dynaTabDao.searchRecord(CataloghiCollettivi.class, denominazione);
-
-						if (cataloghiCollettivi != null) {
-							partecipaCataloghiCollettiviMateriale.setCataloghiCollettivi(cataloghiCollettivi);
-							
-						} else {
-							String msg = "Partecipa cataloghi collettivi materiale non trovato:" + denominazione;
+							String msg = "Catalogo Generale Tipo non trovato:" + cg.getTipo();
 							reportImport.addWarn(msg);
 							log.warn(msg);
 							isPersistable = false;
 						}
-						
-					} else {
-						String msg = "Partecipa cataloghi collettivi materiale non specificato";
-						log.warn(msg);
+					}  else {
+						String msg = "Catalogo Generale Tipo non specificato";
 						isPersistable = false;
-					}
-					
-					CatSpecMateriale materiale = cc.getCatSpecMateriali().getCatSpecMateriale(k);
-					
-					if (materiale != null && materiale.getNome().trim().length() > 0) {
-						String materialeDescr = materiale.getNome();
-						PatrimonioSpecializzazione patrimonioSpecializzazione = (PatrimonioSpecializzazione) 
-						dynaTabDao.searchRecord(PatrimonioSpecializzazione.class, materialeDescr);
-
-						if (patrimonioSpecializzazione != null) {
-							partecipaCataloghiCollettiviMateriale.setPatrimonioSpecializzazione(patrimonioSpecializzazione);
-
-						} else {
-							String msg = "Patrimonio specializzazione non trovato:" + materiale;
-							reportImport.addWarn(msg);
-							log.warn(msg);
-							isPersistable = false;
-						}
-						
-					} else {
-						String msg = "Patrimonio specializzazione non specificato";
 						log.warn(msg);
-						isPersistable = false;
 					}
-					
+
 					CataloghiSupportoDigitaleTipo cataloghiSupportoDigitaleTipo = null;
 					String supportoDigitale = null;
-					
-					CatSpecForme f = materiale.getCatSpecForme();
-					
-					if (f != null && f.getCatSpecFormeDigitale() != null) {
-						if ((f.getCatSpecFormeDigitale().getSupporto() != null) && (f.getCatSpecFormeDigitale().getSupporto().trim().length() > 0)) {
-							supportoDigitale = f.getCatSpecFormeDigitale().getSupporto().trim();
+					Forme f = cg.getForme();
+					if (f != null && f.getDigitale() != null) {
+						if ((f.getDigitale().getSupporto() != null) && (f.getDigitale().getSupporto().trim().length() > 0)) {
+							supportoDigitale = f.getDigitale().getSupporto().trim();
 							cataloghiSupportoDigitaleTipo = (CataloghiSupportoDigitaleTipo) dynaTabDao.searchRecord(CataloghiSupportoDigitaleTipo.class, supportoDigitale);
-							partecipaCataloghiCollettiviMateriale.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
+							partecipaCataloghiGenerali.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
 						}
-						if ((f.getCatSpecFormeDigitale().getPercentuale() != null) && (f.getCatSpecFormeDigitale().getPercentuale().trim().length() > 0)) {
-							int percentualeInformatizzata = Integer.parseInt(f.getCatSpecFormeDigitale().getPercentuale());
-							partecipaCataloghiCollettiviMateriale.setPercentualeInformatizzata(percentualeInformatizzata);
+						if (f.getDigitale().getUrl() != null && f.getDigitale().getUrl().length > 0) {
+							List<CataloghiGeneraliUrl> lcg = new ArrayList<CataloghiGeneraliUrl>();
+
+							for (int iu = 0; iu < f.getDigitale().getUrl().length; iu++) {
+								CataloghiGeneraliUrl cgurl = new CataloghiGeneraliUrl();
+								cgurl.setUrl(f.getDigitale().getUrl(iu));
+								cgurl.setPartecipaCataloghiGenerali(partecipaCataloghiGenerali);
+								lcg.add(cgurl);
+							}
+							partecipaCataloghiGenerali.setCataloghiGeneraliUrls(lcg);
+						}
+						if ((f.getDigitale().getPercentuale() != null) && (f.getDigitale().getPercentuale().trim().length() > 0)) {
+							int percentualeInformatizzata = Integer.parseInt(f.getDigitale().getPercentuale());
+							partecipaCataloghiGenerali.setPercentualeInformatizzata(percentualeInformatizzata);
 						}
 					}
-
 					if (supportoDigitale == null || cataloghiSupportoDigitaleTipo == null) {
 						String msg = null;
 						if (supportoDigitale == null) {
-							msg = "Supporto digitale non specificato in partecipa a cataloghi collettivi, sarà settato a No";
-
+							msg = "Supporto digitale non specificato in partecipa a cataloghi generali, sarà settato a No";	
 						} else {
-							msg = "Supporto digitale non trovato in partecipa a cataloghi collettivi, sarà settato a No: " + supportoDigitale;	
+							msg = "Supporto digitale non trovato in partecipa a cataloghi generali, sarà settato a No: " + supportoDigitale;	
 						}
-
 
 						reportImport.addWarn(msg);
 						log.warn(msg);
 
 						supportoDigitale = "No";
 						cataloghiSupportoDigitaleTipo = (CataloghiSupportoDigitaleTipo) dynaTabDao.searchRecord(CataloghiSupportoDigitaleTipo.class, supportoDigitale);
-						partecipaCataloghiCollettiviMateriale.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
+						partecipaCataloghiGenerali.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
 					}
 
 					if (f != null) {
-						if (f.getCatSpecFormeMicroforme() != null) {
-							partecipaCataloghiCollettiviMateriale.setMicroforme(true);
-							if ((f.getCatSpecFormeMicroforme().getPercentuale() != null) && (f.getCatSpecFormeMicroforme().getPercentuale().trim().length() > 0)) {
-								int percentualeMicroforme = Integer.parseInt(f.getCatSpecFormeMicroforme().getPercentuale());
-								partecipaCataloghiCollettiviMateriale.setPercentualeMicroforme(percentualeMicroforme);
+						if (f.getMicroforme() != null) {
+							partecipaCataloghiGenerali.setMicroforme(true);
+							if ((f.getMicroforme().getPercentuale() != null) && (f.getMicroforme().getPercentuale().trim().length() > 0)) {
+								int percentualeMicroforme = Integer.parseInt(f.getMicroforme().getPercentuale());
+								partecipaCataloghiGenerali.setPercentualeMicroforme(percentualeMicroforme);
 
 							} else {
-								partecipaCataloghiCollettiviMateriale.setPercentualeMicroforme(0);
+								partecipaCataloghiGenerali.setPercentualeMicroforme(0);
 							}
 
 						} else {
-							partecipaCataloghiCollettiviMateriale.setMicroforme(false);
+							partecipaCataloghiGenerali.setMicroforme(false);
 						}
 
-						if (f.getCatSpecFormeSchede() != null) {
-							partecipaCataloghiCollettiviMateriale.setSchede(true);
-							if ((f.getCatSpecFormeSchede().getPercentuale() != null) && (f.getCatSpecFormeSchede().getPercentuale().trim().length() > 0)) {
-								int percentualeSchede = Integer.parseInt(f.getCatSpecFormeSchede().getPercentuale());
-								partecipaCataloghiCollettiviMateriale.setPercentualeSchede(percentualeSchede);
+						if (f.getSchede() != null) {
+							partecipaCataloghiGenerali.setSchede(true);
+							if ((f.getSchede().getPercentuale() != null) && (f.getSchede().getPercentuale().trim().length() > 0)) {
+								int percentualeSchede = Integer.parseInt(f.getSchede().getPercentuale());
+								partecipaCataloghiGenerali.setPercentualeSchede(percentualeSchede);
 
 							} else {
-								partecipaCataloghiCollettiviMateriale.setPercentualeSchede(0);
+								partecipaCataloghiGenerali.setPercentualeSchede(0);
 							}
 
 						} else {
-							partecipaCataloghiCollettiviMateriale.setSchede(false);
+							partecipaCataloghiGenerali.setSchede(false);
 						}
 
-						if (f.getCatSpecFormeVolume() != null) {
-							partecipaCataloghiCollettiviMateriale.setVolume(true);
-							if ((f.getCatSpecFormeVolume().getPercentuale() != null) && (f.getCatSpecFormeVolume().getPercentuale().trim().length() > 0)) {
-								int percentualeVolume = Integer.parseInt(f.getCatSpecFormeVolume().getPercentuale());
-								partecipaCataloghiCollettiviMateriale.setPercentualeVolume(percentualeVolume);
+						if (f.getVolume() != null) {
+							partecipaCataloghiGenerali.setVolume(true);
+							if ((f.getVolume().getPercentuale() != null) && (f.getVolume().getPercentuale().trim().length() > 0)) {
+								int percentualeVolume = Integer.parseInt(f.getVolume().getPercentuale());
+								partecipaCataloghiGenerali.setPercentualeVolume(percentualeVolume);
 
 							} else {
-								partecipaCataloghiCollettiviMateriale.setPercentualeVolume(0);
+								partecipaCataloghiGenerali.setPercentualeVolume(0);
 							}
 
-							if ((f.getCatSpecFormeVolume().getCitazioneBibliografica() != null) && (f.getCatSpecFormeVolume().getCitazioneBibliografica().trim().length() > 0)) {
-								String descrizioneVolume = f.getCatSpecFormeVolume().getCitazioneBibliografica();
-								partecipaCataloghiCollettiviMateriale.setDescrizioneVolume(descrizioneVolume);
+							if ((f.getVolume().getCitazioneBibliografica() != null) && (f.getVolume().getCitazioneBibliografica().trim().length() > 0)) {
+								String descrizioneVolume = f.getVolume().getCitazioneBibliografica();
+								partecipaCataloghiGenerali.setDescrizioneVolume(descrizioneVolume);
 							}
 
 						} else {
-							partecipaCataloghiCollettiviMateriale.setVolume(false);
-						}
-					}
-					
-					CatSpecFormeCopertura fsp = materiale.getCatSpecFormeCopertura();
-					if (fsp != null) {
-						if ((fsp.getDaAnno() != null) && (fsp.getDaAnno().trim().length() > 0)) {
-							int daAnno = Integer.parseInt(fsp.getDaAnno());
-							partecipaCataloghiCollettiviMateriale.setDaAnno(daAnno);
+							partecipaCataloghiGenerali.setVolume(false);
 						}
 
-						if ((fsp.getAdAnno() != null) && (fsp.getAdAnno().trim().length() > 0)) {
-							int aAnno = Integer.parseInt(fsp.getAdAnno());
-							partecipaCataloghiCollettiviMateriale.setAAnno(aAnno);
-						}
-					}
-					
-					if (isPersistable) {
-						partecipaCataloghiCollettiviMateriale.setBiblioteca(bibliotecaDb);
-						biblioDao.saveChild(partecipaCataloghiCollettiviMateriale);
-						log.debug("PARTECIPA CATALOGHI COLLETTIVI MATERIALE salvato");
+						if (isPersistable) {
+							partecipaCataloghiGenerali.setBiblioteca(bibliotecaDb);
+							biblioDao.saveChild(partecipaCataloghiGenerali);
+							List<CataloghiGeneraliUrl> ltemp = (List<CataloghiGeneraliUrl>) partecipaCataloghiGenerali.getCataloghiGeneraliUrls();
+							if (ltemp != null) {
+								for (CataloghiGeneraliUrl entry : ltemp) {
+									biblioDao.saveChild(entry);
+								}
+							}
+							log.debug("Inserito nuovo CATALOGO GENERALE");
 
-					} else {
-						log.debug("PARTECIPA CATALOGHI COLLETTIVI MATERIALE non è salvabile");
+						} else {
+							log.debug("Il CATALOGO GENERALE non è salvabile");
+						}
 					}
 				}
 			}
-		}
 
+			/* CATALOGHI SPECIALI */
+			if (biblioteca.getCataloghi().getCataloghiSpeciali() != null ) {
+				CataloghiSpeciali cataloghiSpeciali = biblioteca.getCataloghi().getCataloghiSpeciali();
+
+				for (int j = 0; j < cataloghiSpeciali.getCatalogoSpecialeCount(); j++) {
+					CatalogoSpeciale cs = cataloghiSpeciali.getCatalogoSpeciale(j);
+
+					if (cs != null && cs.getCatSpecMateriali() != null) {
+						if (j == 0) {
+							if (bibliotecaDb.getPartecipaCataloghiSpecialiMateriales() != null) {
+								List<PartecipaCataloghiSpecialiMateriale> pcsm = bibliotecaDb.getPartecipaCataloghiSpecialiMateriales();
+								for (PartecipaCataloghiSpecialiMateriale entry : pcsm) {
+									if (entry.getCataloghiSpecialiMaterialeUrls() != null && entry.getCataloghiSpecialiMaterialeUrls().size() > 0) {
+										biblioDao.removeChilds(entry.getCataloghiSpecialiMaterialeUrls());
+									}
+								}
+
+								biblioDao.removeChilds(bibliotecaDb.getPartecipaCataloghiSpecialiMateriales());
+								log.debug("Cancellati CATALOGHI SPECIALI...");
+							}
+						}
+
+						PartecipaCataloghiSpecialiMateriale cataloghiSpecialiMateriale = new PartecipaCataloghiSpecialiMateriale();
+
+						boolean isPersistable = true;
+
+						CataloghiSupportoDigitaleTipo cataloghiSupportoDigitaleTipo = null;
+						String supportoDigitale = null;
+						
+						CatSpecForme f = cs.getCatSpecMateriali().getCatSpecMateriale(0).getCatSpecForme();
+						
+						if (f != null && f.getCatSpecFormeDigitale() != null) {
+							if ((f.getCatSpecFormeDigitale().getSupporto() != null) && (f.getCatSpecFormeDigitale().getSupporto().trim().length() > 0)) {
+								supportoDigitale = f.getCatSpecFormeDigitale().getSupporto().trim();
+								cataloghiSupportoDigitaleTipo = (CataloghiSupportoDigitaleTipo) dynaTabDao.searchRecord(CataloghiSupportoDigitaleTipo.class, supportoDigitale);
+								cataloghiSpecialiMateriale.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
+							}
+							if ((f.getCatSpecFormeDigitale().getPercentuale() != null) && (f.getCatSpecFormeDigitale().getPercentuale().trim().length() > 0)) {
+								int percentualeInformatizzata = Integer.parseInt(f.getCatSpecFormeDigitale().getPercentuale());
+								cataloghiSpecialiMateriale.setPercentualeInformatizzata(percentualeInformatizzata);
+							}
+						}
+						if (supportoDigitale == null || cataloghiSupportoDigitaleTipo == null) {
+							String msg = null;
+							if (supportoDigitale == null) {
+								msg = "Supporto digitale non specificato in partecipa a cataloghi speciali, sarà settato a No";
+							} else {
+								msg = "Supporto digitale non trovato in partecipa a cataloghi speciali, sarà settato a No: " + supportoDigitale;	
+							}
+
+							reportImport.addWarn(msg);
+							log.warn(msg);
+
+							supportoDigitale = "No";
+							cataloghiSupportoDigitaleTipo = (CataloghiSupportoDigitaleTipo) dynaTabDao.searchRecord(CataloghiSupportoDigitaleTipo.class, supportoDigitale);
+							cataloghiSpecialiMateriale.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
+						}
+
+						if (f != null) {
+							if (f.getCatSpecFormeMicroforme() != null) {
+								cataloghiSpecialiMateriale.setMicroforme(true);
+								if ((f.getCatSpecFormeMicroforme().getPercentuale() != null) && (f.getCatSpecFormeMicroforme().getPercentuale().trim().length() > 0)) {
+									int percentualeMicroforme = Integer.parseInt(f.getCatSpecFormeMicroforme().getPercentuale());
+									cataloghiSpecialiMateriale.setPercentualeMicroforme(percentualeMicroforme);
+
+								} else {
+									cataloghiSpecialiMateriale.setPercentualeMicroforme(0);
+								}
+
+							} else {
+								cataloghiSpecialiMateriale.setMicroforme(false);
+							}
+
+							if (f.getCatSpecFormeSchede() != null) {
+								cataloghiSpecialiMateriale.setSchede(true);
+								if ((f.getCatSpecFormeSchede().getPercentuale() != null) && (f.getCatSpecFormeSchede().getPercentuale().trim().length() > 0)) {
+									int percentualeSchede = Integer.parseInt(f.getCatSpecFormeSchede().getPercentuale());
+									cataloghiSpecialiMateriale.setPercentualeSchede(percentualeSchede);
+
+								} else {
+									cataloghiSpecialiMateriale.setPercentualeSchede(0);
+								}
+
+							} else {
+								cataloghiSpecialiMateriale.setSchede(false);
+							}
+
+							if (f.getCatSpecFormeVolume() != null) {
+								cataloghiSpecialiMateriale.setVolume(true);
+								if ((f.getCatSpecFormeVolume().getPercentuale() != null) && (f.getCatSpecFormeVolume().getPercentuale().trim().length() > 0)) {
+									int percentualeVolume = Integer.parseInt(f.getCatSpecFormeVolume().getPercentuale());
+									cataloghiSpecialiMateriale.setPercentualeVolume(percentualeVolume);
+
+								} else {
+									cataloghiSpecialiMateriale.setPercentualeVolume(0);
+								}
+
+								if ((f.getCatSpecFormeVolume().getCitazioneBibliografica() != null) && (f.getCatSpecFormeVolume().getCitazioneBibliografica().trim().length() > 0)) {
+									String volumeDescr = f.getCatSpecFormeVolume().getCitazioneBibliografica();
+									cataloghiSpecialiMateriale.setDescrizioneVolume(volumeDescr);
+								}
+
+							} else {
+								cataloghiSpecialiMateriale.setVolume(false);
+							}
+						}
+
+
+						CatSpecFormeCopertura fsp = cs.getCatSpecMateriali().getCatSpecMateriale(0).getCatSpecFormeCopertura();
+						if (fsp != null) {
+							if ((fsp.getDaAnno() != null) && (fsp.getDaAnno().trim().length() > 0)) {
+								int daAnno = Integer.parseInt(fsp.getDaAnno());
+								cataloghiSpecialiMateriale.setDaAnno(daAnno);
+							}
+							if ((fsp.getAdAnno() != null) && (fsp.getAdAnno().trim().length() > 0)) {
+								int aAnno = Integer.parseInt(fsp.getAdAnno());
+								cataloghiSpecialiMateriale.setAAnno(aAnno);
+							}
+						}
+						if ((cs.getCatSpecMateriali().getCatSpecMaterialeCount() > 0) && (cs.getCatSpecMateriali().getCatSpecMateriale(0).getNome().trim().length() > 0)) {
+							String materiale = cs.getCatSpecMateriali().getCatSpecMateriale(0).getNome();
+							PatrimonioSpecializzazione patrimonioSpecializzazione = (PatrimonioSpecializzazione) 
+							dynaTabDao.searchRecord(PatrimonioSpecializzazione.class, materiale);
+							if (patrimonioSpecializzazione != null) {
+								cataloghiSpecialiMateriale.setPatrimonioSpecializzazione(patrimonioSpecializzazione);
+
+							} else {
+								String msg = "Patrimonio specializzazione non trovato: " + materiale;
+								reportImport.addWarn(msg);
+								log.warn(msg);
+								isPersistable = false;
+							}
+
+						}  else {
+							String msg = "Patrimonio specializzazione non specificato";
+							log.warn(msg);
+							isPersistable = false;
+						}
+						if ((cs.getNome() != null) && (cs.getNome().trim().length() > 0)) {
+							String denominazione = cs.getNome();
+							cataloghiSpecialiMateriale.setDenominazione(denominazione);
+							log.debug("Inserito nuovo CATALOGO SPECIALE denominazione: " + denominazione);
+						}
+						if (isPersistable) {
+							cataloghiSpecialiMateriale.setBiblioteca(bibliotecaDb);
+							biblioDao.saveChild(cataloghiSpecialiMateriale);
+							log.debug("Inserito nuovo CATALOGO SPECIALE");
+
+						} else {
+							log.debug("Il catalogo speciale non è salvabile");
+						}
+						
+					} // <---controllo getCatSpecMateriali != null
+					
+				}
+			}
+
+			/* CATALOGHI COLLETTIVI */
+			if (biblioteca.getCataloghi().getCataloghiCollettivi() != null) {
+				it.inera.abi.logic.formatodiscambio.castor.CataloghiCollettivi cataloghiCollettivi = biblioteca.getCataloghi().getCataloghiCollettivi();
+
+				for (int j = 0; j < cataloghiCollettivi.getCatalogoCollettivoCount(); j++) {
+					CatalogoCollettivo cc = cataloghiCollettivi.getCatalogoCollettivo(j);
+
+					if (cc != null && cc.getCatSpecMateriali() != null) {
+
+						if (j == 0) {
+							if (bibliotecaDb.getPartecipaCataloghiCollettiviMateriales() != null) {
+								List<PartecipaCataloghiCollettiviMateriale> pccm = bibliotecaDb.getPartecipaCataloghiCollettiviMateriales();
+								for (PartecipaCataloghiCollettiviMateriale entry : pccm) {
+									if (entry.getCataloghiCollettiviMaterialeUrls() != null && entry.getCataloghiCollettiviMaterialeUrls().size() > 0) {
+										biblioDao.removeChilds(entry.getCataloghiCollettiviMaterialeUrls());
+									}
+								}
+								biblioDao.removeChilds(bibliotecaDb.getPartecipaCataloghiCollettiviMateriales());
+								log.debug("Cancellati CATALOGHI COLLETTIVI...");
+							}
+						}
+
+						boolean isPersistable = true;
+
+						for (int k = 0; k < cc.getCatSpecMateriali().getCatSpecMaterialeCount(); k++) {
+							PartecipaCataloghiCollettiviMateriale partecipaCataloghiCollettiviMateriale = new PartecipaCataloghiCollettiviMateriale();
+
+							if ((cc.getNome() != null) && (cc.getNome().trim().length() > 0)) {
+								String denominazione = cc.getNome();
+								CataloghiCollettivi cataloghiCollettiviRecord = (CataloghiCollettivi) dynaTabDao.searchRecord(CataloghiCollettivi.class, denominazione);
+
+								if (cataloghiCollettiviRecord != null) {
+									partecipaCataloghiCollettiviMateriale.setCataloghiCollettivi(cataloghiCollettiviRecord);
+
+								} else {
+									String msg = "Partecipa cataloghi collettivi materiale non trovato:" + denominazione;
+									reportImport.addWarn(msg);
+									log.warn(msg);
+									isPersistable = false;
+								}
+
+							} else {
+								String msg = "Partecipa cataloghi collettivi materiale non specificato";
+								log.warn(msg);
+								isPersistable = false;
+							}
+
+							CatSpecMateriale materiale = cc.getCatSpecMateriali().getCatSpecMateriale(k);
+
+							if (materiale != null && materiale.getNome().trim().length() > 0) {
+								String materialeDescr = materiale.getNome();
+								PatrimonioSpecializzazione patrimonioSpecializzazione = (PatrimonioSpecializzazione) 
+								dynaTabDao.searchRecord(PatrimonioSpecializzazione.class, materialeDescr);
+
+								if (patrimonioSpecializzazione != null) {
+									partecipaCataloghiCollettiviMateriale.setPatrimonioSpecializzazione(patrimonioSpecializzazione);
+
+								} else {
+									String msg = "Patrimonio specializzazione non trovato:" + materiale;
+									reportImport.addWarn(msg);
+									log.warn(msg);
+									isPersistable = false;
+								}
+
+							} else {
+								String msg = "Patrimonio specializzazione non specificato";
+								log.warn(msg);
+								isPersistable = false;
+							}
+
+							CataloghiSupportoDigitaleTipo cataloghiSupportoDigitaleTipo = null;
+							String supportoDigitale = null;
+
+							CatSpecForme f = materiale.getCatSpecForme();
+
+							if (f != null && f.getCatSpecFormeDigitale() != null) {
+								if ((f.getCatSpecFormeDigitale().getSupporto() != null) && (f.getCatSpecFormeDigitale().getSupporto().trim().length() > 0)) {
+									supportoDigitale = f.getCatSpecFormeDigitale().getSupporto().trim();
+									cataloghiSupportoDigitaleTipo = (CataloghiSupportoDigitaleTipo) dynaTabDao.searchRecord(CataloghiSupportoDigitaleTipo.class, supportoDigitale);
+									partecipaCataloghiCollettiviMateriale.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
+								}
+								if ((f.getCatSpecFormeDigitale().getPercentuale() != null) && (f.getCatSpecFormeDigitale().getPercentuale().trim().length() > 0)) {
+									int percentualeInformatizzata = Integer.parseInt(f.getCatSpecFormeDigitale().getPercentuale());
+									partecipaCataloghiCollettiviMateriale.setPercentualeInformatizzata(percentualeInformatizzata);
+								}
+							}
+
+							if (supportoDigitale == null || cataloghiSupportoDigitaleTipo == null) {
+								String msg = null;
+								if (supportoDigitale == null) {
+									msg = "Supporto digitale non specificato in partecipa a cataloghi collettivi, sarà settato a No";
+
+								} else {
+									msg = "Supporto digitale non trovato in partecipa a cataloghi collettivi, sarà settato a No: " + supportoDigitale;	
+								}
+
+
+								reportImport.addWarn(msg);
+								log.warn(msg);
+
+								supportoDigitale = "No";
+								cataloghiSupportoDigitaleTipo = (CataloghiSupportoDigitaleTipo) dynaTabDao.searchRecord(CataloghiSupportoDigitaleTipo.class, supportoDigitale);
+								partecipaCataloghiCollettiviMateriale.setCataloghiSupportoDigitaleTipo(cataloghiSupportoDigitaleTipo);
+							}
+
+							if (f != null) {
+								if (f.getCatSpecFormeMicroforme() != null) {
+									partecipaCataloghiCollettiviMateriale.setMicroforme(true);
+									if ((f.getCatSpecFormeMicroforme().getPercentuale() != null) && (f.getCatSpecFormeMicroforme().getPercentuale().trim().length() > 0)) {
+										int percentualeMicroforme = Integer.parseInt(f.getCatSpecFormeMicroforme().getPercentuale());
+										partecipaCataloghiCollettiviMateriale.setPercentualeMicroforme(percentualeMicroforme);
+
+									} else {
+										partecipaCataloghiCollettiviMateriale.setPercentualeMicroforme(0);
+									}
+
+								} else {
+									partecipaCataloghiCollettiviMateriale.setMicroforme(false);
+								}
+
+								if (f.getCatSpecFormeSchede() != null) {
+									partecipaCataloghiCollettiviMateriale.setSchede(true);
+									if ((f.getCatSpecFormeSchede().getPercentuale() != null) && (f.getCatSpecFormeSchede().getPercentuale().trim().length() > 0)) {
+										int percentualeSchede = Integer.parseInt(f.getCatSpecFormeSchede().getPercentuale());
+										partecipaCataloghiCollettiviMateriale.setPercentualeSchede(percentualeSchede);
+
+									} else {
+										partecipaCataloghiCollettiviMateriale.setPercentualeSchede(0);
+									}
+
+								} else {
+									partecipaCataloghiCollettiviMateriale.setSchede(false);
+								}
+
+								if (f.getCatSpecFormeVolume() != null) {
+									partecipaCataloghiCollettiviMateriale.setVolume(true);
+									if ((f.getCatSpecFormeVolume().getPercentuale() != null) && (f.getCatSpecFormeVolume().getPercentuale().trim().length() > 0)) {
+										int percentualeVolume = Integer.parseInt(f.getCatSpecFormeVolume().getPercentuale());
+										partecipaCataloghiCollettiviMateriale.setPercentualeVolume(percentualeVolume);
+
+									} else {
+										partecipaCataloghiCollettiviMateriale.setPercentualeVolume(0);
+									}
+
+									if ((f.getCatSpecFormeVolume().getCitazioneBibliografica() != null) && (f.getCatSpecFormeVolume().getCitazioneBibliografica().trim().length() > 0)) {
+										String descrizioneVolume = f.getCatSpecFormeVolume().getCitazioneBibliografica();
+										partecipaCataloghiCollettiviMateriale.setDescrizioneVolume(descrizioneVolume);
+									}
+
+								} else {
+									partecipaCataloghiCollettiviMateriale.setVolume(false);
+								}
+							}
+
+							CatSpecFormeCopertura fsp = materiale.getCatSpecFormeCopertura();
+							if (fsp != null) {
+								if ((fsp.getDaAnno() != null) && (fsp.getDaAnno().trim().length() > 0)) {
+									int daAnno = Integer.parseInt(fsp.getDaAnno());
+									partecipaCataloghiCollettiviMateriale.setDaAnno(daAnno);
+								}
+
+								if ((fsp.getAdAnno() != null) && (fsp.getAdAnno().trim().length() > 0)) {
+									int aAnno = Integer.parseInt(fsp.getAdAnno());
+									partecipaCataloghiCollettiviMateriale.setAAnno(aAnno);
+								}
+							}
+
+							if (isPersistable) {
+								partecipaCataloghiCollettiviMateriale.setBiblioteca(bibliotecaDb);
+								biblioDao.saveChild(partecipaCataloghiCollettiviMateriale);
+								log.debug("PARTECIPA CATALOGHI COLLETTIVI MATERIALE salvato");
+
+							} else {
+								log.debug("PARTECIPA CATALOGHI COLLETTIVI MATERIALE non è salvabile");
+							}
+						}
+						
+					} // <---controllo getCatSpecMateriali != null
+				}
+			}
+		}
 
 		// SEZIONI SPECIALI
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getSezioniSpeciali() != null && biblioteca.getServizi().getSezioniSpeciali().getSezione() != null) {
@@ -1780,80 +1806,81 @@ public class ImporterImpl implements Importer {
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getRiproduzioni() != null) {
 			if (biblioteca.getServizi().getRiproduzioni().getAttivo() == SiNoType.S) {
 				bibliotecaDb.setAttivoRiproduzioni(true);
-				
+
 				it.inera.abi.logic.formatodiscambio.castor.Riproduzione[] riprods = biblioteca.getServizi().getRiproduzioni().getRiproduzione();
-				
+
 				for (int j = 0; j < riprods.length; j++) {
 					if (j == 0) {
-						biblioDao.removeChilds(bibliotecaDb.getRiproduzionis());
+						biblioDao.removeRiproduzioniFromBiblio(bibliotecaDb);
 						log.debug("Cancellati TUTTI METODI DI RIPRODUZIONE...");
 					}
-					
+
 					if ((riprods[j] != null) && (riprods[j].getTipo().trim().length() > 0)) {
 						String tipo = riprods[j].getTipo();
 						RiproduzioniTipo riproduzioniTipo = (RiproduzioniTipo) dynaTabDao.searchRecord(RiproduzioniTipo.class, tipo);
-						
+
 						if (tipo != null) {
 							RiproduzioniPK riproduzioniPK = new RiproduzioniPK();
 							riproduzioniPK.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
 							riproduzioniPK.setIdRiproduzioniTipo(riproduzioniTipo.getIdRiproduzioniTipo());
-							
+
 							Riproduzioni riproduzione = new Riproduzioni();
 							riproduzione.setId(riproduzioniPK);
 							log.debug("TIPO DI RIPRODUZIONE: " + tipo);
-							
+
 							if (riprods[j].getLocale() != null) {
 								if (riprods[j].getLocale() == SiNoType.S) {
 									riproduzione.setLocale(true);
-									
+
 								} else if (riprods[j].getLocale() == SiNoType.N) {
 									riproduzione.setLocale(false);
-									
+
 								}
 							}
-							
+
 							if (riprods[j].getNazionale() != null) {
 								if (riprods[j].getNazionale() == SiNoType.S) {
 									riproduzione.setNazionale(true);
-									
+
 								} else if (riprods[j].getNazionale() == SiNoType.N) {
 									riproduzione.setNazionale(false);
-									
+
 								}
 							}
-							
+
 							if (riprods[j].getInternazionale() != null) {
 								if (riprods[j].getInternazionale() == SiNoType.S) {
 									riproduzione.setInternazionale(true);
-									
+
 								} else if (riprods[j].getInternazionale() == SiNoType.N) {
 									riproduzione.setInternazionale(false);
-									
+
 								}
 							}
 							biblioDao.saveChild(riproduzione);
 							log.debug("Inserito METODO DI RIPRODUZIONE");
-							
+
 						} else {
 							String msg = "Riproduzioni Tipo non trovato: " + tipo;
 							reportImport.addWarn(msg);
 							log.warn(msg);
 						}
-					
+
 					}
 				}
-				
+
 			} else {
 				bibliotecaDb.setAttivoRiproduzioni(false);
-				
+
 				if (bibliotecaDb.getRiproduzionis() != null && bibliotecaDb.getRiproduzionis().size() > 0) {
 					bibliotecaDb.setRiproduzionis(new ArrayList<Riproduzioni>());
-					
+
 					log.debug("Cancellati TUTTI METODI DI RIPRODUZIONE...");
 				}
 			}
-			
+
 		}
+
 		//PRESTITO
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getPrestito() != null) {
 			if (biblioteca.getServizi().getPrestito().getInterbibliotecario() != null) {
@@ -1907,7 +1934,7 @@ public class ImporterImpl implements Importer {
 				if (interbb.getPrestitoInterbibliotecarioAutomatizzato() == SiNoType.S) {
 					bibliotecaDb.setProcedureIllAutomatizzate(true);
 					log.debug("ProcedureIllAutomatizzate: " + true);
-					
+
 				} else if (interbb.getPrestitoInterbibliotecarioAutomatizzato() == SiNoType.N) {
 					bibliotecaDb.setProcedureIllAutomatizzate(false);
 					log.debug("ProcedureIllAutomatizzate: " + false);
@@ -1957,88 +1984,107 @@ public class ImporterImpl implements Importer {
 			}
 
 
-			//Prestito Locale
+			/* Prestito Locale */
 			if (biblioteca.getServizi().getPrestito().getLocale() != null) {
 				if (bibliotecaDb.getPrestitoLocales() != null) {
 					biblioDao.removePrestitoLocale(bibliotecaDb);
 					log.debug("Cancellato PRESTITO LOCALE...");
 				}
-				if (biblioteca.getServizi().getPrestito().getLocale().getTotalePrestiti() != null) {
-					int nPrestitiLocaliAnnuo = biblioteca.getServizi().getPrestito().getLocale().getTotalePrestiti().intValue();
-					bibliotecaDb.setNPrestitiLocaliAnnuo(nPrestitiLocaliAnnuo);
-					log.debug("Modificato TOTALE PRESTITI LOCALI: " + nPrestitiLocaliAnnuo);
-				}
 
-				PrestitoLocale prestitoLocale = new PrestitoLocale();
-				prestitoLocale.setPrestitoLocaleMaterialeEscluso(new ArrayList<PrestitoLocaleMaterialeEscluso>());
-				prestitoLocale.setPrestitoLocaleUtentiAmmessis(new ArrayList<PrestitoLocaleUtentiAmmessi>());
+				if (biblioteca.getServizi().getPrestito().getLocale().getAttivo() != null 
+						&& biblioteca.getServizi().getPrestito().getLocale().getAttivo() == SiNoType.S) {
+					bibliotecaDb.setAttivoPrestitoLocale(true);
+					log.debug("AttivoPrestitoLocale: " + true);
 
-				//Inserimento prestito locale ed eventuali materiali esclusi
-				if (biblioteca.getServizi().getPrestito().getLocale().getPrestitoLocaleAutomatizzato() == SiNoType.S) {
-					prestitoLocale.setAutomatizzato(true);
-					log.debug("Modificato PRESTITO LOCALE AUTOMATIZZATO: " + true);
-					
-				} else if (biblioteca.getServizi().getPrestito().getLocale().getPrestitoLocaleAutomatizzato() == SiNoType.N) {
-					prestitoLocale.setAutomatizzato(false);
-					log.debug("Modificato PRESTITO LOCALE AUTOMATIZZATO: " + false);
-				}
-				if (biblioteca.getServizi().getPrestito().getLocale().getDurata() != null) {
-					int durataGiorni = Integer.valueOf(biblioteca.getServizi().getPrestito().getLocale().getDurata());
-					prestitoLocale.setDurataGiorni(durataGiorni);
-					log.debug("Modificato DURATA: " + durataGiorni);
-				}
+					if (biblioteca.getServizi().getPrestito().getLocale().getTotalePrestiti() != null) {
+						int nPrestitiLocaliAnnuo = biblioteca.getServizi().getPrestito().getLocale().getTotalePrestiti().intValue();
+						bibliotecaDb.setNPrestitiLocaliAnnuo(nPrestitiLocaliAnnuo);
+						log.debug("Modificato TOTALE PRESTITI LOCALI: " + nPrestitiLocaliAnnuo);
+					}
 
-				if (biblioteca.getServizi().getPrestito().getMaterialiEsclusiLocale() != null) {
-					String[] mat = biblioteca.getServizi().getPrestito().getMaterialiEsclusiLocale().getMateriale();
-					for (int j=0; j < mat.length; j++) {
-						if ((mat[j] != null) && (mat[j].trim().length() > 0)) {
-							String materiale = mat[j].trim();
-							PrestitoLocaleMaterialeEscluso escluso = (PrestitoLocaleMaterialeEscluso) dynaTabDao.searchRecord(PrestitoLocaleMaterialeEscluso.class, materiale);
-							if (escluso != null) {
-								if (!prestitoLocale.getPrestitoLocaleMaterialeEscluso().contains(escluso)) {
-									prestitoLocale.getPrestitoLocaleMaterialeEscluso().add(escluso);
-									log.debug("Inserito MATERIALE ESCLUSO DAL PRESTITO: " + escluso);
-									
+					PrestitoLocale prestitoLocale = new PrestitoLocale();
+					prestitoLocale.setPrestitoLocaleMaterialeEscluso(new ArrayList<PrestitoLocaleMaterialeEscluso>());
+					prestitoLocale.setPrestitoLocaleUtentiAmmessis(new ArrayList<PrestitoLocaleUtentiAmmessi>());
+
+					/* Automatizzato */
+					if (biblioteca.getServizi().getPrestito().getLocale().getPrestitoLocaleAutomatizzato() == SiNoType.S) {
+						prestitoLocale.setAutomatizzato(true);
+						log.debug("Modificato PRESTITO LOCALE AUTOMATIZZATO: " + true);
+
+					} else if (biblioteca.getServizi().getPrestito().getLocale().getPrestitoLocaleAutomatizzato() == SiNoType.N) {
+						prestitoLocale.setAutomatizzato(false);
+						log.debug("Modificato PRESTITO LOCALE AUTOMATIZZATO: " + false);
+					}
+
+					/* Durata */
+					if (biblioteca.getServizi().getPrestito().getLocale().getDurata() != null) {
+						int durataGiorni = Integer.valueOf(biblioteca.getServizi().getPrestito().getLocale().getDurata());
+						prestitoLocale.setDurataGiorni(durataGiorni);
+						log.debug("Modificato DURATA: " + durataGiorni);
+					}
+
+					/* Materiali esclusi */
+					if (biblioteca.getServizi().getPrestito().getLocale().getMaterialiEsclusi() != null) {
+						MaterialiEsclusi materialiEsclusi = biblioteca.getServizi().getPrestito().getLocale().getMaterialiEsclusi();
+
+						for (int j = 0; j < materialiEsclusi.getMaterialeEsclusoCount(); j++) {
+							String materiale = materialiEsclusi.getMaterialeEscluso(j);
+							if (materiale != null && materiale.trim().length() > 0) {
+								PrestitoLocaleMaterialeEscluso escluso = (PrestitoLocaleMaterialeEscluso) dynaTabDao.searchRecord(PrestitoLocaleMaterialeEscluso.class, materiale.trim());
+								if (escluso != null) {
+									if (!prestitoLocale.getPrestitoLocaleMaterialeEscluso().contains(escluso)) {
+										prestitoLocale.getPrestitoLocaleMaterialeEscluso().add(escluso);
+										log.debug("Inserito MATERIALE ESCLUSO DAL PRESTITO: " + escluso);
+
+									} else {
+										String msg = "Prestito Locale Materiale Escluso duplicato:" + materiale;
+										reportImport.addWarn(msg);
+										log.warn(msg);
+									}
+
 								} else {
-									String msg = "Prestito Locale Materiale Escluso duplicato:" + materiale;
+									String msg = "Prestito Locale Materiale Escluso non trovato:" + materiale;
 									reportImport.addWarn(msg);
 									log.warn(msg);
 								}
-								
-							} else {
-								String msg = "Prestito Locale Materiale Escluso non trovato:" + materiale;
-								reportImport.addWarn(msg);
-								log.warn(msg);
 							}
 						}
 					}
-				}
-				if (biblioteca.getServizi().getPrestito().getLocale().getUtentiAmmessi() != null) {
-					for (int i = 0; i < biblioteca.getServizi().getPrestito().getLocale().getUtentiAmmessi().length; i++) {
-						String utentiAmmessi = biblioteca.getServizi().getPrestito().getLocale().getUtentiAmmessi(i);
-						PrestitoLocaleUtentiAmmessi ammessi = (PrestitoLocaleUtentiAmmessi) dynaTabDao.searchRecord(PrestitoLocaleUtentiAmmessi.class, utentiAmmessi);
-						if (ammessi != null) {
-							if (!prestitoLocale.getPrestitoLocaleUtentiAmmessis().contains(ammessi)) {
-								prestitoLocale.getPrestitoLocaleUtentiAmmessis().add(ammessi);	
-								log.debug("Inserito UTENTI AMMESSI PRESTITO:LOCALE " + utentiAmmessi);
-								
-							} else {
-								String msg = "Prestito Locale Utenti Ammessi duplicato:" + utentiAmmessi;
-								reportImport.addWarn(msg);
-								log.warn(msg);
-							}
-							
-						} else {
-							String msg = "Prestito Locale Utenti Ammessi non trovato: " + utentiAmmessi;
-							reportImport.addWarn(msg);
-							log.warn(msg);
-						}
 
+					/* Utenti Ammessi */
+					if (biblioteca.getServizi().getPrestito().getLocale().getUtentiAmmessi() != null) {
+						for (int i = 0; i < biblioteca.getServizi().getPrestito().getLocale().getUtentiAmmessi().length; i++) {
+							String utentiAmmessi = biblioteca.getServizi().getPrestito().getLocale().getUtentiAmmessi(i);
+							PrestitoLocaleUtentiAmmessi ammessi = (PrestitoLocaleUtentiAmmessi) dynaTabDao.searchRecord(PrestitoLocaleUtentiAmmessi.class, utentiAmmessi);
+							if (ammessi != null) {
+								if (!prestitoLocale.getPrestitoLocaleUtentiAmmessis().contains(ammessi)) {
+									prestitoLocale.getPrestitoLocaleUtentiAmmessis().add(ammessi);	
+									log.debug("Inserito UTENTI AMMESSI PRESTITO:LOCALE " + utentiAmmessi);
+
+								} else {
+									String msg = "Prestito Locale Utenti Ammessi duplicato:" + utentiAmmessi;
+									reportImport.addWarn(msg);
+									log.warn(msg);
+								}
+
+							} else {
+								String msg = "Prestito Locale Utenti Ammessi non trovato: " + utentiAmmessi;
+								reportImport.addWarn(msg);
+								log.warn(msg);
+							}
+
+						}
 					}
-				}	
-				prestitoLocale.setBiblioteca(bibliotecaDb);
-				biblioDao.saveChild(prestitoLocale);
-				
+
+					prestitoLocale.setBiblioteca(bibliotecaDb);
+					biblioDao.saveChild(prestitoLocale);
+
+				} else if (biblioteca.getServizi().getPrestito().getLocale().getAttivo() != null 
+						&& biblioteca.getServizi().getPrestito().getLocale().getAttivo() == SiNoType.N) {
+					bibliotecaDb.setAttivoPrestitoLocale(false);
+					log.debug("AttivoPrestitoLocale: " + false);
+				}
+
 				log.debug("Modificato PRESTITO LOCALE...");
 			}			
 		}
@@ -2050,17 +2096,17 @@ public class ImporterImpl implements Importer {
 				int bilancioEntrate = biblioteca.getAmministrativa().getBilancio().getEntrate().intValue();
 				bibliotecaDb.setBilancioEntrate(bilancioEntrate);
 				log.debug("Modificati dati di bilancioEntrate: " + bilancioEntrate);
-				
+
 			} else {
 				bibliotecaDb.setBilancioEntrate(0);
 			}
-			
+
 			if (biblioteca.getAmministrativa().getBilancio().getUscite() != null) {
 				if (biblioteca.getAmministrativa().getBilancio().getUscite().getTotale() != null) {
 					int bilancioUscite = biblioteca.getAmministrativa().getBilancio().getUscite().getTotale().intValue();
 					bibliotecaDb.setBilancioUscite(bilancioUscite);
 					log.debug("Modificati dati di bilancioUscite: " + bilancioUscite);
-					
+
 				} else {
 					bibliotecaDb.setBilancioUscite(0);
 				}
@@ -2069,7 +2115,7 @@ public class ImporterImpl implements Importer {
 					int bilancioUscitePersonale = biblioteca.getAmministrativa().getBilancio().getUscite().getPersonale().intValue();
 					bibliotecaDb.setBilancioUscitePersonale(bilancioUscitePersonale);
 					log.debug("Modificati dati di bilancioUscitePersonale: " + bilancioUscitePersonale);
-					
+
 				} else {
 					bibliotecaDb.setBilancioUscitePersonale(0);
 				}
@@ -2078,7 +2124,7 @@ public class ImporterImpl implements Importer {
 					int bilancioUsciteFunzionamento = biblioteca.getAmministrativa().getBilancio().getUscite().getFunzionamento().intValue();
 					bibliotecaDb.setBilancioUsciteFunzionamento(bilancioUsciteFunzionamento);
 					log.debug("Modificati dati di bilancioUsciteFunzionamento: " + bilancioUsciteFunzionamento);
-					
+
 				} else {
 					bibliotecaDb.setBilancioUsciteFunzionamento(0);
 				}
@@ -2113,39 +2159,54 @@ public class ImporterImpl implements Importer {
 
 		}
 
-		//DEPOSITI LEGALI
+		/* DEPOSITI LEGALI */
 		if (biblioteca.getAmministrativa().getDepositiLegali() != null) {
-			for (int j = 0; j < biblioteca.getAmministrativa().getDepositiLegali().getDepositoLegaleCount(); j++) {
-				DepositoLegale dl = (DepositoLegale) biblioteca.getAmministrativa().getDepositiLegali().getDepositoLegale(j);
-				if (j == 0) {
-					if (bibliotecaDb.getDepositiLegalis() != null) {
-						biblioDao.removeChilds(bibliotecaDb.getDepositiLegalis());
-						log.debug("Cancellati DEPOSITI LEGALI...");
+			if (biblioteca.getAmministrativa().getDepositiLegali().getAttivo() == SiNoType.S) {
+				bibliotecaDb.setAttivoDepositoLegale(true);
+				log.debug("AttivoDepositoLegale: " + true);
+
+				for (int j = 0; j < biblioteca.getAmministrativa().getDepositiLegali().getDepositoLegaleCount(); j++) {
+					DepositoLegale dl = (DepositoLegale) biblioteca.getAmministrativa().getDepositiLegali().getDepositoLegale(j);
+					if (j == 0) {
+						if (bibliotecaDb.getDepositiLegalis() != null) {
+							biblioDao.removeChilds(bibliotecaDb.getDepositiLegalis());
+							log.debug("Cancellati DEPOSITI LEGALI...");
+						}
+					}
+					String tipo = dl.getTipo();
+					String annoInizio = dl.getAnnoInizio();
+					DepositiLegaliTipo depositiLegaliTipo = (DepositiLegaliTipo) dynaTabDao.searchRecord(DepositiLegaliTipo.class, tipo);
+
+					if (depositiLegaliTipo != null) {
+						DepositiLegaliPK id = new DepositiLegaliPK();
+						id.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
+						id.setIdDepositiLegaliTipo(depositiLegaliTipo.getIdDepositiLegaliTipo());
+
+						DepositiLegali depositiLegali = new DepositiLegali();
+						depositiLegali.setDaAnno(annoInizio);
+						depositiLegali.setDepositiLegaliTipo(depositiLegaliTipo);
+						depositiLegali.setId(id);
+						biblioDao.saveChild(depositiLegali);
+						log.debug("Inserito DEPOSITO LEGALE tipo: " + dl.getTipo() + " daAnno: " + annoInizio);
+
+					} else {
+						String msg = "Depositi Legali non trovato: " + tipo;
+						reportImport.addWarn(msg);
+						log.warn(msg);
 					}
 				}
-				String tipo = dl.getTipo();
-				String annoInizio = dl.getAnnoInizio();
-				DepositiLegaliTipo depositiLegaliTipo = (DepositiLegaliTipo) dynaTabDao.searchRecord(DepositiLegaliTipo.class, tipo);
 
-				if (depositiLegaliTipo != null) {
-					DepositiLegaliPK id = new DepositiLegaliPK();
-					id.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
-					id.setIdDepositiLegaliTipo(depositiLegaliTipo.getIdDepositiLegaliTipo());
+			} else {
+				bibliotecaDb.setAttivoDepositoLegale(false);
+				log.debug("AttivoDepositoLegale: " + false);
 
-					DepositiLegali depositiLegali = new DepositiLegali();
-					depositiLegali.setDaAnno(annoInizio);
-					depositiLegali.setDepositiLegaliTipo(depositiLegaliTipo);
-					depositiLegali.setId(id);
-					biblioDao.saveChild(depositiLegali);
-					log.debug("Inserito DEPOSITO LEGALE tipo: " + dl.getTipo() + " daAnno: " + annoInizio);
-
-				} else {
-					String msg = "Depositi Legali non trovato: " + tipo;
-					reportImport.addWarn(msg);
-					log.warn(msg);
+				if (bibliotecaDb.getDepositiLegalis() != null && bibliotecaDb.getDepositiLegalis().size() > 0) {
+					biblioDao.removeChilds(bibliotecaDb.getDepositiLegalis());
+					log.debug("Cancellati DEPOSITI LEGALI...");
 				}
 			}
 		}
+
 		// PERSONALE
 		if (biblioteca.getAmministrativa().getPersonale() != null) {
 			bibliotecaDb.setPersonaleEsterno((int) biblioteca.getAmministrativa().getPersonale().getEsterno());
@@ -2157,6 +2218,121 @@ public class ImporterImpl implements Importer {
 			log.debug("Modificati dati PERSONALE Temporaneo:" + biblioteca.getAmministrativa().getPersonale().getTemporaneo());
 			log.debug("Modificati dati PERSONALE Totale:" + biblioteca.getAmministrativa().getPersonale().getTotale());
 		}
+
+		/* REFERENCE */
+		if (biblioteca.getServizi() != null && biblioteca.getServizi().getReference() != null) {
+			if (biblioteca.getServizi().getReference().getAttivo() == SiNoType.S) {
+				bibliotecaDb.setAttivoReference(true);
+				log.debug("AttivoReference(: " + true);
+
+				/* Reference locale */
+				if (biblioteca.getServizi().getReference().getLocale() != null 
+						&& biblioteca.getServizi().getReference().getLocale() == SiNoType.S) {
+					bibliotecaDb.setReferenceLocale(true);
+					log.debug("ReferenceLocale: " + true);
+
+				} else if (biblioteca.getServizi().getReference().getLocale() != null 
+						&& biblioteca.getServizi().getReference().getLocale() == SiNoType.N) {
+					bibliotecaDb.setReferenceLocale(false);
+					log.debug("ReferenceLocale: " + false);
+
+				} else {
+					bibliotecaDb.setReferenceLocale(null);
+				}
+
+				/* Reference online */
+				if (biblioteca.getServizi().getReference().getOnline() != null
+						&& biblioteca.getServizi().getReference().getOnline() == SiNoType.S) {
+					bibliotecaDb.setReferenceOnline(true);
+					log.debug("ReferenceOnline: " + true);
+
+				} else if (biblioteca.getServizi().getReference().getOnline() != null 
+						&& biblioteca.getServizi().getReference().getOnline() == SiNoType.N) {
+					bibliotecaDb.setReferenceOnline(false);
+					log.debug("ReferenceOnline: " + false);
+
+				} else {
+					bibliotecaDb.setReferenceOnline(null);
+				}
+
+			} else if (biblioteca.getServizi().getReference().getAttivo() == SiNoType.N) {
+				bibliotecaDb.setAttivoReference(false);
+				log.debug("AttivoReference: " + false);
+
+				/* Reference locale */
+				bibliotecaDb.setReferenceLocale(false);
+				log.debug("ReferenceLocale: " + false);
+
+				/* Reference online */
+				bibliotecaDb.setReferenceOnline(false);
+				log.debug("ReferenceOnline: " + false);
+
+			}
+
+			log.debug("Modificate informazioni SERVIZI REFERENCE...");
+		}
+
+		/* DOCUMENT DELIVERY */
+		if (biblioteca.getServizi() != null && biblioteca.getServizi().getDocumentDelivery() != null) {
+			if (biblioteca.getServizi().getDocumentDelivery().getAttivo() == SiNoType.S) {
+				bibliotecaDb.setAttivoDocumentDelivery(true);
+				log.debug("AttivoDocumentDelivery: " + true);
+
+				/* Tipologie */
+				if (biblioteca.getServizi().getDocumentDelivery().getDocDelForme() != null) {
+					for (int i = 0; i < biblioteca.getServizi().getDocumentDelivery().getDocDelForme().getFormaCount(); i++) {
+						if (i == 0) {
+							if (bibliotecaDb.getDocumentDeliveries() != null) {
+								bibliotecaDb.getDocumentDeliveries().clear();
+								log.debug("CANCELLATE Document Delivery...");
+
+							} else {
+								bibliotecaDb.setDocumentDeliveries(new ArrayList<RiproduzioniTipo>());
+							}
+						}
+
+						String forma = (String) biblioteca.getServizi().getDocumentDelivery().getDocDelForme().getForma(i);
+
+
+						if (forma != null && forma.length() > 0) {
+							RiproduzioniTipo riproTipo = (RiproduzioniTipo) dynaTabDao.searchRecord(RiproduzioniTipo.class, forma);
+
+							if (riproTipo != null) {
+								if (!bibliotecaDb.getDocumentDeliveries().contains(riproTipo)) {
+									bibliotecaDb.getDocumentDeliveries().add(riproTipo);
+
+								} else {
+									String msg = "Document Delivery duplicata: " + forma;
+									reportImport.addWarn(msg);
+									log.warn(msg);
+								}
+
+							} else {
+								String msg = "Document Delivery non trovata:" + forma;
+								reportImport.addWarn(msg);
+								log.warn(msg);
+							}
+
+							log.debug("Inserita DOCUMENT DELIVERY: " + forma);
+						}
+
+					}
+
+				}
+
+			} else if (biblioteca.getServizi().getDocumentDelivery().getAttivo() == SiNoType.N) {
+				bibliotecaDb.setAttivoDocumentDelivery(false);
+				log.debug("AttivoDocumentDelivery: " + false);
+
+				if (bibliotecaDb.getDocumentDeliveries() != null && bibliotecaDb.getDocumentDeliveries().size() > 0) {
+					bibliotecaDb.getDocumentDeliveries().clear();
+					log.debug("CANCELLATE Document Delivery...");
+				}
+			}
+
+			log.debug("Modificate informazioni SERVIZI DOCUMENT DELIVERY...");
+		}
+
 		log.info("Mapping terminato");
 
 	}
@@ -2215,8 +2391,8 @@ public class ImporterImpl implements Importer {
 	private boolean setDenominazioneUfficiale(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca,
 			ReportImport reportImport, Biblioteca bibliotecaDb, boolean regionale) {
 		// Denominazione ufficiale
-		if (biblioteca.getAnagrafica().getNome() != null && biblioteca.getAnagrafica().getNome().getAttuale() != null) {
-			String denominazioneUfficiale = biblioteca.getAnagrafica().getNome().getAttuale();
+		if (biblioteca.getAnagrafica().getNomi() != null && biblioteca.getAnagrafica().getNomi().getAttuale() != null) {
+			String denominazioneUfficiale = biblioteca.getAnagrafica().getNomi().getAttuale();
 			//Modifica la denominazione pre-esistente
 			bibliotecaDb.setDenominazioneUfficiale(denominazioneUfficiale);
 			log.debug("Modificata DENOMINAZIONE UFFICIALE:" + denominazioneUfficiale);

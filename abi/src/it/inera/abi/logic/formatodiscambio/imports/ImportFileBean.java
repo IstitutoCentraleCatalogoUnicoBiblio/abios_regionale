@@ -3,7 +3,12 @@ package it.inera.abi.logic.formatodiscambio.imports;
 import java.io.Serializable;
 import java.util.Vector;
 
-public class ImportFileBean  implements Serializable  {
+/**
+ * Classe che rappresenta l'import: esito, nome del file, login utente, 
+ * data e ora upload, ecc...
+ *
+ */
+public class ImportFileBean implements Serializable  {
 
 	private static final long serialVersionUID = 8824121806793222260L;
 	

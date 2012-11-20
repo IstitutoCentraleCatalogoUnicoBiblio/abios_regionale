@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per rappresentare le province
+ *
+ */
 public class ProvinceModel extends BaseModel implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -2220794827838745903L;
 
 	public ProvinceModel() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public ProvinceModel(int id_provincia, int id_regione,

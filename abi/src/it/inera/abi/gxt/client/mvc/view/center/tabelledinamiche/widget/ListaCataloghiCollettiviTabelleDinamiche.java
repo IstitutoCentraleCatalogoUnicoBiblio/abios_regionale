@@ -55,6 +55,11 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette la gestione (modifica, aggiungi, rimuovi) 
+ * della tabella dinamica dei cataloghi collettivi
+ * 
+ */
 public class ListaCataloghiCollettiviTabelleDinamiche extends ContentPanel {
 
 	private Grid<CataloghiCollettiviModel> grid = null;

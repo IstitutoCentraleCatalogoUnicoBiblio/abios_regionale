@@ -8,7 +8,6 @@ import it.inera.abi.gxt.client.costants.CostantiTabelleDinamiche;
 import it.inera.abi.gxt.client.mvc.model.ComuniModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
 import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
-import it.inera.abi.gxt.client.mvc.model.RegioniModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
@@ -41,7 +40,6 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
@@ -55,7 +53,6 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
@@ -63,9 +60,15 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * Classe per la ricerca delle biblioteche per regione, provincia,
+ * comune, stato della biblioteca, tipologie (amministrativa e funzionale),
+ * denominazione catalogo e codici
+ *
+ */
 public class RicercaBiblioFormPanel extends FormPanel {
+	
 	private EventType eventToForwardOnSearch = null;
 	private LayoutContainer main;
 	private LayoutContainer left;

@@ -49,7 +49,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica delle informazioni
+ * relative alla lista di destinazioni sociali
+ *
+ */
 public class ListaDestinazioneSocialePanel extends ContentPanel {
+	
 	private TabelleDinamicheServiceAsync tabelleDinamicheService;
 	private BibliotecheServiceAsync bibliotecheServiceAsync ;
 	private int id_biblioteca;

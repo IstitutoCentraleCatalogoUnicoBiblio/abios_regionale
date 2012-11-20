@@ -32,6 +32,11 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Classe che implementa la logica delle principali operazioni riguardanti
+ * le Tabelle Dinamiche
+ *
+ */
 @Service
 public class AbiTabelleDinamicheLogicImpl implements AbiTabelleDinamicheLogic {
 	@PersistenceContext

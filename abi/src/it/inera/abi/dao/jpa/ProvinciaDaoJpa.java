@@ -13,6 +13,10 @@ import it.inera.abi.dao.ProvinciaDao;
 import it.inera.abi.persistence.Provincia;
 import it.inera.abi.persistence.Regione;
 
+/**
+ * Implementazione classe DAO per l'entità Provincia
+ *
+ */
 @Repository
 public class ProvinciaDaoJpa implements ProvinciaDao {
 

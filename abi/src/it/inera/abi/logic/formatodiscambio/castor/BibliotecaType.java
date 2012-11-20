@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: BibliotecaType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
+ * $Id: BibliotecaType.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -41,7 +41,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  L'elemento biblioteca adesso è obbligatorio.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public abstract class BibliotecaType implements java.io.Serializable {
@@ -67,9 +67,12 @@ public abstract class BibliotecaType implements java.io.Serializable {
     private it.inera.abi.logic.formatodiscambio.castor.Patrimonio _patrimonio;
 
     /**
-     * Field _specializzazioneList.
+     * E' stato introdotto l'elemento ripetibile
+     *  'specializzazioni' come contenitore
+     *  delle eventuali specializzazioni.
+     *  
      */
-    private java.util.List<it.inera.abi.logic.formatodiscambio.castor.Specializzazione> _specializzazioneList;
+    private it.inera.abi.logic.formatodiscambio.castor.Specializzazioni _specializzazioni;
 
     /**
      * Field _servizi.
@@ -88,52 +91,12 @@ public abstract class BibliotecaType implements java.io.Serializable {
 
     public BibliotecaType() {
         super();
-        this._specializzazioneList = new java.util.ArrayList<it.inera.abi.logic.formatodiscambio.castor.Specializzazione>();
     }
 
 
       //-----------/
      //- Methods -/
     //-----------/
-
-    /**
-     * 
-     * 
-     * @param vSpecializzazione
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addSpecializzazione(
-            final it.inera.abi.logic.formatodiscambio.castor.Specializzazione vSpecializzazione)
-    throws java.lang.IndexOutOfBoundsException {
-        this._specializzazioneList.add(vSpecializzazione);
-    }
-
-    /**
-     * 
-     * 
-     * @param index
-     * @param vSpecializzazione
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     */
-    public void addSpecializzazione(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.Specializzazione vSpecializzazione)
-    throws java.lang.IndexOutOfBoundsException {
-        this._specializzazioneList.add(index, vSpecializzazione);
-    }
-
-    /**
-     * Method enumerateSpecializzazione.
-     * 
-     * @return an Enumeration over all possible elements of this
-     * collection
-     */
-    public java.util.Enumeration<? extends it.inera.abi.logic.formatodiscambio.castor.Specializzazione> enumerateSpecializzazione(
-    ) {
-        return java.util.Collections.enumeration(this._specializzazioneList);
-    }
 
     /**
      * Returns the value of field 'amministrativa'.
@@ -186,50 +149,18 @@ public abstract class BibliotecaType implements java.io.Serializable {
     }
 
     /**
-     * Method getSpecializzazione.
+     * Returns the value of field 'specializzazioni'. The field
+     * 'specializzazioni' has the following description: E' stato
+     * introdotto l'elemento ripetibile
+     *  'specializzazioni' come contenitore
+     *  delle eventuali specializzazioni.
+     *  
      * 
-     * @param index
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
-     * @return the value of the
-     * it.inera.abi.logic.formatodiscambio.castor.Specializzazione
-     * at the given index
+     * @return the value of field 'Specializzazioni'.
      */
-    public it.inera.abi.logic.formatodiscambio.castor.Specializzazione getSpecializzazione(
-            final int index)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._specializzazioneList.size()) {
-            throw new IndexOutOfBoundsException("getSpecializzazione: Index value '" + index + "' not in range [0.." + (this._specializzazioneList.size() - 1) + "]");
-        }
-
-        return (it.inera.abi.logic.formatodiscambio.castor.Specializzazione) _specializzazioneList.get(index);
-    }
-
-    /**
-     * Method getSpecializzazione.Returns the contents of the
-     * collection in an Array.  <p>Note:  Just in case the
-     * collection contents are changing in another thread, we pass
-     * a 0-length Array of the correct type into the API call. 
-     * This way we <i>know</i> that the Array returned is of
-     * exactly the correct length.
-     * 
-     * @return this collection as an Array
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Specializzazione[] getSpecializzazione(
+    public it.inera.abi.logic.formatodiscambio.castor.Specializzazioni getSpecializzazioni(
     ) {
-        it.inera.abi.logic.formatodiscambio.castor.Specializzazione[] array = new it.inera.abi.logic.formatodiscambio.castor.Specializzazione[0];
-        return (it.inera.abi.logic.formatodiscambio.castor.Specializzazione[]) this._specializzazioneList.toArray(array);
-    }
-
-    /**
-     * Method getSpecializzazioneCount.
-     * 
-     * @return the size of this collection
-     */
-    public int getSpecializzazioneCount(
-    ) {
-        return this._specializzazioneList.size();
+        return this._specializzazioni;
     }
 
     /**
@@ -245,48 +176,6 @@ public abstract class BibliotecaType implements java.io.Serializable {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Method iterateSpecializzazione.
-     * 
-     * @return an Iterator over all possible elements in this
-     * collection
-     */
-    public java.util.Iterator<? extends it.inera.abi.logic.formatodiscambio.castor.Specializzazione> iterateSpecializzazione(
-    ) {
-        return this._specializzazioneList.iterator();
-    }
-
-    /**
-     */
-    public void removeAllSpecializzazione(
-    ) {
-        this._specializzazioneList.clear();
-    }
-
-    /**
-     * Method removeSpecializzazione.
-     * 
-     * @param vSpecializzazione
-     * @return true if the object was removed from the collection.
-     */
-    public boolean removeSpecializzazione(
-            final it.inera.abi.logic.formatodiscambio.castor.Specializzazione vSpecializzazione) {
-        boolean removed = _specializzazioneList.remove(vSpecializzazione);
-        return removed;
-    }
-
-    /**
-     * Method removeSpecializzazioneAt.
-     * 
-     * @param index
-     * @return the element removed from the collection
-     */
-    public it.inera.abi.logic.formatodiscambio.castor.Specializzazione removeSpecializzazioneAt(
-            final int index) {
-        java.lang.Object obj = this._specializzazioneList.remove(index);
-        return (it.inera.abi.logic.formatodiscambio.castor.Specializzazione) obj;
     }
 
     /**
@@ -340,38 +229,18 @@ public abstract class BibliotecaType implements java.io.Serializable {
     }
 
     /**
+     * Sets the value of field 'specializzazioni'. The field
+     * 'specializzazioni' has the following description: E' stato
+     * introdotto l'elemento ripetibile
+     *  'specializzazioni' come contenitore
+     *  delle eventuali specializzazioni.
+     *  
      * 
-     * 
-     * @param index
-     * @param vSpecializzazione
-     * @throws java.lang.IndexOutOfBoundsException if the index
-     * given is outside the bounds of the collection
+     * @param specializzazioni the value of field 'specializzazioni'
      */
-    public void setSpecializzazione(
-            final int index,
-            final it.inera.abi.logic.formatodiscambio.castor.Specializzazione vSpecializzazione)
-    throws java.lang.IndexOutOfBoundsException {
-        // check bounds for index
-        if (index < 0 || index >= this._specializzazioneList.size()) {
-            throw new IndexOutOfBoundsException("setSpecializzazione: Index value '" + index + "' not in range [0.." + (this._specializzazioneList.size() - 1) + "]");
-        }
-
-        this._specializzazioneList.set(index, vSpecializzazione);
-    }
-
-    /**
-     * 
-     * 
-     * @param vSpecializzazioneArray
-     */
-    public void setSpecializzazione(
-            final it.inera.abi.logic.formatodiscambio.castor.Specializzazione[] vSpecializzazioneArray) {
-        //-- copy array
-        _specializzazioneList.clear();
-
-        for (int i = 0; i < vSpecializzazioneArray.length; i++) {
-                this._specializzazioneList.add(vSpecializzazioneArray[i]);
-        }
+    public void setSpecializzazioni(
+            final it.inera.abi.logic.formatodiscambio.castor.Specializzazioni specializzazioni) {
+        this._specializzazioni = specializzazioni;
     }
 
     /**

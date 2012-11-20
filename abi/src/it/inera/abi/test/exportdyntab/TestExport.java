@@ -5,6 +5,10 @@ import it.inera.abi.logic.exportdynatabs.ExportDynaTabs;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+/**
+ * Classe per il testing dell'export delle tabelle dinamiche
+ *
+ */
 public class TestExport {
 
 	/**

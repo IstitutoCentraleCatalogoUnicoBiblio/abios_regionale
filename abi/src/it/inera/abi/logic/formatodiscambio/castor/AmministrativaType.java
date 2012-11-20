@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AmministrativaType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
+ * $Id: AmministrativaType.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -16,7 +16,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  sono auto-esplicativi.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public abstract class AmministrativaType implements java.io.Serializable {
@@ -97,22 +97,20 @@ public abstract class AmministrativaType implements java.io.Serializable {
     private it.inera.abi.logic.formatodiscambio.castor.Strutture _strutture;
 
     /**
-     * Informazioni relative agli utenti della
-     *  biblioteca.
+     * Informazioni relative agli utenti della biblioteca.
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.Utenti _utenti;
 
     /**
-     * Informazioni relative al personale impiegato a
-     *  vario titolo nella biblioteca.
+     * Informazioni relative al personale impiegato a vario titolo
+     * nella biblioteca.
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.Personale _personale;
 
     /**
-     * Informazioni relative al bilancio della
-     *  biblioteca.
+     * Informazioni relative al bilancio della biblioteca.
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.Bilancio _bilancio;
@@ -146,8 +144,7 @@ public abstract class AmministrativaType implements java.io.Serializable {
     /**
      * Returns the value of field 'bilancio'. The field 'bilancio'
      * has the following description: Informazioni relative al
-     * bilancio della
-     *  biblioteca.
+     * bilancio della biblioteca.
      *  
      * 
      * @return the value of field 'Bilancio'.
@@ -240,8 +237,8 @@ public abstract class AmministrativaType implements java.io.Serializable {
     /**
      * Returns the value of field 'personale'. The field
      * 'personale' has the following description: Informazioni
-     * relative al personale impiegato a
-     *  vario titolo nella biblioteca.
+     * relative al personale impiegato a vario titolo nella
+     * biblioteca.
      *  
      * 
      * @return the value of field 'Personale'.
@@ -279,8 +276,7 @@ public abstract class AmministrativaType implements java.io.Serializable {
     /**
      * Returns the value of field 'utenti'. The field 'utenti' has
      * the following description: Informazioni relative agli utenti
-     * della
-     *  biblioteca.
+     * della biblioteca.
      *  
      * 
      * @return the value of field 'Utenti'.
@@ -320,8 +316,7 @@ public abstract class AmministrativaType implements java.io.Serializable {
     /**
      * Sets the value of field 'bilancio'. The field 'bilancio' has
      * the following description: Informazioni relative al bilancio
-     * della
-     *  biblioteca.
+     * della biblioteca.
      *  
      * 
      * @param bilancio the value of field 'bilancio'.
@@ -414,8 +409,7 @@ public abstract class AmministrativaType implements java.io.Serializable {
     /**
      * Sets the value of field 'personale'. The field 'personale'
      * has the following description: Informazioni relative al
-     * personale impiegato a
-     *  vario titolo nella biblioteca.
+     * personale impiegato a vario titolo nella biblioteca.
      *  
      * 
      * @param personale the value of field 'personale'.
@@ -453,8 +447,7 @@ public abstract class AmministrativaType implements java.io.Serializable {
     /**
      * Sets the value of field 'utenti'. The field 'utenti' has the
      * following description: Informazioni relative agli utenti
-     * della
-     *  biblioteca.
+     * della biblioteca.
      *  
      * 
      * @param utenti the value of field 'utenti'.

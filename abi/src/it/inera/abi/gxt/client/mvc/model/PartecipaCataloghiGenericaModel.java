@@ -6,8 +6,13 @@ import java.util.List;
 import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.ChangeEventSource;
 
+/**
+ * Modello generico per la rappresentazione dell'associazione tra la biblioteca 
+ * ed i cataloghi
+ *
+ */
 public class PartecipaCataloghiGenericaModel extends BaseModel implements
-		Serializable ,ChangeEventSource{
+		Serializable ,ChangeEventSource {
 	/**
 	 * Variabili per serializzazione
 	 */

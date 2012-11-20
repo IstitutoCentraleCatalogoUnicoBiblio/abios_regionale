@@ -6,7 +6,6 @@ import it.inera.abi.gxt.client.AppEvents;
 import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.costants.CostantiGestioneBiblio;
-import it.inera.abi.gxt.client.costants.CostantiGestioneUtenti;
 import it.inera.abi.gxt.client.mvc.model.UserModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.model.auth.UtentiAuthModel;
@@ -56,6 +55,11 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette la visualizzazione / modifica delle 
+ * informazioni relative agli utenti
+ *
+ */
 public class ListaUtentiPanel extends ContentPanel {
 
 	protected Grid<UserModel> grid = null;

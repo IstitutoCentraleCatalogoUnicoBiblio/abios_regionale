@@ -3,7 +3,6 @@ package it.inera.abi.gxt.client.auth;
 import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.AppEvents;
 import it.inera.abi.gxt.client.mvc.model.auth.UtentiAuthModel;
-import it.inera.abi.gxt.client.services.AuthService;
 import it.inera.abi.gxt.client.services.AuthServiceAsync;
 
 import com.extjs.gxt.ui.client.Registry;
@@ -12,6 +11,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la gestione dell'autenticazione da parte degli utenti e per
+ * abilitare / oscurare i menu dell'applicativo ABI in base ai ruoli attivi
+ *
+ */
 public class UIAuth {
 	
 	public static UtentiAuthModel getUtentiAuthModel() {

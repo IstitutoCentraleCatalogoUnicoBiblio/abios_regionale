@@ -46,7 +46,13 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette la gestione (modifica, aggiungi, rimuovi) 
+ * della tabella dinamica generica con struttura (id_record, descrizione)
+ * 
+ */
 public class ListaVoceSingolaTabelleDinamiche extends ContentPanel {
+	
 	private boolean modifica;
 	private Grid<VoceUnicaModel> grid = null;
 	private RowEditorCustom<VoceUnicaModel> re = null;

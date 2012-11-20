@@ -2,12 +2,13 @@ package it.inera.abi.test;
 
 import it.inera.abi.logic.statistiche.GenerateStatistics;
 
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
 
+/**
+ * Classe di test per la generazione delle statistiche
+ *
+ */
 public class TestStatistiche {
 
 	public static void main(String[] args) throws Exception {

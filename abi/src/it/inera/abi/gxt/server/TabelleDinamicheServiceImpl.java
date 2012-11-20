@@ -12,10 +12,8 @@ import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimoniCategorieTabelleDinamicheModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimonioSpecializzazioneModel;
 import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
-import it.inera.abi.gxt.client.mvc.model.RegioniModel;
 import it.inera.abi.gxt.client.mvc.model.SistemiPrestitoInterbibliotecarioModel;
 import it.inera.abi.gxt.client.mvc.model.SpecializzazioneModel;
-import it.inera.abi.gxt.client.mvc.model.StatoModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.models.CataloghiCollettiviModel;
 import it.inera.abi.gxt.client.services.CostraintKeyViolationClientSideException;
@@ -34,8 +32,6 @@ import it.inera.abi.persistence.PrestitoLocaleUtentiAmmessi;
 import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -48,13 +44,13 @@ import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 
+/**
+ * Implementazione dei servizi relativi alle tabelle dinamiche (lato server)
+ * 
+ */
 public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServlet implements TabelleDinamicheService {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-
-
 
 	private AbiTabelleDinamicheLogic abiTabelleDinamicheLogic;
 
@@ -756,7 +752,7 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 	/**
 	 * Rimuove il punto dal codice dewey 
 	 * @param idr_removeRecord
-	 * @return
+	 * @return String
 	 */
 	public static String rimuoviPuntoDalCodiceDewey(String idr_removeRecord) {
 		String tmpStr=new String();
@@ -769,8 +765,8 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 
 	/**
 	 * Inserisce nel codice dewey il punto
-	 * @param codiceDewey
-	 * @return
+	 * @param senzaPunto
+	 * @return String
 	 */
 	public static String creaCodiceDeweyPuntato(String senzaPunto) {
 		if(senzaPunto.length()>3){

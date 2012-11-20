@@ -4,6 +4,10 @@ import it.inera.abi.persistence.DenominazioniAlternative;
 
 import java.util.List;
 
+/**
+ * Interfaccia DAO per l'entità Denominazioni Alternative
+ *
+ */
 public interface DenominazioniAlternativeDao {
 
 	public List<DenominazioniAlternative> getDenominazioniAlternative(int id_biblioteca);

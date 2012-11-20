@@ -4,6 +4,10 @@ import it.inera.abi.logic.formatodiscambio.imports.InfoBiblioBean;
 
 import java.util.Vector;
 
+/**
+ * Classe che rappresenta l'export: nome del file, login utente, biblioteche esportate
+ *
+ */
 public class ExportBean {
 	
 	public String fileName;

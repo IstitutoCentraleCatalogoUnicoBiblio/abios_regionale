@@ -5,14 +5,15 @@ import java.util.List;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per i file controllati nel formato di scambio
+ *
+ */
 public class FileCaricatiListModel extends BaseModel {
 
-
-	
 	public FileCaricatiListModel() {
 		set("error", false);
 	}
-
 	
 	public void setBiblios(List biblios) {
 		set("biblios", biblios);
@@ -86,18 +87,23 @@ public class FileCaricatiListModel extends BaseModel {
 	public void setNbib(String nBib) {
 		set("nBib", nBib);
 	}
+	
 	public String getNbib() {
 		return get("nBib");
 	}
+	
 	public void setFilename(String filename) {
 		set("filename", filename);
 	}
+	
 	public String getFilename() {
 		return get("filename");
 	}
+	
 	public void setOriginalFilename(String originalFilename) {
 		set("originalFilename", originalFilename);
 	}
+	
 	public String getOriginalFilename() {
 		return get("originalFilename");
 	}

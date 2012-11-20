@@ -17,7 +17,14 @@ import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.ui.RadioButton;
 
+/**
+ * Estensione della classe <code>GestioneReportFormBasePanel</code>, 
+ * permette la ricerca per le stampe (da scaricare in formato pdf e/o excel) 
+ * dei report nel formato di scambio
+ *
+ */
 public class GestioneReportFormTipoStampaPanel extends GestioneReportFormBasePanel {
+	
 	protected FieldSet tipoStampaFields;
 	protected final RadioButton formatoStampaEtichetta;
 	protected final RadioButton formatoStampaLista;

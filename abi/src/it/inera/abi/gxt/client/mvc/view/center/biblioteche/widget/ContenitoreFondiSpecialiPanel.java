@@ -35,7 +35,6 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
@@ -54,7 +53,13 @@ import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class ContenitoreFondiSpecialiPanel extends FormPanel{
+/**
+ * Classe widget per la visualizzazione / modifica delle informazioni relative
+ * ai fondi speciali
+ *
+ */
+public class ContenitoreFondiSpecialiPanel extends FormPanel {
+	
 	private int idBiblio;
 	private FondiSpecialiModel model;
 	private FondiSpecialiModel modelToSave;
@@ -419,7 +424,7 @@ public class ContenitoreFondiSpecialiPanel extends FormPanel{
 								@Override
 								public void onSuccess(FondiSpecialiModel result) {
 									modelToUpdate=result;
-									fireReleoadPanel();
+									fireReloadPanel();
 									fireCloseWindow();
 									//									modifica = false;
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
@@ -601,7 +606,7 @@ public class ContenitoreFondiSpecialiPanel extends FormPanel{
 		Dispatcher.get().dispatch(AppEvents.ReloadBiblioData,this.idBiblio);
 	}
 
-	public void fireReleoadPanel() {
+	public void fireReloadPanel() {
 		tmpTestoFondiSpecialiPanel.setModel(modelToUpdate);
 		tmpTestoFondiSpecialiPanel.fireRefreshMeEvent();
 	}

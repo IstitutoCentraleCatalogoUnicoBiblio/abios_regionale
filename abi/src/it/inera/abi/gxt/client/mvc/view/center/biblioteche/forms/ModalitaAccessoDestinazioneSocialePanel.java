@@ -5,7 +5,7 @@ import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaDestinazioneSocialePanel;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaModalitaAccesoPanel;
+import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaModalitaAccessoPanel;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
 
@@ -26,7 +26,6 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
-import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.RadioGroup;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
@@ -35,19 +34,20 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
-import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RadioButton;
 
-public class ModalitaAccessoDestinazioneSocialePanel extends
-ContentPanelForTabItem {
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * alle modalità di accesso ed alle destinazioni sociali
+ *
+ */
+public class ModalitaAccessoDestinazioneSocialePanel extends ContentPanelForTabItem {
+	
 	private TableData d;
 	private TableData d2;
 	private TableData d3;
 	private TableData d4;
 	private SimpleComboBox<String> accessoRiservatoField;
-	private NumberField limiteEtaMinField;
-	private NumberField limiteEtaMaxField;
 
 	private RadioGroup rgHandicap;
 	private Radio portatoriHandicapSI;
@@ -56,15 +56,13 @@ ContentPanelForTabItem {
 
 	private TextField<String> riferimentoNormativoField;
 	private TextField<String> urlField;
-	private ListaModalitaAccesoPanel listaModalitaAccesoPanel;
+	private ListaModalitaAccessoPanel listaModalitaAccesoPanel;
 	private	ListaDestinazioneSocialePanel listaDestinazioneSocialePanel;
 	public int id_biblio;
 
 	private Button modalitaAccessoAggiorna;
 	private Button resetAccesso;
 
-	private Button limiteEtaAggiorna;
-	private Button resetLimiteEta;
 	private Button portatoriHandicapAggiorna;
 	private Button resetHandicap;
 	private Button regolamentoAggiorna;
@@ -73,15 +71,13 @@ ContentPanelForTabItem {
 	private BibliotecheServiceAsync bibliotecheService;
 
 	private Text accessoLabel;
-	private Text limiteEtaMinLabel;
-	private Text limiteEtaMaxLabel;
 	private Text portatoriHandicapLabel;
 	private Text riferimentoNormativoLabel;
 	private Text urlLabel;
 
 	/*forms*/
 	private FormPanel modalitaAccessoForm;
-	private FormPanel limiteEtaEListaForm;
+	private FormPanel listaModAccessoForm;
 	private FormPanel portatoriHandicapForm;
 	private FormPanel regolamentoForm;
 
@@ -120,7 +116,6 @@ ContentPanelForTabItem {
 
 	public void createModealitaAccessoForm() {
 		/* MODALITA' ACCESSO */
-
 		LayoutContainer modalitaAccesso = new LayoutContainer();
 		modalitaAccesso.setStyleAttribute("padding", "5px");
 
@@ -238,141 +233,24 @@ ContentPanelForTabItem {
 		modalitaAccessoSet.add(modalitaAccessoForm);
 
 		/*LIMITE ETA' LISTA MODALITA' ACCESSO*/
-		limiteEtaEListaForm = new FormPanel();
-		Utils.setFormStyleProperties(limiteEtaEListaForm);
+		listaModAccessoForm = new FormPanel();
+		Utils.setFormStyleProperties(listaModAccessoForm);
 
-		FormLayout limiteEtaEListaFormLayout = new FormLayout();
-		limiteEtaEListaFormLayout.setLabelAlign(LabelAlign.TOP);
+		FormLayout listaModAccessoFormLayout = new FormLayout();
+		listaModAccessoFormLayout.setLabelAlign(LabelAlign.TOP);
 
-		limiteEtaEListaForm.setLayout(limiteEtaEListaFormLayout);
+		listaModAccessoForm.setLayout(listaModAccessoFormLayout);
 
-		listaModalitaAccesoPanel = new ListaModalitaAccesoPanel();
+		listaModalitaAccesoPanel = new ListaModalitaAccessoPanel();
 		listaModalitaAccesoPanel.setGrid();
 
-		limiteEtaEListaForm.add(listaModalitaAccesoPanel);
+		listaModAccessoForm.add(listaModalitaAccesoPanel);
 
-		/*LIMITE ETA*/
-		TableLayout limiteEtaTableLayout = new TableLayout(3);
-		limiteEtaTableLayout.setWidth("700px");
-		LayoutContainer limiteEtaTable = new LayoutContainer(limiteEtaTableLayout);
-
-		Text limiteEtaLabel = new Text("Limite di età:");
-		// Inserire auto completamento
-		limiteEtaLabel.setStyleAttribute("fontSize", "14px");
-		limiteEtaTable.add(limiteEtaLabel, d3);
-
-		TableLayout tableLayout = new TableLayout(4);
-		tableLayout.setCellPadding(5);
-
-		LayoutContainer minMaxContainer = new LayoutContainer(tableLayout);
-		minMaxContainer.setAutoWidth(true);
-
-		limiteEtaMinLabel = new Text("Min:");
-		limiteEtaMinLabel.setStyleAttribute("fontSize", "14px");
-
-		limiteEtaMinField = new NumberField();
-		limiteEtaMinField.setWidth(40);
-		limiteEtaMinField.setFormat(NumberFormat.getDecimalFormat());
-		Utils.addListenerToChangeLabelColorIfModifiedNumberFieldInt(limiteEtaMinField, limiteEtaMinLabel);
-
-		limiteEtaMaxLabel = new Text("Max:");
-		limiteEtaMaxLabel.setStyleAttribute("fontSize", "14px");
-
-		limiteEtaMaxField = new NumberField();
-		limiteEtaMaxField.setWidth(40);
-		limiteEtaMaxField.setFormat(NumberFormat.getDecimalFormat());
-		Utils.addListenerToChangeLabelColorIfModifiedNumberFieldInt(limiteEtaMaxField, limiteEtaMaxLabel);
-
-		minMaxContainer.add(limiteEtaMinLabel);
-		minMaxContainer.add(limiteEtaMinField);
-		minMaxContainer.add(limiteEtaMaxLabel);
-		minMaxContainer.add(limiteEtaMaxField);
-
-		limiteEtaTable.add(minMaxContainer, d);
-
-		limiteEtaAggiorna = new Button("Aggiorna");
-		Utils.setStylesButton(limiteEtaAggiorna);
-
-		limiteEtaAggiorna.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-
-
-				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
-					public void handleEvent(MessageBoxEvent ce) {
-						Button btn = ce.getButtonClicked();
-						if (btn.getText().equalsIgnoreCase("Si")) {
-
-							HashMap<String, Object> params = new HashMap<String, Object>();
-
-							if (limiteEtaMinField.getValue() != null) {
-								params.put("limiteEtaMin",limiteEtaMinField.getValue().intValue());
-							}
-
-							if (limiteEtaMaxField.getValue() != null) {
-								params.put("limiteEtaMax", limiteEtaMaxField.getValue().intValue());
-							}
-
-							bibliotecheService.setLimiteEtaAccesso(biblioteca.getIdBiblio(),	params, new AsyncCallback<Void>() {
-
-								@Override
-								public void onFailure(Throwable caught) {
-									if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
-										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-								}
-
-								@Override
-								public void onSuccess(Void result) {
-									limiteEtaMinField.setOriginalValue(limiteEtaMinField.getValue());
-									limiteEtaMaxField.setOriginalValue(limiteEtaMaxField.getValue());
-									Utils.setFontColorStyleBlack(limiteEtaMinLabel);
-									Utils.setFontColorStyleBlack(limiteEtaMaxLabel);
-									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
-								}
-							});
-						}
-					}
-				};
-				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, l);
-			}
-		});
-
-		resetLimiteEta = new Button("Reset");
-		Utils.setStylesButton(resetLimiteEta);
-
-		resetLimiteEta.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				limiteEtaEListaForm.reset();
-				Utils.setFontColorStyleBlack(limiteEtaMinLabel);
-				Utils.setFontColorStyleBlack(limiteEtaMaxLabel);
-			}
-		});
-
-		FormButtonBinding limiteEtaBind = new FormButtonBinding(limiteEtaEListaForm);
-
-		limiteEtaBind.addButton(limiteEtaAggiorna);
-		limiteEtaBind.addButton(resetLimiteEta);
-
-		TableLayout limiteEtaTableLayoutButtons = new TableLayout(2);
-		limiteEtaTableLayoutButtons.setCellPadding(5);
-		LayoutContainer limiteEtaButtons = new LayoutContainer(limiteEtaTableLayoutButtons);
-		limiteEtaButtons.add(limiteEtaAggiorna);
-		limiteEtaButtons.add(resetLimiteEta);
-		
-		limiteEtaTable.add(limiteEtaButtons);
-
-		limiteEtaEListaForm.add(limiteEtaTable);
-		/*FINE LIMITE ETA*/
-
-		modalitaAccessoSet.add(limiteEtaEListaForm);
+		modalitaAccessoSet.add(listaModAccessoForm);
 		modalitaAccesso.add(modalitaAccessoSet);
 		add(modalitaAccesso);
 
-		/*LIMITE ETA' LISTA MODALITA' ACCESSO*/
+		/* LISTA MODALITA' ACCESSO */
 
 		/*ACCESSO HANDICAP*/	
 		portatoriHandicapForm = new FormPanel();
@@ -653,7 +531,6 @@ ContentPanelForTabItem {
 	}
 
 	public void setFieldsValues() {
-
 		// MODALITA' ACCESSO
 		if (biblioteca.getAccessoRiservato() == null) {
 			accessoRiservatoField.setRawValue("Informazione non disponibile");
@@ -670,30 +547,6 @@ ContentPanelForTabItem {
 		accessoRiservatoField.setOriginalValue(accessoRiservatoField.getValue());
 		Utils.setFontColorStyleBlack(accessoLabel);
 		UIWorkflow.setReadOnly(accessoRiservatoField);
-
-		if (biblioteca.getLimiteEtaMin() != null) {
-			limiteEtaMinField.setValue(biblioteca.getLimiteEtaMin());
-			limiteEtaMinField.setOriginalValue(biblioteca.getLimiteEtaMin());
-		}
-		else {
-			limiteEtaMinField.setValue(null);
-			limiteEtaMinField.setOriginalValue(null);
-		}
-
-		if (biblioteca.getLimiteEtaMax() != null) {
-			limiteEtaMaxField.setValue(biblioteca.getLimiteEtaMax());
-			limiteEtaMaxField.setOriginalValue(biblioteca.getLimiteEtaMax());
-		}
-		else {
-			limiteEtaMaxField.setValue(null);
-			limiteEtaMaxField.setOriginalValue(null);
-		}
-		Utils.setFontColorStyleBlack(limiteEtaMinLabel);
-		Utils.setFontColorStyleBlack(limiteEtaMaxLabel);
-
-		//setto l'della biblioteca nella griglia
-		UIWorkflow.setReadOnly(limiteEtaMinField);
-		UIWorkflow.setReadOnly(limiteEtaMaxField);
 
 		listaModalitaAccesoPanel.setIdBiblioteca(biblioteca.getIdBiblio());
 		//carico lo store nella griglia
@@ -756,8 +609,6 @@ ContentPanelForTabItem {
 		UIWorkflow.hideView(regolamentoAggiorna);
 		UIWorkflow.hideView(resetRegolamento);
 		
-		UIWorkflow.hideView(limiteEtaAggiorna);
-		UIWorkflow.hideView(resetLimiteEta);
 		if(UIWorkflow.isReadOnly()==false){
 			addKeyListenerForEnter();
 		}else{
@@ -773,13 +624,15 @@ ContentPanelForTabItem {
 		Utils.addKeyListenerForEnter(modalitaAccessoAggiorna, modalitaAccessoForm);
 		Utils.addKeyListenerForEnter(portatoriHandicapAggiorna, portatoriHandicapForm);
 		Utils.addKeyListenerForEnter(regolamentoAggiorna, regolamentoForm);
-		Utils.addKeyListenerForEnter(limiteEtaAggiorna, limiteEtaEListaForm);
+		
 	}
+	
 	private void removeKeyListenerForEnter() {
 		Utils.removeKeyListenerForEnter( modalitaAccessoForm);
 		Utils.removeKeyListenerForEnter( portatoriHandicapForm);
 		Utils.removeKeyListenerForEnter( regolamentoForm);
-		Utils.removeKeyListenerForEnter(limiteEtaEListaForm);
+		Utils.removeKeyListenerForEnter(listaModAccessoForm);
+		
 	}
 
 }

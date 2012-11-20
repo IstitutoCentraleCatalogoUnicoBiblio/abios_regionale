@@ -2,7 +2,6 @@ package it.inera.abi.gxt.client.mvc.view.menu;
 
 import it.inera.abi.gxt.client.AppEvents;
 import it.inera.abi.gxt.client.Utils;
-import it.inera.abi.gxt.client.auth.Roles;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.costants.CostantiFormatoScambio;
 import it.inera.abi.gxt.client.costants.CostantiMenu;
@@ -16,7 +15,6 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.ModelIconProvider;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
@@ -32,6 +30,11 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
+/**
+ * View utilizzata per l'inizializzazione del menu del formato di scambio e
+ * la relativa gestione degli eventi associati
+ *
+ */
 public class FormatoScambioMenuView extends View {
 
 	private ContentPanel formatoScambio;
@@ -43,14 +46,13 @@ public class FormatoScambioMenuView extends View {
 
 	protected void initUI() {
 		
-		// se l'utente non ha ruolo di formato di scambio esco
+		/* se l'utente non ha ruolo di formato di scambio esco */
 		if (!UIAuth.isMenuFormatoScambioEnable()) return; 
 		
 		ContentPanel west = (ContentPanel) Registry.get(AppView.WEST_PANEL);
 		formatoScambio = new ContentPanel();
 		formatoScambio.setHeading(CostantiMenu.FORMATO_SCAMBIO);
 		formatoScambio.setAnimCollapse(false);
-//		formatoScambio.setScrollMode(Scroll.ALWAYS);
 		formatoScambio.setScrollMode(Scroll.AUTOY);
 		
 		List<MenuItem> model = MenuEntriesFactory.getTreeModelFormatoScambio();
@@ -59,7 +61,6 @@ public class FormatoScambioMenuView extends View {
 
 		tree = new TreePanel<MenuItem>(store);
 		tree.setView(new TreePanelViewCustom());
-//		tree.setWidth(300);
 		tree.setDisplayProperty("name");
 		tree.setIconProvider(new ModelIconProvider<MenuItem>() {
 			@Override

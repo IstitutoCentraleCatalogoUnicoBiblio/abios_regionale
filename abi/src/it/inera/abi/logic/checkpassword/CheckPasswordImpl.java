@@ -12,10 +12,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * Classe contenente le implementazioni delle operazioni di logica 
+ * per il controllo e gestione delle password
+ * 
+ */
 @Service
 public class CheckPasswordImpl implements CheckPassword{
 

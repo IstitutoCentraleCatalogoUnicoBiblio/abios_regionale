@@ -27,6 +27,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Classe che implementa la logica delle principali operazioni riguardanti
+ * gli utenti (modifica, gestione password, biblioteche assegnate, ecc...)
+ *
+ */
 @Service
 public class AbiUtentiLogicImpl implements AbiUtentiLogic {
 	

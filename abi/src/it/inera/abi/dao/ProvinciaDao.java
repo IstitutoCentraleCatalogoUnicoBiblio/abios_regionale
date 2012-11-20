@@ -4,10 +4,12 @@ import java.util.List;
 
 import it.inera.abi.persistence.Provincia;
 
-
+/** 
+ * Interfaccia DAO per l'entità Provincia
+ *
+ */
 public interface ProvinciaDao {
 		
-		/*DAL FORMATO DI SCAMBIO*/
 	public String getSiglaProvinciaByCodIstat(String codIstatProvincia);
 	
 	public String getDescrizioneProvinciaByCodIstat(String codIstatProvincia);

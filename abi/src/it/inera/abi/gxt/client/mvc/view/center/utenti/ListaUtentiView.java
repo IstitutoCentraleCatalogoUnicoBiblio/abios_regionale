@@ -1,7 +1,6 @@
 package it.inera.abi.gxt.client.mvc.view.center.utenti;
 
 import it.inera.abi.gxt.client.AppEvents;
-import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.mvc.model.UserModel;
 import it.inera.abi.gxt.client.mvc.model.forms.UtenteCompletoFormModel;
 import it.inera.abi.gxt.client.mvc.view.AppView;
@@ -23,8 +22,13 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.CardLayout;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 
+/**
+ * View utilizzata per l'inizializzazione del pannello contenente la lista degli
+ * utenti e la relativa gestione degli eventi (modifica utente, assegna biblioteche,
+ * filtra utenti, ecc...)
+ *
+ */
 public class ListaUtentiView extends View {
 
 	private ContentPanel mainListaUtentiPanel = null;

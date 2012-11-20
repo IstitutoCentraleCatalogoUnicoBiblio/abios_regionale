@@ -1,5 +1,9 @@
 package it.inera.abi.gxt.client.costants;
 
+/**
+ * Contiene le costanti relative alle voci contenute nel Menu del Formato di Scambio
+ *
+ */
 public class CostantiFormatoScambio {
 	
 	// vecchio menu gestione import

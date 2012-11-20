@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AnagraficaType.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
+ * $Id: AnagraficaType.java,v 1.6 2012/11/20 12:35:35 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -14,7 +14,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  L'elemento anagrafica adesso è obbligatorio.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
+ * @version $Revision: 1.6 $ $Date: 2012/11/20 12:35:35 $
  */
 @SuppressWarnings("serial")
 public abstract class AnagraficaType implements java.io.Serializable {
@@ -49,7 +49,7 @@ public abstract class AnagraficaType implements java.io.Serializable {
      *  sono opzionali e ripetibili.
      *  
      */
-    private it.inera.abi.logic.formatodiscambio.castor.Nome _nome;
+    private it.inera.abi.logic.formatodiscambio.castor.Nomi _nomi;
 
     /**
      * Codici di una biblioteca.
@@ -70,8 +70,8 @@ public abstract class AnagraficaType implements java.io.Serializable {
     private it.inera.abi.logic.formatodiscambio.castor.Indirizzo _indirizzo;
 
     /**
-     * Varie modalità per contattare la biblioteca e il
-     *  suo personale.
+     * Varie modalità per contattare la biblioteca e il suo
+     * personale.
      *  
      */
     private it.inera.abi.logic.formatodiscambio.castor.Contatti _contatti;
@@ -126,8 +126,7 @@ public abstract class AnagraficaType implements java.io.Serializable {
     /**
      * Returns the value of field 'contatti'. The field 'contatti'
      * has the following description: Varie modalità per contattare
-     * la biblioteca e il
-     *  suo personale.
+     * la biblioteca e il suo personale.
      *  
      * 
      * @return the value of field 'Contatti'.
@@ -223,7 +222,7 @@ public abstract class AnagraficaType implements java.io.Serializable {
     }
 
     /**
-     * Returns the value of field 'nome'. The field 'nome' has the
+     * Returns the value of field 'nomi'. The field 'nomi' has the
      * following description: Nomi di una biblioteca. È un insieme
      * in cui solo
      *  il nome attuale è obbligatorio e non ripetibile,
@@ -232,11 +231,11 @@ public abstract class AnagraficaType implements java.io.Serializable {
      *  sono opzionali e ripetibili.
      *  
      * 
-     * @return the value of field 'Nome'.
+     * @return the value of field 'Nomi'.
      */
-    public it.inera.abi.logic.formatodiscambio.castor.Nome getNome(
+    public it.inera.abi.logic.formatodiscambio.castor.Nomi getNomi(
     ) {
-        return this._nome;
+        return this._nomi;
     }
 
     /**
@@ -269,8 +268,7 @@ public abstract class AnagraficaType implements java.io.Serializable {
     /**
      * Sets the value of field 'contatti'. The field 'contatti' has
      * the following description: Varie modalità per contattare la
-     * biblioteca e il
-     *  suo personale.
+     * biblioteca e il suo personale.
      *  
      * 
      * @param contatti the value of field 'contatti'.
@@ -367,7 +365,7 @@ public abstract class AnagraficaType implements java.io.Serializable {
     }
 
     /**
-     * Sets the value of field 'nome'. The field 'nome' has the
+     * Sets the value of field 'nomi'. The field 'nomi' has the
      * following description: Nomi di una biblioteca. È un insieme
      * in cui solo
      *  il nome attuale è obbligatorio e non ripetibile,
@@ -376,11 +374,11 @@ public abstract class AnagraficaType implements java.io.Serializable {
      *  sono opzionali e ripetibili.
      *  
      * 
-     * @param nome the value of field 'nome'.
+     * @param nomi the value of field 'nomi'.
      */
-    public void setNome(
-            final it.inera.abi.logic.formatodiscambio.castor.Nome nome) {
-        this._nome = nome;
+    public void setNomi(
+            final it.inera.abi.logic.formatodiscambio.castor.Nomi nomi) {
+        this._nomi = nomi;
     }
 
     /**

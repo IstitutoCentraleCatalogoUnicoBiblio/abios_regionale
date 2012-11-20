@@ -1,25 +1,19 @@
 package it.inera.abi.test;
 
+import it.inera.abi.dao.DynaTabDao;
+import it.inera.abi.persistence.SistemiBiblioteche;
+
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import it.inera.abi.dao.BiblioDao;
-import it.inera.abi.dao.DynaTabDao;
-import it.inera.abi.dao.UtentiDao;
-import it.inera.abi.dao.mapping.DtoJpaMapping;
-import it.inera.abi.dto.DynaTabDTO;
-import it.inera.abi.persistence.ContattiTipo;
-import it.inera.abi.persistence.Dewey;
-import it.inera.abi.persistence.SistemiBiblioteche;
-import it.inera.abi.persistence.Stato;
-
+/**
+ * Classe di test per il caricamento delle tabelle dinamiche
+ *
+ */
 public class TestDaoDynaTab {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		ApplicationContext appCtxt = new ClassPathXmlApplicationContext("applicationContext.xml");
 		DynaTabDao dynaTabDao = appCtxt.getBean(DynaTabDao.class);
@@ -27,5 +21,4 @@ public class TestDaoDynaTab {
 		System.out.println(results.size());
 		
 	}
-
 }

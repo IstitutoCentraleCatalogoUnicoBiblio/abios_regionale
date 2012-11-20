@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: ContattiDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
+ * $Id: ContattiDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Contatti;
 /**
  * Class ContattiDescriptor.
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class ContattiDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -69,15 +69,15 @@ public class ContattiDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
 
         //-- initialize element descriptors
 
-        //-- _telefonicoList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Telefonico.class, "_telefonicoList", "telefonico", org.exolab.castor.xml.NodeType.Element);
+        //-- _telefonici
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Telefonici.class, "_telefonici", "telefonici", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 Contatti target = (Contatti) object;
-                return target.getTelefonico();
+                return target.getTelefonici();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -85,15 +85,7 @@ public class ContattiDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     Contatti target = (Contatti) object;
-                    target.addTelefonico( (it.inera.abi.logic.formatodiscambio.castor.Telefonico) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    Contatti target = (Contatti) object;
-                    target.removeAllTelefonico();
+                    target.setTelefonici( (it.inera.abi.logic.formatodiscambio.castor.Telefonici) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -104,28 +96,26 @@ public class ContattiDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.Telefonico");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Telefonici");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _telefonicoList
+        //-- validation code for: _telefonici
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
-        //-- _altroList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Altro.class, "_altroList", "altro", org.exolab.castor.xml.NodeType.Element);
+        //-- _altri
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Altri.class, "_altri", "altri", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 Contatti target = (Contatti) object;
-                return target.getAltro();
+                return target.getAltri();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -133,15 +123,7 @@ public class ContattiDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
             {
                 try {
                     Contatti target = (Contatti) object;
-                    target.addAltro( (it.inera.abi.logic.formatodiscambio.castor.Altro) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    Contatti target = (Contatti) object;
-                    target.removeAllAltro();
+                    target.setAltri( (it.inera.abi.logic.formatodiscambio.castor.Altri) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -152,16 +134,14 @@ public class ContattiDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.Altro");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Altri");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _altroList
+        //-- validation code for: _altri
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);

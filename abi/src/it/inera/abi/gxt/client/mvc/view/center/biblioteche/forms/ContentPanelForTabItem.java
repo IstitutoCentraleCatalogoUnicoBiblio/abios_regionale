@@ -6,6 +6,10 @@ import it.inera.abi.gxt.client.mvc.model.BiblioModel;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 
+/**
+ * Classe generica da estendere per ogni form specifica delle biblioteche
+ *
+ */
 public class ContentPanelForTabItem extends ContentPanel {
 	
 	protected BiblioModel biblioteca;

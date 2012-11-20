@@ -1,6 +1,5 @@
 package it.inera.abi.logic.formatodiscambio;
 
-import it.inera.abi.commons.ConvertEncoding;
 import it.inera.abi.commons.Utility;
 import it.inera.abi.logic.formatodiscambio.castor.Biblioteca;
 import it.inera.abi.logic.formatodiscambio.castor.Biblioteche;
@@ -9,13 +8,11 @@ import it.inera.abi.logic.formatodiscambio.imports.ImportFileBean;
 import it.inera.abi.logic.formatodiscambio.imports.Importer;
 import it.inera.abi.logic.formatodiscambio.imports.ReportImport;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Date;
@@ -32,8 +29,11 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.ValidationException;
-import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Implementazione delle operazioni di import del formato di scambio
+ *
+ */
 public class ImportLogicImpl implements ImportLogic {
 
 	private Log log = LogFactory.getLog(ImportLogicImpl.class);
@@ -78,45 +78,16 @@ public class ImportLogicImpl implements ImportLogic {
 			log.fatal("Impossibile caricare il file");
 			throw new Exception("Impossibile caricare il file");
 		}
-
-		// test charset
-		try {
-			String charsetOfFile = Utility.retriveCharset(file);
-
-
-			if ("UTF-8".equalsIgnoreCase(charsetOfFile)) {
-				FileReader fileReader = new FileReader(file.getPath());
-				BufferedReader bufferedReader = new BufferedReader(fileReader);
-				StringBuffer text = new StringBuffer();
-				String line = "";
-				while ((line = bufferedReader.readLine()) != null) {
-					text.append(line);
-				}				
-				bufferedReader.close();
-				FileWriter fileWriter = new FileWriter(file.getPath());
-//				fileWriter.write(text.toString().replaceAll("UTF-8", "ISO-8859-1"));
-				fileWriter.flush();
-				fileWriter.close();
-
-				String path =  file.getPath().substring(0, file.getPath().length() - file.getName().length()) + "converted_" + file.getName();
-//				ConvertEncoding.convert(file.getPath(), path, "UTF-8", "ISO-8859-1");
-				ConvertEncoding.convert(file.getPath(), path, null, null);				
-				if (file.delete()) {
-					log.debug("File originale in UTF-8 cancellato");
-				} else {
-					log.warn("File originale in UTF-8 NON cancellato");
-				}
-				file = new File(path);
-			}
-		} catch (IOException e1) {
-			log.fatal("Errore sui file", e1);
-			throw new Exception("Errore sui file", e1);
-		}
-
+		
+		// controllo il charset del file di input
+		String charsetOfFile = Utility.retrieveCharset(file); // default ritorna ISO-8859-1
+		
 		// crea un file con un nome temporaneo fittizio per spostare e cancellare l uplodato		
 		File targetFile = new File(importUncheckedDir + File.separator + Utility.createTempFileName(utente, email, file.getName())  + ".xml");		
 		try {
-			FileUtils.copyFile(file, targetFile);
+			//FileUtils.copyFile(file, targetFile);
+			String tempContent = FileUtils.readFileToString(file, charsetOfFile);
+			FileUtils.writeStringToFile(targetFile, tempContent);
 			if (file.delete()) {
 				log.debug("File temporaneo cancellato");
 			} else {
@@ -126,7 +97,7 @@ public class ImportLogicImpl implements ImportLogic {
 			log.fatal("Impossibile caricare il file", e);
 			throw new Exception("Impossibile caricare il file", e);
 		}
-
+		
 	}
 
 	@Override

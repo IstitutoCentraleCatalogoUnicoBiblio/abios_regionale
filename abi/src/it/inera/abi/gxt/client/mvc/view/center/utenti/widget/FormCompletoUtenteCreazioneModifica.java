@@ -29,7 +29,6 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.Field;
@@ -51,6 +50,10 @@ import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Form che permette la creazione / modifica di un utente
+ *
+ */
 public class FormCompletoUtenteCreazioneModifica extends LayoutContainer {
 
 	private UtentiServiceAsync utentiService;

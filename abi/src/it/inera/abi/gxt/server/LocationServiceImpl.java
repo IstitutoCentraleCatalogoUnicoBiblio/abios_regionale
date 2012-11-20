@@ -4,14 +4,12 @@ import it.inera.abi.gxt.client.mvc.model.ComuniModel;
 import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
 import it.inera.abi.gxt.client.mvc.model.RegioniModel;
 import it.inera.abi.gxt.client.mvc.model.StatoModel;
-import it.inera.abi.gxt.client.mvc.model.UserModel;
 import it.inera.abi.gxt.client.services.LocationService;
 import it.inera.abi.logic.AbiLocationLogic;
 import it.inera.abi.persistence.Comune;
 import it.inera.abi.persistence.Provincia;
 import it.inera.abi.persistence.Regione;
 import it.inera.abi.persistence.Stato;
-import it.inera.abi.persistence.Utenti;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,12 +23,13 @@ import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 
+/**
+ * Implementazione dei servizi relativi alla località: regioni, province e comuni (lato server)
+ * 
+ */
 public class LocationServiceImpl extends AutoinjectingRemoteServiceServlet
 		implements LocationService {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2490919853033619709L;
 	private AbiLocationLogic abiLocationLogic;
 

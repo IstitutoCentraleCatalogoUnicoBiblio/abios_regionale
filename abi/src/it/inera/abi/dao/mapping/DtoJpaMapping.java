@@ -28,6 +28,10 @@ import it.inera.abi.persistence.TipologiaFunzionale;
 
 import java.util.Hashtable;
 
+/**
+ * Classe che implementa il mapping delle Tabelle Dinamiche
+ *
+ */
 public class DtoJpaMapping {
 
 	private static Hashtable<Integer, Class<?>> dynaClasses = null;

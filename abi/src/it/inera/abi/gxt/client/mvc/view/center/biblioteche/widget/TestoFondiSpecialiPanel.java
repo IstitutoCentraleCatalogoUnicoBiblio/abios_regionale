@@ -12,7 +12,6 @@ import it.inera.abi.gxt.client.workflow.UIWorkflow;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
@@ -27,6 +26,11 @@ import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe widget per il caricamento / aggiornamento delle informazioni relative
+ * ai fondi speciali
+ *
+ */
 public class TestoFondiSpecialiPanel extends LayoutContainer{
 
 	private int idBiblio;

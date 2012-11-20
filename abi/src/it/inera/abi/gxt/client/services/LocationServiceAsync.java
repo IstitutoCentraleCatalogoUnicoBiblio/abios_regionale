@@ -12,6 +12,10 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Interfaccia Async di <code>LocationService</code>
+ * 
+ */
 public interface LocationServiceAsync {
 	
 	void getRegioni(AsyncCallback<List<RegioniModel>> callback);

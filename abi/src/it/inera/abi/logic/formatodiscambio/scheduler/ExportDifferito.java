@@ -15,6 +15,10 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * Classe che esegue il job per l'export differito 
+ *
+ */
 public class ExportDifferito {
 
 	private Log log = LogFactory.getLog(ExportDifferito.class);

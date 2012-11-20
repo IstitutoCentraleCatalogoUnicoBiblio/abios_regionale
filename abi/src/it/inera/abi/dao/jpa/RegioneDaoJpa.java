@@ -15,6 +15,10 @@ import it.inera.abi.persistence.Provincia;
 import it.inera.abi.persistence.Regione;
 import it.inera.abi.persistence.Utenti;
 
+/**
+ * Implementazione classe DAO per l'entità Regione
+ *
+ */
 @Repository
 public class RegioneDaoJpa implements RegioneDao {
 

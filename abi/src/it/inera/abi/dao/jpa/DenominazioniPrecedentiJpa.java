@@ -14,6 +14,10 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Implementazione classe DAO per l'entità Denominazioni Precedenti
+ *
+ */
 @Repository
 public class DenominazioniPrecedentiJpa implements DenominazioniPrecedentiDao {
 	@PersistenceContext

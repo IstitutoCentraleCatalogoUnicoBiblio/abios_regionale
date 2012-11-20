@@ -18,6 +18,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Implementazione classe DAO per l'entità Ente
+ *
+ */
 @Repository
 public class EnteDaoJpa implements EnteDao {
 

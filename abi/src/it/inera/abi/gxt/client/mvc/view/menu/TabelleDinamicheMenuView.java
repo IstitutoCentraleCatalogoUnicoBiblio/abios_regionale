@@ -26,6 +26,11 @@ import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 
+/**
+ * View utilizzata per l'inizializzazione del menu delle tabelle dinamiche e
+ * la relativa gestione degli eventi associati
+ *
+ */
 public class TabelleDinamicheMenuView extends View {
 
 	private ContentPanel tabelleDinamiche;
@@ -43,7 +48,7 @@ public class TabelleDinamicheMenuView extends View {
 
 	private void initUI() {
 		
-		// se l'utente non ha ruolo di tabelle dinamiche esco
+		/* se l'utente non ha ruolo di tabelle dinamiche esco */
 		if (!UIAuth.isMenuTabelleDinamicheEnable()) return; 
 		
 		ContentPanel west = (ContentPanel) Registry.get(AppView.WEST_PANEL);
@@ -89,28 +94,5 @@ public class TabelleDinamicheMenuView extends View {
 		west.add(tabelleDinamiche);
 
 	}
-
-	//	public static int getIdEvent(List<MenuItem> list, String nameEvent) {
-	//		Iterator<MenuItem> it = list.iterator();
-	//		MenuItem tmp;
-	//		while ((it.hasNext())) {
-	//			tmp = it.next();
-	//			if (tmp.getName().equals(nameEvent)) {
-	//				return list.indexOf(tmp);
-	//			}
-	//
-	//		}
-	//		return -1;
-	//	}
-
-	//	public static EventType getEvent(int id) {
-	//	//	AppEvents.getTabDinEvents().get(id);
-	//		return AppEvents.getTabDinEvents().get(id);
-	//	}
-	//	
-	//	public static int getIdEvent(AppEvent ev){
-	//		return AppEvents.getTabDinEvents().indexOf(ev);
-	//	}
-
 
 }

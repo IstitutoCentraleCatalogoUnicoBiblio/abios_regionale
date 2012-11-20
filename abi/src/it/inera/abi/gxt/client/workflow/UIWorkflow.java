@@ -1,13 +1,11 @@
 package it.inera.abi.gxt.client.workflow;
 
-import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.auth.Roles;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.BiblioModel;
 import it.inera.abi.gxt.client.mvc.model.auth.UtentiAuthModel;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.Field;
@@ -17,9 +15,9 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.ui.ButtonBase;
 
 /**
- * Gestisce il workflow, i widget delle form in base allo stato della bibliteca.
- * In caso di stato modifica abilita bottoni, mette readOnly i text field ecc...
- * @author reschini
+ * Gestisce il workflow, i widget delle form in base allo stato della biblioteca.
+ * In caso di cambiamento di stato, modifica / abilita bottoni, mette readOnly 
+ * i textField, ecc...
  *
  */
 public class UIWorkflow {
@@ -32,7 +30,7 @@ public class UIWorkflow {
 	/**
 	 * Controlla se la biblioteca è occupabile da questo utente
 	 * @param biblioModel
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean checkIsOccupabile(BiblioModel biblioModel) {
 		UtentiAuthModel utentiAuthModel = UIAuth.getUtentiAuthModel();
@@ -66,7 +64,7 @@ public class UIWorkflow {
 	/**
 	 * Controlla se la biblioteca è revisionabile
 	 * @param biblioModel
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean checkIsRevisionabile(BiblioModel biblioModel) {
 		// se è in revisione

@@ -6,11 +6,12 @@ import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.ModelComparer;
 import com.extjs.gxt.ui.client.data.ModelData;
 
+/**
+ * Modello utilizzato per i dati relativi ad un singolo ente
+ *
+ */
 public class EnteModel extends BaseModel implements Serializable,ModelComparer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8064344644011832222L;
 
 	public EnteModel() {
@@ -57,7 +58,6 @@ public class EnteModel extends BaseModel implements Serializable,ModelComparer {
 		set("codiceFiscale", codiceFiscale);
 	}
 
-	/**/
 	public String getDenominazione() {
 		return get("denominazione");
 	}

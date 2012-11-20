@@ -29,6 +29,10 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Classe che implementa l'export online e differito 
+ *
+ */
 @Component
 public class ExporterImpl implements Exporter {
 	

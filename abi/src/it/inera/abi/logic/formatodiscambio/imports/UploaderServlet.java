@@ -26,6 +26,10 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+/**
+ * Servlet per il caricamento dei file contenenti le biblioteche da importare
+ *
+ */
 public class UploaderServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 4247784319391733203L;

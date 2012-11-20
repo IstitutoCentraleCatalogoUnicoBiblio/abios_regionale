@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: BibliotecaTypeDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
+ * $Id: BibliotecaTypeDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.BibliotecaType;
 /**
  * Class BibliotecaTypeDescriptor.
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class BibliotecaTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -185,15 +185,15 @@ public class BibliotecaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
-        //-- _specializzazioneList
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Specializzazione.class, "_specializzazioneList", "specializzazione", org.exolab.castor.xml.NodeType.Element);
+        //-- _specializzazioni
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Specializzazioni.class, "_specializzazioni", "specializzazioni", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 BibliotecaType target = (BibliotecaType) object;
-                return target.getSpecializzazione();
+                return target.getSpecializzazioni();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -201,15 +201,7 @@ public class BibliotecaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             {
                 try {
                     BibliotecaType target = (BibliotecaType) object;
-                    target.addSpecializzazione( (it.inera.abi.logic.formatodiscambio.castor.Specializzazione) value);
-                } catch (java.lang.Exception ex) {
-                    throw new IllegalStateException(ex.toString());
-                }
-            }
-            public void resetValue(Object object) throws IllegalStateException, IllegalArgumentException {
-                try {
-                    BibliotecaType target = (BibliotecaType) object;
-                    target.removeAllSpecializzazione();
+                    target.setSpecializzazioni( (it.inera.abi.logic.formatodiscambio.castor.Specializzazioni) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -220,16 +212,14 @@ public class BibliotecaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
                 return null;
             }
         };
-        desc.setSchemaType("list");
-        desc.setComponentType("it.inera.abi.logic.formatodiscambio.castor.Specializzazione");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Specializzazioni");
         desc.setHandler(handler);
-        desc.setMultivalued(true);
+        desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _specializzazioneList
+        //-- validation code for: _specializzazioni
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
-        fieldValidator.setMinOccurs(0);
         { //-- local scope
         }
         desc.setValidator(fieldValidator);

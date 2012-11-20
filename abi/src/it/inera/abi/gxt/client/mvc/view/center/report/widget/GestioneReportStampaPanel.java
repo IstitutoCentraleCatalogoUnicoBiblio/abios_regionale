@@ -1,23 +1,19 @@
 package it.inera.abi.gxt.client.mvc.view.center.report.widget;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.AppEvents;
 import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.auth.UIAuth;
-import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.FormatoScambioServiceAsync;
 import it.inera.abi.gxt.client.services.ReportServiceAsync;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
@@ -28,13 +24,15 @@ import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione delle stampe dei report scaricabili 
+ * in formato pdf e/o excel
+ *
+ */
 public class GestioneReportStampaPanel extends ContentPanel {
 
 	private int tipoRicerca = 0;

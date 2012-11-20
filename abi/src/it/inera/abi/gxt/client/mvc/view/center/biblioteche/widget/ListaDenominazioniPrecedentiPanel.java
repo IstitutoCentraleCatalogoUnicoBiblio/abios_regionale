@@ -43,7 +43,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica della lista di 
+ * denominazioni precedenti
+ *
+ */
 public class ListaDenominazioniPrecedentiPanel extends ContentPanel {
+	
 	private int id_biblio;
 	private boolean modifica;
 	private BaseListLoader<ListLoadResult<ModelData>> loaderDenominazioni;

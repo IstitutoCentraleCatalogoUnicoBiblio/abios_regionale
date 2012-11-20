@@ -34,6 +34,10 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
+/**
+ * Servlet per la generazione delle stampe in formato PDF
+ *
+ */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class PdfGeneratorServlet extends HttpServlet {
 	

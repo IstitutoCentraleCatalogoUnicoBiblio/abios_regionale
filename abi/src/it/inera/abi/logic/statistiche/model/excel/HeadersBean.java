@@ -2,6 +2,10 @@ package it.inera.abi.logic.statistiche.model.excel;
 
 import java.util.Vector;
 
+/**
+ * Classe per la rappresentazione degli header excel
+ *
+ */
 public class HeadersBean {
 
 	private Vector<String> headers;

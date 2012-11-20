@@ -5,7 +5,8 @@ import it.inera.abi.gxt.client.mvc.model.auth.UtentiAuthModel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * The async counterpart of <code>AuthService</code>.
+ * Interfaccia Async di <code>AuthService</code>
+ * 
  */
 public interface AuthServiceAsync {
 	

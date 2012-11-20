@@ -60,6 +60,7 @@ public class CostantiGestioneBiblio {
 	public static final String COMUNCAZIONI_FIELDSET_LABEL = "Comunicazioni";
 	
 	public static final String FROMMODIFICA  = "fromModifica";
-
+	
+	public static final String ISMASKED = "isMasked";
 	
 }

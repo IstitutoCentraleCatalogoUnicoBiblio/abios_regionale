@@ -3,15 +3,12 @@ package it.inera.abi.logic;
 import it.inera.abi.dao.DuplicateEntryException;
 import it.inera.abi.dao.EntryNotFoundException;
 import it.inera.abi.dto.DynaTabDTO;
-import it.inera.abi.logic.impl.Differenze;
 import it.inera.abi.persistence.DepositiLegali;
-import it.inera.abi.persistence.NuovaBiblioteca;
 import it.inera.abi.persistence.PrestitoInterbibliotecario;
 import it.inera.abi.persistence.PrestitoLocale;
 import it.inera.abi.persistence.Riproduzioni;
 import it.inera.abi.persistence.AccessoModalita;
 import it.inera.abi.persistence.Biblioteca;
-import it.inera.abi.persistence.CataloghiGeneraliUrl;
 import it.inera.abi.persistence.Contatti;
 import it.inera.abi.persistence.ContattiTipo;
 import it.inera.abi.persistence.DenominazioniAlternative;
@@ -29,6 +26,7 @@ import it.inera.abi.persistence.PartecipaCataloghiGenerali;
 import it.inera.abi.persistence.PartecipaCataloghiSpecialiMateriale;
 import it.inera.abi.persistence.Patrimonio;
 import it.inera.abi.persistence.Pubblicazioni;
+import it.inera.abi.persistence.RiproduzioniTipo;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
@@ -42,9 +40,12 @@ import it.inera.abi.persistence.Utenti;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
+/**
+ * Classe contenente la logica delle principali operazioni di ricerca/modifica delle biblioteche
+ *
+ */
 public interface AbiBiblioLogic {
 	
 	public List<Biblioteca> ricercaBiblio(HashMap<String, Object> keys, int offset, int rows, String orderByField, String orderByDir);
@@ -134,8 +135,6 @@ public interface AbiBiblioLogic {
 	public void setInfoFondazione(int idBiblio, HashMap<String, Object> params);
 
 	public void setModalitaAccesso(int idBiblio, HashMap<String, Object> params);
-	
-	public void setLimiteEtaAccesso(int idBiblio, HashMap<String, Object> params);
 	
 	public List<AccessoModalita> getAccessoModalitaByIdBiblioteca(
 			int id_biblioteca);
@@ -415,7 +414,7 @@ public interface AbiBiblioLogic {
 	
 	public void setDefinitiveImportate(List<Integer> bibliotecheSelectedIds);
 	
-	public void ripristinaImportate(List<Integer> bibliotecheSelectedIds);
+	public int ripristinaImportate(List<Integer> bibliotecheSelectedIds);
 	
 	public void aggiornaCodici(HashMap<String, Object> params, int idBiblio);
 	
@@ -434,4 +433,16 @@ public interface AbiBiblioLogic {
 	public void removeSistemaPrestitoInterbibliotecario(int id_biblioteca, int id_sistema);
 	
 	public void addSistemaPrestitoInterbibliotecario(int id_biblioteca, Integer id_sistema) throws DuplicateEntryException;
+	
+	public void setReference(int id_biblio, Boolean hasAttivoReference, Boolean hasReferenceLocale, Boolean hasReferenceOnline);
+	
+	public void setAttivoDocumentDelivery(int idbib, Boolean attivoDocumentDelivery);
+	
+	public List<RiproduzioniTipo> getDocumentDeliveryByIdBiblio(int id_biblioteca);
+	
+	public void addDocumentDelivery(int id_biblioteca, Integer idDocumentDelivery) throws DuplicateEntryException;
+
+	public void removeDocumentDelivery(int id_biblioteca, int idRemove);
+	
+	public void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale);
 } 

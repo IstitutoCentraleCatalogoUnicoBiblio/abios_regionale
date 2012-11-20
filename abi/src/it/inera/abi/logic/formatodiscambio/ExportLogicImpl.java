@@ -5,7 +5,6 @@ import it.inera.abi.dao.BiblioDao;
 import it.inera.abi.logic.formatodiscambio.exports.ExportBean;
 import it.inera.abi.logic.formatodiscambio.exports.Exporter;
 import it.inera.abi.logic.formatodiscambio.exports.email.AsyncEmailExporter;
-import it.inera.abi.logic.formatodiscambio.imports.ImportFileBean;
 import it.inera.abi.logic.formatodiscambio.imports.InfoBiblioBean;
 import it.inera.abi.persistence.Biblioteca;
 
@@ -25,6 +24,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
+/**
+ * Implementazione delle operazioni di export del formato di scambio
+ *
+ */
 public class ExportLogicImpl implements ExportLogic {
 
 	private Log _log = LogFactory.getLog(ExportLogicImpl.class);

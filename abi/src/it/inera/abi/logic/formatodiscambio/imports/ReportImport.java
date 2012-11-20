@@ -2,6 +2,10 @@ package it.inera.abi.logic.formatodiscambio.imports;
 
 import java.util.Vector;
 
+/**
+ * Classe che rappresenta gli errori e warning relativi all'import 
+ *
+ */
 public class ReportImport {
 	
 	private Vector<String> errors = new Vector<String>();

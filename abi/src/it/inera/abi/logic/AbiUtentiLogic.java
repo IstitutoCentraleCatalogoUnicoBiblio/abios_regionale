@@ -8,6 +8,11 @@ import it.inera.abi.persistence.Utenti;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Classe contenente la logica delle principali operazioni riguardanti
+ * gli utenti (modifica, gestione password, biblioteche assegnate, ecc...)
+ *
+ */
 public interface AbiUtentiLogic {
 
 	public List<Utenti> getUtenti(HashMap<String, Object> keys, int offset, int rows, String orderByField, String orderByDir);

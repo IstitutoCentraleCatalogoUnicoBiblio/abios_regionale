@@ -3,6 +3,10 @@ package it.inera.abi.gxt.client.resources.icons;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ImageBundle;
 
+/**
+ * Interfaccia che definisce i prototipi GXT delle icone
+ *
+ */
 @SuppressWarnings("deprecation")
 public interface AbiIcons extends ImageBundle {
 	

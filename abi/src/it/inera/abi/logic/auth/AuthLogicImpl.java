@@ -1,10 +1,7 @@
 package it.inera.abi.logic.auth;
 
-import java.util.List;
-import java.util.Set;
 
 import it.inera.abi.dao.UtentiDao;
-import it.inera.abi.persistence.Profili;
 import it.inera.abi.persistence.Utenti;
 
 import org.apache.commons.logging.Log;
@@ -15,6 +12,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+/**
+ * Classe contenente le implementazioni delle operazioni di logica per caricare 
+ * le informazioni dell'utente loggato
+ *
+ */
 @Service
 public class AuthLogicImpl implements AuthLogic {
 
@@ -37,7 +39,7 @@ public class AuthLogicImpl implements AuthLogic {
 	}
 
 	@Override
-	public Utenti retriveUtente(String username) {
+	public Utenti retrieveUtente(String username) {
 		Utenti utenti = utentiDao.findByName(username);
 		return utenti;
 	}

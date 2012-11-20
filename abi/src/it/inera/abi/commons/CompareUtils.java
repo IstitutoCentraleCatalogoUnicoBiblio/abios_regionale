@@ -4,6 +4,10 @@ import org.apache.commons.lang.time.DateFormatUtils;
 
 import it.inera.abi.persistence.OrarioUfficiali;
 
+/**
+ * Classe di utility per la comparazione tra oggetti
+ * 
+ */
 public class CompareUtils {
 	
 

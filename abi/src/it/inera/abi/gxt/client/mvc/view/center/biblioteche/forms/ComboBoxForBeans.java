@@ -3,6 +3,10 @@ package it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 
+/**
+ * Estensione custom della classe <code>ComboBox</code>
+ *
+ */
 public class ComboBoxForBeans<M extends ModelData> extends ComboBox<M> {
 	 @Override
 	    public M getValue() {

@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: LocaleDescriptor.java,v 1.4 2012/07/31 15:00:06 m.bartolozzi Exp $
+ * $Id: LocaleDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Locale;
 /**
  * Class LocaleDescriptor.
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:06 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 public class LocaleDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -67,6 +67,47 @@ public class LocaleDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
         org.exolab.castor.xml.FieldValidator               fieldValidator = null;
         //-- initialize attribute descriptors
 
+        //-- _attivo
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, "_attivo", "attivo", org.exolab.castor.xml.NodeType.Attribute);
+        handler = new org.exolab.castor.xml.XMLFieldHandler() {
+            @Override
+            public java.lang.Object getValue( java.lang.Object object ) 
+                throws IllegalStateException
+            {
+                Locale target = (Locale) object;
+                return target.getAttivo();
+            }
+            @Override
+            public void setValue( java.lang.Object object, java.lang.Object value) 
+                throws IllegalStateException, IllegalArgumentException
+            {
+                try {
+                    Locale target = (Locale) object;
+                    target.setAttivo( (it.inera.abi.logic.formatodiscambio.castor.types.SiNoType) value);
+                } catch (java.lang.Exception ex) {
+                    throw new IllegalStateException(ex.toString());
+                }
+            }
+            @Override
+            @SuppressWarnings("unused")
+            public java.lang.Object newInstance(java.lang.Object parent) {
+                return null;
+            }
+        };
+        handler = new org.exolab.castor.xml.handlers.EnumFieldHandler(it.inera.abi.logic.formatodiscambio.castor.types.SiNoType.class, handler);
+        desc.setImmutable(true);
+        desc.setSchemaType("SiNoType");
+        desc.setHandler(handler);
+        desc.setRequired(true);
+        desc.setMultivalued(false);
+        addFieldDescriptor(desc);
+
+        //-- validation code for: _attivo
+        fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        fieldValidator.setMinOccurs(1);
+        { //-- local scope
+        }
+        desc.setValidator(fieldValidator);
         //-- initialize element descriptors
 
         //-- _prestitoLocaleAutomatizzato
@@ -109,16 +150,15 @@ public class LocaleDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
         { //-- local scope
         }
         desc.setValidator(fieldValidator);
-        //-- _materialeEscluso
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_materialeEscluso", "materiale-escluso", org.exolab.castor.xml.NodeType.Element);
-        desc.setImmutable(true);
+        //-- _materialiEsclusi
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusi.class, "_materialiEsclusi", "materiali-esclusi", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
                 throws IllegalStateException
             {
                 Locale target = (Locale) object;
-                return target.getMaterialeEscluso();
+                return target.getMaterialiEsclusi();
             }
             @Override
             public void setValue( java.lang.Object object, java.lang.Object value) 
@@ -126,7 +166,7 @@ public class LocaleDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
             {
                 try {
                     Locale target = (Locale) object;
-                    target.setMaterialeEscluso( (java.lang.String) value);
+                    target.setMaterialiEsclusi( (it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusi) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -137,19 +177,15 @@ public class LocaleDescriptor extends org.exolab.castor.xml.util.XMLClassDescrip
                 return null;
             }
         };
-        desc.setSchemaType("string");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.MaterialiEsclusi");
         desc.setHandler(handler);
         desc.setMultivalued(false);
         addFieldDescriptor(desc);
         addSequenceElement(desc);
 
-        //-- validation code for: _materialeEscluso
+        //-- validation code for: _materialiEsclusi
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
         { //-- local scope
-            org.exolab.castor.xml.validators.StringValidator typeValidator;
-            typeValidator = new org.exolab.castor.xml.validators.StringValidator();
-            fieldValidator.setValidator(typeValidator);
-            typeValidator.setWhiteSpace("preserve");
         }
         desc.setValidator(fieldValidator);
         //-- _durata

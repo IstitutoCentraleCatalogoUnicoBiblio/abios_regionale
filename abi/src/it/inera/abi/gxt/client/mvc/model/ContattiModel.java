@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per i contatti
+ *
+ */
 public class ContattiModel extends BaseModel implements Serializable{
 	
 	public ContattiModel() {
@@ -70,8 +74,6 @@ public class ContattiModel extends BaseModel implements Serializable{
 	public void setContattiTipo(int contattiTipo){
 		set("contattiTipo", contattiTipo);
 	}
-	
-	
 	
 	public void setValore(String valore){
 		set("valore", valore);

@@ -63,6 +63,11 @@ import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe widget generica per la visualizzazione / modifica delle informazioni 
+ * relative ai cataloghi
+ *
+ */
 public class CreazioneModificaCataloghiGenericaPanel extends FormPanel{
 	/*Servizi*/
 	protected BibliotecheServiceAsync bibliotecheService;

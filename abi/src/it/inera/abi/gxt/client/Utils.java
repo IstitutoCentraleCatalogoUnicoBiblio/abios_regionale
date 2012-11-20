@@ -22,7 +22,6 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
-import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.RadioGroup;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
@@ -32,12 +31,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.dom.client.KeyCodes;
 
 /**
- * Classi di utilità per la UI
- * @author reschini
- *
- */
-/**
- * @author davide
+ * Classe di utilità per la UI
  *
  */
 public class Utils {
@@ -60,7 +54,7 @@ public class Utils {
 	 * @param title
 	 * @param text
 	 * @param anchor
-	 * @return
+	 * @return ToolTipConfig
 	 */
 	public static ToolTipConfig getTooltip(String title, String text, String anchor) {
 		ToolTipConfig config = new ToolTipConfig();  
@@ -158,7 +152,7 @@ public class Utils {
 	/**
 	 * Rimuove il tag hmtl <br/> dalla stringa value
 	 * @param value
-	 * @return
+	 * @return String
 	 */
 	public static String removeBRtag(String value){
 		String	decoded=value.replace("<br/>", " ");
@@ -167,7 +161,7 @@ public class Utils {
 
 	/**Codifica i tag  html " " < > in &#"tag";
 	 * @param s
-	 * @return
+	 * @return String
 	 */
 	public static String encodeHTML(String s)	{
 		StringBuffer out = new StringBuffer();

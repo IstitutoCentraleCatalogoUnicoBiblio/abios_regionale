@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,6 +46,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Classe che implementa la logica per il calcolo delle differenze di una biblioteca
+ *
+ */
 @Service
 public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 
@@ -422,6 +425,9 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 	}
 
 	public void compareAccessoInternet(List<Differenze> differenze, Biblioteca bibliotecaSalvata, Biblioteca bibliotecaAttuale) {
+		if (bibliotecaSalvata.getAttivoAccessoInternet() != bibliotecaAttuale.getAttivoAccessoInternet()) {
+			createDifference(differenze, "Attivo Accesso Internet", siNoBoolean(bibliotecaSalvata.getAttivoAccessoInternet()), siNoBoolean(bibliotecaAttuale.getAttivoAccessoInternet()));
+		}
 		if (bibliotecaSalvata.getAccessoInternetPagamento() != bibliotecaAttuale.getAccessoInternetPagamento()) {
 			createDifference(differenze, "Accesso Internet Pagamento", siNoBoolean(bibliotecaSalvata.getAccessoInternetPagamento()), siNoBoolean(bibliotecaAttuale.getAccessoInternetPagamento()));
 		}
@@ -1042,8 +1048,8 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 	
 	/**
 	 * Ritorna una mappa delle differenze tra la biblioteca salvata e quella sul database
-	 * @param idbiblio
-	 * @return
+	 * @param idbiblio Id della biblioteca da controllare
+	 * @return Lista delle differenze
 	 * @throws Exception
 	 */
 	@Override
@@ -1172,10 +1178,6 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 				
 				createDifference(differenze, "Accesso Riservato",bibliotecaSalvataAccessoRiservato, bibliotecaAttualeAccessoRiservato);
 			}
-		    if (!CompareUtils.equals(bibliotecaAttuale.getAccessoLimiteEtaMin(), bibliotecaSalvata.getAccessoLimiteEtaMin()))
-				createDifference(differenze, "Accesso Limite Eta Min", bibliotecaSalvata.getAccessoLimiteEtaMin(), bibliotecaAttuale.getAccessoLimiteEtaMin());
-		    if (!CompareUtils.equals(bibliotecaAttuale.getAccessoLimiteEtaMax(), bibliotecaSalvata.getAccessoLimiteEtaMax()))
-				createDifference(differenze, "Accesso Limite Eta Max", bibliotecaSalvata.getAccessoLimiteEtaMax(), bibliotecaAttuale.getAccessoLimiteEtaMax());
 			
 			// **********Accesso modalità**********
 			//compareAccessoModalita(differenze, bibliotecaSalvata, bibliotecaAttuale);
@@ -1233,11 +1235,15 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 			// ******** Cataloghi Collettivi *******
 			
 			// ******** Servizi *****************
+			if (bibliotecaAttuale.getAttivoRiproduzioni() != bibliotecaSalvata.getAttivoRiproduzioni())
+				createDifference(differenze, "Attivo Riproduzioni", siNoBoolean(bibliotecaSalvata.getAttivoRiproduzioni()), siNoBoolean(bibliotecaAttuale.getAttivoRiproduzioni()));
 			//compareRiproduzioni(differenze, bibliotecaSalvata, bibliotecaAttuale);
 			
 			// ******** Informazioni bibliografiche *****************
+			if (bibliotecaAttuale.getAttivoInformazioniBibliografiche() != bibliotecaSalvata.getAttivoInformazioniBibliografiche())
+				createDifference(differenze, "Attivo Informazioni Bibliografiche", siNoBoolean(bibliotecaSalvata.getAttivoInformazioniBibliografiche()), siNoBoolean(bibliotecaAttuale.getAttivoInformazioniBibliografiche()));
 			if (bibliotecaAttuale.getGestisceServizioBibliograficoEsterno() != bibliotecaSalvata.getGestisceServizioBibliograficoEsterno())
-				createDifference(differenze, "Gestisce Servizio Bibliografico Esterno", siNoBoolean(bibliotecaSalvata.getGestisceServizioBibliograficoEsterno()), siNoBoolean(bibliotecaAttuale.getGestisceServizioBibliograficoEsterno()) );
+				createDifference(differenze, "Gestisce Servizio Bibliografico Esterno", siNoBoolean(bibliotecaSalvata.getGestisceServizioBibliograficoEsterno()), siNoBoolean(bibliotecaAttuale.getGestisceServizioBibliograficoEsterno()));
 			if (bibliotecaAttuale.getGestisceServizioBibliograficoInterno() != bibliotecaSalvata.getGestisceServizioBibliograficoInterno())
 				createDifference(differenze, "Gestisce Servizio Bibliografico Interno", siNoBoolean(bibliotecaSalvata.getGestisceServizioBibliograficoInterno()), siNoBoolean(bibliotecaAttuale.getGestisceServizioBibliograficoInterno()));
 			
@@ -1259,11 +1265,23 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 			// ******** Bilancio *****************
 			compareBilancio(differenze, bibliotecaSalvata, bibliotecaAttuale);
 			// ******** Deposito legale *****************
+			if (bibliotecaAttuale.getAttivoDepositoLegale() != bibliotecaSalvata.getAttivoDepositoLegale())
+				createDifference(differenze, "Attivo Deposito Legale", siNoBoolean(bibliotecaSalvata.getAttivoDepositoLegale()), siNoBoolean(bibliotecaAttuale.getAttivoDepositoLegale()));
 			//compareDepositoLegale(differenze, bibliotecaSalvata, bibliotecaAttuale);
 			// ******** Note catalogatore *****************
 			// non si confrontano
 			// ******** Comunicazioni *****************
 			// nn si confrontano
+			// ******** Reference *****************
+			if (bibliotecaAttuale.getAttivoReference() != bibliotecaSalvata.getAttivoReference())
+				createDifference(differenze, "Attivo Reference", siNoBoolean(bibliotecaSalvata.getAttivoReference()), siNoBoolean(bibliotecaAttuale.getAttivoReference()));
+			if (bibliotecaAttuale.getReferenceLocale() != bibliotecaSalvata.getReferenceLocale())
+				createDifference(differenze, "Reference Locale", siNoBoolean(bibliotecaSalvata.getReferenceLocale()), siNoBoolean(bibliotecaAttuale.getReferenceLocale()));
+			if (bibliotecaAttuale.getReferenceOnline() != bibliotecaSalvata.getReferenceOnline())
+				createDifference(differenze, "Reference Online", siNoBoolean(bibliotecaSalvata.getReferenceOnline()), siNoBoolean(bibliotecaAttuale.getReferenceOnline()));
+			// ******** Document Delivery *****************
+			if (bibliotecaAttuale.getAttivoDocumentDelivery() != bibliotecaSalvata.getAttivoDocumentDelivery())
+				createDifference(differenze, "Attivo Document Delivery", siNoBoolean(bibliotecaSalvata.getAttivoDocumentDelivery()), siNoBoolean(bibliotecaAttuale.getAttivoDocumentDelivery()));
 
 		} catch (Exception e) {
 			_log.error("Errore nel confrontare la biblioteca dall'XML", e);

@@ -2,6 +2,11 @@ package it.inera.abi.logic.impl;
 
 import java.util.Vector;
 
+/**
+ * Classe per la gestione delle differenze tra una biblioteca 
+ * ed una sua precedente versione 
+ *
+ */
 public class Differenze {
 	
 	private String property;

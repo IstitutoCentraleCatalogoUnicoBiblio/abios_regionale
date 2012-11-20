@@ -3,7 +3,10 @@ package it.inera.abi.gxt.client;
 import com.extjs.gxt.ui.client.util.Params;
 import com.extjs.gxt.ui.client.widget.InfoConfig;
 
-/*Classe che estende infoConfig per poter settare valori custom*/
+/**
+ * Classe che estende InfoConfig per poter settare valori personalizzati
+ * 
+ */
 public class InfoConfigCustom extends InfoConfig{
 
 	public InfoConfigCustom(String title, String message) {

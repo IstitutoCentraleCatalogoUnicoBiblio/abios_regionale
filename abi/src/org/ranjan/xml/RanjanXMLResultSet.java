@@ -1,9 +1,5 @@
 package org.ranjan.xml;
 
-/**
-  * @author Amit Kirdatt
-  * @date 06/08/2002
-  */
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.StringReader;
@@ -60,7 +56,7 @@ public class RanjanXMLResultSet
 
   /**
     *
-    * @param ResultSet aResultSet - The ResultSet to be converted
+    * @param aResultSet - The ResultSet to be converted
     *                               into XML
     */
   public RanjanXMLResultSet(ResultSet aResultSet)
@@ -70,8 +66,8 @@ public class RanjanXMLResultSet
   
   /**
     * 
-    * @param Connection aConnection - A Database Connection
-    * @param ResultSet aResultSet - The ResultSet to be converted
+    * @param aConnection - A Database Connection
+    * @param sql - The ResultSet to be converted
     *                               into XML
     */
   public RanjanXMLResultSet(Connection aConnection,

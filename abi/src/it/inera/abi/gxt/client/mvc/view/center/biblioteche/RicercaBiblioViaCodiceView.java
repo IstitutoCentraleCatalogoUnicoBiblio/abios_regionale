@@ -17,8 +17,12 @@ import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.CardLayout;
-import com.google.gwt.user.client.Window;
 
+/**
+ * View utilizzata per l'inizializzazione del pannello di ricerca via codice
+ * delle biblioteche, la lista dei risultati e la relativa gestione degli eventi
+ *
+ */
 public class RicercaBiblioViaCodiceView extends View {
 
 	private ContentPanel mainPanel;
@@ -84,6 +88,11 @@ public class RicercaBiblioViaCodiceView extends View {
 			
 			layout.setActiveItem(listaBiblioPanel);
 			wrapper.layout(true);
+			
+			Boolean isMasked = event.getData(CostantiGestioneBiblio.ISMASKED);
+			if (isMasked != null && isMasked.booleanValue() == true) {
+				wrapper.unmask();
+			}
 		}
 		if (wrapper != null) {
 			wrapper.fireEvent(Events.Resize);

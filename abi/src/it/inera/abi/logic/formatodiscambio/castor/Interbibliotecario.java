@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Interbibliotecario.java,v 1.4 2012/07/31 15:00:08 m.bartolozzi Exp $
+ * $Id: Interbibliotecario.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -43,7 +43,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  d'uno.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:08 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Interbibliotecario implements java.io.Serializable {
@@ -64,13 +64,10 @@ public class Interbibliotecario implements java.io.Serializable {
     private it.inera.abi.logic.formatodiscambio.castor.types.SiNoType _prestitoInterbibliotecarioAutomatizzato;
 
     /**
-     * Questo elemento
-     *  conteggia il totale dei
-     *  prestiti di questo tipo
-     *  effettuati nel periodo
-     *  di
-     *  osservazione.
-     *  Dev'essere un numero.
+     * Questo elemento conteggia il totale dei prestiti di questo
+     * tipo
+     *  effettuati nel periodo di osservazione. Dev'essere un
+     * numero.
      *  
      */
     private java.math.BigDecimal _totalePrestiti;
@@ -282,13 +279,9 @@ public class Interbibliotecario implements java.io.Serializable {
     /**
      * Returns the value of field 'totalePrestiti'. The field
      * 'totalePrestiti' has the following description: Questo
-     * elemento
-     *  conteggia il totale dei
-     *  prestiti di questo tipo
-     *  effettuati nel periodo
-     *  di
-     *  osservazione.
-     *  Dev'essere un numero.
+     * elemento conteggia il totale dei prestiti di questo tipo
+     *  effettuati nel periodo di osservazione. Dev'essere un
+     * numero.
      *  
      * 
      * @return the value of field 'TotalePrestiti'.
@@ -514,13 +507,9 @@ public class Interbibliotecario implements java.io.Serializable {
     /**
      * Sets the value of field 'totalePrestiti'. The field
      * 'totalePrestiti' has the following description: Questo
-     * elemento
-     *  conteggia il totale dei
-     *  prestiti di questo tipo
-     *  effettuati nel periodo
-     *  di
-     *  osservazione.
-     *  Dev'essere un numero.
+     * elemento conteggia il totale dei prestiti di questo tipo
+     *  effettuati nel periodo di osservazione. Dev'essere un
+     * numero.
      *  
      * 
      * @param totalePrestiti the value of field 'totalePrestiti'.

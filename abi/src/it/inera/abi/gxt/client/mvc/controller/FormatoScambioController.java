@@ -22,6 +22,11 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Controller per il formato di scambio (upload, lista 
+ * file non controllati / controllati, ricerca per export, ecc...)
+ *
+ */
 public class FormatoScambioController extends Controller {
 
 	private FormatoScambioMenuView menuView;

@@ -19,6 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 
+/**
+ * Implementazione classe DAO per l'entità Comune
+ *
+ */
 @Repository
 public class ComuneDaoJpa implements ComuneDao {
 
@@ -33,7 +37,6 @@ public class ComuneDaoJpa implements ComuneDao {
 		em.persist(comune);
 	}
 
-	/* DAL FORMATO DI SCAMBIO */
 	@Override
 	@Transactional
 	public Comune getComuneByCodIstat(String codIstatComune) {

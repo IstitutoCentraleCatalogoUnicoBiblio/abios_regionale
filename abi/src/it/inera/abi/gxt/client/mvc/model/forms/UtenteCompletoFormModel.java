@@ -6,10 +6,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Modello utilizzato all'interno della form di creazione / modifica dell'utente
+ * per rappresentare l'utente e i profili associati
+ *
+ */
 public class UtenteCompletoFormModel extends UserModel implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1178016121040961460L;
 
 	ArrayList<ProfiliUtente> a;
@@ -81,11 +84,11 @@ public class UtenteCompletoFormModel extends UserModel implements Serializable {
 		return get("note");
 	}
 	
-	public void setProfili(List<ProfiliUtente> profili){
+	public void setProfili(List<ProfiliUtente> profili) {
 		set("profili", profili);
 	}
 	
-	public List<ProfiliUtente> getProfili(){
+	public List<ProfiliUtente> getProfili() {
 		return get("profili");
 	}
 }

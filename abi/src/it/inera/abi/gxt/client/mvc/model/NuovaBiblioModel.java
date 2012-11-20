@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per i dati di una nuova biblioteca
+ *
+ */
 public class NuovaBiblioModel extends BaseModel implements Serializable {
 	public static final String IDBIBLIO = "idbiblio";
 	public static final String READONLY = "readOnly";

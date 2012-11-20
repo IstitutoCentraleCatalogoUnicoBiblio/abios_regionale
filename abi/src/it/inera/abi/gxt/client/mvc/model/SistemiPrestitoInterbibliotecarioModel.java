@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per rappresentare i sistemi di prestito interbibliotecario
+ *
+ */
 public class SistemiPrestitoInterbibliotecarioModel extends BaseModel implements Serializable {
 	
 	public SistemiPrestitoInterbibliotecarioModel() {

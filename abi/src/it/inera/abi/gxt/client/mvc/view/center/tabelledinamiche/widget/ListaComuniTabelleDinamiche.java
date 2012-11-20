@@ -64,7 +64,13 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe che permette la gestione (modifica, aggiungi, rimuovi) 
+ * della tabella dinamica dei comuni
+ * 
+ */
 public class ListaComuniTabelleDinamiche extends ContentPanel {
+
 	private LocationServiceAsync locationService;
 	public TabelleDinamicheServiceAsync tabelleDinamicheService;
 	private Button assegnaButton;

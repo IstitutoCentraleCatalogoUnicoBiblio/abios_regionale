@@ -2,7 +2,6 @@ package it.inera.abi.gxt.client.mvc.view.menu;
 
 import it.inera.abi.gxt.client.AppEvents;
 import it.inera.abi.gxt.client.Utils;
-import it.inera.abi.gxt.client.auth.Roles;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.costants.CostantiMenu;
 import it.inera.abi.gxt.client.costants.CostantiReport;
@@ -13,10 +12,8 @@ import it.inera.abi.gxt.client.resources.Resources;
 
 import java.util.List;
 
-import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.core.El;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
@@ -29,14 +26,12 @@ import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanelView;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.Joint;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.AbstractImagePrototype.ImagePrototypeElement;
-import com.google.gwt.user.client.ui.impl.ClippedImagePrototype;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 
+/**
+ * View utilizzata per l'inizializzazione del menu delle stampe e dei report e
+ * la relativa gestione degli eventi associati
+ *
+ */
 public class GestioneReportMenuView extends View {
 
 	private ContentPanel gestioneReport;
@@ -47,14 +42,13 @@ public class GestioneReportMenuView extends View {
 
 	protected void initUI() {
 		
-		// se l'utente non ha ruolo di stampe e report esco
+		/* se l'utente non ha ruolo di stampe e report esco */
 		if (!UIAuth.isMenuStampeReportEnable()) return; 
 		
 		ContentPanel west = (ContentPanel) Registry.get(AppView.WEST_PANEL);
 		gestioneReport = new ContentPanel();
 		gestioneReport.setHeading(CostantiMenu.REPORT);
 		gestioneReport.setAnimCollapse(false);
-//		gestioneReport.setScrollMode(Scroll.ALWAYS);
 		gestioneReport.setScrollMode(Scroll.AUTOY);
 
 		List<MenuItem> model = MenuEntriesFactory.getTreeModelReport();
@@ -63,7 +57,6 @@ public class GestioneReportMenuView extends View {
 
 		final TreePanel<MenuItem> tree = new TreePanel<MenuItem>(store);
 		tree.setView(new TreePanelViewCustom());
-//		tree.setWidth(300);
 		tree.setDisplayProperty("name");
 		tree.getStyle().setLeafIcon(Resources.ICONS.report());
 		

@@ -2,17 +2,16 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Bilancio.java,v 1.4 2012/07/31 15:00:07 m.bartolozzi Exp $
+ * $Id: Bilancio.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
 
 /**
- * Informazioni relative al bilancio della
- *  biblioteca.
+ * Informazioni relative al bilancio della biblioteca.
  *  
  * 
- * @version $Revision: 1.4 $ $Date: 2012/07/31 15:00:07 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Bilancio implements java.io.Serializable {

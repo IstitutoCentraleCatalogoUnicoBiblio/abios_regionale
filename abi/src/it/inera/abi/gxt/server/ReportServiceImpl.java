@@ -12,6 +12,10 @@ import it.inera.abi.gxt.client.services.ReportService;
 import it.inera.abi.logic.stampe.BiblioStampe;
 import it.inera.abi.logic.stampe.ReportLogic;
 
+/**
+ * Implementazione dei servizi relativi ai report (lato server)
+ * 
+ */
 public class ReportServiceImpl extends AutoinjectingRemoteServiceServlet implements ReportService {
 	
 	private static final long serialVersionUID = 5148926030802732305L;

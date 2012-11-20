@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseTreeModel;
 
+/**
+ * Classe che rappresenta una entry del menu delle tabelle dinamiche
+ *
+ */
 public class MenuItem extends BaseTreeModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1349156147793122388L;
 	private static int ID = 0;
 

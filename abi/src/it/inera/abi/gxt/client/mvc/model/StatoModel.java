@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per rappresentare gli stati
+ *
+ */
 public class StatoModel extends BaseModel implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -9042969293269705024L;
 
 	public StatoModel() {
@@ -31,9 +33,6 @@ public class StatoModel extends BaseModel implements Serializable {
 	public void setDenominazione(String denominazione) {
 		set("denominazione", denominazione);
 	}
-
-	/**/
-
 
 	public int getIdStato() {
 		return (Integer) get("id_stato");

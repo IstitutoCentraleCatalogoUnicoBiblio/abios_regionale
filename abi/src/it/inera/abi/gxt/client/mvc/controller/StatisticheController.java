@@ -1,10 +1,3 @@
-/*
- * Ext GWT 2.2.0 - Ext for GWT
- * Copyright(c) 2007-2010, Ext JS, LLC.
- * licensing@extjs.com
- * 
- * http://extjs.com/license
- */
 package it.inera.abi.gxt.client.mvc.controller;
 
 import it.inera.abi.gxt.client.AppEvents;
@@ -17,6 +10,10 @@ import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 
+/**
+ * Controller per la gestione delle statistiche
+ *
+ */
 public class StatisticheController extends Controller {
 
 	private StatisticheMenuView menuView;

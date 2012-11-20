@@ -1,5 +1,9 @@
 package it.inera.abi.logic;
 
+/**
+ * Interfaccia per il log delle operazioni eseguite dall'utente di backend
+ *
+ */
 public interface UserActionLog {
 
 	public abstract void logAction(String user, String actionDescription);

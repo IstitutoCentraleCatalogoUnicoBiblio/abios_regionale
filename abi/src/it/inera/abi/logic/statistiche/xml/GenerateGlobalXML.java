@@ -30,6 +30,10 @@ import org.apache.commons.logging.LogFactory;
 import org.ranjan.xml.RanjanXMLResultSet;
 import org.ranjan.xml.RanjanXMLResultSetException;
 
+/**
+ * Classe per la generazione dell'xml delle statistiche
+ * 
+ */
 public class GenerateGlobalXML {
 
 	private Log _log = LogFactory.getLog(GenerateGlobalXML.class);

@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
+/**
+ * Modello utilizzato per la rappresentazione degli orari
+ *
+ */
 public class OrariModel extends BaseModel implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -1459898121650310103L;
 
 	public OrariModel() {
 
 	}
-
-
 
 	public OrariModel(int giorno, String startOre, String stopOre,
 			String startMin, String stopMin) {

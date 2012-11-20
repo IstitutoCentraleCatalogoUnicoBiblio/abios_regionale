@@ -1,20 +1,25 @@
 package it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms;
 
 import it.inera.abi.gxt.client.Utils;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPuntiDecentratiePanel;
+import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaPuntiDecentratiPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaSistemiDiBibliotechePanel;
 
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 
+/**
+ * Classe per l'inserimento / modifica delle informazioni relative
+ * ai sistemi di biblioteche
+ *
+ */
 public class SistemiDiBibliotechePanel extends ContentPanelForTabItem{
 	
-	private ListaPuntiDecentratiePanel altreBibliotechePanel;
+	private ListaPuntiDecentratiPanel altreBibliotechePanel;
 	private ListaSistemiDiBibliotechePanel sistemiDiBibliotechePanel;
 	private int id_biblio;
 	
 	public SistemiDiBibliotechePanel() {
-		super();	// TODO Auto-generated constructor stub
+		super();
 		createForms();
 	}
 
@@ -26,7 +31,7 @@ public class SistemiDiBibliotechePanel extends ContentPanelForTabItem{
 		FieldSet sistemiBiblioSet = new FieldSet();
 		Utils.setFieldSetProperties(sistemiBiblioSet, "Sistemi e reti di biblioteche");	
 
-		altreBibliotechePanel = new ListaPuntiDecentratiePanel();
+		altreBibliotechePanel = new ListaPuntiDecentratiPanel();
 		altreBibliotechePanel.setGrid();
 		sistemiBiblioSet.add(altreBibliotechePanel);
 

@@ -3,7 +3,6 @@ package it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget;
 import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.auth.UIAuth;
-import it.inera.abi.gxt.client.mvc.model.OrariModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimonioLibrarioModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimonioLibrarioModelForCombo;
 import it.inera.abi.gxt.client.mvc.model.PatrimonioSpecializzazioneModel;
@@ -38,8 +37,6 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.MessageBox.MessageBoxType;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
@@ -55,6 +52,11 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Classe per la visualizzazione / modifica delle informazioni
+ * relative alla lista di patrimoni librari
+ *
+ */
 public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 
 	private TabelleDinamicheServiceAsync tabelleDinamicheService = Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
@@ -391,30 +393,40 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 							if (modifica == false) {
 
 								id_nuovoPatr = store.getAt(0).getIdRecord();
-								try {
-									quantita = store.getAt(0).getQuantita();
-								} catch (NullPointerException npe) {
+								
+								if (store.getAt(0).getQuantita() != null && store.getAt(0).getQuantita().intValue() != 0) {
+									quantita = store.getAt(0).getQuantita().intValue();
+									
+								} else {
 									quantita = 0;
 								}
-								try {
-									quantitaUltimoAnno = store.getAt(0)	.getQuantitaUltimoAnno();
-								} catch (NullPointerException npe) {
+								
+								if (store.getAt(0).getQuantitaUltimoAnno() != null && store.getAt(0)	.getQuantitaUltimoAnno().intValue() != 0) {
+									quantitaUltimoAnno = store.getAt(0).getQuantitaUltimoAnno().intValue();
+									
+								} else {
 									quantitaUltimoAnno = 0;
 								}
+								
 							}
 
 							else {
 								id_nuovoPatr = grid.getSelectionModel().getSelectedItem().getIdRecord();
-								try {
-									quantita = grid.getSelectionModel().getSelectedItem().getQuantita();
-								} catch (NullPointerException npe) {
+								
+								if (grid.getSelectionModel().getSelectedItem().getQuantita() != null && grid.getSelectionModel().getSelectedItem().getQuantita().intValue() != 0) {
+									quantita = grid.getSelectionModel().getSelectedItem().getQuantita().intValue();
+									
+								} else {
 									quantita = 0;
 								}
-								try {
-									quantitaUltimoAnno = grid.getSelectionModel().getSelectedItem().getQuantitaUltimoAnno();
-								} catch (NullPointerException npe) {
+								
+								if (grid.getSelectionModel().getSelectedItem().getQuantitaUltimoAnno() != null && grid.getSelectionModel().getSelectedItem().getQuantitaUltimoAnno().intValue() != 0) {
+									quantitaUltimoAnno = grid.getSelectionModel().getSelectedItem().getQuantitaUltimoAnno().intValue();
+									
+								} else {
 									quantitaUltimoAnno = 0;
 								}
+								
 							}
 							modifica=false;
 							bibliotecheService.addPatrimonioSpeciale(

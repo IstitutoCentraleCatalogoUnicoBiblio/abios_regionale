@@ -1,8 +1,5 @@
 package it.inera.abi.gxt.client.mvc.view.menu;
 
-/**
- * Classe per la creazione delle entry di menu dei vari alberi nel pannello sinistro
- */
 import it.inera.abi.gxt.client.auth.Roles;
 import it.inera.abi.gxt.client.costants.CostantiFormatoScambio;
 import it.inera.abi.gxt.client.costants.CostantiGestioneBiblio;
@@ -11,11 +8,15 @@ import it.inera.abi.gxt.client.costants.CostantiReport;
 import it.inera.abi.gxt.client.costants.CostantiStatistiche;
 import it.inera.abi.gxt.client.costants.CostantiTabelleDinamiche;
 import it.inera.abi.gxt.client.mvc.model.MenuItem;
-import it.inera.abi.gxt.client.resources.Resources;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe per la creazione delle entry del menu dei vari alberi 
+ * all'interno del pannello situato a sinistra
+ * 
+ */
 public class MenuEntriesFactory {
 
 	public static List<MenuItem> getTreeModelTabDin() {

@@ -42,6 +42,7 @@ import it.inera.abi.persistence.PrestitoLocaleUtentiAmmessi;
 import it.inera.abi.persistence.Pubblicazioni;
 import it.inera.abi.persistence.Regolamento;
 import it.inera.abi.persistence.Riproduzioni;
+import it.inera.abi.persistence.RiproduzioniTipo;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
@@ -68,8 +69,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Gestione dell'iterazione tra il filesystem (xml) e il database della biblioteca
- * @author reschini
+ * Classe che implementa la logica delle principali operazioni riguardanti
+ * il trasferimento di una biblioteca (salva, ripristina, backup xml)
  *
  */
 @Service
@@ -211,7 +212,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			}
 
 
-			// **********sistemi biblioteche**********//TESTATO (Davide)
+			// **********sistemi biblioteche**********
 			Vector<Integer> toRemoveId = new Vector<Integer>();
 			if (bibliotecaAttuale.getSistemiBiblioteches() != null) {
 
@@ -228,26 +229,26 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// **********profilo storico e sede**********//TESTATO (Davide)
+			// **********profilo storico e sede**********
 			bibliotecaAttuale.setEdificioMonumentale(bibliotecaSalvata.getEdificioMonumentale());
 			bibliotecaAttuale.setEdificioDenominazione(bibliotecaSalvata.getEdificioDenominazione());
 			bibliotecaAttuale.setEdificioAppositamenteCostruito(bibliotecaSalvata.getEdificioAppositamenteCostruito());
 			bibliotecaAttuale.setEdificioDataCostruzione(bibliotecaSalvata.getEdificioDataCostruzione());
 
-			// **********locali**********//TESTATO (Davide)
+			// **********locali**********
 			bibliotecaAttuale.setMlAperti(bibliotecaSalvata.getMlAperti());
 			bibliotecaAttuale.setMlMagazzini(bibliotecaSalvata.getMlMagazzini());
 			bibliotecaAttuale.setMqPubblici(bibliotecaSalvata.getMqPubblici());
 			bibliotecaAttuale.setMqTotali(bibliotecaSalvata.getMqTotali());
 
-			// **********postazioni**********//TESTATO (Davide)
+			// **********postazioni**********
 			bibliotecaAttuale.setPostiAudio(bibliotecaSalvata.getPostiAudio());
 			bibliotecaAttuale.setPostiInternet(bibliotecaSalvata.getPostiInternet());
 			bibliotecaAttuale.setPostiLettura(bibliotecaSalvata.getPostiLettura());
 			bibliotecaAttuale.setPostiVideo(bibliotecaSalvata.getPostiVideo());
 
 
-			// **********Ente di appartenenza**********//TESTATO (Davide)
+			// **********Ente di appartenenza**********
 			Ente ente = bibliotecaSalvata.getEnte();
 			abiBiblioLogic.setEnte(idbiblio, ente.getStato(), ente.getEnteTipologiaAmministrativa(), ente.getDenominazione());
 
@@ -257,7 +258,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			bibliotecaAttuale.setStrutturaGerarchicaSovraordinata(bibliotecaSalvata.getStrutturaGerarchicaSovraordinata());
 
 
-			// **********Tipologia funzionale**********//TESTATO (Davide)
+			// **********Tipologia funzionale**********
 			abiBiblioLogic.setTipologiaFunzionale(idbiblio, bibliotecaSalvata.getTipologiaFunzionale());
 
 			// **********Fondazione**********
@@ -265,12 +266,10 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			bibliotecaAttuale.setDataIstituzione(bibliotecaSalvata.getDataIstituzione());
 
 
-			// **********info accesso //TESTATO (Davide)
+			// **********info accesso**********
 			bibliotecaAttuale.setAccessoRiservato(bibliotecaSalvata.getAccessoRiservato());
-			bibliotecaAttuale.setAccessoLimiteEtaMin(bibliotecaSalvata.getAccessoLimiteEtaMin());
-			bibliotecaAttuale.setAccessoLimiteEtaMax(bibliotecaSalvata.getAccessoLimiteEtaMax());
 
-			// **********Accesso modalità**********//TESTATO (Davide)
+			// **********Accesso modalità**********
 			if (bibliotecaAttuale.getAccessoModalitas() != null) {
 				Vector<Integer> idsModalita = new Vector<Integer>();
 				for (AccessoModalita accessoModalita : bibliotecaAttuale.getAccessoModalitas()) {
@@ -285,7 +284,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 					abiBiblioLogic.addModalitaAccesso(idbiblio, accessoModalita.getIdAccessoModalita());
 				}
 			}
-			// ********* dest sociali *************//TESTATO (Davide)
+			// ********* dest sociali *************
 			if (bibliotecaAttuale.getDestinazioniSocialis() != null) {
 				biblioDao.removeChilds(bibliotecaAttuale.getDestinazioniSocialis());
 			} 
@@ -296,7 +295,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			}
 			bibliotecaAttuale.setAccessoHandicap(bibliotecaSalvata.getAccessoHandicap());
 
-			// ********* regolamento ************** //TESTATO (Davide)
+			// ********* regolamento **************
 			if (bibliotecaAttuale.getRegolamentos() != null) {
 				biblioDao.removeChilds(bibliotecaAttuale.getRegolamentos());
 			}
@@ -309,7 +308,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ********* orario ufficiale ************** //TESTATO (Davide)
+			// ********* orario ufficiale ************** 
 			if(bibliotecaAttuale.getOrarioUfficialis() != null){
 				biblioDao.removeChilds(bibliotecaAttuale.getOrarioUfficialis());
 			}
@@ -320,7 +319,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ********* variazioni d'orario************** //TESTATO (Davide)
+			// ********* variazioni d'orario************** 
 			if(bibliotecaAttuale.getOrarioVariazionis() != null){
 				biblioDao.removeChilds(bibliotecaAttuale.getOrarioVariazionis());
 			}
@@ -330,7 +329,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 					abiBiblioLogic.addNuovaVariazioneOrario(idbiblio, orarioVariazioni);
 				}
 			}
-			// ********* chiusure ************** //TESTATO (Davide)
+			// ********* chiusure *********
 			if(bibliotecaAttuale.getOrarioChiusures() != null){
 				biblioDao.removeChilds(bibliotecaAttuale.getOrarioChiusures());
 			}
@@ -341,7 +340,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ********* patrimonio librario ************** //TESTATO (Davide)
+			// ********* patrimonio librario ************** 
 			if(bibliotecaAttuale.getPatrimonios() != null){
 				biblioDao.removeChilds(bibliotecaAttuale.getPatrimonios());
 			} 
@@ -356,7 +355,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ******** Inventario - Catalogo topografico - Fondi antichi (fino al 1830)  //TESTATO (Davide)
+			// ******** Inventario - Catalogo topografico - Fondi antichi (fino al 1830) ********
 			abiBiblioLogic.setConsistenzaFondiAntichi1830(idbiblio,  bibliotecaSalvata.getFondiAntichiConsistenza().getIdFondiAntichiConsistenza());
 			bibliotecaAttuale.setInventarioCartaceo(bibliotecaSalvata.getInventarioCartaceo());
 			bibliotecaAttuale.setInventarioInformatizzato(bibliotecaSalvata.getInventarioInformatizzato());
@@ -365,7 +364,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 
 
 			
-			//******* Specializzazioni *************  //TESTATO (Davide)
+			// ******* Specializzazioni *******
 			if(bibliotecaAttuale.getDeweyLiberos() != null){
 				biblioDao.removeChilds(bibliotecaAttuale.getDeweyLiberos());
 			} 
@@ -375,7 +374,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 			
-			// ******* fondi speciali *************  //TESTATO (Davide)
+			// ******* fondi speciali *******
 			if(bibliotecaAttuale.getFondiSpecialis() != null){
 				bibliotecaAttuale.getFondiSpecialis().clear();
 			} 
@@ -386,7 +385,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ******** sistemi di indicizzazione Classificata //TESTATO (Davide)
+			// ******** sistemi di indicizzazione Classificata *******
 			if(bibliotecaAttuale.getIndicizzazioneClassificatas() != null){
 				Vector<Integer> idsIndicizzazioneClassificatas = new Vector<Integer>();
 				for (IndicizzazioneClassificata indicizzazioneClassificata : bibliotecaAttuale.getIndicizzazioneClassificatas()) {
@@ -406,7 +405,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ******** sistemi di indicizzazione per Soggetto //TESTATO (Davide)
+			// ******** sistemi di indicizzazione per Soggetto *******
 			if(bibliotecaAttuale.getIndicizzazioneSoggettos() != null){
 				Vector<Integer> idsIndicizzazioneSoggettos = new Vector<Integer>();
 
@@ -427,7 +426,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 					abiBiblioLogic.addEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica( dynaTabDTODB, idbiblio, DtoJpaMapping.INDICIZZAZIONE_SISTEMI_IND_PER_SOGGETTO_INDEX);
 				}
 			}
-			// ******** norme di catalogazione //TESTATO (Davide)
+			// ******** norme di catalogazione *******
 			if(bibliotecaAttuale.getNormeCatalogaziones() != null){
 				Vector<Integer> idsNormeCatalogaziones = new Vector<Integer>();
 				for (NormeCatalogazione normeCatalogazione : bibliotecaAttuale.getNormeCatalogaziones()) {
@@ -447,9 +446,8 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 					abiBiblioLogic.addEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica( dynaTabDTODB, idbiblio, DtoJpaMapping.CATALOGAZIONE_NORME_INDEX);
 				}
 			}
-
-			// ******** Spogli materiale bibliografico //TESTATO (Davide)
-
+			
+			// ******** Spogli materiale bibliografico *******
 			if(bibliotecaAttuale.getSpogliBibliograficis() != null){
 				biblioDao.removeChilds(bibliotecaAttuale.getSpogliBibliograficis());
 			}
@@ -458,7 +456,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 					abiBiblioLogic.addSpoglioMaterialeBibliograficoRipristino(spogliBibliografici.getDescrizioneBibliografica(), idbiblio);
 				}
 			}
-			// ******** Pubblicazioni //TESTATO (Davide)
+			// ******** Pubblicazioni *******
 			if(bibliotecaAttuale.getPubblicazionis() != null){
 				biblioDao.removeChilds(bibliotecaAttuale.getPubblicazionis());
 			}
@@ -470,7 +468,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ******** Bibliografia //TESTATO (Davide)
+			// ******** Bibliografia *******
 			if (bibliotecaAttuale.getBibliografias() != null) {
 				biblioDao.removeChilds(bibliotecaAttuale.getBibliografias());
 			}
@@ -516,7 +514,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 		
-			// ******** Cataloghi Collettivi ******* //TESTATO (Davide)
+			// ******** Cataloghi Collettivi ******* 
 			if (bibliotecaAttuale.getPartecipaCataloghiCollettiviMateriales() != null) {
 				Vector<Integer> ids = new Vector<Integer>();
 				for (PartecipaCataloghiCollettiviMateriale p :bibliotecaAttuale.getPartecipaCataloghiCollettiviMateriales()) {
@@ -534,19 +532,22 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 			 
-			// ******** Servizi ***************** //TESTATO (Davide)
+			// ******** Servizi *******
 			if( bibliotecaAttuale.getRiproduzionis()!=null){
 				biblioDao.removeChilds(bibliotecaAttuale.getRiproduzionis());
 			}
+			
+			/* Riproduzioni */
+			bibliotecaAttuale.setAttivoRiproduzioni(bibliotecaSalvata.getAttivoRiproduzioni());
 			if (bibliotecaSalvata.getRiproduzionis() != null) {
 				for (Riproduzioni riproduzioni : bibliotecaSalvata.getRiproduzionis()) {
 					biblioDao.saveChild(riproduzioni);
 				}
 			}
-			// ******** Informazioni bibliografiche ***************** //TESTATO (Davide)
+			// ******** Informazioni bibliografiche ***************** 
 			abiBiblioLogic.setServizioBibliograficoInternoEsterno(idbiblio, bibliotecaSalvata.getAttivoInformazioniBibliografiche(), bibliotecaSalvata.getGestisceServizioBibliograficoInterno(), bibliotecaSalvata.getGestisceServizioBibliograficoEsterno());
 
-			// ******* Tipologie comunicazione bibliografica ************ //TESTATO (Davide)
+			// ******* Tipologie comunicazione bibliografica *******
 			if(bibliotecaAttuale.getServiziInformazioniBibliograficheModalitas()!=null){
 				Vector<Integer> idsServiziInformazioniBibliograficheModalitas= new Vector<Integer>();
 				for (ServiziInformazioniBibliograficheModalita modalita : bibliotecaAttuale.getServiziInformazioniBibliograficheModalitas()) {
@@ -562,7 +563,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ******** Sezioni speciali ***************** //TESTATO (Davide)
+			// ******** Sezioni speciali ***************** 
 			if(bibliotecaAttuale.getSezioniSpecialis()!=null){
 				Vector<Integer> idsSezioniSpecialis= new Vector<Integer>();
 				for (SezioniSpeciali sezioniSpeciali : bibliotecaAttuale.getSezioniSpecialis()) {
@@ -578,13 +579,15 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ******** Accesso internet ***************** //TESTATO (Davide)
+			// ******** Accesso internet *******
+			bibliotecaAttuale.setAttivoAccessoInternet(bibliotecaSalvata.getAttivoAccessoInternet());
 			bibliotecaAttuale.setAccessoInternetPagamento(bibliotecaSalvata.getAccessoInternetPagamento());
 			bibliotecaAttuale.setAccessoInternetProxy(bibliotecaSalvata.getAccessoInternetProxy());
 			bibliotecaAttuale.setAccessoInternetTempo(bibliotecaSalvata.getAccessoInternetTempo());
 
 
-			// ******** PrestitoLocale ***************** //TESTATO (Davide)
+			// ******** PrestitoLocale ***************** 
+			bibliotecaAttuale.setAttivoPrestitoLocale(bibliotecaSalvata.getAttivoPrestitoLocale());
 			if(bibliotecaAttuale.getPrestitoLocales()!=null){
 				Vector<Integer> idsPrestitoLocales= new Vector<Integer>();
 
@@ -614,7 +617,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			}
 
 
-			// ******** Prestito interbibliotecario ***************** //TESTATO (Davide)
+			// ******** Prestito interbibliotecario ***************** 
 			if(bibliotecaSalvata.getPrestitoInterbiblioInternazionale()!=null)
 				bibliotecaAttuale.setPrestitoInterbiblioInternazionale(bibliotecaSalvata.getPrestitoInterbiblioInternazionale());
 			else bibliotecaAttuale.setPrestitoInterbiblioInternazionale(null);
@@ -625,7 +628,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				bibliotecaAttuale.setProcedureIllAutomatizzate(bibliotecaSalvata.getProcedureIllAutomatizzate());
 			else bibliotecaAttuale.setProcedureIllAutomatizzate(null);
 
-			// ******** Prestito interbibliotecario: RUOLO ***************** //TESTATO (Davide)
+			// ******** Prestito interbibliotecario: RUOLO ***************** 
 			if(bibliotecaAttuale.getPrestitoInterbibliotecarios()!=null){
 				bibliotecaAttuale.getPrestitoInterbibliotecarios().clear();
 			}
@@ -641,7 +644,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ******** Sistemi di prestito interbibliotecario ***************** //TESTATO (Davide)
+			// ******** Sistemi di prestito interbibliotecario ***************** 
 			if(bibliotecaAttuale.getSistemiPrestitoInterbibliotecarios()!=null){
 				Vector<Integer> idsSistemiPrestitoInterbibliotecarios= new Vector<Integer>();
 				for (SistemiPrestitoInterbibliotecario sistemiPrestitoInterbibliotecario : bibliotecaAttuale.getSistemiPrestitoInterbibliotecarios()) {
@@ -663,18 +666,18 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
-			// ******** Personale ***************** //TESTATO (Davide)
+			// ******** Personale ***************** 
 			bibliotecaAttuale.setPersonaleTotale(bibliotecaSalvata.getPersonaleTotale());
 			bibliotecaAttuale.setPersonaleEsterno(bibliotecaSalvata.getPersonaleEsterno());
 			bibliotecaAttuale.setPersonalePartTime(bibliotecaSalvata.getPersonalePartTime());
 			bibliotecaAttuale.setPersonaleTemporaneo(bibliotecaSalvata.getPersonaleTemporaneo());
 
-			// ******** Informazioni supplementari utenti ***************** //TESTATO (Davide)
+			// ******** Informazioni supplementari utenti ***************** 
 			bibliotecaAttuale.setUtentiIscrittiPrestitoAnno(bibliotecaSalvata.getUtentiIscrittiPrestitoAnno());
 			bibliotecaAttuale.setUtenti(bibliotecaSalvata.getUtenti());
 			bibliotecaAttuale.setUtentiIscritti(bibliotecaSalvata.getUtentiIscritti());
 
-			// ******** Bilancio ***************** //TESTATO (Davide)
+			// ******** Bilancio *******
 			bibliotecaAttuale.setBilancioUscite(bibliotecaSalvata.getBilancioUscite());
 			bibliotecaAttuale.setBilancioUscitePersonale(bibliotecaSalvata.getBilancioUscitePersonale());
 			bibliotecaAttuale.setBilancioUsciteIncrementoPatrimonio(bibliotecaSalvata.getBilancioUsciteIncrementoPatrimonio());
@@ -683,8 +686,10 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			bibliotecaAttuale.setBilancioUsciteVarie(bibliotecaSalvata.getBilancioUsciteVarie());
 			bibliotecaAttuale.setBilancioEntrate(bibliotecaSalvata.getBilancioEntrate());
 
-			// ******** Deposito legale ***************** //TESTATO (Davide)
-			if(bibliotecaAttuale.getDepositiLegalis()!=null){
+			// ******** Deposito legale *******
+			bibliotecaAttuale.setAttivoDepositoLegale(bibliotecaSalvata.getAttivoDepositoLegale());
+			
+			if (bibliotecaAttuale.getDepositiLegalis() != null) {
 				biblioDao.removeChilds(bibliotecaAttuale.getDepositiLegalis());
 			}
 			if (bibliotecaSalvata.getDepositiLegalis() != null) {
@@ -693,10 +698,10 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 			
-			// ******** Note catalogatore *****************//TESTATO (Davide)
+			// ******** Note catalogatore *****************
 			bibliotecaAttuale.setCatalogazioneNote(bibliotecaSalvata.getCatalogazioneNote());
 
-			// ******** Comunicazioni ***************** //TESTATO (Davide)
+			// ******** Comunicazioni ********
 			if (bibliotecaAttuale.getComunicazionis() != null) {
 				biblioDao.removeChilds(bibliotecaAttuale.getComunicazionis());
 			}
@@ -734,7 +739,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			else bibliotecaAttuale.setUtenteUltimaModifica(null);
 
 			
-			//**********************Stato catalogazione********************//
+			// ******** Stato catalogazione ********
 			if (bibliotecaAttuale.getStatoCatalogaziones() != null) {
 				biblioDao.removeChilds(bibliotecaAttuale.getStatoCatalogaziones());
 			}
@@ -744,6 +749,22 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 
+			/* Reference */
+			abiBiblioLogic.setReference(idbiblio, bibliotecaSalvata.getAttivoReference(), bibliotecaSalvata.getReferenceLocale(), bibliotecaSalvata.getReferenceOnline());
+
+			
+			/* Document Delivery */
+			bibliotecaAttuale.setAttivoDocumentDelivery(bibliotecaSalvata.getAttivoDocumentDelivery());
+			
+			if (bibliotecaAttuale.getDocumentDeliveries() != null) {
+				bibliotecaAttuale.getDocumentDeliveries().clear();
+			}
+			
+			if (bibliotecaSalvata.getDocumentDeliveries() != null) {
+				for (RiproduzioniTipo entryDocDelSalvata : bibliotecaSalvata.getDocumentDeliveries()) {
+					bibliotecaAttuale.getDocumentDeliveries().add(entryDocDelSalvata);
+				}
+			}
 			
 			userActionLog.logActionCatalogazioneBiblioDefaultUser("RIPRISTINO BIBLIOTECA COMPLETATO - id_biblioteca="+idbiblio);
 
