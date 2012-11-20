@@ -44,7 +44,7 @@ public class CostantiGestioneBiblio {
 	public static final String PATROMONIO_LIBRARIO = "Patrimonio librario";
 	public static final String SPECIALIZZAZIONI_FONDI_SPECIALI = "Specializzazioni - Fondi speciali";
 	public static final String FONDI_SPECIALI = "Fondi speciali";
-	public static final String TAB_INFORMAZIONI_CATALOGATORE = "Informazioni catalogatore";
+	public static final String TAB_GESTIONALE = "Gestionale";
 	public static final String INFO_CATALOGAZIONE = "Informazioni di catalogazione";
 	
 

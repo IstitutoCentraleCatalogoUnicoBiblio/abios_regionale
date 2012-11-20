@@ -888,4 +888,13 @@ public class BiblioModel extends BaseModel implements Serializable {
 	public Boolean getAttivoDepositoLegale() {
 		return get("attivoDepositoLegale");
 	}
+	
+	public void setFonte(String fonte) {
+		set("fonte", fonte);
+	}
+	
+	public String getFonte() {
+		return get("fonte");
+	}
+	
 }

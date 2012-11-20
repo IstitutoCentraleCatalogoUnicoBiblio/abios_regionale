@@ -42,18 +42,20 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 
 	private LayoutContainer infoCatalogazione;
 	private FieldSet infoCatalogazioneSet;
-	
+
 	private static final String dataCensimentoLabel="Data censimento import:&nbsp;";
 	private static final String dataImportLabel="Data import:&nbsp;";
 	private static final String dataModificaRemotaLabel="Data modifica remota:&nbsp;";
 	private static final String dataModificaLabel="Data modifica:&nbsp;";
 	private static final String utenteUltimaModificaLabel="Utente ultima modifica:&nbsp;";
-	
+	private static final String fonteLabel="Fonte:&nbsp;";
+
 	private Text dataCensimentoText;
 	private Text dataImportText;
 	private Text dataModificaRemotaText;
 	private Text dataModificaText;
 	private Text utenteUltimaModificaText;
+	private Text fonteText;
 
 	private TextArea noteBox;
 	private TextArea comunicazioniBox;
@@ -66,7 +68,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 	/*Forms*/
 	private FormPanel noteForm;
 	private FormPanel comunicazioniForm;
-	
+
 	public NoteCatalogatorePanel() {
 		super();
 		setMonitorWindowResize(true);
@@ -100,28 +102,34 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 		dataCensimentoText = new Text();
 		dataCensimentoText.setStyleAttribute("fontSize", "14px");
 		dataCensimentoText.hide();
-		
+
 		dataImportText = new Text();
 		dataImportText.setStyleAttribute("fontSize", "14px");
 		dataImportText.hide();
-		
+
 		dataModificaRemotaText = new Text();
 		dataModificaRemotaText.setStyleAttribute("fontSize", "14px");
 		dataModificaRemotaText.hide();
-		
+
 		dataModificaText = new Text();
 		dataModificaText.setStyleAttribute("fontSize", "14px");
 		dataModificaText.hide();
-		
+
 		utenteUltimaModificaText = new Text();
 		utenteUltimaModificaText.setStyleAttribute("fontSize", "14px");
 		utenteUltimaModificaText.hide();
-		
+
+		fonteText = new Text();
+		fonteText.setStyleAttribute("fontSize", "14px");
+		fonteText.hide();
+
+
 		infoCatalogazioneContainer.add(dataCensimentoText);
 		infoCatalogazioneContainer.add(dataImportText);
 		infoCatalogazioneContainer.add(dataModificaRemotaText);
 		infoCatalogazioneContainer.add(dataModificaText);
 		infoCatalogazioneContainer.add(utenteUltimaModificaText);
+		infoCatalogazioneContainer.add(fonteText);
 
 		infoCatalogazioneSet.add(infoCatalogazioneContainer);
 		infoCatalogazione.add(infoCatalogazioneSet);
@@ -133,7 +141,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 		FieldSet noteSet = new FieldSet();
 		Utils.setFieldSetProperties(noteSet, CostantiGestioneBiblio.NOTE_CATALOGATORE_FIELDSET_LABEL);
 		noteSet.setCollapsible(true);
-		
+
 		LayoutContainer noteTable = new LayoutContainer(new TableLayout(1));
 
 		noteForm = new FormPanel();
@@ -160,7 +168,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 
 		noteAggiorna = new Button("Aggiorna");
 		Utils.setStylesButton(noteAggiorna);
-		
+
 		noteAggiorna.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
 			@Override
@@ -194,7 +202,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 							});
 
 						} 
-						
+
 					}
 				};
 				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, l);
@@ -204,7 +212,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 
 		noteReset = new Button("Reset");
 		Utils.setStylesButton(noteReset);
-		
+
 		noteReset.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
 			@Override
@@ -213,18 +221,18 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 				Utils.setFontColorStyleBlackTextArea(noteBox, "Note");
 			}
 		});
-		
+
 		noteBind.addButton(noteAggiorna);
 		noteBind.addButton(noteReset);
-		
+
 		noteForm.add(noteBox,new FormData("-20"));
-		
+
 		TableLayout tableLayout = new TableLayout(2);
 		tableLayout.setCellPadding(5);
 		LayoutContainer buttons = new LayoutContainer(tableLayout);
 		buttons.add(noteAggiorna);
 		buttons.add(noteReset);
-		
+
 		noteForm.add(buttons);
 
 		noteTable.add(noteForm, d2);		
@@ -265,7 +273,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 		comunicazioniBox.setWidth("700px");
 		comunicazioniBox.setBorders(true);
 		Utils.addListenerToChangeLabelColorIfModifiedTextArea(comunicazioniBox, "Comunicazioni");
-		
+
 		comunicazioniAggiorna = new Button("Aggiorna");
 		Utils.setStylesButton(comunicazioniAggiorna);
 
@@ -324,9 +332,9 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 
 		comunicazioniBind.addButton(comunicazioniAggiorna);
 		comunicazioniBind.addButton(comunicazioniReset);
-		
+
 		comunicazioniForm.add(comunicazioniBox,new FormData("-20"));
-		
+
 		TableLayout tableLayoutComunicazioni = new TableLayout(2);
 		tableLayoutComunicazioni.setCellPadding(5);
 		LayoutContainer comunicazioniButtons = new LayoutContainer(tableLayoutComunicazioni);
@@ -342,48 +350,64 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 		add(comunicazioni);
 		/* FINE---comunicazioni */
 	}
-	public void setFieldsValues(){
-		if((biblioteca.getDataCensimento()!=null)||(biblioteca.getDataImport()!=null)||(biblioteca.getDataModificaRemota()!=null)||(biblioteca.getDataModifica()!=null)||(biblioteca.getUtenteUltimaModifica()!=null)){
+	
+	public void setFieldsValues() {
+		if (biblioteca.getDataCensimento() != null || biblioteca.getDataImport() != null || biblioteca.getDataModificaRemota() != null || biblioteca.getDataModifica() != null || biblioteca.getUtenteUltimaModifica() != null || biblioteca.getFonte() != null) {
 			infoCatalogazione.show();
-		
-			if(biblioteca.getDataCensimento()!=null){
+
+			if (biblioteca.getDataCensimento() != null) {
 				dataCensimentoText.setText(dataCensimentoLabel+biblioteca.getDataCensimento());
 				dataCensimentoText.show();
-			}else{
+				
+			} else {
 				dataCensimentoText.hide();
 			}
 
-			if(biblioteca.getDataImport()!=null){
+			if (biblioteca.getDataImport() != null) {
 				dataImportText.setText(dataImportLabel+biblioteca.getDataImport());
 				dataImportText.show();
-			}else{
+				
+			} else {
 				dataImportText.hide();
 			}
 
-			if(biblioteca.getDataModificaRemota()!=null){
+			if (biblioteca.getDataModificaRemota() != null) {
 				dataModificaRemotaText.setText(dataModificaRemotaLabel+biblioteca.getDataModificaRemota());
 				dataModificaRemotaText.show();
-			}else{
+				
+			} else {
 				dataModificaRemotaText.hide();
 			}
 
-			if(biblioteca.getDataModifica()!=null){
+			if (biblioteca.getDataModifica() != null) {
 				dataModificaText.setText(dataModificaLabel+biblioteca.getDataModifica());
 				dataModificaText.show();
-			}else{
+				
+			} else {
 				dataModificaText.hide();
 			}
-			
-			if(biblioteca.getUtenteUltimaModifica()!=null){
+
+			if (biblioteca.getUtenteUltimaModifica() != null) {
 				utenteUltimaModificaText.setText(utenteUltimaModificaLabel+biblioteca.getUtenteUltimaModifica());
 				utenteUltimaModificaText.show();
-			}else{
+				
+			} else {
 				utenteUltimaModificaText.hide();
 			}
-		}else {
+			
+			if (biblioteca.getFonte() != null) {
+				fonteText.setText(fonteLabel+biblioteca.getFonte());
+				fonteText.show();
+				
+			} else {
+				fonteText.hide();
+			}
+			
+			
+		} else {
 			infoCatalogazione.hide();
 		}
-		
+
 		if (biblioteca.getNoteCatalogatore() != null) {
 			noteBox.setValue(biblioteca.getNoteCatalogatore());
 			noteBox.setOriginalValue(biblioteca.getNoteCatalogatore());
@@ -393,7 +417,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 			noteBox.setOriginalValue(null);
 		}
 		Utils.setFontColorStyleBlackTextArea(noteBox, "Note");
-		
+
 		if (biblioteca.getComunicazioni() != null) {
 			comunicazioniBox.setValue(biblioteca.getComunicazioni());
 			comunicazioniBox.setOriginalValue(biblioteca.getComunicazioni());
@@ -410,23 +434,23 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 		UIWorkflow.hideView(comunicazioniAggiorna);
 		UIWorkflow.hideView(noteReset);
 		UIWorkflow.hideView(noteAggiorna);
-//		if(UIWorkflow.isReadOnly()==false){
-//			addKeyListenerForEnter();
-//		}else{
-//			removeKeyListenerForEnter();
-//		}
+		//		if(UIWorkflow.isReadOnly()==false){
+		//			addKeyListenerForEnter();
+		//		}else{
+		//			removeKeyListenerForEnter();
+		//		}
 	}
 
-//	private void removeKeyListenerForEnter() {
-//		Utils.removeKeyListenerForEnter( noteForm);
-//		Utils.removeKeyListenerForEnter( comunicazioniForm);
-//	}
+	//	private void removeKeyListenerForEnter() {
+	//		Utils.removeKeyListenerForEnter( noteForm);
+	//		Utils.removeKeyListenerForEnter( comunicazioniForm);
+	//	}
 	public void setIdBiblio(int idBiblio) {
 		this.id_biblio = idBiblio;
 	}
-	
-//	protected void addKeyListenerForEnter() {
-//		Utils.addKeyListenerForEnter(noteAggiorna, noteForm);
-//		Utils.addKeyListenerForEnter(comunicazioniAggiorna, comunicazioniForm);
-//	}
+
+	//	protected void addKeyListenerForEnter() {
+	//		Utils.addKeyListenerForEnter(noteAggiorna, noteForm);
+	//		Utils.addKeyListenerForEnter(comunicazioniAggiorna, comunicazioniForm);
+	//	}
 }

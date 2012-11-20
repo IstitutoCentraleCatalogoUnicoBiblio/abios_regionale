@@ -5117,4 +5117,51 @@ public class BiblioDaoJpa implements BiblioDao {
 		em.merge(biblioteca);
 		
 	}
+	
+	@Override
+	@Transactional
+	public String getPrimaOccorrenzaFonteValorizzata(String[] idBibs) {
+		String prepareQuery = "from Biblioteca as b where ";
+		for (int i = 0; i < idBibs.length; i++) {
+			if (i == 0) {
+				if (i == (idBibs.length-1)) {
+					prepareQuery += "(b.idBiblioteca = :idBiblioteca" + i + ") ";
+					
+				} else {
+					prepareQuery += "(b.idBiblioteca = :idBiblioteca" + i + " OR ";
+				}
+				
+			} else if (i == (idBibs.length-1)) {
+				prepareQuery += "b.idBiblioteca = :idBiblioteca" + i + ") ";
+				
+			} else {
+				prepareQuery += "b.idBiblioteca = :idBiblioteca" + i + " OR ";
+			}
+			
+		}
+		
+		if (idBibs.length > 0) {
+			prepareQuery += " AND b.fonte is not null ";
+			
+		} else {
+			prepareQuery += " b.fonte is not null ";
+		}
+		
+		Query query = em.createQuery(prepareQuery);
+
+		for (int i = 0; i < idBibs.length; i++) {
+			query.setParameter("idBiblioteca" + i, Integer.valueOf(idBibs[i]));
+		}
+
+		List biblios = query.getResultList();
+		Biblioteca[] results = new Biblioteca[biblios.size()];
+		results = (Biblioteca[]) biblios.toArray(results);
+		
+		if (results.length > 0) {
+			return results[0].getFonte();
+			
+		} else {
+			return null;
+		}
+	}
 }

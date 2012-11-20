@@ -158,7 +158,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			// Id biblioteca
 			biblioModel.setIdBiblio(biblioteca.getIdBiblioteca());
 			// Codice iccu
-			biblioModel.setCodice(Utility.buildIsil(biblioteca.getIsilStato(), biblioteca.getIsilProvincia(), "" + biblioteca.getIsilNumero()));
+			biblioModel.setCodice(Utility.buildIsil(biblioteca));
 			biblioModel.setDenominazione(biblioteca.getDenominazioneUfficiale());
 			biblioModel.setIndirizzo(biblioteca.getIndirizzo());
 			// Comune
@@ -192,7 +192,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			// Id biblioteca
 			biblioModel.setIdBiblio(biblioteca.getIdBiblioteca());
 			// Codice iccu
-			biblioModel.setCodice(Utility.buildIsil(biblioteca.getIsilStato(), biblioteca.getIsilProvincia(), "" + biblioteca.getIsilNumero()));
+			biblioModel.setCodice(Utility.buildIsil(biblioteca));
 			biblioModel.setDenominazione(biblioteca.getDenominazioneUfficiale());
 			biblioModel.setIndirizzo(biblioteca.getIndirizzo());
 			// Comune
@@ -244,7 +244,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			biblioModel.setIdBiblio(entry.getIdBiblioteca());
 
 			/* Codice iccu */
-			biblioModel.setCodice(Utility.buildIsil(entry.getIsilStato(), entry.getIsilProvincia(), "" + entry.getIsilNumero()));
+			biblioModel.setCodice(Utility.buildIsil(entry));
 			biblioModel.setDenominazione(entry.getDenominazioneUfficiale());
 			biblioModel.setIndirizzo(entry.getIndirizzo());
 
@@ -721,7 +721,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		// Id biblioteca
 		biblioModel.setIdBiblio(biblioteca.getIdBiblioteca());
 		// Codice iccu
-		biblioModel.setCodice(Utility.buildIsil(biblioteca.getIsilStato(),	biblioteca.getIsilProvincia(), "" + biblioteca.getIsilNumero()));
+		biblioModel.setCodice(Utility.buildIsil(biblioteca));
 		biblioModel.setDenominazione(biblioteca.getDenominazioneUfficiale());
 		biblioModel.setIndirizzo(biblioteca.getIndirizzo());
 		// Comune
@@ -1028,6 +1028,9 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		} else {
 			biblioModel.setAttivoDepositoLegale(null);
 		}
+		
+		/* Fonte */
+		biblioModel.setFonte(biblioteca.getFonte());
 		
 		//STATO CATALOGAZIONE BIBLIOTECA
 		List<StatoCatalogazione> catalogaziones = biblioteca.getStatoCatalogaziones();
@@ -2346,9 +2349,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			biblioModel.setIdBiblio(biblioteca.getIdBiblioteca());
 
 			// Codice iccu
-			biblioModel.setCodice(Utility.buildIsil(
-					biblioteca.getIsilStato(), biblioteca.getIsilProvincia(),
-					"" + biblioteca.getIsilNumero()));
+			biblioModel.setCodice(Utility.buildIsil(biblioteca));
 			biblioModel
 			.setDenominazione(biblioteca.getDenominazioneUfficiale());
 			biblioModel.setIndirizzo(biblioteca.getIndirizzo());

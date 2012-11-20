@@ -242,6 +242,9 @@ public class Biblioteca implements Serializable {
 
 	@Column(name="reference_online")
 	private Boolean referenceOnline;
+	
+	@Column(name="fonte")
+	private String fonte;
 
 	//bi-directional many-to-one association to Bibliografia
 	@OneToMany(mappedBy="biblioteca")
@@ -1162,6 +1165,14 @@ public class Biblioteca implements Serializable {
 
 	public void setReferenceOnline(Boolean referenceOnline) {
 		this.referenceOnline = referenceOnline;
+	}
+	
+	public String getFonte() {
+		return this.fonte;
+	}
+
+	public void setFonte(String fonte) {
+		this.fonte = fonte;
 	}
 
 	public List<Bibliografia> getBibliografias() {

@@ -376,4 +376,6 @@ public interface BiblioDao {
 	public void removeDepositiLegaliFromBiblio(Biblioteca biblioteca);
 	
 	public void removeModalitaAccessoFromBiblio(Biblioteca biblioteca);
+	
+	public String getPrimaOccorrenzaFonteValorizzata(String[] idBibs);
 }

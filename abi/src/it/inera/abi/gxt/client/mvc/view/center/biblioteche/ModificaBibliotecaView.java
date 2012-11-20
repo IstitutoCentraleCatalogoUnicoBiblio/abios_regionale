@@ -276,7 +276,7 @@ public class ModificaBibliotecaView extends View {
 		tipologiaAmministrativaFunzionaleSubTab.add(tipologiaAmministrativaFunzionalePanel);
 
 		TabItem subTabNoteCatalogatore = new TabItem();
-		subTabNoteCatalogatore.setText(CostantiGestioneBiblio.TAB_INFORMAZIONI_CATALOGATORE);
+		subTabNoteCatalogatore.setText(CostantiGestioneBiblio.TAB_GESTIONALE);
 		subTabNoteCatalogatore.setLayout(new FitLayout());
 		subTabNoteCatalogatore.setScrollMode(Scroll.AUTOY);
 		noteCatalogatorePanel=	new NoteCatalogatorePanel();

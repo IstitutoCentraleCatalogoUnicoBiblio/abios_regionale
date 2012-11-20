@@ -99,6 +99,15 @@
 						</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="fonte" minOccurs="0" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>
+							Fonte da cui proviene l'export delle biblioteche (se non valorizzato, 
+							sovrascrive comunque, annullandolo, il relativo campo di ciascuna biblioteca)
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
 				<xs:element name="biblioteca" type="bibliotecaType"
 					minOccurs="1" maxOccurs="unbounded" />
 			</xs:sequence>

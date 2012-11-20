@@ -279,6 +279,10 @@ public class ImportLogicImpl implements ImportLogic {
 		String startDate = DateFormatUtils.format(new Date(), "HH:mm:ss dd-MM-yyyy");
 
 		Date dataExport = biblioteche.getDataExport();
+		String fonte = null;
+		if (biblioteche.getFonte() != null && biblioteche.getFonte().length() > 0) {
+			fonte = biblioteche.getFonte();
+		}
 		for (int i = 0; i < biblioteche.getBibliotecaCount(); i++) {
 
 			ReportImport reportImport = new ReportImport();
@@ -295,7 +299,7 @@ public class ImportLogicImpl implements ImportLogic {
 				log.info("Inizio import biblioteca " + n + " di " + biblioteche.getBibliotecaCount());
 				log.debug("Codice ABI presente nel DB: si procede con l'import della biblioteca...");		
 				try {
-					importer.doImport(biblioteca, dataExport, reportImport);
+					importer.doImport(biblioteca, dataExport, fonte, reportImport);
 				} catch (Exception e) {
 					log.error("Si è verificato un errore che non ha permesso di importare nessun dato della bilblioteca", e);
 					reportImport.addError("Errore che non ha permesso di importare nessun dato della biblioteca: " + e.getMessage());

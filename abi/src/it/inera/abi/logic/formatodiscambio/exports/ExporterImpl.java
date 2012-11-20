@@ -1,5 +1,9 @@
 package it.inera.abi.logic.formatodiscambio.exports;
 
+import it.inera.abi.dao.BiblioDao;
+import it.inera.abi.logic.formatodiscambio.castor.Biblioteche;
+import it.inera.abi.persistence.Biblioteca;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,10 +15,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
-import it.inera.abi.dao.BiblioDao;
-import it.inera.abi.logic.formatodiscambio.castor.Biblioteche;
-import it.inera.abi.persistence.Biblioteca;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
@@ -128,6 +128,10 @@ public class ExporterImpl implements Exporter {
 				// Mappa tra hibernate e castor
 				Biblioteche biblioteche = new Biblioteche();
 				biblioteche.setDataExport(new Date());
+				String firstFonte = biblioDao.getPrimaOccorrenzaFonteValorizzata(idBib);
+				if (firstFonte != null) {
+					biblioteche.setFonte(firstFonte);
+				}
 				it.inera.abi.logic.formatodiscambio.castor.Biblioteca bibliotecaCastor = null;
 				log.debug("******************************************************************************************");
 				log.debug("STARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTART");
