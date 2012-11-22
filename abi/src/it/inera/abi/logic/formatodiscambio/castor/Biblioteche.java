@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Biblioteche.java,v 1.6 2012/11/20 12:35:35 m.bartolozzi Exp $
+ * $Id: Biblioteche.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -10,7 +10,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
 /**
  * Class Biblioteche.
  * 
- * @version $Revision: 1.6 $ $Date: 2012/11/20 12:35:35 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public class Biblioteche implements java.io.Serializable {
@@ -26,15 +26,6 @@ public class Biblioteche implements java.io.Serializable {
      *  
      */
     private java.util.Date _dataExport;
-
-    /**
-     * Fonte da cui proviene l'export delle biblioteche (se non
-     * valorizzato, 
-     *  sovrascrive comunque, annullandolo, il relativo campo di
-     * ciascuna biblioteca)
-     *  
-     */
-    private java.lang.String _fonte;
 
     /**
      * Field _bibliotecaList.
@@ -153,21 +144,6 @@ public class Biblioteche implements java.io.Serializable {
     public java.util.Date getDataExport(
     ) {
         return this._dataExport;
-    }
-
-    /**
-     * Returns the value of field 'fonte'. The field 'fonte' has
-     * the following description: Fonte da cui proviene l'export
-     * delle biblioteche (se non valorizzato, 
-     *  sovrascrive comunque, annullandolo, il relativo campo di
-     * ciascuna biblioteca)
-     *  
-     * 
-     * @return the value of field 'Fonte'.
-     */
-    public java.lang.String getFonte(
-    ) {
-        return this._fonte;
     }
 
     /**
@@ -306,21 +282,6 @@ public class Biblioteche implements java.io.Serializable {
     public void setDataExport(
             final java.util.Date dataExport) {
         this._dataExport = dataExport;
-    }
-
-    /**
-     * Sets the value of field 'fonte'. The field 'fonte' has the
-     * following description: Fonte da cui proviene l'export delle
-     * biblioteche (se non valorizzato, 
-     *  sovrascrive comunque, annullandolo, il relativo campo di
-     * ciascuna biblioteca)
-     *  
-     * 
-     * @param fonte the value of field 'fonte'.
-     */
-    public void setFonte(
-            final java.lang.String fonte) {
-        this._fonte = fonte;
     }
 
     /**

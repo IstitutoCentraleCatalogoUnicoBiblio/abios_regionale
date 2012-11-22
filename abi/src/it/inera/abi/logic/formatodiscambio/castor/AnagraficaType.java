@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AnagraficaType.java,v 1.6 2012/11/20 12:35:35 m.bartolozzi Exp $
+ * $Id: AnagraficaType.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -14,7 +14,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  L'elemento anagrafica adesso è obbligatorio.
  *  
  * 
- * @version $Revision: 1.6 $ $Date: 2012/11/20 12:35:35 $
+ * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
  */
 @SuppressWarnings("serial")
 public abstract class AnagraficaType implements java.io.Serializable {
@@ -40,6 +40,12 @@ public abstract class AnagraficaType implements java.io.Serializable {
      *  
      */
     private java.util.Date _dataAggiornamento;
+
+    /**
+     * Fonte da cui proviene l'export della biblioteca
+     *  
+     */
+    private java.lang.String _fonte;
 
     /**
      * Nomi di una biblioteca. È un insieme in cui solo
@@ -184,6 +190,19 @@ public abstract class AnagraficaType implements java.io.Serializable {
     }
 
     /**
+     * Returns the value of field 'fonte'. The field 'fonte' has
+     * the following description: Fonte da cui proviene l'export
+     * della biblioteca
+     *  
+     * 
+     * @return the value of field 'Fonte'.
+     */
+    public java.lang.String getFonte(
+    ) {
+        return this._fonte;
+    }
+
+    /**
      * Returns the value of field 'indirizzo'. The field
      * 'indirizzo' has the following description: Questo tipo
      * descrive un indirizzo di biblioteca.
@@ -324,6 +343,19 @@ public abstract class AnagraficaType implements java.io.Serializable {
     public void setEdificio(
             final it.inera.abi.logic.formatodiscambio.castor.Edificio edificio) {
         this._edificio = edificio;
+    }
+
+    /**
+     * Sets the value of field 'fonte'. The field 'fonte' has the
+     * following description: Fonte da cui proviene l'export della
+     * biblioteca
+     *  
+     * 
+     * @param fonte the value of field 'fonte'.
+     */
+    public void setFonte(
+            final java.lang.String fonte) {
+        this._fonte = fonte;
     }
 
     /**

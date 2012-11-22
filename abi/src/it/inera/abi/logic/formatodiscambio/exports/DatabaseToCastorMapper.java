@@ -267,6 +267,7 @@ public class DatabaseToCastorMapper {
 		DatabaseToCastorMapper.Anagrafica_setIndirizzo(anagrafica, bibliotecaDb);
 		DatabaseToCastorMapper.Anagrafica_setDenominazioni(anagrafica, bibliotecaDb);
 		DatabaseToCastorMapper.Anagrafica_setDate(anagrafica, bibliotecaDb);
+		DatabaseToCastorMapper.Anagrafica_setFonte(anagrafica, bibliotecaDb);
 		return anagrafica;
 	}
 
@@ -346,7 +347,7 @@ public class DatabaseToCastorMapper {
 				codici.setCei(codice.getValore());
 			}
 		}
-		codici.setIsil(Utility.buildIsil(bibliotecaDb.getIsilStato(), bibliotecaDb.getIsilProvincia(), String.valueOf(bibliotecaDb.getIsilNumero())));
+		codici.setIsil(Utility.buildIsil(bibliotecaDb));
 		//if (codicis != null && codicis.size() > 0){
 		anagrafica.setCodici(codici);
 		log.debug("Settati codici nella parte Anagrafica");
@@ -668,6 +669,17 @@ public class DatabaseToCastorMapper {
 			log.debug("Aggiunta data censimento: " + anno);
 
 		}
+	}
+	
+	private static void Anagrafica_setFonte(Anagrafica anagrafica, Biblioteca bibliotecaDb) {
+		/*
+		 * ANAGRAFICA: Fonte
+		 */
+		if (bibliotecaDb.getFonte() != null) {
+			anagrafica.setFonte(bibliotecaDb.getFonte());
+			log.debug("Aggiunta fonte: " + bibliotecaDb.getFonte());
+		}
+		
 	}
 
 	private static void Cataloghi_setCataloghiCollettivi(Cataloghi cataloghi,

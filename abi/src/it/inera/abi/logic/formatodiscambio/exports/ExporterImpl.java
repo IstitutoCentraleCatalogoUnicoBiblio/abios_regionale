@@ -128,10 +128,7 @@ public class ExporterImpl implements Exporter {
 				// Mappa tra hibernate e castor
 				Biblioteche biblioteche = new Biblioteche();
 				biblioteche.setDataExport(new Date());
-				String firstFonte = biblioDao.getPrimaOccorrenzaFonteValorizzata(idBib);
-				if (firstFonte != null) {
-					biblioteche.setFonte(firstFonte);
-				}
+				
 				it.inera.abi.logic.formatodiscambio.castor.Biblioteca bibliotecaCastor = null;
 				log.debug("******************************************************************************************");
 				log.debug("STARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTART");

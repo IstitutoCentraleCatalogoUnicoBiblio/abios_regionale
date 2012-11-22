@@ -90,7 +90,6 @@ public class ImportDifferito {
 			String startDate = DateFormatUtils.format(new Date(), "HH:mm:ss dd-MM-yyyy");
 
 			Date dataExport = biblioteche.getDataExport();
-			String fonte = biblioteche.getFonte();
 			for (int j = 0; j < biblioteche.getBibliotecaCount(); j++) {
 
 				ReportImport reportImport = new ReportImport();
@@ -109,7 +108,7 @@ public class ImportDifferito {
 					log.debug("Codice ABI presente nel DB: si procede con l'import della biblioteca...");		
 					try {
 						String username = Utility.extractUserNameFromFileName(scheduled[i].getName());
-						importer.doImport(biblioteca, dataExport, fonte, reportImport, username, true);
+						importer.doImport(biblioteca, dataExport, reportImport, username, true);
 						
 					} catch (Exception e) {
 						log.error("Si è verificato un errore che non ha permesso di importare nessun dato della bilblioteca", e);

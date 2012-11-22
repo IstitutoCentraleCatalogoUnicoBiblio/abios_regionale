@@ -130,13 +130,13 @@ public class ImporterImpl implements Importer {
 
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public void doImport(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, Date dataExport, String fonte, ReportImport reportImport) throws Exception {
-		doImport(biblioteca, dataExport, fonte, reportImport, null, false);	
+	public void doImport(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, Date dataExport, ReportImport reportImport) throws Exception {
+		doImport(biblioteca, dataExport, reportImport, null, false);	
 	}
 
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public void doImport(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, Date dataExport, String fonte, ReportImport reportImport, String username, boolean differito) throws Exception {
+	public void doImport(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, Date dataExport, ReportImport reportImport, String username, boolean differito) throws Exception {
 
 		String codiceAbi = Utility.normalizzaCodiciAbi(biblioteca.getAnagrafica().getCodici().getIsil()); // normalizza il codice abi in IT-AA1234
 		log.info("Codice ABI biblioteca: " + codiceAbi);
@@ -207,7 +207,9 @@ public class ImporterImpl implements Importer {
 		bibliotecaDb.setCatalogazioneDataImport(dataExport); // ok
 		
 		// Aggiornamento fonte
-		bibliotecaDb.setFonte(fonte);
+		if (biblioteca.getAnagrafica().getFonte() != null && biblioteca.getAnagrafica().getFonte().length() > 0) {
+			bibliotecaDb.setFonte(biblioteca.getAnagrafica().getFonte());
+		}
 		
 		if (biblioteca.getAnagrafica().getDataCensimento() != null) {
 			String temp = biblioteca.getAnagrafica().getDataCensimento().getContent();
