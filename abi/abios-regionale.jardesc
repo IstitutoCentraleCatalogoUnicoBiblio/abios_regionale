@@ -18,9 +18,9 @@
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.report"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.formatodiscambio.exports.email"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.report.widget"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.dao.mapping"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.model"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.model.auth"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.model"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.dao.mapping"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.commons"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.resources"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.controller"/>
@@ -32,44 +32,44 @@
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.statistiche.model.excel"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.formatodiscambio.imports"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.auth"/>
         <folder path="/abiregionale/src/META-INF"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.auth"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.utenti"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.model.forms"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.resources.messages"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.dao"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.server"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.utenti.widget"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.formatodiscambio.castor"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.utenti.widget"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.services"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.formatoscambio"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.south"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.persistence"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.resources.images"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.widget"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.biblioteche"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.formatoscambio.widget"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.workflow"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.formatoscambio.widget"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.formatodiscambio.exports"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.tools"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;org.ranjan"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.tools"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.menu"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.checkpassword"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.formatodiscambio"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.test.formatodiscambio"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.exportdynatabs"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.auth"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.resources.icons"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;org.ranjan.sql"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.dto"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.resources.icons"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.stampe"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.dto"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.statistiche.xml"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.costants"/>
-        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.tabelledinamiche.models"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.impl"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.statistiche"/>
