@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="idRegione" prompt="idRegione?" promptNeeded="false" repositoryContextId="_SmnucLbzEeGkEPw0KEfivA" type="id_Integer" value="4"/>
+    <contextParameter comment="" name="idRegione" prompt="idRegione?" promptNeeded="false" repositoryContextId="_SmnucLbzEeGkEPw0KEfivA" type="id_Integer" value="13"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -32,6 +32,7 @@
     <routinesParameter id="_E_1RALblEeG8guagzVTH5Q" name="TalendDataGenerator"/>
     <routinesParameter id="_FC-roLblEeG8guagzVTH5Q" name="TalendDate"/>
     <routinesParameter id="_FDJqwLblEeG8guagzVTH5Q" name="TalendString"/>
+    <routinesParameter id="_2WQQYDopEeKMNeZbGDC-fA" name="ABIRoutine"/>
   </parameters>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="32" posY="0">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
@@ -845,6 +846,7 @@
       <column comment="" key="false" name="accesso_internet_pagamento" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_tempo" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_proxy" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
+      <column comment="" key="false" name="attivo_deposito_legale" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
     </metadata>
     <nodeData xsi:type="MapperData">
       <uiProperties shellMaximized="true"/>
@@ -854,7 +856,7 @@
         <mapperTableEntries name="isil_stato" expression="bib_i.isil_st " type="id_String"/>
         <mapperTableEntries name="isil_provincia" expression="bib_i.isil_pr " type="id_String"/>
         <mapperTableEntries name="isil_numero" expression="bib_i.isil_nr " type="id_Long"/>
-        <mapperTableEntries name="denominazione_ufficiale" expression="bib_i.denominazione " type="id_String"/>
+        <mapperTableEntries name="denominazione_ufficiale" expression="ABIRoutine.characterConversion(bib_i.denominazione) " type="id_String"/>
         <mapperTableEntries name="indirizzo" expression="((bib_i.indirizzo != null &amp;&amp; bib_i.indirizzo.length() == 0 )|| (bib_i.indirizzo != null &amp;&amp; bib_i.indirizzo.equals(&quot;NULL&quot;)))? null : bib_i.indirizzo  " type="id_String" nullable="true"/>
         <mapperTableEntries name="frazione" expression="((bib_i.frazione != null &amp;&amp; bib_i.frazione.length() == 0) || (bib_i.frazione != null &amp;&amp; bib_i.frazione.equals(&quot;NULL&quot;)))? null : bib_i.frazione  " type="id_String" nullable="true"/>
         <mapperTableEntries name="cap" expression="((bib_i.cap != null &amp;&amp; bib_i.cap.length() == 0) || (bib_i.cap != null &amp;&amp; bib_i.cap.equals(&quot;NULL&quot;)))? null : bib_i.cap   " type="id_String" nullable="true"/>
@@ -928,6 +930,7 @@
         <mapperTableEntries name="accesso_internet_pagamento" expression="null" type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_tempo" expression="null" type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_proxy" expression="null" type="id_Boolean" nullable="true"/>
+        <mapperTableEntries name="attivo_deposito_legale" expression="null" type="id_Boolean" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="bib_i" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="id_bib" expression="row4.id_bib " type="id_Long"/>
@@ -1450,6 +1453,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="attivo_deposito_legale"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="USE_HINT_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="HINT_OPTIONS"/>
@@ -1541,6 +1549,7 @@
       <column comment="" key="false" name="accesso_internet_pagamento" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_tempo" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_proxy" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
+      <column comment="" key="false" name="attivo_deposito_legale" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
     </metadata>
     <metadata connector="REJECT" label="rg" name="REJECT">
       <column comment="" defaultValue="" key="true" length="19" name="id_biblioteca" nullable="false" pattern="" precision="0" sourceType="BIGINT" type="id_Long"/>
@@ -1621,6 +1630,7 @@
       <column comment="" key="false" name="accesso_internet_pagamento" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_tempo" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column comment="" key="false" name="accesso_internet_proxy" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
+      <column comment="" key="false" name="attivo_deposito_legale" nullable="true" pattern="" sourceType="BIT" type="id_Boolean"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1728,11 +1738,11 @@
       <column comment="" key="false" name="accesso_internet_proxy" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="acc_internet_f">
         <mapperTableEntries name="id_biblioteca" expression="acc_internet_i.id_bib " type="id_Long"/>
-        <mapperTableEntries name="attivo_accesso_internet" expression="acc_internet_i.accesso_internet.equals(&quot;-&quot;)?null:(acc_internet_i.accesso_internet.equals(&quot;L&quot;)?Boolean.FALSE:Boolean.TRUE) " type="id_Boolean" nullable="true"/>
+        <mapperTableEntries name="attivo_accesso_internet" expression="acc_internet_i.accesso_internet.equals(&quot;-&quot;)?Boolean.FALSE:Boolean.TRUE " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_pagamento" expression="acc_internet_i.accesso_internet.equals(&quot;P&quot;)?Boolean.TRUE:null " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_tempo" expression="acc_internet_i.accesso_internet.equals(&quot;T&quot;)?Boolean.TRUE:null " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="accesso_internet_proxy" expression="acc_internet_i.accesso_internet.equals(&quot;S&quot;)?Boolean.TRUE:(acc_internet_i.accesso_internet.equals(&quot;L&quot;)?Boolean.FALSE:null) " type="id_Boolean" nullable="true"/>
@@ -1919,7 +1929,7 @@
     <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="MYSQL"/>
     <elementParameter field="TEXT" name="PORT" value="&quot;3306&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;abicampania&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;abipuglia&quot;"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;root&quot;"/>
     <elementParameter field="TEXT" name="PASS" value="&quot;root&quot;"/>
@@ -2699,6 +2709,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="attivo_informazioni_bibliografiche"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="attivo_deposito_legale"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>

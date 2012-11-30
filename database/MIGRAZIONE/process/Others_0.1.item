@@ -702,7 +702,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select distinct fondi_antichi from biblioteca&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select distinct fondi_antichi from biblioteca order by fondi_antichi asc&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -820,7 +820,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select distinct cat_inv from fondi_spe&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select distinct cat_inv from fondi_spe order by cat_inv asc&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1015,7 +1015,7 @@
     <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="MYSQL"/>
     <elementParameter field="TEXT" name="PORT" value="&quot;3306&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;abicampania&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;abipuglia&quot;"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;root&quot;"/>
     <elementParameter field="TEXT" name="PASS" value="&quot;root&quot;"/>

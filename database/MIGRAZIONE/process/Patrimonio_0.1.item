@@ -97,7 +97,7 @@
       <column comment="" defaultValue="" key="false" length="10" name="id_sort" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="patr_spec_f">
         <mapperTableEntries name="id_patrimonio_specializzazione" expression="patr_spec_i.id_pats " type="id_String"/>
@@ -353,7 +353,7 @@
     <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="MYSQL"/>
     <elementParameter field="TEXT" name="PORT" value="&quot;3306&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;abicampania&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;abipuglia&quot;"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;root&quot;"/>
     <elementParameter field="TEXT" name="PASS" value="&quot;root&quot;"/>

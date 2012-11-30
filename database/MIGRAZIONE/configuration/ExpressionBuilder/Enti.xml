@@ -1,0 +1,5 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<expression:EMFExpression xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:expression="http:///expression.ecore" id="null=>te_f=>descrizione" expression="ABIRoutine.characterConversion(te_i.descrizione)">
+  <variables name="te_i.id_tipe" value="0" talendType="id_Long"/>
+  <variables name="te_i.descrizione" value="null" talendType="id_String"/>
+</expression:EMFExpression>

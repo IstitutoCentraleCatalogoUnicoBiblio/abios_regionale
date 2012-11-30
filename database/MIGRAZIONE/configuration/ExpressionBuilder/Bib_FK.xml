@@ -1,0 +1,187 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:expression="http:///expression.ecore">
+  <expression:EMFExpression id="null=>den_gia=>denominazione" expression="ABIRoutine.characterConversion(row1.descrizione)">
+    <variables name="row1.id_dgi" value="0" talendType="id_Long"/>
+    <variables name="row1.descrizione" value="null" talendType="id_String"/>
+    <variables name="row1.id_bib" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.id_bib_1" value="0" talendType="id_Long"/>
+    <variables name="row1.isil_st" value="null" talendType="id_String"/>
+    <variables name="row1.isil_pr" value="null" talendType="id_String"/>
+    <variables name="row1.isil_nr" value="0" talendType="id_Long"/>
+    <variables name="row1.denominazione" value="null" talendType="id_String"/>
+    <variables name="row1.indirizzo" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.frazione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.cap" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.aut_ammva" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.strut_gerarchica" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.fondazione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.data_fondazione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.anno_istituzione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.stato_accesso" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.accesso_handicap" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.inv_inform" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.catalogo_topogr" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.sup_totale" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.sup_pubblica" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.ml_magazzini" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.ml_aperti" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.posti_video" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.posti_audio" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.posti_internet" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.accesso_internet" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.n_utenti" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.n_iscritti" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.n_pers_temp" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.n_pers_est" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_bilancio" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_personale" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_funz" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_patr" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_altro" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.fondi_antichi" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.id_ente" value="0" talendType="id_Long"/>
+    <variables name="row1.denominaz_edificio" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.edif_monum" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.app_costruito" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.costruzione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.data_costr" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.id_tipf" value="0" talendType="id_Long"/>
+    <variables name="row1.id_loc" value="0" talendType="id_Long"/>
+    <variables name="row1.limite_eta" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.rism" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.sbn" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.acnp" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.prestito_int_naz" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.prestito_int_int" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.serv_bibl_interno" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.serv_bibl_esterno" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.codice_fiscale" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.partita_iva" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.auto_ill_dd" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.totale_automazione" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.posti_lettura" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.stato" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.data" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.user_name" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.catal_coll_loc" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.catal_coll_naz" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.catal_coll_int" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.totale_ore_settimanali" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_settimane_apertura" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_ore_settimanali_pomer" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_acquisti_15" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_acquisti_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.n_utenti_under14" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_posseduto" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_posseduto_under14" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.n_pers_part_time" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.n_utenti_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_prestiti_interbibliotecari_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.totale_prestiti_locali_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.n_pers_tot" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.data_censimento" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.data_ultima_modifica_remota" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.data_import" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.cmbs" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.cei" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.totale_bilancio_entrate" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row1.note" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.id_loc_1" value="0" talendType="id_Long"/>
+    <variables name="row1.id_com" value="0" talendType="id_Long"/>
+    <variables name="row1.id_pro" value="0" talendType="id_Long"/>
+    <variables name="row1.id_reg" value="0" talendType="id_Long"/>
+    <variables name="row1.id_sta" value="null" talendType="id_Long" nullable="true"/>
+  </expression:EMFExpression>
+  <expression:EMFExpression id="null=>den_anche=>denominazione" expression="ABIRoutine.characterConversion(row2.descrizione)">
+    <variables name="row2.id_dan" value="0" talendType="id_Long"/>
+    <variables name="row2.descrizione" value="null" talendType="id_String"/>
+    <variables name="row2.id_bib" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.id_bib_1" value="0" talendType="id_Long"/>
+    <variables name="row2.isil_st" value="null" talendType="id_String"/>
+    <variables name="row2.isil_pr" value="null" talendType="id_String"/>
+    <variables name="row2.isil_nr" value="0" talendType="id_Long"/>
+    <variables name="row2.denominazione" value="null" talendType="id_String"/>
+    <variables name="row2.indirizzo" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.frazione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.cap" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.aut_ammva" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.strut_gerarchica" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.fondazione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.data_fondazione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.anno_istituzione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.stato_accesso" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.accesso_handicap" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.inv_inform" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.catalogo_topogr" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.sup_totale" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.sup_pubblica" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.ml_magazzini" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.ml_aperti" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.posti_video" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.posti_audio" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.posti_internet" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.accesso_internet" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.n_utenti" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.n_iscritti" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.n_pers_temp" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.n_pers_est" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_bilancio" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_personale" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_funz" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_patr" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_altro" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.fondi_antichi" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.id_ente" value="0" talendType="id_Long"/>
+    <variables name="row2.denominaz_edificio" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.edif_monum" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.app_costruito" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.costruzione" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.data_costr" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.id_tipf" value="0" talendType="id_Long"/>
+    <variables name="row2.id_loc" value="0" talendType="id_Long"/>
+    <variables name="row2.limite_eta" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.rism" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.sbn" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.acnp" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.prestito_int_naz" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.prestito_int_int" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.serv_bibl_interno" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.serv_bibl_esterno" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.codice_fiscale" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.partita_iva" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.auto_ill_dd" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.totale_automazione" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.posti_lettura" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.stato" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.data" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.user_name" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.catal_coll_loc" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.catal_coll_naz" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.catal_coll_int" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.totale_ore_settimanali" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_settimane_apertura" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_ore_settimanali_pomer" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_acquisti_15" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_acquisti_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.n_utenti_under14" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_posseduto" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_posseduto_under14" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.n_pers_part_time" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.n_utenti_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_prestiti_interbibliotecari_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.totale_prestiti_locali_anno" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.n_pers_tot" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.data_censimento" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.data_ultima_modifica_remota" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.data_import" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.cmbs" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.cei" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.totale_bilancio_entrate" value="null" talendType="id_Long" nullable="true"/>
+    <variables name="row2.note" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row2.id_loc_1" value="0" talendType="id_Long"/>
+    <variables name="row2.id_com" value="0" talendType="id_Long"/>
+    <variables name="row2.id_pro" value="0" talendType="id_Long"/>
+    <variables name="row2.id_reg" value="0" talendType="id_Long"/>
+    <variables name="row2.id_sta" value="null" talendType="id_Long" nullable="true"/>
+  </expression:EMFExpression>
+</xmi:XMI>

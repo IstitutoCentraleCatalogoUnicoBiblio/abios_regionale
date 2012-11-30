@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="idRegione" prompt="idRegione?" promptNeeded="false" repositoryContextId="_SmnucLbzEeGkEPw0KEfivA" type="id_Integer" value="4"/>
+    <contextParameter comment="" name="idRegione" prompt="idRegione?" promptNeeded="false" repositoryContextId="_SmnucLbzEeGkEPw0KEfivA" type="id_Integer" value="13"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -869,7 +869,7 @@
     <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="MYSQL"/>
     <elementParameter field="TEXT" name="PORT" value="&quot;3306&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;abicampania&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;abipuglia&quot;"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;root&quot;"/>
     <elementParameter field="TEXT" name="PASS" value="&quot;root&quot;"/>
