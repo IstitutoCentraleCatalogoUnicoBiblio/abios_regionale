@@ -509,49 +509,6 @@ CREATE TABLE abiregionale.norme_catalogazione (
 CONSTRAINT pk_norme_catalogazione PRIMARY KEY ( id_norme_catalogazione )
  ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE abiregionale.nuova_biblioteca ( 
-    id_biblioteca INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    isil_stato VARCHAR( 2 ) NOT NULL DEFAULT 'IT',
-    isil_provincia VARCHAR( 2 ) NOT NULL,
-    isil_numero INT UNSIGNED NULL,
-    denominazione_ufficiale VARCHAR( 255 ) NULL,
-    id_comune INT UNSIGNED NULL,
-    data_fondazione VARCHAR( 20 ) NULL,
-    edificio_monumentale BOOL NULL,
-    edificio_data_costruzione VARCHAR( 255 ) NULL,
-    edificio_appositamente_costruito BOOL NULL,
-    autonomia_amministrativa BOOL NULL,
-    accesso_riservato BOOL NULL,
-    accesso_handicap BOOL NULL,
-    accesso_internet_pagamento BOOL NULL,
-    accesso_internet_tempo BOOL NULL,
-    accesso_internet_proxy BOOL NULL,
-    inventario_cartaceo BOOL NULL,
-    inventario_informatizzato BOOL NULL,
-    catalogo_topografico_cartaceo BOOL NULL,
-    catalogo_topografico_informatizzato BOOL NULL,
-    id_tipologia_funzionale INT UNSIGNED NULL,
-    gestisce_servizio_bibliografico_interno BOOL NULL,
-    gestisce_servizio_bibliografico_esterno BOOL NULL,
-    login_creatore INT UNSIGNED NULL,
-    login_gestore INT UNSIGNED NULL,
-    id_stato_biblioteca_workflow INT NOT NULL,
-    ente_denominazione VARCHAR( 255 ) NULL,
-    ente_tipologia_amministrativa VARCHAR( 255 ) NULL,
-    ente_stato VARCHAR( 255 ) NULL,
-CONSTRAINT PK_biblioteca PRIMARY KEY ( id_biblioteca )
- ) engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE INDEX biblioteca_FKIndex2 ON abiregionale.nuova_biblioteca ( id_comune );
-
-CREATE INDEX biblioteca_FKIndex4 ON abiregionale.nuova_biblioteca ( id_tipologia_funzionale );
-
-CREATE INDEX idx_login_creatore ON abiregionale.nuova_biblioteca ( login_creatore );
-
-CREATE INDEX idx_login_gestore ON abiregionale.nuova_biblioteca ( login_gestore );
-
-CREATE INDEX idx_nuova_biblioteca ON abiregionale.nuova_biblioteca ( id_stato_biblioteca_workflow );
-
 CREATE TABLE abiregionale.orario_chiusure ( 
     id_orario_chiusure INT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_biblioteca INT UNSIGNED NOT NULL,
@@ -1034,16 +991,6 @@ ALTER TABLE abiregionale.fondi_speciali ADD FOREIGN KEY fk_1 ( id_fondi_speciali
 
 ALTER TABLE abiregionale.geolocalizzazione ADD FOREIGN KEY fk_0 ( id_biblioteca ) REFERENCES abiregionale.biblioteca( id_biblioteca ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-ALTER TABLE abiregionale.nuova_biblioteca ADD FOREIGN KEY fk_comune ( id_comune ) REFERENCES abiregionale.comune( id_comune ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE abiregionale.nuova_biblioteca ADD FOREIGN KEY fk_tipologia_funzionale ( id_tipologia_funzionale ) REFERENCES abiregionale.tipologia_funzionale( id_tipologia_funzionale ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE abiregionale.nuova_biblioteca ADD FOREIGN KEY fk_login_creatore ( login_creatore ) REFERENCES abiregionale.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE abiregionale.nuova_biblioteca ADD FOREIGN KEY fk_login_gestore ( login_gestore ) REFERENCES abiregionale.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE abiregionale.nuova_biblioteca ADD FOREIGN KEY fk_id_stato_biblioteca_workflow ( id_stato_biblioteca_workflow ) REFERENCES abiregionale.stato_biblioteca_workflow( id_stato ) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 ALTER TABLE abiregionale.orario_chiusure ADD FOREIGN KEY fk_0 ( id_biblioteca ) REFERENCES abiregionale.biblioteca( id_biblioteca ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE abiregionale.orario_ufficiali ADD FOREIGN KEY fk_0 ( id_biblioteca ) REFERENCES abiregionale.biblioteca( id_biblioteca ) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -1113,3 +1060,5 @@ ALTER TABLE abiregionale.stato_catalogazione ADD FOREIGN KEY fk_2 ( id_bibliotec
 ALTER TABLE abiregionale.utenti_has_profili ADD FOREIGN KEY fk_0 ( id_utenti ) REFERENCES abiregionale.utenti( id_utenti ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE abiregionale.utenti_has_profili ADD FOREIGN KEY fk_1 ( id_profili ) REFERENCES abiregionale.profili( id_profili ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+

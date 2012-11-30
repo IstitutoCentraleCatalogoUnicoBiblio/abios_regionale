@@ -824,72 +824,6 @@
 				<column name="id_norme_catalogazione" />
 			</index>
 		</table>
-		<table name="nuova_biblioteca" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
-			<column name="id_biblioteca" type="INT" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
-			<column name="isil_stato" type="VARCHAR" length="2" jt="12" mandatory="y" >
-				<defo>'IT'</defo>
-			</column>
-			<column name="isil_provincia" type="VARCHAR" length="2" jt="12" mandatory="y" />
-			<column name="isil_numero" type="INT" jt="4" unsigned="y" />
-			<column name="denominazione_ufficiale" type="VARCHAR" length="255" jt="12" />
-			<column name="id_comune" type="INT" jt="4" unsigned="y" />
-			<column name="data_fondazione" type="VARCHAR" length="20" jt="12" />
-			<column name="edificio_monumentale" type="BOOL" length="1" jt="-6" />
-			<column name="edificio_data_costruzione" type="VARCHAR" length="255" jt="12" />
-			<column name="edificio_appositamente_costruito" type="BOOL" length="1" jt="-6" />
-			<column name="autonomia_amministrativa" type="BOOL" length="1" jt="-6" />
-			<column name="accesso_riservato" type="BOOL" jt="-6" />
-			<column name="accesso_handicap" type="BOOL" length="1" jt="-6" />
-			<column name="accesso_internet_pagamento" type="BOOL" jt="-6" />
-			<column name="accesso_internet_tempo" type="BOOL" jt="-6" />
-			<column name="accesso_internet_proxy" type="BOOL" jt="-6" />
-			<column name="inventario_cartaceo" type="BOOL" jt="-6" />
-			<column name="inventario_informatizzato" type="BOOL" length="1" jt="-6" />
-			<column name="catalogo_topografico_cartaceo" type="BOOL" jt="-6" />
-			<column name="catalogo_topografico_informatizzato" type="BOOL" length="1" jt="-6" />
-			<column name="id_tipologia_funzionale" type="INT" jt="4" unsigned="y" />
-			<column name="gestisce_servizio_bibliografico_interno" type="BOOL" jt="-6" />
-			<column name="gestisce_servizio_bibliografico_esterno" type="BOOL" length="1" jt="-6" />
-			<column name="login_creatore" type="INT" jt="4" unsigned="y" />
-			<column name="login_gestore" type="INT" jt="4" unsigned="y" />
-			<column name="id_stato_biblioteca_workflow" type="INT" jt="4" mandatory="y" />
-			<column name="ente_denominazione" type="VARCHAR" length="255" jt="12" />
-			<column name="ente_tipologia_amministrativa" type="VARCHAR" length="255" jt="12" />
-			<column name="ente_stato" type="VARCHAR" length="255" jt="12" />
-			<index name="biblioteca_FKIndex2" unique="NORMAL" >
-				<column name="id_comune" />
-			</index>
-			<index name="biblioteca_FKIndex4" unique="NORMAL" >
-				<column name="id_tipologia_funzionale" />
-			</index>
-			<index name="PK_biblioteca" unique="PRIMARY_KEY" >
-				<column name="id_biblioteca" />
-			</index>
-			<index name="idx_login_creatore" unique="NORMAL" >
-				<column name="login_creatore" />
-			</index>
-			<index name="idx_login_gestore" unique="NORMAL" >
-				<column name="login_gestore" />
-			</index>
-			<index name="idx_nuova_biblioteca" unique="NORMAL" >
-				<column name="id_stato_biblioteca_workflow" />
-			</index>
-			<fk name="fk_comune" to_schema="abipuglia" to_table="comune" >
-				<fk_column name="id_comune" pk="id_comune" />
-			</fk>
-			<fk name="fk_tipologia_funzionale" to_schema="abipuglia" to_table="tipologia_funzionale" >
-				<fk_column name="id_tipologia_funzionale" pk="id_tipologia_funzionale" />
-			</fk>
-			<fk name="fk_login_creatore" to_schema="abipuglia" to_table="utenti" >
-				<fk_column name="login_creatore" pk="id_utenti" />
-			</fk>
-			<fk name="fk_login_gestore" to_schema="abipuglia" to_table="utenti" >
-				<fk_column name="login_gestore" pk="id_utenti" />
-			</fk>
-			<fk name="fk_id_stato_biblioteca_workflow" to_schema="abipuglia" to_table="stato_biblioteca_workflow" >
-				<fk_column name="id_stato_biblioteca_workflow" pk="id_stato" />
-			</fk>
-		</table>
 		<table name="orario_chiusure" storage="engine=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" >
 			<column name="id_orario_chiusure" type="INT" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="id_biblioteca" type="INT" length="10" jt="4" mandatory="y" unsigned="y" />
@@ -1432,7 +1366,7 @@
 		</table>
 	</schema>
 	<connector name="Con_0" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.12-bin.jar" host="localhost" port="3306" instance="abipuglia" user="root" />
-	<layout name="abi" tab_index="1" >
+	<layout name="abi" tab_index="0" >
 		<entity schema="abipuglia" name="bibliografia" x="663" y="611" />
 		<entity schema="abipuglia" name="biblioteca" x="845" y="351" />
 		<entity schema="abipuglia" name="cataloghi_collettivi" x="1586" y="624" />
@@ -1462,7 +1396,6 @@
 		<entity schema="abipuglia" name="ente_tipologia_amministrativa" x="39" y="377" />
 		<entity schema="abipuglia" name="fondi_antichi_consistenza" x="416" y="585" />
 		<entity schema="abipuglia" name="geolocalizzazione" x="1261" y="1599" />
-		<entity schema="abipuglia" name="nuova_biblioteca" x="91" y="572" />
 		<entity schema="abipuglia" name="orario_chiusure" x="1183" y="299" />
 		<entity schema="abipuglia" name="orario_ufficiali" x="1508" y="299" />
 		<entity schema="abipuglia" name="orario_variazioni" x="1352" y="299" />
