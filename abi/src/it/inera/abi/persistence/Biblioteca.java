@@ -571,6 +571,10 @@ public class Biblioteca implements Serializable {
 	//bi-directional many-to-one association to StatoCatalogazione
 	@OneToMany(mappedBy="biblioteca")
 	private List<StatoCatalogazione> statoCatalogaziones;
+	
+	//bi-directional many-to-one association to Photo
+	@OneToMany(mappedBy="biblioteca")
+	private List<Photo> photos;
 
     public Biblioteca() {
     }
@@ -1565,6 +1569,14 @@ public class Biblioteca implements Serializable {
 
 	public void setStatoCatalogaziones(List<StatoCatalogazione> statoCatalogaziones) {
 		this.statoCatalogaziones = statoCatalogaziones;
+	}
+	
+	public List<Photo> getPhotos() {
+		return this.photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 	
 }

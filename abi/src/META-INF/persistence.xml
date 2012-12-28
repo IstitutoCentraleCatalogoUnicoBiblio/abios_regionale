@@ -50,6 +50,7 @@
 		<class>it.inera.abi.persistence.PatrimonioPK</class>
 		<class>it.inera.abi.persistence.PatrimonioSpecializzazione</class>
 		<class>it.inera.abi.persistence.PatrimonioSpecializzazioneCategoria</class>
+		<class>it.inera.abi.persistence.Photo</class>
 		<class>it.inera.abi.persistence.PrestitoInterbibliotecario</class>
 		<class>it.inera.abi.persistence.PrestitoInterbibliotecarioModo</class>
 		<class>it.inera.abi.persistence.PrestitoLocale</class>
