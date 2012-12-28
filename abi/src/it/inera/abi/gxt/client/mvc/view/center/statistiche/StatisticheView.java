@@ -63,7 +63,7 @@ public class StatisticheView extends View {
 	private void relayout(String urlTmp) {
 		LayoutContainer wrapper = (LayoutContainer) Registry.get(AppView.CENTER_PANEL);
 		wrapper.removeAll();
-		wrapper.layout();//aggiunta MARINA
+		wrapper.layout();
 		
 		wrapper.setLayout(new FillLayout());
 
@@ -73,7 +73,7 @@ public class StatisticheView extends View {
 	
 		tavola.removeAll();ContentPanel mainPanel = new ContentPanel();
 		mainPanel.removeAll();
-		mainPanel.layout();//aggiunta MARINA
+		mainPanel.layout();
 		
 		mainPanel.setHeading(CostantiStatistiche.getListaNomiTabelle().get(((CostantiStatistiche.getListaUrlTabelle()).indexOf(urlTmp))));
 		mainPanel.setScrollMode(Scroll.ALWAYS);

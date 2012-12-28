@@ -711,7 +711,6 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 			
-			
 			//************* Dati utente e catalogazione***************
 			if(bibliotecaSalvata.getCatalogazioneDataCensimento()!=null){
 				bibliotecaAttuale.setCatalogazioneDataCensimento(bibliotecaSalvata.getCatalogazioneDataCensimento());
@@ -738,7 +737,6 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			} 
 			else bibliotecaAttuale.setUtenteUltimaModifica(null);
 
-			
 			// ******** Stato catalogazione ********
 			if (bibliotecaAttuale.getStatoCatalogaziones() != null) {
 				biblioDao.removeChilds(bibliotecaAttuale.getStatoCatalogaziones());
@@ -765,6 +763,9 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 					bibliotecaAttuale.getDocumentDeliveries().add(entryDocDelSalvata);
 				}
 			}
+			
+			/* Fonte */
+			bibliotecaAttuale.setFonte(bibliotecaSalvata.getFonte());
 			
 			userActionLog.logActionCatalogazioneBiblioDefaultUser("RIPRISTINO BIBLIOTECA COMPLETATO - id_biblioteca="+idbiblio);
 
