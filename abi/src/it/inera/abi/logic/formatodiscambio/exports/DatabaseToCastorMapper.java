@@ -38,6 +38,7 @@ import it.inera.abi.logic.formatodiscambio.castor.DocumentDelivery;
 import it.inera.abi.logic.formatodiscambio.castor.Edificio;
 import it.inera.abi.logic.formatodiscambio.castor.FondiAntichi;
 import it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale;
+import it.inera.abi.logic.formatodiscambio.castor.Fonte;
 import it.inera.abi.logic.formatodiscambio.castor.Forme;
 import it.inera.abi.logic.formatodiscambio.castor.Indirizzo;
 import it.inera.abi.logic.formatodiscambio.castor.InformazioniBibliografiche;
@@ -675,9 +676,16 @@ public class DatabaseToCastorMapper {
 		/*
 		 * ANAGRAFICA: Fonte
 		 */
-		if (bibliotecaDb.getFonte() != null) {
-			anagrafica.setFonte(bibliotecaDb.getFonte());
-			log.debug("Aggiunta fonte: " + bibliotecaDb.getFonte());
+		if (bibliotecaDb.getFonteDescrizione() != null && bibliotecaDb.getFonteDescrizione().length() > 0) {
+			Fonte fonte = new Fonte();
+			fonte.setDescrizione(bibliotecaDb.getFonteDescrizione());
+			
+			if (bibliotecaDb.getFonteUrl() != null && bibliotecaDb.getFonteUrl().length() > 0) {
+				fonte.setUrl(bibliotecaDb.getFonteUrl());
+			}
+			
+			anagrafica.setFonte(fonte);
+			log.debug("Aggiunta fonte: " + bibliotecaDb.getFonteDescrizione());
 		}
 		
 	}

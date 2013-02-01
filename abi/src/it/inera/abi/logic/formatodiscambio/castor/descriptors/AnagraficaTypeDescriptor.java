@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AnagraficaTypeDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
+ * $Id: AnagraficaTypeDescriptor.java,v 1.7.4.1 2013/02/01 09:43:35 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.AnagraficaType;
 /**
  * Class AnagraficaTypeDescriptor.
  * 
- * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
+ * @version $Revision: 1.7.4.1 $ $Date: 2013/02/01 09:43:35 $
  */
 public class AnagraficaTypeDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -151,8 +151,7 @@ public class AnagraficaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
         }
         desc.setValidator(fieldValidator);
         //-- _fonte
-        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(java.lang.String.class, "_fonte", "fonte", org.exolab.castor.xml.NodeType.Element);
-        desc.setImmutable(true);
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Fonte.class, "_fonte", "fonte", org.exolab.castor.xml.NodeType.Element);
         handler = new org.exolab.castor.xml.XMLFieldHandler() {
             @Override
             public java.lang.Object getValue( java.lang.Object object ) 
@@ -167,7 +166,7 @@ public class AnagraficaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
             {
                 try {
                     AnagraficaType target = (AnagraficaType) object;
-                    target.setFonte( (java.lang.String) value);
+                    target.setFonte( (it.inera.abi.logic.formatodiscambio.castor.Fonte) value);
                 } catch (java.lang.Exception ex) {
                     throw new IllegalStateException(ex.toString());
                 }
@@ -178,7 +177,7 @@ public class AnagraficaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
                 return null;
             }
         };
-        desc.setSchemaType("string");
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Fonte");
         desc.setHandler(handler);
         desc.setMultivalued(false);
         addFieldDescriptor(desc);
@@ -187,10 +186,6 @@ public class AnagraficaTypeDescriptor extends org.exolab.castor.xml.util.XMLClas
         //-- validation code for: _fonte
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
         { //-- local scope
-            org.exolab.castor.xml.validators.StringValidator typeValidator;
-            typeValidator = new org.exolab.castor.xml.validators.StringValidator();
-            fieldValidator.setValidator(typeValidator);
-            typeValidator.setWhiteSpace("preserve");
         }
         desc.setValidator(fieldValidator);
         //-- _nomi

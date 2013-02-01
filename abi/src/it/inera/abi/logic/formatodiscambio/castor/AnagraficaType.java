@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: AnagraficaType.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
+ * $Id: AnagraficaType.java,v 1.7.4.1 2013/02/01 09:43:35 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -14,7 +14,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  L'elemento anagrafica adesso è obbligatorio.
  *  
  * 
- * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
+ * @version $Revision: 1.7.4.1 $ $Date: 2013/02/01 09:43:35 $
  */
 @SuppressWarnings("serial")
 public abstract class AnagraficaType implements java.io.Serializable {
@@ -45,7 +45,7 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * Fonte da cui proviene l'export della biblioteca
      *  
      */
-    private java.lang.String _fonte;
+    private it.inera.abi.logic.formatodiscambio.castor.Fonte _fonte;
 
     /**
      * Nomi di una biblioteca. È un insieme in cui solo
@@ -197,7 +197,7 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * 
      * @return the value of field 'Fonte'.
      */
-    public java.lang.String getFonte(
+    public it.inera.abi.logic.formatodiscambio.castor.Fonte getFonte(
     ) {
         return this._fonte;
     }
@@ -354,7 +354,7 @@ public abstract class AnagraficaType implements java.io.Serializable {
      * @param fonte the value of field 'fonte'.
      */
     public void setFonte(
-            final java.lang.String fonte) {
+            final it.inera.abi.logic.formatodiscambio.castor.Fonte fonte) {
         this._fonte = fonte;
     }
 

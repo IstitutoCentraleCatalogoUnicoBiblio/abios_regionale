@@ -202,13 +202,19 @@
 						</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="fonte" minOccurs="0" type="xs:string">
-					<xs:annotation>
-						<xs:documentation>
-							Fonte da cui proviene l'export della biblioteca
-						</xs:documentation>
-					</xs:annotation>
-				</xs:element>
+			<xs:element name="fonte" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Fonte da cui proviene l'export della biblioteca
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="descrizione" minOccurs="1" type="xs:string" />
+						<xs:element name="url" minOccurs="1" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="nomi">
 				<xs:annotation>
 					<xs:documentation>

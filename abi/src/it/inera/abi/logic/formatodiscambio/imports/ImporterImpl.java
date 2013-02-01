@@ -60,6 +60,7 @@ import it.inera.abi.persistence.DepositiLegali;
 import it.inera.abi.persistence.DepositiLegaliPK;
 import it.inera.abi.persistence.DepositiLegaliTipo;
 import it.inera.abi.persistence.DestinazioniSociali;
+import it.inera.abi.persistence.DestinazioniSocialiPK;
 import it.inera.abi.persistence.DestinazioniSocialiTipo;
 import it.inera.abi.persistence.Dewey;
 import it.inera.abi.persistence.DeweyLibero;
@@ -207,8 +208,16 @@ public class ImporterImpl implements Importer {
 		bibliotecaDb.setCatalogazioneDataImport(dataExport); // ok
 		
 		// Aggiornamento fonte
-		if (biblioteca.getAnagrafica().getFonte() != null && biblioteca.getAnagrafica().getFonte().length() > 0) {
-			bibliotecaDb.setFonte(biblioteca.getAnagrafica().getFonte());
+		if (biblioteca.getAnagrafica().getFonte() != null) {
+			/* Descrizione fonte */
+			if (biblioteca.getAnagrafica().getFonte().getDescrizione() != null && biblioteca.getAnagrafica().getFonte().getDescrizione().length() > 0) {
+				bibliotecaDb.setFonteDescrizione(biblioteca.getAnagrafica().getFonte().getDescrizione());
+			}
+			
+			/* Url fonte */
+			if (biblioteca.getAnagrafica().getFonte().getUrl() != null && biblioteca.getAnagrafica().getFonte().getUrl().length() > 0) {
+				bibliotecaDb.setFonteUrl(biblioteca.getAnagrafica().getFonte().getUrl());
+			}
 		}
 		
 		if (biblioteca.getAnagrafica().getDataCensimento() != null) {
@@ -629,10 +638,15 @@ public class ImporterImpl implements Importer {
 
 						DestinazioniSocialiTipo destinazioniSocialiTipo = (DestinazioniSocialiTipo) dynaTabDao.searchRecord(DestinazioniSocialiTipo.class, valore);
 						if (destinazioniSocialiTipo != null) {
+							DestinazioniSocialiPK destinazioniSocialiPK = new DestinazioniSocialiPK();
+							destinazioniSocialiPK.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
+							destinazioniSocialiPK.setIdDestinazioniSocialiTipo(destinazioniSocialiTipo.getIdDestinazioniSociali());
+							
 							DestinazioniSociali destinazioniSociali = new DestinazioniSociali();
 							destinazioniSociali.setDestinazioniSocialiTipo(destinazioniSocialiTipo);
 							destinazioniSociali.setNote(note);
-							bibliotecaDb.getDestinazioniSocialis().add(destinazioniSociali);
+							destinazioniSociali.setId(destinazioniSocialiPK);
+							biblioDao.saveChild(destinazioniSociali);
 							log.debug("Inserito DESTINAZIONE SOCIALE valore: " + valore + " note:" + note);
 
 						} else {

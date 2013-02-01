@@ -68,8 +68,8 @@ public class Roles {
 	
 	/**
 	 * Controlla se un utente ha il ruolo specificato
-	 * @param role
-	 * @return boolean
+	 * @param role Ruolo da controllare
+	 * @return Indica se l'utente ha il ruolo o meno
 	 */
 	public static boolean isUserInRole(String role, Utenti utente) {
 		
