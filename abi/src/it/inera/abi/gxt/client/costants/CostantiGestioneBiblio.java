@@ -54,8 +54,9 @@ public class CostantiGestioneBiblio {
 	public static final String NON_SPECIFICATO="Non specificato";
 
 	public static final String NOTE_CATALOGATORE_FIELDSET_LABEL = "Note catalogatore";
+	public static final String CENSIMENTO_FIELDSET_LABEL = "Rilevamento dati";
 
-	public static final String INFORMAZIONI_CATALOGAZIORE_FIELDSET_LABEL = "Informazioni di catalogazione";
+	public static final String INFORMAZIONI_CATALOGAZIONE_FIELDSET_LABEL = "Informazioni di catalogazione";
 
 	public static final String COMUNCAZIONI_FIELDSET_LABEL = "Comunicazioni";
 	

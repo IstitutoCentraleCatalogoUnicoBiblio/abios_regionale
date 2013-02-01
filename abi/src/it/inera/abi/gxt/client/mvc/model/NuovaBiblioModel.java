@@ -38,6 +38,14 @@ public class NuovaBiblioModel extends BaseModel implements Serializable {
 		set("accessoHandicap", accessoHandicap);
 	}
 	
+	public Boolean getAttivoAccessoInternet() {
+		return get("attivoAccessoInternet");
+	}
+	
+	public void setAttivoAccessoInternet(Boolean attivoAccessoInternet) {
+		set("attivoAccessoInternet", attivoAccessoInternet);
+	}
+	
 	public Boolean getAccessoInternetPagamento() {
 		return get("accessoInternetPagamento");
 	}
@@ -148,6 +156,14 @@ public class NuovaBiblioModel extends BaseModel implements Serializable {
 	
 	public void setEdificioMonumentale(Boolean edificioMonumentale) {
 		set("edificioMonumentale", edificioMonumentale);
+	}
+	
+	public Boolean getAttivoInformazioniBibliografiche() {
+		return get("attivoInformazioniBibliografiche");
+	}
+	
+	public void setAttivoInformazioniBibliografiche(Boolean attivoInformazioniBibliografiche) {
+		set("attivoInformazioniBibliografiche", attivoInformazioniBibliografiche);
 	}
 	
 	public Boolean getGestisceServizioBibliograficoEsterno() {

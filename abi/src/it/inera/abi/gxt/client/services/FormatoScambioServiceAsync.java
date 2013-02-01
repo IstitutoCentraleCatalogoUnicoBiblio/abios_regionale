@@ -16,7 +16,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface FormatoScambioServiceAsync {
 
-	/* IMPORT */	
+	/* IMPORT */
 	public void browseUncheckedFileImport(AsyncCallback<List<FileCaricatiListModel>> callback);
 
 	void browseCheckedFileImport(AsyncCallback<List<FileCaricatiListModel>> callback);

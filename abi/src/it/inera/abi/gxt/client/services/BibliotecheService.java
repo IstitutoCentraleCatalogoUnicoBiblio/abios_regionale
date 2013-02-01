@@ -344,5 +344,7 @@ public interface BibliotecheService extends RemoteService {
 	public void removeDocumentDelivery(int id_biblioteca, int idRemove);
 	
 	public void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale);
+	
+	public void updateCensimento(int id_biblioteca, Integer anno);
 
 }

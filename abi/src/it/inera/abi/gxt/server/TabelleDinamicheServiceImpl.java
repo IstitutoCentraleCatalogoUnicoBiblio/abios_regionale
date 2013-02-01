@@ -233,11 +233,11 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 		int limit = (Integer) m.get("limit");
 		int start = (Integer) m.get("offset");
 
-		int countAll = abiTabelleDinamicheLogic.countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(query);
+		int countAll = abiTabelleDinamicheLogic.countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(query, false);
 
 		List<PatrimonioSpecializzazioneModel> sublist = new ArrayList<PatrimonioSpecializzazioneModel>();
 
-		List<PatrimonioSubCategoryDTO> listDB =abiTabelleDinamicheLogic.getPatrimoniSpecialiPerCategoriePaginatiPerCombo(query,start,limit);
+		List<PatrimonioSubCategoryDTO> listDB = abiTabelleDinamicheLogic.getPatrimoniSpecialiPerCategoriePaginatiPerCombo(query, false, start, limit);
 		Iterator<PatrimonioSubCategoryDTO> it = listDB.iterator();
 
 		while (it.hasNext()) {
@@ -542,11 +542,11 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 		int limit = (Integer) m.get("limit");
 		int start = (Integer) m.get("offset");
 
-		int countAll = abiTabelleDinamicheLogic.countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(query);
+		int countAll = abiTabelleDinamicheLogic.countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(query, true);
 
 		List<PatrimonioSpecializzazioneModel> sublist = new ArrayList<PatrimonioSpecializzazioneModel>();
 
-		List<PatrimonioSubCategoryDTO> listDB =abiTabelleDinamicheLogic.getPatrimoniSpecialiPerCategoriePaginatiPerCombo(query,start,limit);
+		List<PatrimonioSubCategoryDTO> listDB = abiTabelleDinamicheLogic.getPatrimoniSpecialiPerCategoriePaginatiPerCombo(query, true, start, limit);
 
 		for (Iterator<PatrimonioSubCategoryDTO> it = listDB.iterator(); it.hasNext();) {
 
@@ -752,7 +752,7 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 	/**
 	 * Rimuove il punto dal codice dewey 
 	 * @param idr_removeRecord
-	 * @return String
+	 * @return codice dewey senza punto
 	 */
 	public static String rimuoviPuntoDalCodiceDewey(String idr_removeRecord) {
 		String tmpStr=new String();
@@ -765,8 +765,8 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 
 	/**
 	 * Inserisce nel codice dewey il punto
-	 * @param senzaPunto
-	 * @return String
+	 * @param senzaPunto Codice dewey senza punto
+	 * @return Codice dewey con punto
 	 */
 	public static String creaCodiceDeweyPuntato(String senzaPunto) {
 		if(senzaPunto.length()>3){

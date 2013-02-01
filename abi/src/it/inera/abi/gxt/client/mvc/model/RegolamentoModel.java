@@ -16,10 +16,9 @@ public class RegolamentoModel extends BaseModel implements Serializable {
 		
 	}
 
-	public RegolamentoModel(int id_regolamento, int id_biblitoeca,
-			String riferimentoNormativa, String url) {
+	public RegolamentoModel(int id_regolamento, int id_biblioteca, String riferimentoNormativa, String url) {
 		set("id_regolamento", id_regolamento);
-		set("id_biblitoeca", id_biblitoeca);
+		set("id_biblitoeca", id_biblioteca);
 		set("riferimentoNormativa", riferimentoNormativa);
 		set("url", url);
 

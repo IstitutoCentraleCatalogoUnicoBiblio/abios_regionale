@@ -11,7 +11,7 @@ public class DuplicatedEntryClientSideException extends Exception implements Ser
 	private static final long serialVersionUID = -4530580888727894297L;
 	
 	private String message;
-	
+
 	public DuplicatedEntryClientSideException() {
 
 	}

@@ -396,5 +396,7 @@ public interface BibliotecheServiceAsync {
 	void removeDocumentDelivery(int id_biblioteca, int idRemove, AsyncCallback<Void> callback);
 	
 	void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale, AsyncCallback<Void> callback);
+	
+	void updateCensimento(int id_biblioteca, Integer anno, AsyncCallback<Void> callback);
 
 }

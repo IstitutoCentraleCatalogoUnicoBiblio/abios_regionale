@@ -770,11 +770,11 @@ public class BiblioModel extends BaseModel implements Serializable {
 		return get("catalogazioneDataModifica");
 	}
 	
-	public void setDataCensimento(String dataCensimento){
-		set("dataCensimento",dataCensimento);
+	public void setDataCensimento(Integer dataCensimento) {
+		set("dataCensimento", dataCensimento);
 	}
 	
-	public String getDataCensimento(){
+	public Integer getDataCensimento() {
 		return get("dataCensimento");
 	}
 	
@@ -889,12 +889,20 @@ public class BiblioModel extends BaseModel implements Serializable {
 		return get("attivoDepositoLegale");
 	}
 	
-	public void setFonte(String fonte) {
-		set("fonte", fonte);
+	public void setFonteDescrizione(String fonteDescrizione) {
+		set("fonteDescrizione", fonteDescrizione);
 	}
 	
-	public String getFonte() {
-		return get("fonte");
+	public String getFonteDescrizione() {
+		return get("fonteDescrizione");
+	}
+	
+	public void setFonteUrl(String fonteUrl) {
+		set("fonteUrl", fonteUrl);
+	}
+	
+	public String getFonteUrl() {
+		return get("fonteUrl");
 	}
 	
 }

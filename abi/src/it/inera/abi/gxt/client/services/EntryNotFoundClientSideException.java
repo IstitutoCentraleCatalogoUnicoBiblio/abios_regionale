@@ -11,7 +11,7 @@ public class EntryNotFoundClientSideException extends Exception implements Seria
 	private static final long serialVersionUID = -4530580888727894297L;
 	
 	private String message;
-	
+
 	public EntryNotFoundClientSideException() {
 
 	}

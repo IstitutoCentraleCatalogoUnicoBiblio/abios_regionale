@@ -929,7 +929,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 
 		if(biblioteca.getCatalogazioneDataCensimento()!=null){
 			dataCensimentoCalendarTmp.setTime(biblioteca.getCatalogazioneDataCensimento());
-			biblioModel.setDataCensimento(""+dataCensimentoCalendarTmp.get(Calendar.DAY_OF_MONTH)+"/"+(dataCensimentoCalendarTmp.get(Calendar.MONTH)+1)+"/"+dataCensimentoCalendarTmp.get(Calendar.YEAR));
+			biblioModel.setDataCensimento(dataCensimentoCalendarTmp.get(Calendar.YEAR));
 			dataCensimentoCalendarTmp.clear();
 		}
 		if(biblioteca.getCatalogazioneDataImport()!=null){
@@ -1029,8 +1029,9 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			biblioModel.setAttivoDepositoLegale(null);
 		}
 		
-		/* Fonte */
-		biblioModel.setFonte(biblioteca.getFonte());
+		/* Fonte: descrizione e url */
+		biblioModel.setFonteDescrizione(biblioteca.getFonteDescrizione());
+		biblioModel.setFonteUrl(biblioteca.getFonteUrl());
 		
 		//STATO CATALOGAZIONE BIBLIOTECA
 		List<StatoCatalogazione> catalogaziones = biblioteca.getStatoCatalogaziones();
@@ -2894,5 +2895,11 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	@Override
 	public void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale) {
 		abiBiblioLogic.setAttivoDepositoLegale(idbib, attivoDepositoLegale);
+	}
+	
+	@Override
+	public void updateCensimento(int id_biblioteca, Integer anno) {
+		abiBiblioLogic.updateCensimento(id_biblioteca, anno);
+		
 	}
 }
