@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Classe per la generazione di eccezioni per entry non trovata
- *
+ * 
  */
 public class EntryNotFoundException extends Exception implements Serializable{
 

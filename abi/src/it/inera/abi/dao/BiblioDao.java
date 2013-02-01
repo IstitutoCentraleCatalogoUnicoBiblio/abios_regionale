@@ -19,6 +19,7 @@ import it.inera.abi.persistence.PartecipaCataloghiCollettiviMateriale;
 import it.inera.abi.persistence.PartecipaCataloghiGenerali;
 import it.inera.abi.persistence.PartecipaCataloghiSpecialiMateriale;
 import it.inera.abi.persistence.Patrimonio;
+import it.inera.abi.persistence.Photo;
 import it.inera.abi.persistence.PrestitoInterbibliotecario;
 import it.inera.abi.persistence.PrestitoLocale;
 import it.inera.abi.persistence.Pubblicazioni;
@@ -378,4 +379,6 @@ public interface BiblioDao {
 	public void removeModalitaAccessoFromBiblio(Biblioteca biblioteca);
 	
 	public String getPrimaOccorrenzaFonteValorizzata(String[] idBibs);
+	
+	public void inserisciPhoto(int id_biblioteca, Photo photo);
 }

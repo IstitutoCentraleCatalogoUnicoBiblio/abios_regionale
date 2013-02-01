@@ -43,6 +43,7 @@ import it.inera.abi.persistence.PartecipaCataloghiSpecialiMateriale;
 import it.inera.abi.persistence.Patrimonio;
 import it.inera.abi.persistence.PatrimonioPK;
 import it.inera.abi.persistence.PatrimonioSpecializzazione;
+import it.inera.abi.persistence.Photo;
 import it.inera.abi.persistence.PrestitoInterbibliotecario;
 import it.inera.abi.persistence.PrestitoInterbibliotecarioModo;
 import it.inera.abi.persistence.PrestitoLocale;
@@ -95,6 +96,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Implementazione classe DAO per l'entità Biblioteca
  *
  */
+@SuppressWarnings({"rawtypes", "unchecked","unused"})
 @Repository
 public class BiblioDaoJpa implements BiblioDao {
 	public static final String DUPLICATE_ENTRY_ERROR_MESSAGE="ATTENZIONE: la voce potrebbe essere già presente nel database";
@@ -5141,10 +5143,10 @@ public class BiblioDaoJpa implements BiblioDao {
 		}
 		
 		if (idBibs.length > 0) {
-			prepareQuery += " AND b.fonte is not null ";
+			prepareQuery += " AND b.fonteDescrizione is not null ";
 			
 		} else {
-			prepareQuery += " b.fonte is not null ";
+			prepareQuery += " b.fonteDescrizione is not null ";
 		}
 		
 		Query query = em.createQuery(prepareQuery);
@@ -5158,10 +5160,21 @@ public class BiblioDaoJpa implements BiblioDao {
 		results = (Biblioteca[]) biblios.toArray(results);
 		
 		if (results.length > 0) {
-			return results[0].getFonte();
+			return results[0].getFonteDescrizione();
 			
 		} else {
 			return null;
 		}
+	}
+	
+	@Override
+	@Transactional
+	public void inserisciPhoto(int id_biblioteca, Photo photo) {
+		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+
+		photo.setBiblioteca(biblioteca);
+
+		em.merge(photo);
+
 	}
 }

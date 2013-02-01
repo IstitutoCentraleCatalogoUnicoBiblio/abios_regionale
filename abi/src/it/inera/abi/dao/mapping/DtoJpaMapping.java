@@ -8,7 +8,6 @@ import it.inera.abi.persistence.CatalogoGeneraleTipo;
 import it.inera.abi.persistence.ContattiTipo;
 import it.inera.abi.persistence.DepositiLegaliTipo;
 import it.inera.abi.persistence.DestinazioniSocialiTipo;
-import it.inera.abi.persistence.Dewey;
 import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.FondiSpecialiCatalogazioneInventario;
 import it.inera.abi.persistence.IndicizzazioneClassificata;

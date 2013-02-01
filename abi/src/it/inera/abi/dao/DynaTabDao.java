@@ -40,11 +40,9 @@ public interface DynaTabDao {
 
 	public int countAllFiltered(Class<?> test, String searchValore);
 
-	public List<PatrimonioSubCategoryDTO> getPatrimoniSpecialiPerCategoriePaginatiPerCombo(
-			String searchValore, int offset, int limit);
+	public List<PatrimonioSubCategoryDTO> getPatrimoniSpecialiPerCategoriePaginatiPerCombo(String searchValore, boolean forReport, int offset, int limit);
 
-	public int countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(
-			String searchValore);
+	public int countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(String searchValore, boolean forReport);
 	
 	public int countAllDeweyFiltratePerPaginazioneCombobox(String searchValore);
 

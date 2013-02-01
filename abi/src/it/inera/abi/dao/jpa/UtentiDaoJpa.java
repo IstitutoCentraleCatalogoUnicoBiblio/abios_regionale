@@ -497,8 +497,7 @@ public class UtentiDaoJpa implements UtentiDao {
 
 	/**
 	 * per l'autenticazione
-	 * il BINARY si mette per il case insensitive 
-	 * 
+	 * il BINARY si mette per il case insensitive
 	 */
 	@Override
 	@Transactional

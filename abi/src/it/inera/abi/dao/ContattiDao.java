@@ -2,7 +2,6 @@ package it.inera.abi.dao;
 
 import it.inera.abi.persistence.Contatti;
 import it.inera.abi.persistence.ContattiTipo;
-import it.inera.abi.persistence.Stato;
 
 import java.util.List;
 

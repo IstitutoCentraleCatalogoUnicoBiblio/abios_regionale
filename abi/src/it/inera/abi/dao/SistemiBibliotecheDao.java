@@ -20,6 +20,5 @@ public interface SistemiBibliotecheDao {
 	public void addSistemiBiblioteche(String denominazione);
 
 	public void removeSistemiBiblioteche(int id_record);
-
 	
 }

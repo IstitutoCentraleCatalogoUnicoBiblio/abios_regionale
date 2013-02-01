@@ -56,7 +56,7 @@ public class DeweyDTO implements Serializable{
 	public void setDescrizioneUfficiale(String descrizioneUfficiale) {
 		this.descrizioneUfficiale = descrizioneUfficiale;
 	}
-	
+
 	/**
 	 * @return the descrizioneLibera
 	 */

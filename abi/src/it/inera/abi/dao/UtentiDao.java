@@ -30,9 +30,9 @@ public interface UtentiDao {
 	
 	/**
 	 * Ritorna true se la biblioteca puo essere gestita dal utente
-	 * @param codiceAbi
-	 * @param loginUtente
-	 * @return boolean
+	 * @param codiceAbi Codice ISIL
+	 * @param loginUtente Username dell'utente
+	 * @return Indica se la biblioteca è gestibile dall'utente
 	 * @throws DaoException
 	 */
 	public boolean isUtenteManageBiblioByCodAbiSenzaStato(String codiceAbi, String loginUtente);
@@ -40,9 +40,9 @@ public interface UtentiDao {
 	public List<Utenti> getListaUtenti();
 	
 	/**
-	 * Per la sicurezza
-	 * @param username
-	 * @return Utenti
+	 * Per la sicurezza, cerca un utente tramite username
+	 * @param username Da ricercare
+	 * @return Utente trovato
 	 */
 	public Utenti findByName(String username);
 	
@@ -73,7 +73,7 @@ public interface UtentiDao {
 	public void disableAccount(int idUser);
 
 	List<Utenti> getUsersByRole(Integer role);
-
+	
 	public Utenti findByValidateCode(String code);
 	
 }

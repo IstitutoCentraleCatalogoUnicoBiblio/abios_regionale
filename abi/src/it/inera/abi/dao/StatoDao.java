@@ -2,7 +2,6 @@ package it.inera.abi.dao;
 
 import java.util.List;
 
-import it.inera.abi.persistence.Comune;
 import it.inera.abi.persistence.Stato;
 
 /** 

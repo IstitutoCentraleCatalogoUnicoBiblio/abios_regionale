@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Classe DTO che rappresenta la specializzazione del Patrimonio
  *
  */
-public class PatrimonioSubCategoryDTO implements Serializable{
+public class PatrimonioSubCategoryDTO implements Serializable {
 
 	private static final long serialVersionUID = 8177396526854678074L;
 

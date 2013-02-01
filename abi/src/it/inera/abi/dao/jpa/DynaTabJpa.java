@@ -211,7 +211,7 @@ public class DynaTabJpa implements DynaTabDao {
 
 	@Override
 	@Transactional
-	public List<PatrimonioSubCategoryDTO> getPatrimoniSpecialiPerCategoriePaginatiPerCombo(String searchValore, int offset, int limit) {
+	public List<PatrimonioSubCategoryDTO> getPatrimoniSpecialiPerCategoriePaginatiPerCombo(String searchValore, boolean forReport, int offset, int limit) {
 		List<PatrimonioSubCategoryDTO> dtos = new ArrayList<PatrimonioSubCategoryDTO>();
 
 		StringBuffer sb = new StringBuffer();
@@ -223,6 +223,9 @@ public class DynaTabJpa implements DynaTabDao {
 		if (searchValore != null && searchValore.length() > 0) {
 			sb.append(" AND (psc.descrizione LIKE :searchValore  ");
 			sb.append(" OR ps.descrizione LIKE :searchValore) ");
+		}
+		
+		if (forReport) {
 			sb.append(" AND psc.idPatrimonioSpecializzazioneCategoria != 0 ");
 		}
 
@@ -262,7 +265,7 @@ public class DynaTabJpa implements DynaTabDao {
 
 	@Override
 	@Transactional
-	public int countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(String searchValore){
+	public int countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(String searchValore, boolean forReport) {
 
 		StringBuffer sb = new StringBuffer();
 
@@ -273,6 +276,9 @@ public class DynaTabJpa implements DynaTabDao {
 		if (searchValore != null && searchValore.length() > 0) {
 			sb.append(" AND (psc.descrizione LIKE :searchValore  ");
 			sb.append(" OR ps.descrizione LIKE :searchValore) ");
+		}
+		
+		if (forReport) {
 			sb.append(" AND psc.idPatrimonioSpecializzazioneCategoria != 0 ");
 		}
 
