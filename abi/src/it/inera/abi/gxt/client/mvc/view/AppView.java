@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  *
  */
 public class AppView extends View {
-
+	
 	public static final String VIEWPORT = "viewport";
 	public static final String WEST_PANEL = "west";
 	public static final String CENTER_PANEL = "center";
