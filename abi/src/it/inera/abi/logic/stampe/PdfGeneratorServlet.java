@@ -768,7 +768,7 @@ public class PdfGeneratorServlet extends HttpServlet {
 			}
 			
 			if (labels.containsKey("dateAggiornamento") && labels.get("dateAggiornamento") != null) {
-				List<String> tmp = (List<String>) labels.get("dateAggiornamento"); 
+				List<String> tmp = (List<String>) labels.get("dateAggiornamento");
 				
 				if (tmp != null && tmp.size() != 0) {
 					if (tmp.get(0) != null && tmp.get(1) != null) {
@@ -798,6 +798,7 @@ public class PdfGeneratorServlet extends HttpServlet {
 							stmp.append("DATA DI AGGIORNAMENTO A: "+getFormatDate(d1)+"\n");
 						}
 					}
+					
 				}				
 			}
 			
@@ -834,7 +835,7 @@ public class PdfGeneratorServlet extends HttpServlet {
 		return sb.toString();
 	}
 	
-	private String getFormatDate(Calendar date) {		
+	private String getFormatDate(Calendar date) {
 		String formatDate = new String();
 
 		formatDate = formatDate.concat(date.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.ITALY) + " ");

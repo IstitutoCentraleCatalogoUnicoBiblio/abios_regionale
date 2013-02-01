@@ -1,6 +1,5 @@
 package it.inera.abi.logic.auth;
 
-
 import it.inera.abi.dao.UtentiDao;
 import it.inera.abi.persistence.Utenti;
 

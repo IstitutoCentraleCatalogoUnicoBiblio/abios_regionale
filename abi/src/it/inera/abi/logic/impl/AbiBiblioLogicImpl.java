@@ -48,6 +48,7 @@ import it.inera.abi.persistence.PartecipaCataloghiCollettiviMateriale;
 import it.inera.abi.persistence.PartecipaCataloghiGenerali;
 import it.inera.abi.persistence.PartecipaCataloghiSpecialiMateriale;
 import it.inera.abi.persistence.Patrimonio;
+import it.inera.abi.persistence.Photo;
 import it.inera.abi.persistence.PrestitoInterbibliotecario;
 import it.inera.abi.persistence.PrestitoLocale;
 import it.inera.abi.persistence.Pubblicazioni;
@@ -66,7 +67,9 @@ import it.inera.abi.persistence.TipologiaFunzionale;
 import it.inera.abi.persistence.Utenti;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -1206,7 +1209,13 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		biblioDao.inserisciComunicazioniCatalogazione( id_biblio,  value);
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica comunicazioni catalogazione: id_biblioteca="+id_biblio);
 	}
-
+	
+	@Override
+	public void inserisciPhoto(int id_biblioteca, Photo photo) {
+		biblioDao.inserisciPhoto(id_biblioteca, photo);
+		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica foto: id_biblioteca="+id_biblioteca);
+	}
+	
 	@Override
 	@Transactional
 	public void setOccupata(int id) {
@@ -1981,6 +1990,21 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 			biblioDao.removeDepositiLegaliFromBiblio(biblioteca);
 		}
 
+		biblioDao.updateBiblioteca(biblioteca);
+	}
+	
+	@Override
+	public void updateCensimento(int id_biblioteca, Integer anno) {
+		Biblioteca biblioteca = biblioDao.getBibliotecaById(id_biblioteca);
+		
+		if (anno != null) {
+			Calendar c = GregorianCalendar.getInstance();
+			c.set(anno, 0, 1, 0, 0, 0);
+			biblioteca.setCatalogazioneDataCensimento(c.getTime());
+			
+		} else {
+			biblioteca.setCatalogazioneDataCensimento(null);
+		}
 		biblioDao.updateBiblioteca(biblioteca);
 	}
 }

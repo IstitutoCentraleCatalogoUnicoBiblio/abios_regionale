@@ -4,6 +4,7 @@ import it.inera.abi.dao.DuplicateEntryException;
 import it.inera.abi.dao.EntryNotFoundException;
 import it.inera.abi.dto.DynaTabDTO;
 import it.inera.abi.persistence.DepositiLegali;
+import it.inera.abi.persistence.Photo;
 import it.inera.abi.persistence.PrestitoInterbibliotecario;
 import it.inera.abi.persistence.PrestitoLocale;
 import it.inera.abi.persistence.Riproduzioni;
@@ -348,6 +349,8 @@ public interface AbiBiblioLogic {
 	public void inserisciNoteCatalogazione(int id_biblio, String value);
 
 	public void inserisciComunicazioniCatalogazione(int id_biblio, String value);
+	
+	public void inserisciPhoto(int id_biblioteca, Photo photo);
 
 	/**
 	 * Mette in occupata la biblioteca
@@ -445,4 +448,6 @@ public interface AbiBiblioLogic {
 	public void removeDocumentDelivery(int id_biblioteca, int idRemove);
 	
 	public void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale);
+	
+	public void updateCensimento(int id_biblioteca, Integer anno);
 } 

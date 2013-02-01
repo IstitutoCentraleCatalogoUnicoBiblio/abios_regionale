@@ -35,6 +35,7 @@ import it.inera.abi.persistence.PartecipaCataloghiCollettiviMateriale;
 import it.inera.abi.persistence.PartecipaCataloghiGenerali;
 import it.inera.abi.persistence.PartecipaCataloghiSpecialiMateriale;
 import it.inera.abi.persistence.Patrimonio;
+import it.inera.abi.persistence.Photo;
 import it.inera.abi.persistence.PrestitoInterbibliotecario;
 import it.inera.abi.persistence.PrestitoLocale;
 import it.inera.abi.persistence.PrestitoLocaleMaterialeEscluso;
@@ -698,6 +699,9 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 			
+			/* Anno di rilevamento dati */
+			bibliotecaAttuale.setCatalogazioneDataCensimento(bibliotecaSalvata.getCatalogazioneDataCensimento());
+			
 			// ******** Note catalogatore *****************
 			bibliotecaAttuale.setCatalogazioneNote(bibliotecaSalvata.getCatalogazioneNote());
 
@@ -764,8 +768,20 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 				}
 			}
 			
-			/* Fonte */
-			bibliotecaAttuale.setFonte(bibliotecaSalvata.getFonte());
+			/* Fonte: descrizione e url */
+			bibliotecaAttuale.setFonteDescrizione(bibliotecaSalvata.getFonteDescrizione());
+			bibliotecaAttuale.setFonteUrl(bibliotecaSalvata.getFonteUrl());
+			
+			/* Photo */
+			if (bibliotecaAttuale.getPhotos() != null) {
+				biblioDao.removeChilds(bibliotecaAttuale.getPhotos());
+			}
+			if (bibliotecaSalvata.getPhotos() != null) {
+				for (Photo photo : bibliotecaSalvata.getPhotos()) {
+					photo.setIdPhoto(null);
+					abiBiblioLogic.inserisciPhoto(idbiblio, photo);
+				}
+			}
 			
 			userActionLog.logActionCatalogazioneBiblioDefaultUser("RIPRISTINO BIBLIOTECA COMPLETATO - id_biblioteca="+idbiblio);
 
@@ -911,5 +927,11 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			}
 			biblioteca.setStatoCatalogaziones(bibliotecasStatoCatalogazione);
 		}
+		
+		/* Photo */
+		for (Photo photo: biblioteca.getPhotos()) {
+			photo.setBiblioteca(null);
+		}
+		
 	}
 }

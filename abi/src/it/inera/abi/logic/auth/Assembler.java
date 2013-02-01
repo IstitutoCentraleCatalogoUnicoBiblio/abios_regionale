@@ -27,7 +27,6 @@ public class Assembler {
 		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = utenti.getEnabled();
-//		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();

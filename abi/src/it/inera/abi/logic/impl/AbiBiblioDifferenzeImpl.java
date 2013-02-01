@@ -34,6 +34,7 @@ import it.inera.abi.persistence.TipologiaFunzionale;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
@@ -1045,6 +1046,26 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 //		} 
 //	}
 	
+	private void compareCensimento(List<Differenze> differenze, Biblioteca bibliotecaSalvata, Biblioteca bibliotecaAttuale) {
+		Integer censimentoSalvato = null;
+		if (bibliotecaSalvata.getCatalogazioneDataCensimento() != null) {
+			Calendar dataCensimentoSalvata = Calendar.getInstance();
+			dataCensimentoSalvata.setTime(bibliotecaSalvata.getCatalogazioneDataCensimento());
+			
+			censimentoSalvato = dataCensimentoSalvata.get(Calendar.YEAR);
+		}
+		
+		Integer censimentoAttuale = null;
+		if (bibliotecaAttuale.getCatalogazioneDataCensimento() != null) {
+			Calendar dataCensimentoAttuale = Calendar.getInstance();
+			dataCensimentoAttuale.setTime(bibliotecaAttuale.getCatalogazioneDataCensimento());
+			
+			censimentoAttuale = dataCensimentoAttuale.get(Calendar.YEAR);
+		}
+		
+		if (!CompareUtils.equals(censimentoSalvato, censimentoAttuale))
+			createDifference(differenze, "Anno di rilevamento dati", censimentoSalvato, censimentoAttuale);
+	}
 	
 	/**
 	 * Ritorna una mappa delle differenze tra la biblioteca salvata e quella sul database
@@ -1268,6 +1289,8 @@ public class AbiBiblioDifferenzeImpl implements AbiBiblioDifferenze {
 			if (bibliotecaAttuale.getAttivoDepositoLegale() != bibliotecaSalvata.getAttivoDepositoLegale())
 				createDifference(differenze, "Attivo Deposito Legale", siNoBoolean(bibliotecaSalvata.getAttivoDepositoLegale()), siNoBoolean(bibliotecaAttuale.getAttivoDepositoLegale()));
 			//compareDepositoLegale(differenze, bibliotecaSalvata, bibliotecaAttuale);
+			// ******** Anno rilevamento dati ********
+			compareCensimento(differenze, bibliotecaSalvata, bibliotecaAttuale);
 			// ******** Note catalogatore *****************
 			// non si confrontano
 			// ******** Comunicazioni *****************

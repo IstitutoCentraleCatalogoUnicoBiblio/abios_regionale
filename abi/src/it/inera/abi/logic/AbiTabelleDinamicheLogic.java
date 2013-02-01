@@ -32,11 +32,9 @@ public interface AbiTabelleDinamicheLogic {
 
 	public int countAllFilteredGenericaVoceSingola(int id_tabella, String query);
 
-	public int countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(
-			String query);
+	public int countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(String query, boolean forReport);
 
-	public List<PatrimonioSubCategoryDTO> getPatrimoniSpecialiPerCategoriePaginatiPerCombo(
-			String query, int start, int limit);
+	public List<PatrimonioSubCategoryDTO> getPatrimoniSpecialiPerCategoriePaginatiPerCombo(String query, boolean forReport, int start, int limit);
 	
 	public int countAllDeweyFiltratePerPaginazioneCombobox(String query);
 

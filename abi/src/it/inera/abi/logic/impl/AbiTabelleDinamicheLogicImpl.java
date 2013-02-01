@@ -106,14 +106,14 @@ public class AbiTabelleDinamicheLogicImpl implements AbiTabelleDinamicheLogic {
 	}
 
 	@Override
-	public int countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(String query) {
-		return 	dynaTabDao.countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(query);
+	public int countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(String query, boolean forReport) {
+		return 	dynaTabDao.countAallPatrimoniSpecialiPerCategoriePaginatiPerCombo(query, forReport);
 	}
 
 	@Override
-	public List<PatrimonioSubCategoryDTO> getPatrimoniSpecialiPerCategoriePaginatiPerCombo( String query, int start, int limit) {
+	public List<PatrimonioSubCategoryDTO> getPatrimoniSpecialiPerCategoriePaginatiPerCombo(String query, boolean forReport, int start, int limit) {
 
-		return dynaTabDao.getPatrimoniSpecialiPerCategoriePaginatiPerCombo(query, start, limit);
+		return dynaTabDao.getPatrimoniSpecialiPerCategoriePaginatiPerCombo(query, forReport, start, limit);
 	}
 
 	@Override
