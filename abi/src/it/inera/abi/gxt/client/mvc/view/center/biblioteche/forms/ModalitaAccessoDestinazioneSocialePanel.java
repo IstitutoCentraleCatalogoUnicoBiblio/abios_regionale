@@ -232,7 +232,7 @@ public class ModalitaAccessoDestinazioneSocialePanel extends ContentPanelForTabI
 		modalitaAccessoForm.add(modalitaAccessoTable);
 		modalitaAccessoSet.add(modalitaAccessoForm);
 
-		/*LIMITE ETA' LISTA MODALITA' ACCESSO*/
+		/* LISTA MODALITA' ACCESSO */
 		listaModAccessoForm = new FormPanel();
 		Utils.setFormStyleProperties(listaModAccessoForm);
 

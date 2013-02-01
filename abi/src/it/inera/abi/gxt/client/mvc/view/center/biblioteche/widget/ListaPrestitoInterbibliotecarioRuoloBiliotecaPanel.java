@@ -56,7 +56,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class ListaPrestitoInterbibliotecarioRuoloBiliotecaPanel extends ContentPanel {
-	
 	/**
 	 * Variabile per il servizio di operazioni delle tabelle dinamiche
 	 * */

@@ -48,7 +48,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class ContenitoreSpecializzazionePanel extends FormPanel {
-	
 	private int idBiblio;
 	private SpecializzazioneModel model;
 	boolean modifica;

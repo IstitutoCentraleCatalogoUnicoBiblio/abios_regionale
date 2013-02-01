@@ -31,7 +31,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * ai fondi speciali
  *
  */
-public class TestoFondiSpecialiPanel extends LayoutContainer{
+public class TestoFondiSpecialiPanel extends LayoutContainer {
 
 	private int idBiblio;
 	private FondiSpecialiModel model;

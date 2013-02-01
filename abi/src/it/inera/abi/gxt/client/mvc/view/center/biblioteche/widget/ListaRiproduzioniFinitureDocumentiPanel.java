@@ -55,7 +55,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class ListaRiproduzioniFinitureDocumentiPanel extends ContentPanel {
-
+	
 	private int id_biblioteca;
 	private boolean modifica;
 	private TabelleDinamicheServiceAsync tabelleDinamicheService;

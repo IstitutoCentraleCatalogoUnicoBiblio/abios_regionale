@@ -611,7 +611,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 		accessoInternetTable.setWidth(750);
 		attivaAccessoLabel = new Text("Attiva accesso internet:");
 		attivaAccessoLabel.setStyleAttribute("fontSize", "14px");
-
+		
 		attivaAccessoField = new SimpleComboBox<String>();
 		attivaAccessoField.setTriggerAction(TriggerAction.ALL);
 		attivaAccessoField.setEditable(false);

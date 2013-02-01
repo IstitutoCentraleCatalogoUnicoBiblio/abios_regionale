@@ -51,7 +51,7 @@ public class SedeInformazioniSupplPanel extends ContentPanelForTabItem {
 	private FormPanel formLocali;
 	private FormPanel formPostazioni;
 	
-	/*Bottoni salavataggio*/
+	/*Bottoni salvataggio*/
 	private Button aggiornaProfiloStorico;
 	private Button aggiornaLocali;
 	private Button aggiornaPostazioni;

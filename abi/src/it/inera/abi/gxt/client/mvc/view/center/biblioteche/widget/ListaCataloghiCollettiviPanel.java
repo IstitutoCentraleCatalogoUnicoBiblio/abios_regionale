@@ -43,7 +43,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class ListaCataloghiCollettiviPanel extends ListaCataloghiGenericaPanel {
-	
 	private GroupingStore<PartecipaCataloghiCollettiviModel> partecipaCataloghiCollettiviGrigliaStore;
 
 	private BaseListLoader<ListLoadResult<PartecipaCataloghiCollettiviModel>> partecipaCataloghiCollettiviLoader;

@@ -24,11 +24,7 @@ public class DifferenzeWindow extends Window {
 		FitData fitData = new FitData();
 		fitData.setMargins(new Margins(5));
 		setResizable(false);
-//		addListener(Events.Hide, new Listener<ComponentEvent>() {
-//			public void handleEvent(ComponentEvent be) {
-//		
-//			}
-//		});
+
 		html = new Html();
 		
 		add(html);

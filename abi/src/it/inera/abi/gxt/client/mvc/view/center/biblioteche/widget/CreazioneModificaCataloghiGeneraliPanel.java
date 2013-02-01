@@ -39,7 +39,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * per la visualizzazione / modifica delle informazioni relative ai cataloghi generali
  *
  */
-public class CreazioneModificaCataloghiGeneraliPanel extends CreazioneModificaCataloghiGenericaPanel{
+public class CreazioneModificaCataloghiGeneraliPanel extends CreazioneModificaCataloghiGenericaPanel {
 
 	/*Label cataloghi generali*/
 	private  Text tipoCatalogoLabel;

@@ -54,7 +54,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class ListaCataloghiGenericaPanel extends ContentPanel {
-	
 	protected boolean modifica;
 	protected boolean modificaUrl;
 	protected int id_biblioteca;

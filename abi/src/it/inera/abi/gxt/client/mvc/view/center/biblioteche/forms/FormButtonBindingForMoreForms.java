@@ -16,7 +16,7 @@ import com.google.gwt.user.client.Timer;
  * e dei relativi bottoni abilita / disabilita
  * 
  */
-public class FormButtonBindingForMoreForms /*xtends FormButtonBinding */{
+public class FormButtonBindingForMoreForms /*extends FormButtonBinding */{
 
 	private List<FormPanel> panels;
 	private Timer timer;

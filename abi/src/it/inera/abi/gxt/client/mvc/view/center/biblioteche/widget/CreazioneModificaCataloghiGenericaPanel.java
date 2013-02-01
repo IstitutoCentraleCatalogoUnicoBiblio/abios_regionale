@@ -68,7 +68,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * relative ai cataloghi
  *
  */
-public class CreazioneModificaCataloghiGenericaPanel extends FormPanel{
+public class CreazioneModificaCataloghiGenericaPanel extends FormPanel {
 	/*Servizi*/
 	protected BibliotecheServiceAsync bibliotecheService;
 	protected TabelleDinamicheServiceAsync tdsa;

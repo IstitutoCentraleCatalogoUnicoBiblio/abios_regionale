@@ -15,7 +15,6 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 public class CataloghiGeneraliPanel extends ContentPanelForTabItem {
 	
 	private ListaCataloghiGeneraliPanel listaCataloghiGeneraliPanel;
-	
 	private int id_biblio;
 	
 	public CataloghiGeneraliPanel() {

@@ -57,7 +57,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel extends ContentPanel {
-	
 	/**
 	 * Variabile per il servizio di operazioni delle tabelle dinamiche
 	 * */

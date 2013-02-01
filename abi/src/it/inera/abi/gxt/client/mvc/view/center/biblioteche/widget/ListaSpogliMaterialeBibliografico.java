@@ -52,7 +52,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * relative alla lista degli spogli del materiale bibliografico
  *
  */
-public class ListaSpogliMaterialeBibliografico extends ContentPanel{
+public class ListaSpogliMaterialeBibliografico extends ContentPanel {
 	
 	private int id_biblioteca;
 	private boolean modifica;

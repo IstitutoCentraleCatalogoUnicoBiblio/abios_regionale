@@ -64,7 +64,7 @@ public class ContenitoreFondiSpecialiPanel extends FormPanel {
 	private FondiSpecialiModel model;
 	private FondiSpecialiModel modelToSave;
 	private FondiSpecialiModel modelToUpdate;
-	boolean first= true;
+	boolean first = true;
 	boolean modifica;
 	private TestoFondiSpecialiPanel tmpTestoFondiSpecialiPanel;
 	private BibliotecheServiceAsync bibliotecheService;

@@ -179,7 +179,7 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		quantitaColumn.setWidth(150);
 		configs.add(quantitaColumn);
 
-		final	NumberField quantitaUltimoAnnoField = new NumberField();
+		final NumberField quantitaUltimoAnnoField = new NumberField();
 		quantitaUltimoAnnoField.setEmptyText("0");
 		quantitaUltimoAnnoField.setPropertyEditorType(Integer.class);
 		quantitaUltimoAnnoField.setEnabled(true);
@@ -401,7 +401,7 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 									quantita = 0;
 								}
 								
-								if (store.getAt(0).getQuantitaUltimoAnno() != null && store.getAt(0)	.getQuantitaUltimoAnno().intValue() != 0) {
+								if (store.getAt(0).getQuantitaUltimoAnno() != null && store.getAt(0).getQuantitaUltimoAnno().intValue() != 0) {
 									quantitaUltimoAnno = store.getAt(0).getQuantitaUltimoAnno().intValue();
 									
 								} else {

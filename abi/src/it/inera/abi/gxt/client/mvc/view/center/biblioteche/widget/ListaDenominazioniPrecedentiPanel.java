@@ -8,7 +8,6 @@ import it.inera.abi.gxt.client.mvc.view.RowEditorCustom;
 import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
-//import it.inera.abi.gxt.client.workflow.UIWorkflow;
 
 import java.util.ArrayList;
 import java.util.List;

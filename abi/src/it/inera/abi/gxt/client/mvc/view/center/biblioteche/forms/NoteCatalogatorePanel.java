@@ -5,6 +5,7 @@ import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.costants.CostantiGestioneBiblio;
+import it.inera.abi.gxt.client.mvc.view.NumberFieldCustom;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
 
@@ -43,29 +44,33 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 	private LayoutContainer infoCatalogazione;
 	private FieldSet infoCatalogazioneSet;
 
-	private static final String dataCensimentoLabel="Data censimento import:&nbsp;";
 	private static final String dataImportLabel="Data import:&nbsp;";
-	private static final String dataModificaRemotaLabel="Data modifica remota:&nbsp;";
-	private static final String dataModificaLabel="Data modifica:&nbsp;";
+	private static final String dataModificaRemotaLabel="Data export:&nbsp;";
+	private static final String dataModificaLabel="Data ultima modifica:&nbsp;";
 	private static final String utenteUltimaModificaLabel="Utente ultima modifica:&nbsp;";
 	private static final String fonteLabel="Fonte:&nbsp;";
 
-	private Text dataCensimentoText;
 	private Text dataImportText;
 	private Text dataModificaRemotaText;
 	private Text dataModificaText;
 	private Text utenteUltimaModificaText;
 	private Text fonteText;
+	
+	private Text annoRilevamentoDatiLabel;
+	private NumberFieldCustom annoRilevamentoDatiField;
 
 	private TextArea noteBox;
 	private TextArea comunicazioniBox;
 
+	private Button censimentoReset;
+	private Button censimentoAggiorna;
 	private Button comunicazioniReset;
 	private Button comunicazioniAggiorna;
 	private Button noteReset;
 	private Button noteAggiorna;
 
 	/*Forms*/
+	private FormPanel censimentoForm;
 	private FormPanel noteForm;
 	private FormPanel comunicazioniForm;
 
@@ -94,14 +99,10 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 		infoCatalogazione.hide();
 
 		infoCatalogazioneSet = new FieldSet();
-		Utils.setFieldSetProperties(infoCatalogazioneSet, CostantiGestioneBiblio.INFORMAZIONI_CATALOGAZIORE_FIELDSET_LABEL);
+		Utils.setFieldSetProperties(infoCatalogazioneSet, CostantiGestioneBiblio.INFORMAZIONI_CATALOGAZIONE_FIELDSET_LABEL);
 		infoCatalogazioneSet.setCollapsible(true);
 
 		LayoutContainer infoCatalogazioneContainer = new LayoutContainer(new RowLayout());
-
-		dataCensimentoText = new Text();
-		dataCensimentoText.setStyleAttribute("fontSize", "14px");
-		dataCensimentoText.hide();
 
 		dataImportText = new Text();
 		dataImportText.setStyleAttribute("fontSize", "14px");
@@ -123,8 +124,6 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 		fonteText.setStyleAttribute("fontSize", "14px");
 		fonteText.hide();
 
-
-		infoCatalogazioneContainer.add(dataCensimentoText);
 		infoCatalogazioneContainer.add(dataImportText);
 		infoCatalogazioneContainer.add(dataModificaRemotaText);
 		infoCatalogazioneContainer.add(dataModificaText);
@@ -134,7 +133,120 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 		infoCatalogazioneSet.add(infoCatalogazioneContainer);
 		infoCatalogazione.add(infoCatalogazioneSet);
 		add(infoCatalogazione);
-		/*BIBLio*/
+		
+		/* Censimento --> INIZIO */
+		LayoutContainer censimento = new LayoutContainer();
+		censimento.setStyleAttribute("padding", "5px");
+		
+		FieldSet censimentoSet = new FieldSet();
+		Utils.setFieldSetProperties(censimentoSet, CostantiGestioneBiblio.CENSIMENTO_FIELDSET_LABEL);
+		censimentoSet.setCollapsible(true);
+		
+		LayoutContainer censimentoTable = new LayoutContainer(new TableLayout(2));
+		
+		censimentoForm = new FormPanel();
+		censimentoForm.setHeaderVisible(false);
+		censimentoForm.setBorders(false);
+		censimentoForm.setBodyBorder(false);
+		censimentoForm.setButtonAlign(HorizontalAlignment.RIGHT);
+		censimentoForm.setAnimCollapse(true);
+
+		FormLayout censimentoFormLayout = new FormLayout();
+		censimentoFormLayout.setLabelAlign(LabelAlign.TOP);
+
+		censimentoForm.setLayout(censimentoFormLayout);
+
+		FormButtonBinding censimentoBind = new FormButtonBinding(censimentoForm);
+		
+		annoRilevamentoDatiLabel = new Text("Anno:");
+		annoRilevamentoDatiLabel.setStyleAttribute("fontSize", "14px");
+		censimentoTable.add(annoRilevamentoDatiLabel, d);
+		
+		annoRilevamentoDatiField = new NumberFieldCustom();
+		annoRilevamentoDatiField.setMinLength(4);
+		annoRilevamentoDatiField.setMaxLength(4);
+		censimentoTable.add(annoRilevamentoDatiField, d2);
+		
+		Utils.addListenerToChangeLabelColorIfModifiedNumberFieldInt(annoRilevamentoDatiField, annoRilevamentoDatiLabel);
+		
+		censimentoAggiorna = new Button("Aggiorna");
+		Utils.setStylesButton(censimentoAggiorna);
+		
+		censimentoAggiorna.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				bibliotecheService = Registry.get(Abi.BIBLIOTECHE_SERVICE);
+
+				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
+
+					@Override
+					public void handleEvent(MessageBoxEvent ce) {
+
+						Button btn = ce.getButtonClicked();
+						if (btn.getText().equalsIgnoreCase("Si")) {
+
+							bibliotecheService.updateCensimento(id_biblio, annoRilevamentoDatiField.getValue() != null? annoRilevamentoDatiField.getValue().intValue() : null, new AsyncCallback<Void>() {
+
+								@Override
+								public void onFailure(Throwable caught) {
+									if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
+										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+								}
+
+								@Override
+								public void onSuccess(Void result) {
+									annoRilevamentoDatiField.setOriginalValue(annoRilevamentoDatiField.getValue() != null? annoRilevamentoDatiField.getValue().intValue() : null);
+									Utils.setFontColorStyleBlack(annoRilevamentoDatiLabel);
+									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+									fireReleoadbiblioDataEvent();
+								}
+							});
+
+						} 
+
+					}
+				};
+				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, l);
+				
+			}
+		});
+		
+		censimentoReset = new Button("Reset");
+		Utils.setStylesButton(censimentoReset);
+		
+		censimentoReset.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				censimentoForm.reset();
+				Utils.setFontColorStyleBlack(annoRilevamentoDatiLabel);
+				
+			}
+		});
+		
+		censimentoBind.addButton(censimentoAggiorna);
+		censimentoBind.addButton(censimentoReset);
+		
+		TableLayout tableLayoutCensimento = new TableLayout(2);
+		tableLayoutCensimento.setCellPadding(5);
+		LayoutContainer censimentoButtons = new LayoutContainer(tableLayoutCensimento);
+		censimentoButtons.add(censimentoAggiorna);
+		censimentoButtons.add(censimentoReset);
+		
+		censimentoTable.add(new LayoutContainer(), d);
+		censimentoTable.add(censimentoButtons, d2);
+		
+		UIWorkflow.hideView(censimentoAggiorna);
+		UIWorkflow.hideView(censimentoReset);
+
+		censimentoForm.add(censimentoTable);
+		censimentoSet.add(censimentoForm);
+
+		censimento.add(censimentoSet);
+		add(censimento);
+		/* Censimento --> FINE */
+		
 		LayoutContainer note = new LayoutContainer();
 		note.setStyleAttribute("padding", "5px");
 
@@ -352,16 +464,8 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 	}
 	
 	public void setFieldsValues() {
-		if (biblioteca.getDataCensimento() != null || biblioteca.getDataImport() != null || biblioteca.getDataModificaRemota() != null || biblioteca.getDataModifica() != null || biblioteca.getUtenteUltimaModifica() != null || biblioteca.getFonte() != null) {
+		if (biblioteca.getDataImport() != null || biblioteca.getDataModificaRemota() != null || biblioteca.getDataModifica() != null || biblioteca.getUtenteUltimaModifica() != null || biblioteca.getFonteDescrizione() != null) {
 			infoCatalogazione.show();
-
-			if (biblioteca.getDataCensimento() != null) {
-				dataCensimentoText.setText(dataCensimentoLabel+biblioteca.getDataCensimento());
-				dataCensimentoText.show();
-				
-			} else {
-				dataCensimentoText.hide();
-			}
 
 			if (biblioteca.getDataImport() != null) {
 				dataImportText.setText(dataImportLabel+biblioteca.getDataImport());
@@ -395,8 +499,14 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 				utenteUltimaModificaText.hide();
 			}
 			
-			if (biblioteca.getFonte() != null) {
-				fonteText.setText(fonteLabel+biblioteca.getFonte());
+			if (biblioteca.getFonteDescrizione() != null) {
+				if (biblioteca.getFonteUrl() != null && biblioteca.getFonteUrl().length() > 0) {
+					fonteText.setText(fonteLabel+"<a href=\""+biblioteca.getFonteUrl()+"\" target=\"_blank\">"+biblioteca.getFonteDescrizione()+"</a>");
+					
+				} else {
+					fonteText.setText(fonteLabel+biblioteca.getFonteDescrizione());
+				}
+				
 				fonteText.show();
 				
 			} else {
@@ -408,6 +518,14 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 			infoCatalogazione.hide();
 		}
 
+		annoRilevamentoDatiField.setValue(biblioteca.getDataCensimento() != null? biblioteca.getDataCensimento().intValue() : null);
+		annoRilevamentoDatiField.setOriginalValue(biblioteca.getDataCensimento() != null? biblioteca.getDataCensimento().intValue() : null);
+		Utils.setFontColorStyleBlack(annoRilevamentoDatiLabel);
+		
+		UIWorkflow.setReadOnly(annoRilevamentoDatiField);
+		UIWorkflow.hideView(censimentoAggiorna);
+		UIWorkflow.hideView(censimentoReset);
+		
 		if (biblioteca.getNoteCatalogatore() != null) {
 			noteBox.setValue(biblioteca.getNoteCatalogatore());
 			noteBox.setOriginalValue(biblioteca.getNoteCatalogatore());

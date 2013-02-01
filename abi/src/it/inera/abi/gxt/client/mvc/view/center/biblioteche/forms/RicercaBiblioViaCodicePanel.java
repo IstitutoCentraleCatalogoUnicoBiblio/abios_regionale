@@ -33,7 +33,6 @@ import com.google.gwt.user.client.Element;
  *
  */
 public class RicercaBiblioViaCodicePanel extends ContentPanel {
-	
 	protected HashMap<String, Object> keys = new HashMap<String, Object>();
 	protected FormPanel formViaCodice;
 	protected TextFieldCustom<String> codiceIsilField;

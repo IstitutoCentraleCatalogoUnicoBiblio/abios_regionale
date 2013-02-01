@@ -47,7 +47,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class ListaPubblicazioniPanel extends ContentPanel {
-
+	
 	private boolean modifica;
 	private int id_biblioteca;
 	private BibliotecheServiceAsync bibliotecheService;

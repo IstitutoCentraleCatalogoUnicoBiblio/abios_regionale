@@ -8,7 +8,6 @@ import it.inera.abi.gxt.client.mvc.view.RowEditorCustom;
 import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
-//import it.inera.abi.gxt.client.workflow.UIWorkflow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class ListaDenominazioniAlternativePanel extends ContentPanel {
-	
 	private int id_biblio;
 	private boolean modifica;
 	private BaseListLoader<ListLoadResult<ModelData>> loaderDenominazioni;
