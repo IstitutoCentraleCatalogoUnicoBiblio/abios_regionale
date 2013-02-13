@@ -19,6 +19,7 @@ import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.NoteCatalogator
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.OrarioUfficaleVariazioniPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.PatrimonioLibrarioPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.PersonalePanel;
+import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.PhotoPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.PrestitoPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.SedeInformazioniSupplPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.ServiziSezioniSpecialiPanel;
@@ -218,7 +219,7 @@ public class ModificaBibliotecaView extends View {
 		datiAnagraficiSistemiBiblioSubTab.addListener(Events.Select, new Listener<BaseEvent>() {
 			@Override
 			public void handleEvent(BaseEvent be) {
-				datiAnagrafici.	setBiblioteca(tmpBiblio);
+				datiAnagrafici.setBiblioteca(tmpBiblio);
 				datiAnagrafici.setValueFields();
 
 			}
@@ -260,6 +261,21 @@ public class ModificaBibliotecaView extends View {
 		});
 
 		sedeInfoSupplemSubTab.add(sedeInformazioniSupplPanel);
+		
+		/* Foto */
+		TabItem fotoSedeSubTab = new TabItem();
+		fotoSedeSubTab.setScrollMode(Scroll.AUTOY);
+		fotoSedeSubTab.setText(CostantiGestioneBiblio.FOTO_SEDE);
+		
+		final PhotoPanel photoPanel = new PhotoPanel();
+		fotoSedeSubTab.addListener(Events.Select, new Listener<BaseEvent>() {
+			@Override
+			public void handleEvent(BaseEvent be) {
+				photoPanel.setBiblioteca(tmpBiblio);
+				photoPanel.setFieldsValues();
+			}
+		});
+		fotoSedeSubTab.add(photoPanel);
 
 		TabItem tipologiaAmministrativaFunzionaleSubTab = new TabItem();
 		tipologiaAmministrativaFunzionaleSubTab.setScrollMode(Scroll.AUTOY);
@@ -293,6 +309,7 @@ public class ModificaBibliotecaView extends View {
 		subTabBiblioteca.add(datiAnagraficiSistemiBiblioSubTab);
 		subTabBiblioteca.add(sistemiBiblitoecheSubTab);
 		subTabBiblioteca.add(sedeInfoSupplemSubTab);
+		subTabBiblioteca.add(fotoSedeSubTab);
 		subTabBiblioteca.add(tipologiaAmministrativaFunzionaleSubTab);		
 		subTabBiblioteca.add(subTabNoteCatalogatore);
 

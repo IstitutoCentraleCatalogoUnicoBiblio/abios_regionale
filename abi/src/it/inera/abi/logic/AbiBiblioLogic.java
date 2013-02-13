@@ -90,7 +90,7 @@ public interface AbiBiblioLogic {
 
 	public List<Biblioteca> getPuntiDiServizioDecentrati(int id_biblioteca);
 
-	public void addPuntoDiServizioDecentrato(int id_bibloteca_padre, int id_biblioteca_figlio);
+	public void addPuntoDiServizioDecentrato(int idBibliotecaPadre, String isilPrFiglia, String isilNrFiglia);
 
 	public List<Biblioteca> getPuntiDiServizioDecentratiPossibili(
 			String isil_provincia, String filter, int rows, int offset);
@@ -450,4 +450,20 @@ public interface AbiBiblioLogic {
 	public void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale);
 	
 	public void updateCensimento(int id_biblioteca, Integer anno);
+	
+	public void addPadreServizioDecentrato(int idBiblioFiglio, String isilProvinciaPadre, String isilNumeroPadre);
+	
+	public List<String> getListaIsilProvincia(String query);
+	
+	public void removePadreServizioDecentrato(int idBiblioFiglio);
+	
+	public List<Photo> getPhotos(int id_biblioteca);
+	
+	public void addPhoto(int id_biblioteca, String caption, String uri);
+	
+	public void updatePhotoCaption(int idPhoto, String caption);
+	
+	public void removePhoto(int id_biblioteca, int id_photo);
+	
+	public void updatePhotoOrder(List<Integer> idPhotos);
 } 

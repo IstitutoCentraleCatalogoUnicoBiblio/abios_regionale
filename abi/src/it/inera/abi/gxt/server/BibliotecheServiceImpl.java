@@ -17,6 +17,7 @@ import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiGeneraliModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiSpecialiModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimonioLibrarioModel;
+import it.inera.abi.gxt.client.mvc.model.PhotoModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoInterbibliotecarioRuoloModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoLocaleModel;
 import it.inera.abi.gxt.client.mvc.model.RegolamentoModel;
@@ -58,6 +59,7 @@ import it.inera.abi.persistence.PartecipaCataloghiGenerali;
 import it.inera.abi.persistence.PartecipaCataloghiSpecialiMateriale;
 import it.inera.abi.persistence.Patrimonio;
 import it.inera.abi.persistence.PatrimonioSpecializzazione;
+import it.inera.abi.persistence.Photo;
 import it.inera.abi.persistence.PrestitoInterbibliotecario;
 import it.inera.abi.persistence.PrestitoInterbibliotecarioModo;
 import it.inera.abi.persistence.PrestitoLocale;
@@ -87,6 +89,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -542,9 +545,8 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void addPuntoDiServizioDecentrato(int id_bibloteca_padre, int id_biblioteca_figlio) {
-		
-		abiBiblioLogic.addPuntoDiServizioDecentrato(id_bibloteca_padre,	id_biblioteca_figlio);
+	public void addPuntoDiServizioDecentrato(int idBibliotecaPadre, String isilPrFiglia, String isilNrFiglia) {
+		abiBiblioLogic.addPuntoDiServizioDecentrato(idBibliotecaPadre, isilPrFiglia, isilNrFiglia);
 
 	}
 
@@ -558,26 +560,21 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		int start = (Integer) m.get("offset");
 		String isil_provincia = (String) m.get("isil_provincia");
 
-		int countAll = abiBiblioLogic.countAllByIsilProvinciaAndFiltered(
-				isil_provincia, query);
-		List<Biblioteca> puntiDecentratDB = abiBiblioLogic
-		.getPuntiDiServizioDecentratiPossibili(isil_provincia, query,
-				limit, start);
+		int countAll = abiBiblioLogic.countAllByIsilProvinciaAndFiltered(isil_provincia, query);
+		List<Biblioteca> puntiDecentratDB = abiBiblioLogic.getPuntiDiServizioDecentratiPossibili(isil_provincia, query, limit, start);
 		List<BiblioModel> sublist = new ArrayList<BiblioModel>();
 
 		Iterator<Biblioteca> itb = puntiDecentratDB.iterator();
 		while (itb.hasNext()) {
 			Biblioteca biblioteca = (Biblioteca) itb.next();
 			BiblioModel biblioModel = new BiblioModel();
-			biblioModel
-			.setDenominazione(biblioteca.getDenominazioneUfficiale());
+			
 			biblioModel.setIdBiblio(biblioteca.getIdBiblioteca());
+			
 			ComuniModel tmpComune = new ComuniModel();
-			tmpComune.setDenominazione(biblioteca.getComune()
-					.getDenominazione());
+			tmpComune.setDenominazione(biblioteca.getComune().getDenominazione());
 			tmpComune.setIdComune(biblioteca.getComune().getIdComune());
-			tmpComune.setIdProvincia(biblioteca.getComune().getProvincia()
-					.getIdProvincia());
+			tmpComune.setIdProvincia(biblioteca.getComune().getProvincia().getIdProvincia());
 			biblioModel.setComune(tmpComune);
 
 			biblioModel.setComuneDenominazione(tmpComune);
@@ -585,9 +582,10 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			biblioModel.setIsilStato(biblioteca.getIsilStato());
 			biblioModel.setIsilProvincia(biblioteca.getIsilProvincia());
 
-			biblioModel.setIsilNumero(
-					/* Aggiungo gli zeri ad Isil Numero fino a 4 cifre */
-					Utility.zeroFill("" + biblioteca.getIsilNumero(), 4));
+			/* Aggiungo gli zeri ad Isil Numero fino a 4 cifre */
+			biblioModel.setIsilNumero(Utility.zeroFill("" + biblioteca.getIsilNumero(), 4));
+			
+			biblioModel.setDenominazione(biblioteca.getDenominazioneUfficiale() + " (IT-" + biblioModel.getIsilProvincia() + biblioModel.getIsilNumero() + ")");
 
 			sublist.add(biblioModel);
 		}
@@ -1032,6 +1030,43 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		/* Fonte: descrizione e url */
 		biblioModel.setFonteDescrizione(biblioteca.getFonteDescrizione());
 		biblioModel.setFonteUrl(biblioteca.getFonteUrl());
+		
+		/* Biblioteca padre */
+		if (biblioteca.getBibliotecaPadre() != null) {
+			BiblioModel bibliotecaPadreModel = new BiblioModel();
+			Biblioteca bibliotecaPadre = biblioteca.getBibliotecaPadre();
+			
+			bibliotecaPadreModel.setIdBiblio(bibliotecaPadre.getIdBiblioteca());
+			
+			ComuniModel tmpComunePadre = new ComuniModel();
+			tmpComunePadre.setDenominazione(bibliotecaPadre.getComune().getDenominazione());
+			tmpComunePadre.setIdComune(bibliotecaPadre.getComune().getIdComune());
+			tmpComunePadre.setIdProvincia(bibliotecaPadre.getComune().getProvincia().getIdProvincia());
+			bibliotecaPadreModel.setComune(tmpComunePadre);
+
+			bibliotecaPadreModel.setComuneDenominazione(tmpComunePadre);
+
+			bibliotecaPadreModel.setIsilStato(bibliotecaPadre.getIsilStato());
+			bibliotecaPadreModel.setIsilProvincia(bibliotecaPadre.getIsilProvincia());
+
+			bibliotecaPadreModel.setIsilNumero(Utility.zeroFill("" + bibliotecaPadre.getIsilNumero(), 4));
+
+			
+			bibliotecaPadreModel.setDenominazione(bibliotecaPadre.getDenominazioneUfficiale() + " (IT-" + bibliotecaPadreModel.getIsilProvincia() + bibliotecaPadreModel.getIsilNumero() + ")");
+			
+			biblioModel.setBibliotecaPadre(bibliotecaPadreModel);
+			
+		} else {
+			biblioModel.setBibliotecaPadre(null);
+		}
+		
+		/* Biblioteche figlie */
+		if (biblioteca.getBibliotecasFigli() != null && biblioteca.getBibliotecasFigli().size() > 0) {
+			biblioModel.setBibliotecaHasFigli(Boolean.TRUE);
+			
+		} else {
+			biblioModel.setBibliotecaHasFigli(Boolean.FALSE);
+		}
 		
 		//STATO CATALOGAZIONE BIBLIOTECA
 		List<StatoCatalogazione> catalogaziones = biblioteca.getStatoCatalogaziones();
@@ -2900,6 +2935,136 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	@Override
 	public void updateCensimento(int id_biblioteca, Integer anno) {
 		abiBiblioLogic.updateCensimento(id_biblioteca, anno);
+		
+	}
+	
+	@Override
+	public PagingLoadResult<BiblioModel> getPadriPossibiliServizioDecentrato(ModelData loadConfig) {
+		ModelData m = (ModelData) loadConfig;
+
+		String query = (String) m.get("query");
+		int limit = (Integer) m.get("limit");
+		int start = (Integer) m.get("offset");
+		String isil_provincia = (String) m.get("isil_provincia");
+
+		int countAll = abiBiblioLogic.countAllByIsilProvinciaAndFiltered(isil_provincia, query);
+		List<Biblioteca> puntiDecentratDB = abiBiblioLogic.getPuntiDiServizioDecentratiPossibili(isil_provincia, query, limit, start);
+		List<BiblioModel> sublist = new ArrayList<BiblioModel>();
+
+		Iterator<Biblioteca> itb = puntiDecentratDB.iterator();
+		while (itb.hasNext()) {
+			Biblioteca biblioteca = (Biblioteca) itb.next();
+			BiblioModel biblioModel = new BiblioModel();
+			
+			biblioModel.setIdBiblio(biblioteca.getIdBiblioteca());
+			ComuniModel tmpComune = new ComuniModel();
+			tmpComune.setDenominazione(biblioteca.getComune().getDenominazione());
+			tmpComune.setIdComune(biblioteca.getComune().getIdComune());
+			tmpComune.setIdProvincia(biblioteca.getComune().getProvincia().getIdProvincia());
+			biblioModel.setComune(tmpComune);
+
+			biblioModel.setComuneDenominazione(tmpComune);
+
+			biblioModel.setIsilStato(biblioteca.getIsilStato());
+			biblioModel.setIsilProvincia(biblioteca.getIsilProvincia());
+
+			biblioModel.setIsilNumero(Utility.zeroFill("" + biblioteca.getIsilNumero(), 4));
+
+			
+			biblioModel.setDenominazione(biblioteca.getDenominazioneUfficiale() + " (IT-" + biblioModel.getIsilProvincia() + biblioModel.getIsilNumero() + ")");
+			
+			sublist.add(biblioModel);
+		}
+		return new BasePagingLoadResult<BiblioModel>(sublist, start, countAll);
+	}
+	
+	@Override
+	public void addPadreServizioDecentrato(int idBiblioFiglio, String isilProvinciaPadre, String isilNumeroPadre) {
+		abiBiblioLogic.addPadreServizioDecentrato(idBiblioFiglio, isilProvinciaPadre, isilNumeroPadre);
+	}
+	
+	@Override
+	public List<VoceUnicaModel> getListaIsilProvincia(ModelData loadConfig) {
+		ModelData m = (ModelData) loadConfig;
+
+		String query = (String) m.get("query");
+		List<VoceUnicaModel> listaIsilProvincia = new ArrayList<VoceUnicaModel>();
+		
+		List<String> isils = (List<String>) abiBiblioLogic.getListaIsilProvincia(query);
+		
+		for (String entryIsil : isils) {
+			VoceUnicaModel voce = new VoceUnicaModel(entryIsil);
+			listaIsilProvincia.add(voce);
+		}
+		
+		return listaIsilProvincia;
+		
+	}
+	
+	@Override
+	public void removePadreServizioDecentrato(int idBiblioFiglio) {
+		abiBiblioLogic.removePadreServizioDecentrato(idBiblioFiglio);
+	}
+	
+	
+	@Override
+	public List<PhotoModel> getPhotos(int id_biblioteca) {
+		
+		List<PhotoModel> photoList = new ArrayList<PhotoModel>();
+		List<Photo> photos = (List<Photo>) abiBiblioLogic.getPhotos(id_biblioteca);
+		
+		for (Photo photoEntry : photos) {
+			PhotoModel photoModel = new PhotoModel();
+			photoModel.setIdBiblioteca(photoEntry.getBiblioteca().getIdBiblioteca());
+			photoModel.setIdPhoto(photoEntry.getIdPhoto());
+			photoModel.setCaption(photoEntry.getCaption());
+			if (StringUtils.contains(photoEntry.getUri(), "http://")) {
+				/* Foto remota */
+				photoModel.setIsRemote(Boolean.TRUE);
+				photoModel.setUri(photoEntry.getUri());
+				
+				
+			} else {
+				/* Foto locale */
+				photoModel.setIsRemote(Boolean.FALSE);
+				photoModel.setUri("photo/IT/" + photoEntry.getBiblioteca().getIsilProvincia() + "/" + 
+						Utility.zeroFill(String.valueOf(photoEntry.getBiblioteca().getIsilNumero().intValue()), 4) + "/" +						
+						photoEntry.getUri());
+			}
+			
+			photoList.add(photoModel);
+		}
+		return photoList;
+	}
+	
+	@Override
+	public void addPhoto(int id_biblioteca, String caption, String uri) {
+		
+		abiBiblioLogic.addPhoto(id_biblioteca, caption, uri);
+	}
+	
+	@Override
+	public void updatePhotoCaption(int id_photo, String caption) {
+
+		abiBiblioLogic.updatePhotoCaption(id_photo, caption);
+	}
+	
+	@Override
+	public void removePhoto(int id_biblioteca, int id_photo) {
+		abiBiblioLogic.removePhoto(id_biblioteca, id_photo);
+	}
+	
+	@Override
+	public void updatePhotoOrder(List<PhotoModel> photo) {
+		if (photo != null && photo.size() > 0) {
+			List<Integer> idPhotos = new ArrayList<Integer>();
+			
+			for (PhotoModel photoEntry : photo) {
+				idPhotos.add(photoEntry.getIdPhoto());
+			}
+			
+			abiBiblioLogic.updatePhotoOrder(idPhotos);
+		}
 		
 	}
 }

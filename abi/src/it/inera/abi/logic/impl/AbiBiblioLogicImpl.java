@@ -243,6 +243,13 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 			StatoCatalogazione stato = (StatoCatalogazione) itStati.next();
 		}
 
+		List<Biblioteca> figli = biblioteca.getBibliotecasFigli();
+		Iterator<Biblioteca> itFigli = figli.iterator();
+		while (itFigli.hasNext()) {
+			//Iterazione anti-lazy
+			Biblioteca figlia = (Biblioteca) itFigli.next();
+		}
+
 		return biblioteca;
 	}
 
@@ -398,11 +405,14 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 
 	@Override
-	public void addPuntoDiServizioDecentrato(int id_bibloteca_padre,int id_biblioteca_figlio) {
+	public void addPuntoDiServizioDecentrato(int idBibliotecaPadre, String isilPrFiglia, String isilNrFiglia) {
+		String isilFiglia = isilPrFiglia.concat(Utility.zeroFill(isilNrFiglia, 4));
+		String[] bibs = new String[]{isilFiglia};
+		Biblioteca[] bibFiglia = biblioDao.getBibliotecheByCodABI6CharsCode(bibs, 0, 1);
+		
+		biblioDao.addPuntoDiServizioDecentrato(idBibliotecaPadre, bibFiglia[0].getIdBiblioteca());
 
-		biblioDao.addPuntoDiServizioDecentrato(id_bibloteca_padre, id_biblioteca_figlio);
-
-		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica punto di servizio decentrato: id_record="+id_biblioteca_figlio+" - id_biblioteca="+id_bibloteca_padre);
+		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica punto di servizio decentrato: id_record="+idBibliotecaPadre+" - id_biblioteca="+bibFiglia[0].getIdBiblioteca());
 	}
 
 	@Override
@@ -2006,5 +2016,64 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 			biblioteca.setCatalogazioneDataCensimento(null);
 		}
 		biblioDao.updateBiblioteca(biblioteca);
+	}
+	
+	@Override
+	public void addPadreServizioDecentrato(int idBiblioFiglio, String isilProvinciaPadre, String isilNumeroPadre) {
+		String isilPadre = isilProvinciaPadre.concat(Utility.zeroFill(isilNumeroPadre, 4));
+		String[] bibs = new String[]{isilPadre}; 
+		Biblioteca[] bibPadre = biblioDao.getBibliotecheByCodABI6CharsCode(bibs, 0, 1);
+		
+		if (bibPadre != null && bibPadre.length == 1) {
+			Biblioteca figlio = biblioDao.getBibliotecaById(idBiblioFiglio);
+			figlio.setBibliotecaPadre(bibPadre[0]);
+			
+			biblioDao.updateBiblioteca(figlio);
+		}
+	}
+	
+	@Override
+	public List<String> getListaIsilProvincia(String query) {
+		return biblioDao.getListaIsilProvincia(query);
+	}
+	
+	@Override
+	public void removePadreServizioDecentrato(int idBiblioFiglio) {
+		Biblioteca bib = biblioDao.getBibliotecaById(idBiblioFiglio);
+		bib.setBibliotecaPadre(null);
+		
+		biblioDao.updateBiblioteca(bib);
+	}
+	
+	@Override
+	public List<Photo> getPhotos(int id_biblioteca) {
+		return biblioDao.getPhotos(id_biblioteca);
+		
+	}
+	
+	@Override
+	@Transactional
+	public void addPhoto(int id_biblioteca, String caption, String uri) {
+		biblioDao.addPhoto(id_biblioteca, caption, uri);
+
+		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio nuova foto: idBiblioteca="+id_biblioteca+", caption:"+caption);
+	}
+	
+	@Override
+	public void updatePhotoCaption(int idPhoto, String caption) {
+		biblioDao.updatePhotoCaption(idPhoto, caption);
+		
+	}
+	
+	@Override
+	public void removePhoto(int id_biblioteca, int id_photo) {
+		biblioDao.removePhoto(id_biblioteca, id_photo);
+
+		userActionLog.logActionCatalogazioneBiblioDefaultUser("Rimozione photo: id_photo="+id_photo);
+	}
+	
+	@Override
+	public void updatePhotoOrder(List<Integer> idPhotos) {
+		biblioDao.updatePhotoOrder(idPhotos);
 	}
 }

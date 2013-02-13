@@ -569,6 +569,27 @@
 						<!-- <xs:element minOccurs="0" name="tipoDataCostruzione" type="annoSecoloType" 
 							/> <xs:element minOccurs="0" name="dataCostruzione" type="xs:string" /> -->
 						<xs:element minOccurs="0" name="data-costruzione" type="annoSecoloType" />
+						<xs:element minOccurs="0" name="immagini">
+							<xs:annotation>
+								<xs:documentation>
+									E' stato introdotto l'elemento ripetibile
+									'immagini' come contenitore delle 
+									eventuali immagini inserite per la biblioteca.
+							</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element minOccurs="0" name="immagine" maxOccurs="unbounded">
+									<xs:complexType>
+											<xs:sequence>
+												<xs:element name="url" minOccurs="1" type="xs:string" />
+												<xs:element name="didascalia" minOccurs="1" type="xs:string" />
+											</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>

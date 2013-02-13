@@ -31,6 +31,7 @@
 			<property name="emailCheckMsg" value="${formatodiscambio.email.check.msg}" />
 			<property name="emailImportSubject" value="${formatodiscambio.email.import.subject}" />
 			<property name="emailImportMsg" value="${formatodiscambio.email.import.msg}" />
+			<property name="basePhotoUrl" value="${abi.photo.url}" />
 		</bean>
 		
 		<bean id="exportLogic" class="it.inera.abi.logic.formatodiscambio.ExportLogicImpl">
@@ -66,6 +67,7 @@
 			<property name="emailExportAttachMsg" value="${formatodiscambio.email.attach.msg}" />
 			<property name="emailExportAttachFiledescription" value="${formatodiscambio.email.attach.filedescription}" />
 			<property name="emailExportAttachFilename" value="${formatodiscambio.email.attach.filename}" />
+			<property name="basePhotoUrl" value="${abi.photo.url}" />
 		</bean>
 		
 		<!-- 
@@ -87,6 +89,7 @@
 			<property name="emailImportMsg" value="${formatodiscambio.email.importdifferito.msg}" />
 			<property name="emailBounceAddress" value="${formatodiscambio.email.bounce.address}" />
 			<property name="importCheckedDir" value="${formatodiscambio.import.checked.dir}" />
+			<property name="basePhotoUrl" value="${abi.photo.url}" />
 		</bean>
 		
 		<bean id="exportDifferitoJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

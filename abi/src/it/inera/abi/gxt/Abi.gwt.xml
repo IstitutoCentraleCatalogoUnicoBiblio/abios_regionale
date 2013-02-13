@@ -1,6 +1,7 @@
 <module rename-to='abi'>
   <inherits name='com.extjs.gxt.ui.GXT'/>
   <servlet path="/uploadservlet" class="it.inera.abi.logic.formatodiscambio.imports.UploaderServlet"/>
+  <servlet path="/photouploadservlet" class="it.inera.abi.logic.photo.PhotoUploaderServlet" />
   <inherits name="com.google.gwt.i18n.I18N" />
   <extend-property name="locale" values="it" /> 
   <set-property name="locale" value="it" />

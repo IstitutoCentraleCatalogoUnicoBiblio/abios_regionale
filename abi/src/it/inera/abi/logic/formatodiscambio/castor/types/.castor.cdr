@@ -1,4 +1,4 @@
-#Fri Feb 01 10:26:01 CET 2013
+#Mon Feb 11 14:16:40 CET 2013
 it.inera.abi.logic.formatodiscambio.castor.types.TelefonicoTipoType=it.inera.abi.logic.formatodiscambio.castor.types.descriptors.TelefonicoTipoTypeDescriptor
 it.inera.abi.logic.formatodiscambio.castor.types.FondoAnticoTypeVolumiType=it.inera.abi.logic.formatodiscambio.castor.types.descriptors.FondoAnticoTypeVolumiTypeDescriptor
 it.inera.abi.logic.formatodiscambio.castor.types.ModoInternetType=it.inera.abi.logic.formatodiscambio.castor.types.descriptors.ModoInternetTypeDescriptor
@@ -6,6 +6,6 @@ it.inera.abi.logic.formatodiscambio.castor.types.RuoloType=it.inera.abi.logic.fo
 it.inera.abi.logic.formatodiscambio.castor.types.CatalogoInventarioType=it.inera.abi.logic.formatodiscambio.castor.types.descriptors.CatalogoInventarioTypeDescriptor
 it.inera.abi.logic.formatodiscambio.castor.types.AltroTipoType=it.inera.abi.logic.formatodiscambio.castor.types.descriptors.AltroTipoTypeDescriptor
 it.inera.abi.logic.formatodiscambio.castor.types.SiNoType=it.inera.abi.logic.formatodiscambio.castor.types.descriptors.SiNoTypeDescriptor
-it.inera.abi.logic.formatodiscambio.castor.types.OrarioGiornoType=it.inera.abi.logic.formatodiscambio.castor.types.descriptors.OrarioGiornoTypeDescriptor
 it.inera.abi.logic.formatodiscambio.castor.types.TipoDocType=it.inera.abi.logic.formatodiscambio.castor.types.descriptors.TipoDocTypeDescriptor
+it.inera.abi.logic.formatodiscambio.castor.types.OrarioGiornoType=it.inera.abi.logic.formatodiscambio.castor.types.descriptors.OrarioGiornoTypeDescriptor
 it.inera.abi.logic.formatodiscambio.castor.types.AnnoSecoloTypeTipoType=it.inera.abi.logic.formatodiscambio.castor.types.descriptors.AnnoSecoloTypeTipoTypeDescriptor

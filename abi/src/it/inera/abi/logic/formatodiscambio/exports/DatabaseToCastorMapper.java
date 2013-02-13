@@ -40,6 +40,8 @@ import it.inera.abi.logic.formatodiscambio.castor.FondiAntichi;
 import it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale;
 import it.inera.abi.logic.formatodiscambio.castor.Fonte;
 import it.inera.abi.logic.formatodiscambio.castor.Forme;
+import it.inera.abi.logic.formatodiscambio.castor.Immagine;
+import it.inera.abi.logic.formatodiscambio.castor.Immagini;
 import it.inera.abi.logic.formatodiscambio.castor.Indirizzo;
 import it.inera.abi.logic.formatodiscambio.castor.InformazioniBibliografiche;
 import it.inera.abi.logic.formatodiscambio.castor.Interbibliotecario;
@@ -109,6 +111,7 @@ import it.inera.abi.persistence.PartecipaCataloghiGenerali;
 import it.inera.abi.persistence.PartecipaCataloghiSpecialiMateriale;
 import it.inera.abi.persistence.Patrimonio;
 import it.inera.abi.persistence.PatrimonioSpecializzazione;
+import it.inera.abi.persistence.Photo;
 import it.inera.abi.persistence.PrestitoInterbibliotecario;
 import it.inera.abi.persistence.PrestitoInterbibliotecarioModo;
 import it.inera.abi.persistence.PrestitoLocale;
@@ -123,6 +126,7 @@ import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
 import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -144,14 +148,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class DatabaseToCastorMapper {
 
 	private static Log log = LogFactory.getLog(DatabaseToCastorMapper.class);
-
+	
 	@Transactional
-	public static void doDatabaseToCastorMapper (Biblioteca bibliotecaDb, it.inera.abi.logic.formatodiscambio.castor.Biblioteca bibliotecaCastor) {
+	public static void doDatabaseToCastorMapper (Biblioteca bibliotecaDb, it.inera.abi.logic.formatodiscambio.castor.Biblioteca bibliotecaCastor, String basePhotoUrl) {
 
 		log.info("Start transformation from Hibernate classes to Castor classes for export...");
 
 		log.info("Setting ANAGRAFICA classes");
-		Anagrafica anagrafica = DatabaseToCastorMapper.createAnagrafica(bibliotecaDb);
+		Anagrafica anagrafica = DatabaseToCastorMapper.createAnagrafica(bibliotecaDb, basePhotoUrl);
 		bibliotecaCastor.setAnagrafica(anagrafica);
 		log.info("ANAGRAFICA classes have been setted");
 
@@ -259,12 +263,12 @@ public class DatabaseToCastorMapper {
 		return amministrativa;
 	}
 
-	private static Anagrafica createAnagrafica(Biblioteca bibliotecaDb) {
+	private static Anagrafica createAnagrafica(Biblioteca bibliotecaDb, String basePhotoUrl) {
 		Anagrafica anagrafica = new Anagrafica();
 		DatabaseToCastorMapper.Anagrafica_setCodici(anagrafica, bibliotecaDb);
 		DatabaseToCastorMapper.Anagrafica_setContatti(anagrafica, bibliotecaDb);
 		DatabaseToCastorMapper.Anagrafica_setDataIstituzione(anagrafica, bibliotecaDb);
-		DatabaseToCastorMapper.Anagrafica_setEdificio(anagrafica, bibliotecaDb);
+		DatabaseToCastorMapper.Anagrafica_setEdificio(anagrafica, bibliotecaDb, basePhotoUrl);
 		DatabaseToCastorMapper.Anagrafica_setIndirizzo(anagrafica, bibliotecaDb);
 		DatabaseToCastorMapper.Anagrafica_setDenominazioni(anagrafica, bibliotecaDb);
 		DatabaseToCastorMapper.Anagrafica_setDate(anagrafica, bibliotecaDb);
@@ -493,8 +497,7 @@ public class DatabaseToCastorMapper {
 		}
 	}
 
-
-	private static void Anagrafica_setEdificio(Anagrafica anagrafica, Biblioteca bibliotecaDb) {
+	private static void Anagrafica_setEdificio(Anagrafica anagrafica, Biblioteca bibliotecaDb, String basePhotoUrl) {
 		boolean init = false;
 		/*
 		 * ANAGRAFICA: Edificio
@@ -551,7 +554,33 @@ public class DatabaseToCastorMapper {
 			edificio.setMonumentale(SiNoType.N);
 		}
 
-
+		/* Immagini */
+		if (bibliotecaDb.getPhotos() != null && bibliotecaDb.getPhotos().size() > 0) {
+			Immagini images = new Immagini();
+			
+			for (Photo phEntry : bibliotecaDb.getPhotos()) {
+				Immagine img = new Immagine();
+				if (phEntry.getUri().contains("http://")) {
+					img.setUrl(phEntry.getUri());
+					
+				} else {
+					String photoPath = basePhotoUrl + File.separator + 
+						bibliotecaDb.getIsilStato() + File.separator +
+						bibliotecaDb.getIsilProvincia() + File.separator + 
+						Utility.zeroFill(String.valueOf(bibliotecaDb.getIsilNumero().intValue()), 4) + 
+						File.separator + phEntry.getUri();
+					img.setUrl(photoPath);
+					
+				}
+				img.setDidascalia(phEntry.getCaption());
+				
+				images.addImmagine(img);
+			}
+			
+			init = true;
+			edificio.setImmagini(images);
+			log.debug("Settate immagini nella parte Edificio");
+		}
 		if (init) {
 			anagrafica.setEdificio(edificio);
 			log.debug("Settato edificio nella parte Anagrafica");

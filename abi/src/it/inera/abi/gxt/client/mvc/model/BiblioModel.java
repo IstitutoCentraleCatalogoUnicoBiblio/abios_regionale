@@ -905,4 +905,30 @@ public class BiblioModel extends BaseModel implements Serializable {
 		return get("fonteUrl");
 	}
 	
+	public BiblioModel getBibliotecaPadre() {
+		return get("bibliotecaPadre");
+	}
+	
+	public void setBibliotecaPadre(BiblioModel bibPadre) {
+		set("bibliotecaPadre", bibPadre);
+	}
+	
+	public Boolean getBibliotecaHasFigli() {
+		return get("bibliotecaHasFigli");
+	}
+	
+	public void setBibliotecaHasFigli(Boolean hasFigli) {
+		set("bibliotecaHasFigli", hasFigli);
+	}
+	
+	@Override
+	public String toString() {
+		return "BiblioModel [getIdBiblio()=" + getIdBiblio()
+				+ ", getDenominazione()=" + getDenominazione()
+				+ ", getComuneDenominazione()=" + getComuneDenominazione()
+				+ ", getIsilProvincia()=" + getIsilProvincia()
+				+ ", getIsilNumero()=" + getIsilNumero() 
+				+ ", getCodice()=" + getCodice() + "]";
+	}
+	
 }

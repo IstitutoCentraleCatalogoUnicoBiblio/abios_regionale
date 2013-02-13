@@ -5,7 +5,9 @@ import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.BiblioModel;
 import it.inera.abi.gxt.client.mvc.model.ComuniModel;
+import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.view.RowEditorCustom;
+import it.inera.abi.gxt.client.mvc.view.TextFieldCustom;
 import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
@@ -64,16 +66,17 @@ public class ListaPuntiDecentratiPanel extends ContentPanel {
 	private boolean modifica;
 	private int old_id_biblio;
 	private BaseListLoader<ListLoadResult<ComuniModel>> puntiServizioDecentratiLoader;
-	
+
 
 	private ToolBar toolBar = null;
 	private Button remove = null;
 	private Button add = null;
 	private Grid<BiblioModel> grid = null;
-	
+
 	private ComboBox<BiblioModel> denominazioneUfficiale;
-	private TextField<String> codiceIsilProvinciaField;
-	
+	private ComboBox<VoceUnicaModel> codiceIsilProvinciaField;
+	private TextFieldCustom<String> codiceIsilNumeroField;
+
 	public ListaPuntiDecentratiPanel() {
 
 		setBodyStyle("padding-bottom:10px");
@@ -88,32 +91,34 @@ public class ListaPuntiDecentratiPanel extends ContentPanel {
 
 	}
 
+	public Grid<BiblioModel> getGrid() {
+		return this.grid;
+	}
+
 	public void setGrid() {
 
-		final BibliotecheServiceAsync bibliotecheServiceAsync = Registry
-		.get(Abi.BIBLIOTECHE_SERVICE);
+		final BibliotecheServiceAsync bibliotecheServiceAsync = Registry.get(Abi.BIBLIOTECHE_SERVICE);
 		final RowEditorCustom<BiblioModel> re = new RowEditorCustom<BiblioModel>();
 		re.setErrorSummary(false);
 		re.disable();
-		
+
 		RowEditor<BiblioModel>.RowEditorMessages rowEditorMessages = re.getMessages();
-        rowEditorMessages.setCancelText("Annulla");
-        rowEditorMessages.setSaveText("Salva");
-        re.setMessages(rowEditorMessages);
-		
+		rowEditorMessages.setCancelText("Annulla");
+		rowEditorMessages.setSaveText("Salva");
+		re.setMessages(rowEditorMessages);
+
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
 		denominazioneUfficiale = new ComboBox<BiblioModel>();
-
 		denominazioneUfficiale.setDisplayField("denominazione");
 		denominazioneUfficiale.setFieldLabel("denominazione");
-		denominazioneUfficiale.setFireChangeEventOnSetValue(true);
 		denominazioneUfficiale.setEmptyText("Seleziona denominazione...");
+		denominazioneUfficiale.setFireChangeEventOnSetValue(true);
 		denominazioneUfficiale.setLazyRender(false);
 		denominazioneUfficiale.setTriggerAction(TriggerAction.ALL);
+		denominazioneUfficiale.setForceSelection(false);
+		denominazioneUfficiale.setEditable(true);
 		denominazioneUfficiale.setAllowBlank(false);
-		denominazioneUfficiale.setForceSelection(true);
-		denominazioneUfficiale.setEditable(false);
 		denominazioneUfficiale.setTypeAhead(false);
 		denominazioneUfficiale.setMinChars(1);
 		denominazioneUfficiale.setPageSize(10);
@@ -161,11 +166,12 @@ public class ListaPuntiDecentratiPanel extends ContentPanel {
 		RpcProxy<PagingLoadResult<BiblioModel>> puntiDecPossibiliProxy = new RpcProxy<PagingLoadResult<BiblioModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<PagingLoadResult<BiblioModel>> callback) {
-
-				bibliotecheServiceAsync.getPuntiDiServizioDecentratiPossibili(
-						/* isil_provincia, */(ModelData) loadConfig, callback);
+			protected void load(Object loadConfig, AsyncCallback<PagingLoadResult<BiblioModel>> callback) {
+				((ModelData) loadConfig).remove("isil_provincia");
+				if (codiceIsilProvinciaField != null && codiceIsilProvinciaField.getValue() != null) {
+					((ModelData) loadConfig).set("isil_provincia", codiceIsilProvinciaField.getValue().getEntry());
+				}
+				bibliotecheServiceAsync.getPuntiDiServizioDecentratiPossibili((ModelData) loadConfig, callback);
 			}
 
 		};
@@ -186,124 +192,108 @@ public class ListaPuntiDecentratiPanel extends ContentPanel {
 		columnCodiceIsilProvincia.setHeader("Isil Provincia");
 		columnCodiceIsilProvincia.setWidth(80);
 
-		codiceIsilProvinciaField = new TextField<String>();
-		codiceIsilProvinciaField.setMinLength(2);
+		codiceIsilProvinciaField = new ComboBox<VoceUnicaModel>();
+		codiceIsilProvinciaField.setFieldLabel("Isil Provincia");
+		codiceIsilProvinciaField.setDisplayField("entry");
+		codiceIsilProvinciaField.setUseQueryCache(false);
+		codiceIsilProvinciaField.setEmptyText("Isil provincia...");
+		codiceIsilProvinciaField.setLazyRender(false);
+		codiceIsilProvinciaField.setTriggerAction(TriggerAction.ALL);
+		codiceIsilProvinciaField.setForceSelection(true);
+		codiceIsilProvinciaField.setTypeAhead(false);
+		codiceIsilProvinciaField.setEditable(true);
+
+		codiceIsilProvinciaField.setMinChars(1);
 		codiceIsilProvinciaField.setMaxLength(2);
+
+		RpcProxy<List<VoceUnicaModel>> isilProvinciaProxy = new RpcProxy<List<VoceUnicaModel>>() {
+
+			@Override
+			protected void load(Object loadConfig, AsyncCallback<List<VoceUnicaModel>> callback) {
+				bibliotecheServiceAsync.getListaIsilProvincia((ModelData) loadConfig, callback);
+			}
+
+		};
+
+		ModelReader isilProvinciaReader = new ModelReader();
+
+		final BaseListLoader<ListLoadResult<ModelData>> isilProvinciaLoader = new BaseListLoader<ListLoadResult<ModelData>>(isilProvinciaProxy, isilProvinciaReader);
+
+		final ListStore<VoceUnicaModel> isilProvinciaStore = new ListStore<VoceUnicaModel>(isilProvinciaLoader);
+
+		codiceIsilProvinciaField.setStore(isilProvinciaStore);
+
+		isilProvinciaLoader.load();
+
 		columnCodiceIsilProvincia.setEditor(new CellEditor(codiceIsilProvinciaField));
-		codiceIsilProvinciaField.setAllowBlank(false);
-		codiceIsilProvinciaField.setEmptyText("Codice...");
 		configs.add(columnCodiceIsilProvincia);
 
-		codiceIsilProvinciaField.addListener(Events.KeyPress, new Listener<FieldEvent>() {
+		codiceIsilProvinciaField.addSelectionChangedListener(new SelectionChangedListener<VoceUnicaModel>() {
 			@Override
-			public void handleEvent(FieldEvent be) {
-				if ((codiceIsilProvinciaField.getValue()!=null) ){
-					denominazioneUfficiale.enable();
+			public void selectionChanged(SelectionChangedEvent<VoceUnicaModel> se) {
+				if (se.getSelectedItem() != null) {
 					denominazioneUfficiale.setAllowBlank(false);
-				}
-			}
-		});
-		
-		codiceIsilProvinciaField.addListener(Events.OnBlur, new Listener<FieldEvent>() {
-			@Override
-			public void handleEvent(FieldEvent be) {
-				if ((codiceIsilProvinciaField.getValue()!=null) && (codiceIsilProvinciaField.getValue().length()== 2) && (codiceIsilProvinciaField.getValue().equalsIgnoreCase("  ")==false)) {
 					denominazioneUfficiale.enable();
-					denominazioneUfficiale.setAllowBlank(false);
+					denominazioneUfficiale.clear();
+					codiceIsilNumeroField.enable();
+					codiceIsilNumeroField.clear();
 					puntiDecPossibiliLoader.load();
+
 				}
+			}
+		});
+
+		denominazioneUfficiale.addSelectionChangedListener(new SelectionChangedListener<BiblioModel>() {
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BiblioModel> se) {
+				if (se.getSelectedItem() != null) {
+					codiceIsilNumeroField.setValue(se.getSelectedItem().getIsilNumero());
+					codiceIsilNumeroField.disable();
+				}
+
 			}
 		});
 		
-		denominazioneUfficiale.addListener(Events.OnBlur, new Listener<FieldEvent>() {
-			@Override
-			public void handleEvent(FieldEvent be) {
-				if (denominazioneUfficiale.getValue() ==null) {
-					denominazioneUfficiale.enable();
-					denominazioneUfficiale.setAllowBlank(false);
-				}
-			}
-		});
-
-
-		puntiDecPossibiliLoader.addListener(Loader.BeforeLoad, new Listener<LoadEvent>() {
-
-			@Override
-			public void handleEvent(LoadEvent be) {
-				String isil_provincia = "";
-				isil_provincia = codiceIsilProvinciaField.getValue();
-				be.<ModelData> getConfig().set("isil_provincia",isil_provincia);
-				be.<ModelData> getConfig();
-			}
-		});
-
-		
-		puntiDecPossibiliLoader.addListener(Loader.Load, new Listener<LoadEvent>() {
-
-			@Override
-			public void handleEvent(LoadEvent be) {
-				if (denominazioneUfficiale.getValue() ==null) {
-					denominazioneUfficiale.setAllowBlank(false);
-				}
-			}
-		});
 		
 		ColumnConfig columnCodiceIsilNumero = new ColumnConfig();
 		columnCodiceIsilNumero.setId("isil_numero");
 		columnCodiceIsilNumero.setHeader("Isil Numero");
 		columnCodiceIsilNumero.setWidth(80);
 
-		final TextField<String> codiceIsilNumeroField = new TextField<String>();
-		codiceIsilNumeroField.setEnabled(false);
-		codiceIsilNumeroField.setEmptyText("Codice...");
-		codiceIsilNumeroField.disable();
+		codiceIsilNumeroField = new TextFieldCustom<String>();
+		codiceIsilNumeroField.setMinLength(4);
+		codiceIsilNumeroField.setMaxLength(4);
+		codiceIsilNumeroField.setEmptyText("Isil numero...");
 		columnCodiceIsilNumero.setEditor(new CellEditor(codiceIsilNumeroField));
 		configs.add(columnCodiceIsilNumero);
 
-		/* SERVIZIO CARICAMENTO PUNTI DECENTRATI */
-		RpcProxy<List<BiblioModel>> puntiServizioDecentratiProxy = new RpcProxy<List<BiblioModel>>() {
-
+		codiceIsilNumeroField.addListener(Events.OnBlur, new Listener<FieldEvent>() {
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<List<BiblioModel>> callback) {
-				bibliotecheServiceAsync.getPuntiDiServizioDecentratiByIdBiblioteca(id_biblio,
-						callback);
+			public void handleEvent(FieldEvent be) {
+				if (codiceIsilNumeroField.getValue() != null && codiceIsilNumeroField.getValue().length() == 4) {
+					denominazioneUfficiale.setAllowBlank(true);
+					denominazioneUfficiale.disable();
+				}
 
 			}
 
+		});
+
+		/* SERVIZIO CARICAMENTO PUNTI DECENTRATI */
+		RpcProxy<List<BiblioModel>> puntiServizioDecentratiProxy = new RpcProxy<List<BiblioModel>>() {
+			@Override
+			protected void load(Object loadConfig, AsyncCallback<List<BiblioModel>> callback) {
+				bibliotecheServiceAsync.getPuntiDiServizioDecentratiByIdBiblioteca(id_biblio, callback);
+			}
 		};
 
 		ModelReader puntiServizioDecentratiReader = new ModelReader();
 
-		puntiServizioDecentratiLoader = new BaseListLoader<ListLoadResult<ComuniModel>>(
-				puntiServizioDecentratiProxy, puntiServizioDecentratiReader);
+		puntiServizioDecentratiLoader = new BaseListLoader<ListLoadResult<ComuniModel>>(puntiServizioDecentratiProxy, puntiServizioDecentratiReader);
 
-		final ListStore<BiblioModel> puntiServizioDecentratiStore = new ListStore<BiblioModel>(
-				puntiServizioDecentratiLoader);
+		final ListStore<BiblioModel> puntiServizioDecentratiStore = new ListStore<BiblioModel>(puntiServizioDecentratiLoader);
 
 		puntiServizioDecentratiLoader.load();
-
-		/**
-		 * Alla selezione del BiblioModel nella combobox per la
-		 * denominazione del punto decentrato, viene associato il
-		 * codice isil numerico al relativo campo, e l'id della
-		 * biblioteca selezionata come punto di servizio decentrato
-		 * viene associato al BiblioModel rappresentante la riga
-		 * della grid in modifica/creazione
-		 */
-		denominazioneUfficiale.addSelectionChangedListener(new SelectionChangedListener<BiblioModel>() {
-
-			@Override
-			public void selectionChanged(SelectionChangedEvent<BiblioModel> se) {
-
-				if (se.getSelectedItem() != null) {
-					codiceIsilNumeroField.setValue(se.getSelectedItem().getIsilNumero());
-					puntiServizioDecentratiStore.getAt(0).setIdBiblio(se.getSelectedItem().getIdBiblio());
-					codiceIsilNumeroField.disable();
-				}
-
-			}
-		});
 
 		/* END---SERVIZIO CARICAMENTO PUNTI DECENTRATI */
 		ColumnModel cm = new ColumnModel(configs);
@@ -358,36 +348,45 @@ public class ListaPuntiDecentratiPanel extends ContentPanel {
 					public void handleEvent(MessageBoxEvent ce) {
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
+							String isilPR = new String();
+							String isilNR = new String();
 
-							bibliotecheServiceAsync	.addPuntoDiServizioDecentrato(
-									id_biblio,
-									puntiServizioDecentratiStore.getAt(
-											0).getIdBiblio(),
-											new AsyncCallback<Void>() {
+							if (denominazioneUfficiale.getValue() != null) {
+								/* E' stata selezionata una biblioteca dal menu di scelta */
+								isilPR = ((BiblioModel) denominazioneUfficiale.getValue()).getIsilProvincia();
+								isilNR = ((BiblioModel) denominazioneUfficiale.getValue()).getIsilNumero();
 
-										@Override
-										public void onSuccess(
-												Void result) {
+							} else {
+								isilPR = codiceIsilProvinciaField.getValue().getEntry();
+								isilNR = codiceIsilNumeroField.getValue();
+							}
 
-											AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+							if ((isilPR != null && isilPR.length() > 0) && (isilNR != null && isilNR.length() > 0)) {
 
+								bibliotecheServiceAsync.addPuntoDiServizioDecentrato(id_biblio, isilPR, isilNR, new AsyncCallback<Void>() {
+
+									@Override
+									public void onSuccess(Void result) {
+										AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+
+										modifica = false;
+										puntiServizioDecentratiLoader.load();
+										denominazioneUfficiale.disable();
+
+									}
+
+									@Override
+									public void onFailure(Throwable caught) {
+										if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
+											AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 											modifica = false;
-											puntiServizioDecentratiLoader
-											.load();
 											denominazioneUfficiale.disable();
-
 										}
+									}
 
-										@Override
-										public void onFailure(Throwable caught) {
-											if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
-												AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-												modifica = false;
-												denominazioneUfficiale.disable();
-											}
-										}
+								});
+							}
 
-									});
 						} else {
 							if (modifica == false) {
 								re.disable();
@@ -411,7 +410,7 @@ public class ListaPuntiDecentratiPanel extends ContentPanel {
 		grid.setBorders(true);
 		grid.addPlugin(re);
 		grid.setStripeRows(true);
-		
+
 		toolBar = new ToolBar();
 		toolBar.setEnableOverflow(false);
 
@@ -441,15 +440,15 @@ public class ListaPuntiDecentratiPanel extends ContentPanel {
 				re.startEditing(puntiServizioDecentratiStore.indexOf(newPsd),false);
 				modifica = false;
 				remove.disable();
-				
+
 				denominazioneUfficiale.clearInvalid();
 				codiceIsilProvinciaField.clearInvalid();
-				
+
 				denominazioneUfficiale.reset();
 				codiceIsilProvinciaField.reset();
-				
+
 				denominazioneUfficiale.disable();
-				
+
 			}
 
 		});
@@ -574,11 +573,11 @@ public class ListaPuntiDecentratiPanel extends ContentPanel {
 		}
 	}
 
-	public BaseListLoader<ListLoadResult<ComuniModel>>  getLoader(){
+	public BaseListLoader<ListLoadResult<ComuniModel>> getLoader() {
 		UIWorkflow.gridEnableEvent(grid);
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, add);
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, remove);
-		
+
 		return this.puntiServizioDecentratiLoader;
 	}
 }

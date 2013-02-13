@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: EdificioDescriptor.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
+ * $Id: EdificioDescriptor.java,v 1.7.4.2 2013/02/13 15:05:00 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor.descriptors;
@@ -16,7 +16,7 @@ import it.inera.abi.logic.formatodiscambio.castor.Edificio;
 /**
  * Class EdificioDescriptor.
  * 
- * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
+ * @version $Revision: 1.7.4.2 $ $Date: 2013/02/13 15:05:00 $
  */
 public class EdificioDescriptor extends org.exolab.castor.xml.util.XMLClassDescriptorImpl {
 
@@ -226,6 +226,44 @@ public class EdificioDescriptor extends org.exolab.castor.xml.util.XMLClassDescr
         addSequenceElement(desc);
 
         //-- validation code for: _dataCostruzione
+        fieldValidator = new org.exolab.castor.xml.FieldValidator();
+        { //-- local scope
+        }
+        desc.setValidator(fieldValidator);
+        //-- _immagini
+        desc = new org.exolab.castor.xml.util.XMLFieldDescriptorImpl(it.inera.abi.logic.formatodiscambio.castor.Immagini.class, "_immagini", "immagini", org.exolab.castor.xml.NodeType.Element);
+        handler = new org.exolab.castor.xml.XMLFieldHandler() {
+            @Override
+            public java.lang.Object getValue( java.lang.Object object ) 
+                throws IllegalStateException
+            {
+                Edificio target = (Edificio) object;
+                return target.getImmagini();
+            }
+            @Override
+            public void setValue( java.lang.Object object, java.lang.Object value) 
+                throws IllegalStateException, IllegalArgumentException
+            {
+                try {
+                    Edificio target = (Edificio) object;
+                    target.setImmagini( (it.inera.abi.logic.formatodiscambio.castor.Immagini) value);
+                } catch (java.lang.Exception ex) {
+                    throw new IllegalStateException(ex.toString());
+                }
+            }
+            @Override
+            @SuppressWarnings("unused")
+            public java.lang.Object newInstance(java.lang.Object parent) {
+                return null;
+            }
+        };
+        desc.setSchemaType("it.inera.abi.logic.formatodiscambio.castor.Immagini");
+        desc.setHandler(handler);
+        desc.setMultivalued(false);
+        addFieldDescriptor(desc);
+        addSequenceElement(desc);
+
+        //-- validation code for: _immagini
         fieldValidator = new org.exolab.castor.xml.FieldValidator();
         { //-- local scope
         }

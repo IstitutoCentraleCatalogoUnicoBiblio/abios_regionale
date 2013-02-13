@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class CheckPasswordImpl implements CheckPassword{
+public class CheckPasswordImpl implements CheckPassword {
 
 	@Autowired private UtentiDao utentiDao;
 	

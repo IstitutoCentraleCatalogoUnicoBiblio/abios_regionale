@@ -95,8 +95,7 @@ public interface BiblioDao {
 
 	public List<Biblioteca> getPuntiDiServizioDecentrati(int id_biblioteca);
 
-	public void addPuntoDiServizioDecentrato(int id_bibloteca_padre,
-			int id_biblioteca_figlio);
+	public void addPuntoDiServizioDecentrato(int idBibliotecaPadre, int idBibliotecaFiglia);
 
 	public List<Biblioteca> getPuntiDiServizioDecentratiPossibili(String isil_provincia,
 			String filter, int rows, int offset);
@@ -381,4 +380,16 @@ public interface BiblioDao {
 	public String getPrimaOccorrenzaFonteValorizzata(String[] idBibs);
 	
 	public void inserisciPhoto(int id_biblioteca, Photo photo);
+	
+	public List<String> getListaIsilProvincia(String query);
+	
+	public List<Photo> getPhotos(int id_biblioteca);
+	
+	public void addPhoto(int id_biblioteca, String caption, String uri);
+	
+	public void updatePhotoCaption(int idPhoto, String caption);
+	
+	public void removePhoto(int id_biblioteca, int id_photo);
+	
+	public void updatePhotoOrder(List<Integer> idPhotos);
 }

@@ -206,8 +206,7 @@ public class ListaCataloghiGenericaPanel extends ContentPanel {
 					grid.addListener(Events.ColumnResize,
 							new Listener<GridEvent<PartecipaCataloghiGenericaModel>>() {
 
-						public void handleEvent(
-								GridEvent<PartecipaCataloghiGenericaModel> be) {
+						public void handleEvent(GridEvent<PartecipaCataloghiGenericaModel> be) {
 							for (int i = 0; i < be.getGrid().getStore().getCount(); i++) {
 								if (be.getGrid().getView().getWidget(i, be.getColIndex()) != null
 										&& be.getGrid().getView().getWidget(i,be.getColIndex()) instanceof BoxComponent) {
@@ -218,7 +217,7 @@ public class ListaCataloghiGenericaPanel extends ContentPanel {
 					});
 				}
 
-				final	Button aggiungiModificaButton = new Button((String) model.get(property),
+				final Button aggiungiModificaButton = new Button((String) model.get(property),
 						new SelectionListener<ButtonEvent>() {
 					@Override
 					public void componentSelected(ButtonEvent ce) {		

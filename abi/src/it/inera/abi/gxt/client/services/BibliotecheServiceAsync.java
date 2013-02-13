@@ -11,6 +11,7 @@ import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiGeneraliModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiSpecialiModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimonioLibrarioModel;
+import it.inera.abi.gxt.client.mvc.model.PhotoModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoInterbibliotecarioRuoloModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoLocaleModel;
 import it.inera.abi.gxt.client.mvc.model.ServiziRiproduzioniModel;
@@ -73,8 +74,7 @@ public interface BibliotecheServiceAsync {
 	void getPuntiDiServizioDecentratiByIdBiblioteca(int id_biblioteca,
 			AsyncCallback<List<BiblioModel>> callback);
 
-	void addPuntoDiServizioDecentrato(int id_bibloteca_padre,
-			int id_biblioteca_figlio, AsyncCallback<Void> callback);
+	void addPuntoDiServizioDecentrato(int idBibliotecaPadre, String isilPrFiglia, String isilNrFiglia, AsyncCallback<Void> callback);
 
 	void removePuntoDiServizioDecentrato(int id_bibloteca,
 			AsyncCallback<Void> callback);
@@ -398,5 +398,23 @@ public interface BibliotecheServiceAsync {
 	void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale, AsyncCallback<Void> callback);
 	
 	void updateCensimento(int id_biblioteca, Integer anno, AsyncCallback<Void> callback);
+	
+	void getPadriPossibiliServizioDecentrato(ModelData loadConfig, AsyncCallback<PagingLoadResult<BiblioModel>> callback);
+	
+	void addPadreServizioDecentrato(int idBiblioFiglio, String isilProvinciaPadre, String isilNumeroPadre, AsyncCallback<Void> callback);
+	
+	void getListaIsilProvincia(ModelData loadConfig, AsyncCallback<List<VoceUnicaModel>> callback);
+	
+	void removePadreServizioDecentrato(int idBiblioFiglio, AsyncCallback<Void> callback);
+	
+	void getPhotos(int id_biblioteca, AsyncCallback<List<PhotoModel>> callback);
+	
+	void addPhoto(int id_biblioteca, String caption, String uri, AsyncCallback<Void> callback);
+	
+	void updatePhotoCaption(int id_photo, String caption, AsyncCallback<Void> callback);
+	
+	void removePhoto(int id_biblioteca, int id_photo, AsyncCallback<Void> callback);
+	
+	void updatePhotoOrder(List<PhotoModel> photo, AsyncCallback<Void> callback);
 
 }

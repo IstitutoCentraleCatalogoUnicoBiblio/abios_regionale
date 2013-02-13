@@ -3,10 +3,12 @@ package it.inera.abi.gxt.client.workflow;
 import it.inera.abi.gxt.client.auth.Roles;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.BiblioModel;
+import it.inera.abi.gxt.client.mvc.model.PhotoModel;
 import it.inera.abi.gxt.client.mvc.model.auth.UtentiAuthModel;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.Component;
+import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.Radio;
@@ -29,8 +31,8 @@ public class UIWorkflow {
 
 	/**
 	 * Controlla se la biblioteca è occupabile da questo utente
-	 * @param biblioModel
-	 * @return boolean
+	 * @param biblioModel Modello della biblioteca
+	 * @return Booleano che indica se è occupabile dall'utente loggato
 	 */
 	public static boolean checkIsOccupabile(BiblioModel biblioModel) {
 		UtentiAuthModel utentiAuthModel = UIAuth.getUtentiAuthModel();
@@ -63,8 +65,8 @@ public class UIWorkflow {
 	
 	/**
 	 * Controlla se la biblioteca è revisionabile
-	 * @param biblioModel
-	 * @return boolean
+	 * @param biblioModel Modello della biblioteca
+	 * @return Booleano che dice se è revisionabile
 	 */
 	public static boolean checkIsRevisionabile(BiblioModel biblioModel) {
 		// se è in revisione
@@ -136,6 +138,15 @@ public class UIWorkflow {
 			grid.disableEvents(false);
 		} else {
 			grid.disableEvents(true);
+		}
+	}
+	
+	public static void listViewEnableEvent(ListView<PhotoModel> listView) {
+		if (!isReadOnly()) {
+			listView.disableEvents(false);
+			
+		} else {
+			listView.disableEvents(true);
 		}
 	}
 	

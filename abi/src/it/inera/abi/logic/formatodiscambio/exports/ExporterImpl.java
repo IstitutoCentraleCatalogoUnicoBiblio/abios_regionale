@@ -75,6 +75,9 @@ public class ExporterImpl implements Exporter {
 	private String emailExportAttachFiledescription = null; //config.getString(Constants.EMAIL_EXPORT_ATTACH_FILEDESCRIPTION);
 	private String emailExportAttachFilename = null; //config.getString(Constants.EMAIL_EXPORT_ATTACH_FILENAME);
 	
+	/* Base photo url */
+	private String basePhotoUrl = null;
+	
 	@Override
 	@Transactional
 	public void doExport(String[] idBib, String email) {
@@ -137,13 +140,13 @@ public class ExporterImpl implements Exporter {
 					log.debug("START EXPORT BIBLIOTECA " + j);
 					log.info("Mapping biblioteca con id = " + bibliotecheDb[j].getIdBiblioteca());			
 					bibliotecaCastor = new it.inera.abi.logic.formatodiscambio.castor.Biblioteca();
-					DatabaseToCastorMapper.doDatabaseToCastorMapper(bibliotecheDb[j], bibliotecaCastor);
+					DatabaseToCastorMapper.doDatabaseToCastorMapper(bibliotecheDb[j], bibliotecaCastor, basePhotoUrl);
 					biblioteche.addBiblioteca(bibliotecaCastor);
 					log.debug("FINE EXPORT BIBLIOTECA " + j);
 				}
-				log.debug("*******************************************************************************************");
+				log.debug("********************************************************************************************");
 				log.debug("FINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINEFINE");
-				log.debug("*******************************************************************************************");
+				log.debug("********************************************************************************************");
 				
 				
 				//Data export
@@ -395,5 +398,8 @@ public class ExporterImpl implements Exporter {
 		this.emailExportAttachFilename = emailExportAttachFilename;
 	}
 	
+	public void setBasePhotoUrl(String basePhotoUrl) {
+		this.basePhotoUrl = basePhotoUrl;
+	}
 	
 }

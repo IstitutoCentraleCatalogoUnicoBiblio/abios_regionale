@@ -2,7 +2,7 @@
  * This class was automatically generated with 
  * <a href="http://www.castor.org">Castor 1.3.1</a>, using an XML
  * Schema.
- * $Id: Edificio.java,v 1.7 2012/11/22 09:50:20 m.bartolozzi Exp $
+ * $Id: Edificio.java,v 1.7.4.2 2013/02/13 15:05:01 m.bartolozzi Exp $
  */
 
 package it.inera.abi.logic.formatodiscambio.castor;
@@ -14,7 +14,7 @@ package it.inera.abi.logic.formatodiscambio.castor;
  *  renderne obbligatorio almeno uno.
  *  
  * 
- * @version $Revision: 1.7 $ $Date: 2012/11/22 09:50:20 $
+ * @version $Revision: 1.7.4.2 $ $Date: 2013/02/13 15:05:01 $
  */
 @SuppressWarnings("serial")
 public class Edificio implements java.io.Serializable {
@@ -43,6 +43,14 @@ public class Edificio implements java.io.Serializable {
      * Field _dataCostruzione.
      */
     private it.inera.abi.logic.formatodiscambio.castor.DataCostruzione _dataCostruzione;
+
+    /**
+     * E' stato introdotto l'elemento ripetibile
+     *  'immagini' come contenitore delle 
+     *  eventuali immagini inserite per la biblioteca.
+     *  
+     */
+    private it.inera.abi.logic.formatodiscambio.castor.Immagini _immagini;
 
 
       //----------------/
@@ -86,6 +94,21 @@ public class Edificio implements java.io.Serializable {
     public java.lang.String getDenominazione(
     ) {
         return this._denominazione;
+    }
+
+    /**
+     * Returns the value of field 'immagini'. The field 'immagini'
+     * has the following description: E' stato introdotto
+     * l'elemento ripetibile
+     *  'immagini' come contenitore delle 
+     *  eventuali immagini inserite per la biblioteca.
+     *  
+     * 
+     * @return the value of field 'Immagini'.
+     */
+    public it.inera.abi.logic.formatodiscambio.castor.Immagini getImmagini(
+    ) {
+        return this._immagini;
     }
 
     /**
@@ -174,6 +197,21 @@ public class Edificio implements java.io.Serializable {
     public void setDenominazione(
             final java.lang.String denominazione) {
         this._denominazione = denominazione;
+    }
+
+    /**
+     * Sets the value of field 'immagini'. The field 'immagini' has
+     * the following description: E' stato introdotto l'elemento
+     * ripetibile
+     *  'immagini' come contenitore delle 
+     *  eventuali immagini inserite per la biblioteca.
+     *  
+     * 
+     * @param immagini the value of field 'immagini'.
+     */
+    public void setImmagini(
+            final it.inera.abi.logic.formatodiscambio.castor.Immagini immagini) {
+        this._immagini = immagini;
     }
 
     /**

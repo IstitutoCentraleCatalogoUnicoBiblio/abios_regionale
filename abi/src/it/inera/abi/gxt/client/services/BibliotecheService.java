@@ -12,6 +12,7 @@ import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiCollettiviModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiGeneraliModel;
 import it.inera.abi.gxt.client.mvc.model.PartecipaCataloghiSpecialiModel;
 import it.inera.abi.gxt.client.mvc.model.PatrimonioLibrarioModel;
+import it.inera.abi.gxt.client.mvc.model.PhotoModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoInterbibliotecarioRuoloModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoLocaleModel;
 import it.inera.abi.gxt.client.mvc.model.ServiziRiproduzioniModel;
@@ -73,7 +74,7 @@ public interface BibliotecheService extends RemoteService {
 
 	public List<BiblioModel> getPuntiDiServizioDecentratiByIdBiblioteca(int id_biblioteca);
 
-	public void addPuntoDiServizioDecentrato(int id_bibloteca_padre, int id_biblioteca_figlio);
+	public void addPuntoDiServizioDecentrato(int idBibliotecaPadre, String isilPrFiglia, String isilNrFiglia);
 
 	public void removePuntoDiServizioDecentrato(int id_bibloteca);
 
@@ -346,5 +347,23 @@ public interface BibliotecheService extends RemoteService {
 	public void setAttivoDepositoLegale(int idbib, Boolean attivoDepositoLegale);
 	
 	public void updateCensimento(int id_biblioteca, Integer anno);
+	
+	public PagingLoadResult<BiblioModel> getPadriPossibiliServizioDecentrato(ModelData loadConfig);
+	
+	public void addPadreServizioDecentrato(int idBiblioFiglio, String isilProvinciaPadre, String isilNumeroPadre);
+	
+	public List<VoceUnicaModel> getListaIsilProvincia(ModelData loadConfig);
+	
+	public void removePadreServizioDecentrato(int idBiblioFiglio);
+	
+	public List<PhotoModel> getPhotos(int id_biblioteca);
+	
+	public void addPhoto(int id_biblioteca, String caption, String uri);
+	
+	public void updatePhotoCaption(int id_photo, String caption);
+	
+	public void removePhoto(int id_biblioteca, int id_photo);
+	
+	public void updatePhotoOrder(List<PhotoModel> photo);
 
 }

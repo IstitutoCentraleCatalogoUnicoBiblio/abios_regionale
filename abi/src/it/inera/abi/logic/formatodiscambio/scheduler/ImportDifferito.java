@@ -45,6 +45,7 @@ public class ImportDifferito {
 	private String emailImportMsg = null;
 	private String emailBounceAddress = null;
 	private String importCheckedDir = null;
+	private String basePhotoUrl = null;
 	
 	public void execute() throws Exception {
 		log.info("Start job per l'import differito");
@@ -108,7 +109,7 @@ public class ImportDifferito {
 					log.debug("Codice ABI presente nel DB: si procede con l'import della biblioteca...");		
 					try {
 						String username = Utility.extractUserNameFromFileName(scheduled[i].getName());
-						importer.doImport(biblioteca, dataExport, reportImport, username, true);
+						importer.doImport(biblioteca, dataExport, reportImport, username, true, basePhotoUrl);
 						
 					} catch (Exception e) {
 						log.error("Si è verificato un errore che non ha permesso di importare nessun dato della bilblioteca", e);
@@ -242,5 +243,9 @@ public class ImportDifferito {
 	
 	public void setImportCheckedDir(String importCheckedDir) {
 		this.importCheckedDir = importCheckedDir;
+	}
+	
+	public void setBasePhotoUrl(String basePhotoUrl) {
+		this.basePhotoUrl = basePhotoUrl;
 	}
 }

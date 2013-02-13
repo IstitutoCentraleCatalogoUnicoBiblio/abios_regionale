@@ -23,6 +23,7 @@ import it.inera.abi.logic.formatodiscambio.castor.DepositoLegale;
 import it.inera.abi.logic.formatodiscambio.castor.Destinazione;
 import it.inera.abi.logic.formatodiscambio.castor.FondoSpeciale;
 import it.inera.abi.logic.formatodiscambio.castor.Forme;
+import it.inera.abi.logic.formatodiscambio.castor.Immagine;
 import it.inera.abi.logic.formatodiscambio.castor.Interbibliotecario;
 import it.inera.abi.logic.formatodiscambio.castor.Internet;
 import it.inera.abi.logic.formatodiscambio.castor.Materiale;
@@ -80,6 +81,7 @@ import it.inera.abi.persistence.PartecipaCataloghiSpecialiMateriale;
 import it.inera.abi.persistence.Patrimonio;
 import it.inera.abi.persistence.PatrimonioPK;
 import it.inera.abi.persistence.PatrimonioSpecializzazione;
+import it.inera.abi.persistence.Photo;
 import it.inera.abi.persistence.PrestitoInterbibliotecario;
 import it.inera.abi.persistence.PrestitoInterbibliotecarioModo;
 import it.inera.abi.persistence.PrestitoLocale;
@@ -103,6 +105,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
@@ -131,13 +134,13 @@ public class ImporterImpl implements Importer {
 
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public void doImport(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, Date dataExport, ReportImport reportImport) throws Exception {
-		doImport(biblioteca, dataExport, reportImport, null, false);	
+	public void doImport(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, Date dataExport, ReportImport reportImport, String basePhotoUrl) throws Exception {
+		doImport(biblioteca, dataExport, reportImport, null, false, basePhotoUrl);	
 	}
 
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public void doImport(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, Date dataExport, ReportImport reportImport, String username, boolean differito) throws Exception {
+	public void doImport(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, Date dataExport, ReportImport reportImport, String username, boolean differito, String basePhotoUrl) throws Exception {
 
 		String codiceAbi = Utility.normalizzaCodiciAbi(biblioteca.getAnagrafica().getCodici().getIsil()); // normalizza il codice abi in IT-AA1234
 		log.info("Codice ABI biblioteca: " + codiceAbi);
@@ -575,6 +578,39 @@ public class ImporterImpl implements Importer {
 				String edificioDataCostruzione = biblioteca.getAnagrafica().getEdificio().getDataCostruzione().getContent();
 				bibliotecaDb.setEdificioDataCostruzione(edificioDataCostruzione);
 				log.debug("Modificato edificio DataCostruzione: " + edificioDataCostruzione);
+			}
+			
+			/* Immagini */
+			if (biblioteca.getAnagrafica().getEdificio().getImmagini() != null) {
+				for (int i = 0; i < biblioteca.getAnagrafica().getEdificio().getImmagini().getImmagineCount(); i++) {
+					
+					if (i == 0) {
+						if (bibliotecaDb.getPhotos() != null) {
+							biblioDao.removeChilds(bibliotecaDb.getPhotos());
+							log.debug("Cancellate PHOTO...");
+						}
+					}
+					
+					Immagine img = (Immagine) biblioteca.getAnagrafica().getEdificio().getImmagini().getImmagine(i);
+					
+					if (img != null) {
+						Photo photo = new Photo();
+						if (img.getUrl().contains(basePhotoUrl)) {
+							String filename = FilenameUtils.getName(img.getUrl());
+							photo.setUri(filename);
+							
+						} else {
+							photo.setUri(img.getUrl());
+						}
+						
+						photo.setCaption(img.getDidascalia());
+						photo.setBiblioteca(bibliotecaDb);
+						biblioDao.saveChild(photo);
+						log.debug("Inserita nuova PHOTO: " + img.getUrl());
+					}
+					
+				}
+				
 			}
 		}
 

@@ -60,7 +60,8 @@ public class ImportLogicImpl implements ImportLogic {
 	private String emailImportSubject = null; //config.getString(Constants.EMAIL_IMPORT_SUBJECT);
 	private String emailImportMsg = null; //config.getString(Constants.EMAIL_IMPORT_MSG);
 
-
+	/* Base photo url */
+	private String basePhotoUrl = null;
 
 
 	@Override
@@ -295,7 +296,7 @@ public class ImportLogicImpl implements ImportLogic {
 				log.info("Inizio import biblioteca " + n + " di " + biblioteche.getBibliotecaCount());
 				log.debug("Codice ABI presente nel DB: si procede con l'import della biblioteca...");		
 				try {
-					importer.doImport(biblioteca, dataExport, reportImport);
+					importer.doImport(biblioteca, dataExport, reportImport, basePhotoUrl);
 				} catch (Exception e) {
 					log.error("Si è verificato un errore che non ha permesso di importare nessun dato della bilblioteca", e);
 					reportImport.addError("Errore che non ha permesso di importare nessun dato della biblioteca: " + e.getMessage());
@@ -514,6 +515,10 @@ public class ImportLogicImpl implements ImportLogic {
 	public void setEmailImportSubject(String emailImportSubject) {
 		this.emailImportSubject = emailImportSubject;
 	}
+	public void setBasePhotoUrl(String basePhotoUrl) {
+		this.basePhotoUrl = basePhotoUrl;
+	}
+	
 
 	@Override
 	public byte[] download(String type, String filename) throws Exception {

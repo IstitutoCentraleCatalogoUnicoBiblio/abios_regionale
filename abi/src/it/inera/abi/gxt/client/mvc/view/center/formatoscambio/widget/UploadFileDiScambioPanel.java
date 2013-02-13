@@ -7,6 +7,7 @@ import it.inera.abi.gxt.client.Utils;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FormEvent;
 import com.extjs.gxt.ui.client.event.Listener;
@@ -71,7 +72,16 @@ public class UploadFileDiScambioPanel extends FormPanel {
 		username.setVisible(false);
 		add(username);
 
-		file = new FileUploadField();
+		file = new FileUploadField() {
+			/* this is to resolve the "fakepath" issue */
+			@Override
+			protected void onChange(ComponentEvent ce) {
+				final String fullPath = getFileInput().getValue();
+				final int lastIndex = fullPath.lastIndexOf('\\');
+				final String fileName = fullPath.substring(lastIndex + 1);
+				setValue(fileName);
+			}
+		};
 		file.setAllowBlank(false);
 		file.setName("uploadedfile");
 		file.setFieldLabel("File");

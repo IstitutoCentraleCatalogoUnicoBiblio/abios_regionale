@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public interface Importer {
 
-	public void doImport(Biblioteca biblioteca,	Date dataExport, ReportImport reportImport) throws Exception;
-	public void doImport(Biblioteca biblioteca,	Date dataExport, ReportImport reportImport, String username, boolean differito) throws Exception;
+	public void doImport(Biblioteca biblioteca,	Date dataExport, ReportImport reportImport, String basePhotoUrl) throws Exception;
+	public void doImport(Biblioteca biblioteca,	Date dataExport, ReportImport reportImport, String username, boolean differito, String basePhotoUrl) throws Exception;
 	
 }

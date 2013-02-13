@@ -23,7 +23,10 @@ public class Photo implements Serializable {
 
 	@Column(length=255)
 	private String caption;
-
+	
+	@Column
+	private Integer ordine;
+	
 	//bi-directional many-to-one association to Biblioteca
     @ManyToOne
 	@JoinColumn(name="id_biblioteca", nullable=false)
@@ -56,6 +59,14 @@ public class Photo implements Serializable {
 		this.caption = caption;
 	}
 
+	public Integer getOrdine() {
+		return this.ordine;
+	}
+	
+	public void setOrdine(Integer ordine) {
+		this.ordine = ordine;
+	}
+	
 	public Biblioteca getBiblioteca() {
 		return this.biblioteca;
 	}

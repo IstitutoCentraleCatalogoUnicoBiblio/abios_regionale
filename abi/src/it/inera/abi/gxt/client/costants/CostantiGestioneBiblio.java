@@ -38,6 +38,7 @@ public class CostantiGestioneBiblio {
 	public static final String DATI_ANAGRAFICI = "Dati anagrafici";
 	public static final String SISTEMI_BIBLITOECHE = "Sistemi di biblioteche";
 	public static final String SEDE_INFO_SUPPL = "Sede - Informazioni supplementari";
+	public static final String FOTO_SEDE = "Foto Sede";
 	public static final String TIPOLOGIA_AMMINISTRATIVA_FUNZIONALE = "Tip. amm./ funz.";
 	public static final String ACCESSO_DESTINAZIONE_SOCIALE = "Modalità accesso - Destinazione sociale";
 	public static final String ORARI_UFFICIALE_VARIAZIONE = "Orario ufficiale e variazioni";
