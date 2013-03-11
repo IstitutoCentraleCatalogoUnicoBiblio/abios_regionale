@@ -176,7 +176,7 @@ public class PrestitoPanel extends ContentPanelForTabItem {
 
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									listaPrestitiLocaliPanel.getLoader().load();
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 									
 								}
 								
@@ -427,7 +427,7 @@ public class PrestitoPanel extends ContentPanelForTabItem {
 									Utils.setFontColorStyleBlack(prestitoInternazionaleLabel);
 									Utils.setFontColorStyleBlack(procedureAutomatizzateLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 								}
 
 								@Override

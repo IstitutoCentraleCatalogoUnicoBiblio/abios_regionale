@@ -406,7 +406,7 @@ public class PatrimonioLibrarioPanel extends ContentPanelForTabItem {
 									Utils.setFontColorStyleBlack(catInformLabel);
 									Utils.setFontColorStyleBlack(fondiAntichiLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 								
 									
 								}

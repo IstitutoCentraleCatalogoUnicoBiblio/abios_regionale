@@ -246,7 +246,7 @@ public class SedeInformazioniSupplPanel extends ContentPanelForTabItem {
 
 								@Override
 								public void onSuccess(Void result) {
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 
 									/*Resetto le labels al  colore nero*/
@@ -486,7 +486,7 @@ public class SedeInformazioniSupplPanel extends ContentPanelForTabItem {
 
 								@Override
 								public void onSuccess(Void result) {
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									/*Resetto le labels al  colore nero*/
 									setBlackLabelsInfoLocaliForm(mqSupBiblioLabel, mqServiziLabel, metriLineariScaffaliMagazzinoLabel, metriLineariScaffaliApertiLabel);
@@ -656,7 +656,7 @@ public class SedeInformazioniSupplPanel extends ContentPanelForTabItem {
 
 								@Override
 								public void onSuccess(Void result) {
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									/*Resetto le labels al  colore nero*/
 									setBlackLabelsFormPostazioni(postazioniLetturaLabel, postiVideoLabel, postiAscoltoLabel, postiInternetLabel);
@@ -751,7 +751,7 @@ public class SedeInformazioniSupplPanel extends ContentPanelForTabItem {
 	}
 
 
-	public void fireReloadbiblioDataEvent() {
+	public void fireReloadBiblioDataEvent() {
 		Dispatcher.get().dispatch(AppEvents.ReloadBiblioData,biblioteca.getIdBiblio());
 	}
 	

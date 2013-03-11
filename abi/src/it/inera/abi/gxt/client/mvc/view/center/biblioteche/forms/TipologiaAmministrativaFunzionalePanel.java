@@ -459,7 +459,7 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 								public void onSuccess(Void result) {
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 									/*Setto le labels di colore nero al form ente*/
 									setBlackLabelsFormEnte();
 									/*Setto i nuovi parametri di originalValue()*/
@@ -611,7 +611,7 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 									/*Setto le label di colore nero*/
 									setBlackLabelsFormAutonomiaAmministrativa();
 									/*Setto gli original value con i nuovi valori*/ 
@@ -767,7 +767,7 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 									/*Setto le label di colore nero*/
 									Utils.setFontColorStyleBlack(tipFunzLabel);
 									/*Setto gli originalValue() con i nuovi valori*/ 
@@ -889,7 +889,7 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 
 									setBlackLabelsFondazioneForm();
 									

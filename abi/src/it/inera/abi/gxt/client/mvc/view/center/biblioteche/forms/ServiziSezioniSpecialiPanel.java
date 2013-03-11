@@ -237,7 +237,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									listaRiproduzioniFinitureDocumentiPanel.getLoader().load();
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 
 								}
 
@@ -519,7 +519,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 									Utils.setFontColorStyleBlack(servizioInSedeLabel);
 									Utils.setFontColorStyleBlack(servizioEsternoLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 								}
 
 								@Override
@@ -766,7 +766,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 									Utils.setFontColorStyleBlack(accessoApagamentoLabel);
 									Utils.setFontColorStyleBlack(accessoATempoLabel);
 									Utils.setFontColorStyleBlack(accessoProxyLabel);
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 								}
 
@@ -1038,7 +1038,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 									Utils.setFontColorStyleBlack(referenceLocaleLabel);
 									Utils.setFontColorStyleBlack(referenceOnlineLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 								}
 
 								@Override
@@ -1163,7 +1163,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									listaDocumentDeliveryPanel.getLoader().load();
-									fireReloadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 
 								}
 
