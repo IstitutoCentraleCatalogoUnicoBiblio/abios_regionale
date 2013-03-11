@@ -54,7 +54,6 @@ public class GoogleGeoLocalizePanel extends Dialog {
 	private Double longitudine;
 	private Boolean edit = true;
 	private Boolean modified = false;
-	private Boolean initialized = false;
 	private Boolean caricato = false;
 
 	private TextField<String> indirizzoField;
@@ -113,7 +112,7 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		geolocalizzaButton.setId(Dialog.CLOSE);
 		geolocalizzaButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			public void componentSelected(ButtonEvent ce) {
-				modified = false;
+//				modified = false;
 				showAddress(makeAddressString());
 			}
 		});		
@@ -163,7 +162,6 @@ public class GoogleGeoLocalizePanel extends Dialog {
 	@Override
 	protected void onShow() {
 		super.onShow();
-		initialized = false;
 
 		if (!caricato) {
 			loadForm();
@@ -298,12 +296,10 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		indirizzoField.setFieldLabel("Via/Piazza n°civico");
 		indirizzoField.setEmptyText("Digita l'indirizzo...");
 		indirizzoField.setWidth(200);
-		indirizzoField.addListener(Events.Change, new Listener<FieldEvent>(){
+		indirizzoField.addListener(Events.OnKeyUp, new Listener<FieldEvent>(){
 			public void handleEvent(FieldEvent be) {
-				if(initialized) {
-					showAddress(makeAddressString());
-					modified = true;
-				}
+				showAddress(makeAddressString());
+				modified = true;
 			}});
 		viaPiazzaContainer.add(indirizzoField, data);
 		addressTable.add(viaPiazzaContainer, colonna1);
@@ -318,12 +314,10 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		frazioneField.setFieldLabel("Localit&agrave;/Frazione");
 		frazioneField.setEmptyText("Digita la Località/Frazione...");
 		frazioneField.setWidth(200);
-		frazioneField.addListener(Events.Change, new Listener<FieldEvent>(){
+		frazioneField.addListener(Events.OnKeyUp, new Listener<FieldEvent>(){
 			public void handleEvent(FieldEvent be) {
-				if(initialized) {
-					showAddress(makeAddressString());
-					modified = true;
-				}
+				showAddress(makeAddressString());
+				modified = true;
 			}});
 		frazioneContainer.add(frazioneField, data);
 		addressTable.add(frazioneContainer, colonna1);
@@ -337,12 +331,10 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		capField.setEmptyText("Digita il CAP...");
 		capField.setFieldLabel("CAP");
 		capField.setWidth(200);
-		capField.addListener(Events.Change, new Listener<FieldEvent>(){
+		capField.addListener(Events.OnKeyUp, new Listener<FieldEvent>(){
 			public void handleEvent(FieldEvent be) {
-				if(initialized) {
-					showAddress(makeAddressString());
-					modified = true;
-				}
+				showAddress(makeAddressString());
+				modified = true;
 			}});
 		capContainer.add(capField, data);
 		addressTable.add(capContainer, colonna1);
@@ -361,11 +353,10 @@ public class GoogleGeoLocalizePanel extends Dialog {
 			comuneField.setReadOnly(true);			
 		}
 		comuneField.setWidth(200);
-		comuneField.addListener(Events.Change, new Listener<FieldEvent>(){
+		comuneField.addListener(Events.OnKeyUp, new Listener<FieldEvent>(){
 			public void handleEvent(FieldEvent be) {
-				if(initialized) {
-					showAddress(makeAddressString());
-				}
+				showAddress(makeAddressString());
+				modified = true;
 			}});
 		cittaContainer.add(comuneField, data);
 		addressTable.add(cittaContainer, colonna1);
@@ -423,7 +414,6 @@ public class GoogleGeoLocalizePanel extends Dialog {
 	}
 
 	private void loadForm() {
-		initialized = false;
 		indirizzoField.setValue((indirizzo != null)?indirizzo:"");
 		frazioneField.setValue((frazione != null)?frazione:"");
 		capField.setValue((cap != null)?cap:"");
@@ -435,9 +425,9 @@ public class GoogleGeoLocalizePanel extends Dialog {
 	}
 
 	private void saveForm() {
-		//		indirizzo = indirizzoField.getValue();
-		//		frazione = frazioneField.getValue();
-		//		cap = capField.getValue();
+		indirizzo = indirizzoField.getValue();
+		frazione = frazioneField.getValue();
+		cap = capField.getValue();
 		latitudine = (latField.getRawValue() != null)?new Double(latField.getRawValue()):0;
 		longitudine = (lngField.getRawValue() != null)?new Double(lngField.getRawValue()):0;
 		fireEvent(Events.Update);
@@ -445,7 +435,6 @@ public class GoogleGeoLocalizePanel extends Dialog {
 	}
 
 	public void cleanUp() {
-		initialized = false;
 		indirizzo = null;
 		frazione = null;
 		cap = null;
@@ -499,6 +488,7 @@ public class GoogleGeoLocalizePanel extends Dialog {
 			public void onSuccess(final LatLng point) {
 				latField.setValue(point.getLatitude());
 				lngField.setValue(point.getLongitude());
+				modified = true;
 				mapWidget.setCenter(point, 14);
 				placeMarker(point);
 			}
