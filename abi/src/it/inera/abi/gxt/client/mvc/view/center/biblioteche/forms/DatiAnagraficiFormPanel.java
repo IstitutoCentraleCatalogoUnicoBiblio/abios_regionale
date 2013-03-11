@@ -24,6 +24,8 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.data.BaseListLoader;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.ListLoadResult;
+import com.extjs.gxt.ui.client.data.LoadEvent;
+import com.extjs.gxt.ui.client.data.Loader;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.ModelReader;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
@@ -55,6 +57,8 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
 import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -208,7 +212,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 									public void onSuccess(Void result) {
 										AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 										aggiornaDenominazione.disable();
-										fireReleoadbiblioDataEvent();
+										fireReloadBiblioDataEvent();
 										Utils.setFontColorStyleBlack(denominazioneUfficialeLabel);
 										denominazioneUfficiale.setOriginalValue(denominazioneUfficiale.getValue());
 									}
@@ -490,9 +494,15 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 					g.setStato(biblioteca.getStato()!=null?biblioteca.getStato():"");
 					if (biblioteca.getGeoX() != null) {
 						g.setLatitudine(biblioteca.getGeoX());
+						
+					} else {
+						g.setLatitudine(null);
 					}
 					if (biblioteca.getGeoY() != null) {
 						g.setLongitudine(biblioteca.getGeoY());
+						
+					} else {
+						g.setLongitudine(null);
 					}
 
 					g.show();
@@ -503,6 +513,66 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 
 				@Override
 				public void handleEvent(BaseEvent be) {
+					/* Via / Piazza */
+					if (viaPiazzaNCivicoField.getValue() == null) {
+						if (g.getViaPiazza() != null) {
+							viaPiazzaNCivicoField.setValue(g.getViaPiazza());
+							Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
+						}
+						
+					} else {
+						if (g.getViaPiazza() != null) {
+							if (!(viaPiazzaNCivicoField.getValue().equalsIgnoreCase(g.getViaPiazza()))) {
+								viaPiazzaNCivicoField.setValue(g.getViaPiazza());
+								Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
+							}
+							
+						} else {
+							viaPiazzaNCivicoField.setValue(g.getViaPiazza());
+							Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
+						}
+					}
+					
+					/* Frazione */
+					if (frazioneField.getValue() == null) {
+						if (g.getLocalita() != null) {
+							frazioneField.setValue(g.getLocalita());
+							Utils.setFontColorStyleRed(frazioneLabel);
+						}
+						
+					} else {
+						if (g.getLocalita() != null) {
+							if (!(frazioneField.getValue().equalsIgnoreCase(g.getLocalita()))) {
+								frazioneField.setValue(g.getLocalita());
+								Utils.setFontColorStyleRed(frazioneLabel);
+							}
+							
+						} else {
+							frazioneField.setValue(g.getLocalita());
+							Utils.setFontColorStyleRed(frazioneLabel);
+						}						
+					}
+					
+					/* CAP */
+					if (capField.getValue() == null) {
+						if (g.getCap() != null) {
+							capField.setValue(g.getCap());
+							Utils.setFontColorStyleRed(capLabel);
+						}
+						
+					} else {
+						if (g.getCap() != null) {
+							if (!(capField.getValue().equalsIgnoreCase(g.getCap()))) {
+								capField.setValue(g.getCap());
+								Utils.setFontColorStyleRed(capLabel);
+							}
+							
+						} else {
+							capField.setValue(g.getCap());
+							Utils.setFontColorStyleRed(capLabel);
+						}
+					}
+					
 					latField.setValue(g.getLatitudine());
 					lngField.setValue(g.getLongitudine());
 					Utils.setFontColorStyleRed(latLabel);
@@ -547,28 +617,26 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 							params.put("latitudine", latField.getValue());
 							params.put("longitudine", lngField.getValue());
 
-							viaPiazzaNCivicoField.setOriginalValue( viaPiazzaNCivicoField.getValue());
-							capField.setOriginalValue( capField.getValue());
-							frazioneField.setOriginalValue(frazioneField.getValue());
-							comuneField.setOriginalValue(comuneField.getValue());
-							latField.setOriginalValue(latField.getValue().doubleValue());
-							lngField.setOriginalValue(lngField.getValue().doubleValue());
-
-							setBlackLabelsFormIndirizzo();
-
 							bibliotecheServiceAsync.aggiornaIndirizzo(params, biblioteca.getIdBiblio(),	new AsyncCallback<Void>() {
+								@Override
+								public void onSuccess(Void result) {
+//									MessageBox.info("ESITO UPDATE",	"Aggiornamento voce effettuato con successo!", null).show();
+									viaPiazzaNCivicoField.setOriginalValue( viaPiazzaNCivicoField.getValue());
+									capField.setOriginalValue( capField.getValue());
+									frazioneField.setOriginalValue(frazioneField.getValue());
+									comuneField.setOriginalValue(comuneField.getValue());
+									if (latField.getValue() != null) latField.setOriginalValue(latField.getValue().doubleValue());
+									if (lngField.getValue() != null) lngField.setOriginalValue(lngField.getValue().doubleValue());
+									setBlackLabelsFormIndirizzo();
+									fireReloadBiblioDataEvent();
+								}
+								
 								@Override
 								public void onFailure(Throwable caught) {
 									if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
 										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 
-								}
-
-								@Override
-								public void onSuccess(Void result) {
-//									MessageBox.info("ESITO UPDATE",	"Aggiornamento voce effettuato con successo!", null).show();
-									fireReleoadbiblioDataEvent();
 								}
 							});
 						}
@@ -677,21 +745,39 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		final BaseListLoader<ListLoadResult<ModelData>> statoCatalogazioneLoader = new BaseListLoader<ListLoadResult<ModelData>>(
 				statoCatalogazioneProxy, statoCatalogazioneReader);
 
-		ListStore<VoceUnicaModel> statoCatalogazioneStore = new ListStore<VoceUnicaModel>(statoCatalogazioneLoader);
+		final ListStore<VoceUnicaModel> statoCatalogazioneStore = new ListStore<VoceUnicaModel>(statoCatalogazioneLoader);
 
+		statoCatalogazioneLoader.addListener(Loader.Load, new Listener<LoadEvent>() {
+			@Override
+			public void handleEvent(LoadEvent be) {
+				if(be.<ModelData> getConfig().get("query")==null || be.<ModelData> getConfig().get("query").equals("")) {
+					/*Inserisce una voce bianca al caricamento dello store*/
+					DeferredCommand.addCommand(new Command() {
+
+						@Override
+						public void execute() {
+							VoceUnicaModel emptyStatoCatalogazione = new VoceUnicaModel();
+							emptyStatoCatalogazione.setEntry("Nessuno stato di registrazione");
+							emptyStatoCatalogazione.setIdRecord(-1);
+							statoCatalogazioneStore.insert(emptyStatoCatalogazione, 0);
+						}
+					});
+				}
+			}
+		});
+		
 		statoCatalogazioneField = new ComboBoxForBeans<VoceUnicaModel>();
 
 		statoCatalogazioneField.setFieldLabel("Stato registrazione");
 		statoCatalogazioneField.setWidth(250);
 		statoCatalogazioneField.setDisplayField("entry");
 		statoCatalogazioneField.setStore(statoCatalogazioneStore);
-		//		statoCatalogazioneField.setAllowBlank(false);
 		statoCatalogazioneField.setFireChangeEventOnSetValue(true);
-		statoCatalogazioneField.setEmptyText("Scegli uno stato...");
 		statoCatalogazioneField.setLazyRender(false);
 		statoCatalogazioneField.setTriggerAction(TriggerAction.ALL);
 		statoCatalogazioneField.setForceSelection(false);
 		statoCatalogazioneField.setEditable(false);
+		statoCatalogazioneField.setTemplate(getTemplateEmptyRowLocation());
 		statoCatalogazioneLoader.load();
 		codiceIsilLabel= new Text("Codice Isil:");
 
@@ -742,13 +828,15 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 							HashMap<String, Object> params = new HashMap<String, Object>();
 							params.put("idBiblioteca", biblioteca.getIdBiblio());
 							params.put("idStatoCatalogazione", statoCatalogazioneField.getValue().getIdRecord());
-							if(statoCatalogazioneField.getValue()!=null){
-								if(statoCatalogazioneField.getValue().getIdRecord().intValue()==7){
-									if(isilProvincia.getValue()!=null && isilNumero.getValue()!=null){
+							
+							if (statoCatalogazioneField.getValue() != null) {
+								if (statoCatalogazioneField.getValue().getIdRecord().intValue() == 7) {
+									if (isilProvincia.getValue() != null && isilNumero.getValue() != null) {
 										params.put("isilStato",isilStato.getValue() );
 										params.put("isilProvincia", isilProvincia.getValue());
 										params.put("isilNumero", isilNumero.getValue().intValue());
-									} else{
+										
+									} else {
 										Utils.setFontColorStyleBlack(codiceIsilLabel);
 										isilProvincia.setValue(null);
 										isilNumero.setValue(null);
@@ -768,20 +856,21 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 
 								@Override
 								public void onSuccess(Boolean result) {
-									if (result==true){
+									if (result == true) {
 										AbiMessageBox.messageAlertBox("Inserire un codice abi valido!","ATTENZIONE");
-									}else{
+										
+									} else {
 										AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									}
-									fireReleoadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 									/*Setto le label di colore nero*/
 									Utils.setFontColorStyleBlack(statoCatalogazioneLabel);
 
 									/*Setto gli originalValue() con i nuovi valori*/ 
 									statoCatalogazioneField.setOriginalValue(statoCatalogazioneField.getValue());
-									if(statoCatalogazioneField.getValue()!=null && statoCatalogazioneField.getValue().getIdRecord().intValue()==7){
-										if(result==false){
-											if(isilProvincia.getValue()!=null && isilNumero.getValue()!=null){
+									if (statoCatalogazioneField.getValue() != null && statoCatalogazioneField.getValue().getIdRecord().intValue() == 7) {
+										if (result == false) {
+											if (isilProvincia.getValue() != null && isilNumero.getValue() != null) {
 												Utils.setFontColorStyleBlack(codiceIsilLabel);
 												isilStato.setOriginalValue(isilStato.getValue());
 												isilProvincia.setOriginalValue(isilProvincia.getValue());
@@ -933,7 +1022,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 									pivaField.setOriginalValue( pivaField.getValue());
 
 //									MessageBox.info("ESITO UPDATE",	"Aggiornamento voce effettuato con successo!", null).show();
-									fireReleoadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 								}
 							});
 						}
@@ -1049,7 +1138,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 									cmbsField.setOriginalValue( cmbsField.getValue());
 
 //									MessageBox.info("ESITO UPDATE",	"Aggiornamento voce effettuato con successo!", null).show();
-									fireReleoadbiblioDataEvent();
+									fireReloadBiblioDataEvent();
 								}
 							});
 						}
@@ -1224,36 +1313,35 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 
 			isilStato.setOriginalValue("IT");
 			isilStato.setValue("IT");
-			if(biblioteca.getStatoCatalogazioneModel()!=null){
-				
+			if (biblioteca.getStatoCatalogazioneModel() != null) {
 				statoCatalogazioneField.setValue(biblioteca.getStatoCatalogazioneModel());
 				statoCatalogazioneField.setOriginalValue(biblioteca.getStatoCatalogazioneModel());
-				if(biblioteca.getStatoCatalogazioneModel().getIdRecord().intValue()==7){
+				
+				if (biblioteca.getStatoCatalogazioneModel().getIdRecord().intValue() == 7) {
 					showIsilComponents();
-					if(biblioteca.getStatoCatalogazioneModel().getIsilProvincia()!=null && biblioteca.getStatoCatalogazioneModel().getIsilNumero()!=null){
+					if (biblioteca.getStatoCatalogazioneModel().getIsilProvincia() != null && biblioteca.getStatoCatalogazioneModel().getIsilNumero() != null) {
 						isilProvincia.setOriginalValue(biblioteca.getStatoCatalogazioneModel().getIsilProvincia());
 						isilNumero.setOriginalValue(biblioteca.getStatoCatalogazioneModel().getIsilNumero());
 
 						isilProvincia.setValue(biblioteca.getStatoCatalogazioneModel().getIsilProvincia());
 						isilNumero.setValue(biblioteca.getStatoCatalogazioneModel().getIsilNumero());
 					}
-				}else{
+					
+				} else {
+					if (biblioteca.getStatoCatalogazioneModel().getIdRecord().intValue() == -1) {
+						isilProvincia.setValue(null);
+						isilNumero.setValue(null);
+
+						isilProvincia.setOriginalValue(null);
+						isilNumero.setOriginalValue(null);
+						
+					}
+					
 					hideIsilComponents();
 				}
-			}else{
-				statoCatalogazioneField.setValue(null);
-				statoCatalogazioneField.setOriginalValue(null);
-
-				isilProvincia.setValue(null);
-				isilNumero.setValue(null);
-
-				isilProvincia.setOriginalValue(null);
-				isilNumero.setOriginalValue(null);
-
-				hideIsilComponents();
 			}
+			
 			/*Setto le label di colore nero in caso fossero state modificate precedentemente*/
-
 			Utils.setFontColorStyleBlack(denominazioneUfficialeLabel);
 
 			Utils.setFontColorStyleBlack(statoCatalogazioneLabel);
@@ -1383,4 +1471,12 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 	public void setGeolocalizzaText(String text) {
 		geolocalizza.setText(text);
 	}
+	
+	private native String getTemplateEmptyRowLocation() /*-{ 
+	return [ 
+	'<tpl for=".">', 
+	'<div class="x-combo-list-item" style="height:18px;">{entry}</div>', 
+	'</tpl>' 
+	].join(""); 
+	}-*/;
 }
