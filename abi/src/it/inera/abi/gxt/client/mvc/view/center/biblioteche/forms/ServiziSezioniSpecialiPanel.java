@@ -237,7 +237,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									listaRiproduzioniFinitureDocumentiPanel.getLoader().load();
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 
 								}
 
@@ -519,7 +519,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 									Utils.setFontColorStyleBlack(servizioInSedeLabel);
 									Utils.setFontColorStyleBlack(servizioEsternoLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 								}
 
 								@Override
@@ -766,7 +766,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 									Utils.setFontColorStyleBlack(accessoApagamentoLabel);
 									Utils.setFontColorStyleBlack(accessoATempoLabel);
 									Utils.setFontColorStyleBlack(accessoProxyLabel);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 								}
 
@@ -1038,7 +1038,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 									Utils.setFontColorStyleBlack(referenceLocaleLabel);
 									Utils.setFontColorStyleBlack(referenceOnlineLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 								}
 
 								@Override
@@ -1163,7 +1163,7 @@ public class ServiziSezioniSpecialiPanel extends ContentPanelForTabItem {
 
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									listaDocumentDeliveryPanel.getLoader().load();
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 
 								}
 

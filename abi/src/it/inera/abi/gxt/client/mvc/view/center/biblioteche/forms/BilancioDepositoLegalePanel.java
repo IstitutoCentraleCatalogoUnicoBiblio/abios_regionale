@@ -264,7 +264,7 @@ public class BilancioDepositoLegalePanel extends ContentPanelForTabItem {
 											Utils.setFontColorStyleBlack(speseAltreLabel);
 											Utils.setFontColorStyleBlack(totEntrateLabel);
 											AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-											fireReleoadbiblioDataEvent();
+											fireReloadbiblioDataEvent();
 										}
 
 										@Override
@@ -392,7 +392,7 @@ public class BilancioDepositoLegalePanel extends ContentPanelForTabItem {
 
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									listaDepositiLegaliPanel.getLoader().load();
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 
 								}
 

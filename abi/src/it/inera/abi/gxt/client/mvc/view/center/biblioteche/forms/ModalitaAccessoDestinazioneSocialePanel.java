@@ -194,7 +194,7 @@ public class ModalitaAccessoDestinazioneSocialePanel extends ContentPanelForTabI
 									accessoRiservatoField.setOriginalValue(accessoRiservatoField.getValue());
 									Utils.setFontColorStyleBlack(accessoLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 								}
 							});
 						}
@@ -345,7 +345,7 @@ public class ModalitaAccessoDestinazioneSocialePanel extends ContentPanelForTabI
 									}
 									Utils.setFontColorStyleBlack(portatoriHandicapLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 								}
 							});
 						}
@@ -485,7 +485,7 @@ public class ModalitaAccessoDestinazioneSocialePanel extends ContentPanelForTabI
 									Utils.setFontColorStyleBlack(riferimentoNormativoLabel);
 									Utils.setFontColorStyleBlack(urlLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 								}
 							});
 

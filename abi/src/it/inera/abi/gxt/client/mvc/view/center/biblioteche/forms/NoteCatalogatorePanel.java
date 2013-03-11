@@ -199,7 +199,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 									annoRilevamentoDatiField.setOriginalValue(annoRilevamentoDatiField.getValue() != null? annoRilevamentoDatiField.getValue().intValue() : null);
 									Utils.setFontColorStyleBlack(annoRilevamentoDatiLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 								}
 							});
 
@@ -309,7 +309,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 									noteBox.setOriginalValue(noteBox.getValue());
 									Utils.setFontColorStyleBlackTextArea(noteBox, "Note");
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 								}
 							});
 
@@ -416,7 +416,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 									comunicazioniBox.setOriginalValue(comunicazioniBox.getValue());
 									Utils.setFontColorStyleBlackTextArea(comunicazioniBox, "Comunicazioni");
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 								}
 							});
 						} 

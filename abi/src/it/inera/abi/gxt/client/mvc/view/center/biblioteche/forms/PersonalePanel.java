@@ -197,7 +197,7 @@ public class PersonalePanel extends ContentPanelForTabItem {
 									Utils.setFontColorStyleBlack(esternoLabel);
 									Utils.setFontColorStyleBlack(temporaneoLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 								}
 
 								@Override
@@ -340,7 +340,7 @@ public class PersonalePanel extends ContentPanelForTabItem {
 									Utils.setFontColorStyleBlack(iscrittiPrestitoUltimi12MesiLabel);
 									Utils.setFontColorStyleBlack(utentiIscrittiLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-									fireReleoadbiblioDataEvent();
+									fireReloadbiblioDataEvent();
 								}
 
 								@Override
