@@ -1909,6 +1909,11 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 	
 	@Override
+	public Boolean removeStatoCatalogazione(HashMap<String, Object> params) {
+		return biblioDao.removeStatoCatalogazione(params);
+	}
+	
+	@Override
 	public void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni) {
 		Biblioteca biblioteca = biblioDao.getBibliotecaById(idbib);
 		biblioteca.setAttivoRiproduzioni(attivoRiproduzioni);

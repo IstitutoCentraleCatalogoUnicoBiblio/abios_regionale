@@ -1070,15 +1070,20 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		
 		//STATO CATALOGAZIONE BIBLIOTECA
 		List<StatoCatalogazione> catalogaziones = biblioteca.getStatoCatalogaziones();
-		if(catalogaziones.size()>0){
+		if (catalogaziones != null && catalogaziones.size() > 0) {
 			StatoCatalogazione statoCatalogazione = catalogaziones.get(0);
 
 			VoceUnicaModel statoCatalogazioneModel = new VoceUnicaModel();
 			statoCatalogazioneModel.setIdRecord(statoCatalogazione.getId().getIdStatoCatalogazione());
 			statoCatalogazioneModel.setEntry(statoCatalogazione.getStatoCatalogazioneTipo().getDescrizione());
 			biblioModel.setStatoCatalogazioneModel(statoCatalogazioneModel);
-		}else{
-			biblioModel.setStatoCatalogazioneModel(null);
+			
+		} else {
+			VoceUnicaModel nessunStatoCatalogazioneModel = new VoceUnicaModel();
+			nessunStatoCatalogazioneModel.setIdRecord(new Integer(-1));
+			nessunStatoCatalogazioneModel.setEntry("Nessuno stato di registrazione");
+			
+			biblioModel.setStatoCatalogazioneModel(nessunStatoCatalogazioneModel);
 		}
 		return biblioModel;
 	}
@@ -2835,6 +2840,12 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 
 	@Override
 	public Boolean setStatoCatalogazione(HashMap<String, Object> params) {
+		if (params.containsKey("idStatoCatalogazione")) {
+			Integer idStatoCatalogazione = (Integer) params.get("idStatoCatalogazione");
+			if (idStatoCatalogazione.intValue() == -1) {
+				return abiBiblioLogic.removeStatoCatalogazione(params);
+			}
+		}
 		return abiBiblioLogic.addStatoCatalogazione(params);
 	}
 

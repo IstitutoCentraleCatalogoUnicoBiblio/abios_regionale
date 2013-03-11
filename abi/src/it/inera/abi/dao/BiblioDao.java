@@ -341,9 +341,11 @@ public interface BiblioDao {
 
 	public CodiciTipo getCodiceTipoById(int idCodice);
 
-	public void addStatoCatalogazioneViaRipristino(int idbiblio,	Integer idStatoCatalogazione, Integer idBibliotecaTarget);
+	public void addStatoCatalogazioneViaRipristino(int idbiblio, Integer idStatoCatalogazione, Integer idBibliotecaTarget);
 
-	Boolean addStatoCatalogazione(HashMap<String, Object> params);
+	public Boolean addStatoCatalogazione(HashMap<String, Object> params);
+	
+	public Boolean removeStatoCatalogazione(HashMap<String, Object> params);
 
 	public void removeChild(Object o);
 

@@ -5102,6 +5102,25 @@ public class BiblioDaoJpa implements BiblioDao {
 
 		return result;
 	}
+	
+	@Override
+	@Transactional
+	public Boolean removeStatoCatalogazione(HashMap<String, Object> params) {
+		Boolean result = false;
+		int idbiblio = (Integer) params.get("idBiblioteca");
+		Integer idStatoCatalogazione = (Integer) params.get("idStatoCatalogazione");
+		
+		Biblioteca biblioteca = getBibliotecaById(idbiblio);
+		if (idStatoCatalogazione != null && idStatoCatalogazione.intValue() == -1) {
+			if (biblioteca.getStatoCatalogaziones() != null && biblioteca.getStatoCatalogaziones().size() > 0) {
+				clearListaStatoCatalogazione(idbiblio);
+				
+				em.merge(biblioteca);
+			}
+		}
+		
+		return result;
+	}
 
 	@Transactional
 	public void clearListaStatoCatalogazione(int idbiblio) {

@@ -427,6 +427,8 @@ public interface AbiBiblioLogic {
 	
 	public Boolean addStatoCatalogazione(HashMap<String, Object> params);
 	
+	public Boolean removeStatoCatalogazione(HashMap<String, Object> params);
+	
 	public void setAttivoRiproduzioni(int idbib, Boolean attivoRiproduzioni);
 	
 	public void setAttivoPrestitoLocale(int idbib, Boolean attivoPrestitoLocale);
