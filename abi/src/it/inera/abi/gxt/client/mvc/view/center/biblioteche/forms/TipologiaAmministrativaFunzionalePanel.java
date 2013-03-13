@@ -26,7 +26,9 @@ import com.extjs.gxt.ui.client.data.ModelReader;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoader;
 import com.extjs.gxt.ui.client.data.RpcProxy;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
@@ -55,8 +57,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabItem {
-
-	private boolean firstLoad = true;
 
 	private TableData d;
 	private TableData dataToRight;
@@ -197,73 +197,27 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 		denominazioneEnteField = new ComboBoxForBeans<EnteModel>();
 		denominazioneEnteField.setWidth(550);
 		denominazioneEnteField.setDisplayField("denominazione");
-		denominazioneEnteField.setAllowBlank(false);
 		denominazioneEnteField.setStore(listStoreEnte);
 		denominazioneEnteField.setFireChangeEventOnSetValue(true);
 		denominazioneEnteField.setEmptyText("Scegli una denominazione...");
 		denominazioneEnteField.setLazyRender(false);
 		denominazioneEnteField.setTriggerAction(TriggerAction.ALL);
 		denominazioneEnteField.setEditable(true);
-		denominazioneEnteField.setForceSelection(true);
 		denominazioneEnteField.setPageSize(10);
-		denominazioneEnteField.setTypeAhead(false);
-		denominazioneEnteField.setMinChars(1);
 
-		//		enteLoader.addListener(Loader.Load, new Listener<BaseEvent>() {
-		//
-		//			@Override
-		//			public void handleEvent(BaseEvent be) {
-		//				final List<EnteModel> tmpStore = new ArrayList<EnteModel>();
-		//
-		//				for(EnteModel e :listStoreEnte.getModels()){
-		//					EnteModel tmpEnteModel = e;
-		//					tmpEnteModel.setDenominazione(Utils.insertBRtag(e.getDenominazione(),30));
-		//					tmpStore.add(tmpEnteModel);					
-		//				}
-		//
-		//				listStoreEnte.removeAll();
-		//				listStoreEnte.add(tmpStore);
-		//
-		//			
-		//
-		//			}
-		//		});
-
-		//		denominazioneEnteField.setPropertyEditor(new ListModelPropertyEditor<EnteModel>() {
-		//
-		//			@Override
-		//			public String getStringValue(EnteModel value) {
-		//				
-		//				return value.getDenominazione();
-		//			}
-		//
-		//			@Override
-		//			public EnteModel convertStringValue(String value) {
-		//				enteLoader.load();
-		//				for(EnteModel e :listStoreEnte.getModels()){
-		//					if(e.getDenominazione().equalsIgnoreCase(value)){
-		//						EnteModel tmpEnteModel = e;
-		//						tmpEnteModel.setDenominazione(Utils.removeBRtag(e.getDenominazione()));
-		//						return tmpEnteModel;
-		//					}
-		//				}
-		//				return biblioteca.getEnte();
-		//			}
-		//		});
-
+		denominazioneEnteField.addListener(Events.OnKeyUp, new Listener<BaseEvent>() {
+			@Override
+			public void handleEvent(BaseEvent be) {
+				if (!UIWorkflow.isReadOnly()) Utils.setFontColorStyleRed(denominazioneEnteLabel);
+			}
+		});
+		
 		denominazioneEnteField.addSelectionChangedListener(new SelectionChangedListener<EnteModel>() {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<EnteModel> se) {
-				if(se.getSelectedItem()!=null){
-					if(denominazioneEnteField.getValue()!=null && denominazioneEnteField.getOriginalValue()!=null) {
-
-						if(denominazioneEnteField.getValue().getIdEnte()==denominazioneEnteField.getOriginalValue().getIdEnte()) {
-							Utils.setFontColorStyleBlack(denominazioneEnteLabel);
-						}else{
-							Utils.setFontColorStyleRed(denominazioneEnteLabel);
-						}
-					}
+				if (se.getSelectedItem() != null) {
+					Utils.setFontColorStyleRed(denominazioneEnteLabel);
 				}
 			}
 		});
@@ -281,8 +235,8 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 			protected void load(Object loadConfig,
 					AsyncCallback<PagingLoadResult<VoceUnicaModel>> callback) {
 				// ID associato tabella tipologie funzionali
-				tabelleDinamicheService
-				.getListaVociFiltratePerPaginazioneCombobox(CostantiTabelleDinamiche.ENTI_TIPOLOGIE_AMMINISTRATIVE_INDEX,
+				tabelleDinamicheService.getListaVociFiltratePerPaginazioneCombobox(
+						CostantiTabelleDinamiche.ENTI_TIPOLOGIE_AMMINISTRATIVE_INDEX,
 						(ModelData) loadConfig, callback);
 			}
 
@@ -316,15 +270,8 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<VoceUnicaModel> se) {
-				if(se.getSelectedItem()!=null){
-					if(tipologiaAmministrativaField.getValue()!=null && tipologiaAmministrativaField.getOriginalValue()!=null) {
-
-						if(tipologiaAmministrativaField.getValue().getIdRecord()==tipologiaAmministrativaField.getOriginalValue().getIdRecord()) {
-							Utils.setFontColorStyleBlack(tipologiaAmministrativaLabel);
-						}else{
-							Utils.setFontColorStyleRed(tipologiaAmministrativaLabel);
-						}
-					}
+				if (se.getSelectedItem() != null) {
+					Utils.setFontColorStyleRed(tipologiaAmministrativaLabel);
 				}
 			}
 		});
@@ -380,40 +327,15 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<StatoModel> se) {
-				if(se.getSelectedItem()!=null){
-					if(statoAppartenenzaField.getValue()!=null && statoAppartenenzaField.getOriginalValue()!=null) {
-
-						if(statoAppartenenzaField.getValue().getIdStato()==statoAppartenenzaField.getOriginalValue().getIdStato()) {
-							Utils.setFontColorStyleBlack(statoAppartenenzaLabel);
-						}else{
-							Utils.setFontColorStyleRed(statoAppartenenzaLabel);
-						}
-					}
+				if (se.getSelectedItem() != null) {
+					Utils.setFontColorStyleRed(statoAppartenenzaLabel);
 				}
 			}
 		});
 
-		denominazioneEnteField.addSelectionChangedListener(new SelectionChangedListener<EnteModel>() {
-
-			@Override
-			public void selectionChanged(SelectionChangedEvent<EnteModel> se) {
-				/*
-				 * Setto i campi tipologia amministrativa e stato in
-				 * base all'ente selezionato
-				 */
-				if(se.getSelectedItem()!=null){
-					if(se.getSelectedItem().getEnteTipologiaAmministrativa()!=null){
-						tipologiaAmministrativaField.setValue(se.getSelectedItem().getEnteTipologiaAmministrativa());
-					}
-					if(se.getSelectedItem().getStato()!=null)
-						statoAppartenenzaField.setValue(se.getSelectedItem().getStato());
-				}
-			}
-		});
 		aggiornaEnteAppartenenza = new Button("Crea l'ente di appartenenza");
 		Utils.setStylesButton(aggiornaEnteAppartenenza);
 
-		
 		FormButtonBinding bindEnteAppartenenza = new FormButtonBinding(formEnteAppartenenza);
 		bindEnteAppartenenza.addButton(aggiornaEnteAppartenenza);
 
@@ -421,51 +343,50 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-
-
 				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
 					public void handleEvent(MessageBoxEvent ce) {
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
 							HashMap<String, Object> params = new HashMap<String, Object>();
 
-							String denominazioneTmp=null;
-							if(denominazioneEnteField.getValue()==null){
-								denominazioneTmp=denominazioneEnteField.getRawValue();
-							}else{
-								denominazioneTmp=denominazioneEnteField.getValue().getDenominazione();
+							/* ENTE: denominazione */
+							String enteDenom = null;
+							if (denominazioneEnteField.getValue() == null) {
+								enteDenom = denominazioneEnteField.getRawValue();
+								
+							} else {
+								enteDenom = denominazioneEnteField.getValue().getDenominazione();
 							}
-							params.put("denominazione",denominazioneTmp);
-							if(tipologiaAmministrativaField.getValue()==null){
-								AbiMessageBox.messageAlertBox(AbiMessageBox.INVALID_PARAMETER_MESSAGE+" Tipologia amministrativa", AbiMessageBox.INVALID_PARAMETER_TITLE);
-								return;
-							}
-							params.put("enteTipologiaAmministrativa",tipologiaAmministrativaField.getValue());
-							if(statoAppartenenzaField.getValue()==null){
-								AbiMessageBox.messageAlertBox(AbiMessageBox.INVALID_PARAMETER_MESSAGE+" Stato", AbiMessageBox.INVALID_PARAMETER_TITLE);
-								return;
-							}
-							params.put("stato",statoAppartenenzaField.getValue());
+							params.put("denominazione", enteDenom);
+							
+							/* ENTE: tipologia amministrativa */
+							Integer enteTipAmm = tipologiaAmministrativaField.getValue().getIdRecord();
+							params.put("enteTipologiaAmministrativa", enteTipAmm);
+							
+							/* ENTE: stato di appartenenza */
+							Integer enteStato = statoAppartenenzaField.getValue().getIdStato();
+							params.put("stato", enteStato);
 
 							bibliotecheService.setEnte(biblioteca.getIdBiblio(), params, new AsyncCallback<Void>() {
-
-								@Override
-								public void onFailure(Throwable caught) {
-									if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
-										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-								}
 
 								@Override
 								public void onSuccess(Void result) {
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 
 									fireReloadBiblioDataEvent();
-									/*Setto le labels di colore nero al form ente*/
+									/* Setto le labels di colore nero al form ente */
 									setBlackLabelsFormEnte();
-									/*Setto i nuovi parametri di originalValue()*/
+									/* Setto i nuovi parametri di originalValue() */
+									
 									denominazioneEnteField.setOriginalValue((denominazioneEnteField.getValue()!=null?denominazioneEnteField.getValue():null));
 									tipologiaAmministrativaField.setOriginalValue((tipologiaAmministrativaField.getValue()!=null?tipologiaAmministrativaField.getValue():null));
 									statoAppartenenzaField.setOriginalValue((statoAppartenenzaField.getValue()!=null?statoAppartenenzaField.getValue():null));
+								}
+								
+								@Override
+								public void onFailure(Throwable caught) {
+									if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
+										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 								}
 							});
 						}
@@ -504,9 +425,6 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 		add(enteAppartenenza);
 
 		/* FINE----ENTE DI APPARTENENZA */
-		/* Setto i valori dei campi */
-
-
 	}
 
 
@@ -1019,10 +937,10 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 	}
 	
 	private void removeKeyListenerForEnter() {
-		Utils.removeKeyListenerForEnter( formEnteAppartenenza);
-		Utils.removeKeyListenerForEnter( formAutonomiaAmministrativa);
-		Utils.removeKeyListenerForEnter( formTipologiaFunzionale);
-		Utils.removeKeyListenerForEnter( fondazioneBibliotecaForm);
+		Utils.removeKeyListenerForEnter(formEnteAppartenenza);
+		Utils.removeKeyListenerForEnter(formAutonomiaAmministrativa);
+		Utils.removeKeyListenerForEnter(formTipologiaFunzionale);
+		Utils.removeKeyListenerForEnter(fondazioneBibliotecaForm);
 
 		
 	}

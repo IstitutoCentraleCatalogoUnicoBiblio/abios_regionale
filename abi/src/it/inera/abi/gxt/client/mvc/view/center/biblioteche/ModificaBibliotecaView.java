@@ -63,6 +63,7 @@ public class ModificaBibliotecaView extends View {
 	private ContentPanel mainModficaBiblioPanel = null;
 	private BiblioModel tmpBiblio;
 	private DatiAnagraficiFormPanel datiAnagrafici;
+	private TipologiaAmministrativaFunzionalePanel tipologiaAmministrativaFunzionalePanel;
 	private	ModalitaAccessoDestinazioneSocialePanel accessoDestinazioneSocialePanel; 
 	private OrarioUfficaleVariazioniPanel orarioUfficaleVariazioniPanel;
 	private PatrimonioLibrarioPanel patrimonioLibrarioPanel;
@@ -194,6 +195,8 @@ public class ModificaBibliotecaView extends View {
 			tmpBiblio = (BiblioModel) event.getData("biblioteca");
 			datiAnagrafici.setBiblioteca(tmpBiblio);
 			datiAnagrafici.setValueFields();
+			tipologiaAmministrativaFunzionalePanel.setBiblioteca(tmpBiblio);
+			tipologiaAmministrativaFunzionalePanel.setFieldValues();
 			serviziSezioniSpecialiPanel.setBiblioteca(tmpBiblio);
 			serviziSezioniSpecialiPanel.setFieldsValues();
 			prestitoPanel.setBiblioteca(tmpBiblio);
@@ -283,7 +286,7 @@ public class ModificaBibliotecaView extends View {
 		tipologiaAmministrativaFunzionaleSubTab.setScrollMode(Scroll.AUTOY);
 		tipologiaAmministrativaFunzionaleSubTab.setText(CostantiGestioneBiblio.TIPOLOGIA_AMMINISTRATIVA_FUNZIONALE);
 
-		final TipologiaAmministrativaFunzionalePanel tipologiaAmministrativaFunzionalePanel = new TipologiaAmministrativaFunzionalePanel();
+		tipologiaAmministrativaFunzionalePanel = new TipologiaAmministrativaFunzionalePanel();
 		tipologiaAmministrativaFunzionaleSubTab.addListener(Events.Select, new Listener<BaseEvent>() {
 			@Override
 			public void handleEvent(BaseEvent be) {
