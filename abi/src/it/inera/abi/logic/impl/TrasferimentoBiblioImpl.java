@@ -251,7 +251,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 
 			// **********Ente di appartenenza**********
 			Ente ente = bibliotecaSalvata.getEnte();
-			abiBiblioLogic.setEnte(idbiblio, ente.getStato(), ente.getEnteTipologiaAmministrativa(), ente.getDenominazione());
+			abiBiblioLogic.setEnte(idbiblio, ente.getDenominazione(), ente.getEnteTipologiaAmministrativa().getIdEnteTipologiaAmministrativa(), ente.getStato().getIdStato());
 
 
 			// **********Autonomia amministrativa della biblioteca**********

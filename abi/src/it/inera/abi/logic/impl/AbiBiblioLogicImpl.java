@@ -564,10 +564,11 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 
 	@Override
 	@Transactional
-	public void setEnte(int id_biblioteca, Stato stato,	EnteTipologiaAmministrativa enteTipologiaAmministrativa,
-			String denominazione) {
+	public void setEnte(int id_biblioteca, String denominazione,
+			Integer idEnteTipologiaAmministrativa, Integer idStato) {
 
-		Ente ente = enteDao.createEnteIfNotExist2(stato, enteTipologiaAmministrativa, denominazione, null, null, null);
+//		Ente ente = enteDao.createEnteIfNotExist2(stato, enteTipologiaAmministrativa, denominazione, null, null, null);
+		Ente ente = enteDao.createEnteIfNotExist(denominazione, idEnteTipologiaAmministrativa, idStato, null, null, null);
 
 		biblioDao.setEnte(id_biblioteca, ente);
 
@@ -2014,7 +2015,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		
 		if (anno != null) {
 			Calendar c = GregorianCalendar.getInstance();
-			c.set(anno, 0, 1, 0, 0, 0);
+			c.set(anno, 0, 1, 5, 0, 0);
 			biblioteca.setCatalogazioneDataCensimento(c.getTime());
 			
 		} else {

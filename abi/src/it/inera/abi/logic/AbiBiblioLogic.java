@@ -17,7 +17,6 @@ import it.inera.abi.persistence.DenominazioniPrecedenti;
 import it.inera.abi.persistence.DestinazioniSociali;
 import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.Ente;
-import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.FondiSpeciali;
 import it.inera.abi.persistence.OrarioChiusure;
 import it.inera.abi.persistence.OrarioUfficiali;
@@ -122,9 +121,10 @@ public interface AbiBiblioLogic {
 			int rows);
 	public int countAllEntiFiltered(String filter);
 
-	public	void setEnte(int id_biblioteca,Stato stato,
-			EnteTipologiaAmministrativa enteTipologiaAmministrativa,
-			String denominazione);
+	public	void setEnte(int id_biblioteca, 
+			String denominazione, 
+			Integer idEnteTipologiaAmministrativa,
+			Integer idStato);
 
 	public void setAutonomiaAmministrativa(int idBiblio,
 			HashMap<String, Object> params);

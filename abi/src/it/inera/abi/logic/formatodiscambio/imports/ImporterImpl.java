@@ -2511,47 +2511,64 @@ public class ImporterImpl implements Importer {
 	@Transactional
 	private boolean setEnte(it.inera.abi.logic.formatodiscambio.castor.Biblioteca biblioteca, ReportImport reportImport, Biblioteca bibliotecaDb) {
 		if (biblioteca.getAmministrativa() != null && biblioteca.getAmministrativa().getEnte() != null) {
-
-			String codiceFiscale = null;
-			if (biblioteca.getAmministrativa().getEnte().getCodiceFiscale() != null) {
-				codiceFiscale = biblioteca.getAmministrativa().getEnte().getCodiceFiscale();
-				log.debug("Ente codiceFiscale: " + codiceFiscale);
-			}
+			/* ENTE: denominazione */
 			String denominazione = null;
 			if (biblioteca.getAmministrativa().getEnte().getNome() != null) {
 				denominazione = biblioteca.getAmministrativa().getEnte().getNome();
 				log.debug("ente denominazione: " + denominazione);
 			}
+			
+			/* ENTE: tipologia amministrativa */
+			Integer idTipologiaAmministrativa = null;
+			if (biblioteca.getAmministrativa().getEnte().getTipologiaAmministrativa() != null) {
+				String enteTipologiaAmministrativaDenom = biblioteca.getAmministrativa().getEnte().getTipologiaAmministrativa();
+				EnteTipologiaAmministrativa enteTipologiaAmministrativa = (EnteTipologiaAmministrativa) dynaTabDao.searchRecord(EnteTipologiaAmministrativa.class, enteTipologiaAmministrativaDenom);
+				if (enteTipologiaAmministrativa == null) {
+					String msg = "Ente tipologia amministrativa non trovata: " + enteTipologiaAmministrativaDenom;
+					reportImport.addWarn(msg);
+					log.warn(msg);
+					
+				} else {
+					idTipologiaAmministrativa = enteTipologiaAmministrativa.getIdEnteTipologiaAmministrativa();
+					log.debug("Modificata ente enteTipologiaAmministrativa: " + enteTipologiaAmministrativa);
+				}				
+			}
+			
+			/* ENTE:  stato appartenenza */
+			Integer idStato = null;
+			if (biblioteca.getAmministrativa().getEnte().getStato() != null) {
+				String statoEnteDenom = biblioteca.getAmministrativa().getEnte().getStato();
+				Stato statoEnte = statoDao.loadStatoBySigla(statoEnteDenom);
+				if (statoEnte == null) {
+					String msg = "Ente stato non trovato: " + statoEnteDenom;
+					reportImport.addWarn(msg);
+					log.warn(msg);
+					
+				} else {
+					idStato = statoEnte.getIdStato();
+					log.debug("statoEnte: " + statoEnte);
+				}
+			}
+			
+			/* ENTE: asia asip */
+			String asiaAsip = null;
+
+			/* ENTE: partita iva */
 			String partitaIva = null;
 			if (biblioteca.getAmministrativa().getEnte().getPartitaIVA() != null) {
 				partitaIva = biblioteca.getAmministrativa().getEnte().getPartitaIVA();
 				log.debug("Modifica ente partitaIva: " + partitaIva);
 			}
-			EnteTipologiaAmministrativa enteTipologiaAmministrativa = null;
-			if (biblioteca.getAmministrativa().getEnte().getTipologiaAmministrativa() != null) {
-				String enteTipologiaAmministrativaStr = biblioteca.getAmministrativa().getEnte().getTipologiaAmministrativa();
-				enteTipologiaAmministrativa = (EnteTipologiaAmministrativa) dynaTabDao.searchRecord(EnteTipologiaAmministrativa.class, enteTipologiaAmministrativaStr);
-				if (enteTipologiaAmministrativa == null) {
-					String msg = "Ente tipologia amministrativa non trovata: " + enteTipologiaAmministrativaStr;
-					reportImport.addWarn(msg);
-					log.warn(msg);
-				}
-				log.debug("Modificata ente enteTipologiaAmministrativa: " + enteTipologiaAmministrativa);
+			
+			/* ENTE: codice fiscale */
+			String codiceFiscale = null;
+			if (biblioteca.getAmministrativa().getEnte().getCodiceFiscale() != null) {
+				codiceFiscale = biblioteca.getAmministrativa().getEnte().getCodiceFiscale();
+				log.debug("Ente codiceFiscale: " + codiceFiscale);
 			}
-			Stato statoEnte = null;
-			if (biblioteca.getAmministrativa().getEnte().getStato() != null) {
-				String statoEnteDenom = biblioteca.getAmministrativa().getEnte().getStato();
-				statoEnte = statoDao.loadStatoBySigla(statoEnteDenom);
-				if (statoEnte == null) {
-					String msg = "Ente stato non trovato: " + statoEnteDenom;
-					reportImport.addWarn(msg);
-					log.warn(msg);
-				}
-				log.debug("statoEnte: " + statoEnte);
-			}
-			String asiaAsip = null;
+			
 			// cerco l'ente con i dati dal XML, se lo trovo aggiungo quello altrimenti lo creo nuovo
-			Ente enteJpa = enteDao.createEnteIfNotExist(statoEnte, enteTipologiaAmministrativa, denominazione, asiaAsip, partitaIva, codiceFiscale);
+			Ente enteJpa = enteDao.createEnteIfNotExist(denominazione, idTipologiaAmministrativa, idStato, asiaAsip, partitaIva, codiceFiscale);
 			bibliotecaDb.setEnte(enteJpa);
 
 
@@ -2569,6 +2586,7 @@ public class ImporterImpl implements Importer {
 			}
 
 			return true;
+			
 		} else {
 			/* Non essendo specificato un ente, viene assegnato quello di default (il primo della lista) */
 			Ente enteJpa = enteDao.retrieveDefaultEnte();

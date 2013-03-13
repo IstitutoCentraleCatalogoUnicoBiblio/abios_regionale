@@ -388,7 +388,7 @@ public class DatabaseToCastorMapper {
 				log.debug("Aggiunto contatto telefonico: " + telefonico.getNumero() + " (" + telefonico.getTipo().toString() + ")");
 				telefoniC.add(telefonico);
 			}
-			if ("Email".equalsIgnoreCase(contDescr)) {
+			if ("E-mail".equalsIgnoreCase(contDescr)) {
 				Altro altro = new Altro();
 				altro.setTipo(AltroTipoType.E_MAIL);
 				altro.setValore(contatto.getValore());

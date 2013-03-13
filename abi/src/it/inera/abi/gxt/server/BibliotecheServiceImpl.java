@@ -303,28 +303,21 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		/**
 		 * LOAD CONTATTI
 		 * */
-		List<Contatti> contatti = abiBiblioLogic
-		.getListaContattiBibliotecaById(id_biblio);
+		List<Contatti> contatti = abiBiblioLogic.getListaContattiBibliotecaById(id_biblio);
 		List<ContattiModel> listRecapiti = new ArrayList<ContattiModel>();
 
-		Iterator<Contatti> itContatti = contatti.iterator();
-		while (itContatti.hasNext()) {
-			/**
-			 * MAPPING
-			 * */
-			Contatti contatto = (Contatti) itContatti.next();
-			ContattiModel contattiModel = new ContattiModel();
-
-			contattiModel.setIdContatti(contatto.getIdContatti());
-			contattiModel.setIdBiblioteca(contatto.getBiblioteca()
-					.getIdBiblioteca());
-			contattiModel.setContattiTipoLabel(contatto.getContattiTipo()
-					.getDescrizione());
-			contattiModel.setDescr(contatto.getNote());
-			contattiModel.setValore(contatto.getValore());
-			listRecapiti.add(contattiModel);
+		for (Contatti entryContatto : contatti) {
+			ContattiModel contattoModel = new ContattiModel();
+			contattoModel.setIdContatti(entryContatto.getIdContatti().intValue());
+			contattoModel.setIdBiblioteca(entryContatto.getBiblioteca().getIdBiblioteca().intValue());
+			contattoModel.setContattiTipo(entryContatto.getContattiTipo().getIdContattiTipo().intValue());
+			contattoModel.setContattiTipoLabel(entryContatto.getContattiTipo().getDescrizione());
+			contattoModel.setValore(entryContatto.getValore());
+			contattoModel.setDescr(entryContatto.getNote());
+			
+			listRecapiti.add(contattoModel);
 		}
-
+		
 		return listRecapiti;
 
 	}
@@ -356,11 +349,10 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		b.setIdBiblioteca(nuovoContatto.getIdBiblioteca());
 		contatti.setBiblioteca(b);
 
-		contatti.setNote(nuovoContatto.getDescr());
 		contatti.setValore(nuovoContatto.getValore());
-
+		contatti.setNote(nuovoContatto.getDescr());
+		
 		ContattiTipo ctipo = new ContattiTipo();
-		// ctipo.setDescrizione(nuovoContatto.getContattiTipoLabel());
 		ctipo.setIdContattiTipo(nuovoContatto.getContattiTipo());
 		contatti.setContattiTipo(ctipo);
 
@@ -1112,19 +1104,11 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 
 	@Override
 	public void setEnte(int id_biblioteca, HashMap<String, Object> params) {
+		String denominazione = (String) params.get("denominazione");
+		Integer idEnteTipologiaAmministrativa = (Integer) params.get("enteTipologiaAmministrativa");
+		Integer idStato = (Integer) params.get("stato");
 
-		VoceUnicaModel eta = (VoceUnicaModel) params.get("enteTipologiaAmministrativa");
-		EnteTipologiaAmministrativa enteTipologiaAmministrativa = new EnteTipologiaAmministrativa();
-		enteTipologiaAmministrativa.setIdEnteTipologiaAmministrativa(eta.getIdRecord());
-		enteTipologiaAmministrativa.setDescrizione(eta.getEntry());
-
-		StatoModel sm = (StatoModel) params.get("stato");
-		Stato stato = new Stato();
-		stato.setIdStato(sm.getIdStato());
-		stato.setDenominazione(sm.getDenominazione());
-		stato.setSigla(sm.getSigla());
-
-		abiBiblioLogic.setEnte(id_biblioteca, stato, enteTipologiaAmministrativa, (String) params.get("denominazione"));
+		abiBiblioLogic.setEnte(id_biblioteca, denominazione, idEnteTipologiaAmministrativa, idStato);
 	}
 
 	@Override
