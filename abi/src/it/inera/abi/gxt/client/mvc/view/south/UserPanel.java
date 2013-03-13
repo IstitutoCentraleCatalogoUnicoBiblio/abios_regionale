@@ -1,6 +1,7 @@
 package it.inera.abi.gxt.client.mvc.view.south;
 
 import it.inera.abi.gxt.client.auth.UIAuth;
+import it.inera.abi.gxt.client.costants.CostantiApplicativo;
 import it.inera.abi.gxt.client.mvc.model.auth.UtentiAuthModel;
 import it.inera.abi.gxt.client.mvc.view.center.utenti.widget.ModificaAccountWindow;
 import it.inera.abi.gxt.client.resources.Resources;
@@ -14,6 +15,7 @@ import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
@@ -89,7 +91,14 @@ public class UserPanel extends LayoutContainer {
 			}
 		});
 		toolBar.add(logoutButton);
-
+		
+		Label version = new Label();
+		String versionLabel = "Versione: " + CostantiApplicativo.VERSION_NUMBER + "&nbsp;&nbsp;&nbsp;";
+		version.setWidth(200);
+		version.setText(versionLabel);
+		
+		toolBar.add(new FillToolItem());
+		toolBar.add(version);
 		return toolBar;
 	}
 
