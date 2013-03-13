@@ -322,11 +322,10 @@ public class ListaContattiPanel extends ContentPanel {
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
 							ContattiModel nuovoContatto =null;
-							if(modifica){
-
-								nuovoContatto=grid.getSelectionModel().getSelectedItem();
-								nuovoContatto.setIdContatti(grid.getSelectionModel().getSelectedItem().getIdContatti());
-							}else{
+							if (modifica) {
+								nuovoContatto = grid.getSelectionModel().getSelectedItem();
+								
+							} else {
 								nuovoContatto = grid.getStore().getAt(0);
 							}
 
