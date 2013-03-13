@@ -12,8 +12,11 @@ import it.inera.abi.persistence.Stato;
  */
 public interface EnteDao {
 	
-	public Ente createEnteIfNotExist(Stato stato, EnteTipologiaAmministrativa tipologiaAmministrativa,
-	String denominazione, String asia_asip, String partita_iva, String codice_fiscale);
+	public Ente createEnteIfNotExist(
+			String denominazione,
+			Integer idTipologiaAmministrativa,
+			Integer idStato, 
+			String asiaAsip, String partitaIva, String codiceFiscale);
 
 	public List<Ente> getEntiPaginatiFilteredPerCombos(String filter, int offset,
 			int rows);
