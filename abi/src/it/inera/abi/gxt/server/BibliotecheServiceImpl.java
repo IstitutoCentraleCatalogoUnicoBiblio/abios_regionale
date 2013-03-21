@@ -1709,10 +1709,12 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		DynaTabDTO dynaTabDTODB = new DynaTabDTO();
 		dynaTabDTODB.setId(idToSave);
 		dynaTabDTODB.setIdTabella(idTabellaDinamica);
+		
 		try {
-			abiBiblioLogic.addEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(dynaTabDTODB, id_biblioteca,idTabellaDinamica) ;
+			abiBiblioLogic.addEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(dynaTabDTODB, id_biblioteca, idTabellaDinamica);
+			
 		} catch (DuplicateEntryException e) {
-			throw new DuplicatedEntryClientSideException(e.getMessage()); 
+			throw new DuplicatedEntryClientSideException(e.getMessage());
 		}
 	}
 
@@ -1735,14 +1737,15 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		List<VoceUnicaModel> sublist = new ArrayList<VoceUnicaModel>();
 		int countAll=abiBiblioLogic.countAllSpogliMaterialBibliograficoPossibili(query);
 
-		List<SpogliBibliografici> spogliBibliograficis =abiBiblioLogic.getSpogliMaterialBibliograficoPerPaginazioneCombobox(start,limit,query);
-		Iterator<SpogliBibliografici> iterator = spogliBibliograficis.iterator();
+		List<String> spogliBibliograficis = abiBiblioLogic.getSpogliMaterialBibliograficoPerPaginazioneCombobox(start,limit,query);
+		
+		Iterator<String> iterator = spogliBibliograficis.iterator();
+		
 		while (iterator.hasNext()) {
-			SpogliBibliografici spogliBibliografici = (SpogliBibliografici) iterator
-			.next();
+			String spogliBibliografici = (String) iterator.next();
 			VoceUnicaModel model = new VoceUnicaModel();
-			model.setIdRecord(spogliBibliografici.getIdSpogliBibliografici());
-			model.setEntry(spogliBibliografici.getDescrizioneBibliografica());
+			model.setIdRecord(spogliBibliograficis.indexOf(spogliBibliografici));
+			model.setEntry(spogliBibliografici);
 
 			sublist.add(model);
 		}

@@ -61,7 +61,7 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 
 	private TabelleDinamicheServiceAsync tabelleDinamicheService = Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
 	private boolean modifica = false;
-	private boolean categoriaSelected=false;
+	private boolean categoriaSelected = false;
 	private BibliotecheServiceAsync bibliotecheService;
 	private int id_biblioteca;
 	private int idr_removeRecord;
@@ -111,12 +111,12 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 			public Object preProcessValue(Object value) {
 				if (value == null) {
 					return value;
-				}
-				if(modifica){
-					return tipologia.getStore().findModel("denominazioneMateriale", value.toString());
-					
+
 				} else {
-					return  "Seleziona una tipologia...";
+					if (modifica) {
+						return tipologia.getStore().findModel("denominazioneMateriale", value.toString());
+
+					} else return  "Seleziona una tipologia...";
 				}
 			}
 
@@ -125,24 +125,18 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 				if (modifica == false) {
 					if (value == null) {
 						return value;
-					}
-					return ((ModelData) value).get("denominazioneMateriale");
-				}else{
-					return grid.getSelectionModel().getSelectedItem().getEntry();
-				}
-			} 
+
+					} else return ((ModelData) value).get("denominazioneMateriale");
+					
+				} else return grid.getSelectionModel().getSelectedItem().getEntry();
+			}
 		};
 
 		RpcProxy<PagingLoadResult<PatrimonioSpecializzazioneModel>> tipologiaPatrimonioProxy = new RpcProxy<PagingLoadResult<PatrimonioSpecializzazioneModel>>() {
-
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<PagingLoadResult<PatrimonioSpecializzazioneModel>> callback) {
-				tabelleDinamicheService.getTipologiePatrimonioFiltratePerPaginazioneCombobox(
-						(ModelData) loadConfig, callback);
-
+			protected void load(Object loadConfig, AsyncCallback<PagingLoadResult<PatrimonioSpecializzazioneModel>> callback) {
+				tabelleDinamicheService.getTipologiePatrimonioFiltratePerPaginazioneCombobox((ModelData) loadConfig, callback);
 			}
-
 		};
 
 		ModelReader tipologiaPatrimonioReader = new ModelReader();
@@ -153,8 +147,6 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		tipologiaPatrimonioLoader.load();
 		final ListStore<PatrimonioSpecializzazioneModel> tipologiaPatrimonioComboboxStore = new ListStore<PatrimonioSpecializzazioneModel>(
 				tipologiaPatrimonioLoader);
-
-
 
 		tipologia.setStore(tipologiaPatrimonioComboboxStore);
 
@@ -199,9 +191,9 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		re.setErrorSummary(false);
 
 		RowEditor<PatrimonioLibrarioModel>.RowEditorMessages rowEditorMessages = re.getMessages();
-        rowEditorMessages.setCancelText("Annulla");
-        rowEditorMessages.setSaveText("Salva");
-        re.setMessages(rowEditorMessages);
+		rowEditorMessages.setCancelText("Annulla");
+		rowEditorMessages.setSaveText("Salva");
+		re.setMessages(rowEditorMessages);
 		
 		RpcProxy<List<PatrimonioLibrarioModel>> proxyPatrimonioLibrario = new RpcProxy<List<PatrimonioLibrarioModel>>() {
 
@@ -224,11 +216,11 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		grid.addPlugin(re);
 		grid.setStripeRows(true);
 		grid.getView().setAutoFill(true);
+		
 		tipologia.addSelectionChangedListener(new SelectionChangedListener<PatrimonioSpecializzazioneModel>() {
 
 			@Override
-			public void selectionChanged(
-					SelectionChangedEvent<PatrimonioSpecializzazioneModel> se) {
+			public void selectionChanged(SelectionChangedEvent<PatrimonioSpecializzazioneModel> se) {
 				if (se.getSelectedItem() != null && grid.getStore().getAt(0) != null) {
 					if (se.getSelectedItem().getIdRecord() == -1) {
 						se.setCancelled(true);
@@ -240,15 +232,18 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 					} else {
 						if (modifica == false) {
 							grid.getStore().getAt(0).setIdRecord(se.getSelectedItem().getIdRecord());
+							PatrimonioSpecializzazioneModel newValPatr = se.getSelectedItem();
+							newValPatr.setEntry(se.getSelectedItem().getEntry().substring(1));
+							tipologia.setValue(newValPatr);
+							
 						} else {
-
 							grid.getSelectionModel().getSelectedItem().setIdRecord(se.getSelectedItem().getIdRecord());
-
 						}
 					}
 				}
 			}
 		});
+		
 		toolBar = new ToolBar();
 		/*setta il font-weight del testo a bold*/
 		toolBar.addStyleName("font-weight-style");
@@ -263,9 +258,6 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				tipologia.setEmptyText("Seleziona una tipologia...");
-				tipologia.setEditable(true);
-				tipologia.setEnabled(true);
 				remove.disable();
 				PatrimonioLibrarioModelForCombo newPatr = new PatrimonioLibrarioModelForCombo();
 				newPatr.setQuantita(0);
@@ -375,7 +367,7 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 			public void handleEvent(BaseEvent be) {
 				if (categoriaSelected) {
 					be.setCancelled(true);
-					categoriaSelected=false;
+					categoriaSelected = false;
 					return;
 				}
 
@@ -428,34 +420,36 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 								}
 								
 							}
-							modifica=false;
-							bibliotecheService.addPatrimonioSpeciale(
-									id_biblioteca, id_nuovoPatr, quantita,	quantitaUltimoAnno,	new AsyncCallback<Void>() {
+							
+							modifica = false;
+							bibliotecheService.addPatrimonioSpeciale(id_biblioteca, id_nuovoPatr, quantita,	quantitaUltimoAnno,	new AsyncCallback<Void>() {
 
-										@Override
-										public void onSuccess(Void result) {
-											loaderPatrimonioGriglia.load();
-											modifica = false;
-											AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+								@Override
+								public void onSuccess(Void result) {
+									loaderPatrimonioGriglia.load();
+									modifica = false;
+									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 
-										}
+								}
 
-										@Override
-										public void onFailure(Throwable caught) {
-											if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
-												AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-												loaderPatrimonioGriglia.load();
-												modifica = false;
-											}
-										}
+								@Override
+								public void onFailure(Throwable caught) {
+									if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
+										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+										loaderPatrimonioGriglia.load();
+										modifica = false;
+									}
+								}
 
-									});
+							});
 						} else {
 							if (modifica == false) {
 								store.remove(0);
+								
 							} else {
 								modifica = false;
 							}
+							
 							loaderPatrimonioGriglia.load();
 						}
 					}

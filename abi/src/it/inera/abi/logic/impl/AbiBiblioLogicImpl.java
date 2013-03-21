@@ -874,7 +874,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 
 	@Override
-	public void addEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(	DynaTabDTO dynaTabDTODB, int id_biblioteca, int idTabellaDinamica) throws DuplicateEntryException {
+	public void addEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(DynaTabDTO dynaTabDTODB, int id_biblioteca, int idTabellaDinamica) throws DuplicateEntryException {
 		biblioDao.addEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(dynaTabDTODB,id_biblioteca,idTabellaDinamica);
 
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica "+Utility.extractClassName(DtoJpaMapping.getDynaClass(idTabellaDinamica).getName())+": id_record="+dynaTabDTODB.getId()+" - id_biblioteca="+id_biblioteca);
@@ -899,13 +899,12 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 
 	@Override
 	public int countAllSpogliMaterialBibliograficoPossibili(String filter) {
-
 		return biblioDao.countAllSpogliMaterialBibliograficoPossibili(filter);
 	}
 
 	@Override
-	public List<SpogliBibliografici> getSpogliMaterialBibliograficoPerPaginazioneCombobox(int start, int limit, String query) {
-		return biblioDao.getListaSpogliMaterialBibliograficoPossibiliFiltered( start, limit,query);
+	public List<String> getSpogliMaterialBibliograficoPerPaginazioneCombobox(int start, int limit, String query) {
+		return biblioDao.getListaSpogliMaterialBibliograficoPossibiliFiltered(start, limit, query);
 
 	}
 

@@ -3,17 +3,13 @@ package it.inera.abi.logic;
 import it.inera.abi.dao.DuplicateEntryException;
 import it.inera.abi.dao.EntryNotFoundException;
 import it.inera.abi.dto.DynaTabDTO;
-import it.inera.abi.persistence.DepositiLegali;
-import it.inera.abi.persistence.Photo;
-import it.inera.abi.persistence.PrestitoInterbibliotecario;
-import it.inera.abi.persistence.PrestitoLocale;
-import it.inera.abi.persistence.Riproduzioni;
 import it.inera.abi.persistence.AccessoModalita;
 import it.inera.abi.persistence.Biblioteca;
 import it.inera.abi.persistence.Contatti;
 import it.inera.abi.persistence.ContattiTipo;
 import it.inera.abi.persistence.DenominazioniAlternative;
 import it.inera.abi.persistence.DenominazioniPrecedenti;
+import it.inera.abi.persistence.DepositiLegali;
 import it.inera.abi.persistence.DestinazioniSociali;
 import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.Ente;
@@ -25,14 +21,17 @@ import it.inera.abi.persistence.PartecipaCataloghiCollettiviMateriale;
 import it.inera.abi.persistence.PartecipaCataloghiGenerali;
 import it.inera.abi.persistence.PartecipaCataloghiSpecialiMateriale;
 import it.inera.abi.persistence.Patrimonio;
+import it.inera.abi.persistence.Photo;
+import it.inera.abi.persistence.PrestitoInterbibliotecario;
+import it.inera.abi.persistence.PrestitoLocale;
 import it.inera.abi.persistence.Pubblicazioni;
+import it.inera.abi.persistence.Riproduzioni;
 import it.inera.abi.persistence.RiproduzioniTipo;
 import it.inera.abi.persistence.ServiziInformazioniBibliograficheModalita;
 import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
 import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import it.inera.abi.persistence.SpogliBibliografici;
-import it.inera.abi.persistence.Stato;
 import it.inera.abi.persistence.StatoBibliotecaWorkflow;
 import it.inera.abi.persistence.TipologiaFunzionale;
 import it.inera.abi.persistence.Utenti;
@@ -232,7 +231,7 @@ public interface AbiBiblioLogic {
 
 	public int countAllSpogliMaterialBibliograficoPossibili(String filter);
 
-	public List<SpogliBibliografici> getSpogliMaterialBibliograficoPerPaginazioneCombobox(
+	public List<String> getSpogliMaterialBibliograficoPerPaginazioneCombobox(
 		 int start, int limit, String query);
 
 	public  List<SpogliBibliografici>  getListaSpogliMarerialeBibliograficoByIdBiblio(int id_biblioteca);

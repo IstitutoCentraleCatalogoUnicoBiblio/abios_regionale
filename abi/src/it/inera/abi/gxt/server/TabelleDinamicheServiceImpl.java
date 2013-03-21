@@ -253,7 +253,7 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 				modelCat.setEntry(DTO.getDescrizioneCat());
 
 				model.setIdRecord(DTO.getId_patrimonio_specializzazione());
-				model.setEntry(DTO.getDescrizioneTipologia());
+				model.setEntry(">" + DTO.getDescrizioneTipologia());
 
 				if (DTO.getIdCatMadre() != null) {
 
@@ -288,7 +288,7 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 				modelCat.setEntry(DTO.getDescrizioneCat());				
 
 				model.setIdRecord(DTO.getId_patrimonio_specializzazione());
-				model.setEntry(DTO.getDescrizioneTipologia());
+				model.setEntry(">" + DTO.getDescrizioneTipologia());
 
 				if (DTO.getIdCatMadre() != null) {
 
@@ -318,7 +318,7 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 
 				PatrimonioSpecializzazioneModel model = new PatrimonioSpecializzazioneModel();
 				model.setIdRecord(DTO.getId_patrimonio_specializzazione());
-				model.setEntry(DTO.getDescrizioneTipologia());
+				model.setEntry(">" + DTO.getDescrizioneTipologia());
 				model.setCondition(3);
 
 				sublist.add(model);

@@ -134,8 +134,7 @@ public class ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel extends Co
 		RpcProxy<PagingLoadResult<VoceUnicaModel>> descrizioneVoceProxy = new RpcProxy<PagingLoadResult<VoceUnicaModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<PagingLoadResult<VoceUnicaModel>> callback) {
+			protected void load(Object loadConfig, AsyncCallback<PagingLoadResult<VoceUnicaModel>> callback) {
 				tabelleDinamicheService.getListaVociFiltratePerPaginazioneCombobox(idTabellaDinamica,(ModelData)loadConfig, callback);
 			}
 
@@ -173,8 +172,7 @@ public class ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel extends Co
 					return value;
 				}
 				if (modifica == true) {
-					return descrizioneVoceField.getStore().findModel("entry",
-							value.toString());
+					return descrizioneVoceField.getStore().findModel("entry", value.toString());
 
 				} else
 					return "Descrizione...";
@@ -184,13 +182,15 @@ public class ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel extends Co
 			public Object postProcessValue(Object value) {
 
 				if (value == null) {
-					if(descrizioneVoceField.getRawValue()!=null){
+					if (descrizioneVoceField.getRawValue() != null) {
 						return descrizioneVoceField.getRawValue();
-					}
-					return value;
+						
+					} else return value;
+					
+				} else {
+					VoceUnicaModel tmp = (VoceUnicaModel) value;
+					return tmp.getEntry();
 				}
-				VoceUnicaModel tmp=(VoceUnicaModel) value;
-				return tmp.getEntry();
 			}
 		};
 
@@ -211,8 +211,7 @@ public class ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel extends Co
 		RpcProxy<List<VoceUnicaModel>> proxyDestinazioneSocialeGriglia = new RpcProxy<List<VoceUnicaModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<List<VoceUnicaModel>> callback) {
+			protected void load(Object loadConfig, AsyncCallback<List<VoceUnicaModel>> callback) {
 				bibliotecheService.getEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica( id_biblioteca,idTabellaDinamica, callback);
 			}
 
@@ -272,17 +271,16 @@ public class ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel extends Co
 			public void componentSelected(ButtonEvent ce) {
 				remove.disable();
 
-				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>(){
+				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
 
 					@Override
 					public void handleEvent(MessageBoxEvent ce) {
 
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
-
-							int id_rimuoviModalita = grid.getSelectionModel().getSelectedItem().	getIdRecord();
-							bibliotecheService.removeEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(id_biblioteca, id_rimuoviModalita,idTabellaDinamica,
-									new AsyncCallback<Void>() {
+							int id_rimuoviModalita = grid.getSelectionModel().getSelectedItem().getIdRecord();
+							bibliotecheService.removeEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(
+									id_biblioteca, id_rimuoviModalita, idTabellaDinamica, new AsyncCallback<Void>() {
 
 								@Override
 								public void onSuccess(Void result) {
@@ -326,7 +324,7 @@ public class ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel extends Co
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<VoceUnicaModel> se) {
-				if(se.getSelectedItem()!=null && 	grid.getStore().getCount()>0){
+				if (se.getSelectedItem() != null) {
 					grid.getStore().getAt(0).setIdRecord(se.getSelectedItem().getIdRecord());
 				}
 			}
@@ -339,91 +337,66 @@ public class ListaPerCaricamentoDatiTabelleDinamicheAVoceSingolaPanel extends Co
 			}	
 		});
 
-		/*Aggiungo un listener all RowEditor per la cattura dell'evento di salvataggio della nuova voce*/
 		re.addListener(Events.AfterEdit, new Listener<BaseEvent>() {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
-				/*Controllo che l'eventuale stringa digitata sia contenuta nello store*/
-				if(	descrizioneVoceStore.getModels().size()<=0){
-					/*se lo store non è stato ancora caricato blocco l'evento e ricarico la lista
-					 * e stampo un messaggio di errore*/
-					be.setCancelled(true);
-					loaderGriglia.load();
-					AbiMessageBox.messageErrorAlertBox(AbiMessageBox.INSERIMENTO_PARAMETRO_FAILURE_MESSAGE, AbiMessageBox.INSERIMENTO_PARAMETRO_TITLE);
-					return;
-				}else{
-					/*altrimenti itero gli elementi dello store e se l'elemento visualizzato è contenuto proseguo 
-					 * altrimenti  blocco l'evento e ricarico la lista e stampo un messaggio di errore*/
-					boolean trovato=false;
-					for(VoceUnicaModel model :descrizioneVoceStore.getModels()){
-						if(model.getEntry().compareToIgnoreCase(descrizioneVoceField.getRawValue())!=0){
-							trovato =true;
-							break;
-						}
-					}
-					if(trovato==false){
-						be.setCancelled(true);
-						loaderGriglia.load();
-						AbiMessageBox.messageErrorAlertBox(AbiMessageBox.INSERIMENTO_PARAMETRO_FAILURE_MESSAGE, AbiMessageBox.INSERIMENTO_PARAMETRO_TITLE);
-						return;
-					}
-				}
 				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
 
 					@Override
 					public void handleEvent(MessageBoxEvent ce) {
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
-
-							int idToSave=grid.getStore().getAt(0).getIdRecord();
-							bibliotecheService.addEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(idToSave,id_biblioteca,idTabellaDinamica, new AsyncCallback<Void>() {
-
+							int idToSave = grid.getStore().getAt(0).getIdRecord();
+							bibliotecheService.addEntryTabelleDinamicheByIdBiblioAndIdTabellaDinamica(idToSave, id_biblioteca, idTabellaDinamica, new AsyncCallback<Void>() {
 								@Override
 								public void onSuccess(Void result) {
-									re.disable();
 									loaderGriglia.load();
-									modifica = false;
+									re.disable();
+									descrizioneVoceField.enable();
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+									
 								}
-
+								
 								@Override
 								public void onFailure(Throwable caught) {
-									if (UIAuth.checkIsLogin(caught.toString())) { // controllo se l'errore è dovuto alla richiesta di login
-										re.disable();
-
-										if (caught instanceof DuplicatedEntryClientSideException){
+									if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
+										descrizioneVoceField.enable();
+										if (caught instanceof DuplicatedEntryClientSideException) {
 											AbiMessageBox.messageErrorAlertBox(caught.getMessage(), AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-										}else{
+											
+										} else {
 											AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 										}
+										
 										loaderGriglia.load();
+										re.disable();
 									}
 								}
 							});
-						} 
-						else{
-							loaderGriglia.load();		
+							
+						} else {
+							re.disable();
+							loaderGriglia.load();
 						}
 					}
 				};
 				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, l);
 			}
 		});
-
 	}
+	
 	/**
-	 * Setta va variabile id_biblioteca
+	 * Setta la variabile id_biblioteca
 	 * */
-	public void setIdBiblioteca(int idBiblioteca){
-		this.id_biblioteca=idBiblioteca;
+	public void setIdBiblioteca(int idBiblioteca) {
+		this.id_biblioteca = idBiblioteca;
 	}
 
 	/**
 	 * Ritorna il l'oggeto di tipo loader per il caricamento dei dati nello store della Grid 
 	 * */
-	public BaseListLoader<ListLoadResult<VoceUnicaModel>> getLoader(){
-
+	public BaseListLoader<ListLoadResult<VoceUnicaModel>> getLoader() {
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, add);
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, remove);
 		UIWorkflow.gridEnableEvent(grid);

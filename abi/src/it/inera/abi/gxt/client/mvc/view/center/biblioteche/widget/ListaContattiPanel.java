@@ -202,10 +202,21 @@ public class ListaContattiPanel extends ContentPanel {
 					SelectionChangedEvent<VoceUnicaModel> se) {
 				if (se.getSelectedItem() != null) {
 
-					if(modifica){
+					if (modifica) {
 						grid.getSelectionModel().getSelectedItem().setContattiTipo(se.getSelectedItem().getIdRecord());
-					}else{
+						
+					} else {
 						grid.getStore().getAt(0).setContattiTipo(se.getSelectedItem().getIdRecord());
+						if (se.getSelectedItem().getIdRecord().intValue() == 1 || se.getSelectedItem().getIdRecord().intValue() == 2) {
+							if (valore != null) {
+								valore.setValue("+39 ");
+							}
+							
+						} else {
+							if (valore != null) {
+								valore.clear();
+							}
+						}
 					}
 
 				}

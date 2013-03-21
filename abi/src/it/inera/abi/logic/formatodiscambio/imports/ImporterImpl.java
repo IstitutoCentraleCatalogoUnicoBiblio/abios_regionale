@@ -1316,8 +1316,11 @@ public class ImporterImpl implements Importer {
 				bibliotecaDb.setGestisceServizioBibliograficoEsterno(false);
 				log.debug("GestisceServizioBibliograficoEsterno: " + false);
 
-				bibliotecaDb.getServiziInformazioniBibliograficheModalitas().clear();
-				log.debug("Cancellati SERVIZI ESTERNI...");				
+				if (bibliotecaDb.getServiziInformazioniBibliograficheModalitas() != null 
+						&& bibliotecaDb.getServiziInformazioniBibliograficheModalitas().size() > 0) {
+					bibliotecaDb.getServiziInformazioniBibliograficheModalitas().clear();
+					log.debug("Cancellati SERVIZI ESTERNI...");				
+				}
 			}
 
 			log.debug("Modificate informazioni SERVIZI INTERNI/ESTERNI...");

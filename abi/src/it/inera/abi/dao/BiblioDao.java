@@ -204,7 +204,7 @@ public interface BiblioDao {
 
 	public int countAllSpogliMaterialBibliograficoPossibili(String filter);
 
-	public List<SpogliBibliografici> getListaSpogliMaterialBibliograficoPossibiliFiltered(
+	public List<String> getListaSpogliMaterialBibliograficoPossibiliFiltered(
 		 int start, int limit,String filter);
 
 	public List<SpogliBibliografici> getListaSpogliMarerialeBibliograficoByIdBiblio(

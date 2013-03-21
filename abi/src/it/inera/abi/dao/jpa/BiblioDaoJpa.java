@@ -744,13 +744,11 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	}
 
-	// TODO
 	/*
 	 * Modificare:anzichè fare la query su tutte le biblioteche che contengono
 	 * quel determinato id padre richiamare il metodo
 	 * bibliotecaPadre.getBibliotecasFigli()
 	 */
-
 	@Override
 	@Transactional
 	public List<Biblioteca> getPuntiDiServizioDecentrati(int id_biblioteca) {
@@ -1812,7 +1810,7 @@ public class BiblioDaoJpa implements BiblioDao {
 	public int countAllSpogliMaterialBibliograficoPossibili(String filter) {
 
 		StringBuffer sb = new StringBuffer();
-		sb.append(" SELECT COUNT(s) FROM SpogliBibliografici s ");
+		sb.append(" SELECT COUNT(distinct s.descrizioneBibliografica) FROM SpogliBibliografici s ");
 
 		if (filter != null && filter.length() > 0) {
 			sb.append(" WHERE s.descrizioneBibliografica like :descrizioneBibliografica ");
@@ -1830,16 +1828,18 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public List<SpogliBibliografici> getListaSpogliMaterialBibliograficoPossibiliFiltered(
+	public List<String> getListaSpogliMaterialBibliograficoPossibiliFiltered(
 			int start, int limit, String filter) {
 
 		StringBuffer sb = new StringBuffer();
-		sb.append(" FROM SpogliBibliografici s ");
+		sb.append("select DISTINCT s.descrizioneBibliografica FROM SpogliBibliografici s ");
 
 		if (filter != null && filter.length() > 0) {
 			sb.append(" WHERE s.descrizioneBibliografica like :descrizioneBibliografica ");
 		}
 
+		sb.append(" ORDER BY s.descrizioneBibliografica asc ");
+		
 		Query q = em.createQuery(sb.toString());
 
 		if (filter != null && filter.length() > 0) {
