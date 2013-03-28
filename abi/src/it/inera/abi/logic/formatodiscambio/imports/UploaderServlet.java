@@ -3,6 +3,7 @@ package it.inera.abi.logic.formatodiscambio.imports;
 import it.inera.abi.logic.formatodiscambio.ImportLogic;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -65,7 +66,11 @@ public class UploaderServlet extends HttpServlet {
 				FileItem item = (FileItem) it.next();
 				if (!item.isFormField() && "uploadedfile".equals(item.getFieldName())) {
 					File uploadedFile = new File(System.getProperty("java.io.tmpdir") + File.separator + item.getName());
-					item.write(uploadedFile);
+					String prova = item.getString("UTF-8").replace("ISO-8859-1", "UTF-8");
+					FileWriter wr = new FileWriter(uploadedFile);
+					wr.write(prova);
+					wr.flush();
+//					item.write(uploadedFile);
 					pathUploadedFile = uploadedFile.getAbsolutePath();
 				} else if (item.isFormField()) {
 					String name = item.getFieldName();
