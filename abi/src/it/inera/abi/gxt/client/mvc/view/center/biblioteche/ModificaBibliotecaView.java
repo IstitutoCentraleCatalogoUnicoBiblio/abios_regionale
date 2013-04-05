@@ -144,16 +144,22 @@ public class ModificaBibliotecaView extends View {
 			if (!tmpBiblio.equals(null)) {
 
 				updateToolbar();
-
+				
 				String heading = null;
 
 				if (revisione) {
 					heading = "Revisione biblioteca:  ";
+					lista.setText("Lista");
+					
 				} else {
-					if (readOnly) 
+					if (readOnly) {
 						heading = "Visualizzazione biblioteca:  ";
-					else
+						lista.setText("Lista");
+						
+					} else {
 						heading = "Modifica biblioteca:  ";
+						lista.setText("Esci e rendi Occupata");
+					}
 				}
 				mainModficaBiblioPanel.setHeading(heading	
 						+ tmpBiblio.getCodice() + " - "
@@ -820,7 +826,9 @@ public class ModificaBibliotecaView extends View {
 		lista.addListener(Events.OnClick, new Listener<BaseEvent>() {
 			@Override
 			public void handleEvent(BaseEvent be) {
-				AbiMessageBox.messageConfirmOperationAlertBox("Tornare alla lista biblioteche?", "Torna alla lista", new Listener<MessageBoxEvent>(){
+				String avvisoTitle = UIWorkflow.isReadOnly() ? "Torna alla lista" : "Torna alla lista e rendi occupata";
+				String avvisoMsg = UIWorkflow.isReadOnly() ? "Tornare alla lista biblioteche?" : "Tornare alla lista e rendi occupata la biblioteca?";
+				AbiMessageBox.messageConfirmOperationAlertBox(avvisoMsg, avvisoTitle, new Listener<MessageBoxEvent>(){
 					@Override
 					public void handleEvent(MessageBoxEvent be) {
 						Button btn = be.getButtonClicked();

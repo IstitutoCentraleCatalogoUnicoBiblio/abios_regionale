@@ -2,6 +2,7 @@ package it.inera.abi.gxt.client.mvc.view.center.utenti.widget;
 
 import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.Utils;
+import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.model.auth.ProfiliModel;
 import it.inera.abi.gxt.client.services.UtentiServiceAsync;
 
@@ -50,7 +51,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class RicercaUtentiFormPanel extends FormPanel {
-	
+
 	private EventType eventToForwordOnSearch = null;
 
 	protected final TextField<String> username;
@@ -59,7 +60,7 @@ public class RicercaUtentiFormPanel extends FormPanel {
 	protected final TextField<String> cognome;
 	protected final TextField<String> email;
 	protected final ComboBox<ProfiliModel> ruolo;
-	protected SimpleComboBox<String> enabled;
+	protected ComboBox<VoceUnicaModel> enabled;
 	protected Button ricerca; 
 	protected HashMap<String, Object> keys = new HashMap<String, Object>();
 	
@@ -88,31 +89,23 @@ public class RicercaUtentiFormPanel extends FormPanel {
 		
 		right.setLayout(layoutLeft);
 		
-		enabled = new SimpleComboBox<String>();
-		enabled.setFieldLabel("Stato account");
-		enabled.setTriggerAction(TriggerAction.ALL);
-		enabled.setEditable(false);
-		enabled.setFireChangeEventOnSetValue(true);
-		enabled.add("<option class=\"x-combo-list-item\" style=\"height:18px;\">&nbsp;</option>");
-		enabled.add("Tutti");
-		enabled.add("Abilitati");
-		enabled.add("Disabilitati");
+		ListStore<VoceUnicaModel> listStoreStati = new ListStore<VoceUnicaModel>();
+		listStoreStati.insert(new VoceUnicaModel(-1, ""), 0);
+		listStoreStati.insert(new VoceUnicaModel(0, "Tutti"), 1);
+		listStoreStati.insert(new VoceUnicaModel(1, "Abilitati"), 2);
+		listStoreStati.insert(new VoceUnicaModel(2, "Disabilitati"), 3);
 		
-		enabled.setSimpleValue("Tutti");
-		enabled.addSelectionChangedListener(new SelectionChangedListener<SimpleComboValue<String>>() {
-			@Override
-			public void selectionChanged(
-					SelectionChangedEvent<SimpleComboValue<String>> se) {
-				if (se.getSelectedItem() != null && se.getSelectedItem().getValue() != null) {
-					String s = (String) se.getSelectedItem().getValue();
-					if (!s.equalsIgnoreCase("Tutti") && !s.equalsIgnoreCase("Abilitati") && !s.equalsIgnoreCase("Disabilitati")) {
-						enabled.setRawValue("");
-						enabled.clear();
-					}
-				}
-			}
-		});
-//		left.add(enabled);
+		enabled = new ComboBox<VoceUnicaModel>();
+		enabled.setFieldLabel("Stato account");
+		enabled.setDisplayField("entry");
+		enabled.setStore(listStoreStati);
+		enabled.setFireChangeEventOnSetValue(true);
+		enabled.setEmptyText("Stato...");		
+		enabled.setLazyRender(false);
+		enabled.setTriggerAction(TriggerAction.ALL);
+		enabled.setForceSelection(false);
+		enabled.setEditable(false);
+		enabled.setTemplate(getTemplateEmptyRowStatiModel());
 		
 		LayoutContainer left = new LayoutContainer();
 
@@ -245,13 +238,18 @@ public class RicercaUtentiFormPanel extends FormPanel {
 				keys.put("email", email.getValue());
 				if (ruolo.getValue() != null)
 					keys.put("ruolo", ruolo.getValue().getId().toString());
-				if (enabled.getValue() != null){
-					if(enabled.getValue().getValue().equalsIgnoreCase("Abilitati")){
-						keys.put("enabled",true);
-					}else if (enabled.getValue().getValue().equalsIgnoreCase("Disabilitati")) {
-						keys.put("enabled",false);
+				
+				if (enabled.getValue() != null) {
+					if (enabled.getValue().getIdRecord().intValue() > 0) {
+						if (enabled.getValue().getEntry().equalsIgnoreCase("Abilitati")) {
+							keys.put("enabled", true);
+							
+						} else if (enabled.getValue().getEntry().equalsIgnoreCase("Disabilitati")) {
+							keys.put("enabled", false);
+						}
 					}
 				}
+				
 				AppEvent event = new AppEvent(eventToForwordOnSearch);
 				event.setData("parametriRicerca", keys);
 
@@ -307,5 +305,13 @@ public class RicercaUtentiFormPanel extends FormPanel {
 	'<div class="x-combo-list-item" style="height:18px;">{denominazione}</div>', 
 	'</tpl>' 
 	].join(""); 
-	}-*/; 
+	}-*/;
+	
+	private native String getTemplateEmptyRowStatiModel() /*-{ 
+	return [ 
+	'<tpl for=".">', 
+	'<div class="x-combo-list-item" style="height:18px;">{entry}</div>', 
+	'</tpl>' 
+	].join(""); 
+	}-*/;
 }
