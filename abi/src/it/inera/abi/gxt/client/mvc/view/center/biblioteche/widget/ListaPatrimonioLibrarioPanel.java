@@ -64,7 +64,6 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 	private boolean categoriaSelected = false;
 	private BibliotecheServiceAsync bibliotecheService;
 	private int id_biblioteca;
-	private int idr_removeRecord;
 	private BaseListLoader<ListLoadResult<PatrimonioLibrarioModel>> loaderPatrimonioGriglia;
 
 	private ToolBar toolBar;
@@ -80,7 +79,7 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		setBorders(false);
 		setHeaderVisible(false);
 		setWidth(750);
-		setHeight(130);
+		setHeight(200);
 		setScrollMode(Scroll.AUTOY);
 		setLayout(new FitLayout());
 	}
@@ -109,26 +108,20 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		CellEditor editor = new CellEditor(tipologia) {
 			@Override
 			public Object preProcessValue(Object value) {
-				if (value == null) {
-					return value;
+				if (modifica) {
+					return grid.getSelectionModel().getSelectedItem();
 
 				} else {
-					if (modifica) {
-						return tipologia.getStore().findModel("denominazioneMateriale", value.toString());
-
-					} else return  "Seleziona una tipologia...";
+					return null;
 				}
 			}
 
 			@Override
 			public Object postProcessValue(Object value) {
-				if (modifica == false) {
-					if (value == null) {
-						return value;
-
-					} else return ((ModelData) value).get("denominazioneMateriale");
-					
-				} else return grid.getSelectionModel().getSelectedItem().getEntry();
+				if (value == null) {
+					return value;
+				} 
+				return ((ModelData) value).get("denominazioneMateriale");
 			}
 		};
 
@@ -141,9 +134,8 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 
 		ModelReader tipologiaPatrimonioReader = new ModelReader();
 
-		PagingLoader<PagingLoadResult<PatrimonioSpecializzazioneModel>> tipologiaPatrimonioLoader = new BasePagingLoader<PagingLoadResult<PatrimonioSpecializzazioneModel>>(
+		final PagingLoader<PagingLoadResult<PatrimonioSpecializzazioneModel>> tipologiaPatrimonioLoader = new BasePagingLoader<PagingLoadResult<PatrimonioSpecializzazioneModel>>(
 				tipologiaPatrimonioProxy, tipologiaPatrimonioReader);
-		tipologiaPatrimonioLoader.setLimit(10);
 		tipologiaPatrimonioLoader.load();
 		final ListStore<PatrimonioSpecializzazioneModel> tipologiaPatrimonioComboboxStore = new ListStore<PatrimonioSpecializzazioneModel>(
 				tipologiaPatrimonioLoader);
@@ -194,15 +186,13 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		rowEditorMessages.setCancelText("Annulla");
 		rowEditorMessages.setSaveText("Salva");
 		re.setMessages(rowEditorMessages);
-		
+
 		RpcProxy<List<PatrimonioLibrarioModel>> proxyPatrimonioLibrario = new RpcProxy<List<PatrimonioLibrarioModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,	AsyncCallback<List<PatrimonioLibrarioModel>> callback) {
-
+			protected void load(Object loadConfig, AsyncCallback<List<PatrimonioLibrarioModel>> callback) {
 				bibliotecheService.getListaPatrimonioSpecializzazione(id_biblioteca, callback);
 			}
-
 		};
 
 		ModelReader readerPatrimonioGriglia = new ModelReader();
@@ -216,34 +206,26 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		grid.addPlugin(re);
 		grid.setStripeRows(true);
 		grid.getView().setAutoFill(true);
-		
+
 		tipologia.addSelectionChangedListener(new SelectionChangedListener<PatrimonioSpecializzazioneModel>() {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<PatrimonioSpecializzazioneModel> se) {
-				if (se.getSelectedItem() != null && grid.getStore().getAt(0) != null) {
+				if (se.getSelectedItem() != null) {
 					if (se.getSelectedItem().getIdRecord() == -1) {
 						se.setCancelled(true);
 						AbiMessageBox.messageAlertBox(AbiMessageBox.INFO_SELECTION_MESSAGE, AbiMessageBox.INFO_SELECTION_TITLE);
 						grid.getStore().remove(0);
-						categoriaSelected=true;
+						categoriaSelected = true;
 						re.stopEditing(true);
-						
+
 					} else {
-						if (modifica == false) {
-							grid.getStore().getAt(0).setIdRecord(se.getSelectedItem().getIdRecord());
-							PatrimonioSpecializzazioneModel newValPatr = se.getSelectedItem();
-							newValPatr.setEntry(se.getSelectedItem().getEntry().substring(1));
-							tipologia.setValue(newValPatr);
-							
-						} else {
-							grid.getSelectionModel().getSelectedItem().setIdRecord(se.getSelectedItem().getIdRecord());
-						}
+						grid.getStore().getAt(0).setIdRecord(se.getSelectedItem().getIdRecord());
 					}
 				}
 			}
 		});
-		
+
 		toolBar = new ToolBar();
 		/*setta il font-weight del testo a bold*/
 		toolBar.addStyleName("font-weight-style");
@@ -285,10 +267,12 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 					public void handleEvent(MessageBoxEvent ce) {
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
-							bibliotecheService.removePatrimonioSpeciale(id_biblioteca, idr_removeRecord, new AsyncCallback<Void>() {
+							int idRecordToRemove = grid.getSelectionModel().getSelectedItem().getIdRecord();
+							bibliotecheService.removePatrimonioSpeciale(id_biblioteca, idRecordToRemove, new AsyncCallback<Void>() {
 
 								@Override
-								public void onSuccess(	Void result) {
+								public void onSuccess(Void result) {
+									tipologia.enable();
 									loaderPatrimonioGriglia.load();
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_RIMOZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_RIMOZIONE_VOCE_TITLE);
 								}
@@ -316,10 +300,7 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		grid.addListener(Events.RowClick, new Listener<GridEvent<PatrimonioLibrarioModel>>() {
 
 			public void handleEvent(GridEvent<PatrimonioLibrarioModel> be) {
-
-				idr_removeRecord = be.getGrid().getSelectionModel().getSelectedItem().getIdRecord();
 				remove.enable();
-				modifica=false;
 			}
 		});
 
@@ -330,20 +311,8 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 		setTopComponent(toolBar);
 		grid.addListener(Events.RowDoubleClick, new Listener<GridEvent<PatrimonioLibrarioModel>>() {
 
-			public void handleEvent(
-					GridEvent<PatrimonioLibrarioModel> be) {
-				/*
-				 * All'evento di doppio clic cu una riga della griglia
-				 * visualizzo nella combobox il valore (VoceUnicaModel)
-				 * ricavato dai valori di quello della griglia
-				 */
-
-				int idr = be.getGrid().getSelectionModel().getSelectedItem().getIdRecord();
-				String str = be.getGrid().getSelectionModel().getSelectedItem().getEntry();
-				tipologia.setValue(new PatrimonioSpecializzazioneModel(idr, str));
-				tipologia.setEmptyText(str);
-				tipologia.setEditable(false);
-				tipologia.setEnabled(false);
+			public void handleEvent(GridEvent<PatrimonioLibrarioModel> be) {
+				tipologia.disable();
 
 				remove.disable();
 				modifica = true;
@@ -357,6 +326,7 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 					store.remove(0);
 				}
 				modifica = false;
+				tipologia.enable();
 				loaderPatrimonioGriglia.load();
 			}
 		});
@@ -383,53 +353,54 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 							int quantitaUltimoAnno;
 
 							if (modifica == false) {
-
 								id_nuovoPatr = store.getAt(0).getIdRecord();
-								
+
 								if (store.getAt(0).getQuantita() != null && store.getAt(0).getQuantita().intValue() != 0) {
 									quantita = store.getAt(0).getQuantita().intValue();
-									
+
 								} else {
 									quantita = 0;
 								}
-								
+
 								if (store.getAt(0).getQuantitaUltimoAnno() != null && store.getAt(0).getQuantitaUltimoAnno().intValue() != 0) {
 									quantitaUltimoAnno = store.getAt(0).getQuantitaUltimoAnno().intValue();
-									
+
 								} else {
 									quantitaUltimoAnno = 0;
 								}
-								
-							}
 
-							else {
+							} else {
 								id_nuovoPatr = grid.getSelectionModel().getSelectedItem().getIdRecord();
-								
+
 								if (grid.getSelectionModel().getSelectedItem().getQuantita() != null && grid.getSelectionModel().getSelectedItem().getQuantita().intValue() != 0) {
 									quantita = grid.getSelectionModel().getSelectedItem().getQuantita().intValue();
-									
+
 								} else {
 									quantita = 0;
 								}
-								
+
 								if (grid.getSelectionModel().getSelectedItem().getQuantitaUltimoAnno() != null && grid.getSelectionModel().getSelectedItem().getQuantitaUltimoAnno().intValue() != 0) {
 									quantitaUltimoAnno = grid.getSelectionModel().getSelectedItem().getQuantitaUltimoAnno().intValue();
-									
+
 								} else {
 									quantitaUltimoAnno = 0;
 								}
-								
 							}
-							
-							modifica = false;
-							bibliotecheService.addPatrimonioSpeciale(id_biblioteca, id_nuovoPatr, quantita,	quantitaUltimoAnno,	new AsyncCallback<Void>() {
+
+							bibliotecheService.addPatrimonioSpeciale(id_biblioteca, modifica, id_nuovoPatr, quantita, quantitaUltimoAnno, new AsyncCallback<Boolean>() {
 
 								@Override
-								public void onSuccess(Void result) {
+								public void onSuccess(Boolean result) {
 									loaderPatrimonioGriglia.load();
 									modifica = false;
-									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+									tipologia.enable();
+									if (result.booleanValue()) {
+										AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 
+									} else {
+										AbiMessageBox.messageAlertBox(AbiMessageBox.ESITO_VOCE_GIA_PRESENTE_MESSAGE, AbiMessageBox.ESITO_VOCE_GIA_PRESENTE_TITLE);
+									}
+									
 								}
 
 								@Override
@@ -438,18 +409,18 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 										loaderPatrimonioGriglia.load();
 										modifica = false;
+										tipologia.enable();
 									}
 								}
 
 							});
+							
 						} else {
 							if (modifica == false) {
 								store.remove(0);
-								
-							} else {
-								modifica = false;
+
 							}
-							
+							tipologia.enable();
 							loaderPatrimonioGriglia.load();
 						}
 					}

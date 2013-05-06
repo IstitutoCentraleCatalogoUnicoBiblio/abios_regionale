@@ -77,7 +77,7 @@ public class ListaSezioniSpecialiPanel extends ContentPanel {
 		setBorders(false);
 		setHeaderVisible(false);
 		setWidth(750);
-		setHeight(130);
+		setHeight(200);
 		setScrollMode(Scroll.AUTOY);
 		setLayout(new FitLayout());
 	}
