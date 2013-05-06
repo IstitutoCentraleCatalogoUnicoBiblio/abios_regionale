@@ -441,10 +441,13 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 
 	@Override
-	public void addSistemaBiblioteca(int id_biblioteca,	int id_sistema_biblioteche) {
-		biblioDao.addSistemaBiblioteca(id_biblioteca, id_sistema_biblioteche);
+	public boolean addSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche) {
+		boolean added = biblioDao.addSistemaBiblioteca(id_biblioteca, id_sistema_biblioteche);
 
-		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica sistema di biblitoeche: id_record="+id_sistema_biblioteche+" - id_biblioteca="+id_biblioteca);
+		if (added)
+			userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica sistema di biblioteche: id_record="+id_sistema_biblioteche+" - id_biblioteca="+id_biblioteca);
+		
+		return added;
 	}
 
 	@Override
@@ -654,11 +657,13 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 
 	@Override
-	public void addDestinazioniSociali(int id_biblioteca, int id_nuovaDestinazione,	String note) {
-		biblioDao.addDestinazioniSociali(id_biblioteca, id_nuovaDestinazione,note);
+	public boolean addDestinazioniSociali(int id_biblioteca, boolean modifica, int id_nuovaDestinazione, String note) {
+		boolean added = biblioDao.addDestinazioniSociali(id_biblioteca, modifica, id_nuovaDestinazione, note);
 
-		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica destinazione sociale: id_record="+id_nuovaDestinazione+" - id_biblioteca="+id_biblioteca);
-
+		if (added)
+			userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica destinazione sociale: id_record="+id_nuovaDestinazione+" - id_biblioteca="+id_biblioteca);
+		
+		return added;
 	}
 
 	@Override
@@ -787,10 +792,13 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 
 	@Override
-	public void addPatrimonioSpeciale(int id_biblioteca, int id_nuovoPatr,	int quantita, int quantitaUltimoAnno) {
-		biblioDao.addPatrimonioSpeciale( id_biblioteca, id_nuovoPatr, quantita,quantitaUltimoAnno);
+	public boolean addPatrimonioSpeciale(int id_biblioteca, boolean modifica, int id_nuovoPatr, int quantita, int quantitaUltimoAnno) {
+		boolean added = biblioDao.addPatrimonioSpeciale(id_biblioteca, modifica, id_nuovoPatr, quantita, quantitaUltimoAnno);
 
-		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica patrimonio speciale: id_record="+id_nuovoPatr+"- id_biblioteca="+id_biblioteca);
+		if (added)
+			userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica patrimonio speciale: id_record="+id_nuovoPatr+" - id_biblioteca="+id_biblioteca);
+		
+		return added;
 	}
 
 	@Override
@@ -898,26 +906,23 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 
 	@Override
-	public int countAllSpogliMaterialBibliograficoPossibili(String filter) {
-		return biblioDao.countAllSpogliMaterialBibliograficoPossibili(filter);
+	public int countAllSpogliMaterialeBibliograficoPossibili(String filter) {
+		return biblioDao.countAllSpogliMaterialeBibliograficoPossibili(filter);
 	}
 
 	@Override
-	public List<String> getSpogliMaterialBibliograficoPerPaginazioneCombobox(int start, int limit, String query) {
-		return biblioDao.getListaSpogliMaterialBibliograficoPossibiliFiltered(start, limit, query);
-
+	public List<String> getSpogliMaterialeBibliograficoPerPaginazioneCombobox(int start, int limit, String query) {
+		return biblioDao.getListaSpogliMaterialeBibliograficoPossibiliFiltered(start, limit, query);
 	}
 
 	@Override
-	public List<SpogliBibliografici> getListaSpogliMarerialeBibliograficoByIdBiblio(int id_biblioteca) {
-		return biblioDao.getListaSpogliMarerialeBibliograficoByIdBiblio(
-				id_biblioteca);
-
+	public List<SpogliBibliografici> getListaSpogliMaterialeBibliograficoByIdBiblio(int id_biblioteca) {
+		return biblioDao.getListaSpogliMaterialeBibliograficoByIdBiblio(id_biblioteca);
 	}
 
 	@Override
-	public void addSpoglioMaterialeBibliografico(String descrSpoglio,int id_biblioteca) throws DuplicateEntryException {
-		biblioDao.addSpoglioMaterialeBibliografico( descrSpoglio,id_biblioteca);
+	public void addSpoglioMaterialeBibliografico(SpogliBibliografici nuovoSpoglio, int id_biblioteca, boolean modifica) {
+		biblioDao.addSpoglioMaterialeBibliografico(nuovoSpoglio, id_biblioteca, modifica);
 
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica fondo speciale: id_biblioteca=N/A");
 	}
@@ -943,7 +948,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 
 	@Override
 	public void addPubblicazioni(Pubblicazioni nuovaPubblicazione, int id_biblioteca, boolean modifica) {
-		biblioDao.addPubblicazioni(nuovaPubblicazione, id_biblioteca,modifica);
+		biblioDao.addPubblicazioni(nuovaPubblicazione, id_biblioteca, modifica);
 
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica fondo speciale:"+(modifica?" id_record="+nuovaPubblicazione.getIdPubblicazioni():"")+" - id_biblioteca="+id_biblioteca);
 
@@ -1196,10 +1201,13 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	}
 
 	@Override
-	public void addDepositoLegaleToBiblio(int id_biblioteca,int id_nuovoTipoDeposito, String anno,boolean modifica) {
-
-		biblioDao.addDepositoLegaleToBiblio( id_biblioteca, id_nuovoTipoDeposito,  anno, modifica);
-		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica deposito legale: "+(modifica?"id_record="+id_nuovoTipoDeposito:"")+" - id_biblioteca="+id_biblioteca);
+	public boolean addDepositoLegaleToBiblio(int id_biblioteca, boolean modifica, int id_nuovoTipoDeposito, String anno) {
+		boolean added = biblioDao.addDepositoLegaleToBiblio(id_biblioteca, modifica, id_nuovoTipoDeposito, anno);
+		
+		if (added)
+			userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica deposito legale: "+(modifica?"id_record="+id_nuovoTipoDeposito:"")+" - id_biblioteca="+id_biblioteca);
+		
+		return added;
 	}
 
 	@Override
@@ -1322,7 +1330,6 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		Date catalogazioneDataModifica = new Date(); // now
 		biblioteca.setCatalogazioneDataModifica(catalogazioneDataModifica);
 		biblioteca.setCatalogazioneDataImport(null);
-		biblioteca.setCatalogazioneNote(null);
 		biblioDao.setNuovoStato(biblioteca, StatiBiblioteca.DEFINITIVA);
 		userActionLog.logActionStatoBibliotecaDefaultUser("Stato biblioteca con id="+biblioteca.getIdBiblioteca()+" impostato a: "+StatiBiblioteca.DEFINITIVA+" per revisione APPROVATA" );
 	}

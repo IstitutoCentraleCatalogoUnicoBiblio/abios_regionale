@@ -291,7 +291,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			} 
 			if (bibliotecaSalvata.getDestinazioniSocialis() != null) {
 				for (DestinazioniSociali destinazioniSociali : 	bibliotecaSalvata.getDestinazioniSocialis()) {
-					abiBiblioLogic.addDestinazioniSociali(idbiblio, destinazioniSociali.getId().getIdDestinazioniSocialiTipo(), destinazioniSociali.getNote());
+					abiBiblioLogic.addDestinazioniSociali(idbiblio, false, destinazioniSociali.getId().getIdDestinazioniSocialiTipo(), destinazioniSociali.getNote());
 				}
 			}
 			bibliotecaAttuale.setAccessoHandicap(bibliotecaSalvata.getAccessoHandicap());
@@ -348,7 +348,7 @@ public class TrasferimentoBiblioImpl implements TrasferimentoBiblioteca {
 			if( bibliotecaSalvata.getPatrimonios()!=null){
 				for (Patrimonio patrimonio : bibliotecaSalvata.getPatrimonios()) {
 					abiBiblioLogic.addPatrimonioSpeciale(
-							idbiblio, 
+							idbiblio, false,
 							patrimonio.getId().getIdPatrimonioSpecializzazione(), 
 							patrimonio.getQuantita(), 
 							patrimonio.getQuantitaUltimoAnno()

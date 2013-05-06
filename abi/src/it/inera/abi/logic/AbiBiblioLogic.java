@@ -101,7 +101,7 @@ public interface AbiBiblioLogic {
 	public List<SistemiBiblioteche> getSistemiBibliotecheByIdBiblioteca(
 			int id_biblioteca);
 
-	public void addSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche);
+	public boolean addSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche);
 
 	public	void removeSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche);
 	
@@ -145,9 +145,8 @@ public interface AbiBiblioLogic {
 
 	public List<DestinazioniSociali> getDestinazioniSocialiByIdBiblioteca(
 			int id_biblioteca);
-
 	
-	public	void addDestinazioniSociali(int id_biblioteca, int id_nuovaDestinazione,
+	public boolean addDestinazioniSociali(int id_biblioteca, boolean modifica, int id_nuovaDestinazione,
 			String note);
 
 	public void removeDestinazioneSociale(int id_biblioteca,int id_rimuoviDestinazione);
@@ -191,7 +190,7 @@ public interface AbiBiblioLogic {
 	public List<Patrimonio> getListaPatrimonioSpecializzazione(
 			int id_biblioteca);
 
-	public void addPatrimonioSpeciale(int id_biblioteca, int id_nuovoPatr,
+	public boolean addPatrimonioSpeciale(int id_biblioteca, boolean modifica, int id_nuovoPatr,
 			int quantita, int quantitaUltimoAnno);
 
 	public void removePatrimonioSpeciale(int id_biblioteca, int id_rimuoviPatr);
@@ -229,18 +228,16 @@ public interface AbiBiblioLogic {
 
 	public FondiSpeciali updateFondoSpeciale(FondiSpeciali fondoSpeciale);
 
-	public int countAllSpogliMaterialBibliograficoPossibili(String filter);
+	public int countAllSpogliMaterialeBibliograficoPossibili(String filter);
 
-	public List<String> getSpogliMaterialBibliograficoPerPaginazioneCombobox(
+	public List<String> getSpogliMaterialeBibliograficoPerPaginazioneCombobox(
 		 int start, int limit, String query);
 
-	public  List<SpogliBibliografici>  getListaSpogliMarerialeBibliograficoByIdBiblio(int id_biblioteca);
+	public  List<SpogliBibliografici> getListaSpogliMaterialeBibliograficoByIdBiblio(int id_biblioteca);
 
+	public void addSpoglioMaterialeBibliografico(SpogliBibliografici nuovoSpoglio, int id_biblioteca, boolean modifica);
 
-	public 	void addSpoglioMaterialeBibliografico(String descrSpoglio,
-			int id_biblioteca) throws DuplicateEntryException;
-
-	public	void addSpoglioMaterialeBibliograficoRipristino(String descrSpoglio,int id_biblioteca) throws DuplicateEntryException;
+	public	void addSpoglioMaterialeBibliograficoRipristino(String descrSpoglio, int id_biblioteca) throws DuplicateEntryException;
 	
 	public void removeSpogliMaterialeBibliografico(int id_rimuoviSpoglio);
 
@@ -341,9 +338,9 @@ public interface AbiBiblioLogic {
 
 	public List<DepositiLegali> getDepositiLegaliByIdBiblio(int id_biblioteca);
 
-	public void addDepositoLegaleToBiblio(int id_biblioteca,int id_nuovoTipoDeposito, String anno,boolean modifica);
+	public boolean addDepositoLegaleToBiblio(int id_biblioteca, boolean modifica, int id_nuovoTipoDeposito, String anno);
 
-	public void removeDepositoLegaleFromBiblio(int id_biblioteca,int id_rimuoviDepositoLegale);
+	public void removeDepositoLegaleFromBiblio(int id_biblioteca, int id_rimuoviDepositoLegale);
 
 	public void inserisciNoteCatalogazione(int id_biblio, String value);
 
