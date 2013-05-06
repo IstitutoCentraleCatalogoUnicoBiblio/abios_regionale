@@ -33,6 +33,9 @@ public class AbiMessageBox {
 	public static final String INFO_SELECTION_TITLE="INFORMAZIONI SELEZIONE";
 	public static final String INFO_SELECTION_MESSAGE="Le voci principali sono relative ad una categoria. Selezionare una voce di secondo livello per continuare con l'operazione.";
 
+	public static final String ESITO_VOCE_GIA_PRESENTE_TITLE="AVVISO VOCE INSERITA";
+	public static final String ESITO_VOCE_GIA_PRESENTE_MESSAGE="ATTENZIONE: la voce inserita è già presente in lista.";
+
 	public static final String INSERIMENTO_PARAMETRO_FAILURE_MESSAGE = "ATTENZIONE: parametro inserito non valido!";
 	public static final String INSERIMENTO_PARAMETRO_TITLE = "INSERIMENTO PARAMETRO";
 	
