@@ -66,27 +66,27 @@ public class ListaModalitaComunicazioneInformazioniBibliografiche extends Conten
 	private  BaseListLoader<ListLoadResult<VoceUnicaModel>> modalitaComunicazioneLoader;
 	
 	public ListaModalitaComunicazioneInformazioniBibliografiche() {
-		bibliotecheService=(BibliotecheServiceAsync)Registry.get(Abi.BIBLIOTECHE_SERVICE);
-		tabelleDinamicheService=(TabelleDinamicheServiceAsync) Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
+		bibliotecheService = (BibliotecheServiceAsync) Registry.get(Abi.BIBLIOTECHE_SERVICE);
+		tabelleDinamicheService = (TabelleDinamicheServiceAsync) Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
 
 		setBodyStyle("padding-bottom:10px");
 		setBodyBorder(false);
 		setBorders(false);
 		setHeaderVisible(false);
 		setWidth(750);
-		setHeight(130);
+		setHeight(200);
 		setScrollMode(Scroll.AUTOY);
 		setLayout(new FitLayout());
 	}
 
-	public void setGrid(){
+	public void setGrid() {
 
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
 		RpcProxy<List<VoceUnicaModel>> modalitaComunicazioneComboProxy = new RpcProxy<List<VoceUnicaModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,AsyncCallback<List<VoceUnicaModel>> callback) {
+			protected void load(Object loadConfig, AsyncCallback<List<VoceUnicaModel>> callback) {
 				tabelleDinamicheService.getListaVoci(CostantiTabelleDinamiche.SERVIZI_MODALITA_COMUNICAZIONE_INFOTMAZIONI_BIBLIOGRAFICHE_INDEX, callback);
 			}
 		};
@@ -128,7 +128,7 @@ public class ListaModalitaComunicazioneInformazioniBibliografiche extends Conten
 				if (value == null) {
 					return value;
 				}
-				VoceUnicaModel tmp=(VoceUnicaModel) value;
+				VoceUnicaModel tmp = (VoceUnicaModel) value;
 				return tmp.getEntry();
 			}
 		};
@@ -146,7 +146,7 @@ public class ListaModalitaComunicazioneInformazioniBibliografiche extends Conten
 			@Override
 			public void selectionChanged(SelectionChangedEvent<VoceUnicaModel> se) {
 
-				if(se.getSelectedItem()!=null){
+				if (se.getSelectedItem() != null) {
 					grid.getStore().getAt(0).setIdRecord(se.getSelectedItem().getIdRecord());
 				}
 			}
@@ -166,17 +166,15 @@ public class ListaModalitaComunicazioneInformazioniBibliografiche extends Conten
 		RpcProxy<List<VoceUnicaModel>> modalitaComunicazioneProxy = new RpcProxy<List<VoceUnicaModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<List<VoceUnicaModel>> callback) {
-
+			protected void load(Object loadConfig, AsyncCallback<List<VoceUnicaModel>> callback) {
 				bibliotecheService.getModalitaComunicazioniBibliograficheByIdBiblio(id_biblioteca, callback);
 			}
 		};
 
-		ModelReader modalitaComuniazzioneReader = new ModelReader();
+		ModelReader modalitaComunicazioneReader = new ModelReader();
 
 		modalitaComunicazioneLoader  = new BaseListLoader<ListLoadResult<VoceUnicaModel>>(
-				modalitaComunicazioneProxy, modalitaComuniazzioneReader);
+				modalitaComunicazioneProxy, modalitaComunicazioneReader);
 
 		modalitaComunicazioneStore = new ListStore<VoceUnicaModel>(modalitaComunicazioneLoader);
 
@@ -258,19 +256,16 @@ public class ListaModalitaComunicazioneInformazioniBibliografiche extends Conten
 
 		});
 		remove.disable();
-		grid.addListener(Events.RowClick,new Listener<GridEvent<VoceUnicaModel>>() {
+		grid.addListener(Events.RowClick, new Listener<GridEvent<VoceUnicaModel>>() {
 
 			public void handleEvent(GridEvent<VoceUnicaModel> be) {
-
 				remove.enable();
 			}
 		});
 
-		grid.addListener(Events.RowDoubleClick,
-				new Listener<GridEvent<VoceUnicaModel>>() {
+		grid.addListener(Events.RowDoubleClick, new Listener<GridEvent<VoceUnicaModel>>() {
 
 			public void handleEvent(GridEvent<VoceUnicaModel> be) {
-
 				remove.disable();
 			}
 		});
@@ -349,8 +344,9 @@ public class ListaModalitaComunicazioneInformazioniBibliografiche extends Conten
 
 		return this.modalitaComunicazioneLoader;
 	}
+	
 	/**
-	 * Setta va variabile id_biblioteca
+	 * Setta la variabile id_biblioteca
 	 * */
 	public void setIdBiblioteca(int idBiblioteca) {
 		this.id_biblioteca = idBiblioteca;

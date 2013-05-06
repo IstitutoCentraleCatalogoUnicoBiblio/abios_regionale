@@ -64,25 +64,26 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 
 	private Grid<DestinazioneSocialeModel> grid;
 	private Button add;
+	private Button remove;
 	private ToolBar toolBar;
-	private final Button remove = new Button("Rimuovi");
 
 	public ListaDestinazioneSocialePanel() {
-		bibliotecheServiceAsync=(BibliotecheServiceAsync)Registry.get(Abi.BIBLIOTECHE_SERVICE);
-		tabelleDinamicheService=(TabelleDinamicheServiceAsync) Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
+		bibliotecheServiceAsync = (BibliotecheServiceAsync) Registry.get(Abi.BIBLIOTECHE_SERVICE);
+		tabelleDinamicheService = (TabelleDinamicheServiceAsync) Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
 
 		setBodyStyle("padding-bottom:10px");
 		setBodyBorder(false);
 		setBorders(false);
 		setHeaderVisible(false);
 		setWidth(750);
-		setHeight(130);
+		setHeight(200);
 		setScrollMode(Scroll.AUTOY);
 		setLayout(new FitLayout());
 
 		modifica = false;
 	}
-	public void setGrid(){
+	
+	public void setGrid() {
 
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
@@ -98,19 +99,18 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 		RpcProxy<List<VoceUnicaModel>> proxyDestinazioneSocialeCombo = new RpcProxy<List<VoceUnicaModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<List<VoceUnicaModel>> callback) {
-
+			protected void load(Object loadConfig, AsyncCallback<List<VoceUnicaModel>> callback) {
 				tabelleDinamicheService.getListaVoci(CostantiTabelleDinamiche.DESTINAZIONI_SOCIALI_TIPOLOGIE_INDEX, callback);
 			}
-
 		};
+		
 		ModelReader readerDestinazioneSocialeCombo = new ModelReader();
 
 		final BaseListLoader<ListLoadResult<ModelData>> loaderDestinazioneSocialeCombo = new BaseListLoader<ListLoadResult<ModelData>>(
 				proxyDestinazioneSocialeCombo, readerDestinazioneSocialeCombo);
 
-		final	ListStore<VoceUnicaModel> listStoreDestinazioneSocialeCombo = new ListStore<VoceUnicaModel>( loaderDestinazioneSocialeCombo);
+		final ListStore<VoceUnicaModel> listStoreDestinazioneSocialeCombo = new ListStore<VoceUnicaModel>(loaderDestinazioneSocialeCombo);
+		
 		final ComboBox<VoceUnicaModel> destinazioneSocialeType = new ComboBox<VoceUnicaModel>();
 		destinazioneSocialeType.setDisplayField("entry");
 		destinazioneSocialeType.setFieldLabel("modalità accesso");
@@ -123,15 +123,19 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 		destinazioneSocialeType.setLazyRender(false);
 		destinazioneSocialeType.setTriggerAction(TriggerAction.ALL);
 		destinazioneSocialeType.setEditable(false);
-
+		loaderDestinazioneSocialeCombo.load();
 
 		CellEditor editor = new CellEditor(destinazioneSocialeType) {
 			@Override
 			public Object preProcessValue(Object value) {
-				if (value == null) {
-					return value;
+				if (modifica && value != null) {
+					VoceUnicaModel entry = destinazioneSocialeType.getStore().findModel("entry", value.toString());
+					return entry;
+
+				} else {
+					return null;
 				}
-				return destinazioneSocialeType.getStore().findModel("entry",value.toString());
+				
 			}
 
 			@Override
@@ -162,37 +166,31 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 
 		configs.add(columnNote);
 
-
-
 		RpcProxy<List<DestinazioneSocialeModel>> proxyDestinazioneSocialeGriglia = new RpcProxy<List<DestinazioneSocialeModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<List<DestinazioneSocialeModel>> callback) {
+			protected void load(Object loadConfig, AsyncCallback<List<DestinazioneSocialeModel>> callback) {
 				bibliotecheServiceAsync.getDestinazioniSociali( id_biblioteca, callback);
 			}
-
 		};
+		
 		ModelReader readerDestinazioneSocialeGriglia = new ModelReader();
 
 		loaderDestinazioneSocialeGriglia = new BaseListLoader<ListLoadResult<DestinazioneSocialeModel>>(proxyDestinazioneSocialeGriglia, readerDestinazioneSocialeGriglia);
 
 		final ListStore<DestinazioneSocialeModel> storeGriglia = new ListStore<DestinazioneSocialeModel>(loaderDestinazioneSocialeGriglia);
 
-		destinazioneSocialeType	.addSelectionChangedListener(new SelectionChangedListener<VoceUnicaModel>() {
+		destinazioneSocialeType.addSelectionChangedListener(new SelectionChangedListener<VoceUnicaModel>() {
 
 			@Override
-			public void selectionChanged(
-					SelectionChangedEvent<VoceUnicaModel> se) {
+			public void selectionChanged(SelectionChangedEvent<VoceUnicaModel> se) {
 				if (se.getSelectedItem() != null) {
-
-					storeGriglia.getAt(0).setIdRecord(
-							se.getSelectedItem().getIdRecord());
+					storeGriglia.getAt(0).setIdRecord(se.getSelectedItem().getIdRecord());
 				}
 			}
 		});
+		
 		ColumnModel cm = new ColumnModel(configs);
-
 
 		grid = new Grid<DestinazioneSocialeModel>(storeGriglia, cm);
 		grid.setStripeRows(true);
@@ -222,6 +220,8 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 		});
 		toolBar.add(add);
 
+		remove = new Button("Rimuovi");
+		remove.setIcon(Resources.ICONS.delete());
 		remove.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
@@ -230,19 +230,17 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 
 					@Override
 					public void handleEvent(MessageBoxEvent ce) {
-
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
-
-							int id_rimuoviModalita = grid.	getSelectionModel().getSelectedItem().getIdRecord();
+							int id_rimuoviModalita = grid.getSelectionModel().getSelectedItem().getIdRecord();
+							
 							bibliotecheServiceAsync.removeDestinazioneSociale(id_biblioteca, id_rimuoviModalita, new AsyncCallback<Void>() {
 
 								@Override
 								public void onSuccess(Void result) {
-
+									remove.disable();
 									loaderDestinazioneSocialeGriglia.load();
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_RIMOZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_RIMOZIONE_VOCE_TITLE);
-
 								}
 
 								@Override
@@ -263,6 +261,8 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 			}
 
 		});
+		toolBar.add(remove);
+		
 		remove.disable();
 		grid.addListener(Events.RowClick, new Listener<GridEvent<DestinazioneSocialeModel>>() {
 
@@ -279,9 +279,6 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 			}
 		});
 
-		remove.setIcon(Resources.ICONS.delete());
-		toolBar.add(remove);
-
 		add(grid);
 		setTopComponent(toolBar);
 		re.addListener(Events.CancelEdit, new Listener<BaseEvent>() {
@@ -293,7 +290,7 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 				}
 				modifica = false;
 				destinazioneSocialeType.enable();
-				loaderDestinazioneSocialeGriglia.load();		
+				loaderDestinazioneSocialeGriglia.load();
 			}	
 		});
 
@@ -305,41 +302,53 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 
 					@Override
 					public void handleEvent(MessageBoxEvent ce) {
-
 						Button btn = ce.getButtonClicked();
+						
 						if (btn.getText().equalsIgnoreCase("Si")) {
 							int id_nuovaDestinazione;
-							String note=null;
-							if(modifica==false){
+							String note = null;
+							if (modifica == false) {
 								id_nuovaDestinazione = storeGriglia.getAt(0).getIdRecord();
-								note= storeGriglia.getAt(0).getNote();
+								note = storeGriglia.getAt(0).getNote();
+								
+							} else {
+								id_nuovaDestinazione = grid.getSelectionModel().getSelectedItem().getIdRecord();
+								note = grid.getSelectionModel().getSelectedItem().getNote();
 							}
-							else {id_nuovaDestinazione=grid.getSelectionModel().getSelectedItem().getIdRecord();
-							note=grid.getSelectionModel().getSelectedItem().getNote();
-							}
-							bibliotecheServiceAsync.addDestinazioneSociale(	id_biblioteca, id_nuovaDestinazione,note, new AsyncCallback<Void>() {
+							
+							bibliotecheServiceAsync.addDestinazioneSociale(id_biblioteca, modifica, id_nuovaDestinazione, note, new AsyncCallback<Boolean>() {
 
 								@Override
-								public void onSuccess(Void result) {
-									loaderDestinazioneSocialeGriglia.load();														loaderDestinazioneSocialeGriglia.load();
+								public void onSuccess(Boolean result) {
+									loaderDestinazioneSocialeGriglia.load();
 									modifica = false;
-									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									destinazioneSocialeType.enable();
+									if (result.booleanValue()) {
+										AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+										
+									} else {
+										AbiMessageBox.messageAlertBox(AbiMessageBox.ESITO_VOCE_GIA_PRESENTE_MESSAGE, AbiMessageBox.ESITO_VOCE_GIA_PRESENTE_TITLE);
+									}
 								}
 
 								@Override
 								public void onFailure(Throwable caught) {
 									if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
 										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+										loaderDestinazioneSocialeGriglia.load();
+										modifica = false;
 										destinazioneSocialeType.enable();
 									}
 								}
 							});
+							
 						} else {
-							if(modifica==false){
+							if (modifica == false) {
 								storeGriglia.remove(0);
 							}
+							
 							destinazioneSocialeType.enable();
+							loaderDestinazioneSocialeGriglia.load();
 						}
 					}
 				};
@@ -349,12 +358,12 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 		});
 	}
 
-	public void setIdBiblioteca(int idBiblioteca){
-		this.id_biblioteca=idBiblioteca;
+	public void setIdBiblioteca(int idBiblioteca) {
+		this.id_biblioteca = idBiblioteca;
 	}
 
 
-	public BaseListLoader<ListLoadResult<DestinazioneSocialeModel>> getLoader(){
+	public BaseListLoader<ListLoadResult<DestinazioneSocialeModel>> getLoader() {
 
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, add);
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, remove);
@@ -362,6 +371,5 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 
 		return this.loaderDestinazioneSocialeGriglia;	
 	}
-
 
 }

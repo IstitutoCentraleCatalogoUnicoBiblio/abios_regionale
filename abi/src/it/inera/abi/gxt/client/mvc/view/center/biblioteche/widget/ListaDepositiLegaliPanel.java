@@ -69,22 +69,22 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 	private Grid<DepositiLegaliModel> grid;
 
 	public ListaDepositiLegaliPanel() {
-		bibliotecheServiceAsync=(BibliotecheServiceAsync)Registry.get(Abi.BIBLIOTECHE_SERVICE);
-		tabelleDinamicheService=(TabelleDinamicheServiceAsync) Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
+		bibliotecheServiceAsync = (BibliotecheServiceAsync) Registry.get(Abi.BIBLIOTECHE_SERVICE);
+		tabelleDinamicheService = (TabelleDinamicheServiceAsync) Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
 
 		setBodyStyle("padding-bottom:10px");
 		setBodyBorder(false);
 		setBorders(false);
 		setHeaderVisible(false);
 		setWidth(750);
-		setHeight(130);
+		setHeight(200);
 		setScrollMode(Scroll.AUTOY);
 		setLayout(new FitLayout());
 
 		modifica = false;
 	}
-	public void setGrid(){
-
+	
+	public void setGrid() {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
 		final RowEditorCustom<VoceUnicaModel> re = new RowEditorCustom<VoceUnicaModel>();
@@ -99,19 +99,17 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 		RpcProxy<List<VoceUnicaModel>> proxyDepositoLegaleCombo = new RpcProxy<List<VoceUnicaModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<List<VoceUnicaModel>> callback) {
-
+			protected void load(Object loadConfig, AsyncCallback<List<VoceUnicaModel>> callback) {
 				tabelleDinamicheService.getListaVoci(CostantiTabelleDinamiche.DEPOSITI_LEGALI_TIPOLOGIE_INDEX, callback);
 			}
-
 		};
+		
 		ModelReader readerDepositoLegaleCombo = new ModelReader();
 
 		final BaseListLoader<ListLoadResult<ModelData>> loaderDepositoLegaleCombo = new BaseListLoader<ListLoadResult<ModelData>>(
 				proxyDepositoLegaleCombo, readerDepositoLegaleCombo);
 
-		final	ListStore<VoceUnicaModel> listStoreDepositoLegaleCombo = new ListStore<VoceUnicaModel>(loaderDepositoLegaleCombo);
+		final ListStore<VoceUnicaModel> listStoreDepositoLegaleCombo = new ListStore<VoceUnicaModel>(loaderDepositoLegaleCombo);
 		final ComboBox<VoceUnicaModel> depositoLegaleType = new ComboBox<VoceUnicaModel>();
 		depositoLegaleType.setDisplayField("entry");
 		depositoLegaleType.setFireChangeEventOnSetValue(true);
@@ -122,15 +120,17 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 		depositoLegaleType.setLazyRender(false);
 		depositoLegaleType.setTriggerAction(TriggerAction.ALL);
 		depositoLegaleType.setEditable(false);
-
+		loaderDepositoLegaleCombo.load();
 
 		CellEditor editor = new CellEditor(depositoLegaleType) {
 			@Override
 			public Object preProcessValue(Object value) {
-				if (value == null) {
-					return value;
+				if (modifica && value != null) {
+					return depositoLegaleType.getStore().findModel("entry",	value.toString());
+					
+				} else {
+					return null;
 				}
-				return depositoLegaleType.getStore().findModel("entry",	value.toString());
 			}
 
 			@Override
@@ -166,24 +166,24 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 			protected void load(Object loadConfig, AsyncCallback<List<DepositiLegaliModel>> callback) { 
 				bibliotecheServiceAsync.getDepositiLegaliByIdBiblio( id_biblioteca, callback);
 			}
-
 		};
+		
 		ModelReader readerDepositoLegaleGriglia = new ModelReader();
 
 		loaderDepositoLegaleGriglia = new BaseListLoader<ListLoadResult<DepositiLegaliModel>>(proxyDepositoLegaleGriglia, readerDepositoLegaleGriglia);
 
 		storeGriglia = new ListStore<DepositiLegaliModel>(loaderDepositoLegaleGriglia);
 
-		depositoLegaleType	.addSelectionChangedListener(new SelectionChangedListener<VoceUnicaModel>() {
+		depositoLegaleType.addSelectionChangedListener(new SelectionChangedListener<VoceUnicaModel>() {
 
 			@Override
-			public void selectionChanged(
-					SelectionChangedEvent<VoceUnicaModel> se) {
+			public void selectionChanged(SelectionChangedEvent<VoceUnicaModel> se) {
 				if (se.getSelectedItem() != null) {
 					grid.getStore().getAt(0).setIdDepositoTipo(se.getSelectedItem().getIdRecord());
 				}
 			}
 		});
+		
 		ColumnModel cm = new ColumnModel(configs);
 
 		grid = new Grid<DepositiLegaliModel>(storeGriglia, cm);
@@ -213,21 +213,22 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 		});
 		toolBar.add(add);
 
-		remove = new Button("Rimuovi", new SelectionListener<ButtonEvent>() {
+		remove = new Button("Rimuovi");
+		remove.setIcon(Resources.ICONS.delete());
+		remove.addSelectionListener(new SelectionListener<ButtonEvent>() {
+			
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				remove.disable();
-				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>(){
-
+				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
 					@Override
 					public void handleEvent(MessageBoxEvent ce) {
-
 						Button btn = ce.getButtonClicked();
+						
 						if (btn.getText().equalsIgnoreCase("Si")) {
-
 							int id_rimuoviDepositoLegale = grid.getSelectionModel().getSelectedItem().getIdDepositoTipo();
-							bibliotecheServiceAsync.removeDepositoLegaleFromBiblio(
-									id_biblioteca, id_rimuoviDepositoLegale,
+							
+							bibliotecheServiceAsync.removeDepositoLegaleFromBiblio(id_biblioteca, id_rimuoviDepositoLegale,
 									new AsyncCallback<Void>() {
 
 										@Override
@@ -254,17 +255,16 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 
 		});
 		remove.disable();
-		grid.addListener(Events.RowClick,
-				new Listener<GridEvent<DepositiLegaliModel>>() {
+		
+		grid.addListener(Events.RowClick, new Listener<GridEvent<DepositiLegaliModel>>() {
 
 			public void handleEvent(GridEvent<DepositiLegaliModel> be) {
-
 				remove.enable();
-				modifica =false;
+				modifica = false;
 			}
 		});
-		grid.addListener(Events.RowDoubleClick,
-				new Listener<GridEvent<DepositiLegaliModel>>() {
+		
+		grid.addListener(Events.RowDoubleClick, new Listener<GridEvent<DepositiLegaliModel>>() {
 
 			public void handleEvent(GridEvent<DepositiLegaliModel> be) {
 				depositoLegaleType.disable();
@@ -273,7 +273,6 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 			}
 		});
 
-		remove.setIcon(Resources.ICONS.delete());
 		toolBar.add(remove);
 
 		add(grid);
@@ -296,47 +295,59 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 			@Override
 			public void handleEvent(BaseEvent be) {
 				remove.disable();
-				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>(){
+				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
 					@Override
 					public void handleEvent(MessageBoxEvent ce) {
-
 						Button btn = ce.getButtonClicked();
+						
 						if (btn.getText().equalsIgnoreCase("Si")) {
 							int id_nuovoTipoDeposito;
-							String anno=null;
-							if(modifica==false){
+							String anno = null;
+							
+							if (modifica == false) {
 								id_nuovoTipoDeposito = grid.getStore().getAt(0).getIdDepositoTipo();
-								anno= grid.getStore().getAt(0).getDepositoAnno();
+								anno = grid.getStore().getAt(0).getDepositoAnno();
+								
+							} else {
+								id_nuovoTipoDeposito = grid.getSelectionModel().getSelectedItem().getIdDepositoTipo();
+								anno = grid.getSelectionModel().getSelectedItem().getDepositoAnno();
 							}
-							else {
-								id_nuovoTipoDeposito=grid.getSelectionModel().getSelectedItem().getIdDepositoTipo();
-								anno=grid.getSelectionModel().getSelectedItem().getDepositoAnno();
-							}
-							bibliotecheServiceAsync.addDepositoLegaleToBiblio(id_biblioteca, id_nuovoTipoDeposito,anno,modifica,	new AsyncCallback<Void>() {
+							
+							bibliotecheServiceAsync.addDepositoLegaleToBiblio(id_biblioteca, modifica, id_nuovoTipoDeposito,
+									anno, new AsyncCallback<Boolean>() {
 
 								@Override
-								public void onSuccess(Void result) {
+								public void onSuccess(Boolean result) {
 									loaderDepositoLegaleGriglia.load();	
 									modifica = false;
-									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									depositoLegaleType.enable();
+									if (result.booleanValue()) {
+										AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+										
+									} else {
+										AbiMessageBox.messageAlertBox(AbiMessageBox.ESITO_VOCE_GIA_PRESENTE_MESSAGE, AbiMessageBox.ESITO_VOCE_GIA_PRESENTE_TITLE);
+									}
 								}
 
 								@Override
 								public void onFailure(Throwable caught) {
 									if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
 										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+										loaderDepositoLegaleGriglia.load();	
+										modifica = false;
 										depositoLegaleType.enable();
 									}
 								}
 
 
 							});
+							
 						} else {
-							if(modifica==false){
+							if (modifica == false) {
 								storeGriglia.remove(0);
 							}
 							depositoLegaleType.enable();
+							loaderDepositoLegaleGriglia.load();
 						}
 					}
 				};
@@ -345,12 +356,11 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 		});
 	}
 
-	public void setIdBiblioteca(int idBiblioteca){
-		this.id_biblioteca=idBiblioteca;
+	public void setIdBiblioteca(int idBiblioteca) {
+		this.id_biblioteca = idBiblioteca;
 	}
 
-
-	public BaseListLoader<ListLoadResult<DepositiLegaliModel>> getLoader(){
+	public BaseListLoader<ListLoadResult<DepositiLegaliModel>> getLoader() {
 
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, add);
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, remove);
@@ -358,6 +368,4 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 
 		return this.loaderDepositoLegaleGriglia;	
 	}
-
-
 }
