@@ -108,7 +108,7 @@ public interface BiblioDao {
 	public List<SistemiBiblioteche> getSistemiBibliotecheByIdBiblioteca(
 			int id_biblioteca);
 
-	public void addSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche);
+	public boolean addSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche);
 
 	public	void removeSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche);
 
@@ -124,7 +124,7 @@ public interface BiblioDao {
 	public List<DestinazioniSociali> getDestinazioniSocialiByIdBiblioteca(
 			int id_biblioteca);
 
-	public void addDestinazioniSociali(int id_biblioteca,
+	public boolean addDestinazioniSociali(int id_biblioteca, boolean modifica,
 			int id_nuovaDestinazione, String note);
 
 	public void removeDestinazioneSociale(int id_biblioteca,
@@ -164,7 +164,7 @@ public interface BiblioDao {
 
 	public List<Patrimonio> getListaPatrimonioSpecializzazione(int id_biblioteca);
 
-	public void addPatrimonioSpeciale(int id_biblioteca, int id_nuovoPatr,
+	public boolean addPatrimonioSpeciale(int id_biblioteca, boolean modifica, int id_nuovoPatr,
 			int quantita, int quantitaUltimoAnno);
 
 	public void removePatrimonioSpeciale(int id_biblioteca, int id_rimuoviPatr);
@@ -202,16 +202,15 @@ public interface BiblioDao {
 
 	public FondiSpeciali updateFondoSpeciale(FondiSpeciali fondoSpeciale);
 
-	public int countAllSpogliMaterialBibliograficoPossibili(String filter);
+	public int countAllSpogliMaterialeBibliograficoPossibili(String filter);
 
-	public List<String> getListaSpogliMaterialBibliograficoPossibiliFiltered(
+	public List<String> getListaSpogliMaterialeBibliograficoPossibiliFiltered(
 		 int start, int limit,String filter);
 
-	public List<SpogliBibliografici> getListaSpogliMarerialeBibliograficoByIdBiblio(
+	public List<SpogliBibliografici> getListaSpogliMaterialeBibliograficoByIdBiblio(
 			int id_biblioteca);
 
-	public void addSpoglioMaterialeBibliografico(
-			String descrSpoglio, int id_biblioteca) throws DuplicateEntryException;
+	public void addSpoglioMaterialeBibliografico(SpogliBibliografici nuovoSpoglio, int id_biblioteca, boolean modifica);
 
 	public void addSpoglioMaterialeBibliograficoRipristino(String descrSpoglio,	int id_biblioteca);
 	
@@ -320,7 +319,7 @@ public interface BiblioDao {
 
 	public List<DepositiLegali> getDepositiLegaliByIdBiblio(int id_biblioteca);
 
-	public void addDepositoLegaleToBiblio(int id_biblioteca,int id_nuovoTipoDeposito, String anno,boolean modifica);
+	public boolean addDepositoLegaleToBiblio(int id_biblioteca, boolean modifica, int id_nuovoTipoDeposito, String anno);
 
 	public void removeDepositoLegaleFromBiblio(int id_biblioteca,int id_rimuoviDepositoLegale);
 

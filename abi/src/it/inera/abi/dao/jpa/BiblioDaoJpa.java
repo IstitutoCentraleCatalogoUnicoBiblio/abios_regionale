@@ -22,6 +22,7 @@ import it.inera.abi.persistence.DepositiLegaliPK;
 import it.inera.abi.persistence.DepositiLegaliTipo;
 import it.inera.abi.persistence.DestinazioniSociali;
 import it.inera.abi.persistence.DestinazioniSocialiPK;
+import it.inera.abi.persistence.DestinazioniSocialiTipo;
 import it.inera.abi.persistence.Dewey;
 import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.DeweyLiberoPK;
@@ -299,7 +300,7 @@ public class BiblioDaoJpa implements BiblioDao {
 
 		if (keys != null && (keys.containsKey("cataloghiCollettivi") && keys.get("cataloghiCollettivi") != null)) {
 			sb.append("join b.partecipaCataloghiCollettiviMateriales pcc " + 
-					"join pcc.cataloghiCollettivi cc ");
+			"join pcc.cataloghiCollettivi cc ");
 		}
 		if (keys != null && (keys.containsKey("codiciTipo") && keys.get("codiciTipo") != null)) {
 			if (!((String) keys.get("codiciTipo")).equalsIgnoreCase("ABI")) {
@@ -338,7 +339,7 @@ public class BiblioDaoJpa implements BiblioDao {
 
 				if (tipAmm.length() > 1 && tipAmm.substring((tipAmm.length()-2), tipAmm.length()).equals("00")) {
 					criteria.add("(b.ente.enteTipologiaAmministrativa >= :enteTipologiaAmministrativa AND " +
-							"b.ente.enteTipologiaAmministrativa < :enteTipologiaAmministrativa + 100)");
+					"b.ente.enteTipologiaAmministrativa < :enteTipologiaAmministrativa + 100)");
 				} else {
 					criteria.add("b.ente.enteTipologiaAmministrativa = :enteTipologiaAmministrativa");
 				}
@@ -514,7 +515,7 @@ public class BiblioDaoJpa implements BiblioDao {
 		}
 		if (keys != null && (keys.containsKey("cataloghiCollettivi") && keys.get("cataloghiCollettivi") != null)) {
 			sb.append("join b.partecipaCataloghiCollettiviMateriales pcc " +
-					"join pcc.cataloghiCollettivi cc ");
+			"join pcc.cataloghiCollettivi cc ");
 		}
 		if (keys != null && (keys.containsKey("codiciTipo") && keys.get("codiciTipo") != null)) {
 			if (!((String) keys.get("codiciTipo")).equalsIgnoreCase("ABI")) {
@@ -551,7 +552,7 @@ public class BiblioDaoJpa implements BiblioDao {
 
 				if (tipAmm.length() > 1 && tipAmm.substring((tipAmm.length()-2), tipAmm.length()).equals("00")) {
 					criteria.add("(b.ente.enteTipologiaAmministrativa >= :enteTipologiaAmministrativa AND " + 
-							"b.ente.enteTipologiaAmministrativa < :enteTipologiaAmministrativa + 100)");
+					"b.ente.enteTipologiaAmministrativa < :enteTipologiaAmministrativa + 100)");
 				} else {
 					criteria.add("b.ente.enteTipologiaAmministrativa = :enteTipologiaAmministrativa");
 				}
@@ -869,13 +870,10 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public List<SistemiBiblioteche> getSistemiBibliotecheByIdBiblioteca(
-			int id_biblioteca) {
-
+	public List<SistemiBiblioteche> getSistemiBibliotecheByIdBiblioteca(int id_biblioteca) {
 		Biblioteca b = em.find(Biblioteca.class, id_biblioteca);
 
-		List<SistemiBiblioteche> listaSistemiBiblioteche = b
-		.getSistemiBiblioteches();
+		List<SistemiBiblioteche> listaSistemiBiblioteche = b.getSistemiBiblioteches();
 		if (listaSistemiBiblioteche == null)
 			listaSistemiBiblioteche = new ArrayList<SistemiBiblioteche>();
 		// listaSistemiBiblioteche.size();
@@ -894,23 +892,21 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public void addSistemaBiblioteca(int id_biblioteca,
-			int id_sistema_biblioteche) {
+	public boolean addSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche) {
 		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
-		biblioteca.setIdBiblioteca(id_biblioteca);
 
-		List<SistemiBiblioteche> sistemiBiblioteches = biblioteca
-		.getSistemiBiblioteches();
+		List<SistemiBiblioteche> sistemi = biblioteca.getSistemiBiblioteches();
 
-		SistemiBiblioteche nuovoSistema = em.find(SistemiBiblioteche.class,
-				id_sistema_biblioteche);
-		if ((sistemiBiblioteches.contains(nuovoSistema)) == false) {
-
-			sistemiBiblioteches.add(nuovoSistema);
-
-			biblioteca.setSistemiBiblioteches(sistemiBiblioteches);
-
+		SistemiBiblioteche nuovoSistema = em.find(SistemiBiblioteche.class, id_sistema_biblioteche);
+		if (!sistemi.contains(nuovoSistema)) {
+			sistemi.add(nuovoSistema);
+			biblioteca.setSistemiBiblioteches(sistemi);
 			em.merge(biblioteca);
+
+			return true;
+			
+		} else {
+			return false;
 		}
 	}
 
@@ -1017,19 +1013,38 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public void addDestinazioniSociali(int id_biblioteca,
+	public boolean addDestinazioniSociali(int id_biblioteca, boolean modifica,
 			int id_nuovaDestinazione, String note) {
+		if (!modifica && searchDestinazioneSociale(id_biblioteca, id_nuovaDestinazione) == true) {
+			return false;
 
-		DestinazioniSocialiPK destinazioniSocialiPK = new DestinazioniSocialiPK();
-		destinazioniSocialiPK.setIdBiblioteca(id_biblioteca);
-		destinazioniSocialiPK
-		.setIdDestinazioniSocialiTipo(id_nuovaDestinazione);
+		} else {
+			DestinazioniSocialiPK destinazioniSocialiPK = new DestinazioniSocialiPK();
+			destinazioniSocialiPK.setIdBiblioteca(id_biblioteca);
+			destinazioniSocialiPK.setIdDestinazioniSocialiTipo(id_nuovaDestinazione);
+			
+			DestinazioniSociali destinazioniSociali = new DestinazioniSociali();
+			destinazioniSociali.setId(destinazioniSocialiPK);
+			destinazioniSociali.setNote(note);
+			
+			em.merge(destinazioniSociali);
 
-		DestinazioniSociali destinazioniSociali = new DestinazioniSociali();
-		destinazioniSociali.setId(destinazioniSocialiPK);
-		destinazioniSociali.setNote(note);
-		em.merge(destinazioniSociali);
+			return true;
+		}
+		
+	}
+	
+	private boolean searchDestinazioneSociale(int idBiblioteca, int idDestSoc) {
+		Biblioteca biblioteca = em.find(Biblioteca.class, idBiblioteca);
+		List<DestinazioniSociali> destSocs = biblioteca.getDestinazioniSocialis();
 
+		for (DestinazioniSociali entryDestSoc : destSocs) {
+			DestinazioniSocialiTipo destSoc = entryDestSoc.getDestinazioniSocialiTipo();
+			if (destSoc != null && destSoc.getIdDestinazioniSociali().intValue() == idDestSoc) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -1214,20 +1229,40 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public void addPatrimonioSpeciale(int id_biblioteca, int id_nuovoPatr,
+	public boolean addPatrimonioSpeciale(int id_biblioteca, boolean modifica, int id_nuovoPatr,
 			int quantita, int quantitaUltimoAnno) {
-		PatrimonioPK patrimonioPK = new PatrimonioPK();
-		patrimonioPK.setIdBiblioteca(id_biblioteca);
-		patrimonioPK.setIdPatrimonioSpecializzazione(id_nuovoPatr);
+		if (!modifica && searchPatrimonioSpeciale(id_biblioteca, id_nuovoPatr) == true) {
+			return false;
 
-		Patrimonio patrimonio = new Patrimonio();
-		patrimonio.setId(patrimonioPK);
-		patrimonio.setQuantita(quantita);
-		patrimonio.setQuantitaUltimoAnno(quantitaUltimoAnno);
+		} else {
+			PatrimonioPK patrimonioPK = new PatrimonioPK();
+			patrimonioPK.setIdBiblioteca(id_biblioteca);
+			patrimonioPK.setIdPatrimonioSpecializzazione(id_nuovoPatr);
 
-		em.merge(patrimonio);
+			Patrimonio patrimonio = new Patrimonio();
+			patrimonio.setId(patrimonioPK);
+			patrimonio.setQuantita(quantita);
+			patrimonio.setQuantitaUltimoAnno(quantitaUltimoAnno);
+
+			em.merge(patrimonio);
+			
+			return true;
+		}
 	}
 
+	private boolean searchPatrimonioSpeciale(int idBiblioteca, int idPatrimonio) {
+		Biblioteca biblioteca = em.find(Biblioteca.class, idBiblioteca);
+		List<Patrimonio> patrimonios = biblioteca.getPatrimonios();
+
+		for (Patrimonio entryPatr : patrimonios) {
+			PatrimonioSpecializzazione patrSpec = entryPatr.getPatrimonioSpecializzazione();
+			if (patrSpec != null && patrSpec.getIdPatrimonioSpecializzazione().intValue() == idPatrimonio) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	@Transactional
 	public void removePatrimonioSpeciale(int id_biblioteca, int id_rimuoviPatr) {
@@ -1807,7 +1842,7 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public int countAllSpogliMaterialBibliograficoPossibili(String filter) {
+	public int countAllSpogliMaterialeBibliograficoPossibili(String filter) {
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(" SELECT COUNT(distinct s.descrizioneBibliografica) FROM SpogliBibliografici s ");
@@ -1828,7 +1863,7 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public List<String> getListaSpogliMaterialBibliograficoPossibiliFiltered(
+	public List<String> getListaSpogliMaterialeBibliograficoPossibiliFiltered(
 			int start, int limit, String filter) {
 
 		StringBuffer sb = new StringBuffer();
@@ -1839,7 +1874,7 @@ public class BiblioDaoJpa implements BiblioDao {
 		}
 
 		sb.append(" ORDER BY s.descrizioneBibliografica asc ");
-		
+
 		Query q = em.createQuery(sb.toString());
 
 		if (filter != null && filter.length() > 0) {
@@ -1854,7 +1889,7 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public List<SpogliBibliografici> getListaSpogliMarerialeBibliograficoByIdBiblio(
+	public List<SpogliBibliografici> getListaSpogliMaterialeBibliograficoByIdBiblio(
 			int id_biblioteca) {
 		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
 
@@ -1869,22 +1904,12 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public void addSpoglioMaterialeBibliografico(String descrSpoglio, int id_biblioteca) throws DuplicateEntryException {
-
+	public void addSpoglioMaterialeBibliografico(SpogliBibliografici nuovoSpoglio, int id_biblioteca, boolean modifica) {
 		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
-		SpogliBibliografici toSave = new SpogliBibliografici();
-		toSave.setDescrizioneBibliografica(descrSpoglio);
-		toSave.setBiblioteca(biblioteca);
-		List<SpogliBibliografici> spogliBibliograficis = biblioteca.getSpogliBibliograficis();
-		Iterator<SpogliBibliografici> it = spogliBibliograficis.iterator();
-		while (it.hasNext()) {
-			SpogliBibliografici spogliBibliografici = (SpogliBibliografici) it.next();
-			if (spogliBibliografici.getDescrizioneBibliografica().compareToIgnoreCase(toSave.getDescrizioneBibliografica()) == 0) {
-				// Se esiste già ritorno eccezione con opportuno messaggio
-				throw new DuplicateEntryException(DUPLICATE_ENTRY_ERROR_MESSAGE);
-			}
-		}
-		em.persist(toSave);
+
+		nuovoSpoglio.setBiblioteca(biblioteca);
+
+		em.merge(nuovoSpoglio);
 	}
 
 	@Override
@@ -4760,24 +4785,38 @@ public class BiblioDaoJpa implements BiblioDao {
 
 	@Override
 	@Transactional
-	public void addDepositoLegaleToBiblio(int id_biblioteca, int id_nuovoTipoDeposito, String anno, boolean modifica) {
-		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+	public boolean addDepositoLegaleToBiblio(int id_biblioteca, boolean modifica, int id_nuovoTipoDeposito, String anno) {
+		if (!modifica && searchDepositoLegale(id_biblioteca, id_nuovoTipoDeposito) == true) {
+			return false;
 
-		DepositiLegaliPK depositiLegaliPK = new DepositiLegaliPK();
-		depositiLegaliPK.setIdBiblioteca(id_biblioteca);
-		depositiLegaliPK.setIdDepositiLegaliTipo(id_nuovoTipoDeposito);
+		} else {
+			DepositiLegaliPK depositiLegaliPK = new DepositiLegaliPK();
+			depositiLegaliPK.setIdBiblioteca(id_biblioteca);
+			depositiLegaliPK.setIdDepositiLegaliTipo(id_nuovoTipoDeposito);
 
-		DepositiLegali depositiLegali = new DepositiLegali();
-		depositiLegali.setId(depositiLegaliPK);
-		depositiLegali.setBiblioteca(biblioteca);
-		depositiLegali.setDaAnno(anno);
-		depositiLegali.setDepositiLegaliTipo(em.find(DepositiLegaliTipo.class, id_nuovoTipoDeposito));
-		if (modifica)
+			DepositiLegali depositiLegali = new DepositiLegali();
+			depositiLegali.setId(depositiLegaliPK);
+			depositiLegali.setDaAnno(anno);
+
 			em.merge(depositiLegali);
-		else
-			em.persist(depositiLegali);
+			
+			return true;
+		}
 	}
 
+	private boolean searchDepositoLegale(int id_biblioteca, int id_nuovoTipoDeposito) {
+		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+		List<DepositiLegali> depLegs = biblioteca.getDepositiLegalis();
+
+		for (DepositiLegali entryDepLeg : depLegs) {
+			DepositiLegaliTipo depLeg = entryDepLeg.getDepositiLegaliTipo();
+			if (depLeg != null && depLeg.getIdDepositiLegaliTipo().intValue() == id_nuovoTipoDeposito) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	@Transactional
 	public void removeDepositoLegaleFromBiblio(int id_biblioteca, int id_rimuoviDepositoLegale) {
@@ -5102,23 +5141,23 @@ public class BiblioDaoJpa implements BiblioDao {
 
 		return result;
 	}
-	
+
 	@Override
 	@Transactional
 	public Boolean removeStatoCatalogazione(HashMap<String, Object> params) {
 		Boolean result = false;
 		int idbiblio = (Integer) params.get("idBiblioteca");
 		Integer idStatoCatalogazione = (Integer) params.get("idStatoCatalogazione");
-		
+
 		Biblioteca biblioteca = getBibliotecaById(idbiblio);
 		if (idStatoCatalogazione != null && idStatoCatalogazione.intValue() == -1) {
 			if (biblioteca.getStatoCatalogaziones() != null && biblioteca.getStatoCatalogaziones().size() > 0) {
 				clearListaStatoCatalogazione(idbiblio);
-				
+
 				em.merge(biblioteca);
 			}
 		}
-		
+
 		return result;
 	}
 
@@ -5475,19 +5514,19 @@ public class BiblioDaoJpa implements BiblioDao {
 	@Transactional
 	public List<Photo> getPhotos(int id_biblioteca) {
 
-//		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
-//
-//		List<Photo> photos = biblioteca.getPhotos();
-//		Iterator<Photo> it = photos.iterator();
-//
-//		while (it.hasNext()) {
-//			// Iterazione anti-lazy
-//			Photo ph = (Photo) it.next();
-//		}
+		//		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
+		//
+		//		List<Photo> photos = biblioteca.getPhotos();
+		//		Iterator<Photo> it = photos.iterator();
+		//
+		//		while (it.hasNext()) {
+		//			// Iterazione anti-lazy
+		//			Photo ph = (Photo) it.next();
+		//		}
 		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
-		
+
 		String prepareQuery = "from Photo p where biblioteca = :biblioteca order by p.ordine asc";
-		
+
 		Query query = em.createQuery(prepareQuery);
 
 		query.setParameter("biblioteca", biblioteca);
@@ -5506,10 +5545,10 @@ public class BiblioDaoJpa implements BiblioDao {
 		photo.setBiblioteca(biblioteca);
 		photo.setCaption(caption);
 		photo.setUri(uri);
-		
+
 		if (biblioteca.getPhotos() == null || (biblioteca.getPhotos() != null && biblioteca.getPhotos().size() == 0)) {
 			photo.setOrdine(1);
-			
+
 		} else {
 			List<Photo> photos = getPhotos(id_biblioteca);
 			Photo ph = photos.get(photos.size()-1);
@@ -5540,19 +5579,19 @@ public class BiblioDaoJpa implements BiblioDao {
 		for (Photo photoEntry : biblioteca.getPhotos()) {
 			if (photoEntry.getIdPhoto().intValue() == id_photo) {
 				photoEntry.setOrdine(0);
-				
+
 			} else {
 				photoEntry.setOrdine(order);
 				order++;
 			}
-			
+
 			em.merge(photoEntry);
 		}
 
 		/* Elimino la foto */
 		em.remove(photo);
 	}
-	
+
 	@Override
 	@Transactional
 	public void updatePhotoOrder(List<Integer> idPhotos) {
@@ -5561,7 +5600,7 @@ public class BiblioDaoJpa implements BiblioDao {
 			Photo photo = em.find(Photo.class, id);
 			photo.setOrdine(order);
 			order++;
-			
+
 			em.merge(photo);
 		}
 	}
