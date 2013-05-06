@@ -693,9 +693,9 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void addSistemaBiblioteca(int id_biblioteca,
+	public Boolean addSistemaBiblioteca(int id_biblioteca,
 			int id_sistema_biblioteche) {
-		abiBiblioLogic.addSistemaBiblioteca(id_biblioteca,
+		return abiBiblioLogic.addSistemaBiblioteca(id_biblioteca,
 				id_sistema_biblioteche);
 	}
 
@@ -1195,9 +1195,9 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void addDestinazioneSociale(int id_biblioteca,
+	public Boolean addDestinazioneSociale(int id_biblioteca, boolean modifica, 
 			int id_nuovaDestinazione, String note) {
-		abiBiblioLogic.addDestinazioniSociali(id_biblioteca,
+		return abiBiblioLogic.addDestinazioniSociali(id_biblioteca, modifica,
 				id_nuovaDestinazione, note);
 
 	}
@@ -1509,9 +1509,9 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void addPatrimonioSpeciale(int id_biblioteca, int id_nuovoPatr,
+	public Boolean addPatrimonioSpeciale(int id_biblioteca, boolean modifica, int id_nuovoPatr,
 			int quantita,int quantitaUltimoAnno) {
-		abiBiblioLogic.addPatrimonioSpeciale(id_biblioteca, id_nuovoPatr,
+		return abiBiblioLogic.addPatrimonioSpeciale(id_biblioteca, modifica, id_nuovoPatr,
 				quantita,quantitaUltimoAnno);
 
 	}
@@ -1735,9 +1735,9 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		int start = (Integer) m.get("offset");
 
 		List<VoceUnicaModel> sublist = new ArrayList<VoceUnicaModel>();
-		int countAll=abiBiblioLogic.countAllSpogliMaterialBibliograficoPossibili(query);
+		int countAll=abiBiblioLogic.countAllSpogliMaterialeBibliograficoPossibili(query);
 
-		List<String> spogliBibliograficis = abiBiblioLogic.getSpogliMaterialBibliograficoPerPaginazioneCombobox(start,limit,query);
+		List<String> spogliBibliograficis = abiBiblioLogic.getSpogliMaterialeBibliograficoPerPaginazioneCombobox(start,limit,query);
 		
 		Iterator<String> iterator = spogliBibliograficis.iterator();
 		
@@ -1754,9 +1754,8 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public List<VoceUnicaModel> getListaSpogliMarerialeBibliograficoByIdBiblio(int id_biblioteca) {
-		List<SpogliBibliografici> spogliBibliograficis =abiBiblioLogic.getListaSpogliMarerialeBibliograficoByIdBiblio(
-				id_biblioteca);
+	public List<VoceUnicaModel> getListaSpogliMaterialeBibliograficoByIdBiblio(int id_biblioteca) {
+		List<SpogliBibliografici> spogliBibliograficis =abiBiblioLogic.getListaSpogliMaterialeBibliograficoByIdBiblio(id_biblioteca);
 
 		List<VoceUnicaModel> spogliBibliograficiModel= new ArrayList<VoceUnicaModel>();
 		Iterator<SpogliBibliografici> it = spogliBibliograficis.iterator();
@@ -1774,13 +1773,16 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void addSpoglioMaterialeBibliografico(String descrSpoglio,int id_biblioteca) throws DuplicatedEntryClientSideException {
+	public void addSpoglioMaterialeBibliografico(VoceUnicaModel modelToSave, int id_biblioteca, boolean modifica) {
 
-		try{
-			abiBiblioLogic.addSpoglioMaterialeBibliografico(descrSpoglio, id_biblioteca);
-		}catch(DuplicateEntryException e){
-			throw new DuplicatedEntryClientSideException(e.getMessage());
+		SpogliBibliografici nuovoSpoglio = new SpogliBibliografici();
+		if (modifica) {
+			nuovoSpoglio.setIdSpogliBibliografici(modelToSave.getIdRecord());
 		}
+		nuovoSpoglio.setDescrizioneBibliografica(modelToSave.getEntry());
+
+		abiBiblioLogic.addSpoglioMaterialeBibliografico(nuovoSpoglio, id_biblioteca, modifica);
+		
 	} 
 
 	@Override
@@ -1810,7 +1812,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void addPubblicazioni(VoceUnicaModel modelToSave, int id_biblioteca,boolean modifica) {
+	public void addPubblicazioni(VoceUnicaModel modelToSave, int id_biblioteca, boolean modifica) {
 
 		Pubblicazioni nuovaPubblicazione = new Pubblicazioni();
 		if (modifica){
@@ -2674,8 +2676,8 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	}
 
 	@Override
-	public void addDepositoLegaleToBiblio(int id_biblioteca,int id_nuovoTipoDeposito, String anno,boolean modifica ) {
-		abiBiblioLogic.addDepositoLegaleToBiblio( id_biblioteca, id_nuovoTipoDeposito,  anno,modifica);
+	public Boolean addDepositoLegaleToBiblio(int id_biblioteca, boolean modifica, int id_nuovoTipoDeposito, String anno) {
+		return abiBiblioLogic.addDepositoLegaleToBiblio(id_biblioteca, modifica, id_nuovoTipoDeposito, anno);
 	}
 
 	@Override

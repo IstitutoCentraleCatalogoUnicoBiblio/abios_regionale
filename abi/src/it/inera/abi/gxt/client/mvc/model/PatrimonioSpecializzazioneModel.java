@@ -75,13 +75,13 @@ public class PatrimonioSpecializzazioneModel extends BaseModel implements Serial
   
     public static String getTemplateMateriali() {
 		  
-        String tpl = "<tpl for=\".\">"
-                + "<tpl if=\"condition == 1 \"><b>{denominazioneMateriale}</b><br></tpl>"
-                + "<tpl if=\"condition == 2 \">&nbsp;&nbsp;&nbsp;<b>{denominazioneMateriale}</b><br></tpl>"
-                + "<tpl if=\"condition == 3 \">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{[values.denominazioneMateriale.substr(1)]}<br></tpl>"
-                + "</tpl>";
-        
-		return tpl;
+    	String tpl = "<tpl for=\".\">"
+            + "<tpl if=\"condition == 1 \"><b>{denominazioneMateriale}</b><br></tpl>"
+            + "<tpl if=\"condition == 2 \">&nbsp;&nbsp;&nbsp;<b>{denominazioneMateriale}</b><br></tpl>"
+            + "<tpl if=\"condition == 3 \">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{denominazioneMateriale}</b><br></tpl>"
+            + "</tpl>";
+    
+    	return tpl;
 	}
     
 }

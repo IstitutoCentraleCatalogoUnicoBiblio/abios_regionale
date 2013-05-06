@@ -82,7 +82,7 @@ public interface BibliotecheService extends RemoteService {
 
 	public List<VoceUnicaModel> getSistemiBibliotecheByIdBiblioteca(int id_biblioteca);
 
-	public void addSistemaBiblioteca(int id_biblioteca,	int id_sistema_biblioteche);
+	public Boolean addSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche);
 
 	public void removeSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche);
 
@@ -112,7 +112,7 @@ public interface BibliotecheService extends RemoteService {
 
 	public List<DestinazioneSocialeModel> getDestinazioniSociali(int id_biblioteca);
 
-	public void addDestinazioneSociale(int id_biblioteca, int id_nuovaDestinazione, String note);
+	public Boolean addDestinazioneSociale(int id_biblioteca, boolean modifica, int id_nuovaDestinazione, String note);
 
 	public void removeDestinazioneSociale(int id_biblioteca, int id_rimuoviModalita);
 
@@ -146,7 +146,7 @@ public interface BibliotecheService extends RemoteService {
 
 	public List<PatrimonioLibrarioModel> getListaPatrimonioSpecializzazione(int id_biblioteca);
 	
-	public void addPatrimonioSpeciale(int id_biblioteca, int id_nuovoPatr, int quantita, int quantitaUltimoAnno);
+	public Boolean addPatrimonioSpeciale(int id_biblioteca, boolean modifica, int id_nuovoPatr, int quantita, int quantitaUltimoAnno);
 
 	public void removePatrimonioSpeciale(int id_biblioteca, int id_rimuoviPatr);
 
@@ -172,9 +172,9 @@ public interface BibliotecheService extends RemoteService {
 
 	public PagingLoadResult<VoceUnicaModel> getSpogliMaterialBibliograficoPerPaginazioneCombobox(int id_biblioteca, ModelData loadConfig);
 
-	public List<VoceUnicaModel> getListaSpogliMarerialeBibliograficoByIdBiblio(int id_biblioteca);
+	public List<VoceUnicaModel> getListaSpogliMaterialeBibliograficoByIdBiblio(int id_biblioteca);
 
-	public void addSpoglioMaterialeBibliografico(String descrSpoglio, int id_biblioteca) throws DuplicatedEntryClientSideException;
+	public void addSpoglioMaterialeBibliografico(VoceUnicaModel modelToSave, int id_biblioteca, boolean modifica);
 
 	public void removeSpogliMaterialeBibliografico(int id_rimuoviSpoglio);
 
@@ -252,7 +252,7 @@ public interface BibliotecheService extends RemoteService {
 	
 	public List<DepositiLegaliModel> getDepositiLegaliByIdBiblio(int id_biblioteca);
 
-	public void addDepositoLegaleToBiblio(int id_biblioteca, int id_nuovoTipoDeposito, String anno, boolean modifica);
+	public Boolean addDepositoLegaleToBiblio(int id_biblioteca, boolean modifica, int id_nuovoTipoDeposito, String anno);
 
 	public void removeDepositoLegaleFromBiblio(int id_biblioteca, int id_rimuoviDepositoLegale);
 

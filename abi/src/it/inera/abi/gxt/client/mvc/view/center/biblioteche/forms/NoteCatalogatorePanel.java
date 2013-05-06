@@ -44,7 +44,7 @@ public class NoteCatalogatorePanel extends ContentPanelForTabItem {
 	private LayoutContainer infoCatalogazione;
 	private FieldSet infoCatalogazioneSet;
 
-	private static final String dataImportLabel="Data import:&nbsp;";
+	private static final String dataImportLabel="Data export formato:&nbsp;";
 	private static final String dataModificaRemotaLabel="Data export:&nbsp;";
 	private static final String dataModificaLabel="Data ultima modifica:&nbsp;";
 	private static final String utenteUltimaModificaLabel="Utente ultima modifica:&nbsp;";

@@ -87,7 +87,7 @@ public interface BibliotecheServiceAsync {
 			AsyncCallback<List<VoceUnicaModel>> callback);
 
 	void addSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche,
-			AsyncCallback<Void> callback);
+			AsyncCallback<Boolean> callback);
 
 	void removeSistemaBiblioteca(int id_biblioteca, int id_sistema_biblioteche,
 			AsyncCallback<Void> callback);
@@ -130,8 +130,8 @@ public interface BibliotecheServiceAsync {
 	void getDestinazioniSociali(int id_biblioteca,
 			AsyncCallback<List<DestinazioneSocialeModel>> callback);
 
-	void addDestinazioneSociale(int id_biblioteca, int id_nuovaDestinazione,
-			String note, AsyncCallback<Void> asyncCallback);
+	void addDestinazioneSociale(int id_biblioteca, boolean modifica, int id_nuovaDestinazione,
+			String note, AsyncCallback<Boolean> asyncCallback);
 
 	void removeDestinazioneSociale(int id_biblioteca, int id_rimuoviModalita,
 			AsyncCallback<Void> asyncCallback);
@@ -179,8 +179,8 @@ public interface BibliotecheServiceAsync {
 	void getListaPatrimonioSpecializzazione(int id_biblioteca,
 			AsyncCallback<List<PatrimonioLibrarioModel>> callback);
 
-	void addPatrimonioSpeciale(int id_biblioteca, int id_nuovoPatr,
-			int quantita, int quantitaUltimoAnno, AsyncCallback<Void> asyncCallback);
+	void addPatrimonioSpeciale(int id_biblioteca, boolean modifica, int id_nuovoPatr,
+			int quantita, int quantitaUltimoAnno, AsyncCallback<Boolean> asyncCallback);
 
 	void removePatrimonioSpeciale(int id_biblioteca, int id_rimuoviPatr,
 			AsyncCallback<Void> asyncCallback);
@@ -221,10 +221,10 @@ public interface BibliotecheServiceAsync {
 			int id_biblioteca, ModelData loadConfig,
 			AsyncCallback<PagingLoadResult<VoceUnicaModel>> callback);
 
-	void getListaSpogliMarerialeBibliograficoByIdBiblio(int id_biblioteca,
+	void getListaSpogliMaterialeBibliograficoByIdBiblio(int id_biblioteca,
 			AsyncCallback<List<VoceUnicaModel>> callback);
 
-	void addSpoglioMaterialeBibliografico(String descrSpoglio,int id_biblioteca, AsyncCallback<Void> asyncCallback);
+	void addSpoglioMaterialeBibliografico(VoceUnicaModel modelToSave, int id_biblioteca, boolean modifica, AsyncCallback<Void> asyncCallback);
 
 	void removeSpogliMaterialeBibliografico(int id_rimuoviSpoglio, AsyncCallback<Void> asyncCallback);
 
@@ -324,8 +324,8 @@ public interface BibliotecheServiceAsync {
 
 	void getDepositiLegaliByIdBiblio(int id_biblioteca,	AsyncCallback<List<DepositiLegaliModel>> callback);
 
-	void addDepositoLegaleToBiblio(int id_biblioteca, int id_nuovoTipoDeposito,
-			String anno,boolean modifica, AsyncCallback<Void> asyncCallback);
+	void addDepositoLegaleToBiblio(int id_biblioteca, boolean modifica, int id_nuovoTipoDeposito,
+			String anno, AsyncCallback<Boolean> asyncCallback);
 
 	void removeDepositoLegaleFromBiblio(int id_biblioteca,
 			int id_rimuoviDepositoLegale, AsyncCallback<Void> asyncCallback);

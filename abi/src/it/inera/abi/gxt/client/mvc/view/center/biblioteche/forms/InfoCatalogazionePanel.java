@@ -99,10 +99,11 @@ public class InfoCatalogazionePanel extends ContentPanelForTabItem {
 		FieldSet spogliMaterialeBibliograficoSet = new FieldSet();
 		Utils.setFieldSetProperties(spogliMaterialeBibliograficoSet, "Spogli materiale bibliografico");
 		spogliMaterialeBibliograficoSet.setCollapsible(true);
+		
 		listaSpogliMaterialeBibliografico = new ListaSpogliMaterialeBibliografico();
 		listaSpogliMaterialeBibliografico.setGrid();
+		
 		spogliMaterialeBibliograficoSet.add(listaSpogliMaterialeBibliografico);
-
 		spogliMaterialeBibliografico.add(spogliMaterialeBibliograficoSet);
 		add(spogliMaterialeBibliografico);
 		/* FINE---SPOGLI MATERIALE BIBLIOGRAFICO */
