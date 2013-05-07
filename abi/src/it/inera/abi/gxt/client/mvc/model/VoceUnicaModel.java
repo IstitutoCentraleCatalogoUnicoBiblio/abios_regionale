@@ -17,7 +17,6 @@ public class VoceUnicaModel extends BaseModel implements Serializable {
 
 	}
 
-
 	public VoceUnicaModel(Integer id_record,String entry) {
 		set("id_record", id_record);
 		set("entry", entry);
@@ -70,28 +69,20 @@ public class VoceUnicaModel extends BaseModel implements Serializable {
 	//******fine******//
 
 	/*Utilizzati nello stato catalogazione*/
-	public String getIsilStato(){
-		return get("isilStato");
-	}
-
-	public String getIsilProvincia(){
+	public String getIsilProvincia() {
 		return get("isilProvincia");
 	}
-
-	public Integer getIsilNumero(){
+	
+	public void setIsilProvincia(String isilProvincia) {
+		set("isilProvincia", isilProvincia);
+	}
+	
+	public Integer getIsilNumero() {
 		return get("isilNumero");
 	}
 
-	public void getIsilStato(String isilStato){
-		set("isilStato",isilStato);
-	}
-
-	public void getIsilProvincia(String isilProvincia){
-		set("isilProvincia",isilProvincia);
-	}
-
-	public void getIsilNumero(Integer isilNumero){
-		set("isilNumero",isilNumero);
+	public void setIsilNumero(Integer isilNumero) {
+		set("isilNumero", isilNumero);
 	}
 	/*fine --Utilizzati nello stato catalogazione*/
 }

@@ -7,6 +7,7 @@ import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.costants.CostantiTabelleDinamiche;
 import it.inera.abi.gxt.client.mvc.model.ComuniModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
+import it.inera.abi.gxt.client.mvc.view.NumberFieldCustom;
 import it.inera.abi.gxt.client.mvc.view.TextFieldCustom;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.GoogleGeoLocalizePanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaContattiPanel;
@@ -99,8 +100,8 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 	/*Stato catalogazione*/
 	private ComboBoxForBeans<VoceUnicaModel> statoCatalogazioneField;
 	private TextField<String> isilStato;
-	private TextField<String> isilProvincia;
-	private NumberField isilNumero;
+	private TextFieldCustom<String> isilProvincia;
+	private NumberFieldCustom isilNumero;
 	/*Liste*/
 	private ListaDenominazioniPrecedentiPanel denominazioniPrecedentiPanel;
 	private ListaDenominazioniAlternativePanel denominazioniAlternativePanel;
@@ -779,7 +780,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		statoCatalogazioneField.setEditable(false);
 		statoCatalogazioneField.setTemplate(getTemplateEmptyRowLocation());
 		statoCatalogazioneLoader.load();
-		codiceIsilLabel= new Text("Codice Isil:");
+		codiceIsilLabel = new Text("Codice Isil:");
 
 		statoCatalogazioneField.addSelectionChangedListener(new SelectionChangedListener<VoceUnicaModel>() {
 
@@ -832,16 +833,10 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 							if (statoCatalogazioneField.getValue() != null) {
 								if (statoCatalogazioneField.getValue().getIdRecord().intValue() == 7) {
 									if (isilProvincia.getValue() != null && isilNumero.getValue() != null) {
-										params.put("isilStato",isilStato.getValue() );
+										params.put("isilStato", isilStato.getValue());
 										params.put("isilProvincia", isilProvincia.getValue());
 										params.put("isilNumero", isilNumero.getValue().intValue());
 										
-									} else {
-										Utils.setFontColorStyleBlack(codiceIsilLabel);
-										isilProvincia.setValue(null);
-										isilNumero.setValue(null);
-										isilProvincia.setOriginalValue(null);
-										isilNumero.setOriginalValue(null);
 									}
 								}
 							}
@@ -849,29 +844,26 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 							bibliotecheServiceAsync.setStatoCatalogazione(params, new AsyncCallback<Boolean>() {
 
 								@Override
-								public void onFailure(Throwable caught) {
-									if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
-										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-								}
-
-								@Override
 								public void onSuccess(Boolean result) {
-									if (result == true) {
-										AbiMessageBox.messageAlertBox("Inserire un codice abi valido!","ATTENZIONE");
+									if (result.booleanValue()) {
+										AbiMessageBox.messageAlertBox("Inserire un codice isil valido!", "ATTENZIONE");
 										
 									} else {
-										AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE,AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+										AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+										fireReloadBiblioDataEvent();
 									}
-									fireReloadBiblioDataEvent();
+									
 									/*Setto le label di colore nero*/
 									Utils.setFontColorStyleBlack(statoCatalogazioneLabel);
 
 									/*Setto gli originalValue() con i nuovi valori*/ 
 									statoCatalogazioneField.setOriginalValue(statoCatalogazioneField.getValue());
+									
 									if (statoCatalogazioneField.getValue() != null && statoCatalogazioneField.getValue().getIdRecord().intValue() == 7) {
-										if (result == false) {
+										if (!result.booleanValue()) {
+											Utils.setFontColorStyleBlack(codiceIsilLabel);
+											
 											if (isilProvincia.getValue() != null && isilNumero.getValue() != null) {
-												Utils.setFontColorStyleBlack(codiceIsilLabel);
 												isilStato.setOriginalValue(isilStato.getValue());
 												isilProvincia.setOriginalValue(isilProvincia.getValue());
 												isilNumero.setOriginalValue(isilNumero.getValue());
@@ -879,6 +871,13 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 										}
 									}
 								}
+								
+								@Override
+								public void onFailure(Throwable caught) {
+									if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
+										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+								}
+								
 							});
 						}
 					}
@@ -890,7 +889,6 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 
 		statoCatalogazioneReset = new Button("Reset");
 		Utils.setStylesButton(statoCatalogazioneReset);
-		//		statoCatalogazioneReset.disable();
 		statoCatalogazioneReset.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
 			@Override
@@ -900,7 +898,6 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 				Utils.setFontColorStyleBlack(codiceIsilLabel);
 			}
 		});
-		/************/
 
 		FormButtonBinding bindStatoCatalogazione = new FormButtonBinding(formStatoCatalogazione);
 		bindStatoCatalogazione.addButton(statoCatalogazioneAggiorna);
@@ -923,14 +920,12 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		isilStato.setWidth("40px");
 		isilStato.setStyleAttribute("marginLeft", "28px");
 		isilStato.disable();
-		isilProvincia= new TextField<String>();
+		isilProvincia = new TextFieldCustom<String>();
 		isilProvincia.setWidth("40px");
-		//		isilProvincia.setMinLength(2);
 		isilProvincia.setMaxLength(2);
 
-		isilNumero= new NumberField();
+		isilNumero = new NumberFieldCustom();
 		isilNumero.setFormat(NumberFormat.getFormat("0"));
-		//		isilNumero.setMinLength(1);
 		isilNumero.setMaxLength(4);
 		isilNumero.setWidth("40px");
 
@@ -938,8 +933,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		isilContainer.add(isilProvincia);
 		isilContainer.add(isilNumero);
 
-		Utils.addListenerToChangeLabelColorIfModifiedTextField(isilProvincia,codiceIsilLabel);
-		Utils.addListenerToChangeLabelColorIfModifiedTextField(isilProvincia,codiceIsilLabel);
+		Utils.addListenerToChangeLabelColorIfModifiedTextField(isilProvincia, codiceIsilLabel);
 
 		codiceIsilTable.add(codiceIsilLabel, colonnaLabel);
 		codiceIsilTable.add(isilContainer, colonnaLabel);
