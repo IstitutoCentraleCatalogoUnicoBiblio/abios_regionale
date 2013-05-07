@@ -1,8 +1,5 @@
 package it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.inera.abi.gxt.client.Abi;
 import it.inera.abi.gxt.client.AbiMessageBox;
 import it.inera.abi.gxt.client.auth.UIAuth;
@@ -13,6 +10,9 @@ import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.services.DuplicatedEntryClientSideException;
 import it.inera.abi.gxt.client.services.TabelleDinamicheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.Scroll;
@@ -39,14 +39,14 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
+import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid.ClicksToEdit;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowEditor;
-import com.extjs.gxt.ui.client.widget.grid.EditorGrid.ClicksToEdit;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -82,7 +82,7 @@ public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
 		setBorders(false);
 		setHeaderVisible(false);
 		setWidth(750);
-		setHeight(130);
+		setHeight(200);
 		setScrollMode(Scroll.AUTOY);
 		setLayout(new FitLayout());
 	}

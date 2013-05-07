@@ -43,6 +43,7 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid.ClicksToEdit;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowEditor;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
@@ -72,18 +73,17 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 		setBorders(false);
 		setHeaderVisible(false);
 		setWidth(750);
-		setHeight(130);
+		setHeight(200);
 		setScrollMode(Scroll.AUTOY);
 		setLayout(new FitLayout());
 	}
 
 	public void setGrid() {
-
 		final BibliotecheServiceAsync bibliotecheServiceAsync = Registry.get(Abi.BIBLIOTECHE_SERVICE);
 		final TabelleDinamicheServiceAsync tdsa = (TabelleDinamicheServiceAsync) Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
 
 		final RowEditorCustom<VoceUnicaModel> re = new RowEditorCustom<VoceUnicaModel>();
-//		re.setClicksToEdit(ClicksToEdit.TWO);
+		re.setClicksToEdit(ClicksToEdit.TWO);
 		re.setErrorSummary(false);
 		re.disable();
 
@@ -100,17 +100,15 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 		column.setWidth(300);
 
 		final ComboBox<VoceUnicaModel> denominazione = new ComboBox<VoceUnicaModel>();
-
 		denominazione.setDisplayField("entry");
 		denominazione.setFieldLabel("entry");
 		denominazione.setFireChangeEventOnSetValue(true);
-		denominazione.setEmptyText("Seleziona un sistema di biblioteche...");
+		denominazione.setEmptyText("Sistema di biblioteche...");
 		denominazione.setLazyRender(false);
 		denominazione.setTriggerAction(TriggerAction.ALL);
 		denominazione.setAllowBlank(false);
 		denominazione.setForceSelection(true);
 		denominazione.setEditable(true);
-		denominazione.setEmptyText("Demoniazione...");
 		denominazione.setTypeAhead(false);
 		denominazione.setMinChars(1);
 		denominazione.setPageSize(10);
@@ -121,9 +119,8 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 				if (value == null) {
 					return value;
 				}
-
-				return denominazione.getStore().findModel("entry",
-						value.toString());
+				
+				return "Sistema di biblioteche...";
 			}
 
 			@Override
@@ -141,29 +138,24 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 		columnDenominazione.setWidth(400);
 		columnDenominazione.setEditor(editor);
 		configs.add(columnDenominazione);
-		/**/
-		/*
-		 * t
-		 */
-		RpcProxy<PagingLoadResult<VoceUnicaModel>> sistemiBibioProxy = new RpcProxy<PagingLoadResult<VoceUnicaModel>>() {
+
+		RpcProxy<PagingLoadResult<VoceUnicaModel>> sistemiBiblioProxy = new RpcProxy<PagingLoadResult<VoceUnicaModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<PagingLoadResult<VoceUnicaModel>> callback) {
+			protected void load(Object loadConfig, AsyncCallback<PagingLoadResult<VoceUnicaModel>> callback) {
 				tdsa.getListaVociFiltratePerPaginazioneCombobox(CostantiTabelleDinamiche.SISTEMI_RETI_BIBLITOECHE_INDEX,
 						(ModelData) loadConfig, callback);
-
 			}
-
 		};
-		ModelReader sistemiBibioReader = new ModelReader();
+		
+		ModelReader sistemiBiblioReader = new ModelReader();
 
-		PagingLoader<PagingLoadResult<VoceUnicaModel>> sistemiBibioLoader = new BasePagingLoader<PagingLoadResult<VoceUnicaModel>>(
-				sistemiBibioProxy, sistemiBibioReader);
-		sistemiBibioLoader.setLimit(10);
+		PagingLoader<PagingLoadResult<VoceUnicaModel>> sistemiBiblioLoader = new BasePagingLoader<PagingLoadResult<VoceUnicaModel>>(
+				sistemiBiblioProxy, sistemiBiblioReader);
+		sistemiBiblioLoader.setLimit(10);
 
 		final ListStore<VoceUnicaModel> sistemiBiblioComboboxStore = new ListStore<VoceUnicaModel>(
-				sistemiBibioLoader);
+				sistemiBiblioLoader);
 
 		denominazione.setStore(sistemiBiblioComboboxStore);
 
@@ -171,12 +163,9 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 		RpcProxy<List<VoceUnicaModel>> puntiServizioDecentratiProxy = new RpcProxy<List<VoceUnicaModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,
-					AsyncCallback<List<VoceUnicaModel>> callback) {
+			protected void load(Object loadConfig, AsyncCallback<List<VoceUnicaModel>> callback) {
 				bibliotecheServiceAsync.getSistemiBibliotecheByIdBiblioteca(id_biblioteca, callback);
-
 			}
-
 		};
 
 		ModelReader sistemiBiblioByIdBiblioReader = new ModelReader();
@@ -191,12 +180,19 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 		denominazione.addSelectionChangedListener(new SelectionChangedListener<VoceUnicaModel>() {
 
 			@Override
-			public void selectionChanged(
-					SelectionChangedEvent<VoceUnicaModel> se) {
+			public void selectionChanged(SelectionChangedEvent<VoceUnicaModel> se) {
 				if (se.getSelectedItem() != null) {
-
 					grid.getStore().getAt(0).setIdRecord(se.getSelectedItem().getIdRecord());
 				}
+			}
+		});
+		
+		re.addListener(Events.CancelEdit, new Listener<BaseEvent>() {
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				re.disable();
+				sistemiBiblioByIdBiblioLoader.load();
 			}
 		});
 
@@ -204,54 +200,51 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
-				//	sistemiBiblioByIdBiblioStore.remove(0);
-
 				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
+					
 					public void handleEvent(MessageBoxEvent ce) {
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
+							int id_nuovoSistema = sistemiBiblioByIdBiblioStore.getAt(0).getIdRecord();
 
-							int id_nuovoSistema = sistemiBiblioByIdBiblioStore
-							.getAt(0).getIdRecord();
-
-							bibliotecheServiceAsync.addSistemaBiblioteca(id_biblioteca, id_nuovoSistema,new AsyncCallback<Void>() {
+							bibliotecheServiceAsync.addSistemaBiblioteca(id_biblioteca, id_nuovoSistema, new AsyncCallback<Boolean>() {
 
 								@Override
-								public void onSuccess(Void result) {
-
-									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-
+								public void onSuccess(Boolean result) {
+									re.disable();
 									sistemiBiblioByIdBiblioLoader.load();
+									
+									if (result.booleanValue()) {
+										AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+										
+									} else {
+										AbiMessageBox.messageAlertBox(AbiMessageBox.ESITO_VOCE_GIA_PRESENTE_MESSAGE, AbiMessageBox.ESITO_VOCE_GIA_PRESENTE_TITLE);
+									}
 								}
 
 								@Override
 								public void onFailure(Throwable caught) {
 									if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
 										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+										re.disable();
+										sistemiBiblioByIdBiblioLoader.load();
 									}
 								}
 
 							});
+							
 						} else {
-							sistemiBiblioByIdBiblioStore.remove(0);
+							re.disable();
+							sistemiBiblioByIdBiblioLoader.load();
 						}
 
 					}
 				};
 
 				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, l);
-
 			}
 		});
 
-		re.addListener(Events.CancelEdit, new Listener<BaseEvent>() {
-
-			@Override
-			public void handleEvent(BaseEvent be) {
-				sistemiBiblioByIdBiblioStore.remove(0);
-			}
-
-		});
 		grid = new Grid<VoceUnicaModel>(sistemiBiblioByIdBiblioStore, cm);
 		grid.setAutoExpandColumn("entry");
 		grid.setBorders(true);
@@ -266,26 +259,26 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 		toolBar.setBorders(false);
 
 		toolBar.add(new Text("Sistemi di biblioteche "));
+		
 		add = new Button("Aggiungi");
 		add.setIcon(Resources.ICONS.add());
 		add.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				re.enable();
-				re.enableEvents(true);
+				remove.disable();
 				VoceUnicaModel v = new VoceUnicaModel();
-
+				re.enable();
 				re.stopEditing(false);
 				sistemiBiblioByIdBiblioStore.insert(v, 0);
-				re.startEditing(sistemiBiblioByIdBiblioStore.indexOf(v),false);
-
+				re.startEditing(sistemiBiblioByIdBiblioStore.indexOf(v), false);
 
 				denominazione.clearInvalid();
 			}
-
 		});
+		
 		remove = new Button("Rimuovi");
+		remove.setIcon(Resources.ICONS.delete());
 		remove.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(final ButtonEvent ce) {
@@ -296,6 +289,7 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 						Button btn = me.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
 							int id_sistema = grid.getSelectionModel().getSelectedItem().getIdRecord();
+							
 							bibliotecheServiceAsync.removeSistemaBiblioteca(id_biblioteca, id_sistema,new AsyncCallback<Void>() {
 
 								@Override
@@ -312,11 +306,10 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 									}
 								}
 							});
+							
 							if (grid.getStore().getCount() == 0) {
 								ce.<Component> getComponent().disable();
 							}
-
-
 						}
 
 					}
@@ -328,16 +321,20 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 		});
 
 		remove.disable();
-		grid.addListener(Events.RowClick,
-				new Listener<GridEvent<VoceUnicaModel>>() {
+		
+		grid.addListener(Events.RowClick, new Listener<GridEvent<VoceUnicaModel>>() {
 
 			public void handleEvent(GridEvent<VoceUnicaModel> be) {
-
 				remove.enable();
 			}
 		});
+		
+		grid.addListener(Events.RowDoubleClick, new Listener<GridEvent<VoceUnicaModel>>() {
 
-		remove.setIcon(Resources.ICONS.delete());
+			public void handleEvent(GridEvent<VoceUnicaModel> be) {
+				remove.disable();
+			}
+		});
 
 		add(grid);
 		setTopComponent(toolBar);
@@ -348,7 +345,8 @@ public class ListaSistemiDiBibliotechePanel extends ContentPanel {
 		id_biblioteca = idBiblio;
 
 	}
-	public BaseListLoader<ListLoadResult<VoceUnicaModel>> getLoader(){
+	
+	public BaseListLoader<ListLoadResult<VoceUnicaModel>> getLoader() {
 		UIWorkflow.gridEnableEvent(grid);
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, add);
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, remove);
