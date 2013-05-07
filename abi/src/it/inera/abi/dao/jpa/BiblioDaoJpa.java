@@ -5071,8 +5071,10 @@ public class BiblioDaoJpa implements BiblioDao {
 		statoCatalogazione.setId(statoCatalogazionePK);
 
 		if (idStatoCatalogazione.intValue() == 7) {// Stato biblioteca confluita
-			Biblioteca bibliotecaTarget = getBibliotecaById(idBibliotecaTarget);
-			statoCatalogazione.setBibliotecaTarget(bibliotecaTarget);
+			if (idBibliotecaTarget != null) {
+				Biblioteca bibliotecaTarget = getBibliotecaById(idBibliotecaTarget);
+				statoCatalogazione.setBibliotecaTarget(bibliotecaTarget);
+			}
 		}
 
 		em.merge(statoCatalogazione);
