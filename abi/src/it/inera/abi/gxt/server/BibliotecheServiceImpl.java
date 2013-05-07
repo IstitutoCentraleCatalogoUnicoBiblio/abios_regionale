@@ -48,7 +48,6 @@ import it.inera.abi.persistence.DestinazioniSociali;
 import it.inera.abi.persistence.Dewey;
 import it.inera.abi.persistence.DeweyLibero;
 import it.inera.abi.persistence.Ente;
-import it.inera.abi.persistence.EnteTipologiaAmministrativa;
 import it.inera.abi.persistence.FondiSpeciali;
 import it.inera.abi.persistence.FondiSpecialiCatalogazioneInventario;
 import it.inera.abi.persistence.OrarioChiusure;
@@ -72,7 +71,6 @@ import it.inera.abi.persistence.SezioniSpeciali;
 import it.inera.abi.persistence.SistemiBiblioteche;
 import it.inera.abi.persistence.SistemiPrestitoInterbibliotecario;
 import it.inera.abi.persistence.SpogliBibliografici;
-import it.inera.abi.persistence.Stato;
 import it.inera.abi.persistence.StatoBibliotecaWorkflow;
 import it.inera.abi.persistence.StatoCatalogazione;
 import it.inera.abi.persistence.TipologiaFunzionale;
@@ -1068,6 +1066,11 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			VoceUnicaModel statoCatalogazioneModel = new VoceUnicaModel();
 			statoCatalogazioneModel.setIdRecord(statoCatalogazione.getId().getIdStatoCatalogazione());
 			statoCatalogazioneModel.setEntry(statoCatalogazione.getStatoCatalogazioneTipo().getDescrizione());
+			if (statoCatalogazioneModel.getIdRecord().intValue() == 7 && statoCatalogazione.getBibliotecaTarget() != null) {
+				Biblioteca bibliotecaTarget = statoCatalogazione.getBibliotecaTarget();
+				statoCatalogazioneModel.setIsilProvincia(bibliotecaTarget.getIsilProvincia());
+				statoCatalogazioneModel.setIsilNumero(bibliotecaTarget.getIsilNumero());
+			}
 			biblioModel.setStatoCatalogazioneModel(statoCatalogazioneModel);
 			
 		} else {

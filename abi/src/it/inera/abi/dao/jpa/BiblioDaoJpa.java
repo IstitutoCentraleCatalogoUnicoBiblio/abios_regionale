@@ -5106,21 +5106,24 @@ public class BiblioDaoJpa implements BiblioDao {
 		if (idStatoCatalogazione.intValue() == 7) {// Stato biblioteca confluita
 			String isilSt = (String) params.get("isilStato");
 			String isilPr = (String) params.get("isilProvincia");
-			String isilNr = "" + (Integer) (params.get("isilNumero"));
-			if (isilSt != null && isilPr != null && isilNr != null
-					&& (!isilSt.equals("")) && (!isilSt.equals(" "))
-					&& (!isilPr.equals("")) && (!isilPr.equals(" "))
-					&& (!isilNr.equals("")) && (!isilNr.equals(" "))) {
-				String idBibliotecaTarget = Utility.buildIsil(isilSt, isilPr, isilNr);
-
-				String[] str = new String[1];
-				str[0] = idBibliotecaTarget;
-
-				Biblioteca[] bibliotecaTarget = getBibliotecheViaCodice(str, null, 0, 1);
-				if (bibliotecaTarget.length > 0) {
-					statoCatalogazione.setBibliotecaTarget(bibliotecaTarget[0]);
-				} else {
+			String isilNr = ((Integer) params.get("isilNumero")).toString();
+			
+			if (StringUtils.isNotBlank(isilSt) && StringUtils.isNotBlank(isilPr) && StringUtils.isNotBlank(isilNr)) {
+				if (isilPr.length() != 2) {
 					result = true;
+
+				} else {
+					String isilBibliotecaTarget = Utility.buildIsil(isilSt, isilPr, isilNr);
+					
+					String[] str = new String[1];
+					str[0] = isilBibliotecaTarget;
+					
+					Biblioteca[] bibliotecaTarget = getBibliotecheViaCodice(str, null, 0, 1);
+					if (bibliotecaTarget.length > 0) {
+						statoCatalogazione.setBibliotecaTarget(bibliotecaTarget[0]);
+					} else {
+						result = true;
+					}
 				}
 			}
 		}
