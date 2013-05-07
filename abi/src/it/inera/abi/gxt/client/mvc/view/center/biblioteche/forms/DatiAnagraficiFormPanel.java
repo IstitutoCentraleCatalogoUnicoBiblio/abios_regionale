@@ -864,9 +864,24 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 											Utils.setFontColorStyleBlack(codiceIsilLabel);
 											
 											if (isilProvincia.getValue() != null && isilNumero.getValue() != null) {
-												isilStato.setOriginalValue(isilStato.getValue());
 												isilProvincia.setOriginalValue(isilProvincia.getValue());
 												isilNumero.setOriginalValue(isilNumero.getValue());
+												
+											} else {
+												if (biblioteca.getStatoCatalogazioneModel().getIsilProvincia() != null && biblioteca.getStatoCatalogazioneModel().getIsilNumero() != null) {
+													isilProvincia.setOriginalValue(biblioteca.getStatoCatalogazioneModel().getIsilProvincia());
+													isilNumero.setOriginalValue(biblioteca.getStatoCatalogazioneModel().getIsilNumero());
+													
+													isilProvincia.setValue(biblioteca.getStatoCatalogazioneModel().getIsilProvincia());
+													isilNumero.setValue(biblioteca.getStatoCatalogazioneModel().getIsilNumero());
+													
+												} else {
+													isilProvincia.setOriginalValue(null);
+													isilNumero.setOriginalValue(null);
+													
+													isilProvincia.setValue(null);
+													isilNumero.setValue(null);
+												}
 											}
 										}
 									}
@@ -934,7 +949,8 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		isilContainer.add(isilNumero);
 
 		Utils.addListenerToChangeLabelColorIfModifiedTextField(isilProvincia, codiceIsilLabel);
-
+		Utils.addListenerToChangeLabelColorIfModifiedNumberFieldInt(isilNumero, codiceIsilLabel);
+		
 		codiceIsilTable.add(codiceIsilLabel, colonnaLabel);
 		codiceIsilTable.add(isilContainer, colonnaLabel);
 

@@ -5106,7 +5106,7 @@ public class BiblioDaoJpa implements BiblioDao {
 		if (idStatoCatalogazione.intValue() == 7) {// Stato biblioteca confluita
 			String isilSt = (String) params.get("isilStato");
 			String isilPr = (String) params.get("isilProvincia");
-			String isilNr = ((Integer) params.get("isilNumero")).toString();
+			String isilNr = params.get("isilNumero") != null ? ((Integer) params.get("isilNumero")).toString() : null;
 			
 			if (StringUtils.isNotBlank(isilSt) && StringUtils.isNotBlank(isilPr) && StringUtils.isNotBlank(isilNr)) {
 				if (isilPr.length() != 2) {
