@@ -62,7 +62,7 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 	private BaseListLoader<ListLoadResult<OrariModel>> loaderVariazioniOrari;
 	private BibliotecheServiceAsync bibliotecheServiceAsync ;
 	private int id_biblioteca;
-	private boolean modifica =false;
+	private boolean modifica = false;
 
 	private Button add;
 	private Button remove;
@@ -70,13 +70,13 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 
 	public ListaVariazioniOrarioPanel() {
 
-		bibliotecheServiceAsync=(BibliotecheServiceAsync)Registry.get(Abi.BIBLIOTECHE_SERVICE);
+		bibliotecheServiceAsync = (BibliotecheServiceAsync) Registry.get(Abi.BIBLIOTECHE_SERVICE);
 		setBodyBorder(false);
 		setBorders(false);
 		setHeaderVisible(false);
 
 		setWidth(750);
-		setHeight(200);
+		setHeight(300);
 		setScrollMode(Scroll.NONE);
 		setLayout(new FitLayout());
 	}
