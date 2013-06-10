@@ -298,7 +298,7 @@ public class ImportLogicImpl implements ImportLogic {
 				try {
 					importer.doImport(biblioteca, dataExport, reportImport, basePhotoUrl);
 				} catch (Exception e) {
-					log.error("Si è verificato un errore che non ha permesso di importare nessun dato della bilblioteca", e);
+					log.error("Si è verificato un errore che non ha permesso di importare nessun dato della biblioteca", e);
 					reportImport.addError("Errore che non ha permesso di importare nessun dato della biblioteca: " + e.getMessage());
 				}
 				reports.put(biblioteca, reportImport);
