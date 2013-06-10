@@ -978,7 +978,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 	@Override
 	public void addPartecipaCatalogoCollettivo(int id_biblioteca, PartecipaCataloghiCollettiviMateriale partecipaCataloghoCollettivoMateriale, boolean modifica) throws EntryNotFoundException {
 
-		biblioDao.addPartecipaCatalogoCollettivo(id_biblioteca,partecipaCataloghoCollettivoMateriale,modifica);
+		biblioDao.addPartecipaCatalogoCollettivo(id_biblioteca, partecipaCataloghoCollettivoMateriale, modifica);
 
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica partecipazione catalogo collettivo: "+(modifica?"id_record="+partecipaCataloghoCollettivoMateriale.getIdCataloghiCollettiviMateriale():"")+" - id_biblioteca="+id_biblioteca);
 
@@ -991,7 +991,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 
 	@Override
 	public void addPartecipaCatalogoSpeciale(int id_biblioteca,	PartecipaCataloghiSpecialiMateriale partecipaCataloghoSpecialeMateriale, boolean modifica) {
-		biblioDao.addPartecipaCatalogoSpeciale(id_biblioteca,partecipaCataloghoSpecialeMateriale,modifica);
+		biblioDao.addPartecipaCatalogoSpeciale(id_biblioteca, partecipaCataloghoSpecialeMateriale, modifica);
 
 		userActionLog.logActionCatalogazioneBiblioDefaultUser("Salvataggio/modifica partecipazione catalogo speciale: "+(modifica?"id_record="+partecipaCataloghoSpecialeMateriale.getIdCataloghiSpecialiMateriale():"")+" - id_biblioteca="+id_biblioteca);
 

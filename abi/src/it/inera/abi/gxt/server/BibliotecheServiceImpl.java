@@ -1989,11 +1989,18 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			partecipaCataloghoCollettivoMateriale.setPercentualeInformatizzata(tmpCatalogo.getPercentInformatizzato());
 		}
 
-		if((Integer)tmpCatalogo.getAnnoDa()!=null){
+		if ((Integer)tmpCatalogo.getAnnoDa() != null) {
 			partecipaCataloghoCollettivoMateriale.setDaAnno(tmpCatalogo.getAnnoDa());
+			
+		} else {
+			partecipaCataloghoCollettivoMateriale.setDaAnno(null);
 		}
-		if((Integer)tmpCatalogo.getAnnoA()!=null){
+		
+		if ((Integer)tmpCatalogo.getAnnoA() != null) {
 			partecipaCataloghoCollettivoMateriale.setAAnno(tmpCatalogo.getAnnoA());
+			
+		} else {
+			partecipaCataloghoCollettivoMateriale.setAAnno(null);
 		}
 
 		try {
@@ -2131,14 +2138,21 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			partecipaCataloghoSpecialeMateriale.setPercentualeInformatizzata(tmpCatalogo.getPercentInformatizzato());
 		}
 
-		if((Integer)tmpCatalogo.getAnnoDa()!=null){
+		if ((Integer)tmpCatalogo.getAnnoDa() != null) {
 			partecipaCataloghoSpecialeMateriale.setDaAnno(tmpCatalogo.getAnnoDa());
+			
+		} else {
+			partecipaCataloghoSpecialeMateriale.setDaAnno(null);
 		}
-		if((Integer)tmpCatalogo.getAnnoA()!=null){
+		
+		if ((Integer)tmpCatalogo.getAnnoA() != null) {
 			partecipaCataloghoSpecialeMateriale.setAAnno(tmpCatalogo.getAnnoA());
+			
+		} else {
+			partecipaCataloghoSpecialeMateriale.setAAnno(null);
 		}
 
-		abiBiblioLogic.addPartecipaCatalogoSpeciale(id_biblioteca, partecipaCataloghoSpecialeMateriale,modifica);
+		abiBiblioLogic.addPartecipaCatalogoSpeciale(id_biblioteca, partecipaCataloghoSpecialeMateriale, modifica);
 	}
 
 	@Override
@@ -2281,11 +2295,18 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			partecipaCataloghiGenerali.setPercentualeInformatizzata(tmpCatalogo.getPercentInformatizzato());
 		}
 
-		if((Integer)tmpCatalogo.getAnnoDa()!=null){
+		if ((Integer)tmpCatalogo.getAnnoDa() != null) {
 			partecipaCataloghiGenerali.setDaAnno(tmpCatalogo.getAnnoDa());
+			
+		} else {
+			partecipaCataloghiGenerali.setDaAnno(null);
 		}
-		if((Integer)tmpCatalogo.getAnnoA()!=null){
+		
+		if ((Integer)tmpCatalogo.getAnnoA() != null) {
 			partecipaCataloghiGenerali.setAAnno(tmpCatalogo.getAnnoA());
+			
+		} else {
+			partecipaCataloghiGenerali.setAAnno(null);
 		}
 
 		abiBiblioLogic.addPartecipaCatalogoGenerale(id_biblioteca,partecipaCataloghiGenerali, modifica);

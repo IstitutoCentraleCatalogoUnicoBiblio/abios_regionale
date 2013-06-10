@@ -2052,11 +2052,19 @@ public class BiblioDaoJpa implements BiblioDao {
 			if (tmp.getPercentualeInformatizzata() != null)
 				toSave.setPercentualeInformatizzata(tmp.getPercentualeInformatizzata());
 
-			if (tmp.getDaAnno() != null)
+			if (tmp.getDaAnno() != null) {
 				toSave.setDaAnno(tmp.getDaAnno());
-
-			if (tmp.getAAnno() != null)
+				
+			} else {
+				toSave.setDaAnno(null);
+			}
+			
+			if (tmp.getAAnno() != null) {
 				toSave.setAAnno(tmp.getAAnno());
+				
+			} else {
+				toSave.setAAnno(null);
+			}
 
 			em.merge(toSave);
 
@@ -2167,11 +2175,20 @@ public class BiblioDaoJpa implements BiblioDao {
 				toUpdate.setPercentualeInformatizzata(tmp
 						.getPercentualeInformatizzata());
 
-			if (tmp.getDaAnno() != null)
+			if (tmp.getDaAnno() != null) {
 				toUpdate.setDaAnno(tmp.getDaAnno());
+				
+			} else {
+				toUpdate.setDaAnno(null);
+			}
+			
 
-			if (tmp.getAAnno() != null)
+			if (tmp.getAAnno() != null) {
 				toUpdate.setAAnno(tmp.getAAnno());
+				
+			} else {
+				toUpdate.setAAnno(null);
+			}
 
 			em.merge(toUpdate);
 		} else {
@@ -2449,12 +2466,20 @@ public class BiblioDaoJpa implements BiblioDao {
 				toUpdate.setPercentualeInformatizzata(tmp
 						.getPercentualeInformatizzata());
 
-			if (tmp.getDaAnno() != null)
+			if (tmp.getDaAnno() != null) {
 				toUpdate.setDaAnno(tmp.getDaAnno());
+			
+			} else {
+				toUpdate.setDaAnno(null);
+			}
 
-			if (tmp.getAAnno() != null)
+			if (tmp.getAAnno() != null) {
 				toUpdate.setAAnno(tmp.getAAnno());
 
+			} else {
+				toUpdate.setAAnno(null);
+			}
+			
 			em.merge(toUpdate);
 		}
 
