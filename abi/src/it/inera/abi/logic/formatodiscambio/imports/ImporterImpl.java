@@ -505,8 +505,9 @@ public class ImporterImpl implements Importer {
 				Geolocalizzazione coordinate = new Geolocalizzazione();
 				coordinate.setLatitudine(latitudine);
 				coordinate.setLongitudine(longitudine);
-
+				coordinate.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
 				bibliotecaDb.setGeolocalizzazione(coordinate);
+				biblioDao.saveChild(coordinate);
 			}
 		}
 
@@ -772,6 +773,7 @@ public class ImporterImpl implements Importer {
 				log.debug("Inserita url: " + url);
 			}
 			regolamento.setBiblioteca(bibliotecaDb);
+			biblioDao.saveChild(regolamento);
 		}
 
 
