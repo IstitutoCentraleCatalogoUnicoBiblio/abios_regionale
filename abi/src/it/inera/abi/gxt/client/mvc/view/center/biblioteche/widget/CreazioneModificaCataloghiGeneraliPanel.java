@@ -269,11 +269,19 @@ public class CreazioneModificaCataloghiGeneraliPanel extends CreazioneModificaCa
 								tmpCatalogo.setPercentInformatizzato((Integer)percentInformatizzatoField.getValue());
 							}else tmpCatalogo.setPercentInformatizzato(0);
 
-							if(annoDaField.getValue()!=null)
+							if (annoDaField.getValue() != null) {
 								tmpCatalogo.setDaAnno(annoDaField.getValue().intValue());
-
-							if(annoAField.getValue()!=null)
+								
+							} else {
+								tmpCatalogo.setDaAnno(null);
+							}
+							
+							if (annoAField.getValue() != null) {
 								tmpCatalogo.setAAnno(annoAField.getValue().intValue());
+								
+							} else {
+								tmpCatalogo.setAAnno(null);
+							}
 
 							bibliotecheService.addPartecipaCatalogoGenerale(idBiblio, tmpCatalogo,	true,	new AsyncCallback<Void>() {
 

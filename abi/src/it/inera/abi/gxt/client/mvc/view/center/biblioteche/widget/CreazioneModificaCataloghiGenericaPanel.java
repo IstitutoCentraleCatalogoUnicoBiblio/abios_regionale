@@ -457,7 +457,7 @@ public class CreazioneModificaCataloghiGenericaPanel extends FormPanel {
 		formatiAccessoTable.add(citazioneBiblioLabel,labelFormatiTableData);
 		formatiAccessoTable.add(citazioneBiblioField);
 
-		Text coperturaBibliograficaText = new Text("<b>Copertura bibliorafica</b>");
+		Text coperturaBibliograficaText = new Text("<b>Copertura bibliografica</b>");
 
 		TableData annoDaTableData = new TableData();
 		annoDaTableData= new TableData();
@@ -916,10 +916,19 @@ public class CreazioneModificaCataloghiGenericaPanel extends FormPanel {
 		initUrlButton(model);
 
 		/*Supporto bibliografico*/
-		if(model.getAnnoDa()!=null)
+		if (model.getAnnoDa() != null) {
 			annoDaField.setValue(model.getAnnoDa());
-		if(model.getAnnoA()!=null)
+			
+		} else {
+			annoDaField.setValue(null);
+		}
+		
+		if (model.getAnnoA() != null) {
 			annoAField.setValue(model.getAnnoA());
+			
+		} else {
+			annoAField.setValue(null);
+		}
 
 		if(UIWorkflow.isReadOnly()==false){
 			schedeField.enable();
