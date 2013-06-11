@@ -45,24 +45,24 @@ import com.google.gwt.user.client.ui.RadioButton;
 public class VariazioneOrarioWindow extends Window {
 
 	private int id_biblio = 0;
-	
+
 	private BibliotecheServiceAsync bibliotecheServiceAsync;
-	
+
 	private FormPanel mainPanel = null;
 
 	private Vector<CheckBox> daysChecked;
 
 	private FormButtonBinding buttonBinding = null;
-	
+
 	private TextField<String> periodoVarField = null;
 	private SimpleComboBox<String> startOreField = null;
 	private SimpleComboBox<String> startMinField = null;
 	private SimpleComboBox<String> stopOreField = null;
 	private SimpleComboBox<String> stopMinField = null;
-	
+
 	private RadioButton tuttiGiorniRadio = null;
 	private HorizontalPanel dayBox = null;
-	
+
 	private CheckBox lun = null;
 	private CheckBox mar = null;
 	private CheckBox mer = null;
@@ -70,13 +70,13 @@ public class VariazioneOrarioWindow extends Window {
 	private CheckBox ven = null;
 	private CheckBox sab = null;
 	private CheckBox dom = null;
-	
+
 	private Button save = null; 
 	private Button cancel = null;
-	
+
 	public VariazioneOrarioWindow() {
 		bibliotecheServiceAsync = (BibliotecheServiceAsync) Registry.get(Abi.BIBLIOTECHE_SERVICE);
-		
+
 		setSize(350, 350);
 		setModal(true);
 		setScrollMode(Scroll.NONE);
@@ -85,7 +85,7 @@ public class VariazioneOrarioWindow extends Window {
 		setLayout(new FitLayout());
 		setHeading("Inserimento variazione orario");
 		addStyleName("font-weight-button");
-		
+
 		mainPanel = new FormPanel();
 		mainPanel.setBodyBorder(false);
 		mainPanel.setBorders(false);
@@ -106,7 +106,9 @@ public class VariazioneOrarioWindow extends Window {
 
 		startOreField = new SimpleComboBox<String>();
 		startOreField.setEmptyText("hh");
-		startOreField.setAllowBlank(false);
+
+		startOreField.setAllowBlank(true);
+
 		startOreField.setForceSelection(true);
 		startOreField.setWidth(50);
 		startOreField.setTriggerAction(TriggerAction.ALL);
@@ -124,7 +126,9 @@ public class VariazioneOrarioWindow extends Window {
 
 		startMinField = new SimpleComboBox<String>();
 		startMinField.setEmptyText("mm");
-		startMinField.setAllowBlank(false);
+
+		startMinField.setAllowBlank(true);
+
 		startMinField.setWidth(50);
 		startMinField.setForceSelection(true);
 		startMinField.setTriggerAction(TriggerAction.ALL);
@@ -151,7 +155,9 @@ public class VariazioneOrarioWindow extends Window {
 
 		stopOreField = new SimpleComboBox<String>();
 		stopOreField.setEmptyText("hh");
-		stopOreField.setAllowBlank(false);
+
+		stopOreField.setAllowBlank(true);
+
 		stopOreField.setForceSelection(true);
 		stopOreField.setWidth(50);
 		stopOreField.setTriggerAction(TriggerAction.ALL);
@@ -177,7 +183,9 @@ public class VariazioneOrarioWindow extends Window {
 
 		stopMinField = new SimpleComboBox<String>();
 		stopMinField.setEmptyText("mm");
-		stopMinField.setAllowBlank(false);
+
+		stopMinField.setAllowBlank(true);
+
 		stopMinField.setWidth(50);
 		stopMinField.setForceSelection(true);
 		stopMinField.setTriggerAction(TriggerAction.ALL);
@@ -349,9 +357,9 @@ public class VariazioneOrarioWindow extends Window {
 
 		TableLayout tableLayout = new TableLayout(2);
 		tableLayout.setCellPadding(5);
-		
+
 		final LayoutContainer buttons = new LayoutContainer(tableLayout);
-		
+
 		save = new Button("Salva");
 		save.addListener(Events.OnMouseUp, new Listener<BaseEvent>() {
 
@@ -373,20 +381,20 @@ public class VariazioneOrarioWindow extends Window {
 
 				toSave.setStopMin(stopMinField.getSimpleValue());
 
-				if (checkOrarioFormat(toSave)) {
+				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, new Listener<MessageBoxEvent>() {
 
-					AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, new Listener<MessageBoxEvent>() {
-						
-						@Override
-						public void handleEvent(MessageBoxEvent ce) {
-							Button btn = ce.getButtonClicked();
-							if (btn.getText().equalsIgnoreCase("Si")) {
+					@Override
+					public void handleEvent(MessageBoxEvent ce) {
+						Button btn = ce.getButtonClicked();
+						if (btn.getText().equalsIgnoreCase("Si")) {
+
+							if (checkOrarioFormat(toSave)) {
 
 								if (tuttiGiorniRadio.getValue().booleanValue() == true) {
 									for (int i = 0; i < 7; i++) {
 										id_days.add(i+1);		
 									}
-									
+
 								} else {
 									if (lun.getValue()) {
 										id_days.add(1);
@@ -411,38 +419,45 @@ public class VariazioneOrarioWindow extends Window {
 									}
 
 								}
-								
-								bibliotecheServiceAsync.addNuovaVariazioneOrarioCustom(id_biblio, id_days, toSave, new AsyncCallback<Void>() {
-									
-									@Override
-									public void onSuccess(Void result) {
-										AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-										
-									}
-									
-									@Override
-									public void onFailure(Throwable caught) {
-										if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
-											AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+
+								if (tuttiGiorniRadio.getValue().booleanValue() == false && id_days.size() == 0) {
+									AbiMessageBox.messageErrorAlertBox("Selezionare almeno un giorno corrispondente all'orario inserito!", "ERRORE SELEZIONE GIORNI");
+									hide();
+
+								} else {
+									bibliotecheServiceAsync.addNuovaVariazioneOrarioCustom(id_biblio, id_days, toSave, new AsyncCallback<Void>() {
+
+										@Override
+										public void onSuccess(Void result) {
+											hide();
+											AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+
 										}
-									}
-								});
+
+										@Override
+										public void onFailure(Throwable caught) {
+											if (UIAuth.checkIsLogin(caught.toString())) {// controllo se l'errore è dovuto alla richiesta di login
+												hide();
+												AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+											}
+										}
+									});
+								}
+
+							} else {
+								AbiMessageBox.messageErrorAlertBox("L'orario di apertura deve essere precedente all'orario di chiusura!", "ERRORE FORMATO ORARIO");
+								hide();
 							}
-							
+
+						} else {
 							hide();
 						}
-					});
-					
-					
-					
-				} else {
-					AbiMessageBox.messageErrorAlertBox("L'orario di apertura deve essere precedente all'orario di chiusura!", "ERRORE FORMATO ORARIO");
-					hide();
-				}
-				
+					}
+				});
+
 			}
 		});
-		
+
 		cancel = new Button("Annulla");
 		cancel.addListener(Events.OnMouseUp, new Listener<BaseEvent>() {
 
@@ -452,10 +467,10 @@ public class VariazioneOrarioWindow extends Window {
 				hide();
 			}
 		});
-		
+
 		buttonBinding = new FormButtonBinding(mainPanel);
 		buttonBinding.addButton(save);
-		
+
 		buttons.add(save);
 		buttons.add(cancel);
 
@@ -463,12 +478,12 @@ public class VariazioneOrarioWindow extends Window {
 		c.setStyleAttribute("margin", "30px");
 		c.add(buttons);
 		windowContainer.add(c);
-		
+
 		mainPanel.add(windowContainer);
 		add(mainPanel);
-		
+
 	}
-	
+
 	public void resetForm() {
 		periodoVarField.clear();
 		startOreField.clear();
@@ -479,24 +494,41 @@ public class VariazioneOrarioWindow extends Window {
 		dayBox.hide();
 		mainPanel.reset();
 	}
-	
+
 	public void setIdBiblio(int idBib) {
 		this.id_biblio = idBib;
 	}
 
 	public static boolean checkOrarioFormat(OrariModel tmpSave) {
-		int startOreInt = Integer.parseInt(tmpSave.getStartOre());
-		int startMinInt = Integer.parseInt(tmpSave.getStartMin());
 
-		int stopOreInt = Integer.parseInt(tmpSave.getStopOre());
-		int stopMinInt = Integer.parseInt(tmpSave.getStopMin());
+		Integer startMin = null;
+		Integer endMin = null;
 
-		if (startOreInt > stopOreInt || (((startOreInt >= stopOreInt) || (startOreInt == stopOreInt)) && (startMinInt >= stopMinInt))) {
-			return false;
-			
+		if (tmpSave.getStartOre() != null && tmpSave.getStartOre().length() > 0 && tmpSave.getStartMin() != null && tmpSave.getStartMin().length() > 0) {
+			int startOreInt = Integer.parseInt(tmpSave.getStartOre());
+			int startMinInt = Integer.parseInt(tmpSave.getStartMin());
+
+			startMin = new Integer((startOreInt*60)+startMinInt);
+		}
+
+		if (tmpSave.getStopOre() != null && tmpSave.getStopOre().length() > 0 && tmpSave.getStopMin() != null && tmpSave.getStopMin().length() > 0) {
+			int stopOreInt = Integer.parseInt(tmpSave.getStopOre());
+			int stopMinInt = Integer.parseInt(tmpSave.getStopMin());
+
+			endMin = new Integer((stopOreInt*60)+stopMinInt);
+		}
+
+		if (startMin != null && endMin != null) {
+			if (endMin.intValue() > startMin.intValue()) {
+				return true;
+
+			} else {
+				return false;
+			}
+
 		} else {
 			return true;
 		}
 	}
-	
+
 }

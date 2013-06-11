@@ -150,9 +150,10 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 		startOreField.setEditable(false);
 		startOreField.setFireChangeEventOnSetValue(true);
 		for (int i = 0; i <= 24; i++) {
-			if(i<10){
-			startOreField.add("0" + i);
-			}else{
+			if (i < 10) {
+				startOreField.add("0" + i);
+
+			} else {
 				startOreField.add("" + i);
 			}
 		}
@@ -210,8 +211,8 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 				startMinField.focus();
 			}
 		});
-		
-		
+
+
 		CellEditor startMinEditor = new CellEditor(startMinField) {
 			@Override
 			public Object preProcessValue(Object value) {
@@ -264,7 +265,7 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 				stopOreField.focus();
 			}
 		});
-		
+
 		CellEditor stopOreEditor = new CellEditor(stopOreField) {
 			@Override
 			public Object preProcessValue(Object value) {
@@ -317,7 +318,7 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 				stopMinField.focus();
 			}
 		});
-		
+
 		CellEditor stopMinEditor = new CellEditor(stopMinField) {
 			@Override
 			public Object preProcessValue(Object value) {
@@ -355,12 +356,12 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 		re.setButtonAlign(HorizontalAlignment.CENTER);
 		re.setClicksToEdit(ClicksToEdit.TWO);
 		re.setErrorSummary(false);
-		
+
 		RowEditor<OrariModel>.RowEditorMessages rowEditorMessages = re.getMessages();
-        rowEditorMessages.setCancelText("Annulla");
-        rowEditorMessages.setSaveText("Salva");
-        re.setMessages(rowEditorMessages);
-		
+		rowEditorMessages.setCancelText("Annulla");
+		rowEditorMessages.setSaveText("Salva");
+		re.setMessages(rowEditorMessages);
+
 		RpcProxy<List<OrariModel>> proxyVariazioniOrari = new RpcProxy<List<OrariModel>>() {
 
 			@Override
@@ -413,7 +414,7 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 				variazioniOrariStore.insert(newVariazione, 0);
 				re.startEditing(variazioniOrariStore.indexOf(newVariazione), false);
 				remove.disable();
-				
+
 				periodoField.clearInvalid();
 				giorniField.clearInvalid();
 				startOreField.clearInvalid();
@@ -509,28 +510,28 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 			@Override
 			public void handleEvent(BaseEvent be) {
 
-				OrariModel tmpSave=null;
-				if(modifica==false){
+				OrariModel tmpSave = null;
+
+				if (modifica == false) {
 					tmpSave = variazioniOrariStore.getAt(0);
+
+				} else {
+					tmpSave = grid.getSelectionModel().getSelectedItem();
 				}
-				else {	 tmpSave =grid.getSelectionModel().getSelectedItem();
-				}
 
-				if(		OrarioUfficaleVariazioniPanel.checkOrarioFormat(tmpSave)){
+				final OrariModel toSave = tmpSave;
 
-					final OrariModel toSave =tmpSave;
+				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
 
-					final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>(){
+					@Override
+					public void handleEvent(MessageBoxEvent ce) {
 
-						@Override
-						public void handleEvent(MessageBoxEvent ce) {
+						Button btn = ce.getButtonClicked();
+						if (btn.getText().equalsIgnoreCase("Si")) {
 
-							Button btn = ce.getButtonClicked();
-							if (btn.getText().equalsIgnoreCase("Si")) {
+							if (OrarioUfficaleVariazioniPanel.checkOrarioFormat(toSave)) {
 
-
-
-								bibliotecheServiceAsync.addNuovaVariazioneOrario( id_biblioteca, toSave, modifica, new AsyncCallback<Void>() {
+								bibliotecheServiceAsync.addNuovaVariazioneOrario(id_biblioteca, toSave, modifica, new AsyncCallback<Void>() {
 
 									@Override
 									public void onSuccess(Void result) {
@@ -547,38 +548,41 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 										}
 									}
 								});
+
 							} else {
-								if(modifica==false){
+								if (modifica == false) {
 									variazioniOrariStore.remove(0);
-								}else{
-									variazioniOrariStore.rejectChanges();
+
+								} else {
+									variazioniOrariStore.remove(grid.getSelectionModel().getSelectedItem());
 								}
+
+								modifica = false;
 							}
-							modifica=false;
+
+						} else {
+							if (modifica == false) {
+								variazioniOrariStore.remove(0);
+
+							} else {
+								variazioniOrariStore.rejectChanges();
+							}
 						}
 
-					};
-					AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, l);
-
-				}else{
-					if(modifica==false){
-						variazioniOrariStore.remove(0);
-					}else{
-						variazioniOrariStore.remove(grid.getSelectionModel().getSelectedItem());
+						modifica = false;
 					}
-					modifica = false;
-				}
+
+				};
+				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, l);
 			}
-
-
 		});
 	}
 
-	public void setIdBiblioteca(int idBiblioteca){
-		this.id_biblioteca=idBiblioteca;
+	public void setIdBiblioteca(int idBiblioteca) {
+		this.id_biblioteca = idBiblioteca;
 	}
 
-	public BaseListLoader<ListLoadResult<OrariModel>> getLoader(){
+	public BaseListLoader<ListLoadResult<OrariModel>> getLoader() {
 
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, add);
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, remove);

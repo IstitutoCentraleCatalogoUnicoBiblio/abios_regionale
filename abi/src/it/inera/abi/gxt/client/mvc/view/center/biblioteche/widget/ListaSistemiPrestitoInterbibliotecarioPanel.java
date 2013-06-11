@@ -58,15 +58,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
 	
-	private BibliotecheServiceAsync bibliotecheService;
-	private TabelleDinamicheServiceAsync tabelleDinamicheService = Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
+	private BibliotecheServiceAsync bibliotecheService = (BibliotecheServiceAsync) Registry.get(Abi.BIBLIOTECHE_SERVICE);
+	private TabelleDinamicheServiceAsync tabelleDinamicheService = (TabelleDinamicheServiceAsync) Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
 
 	private boolean modifica = false;
 	private boolean descrizioneSelected = false;
 
 	private int id_biblioteca;
-
-	private String id_newSist;
 
 	private BaseListLoader<ListLoadResult<SistemiPrestitoInterbibliotecarioModel>> sistPrestInterbibLoader;
 
@@ -76,7 +74,6 @@ public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
 	private Grid<SistemiPrestitoInterbibliotecarioModel> grid;
 
 	public ListaSistemiPrestitoInterbibliotecarioPanel() {
-		bibliotecheService = (BibliotecheServiceAsync) Registry.get(Abi.BIBLIOTECHE_SERVICE);
 		setBodyStyle("padding-bottom:10px");
 		setBodyBorder(false);
 		setBorders(false);
@@ -187,17 +184,15 @@ public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
 		RpcProxy<List<SistemiPrestitoInterbibliotecarioModel>> proxySistPrestInterbib = new RpcProxy<List<SistemiPrestitoInterbibliotecarioModel>>() {
 
 			@Override
-			protected void load(Object loadConfig,	AsyncCallback<List<SistemiPrestitoInterbibliotecarioModel>> callback) {
+			protected void load(Object loadConfig, AsyncCallback<List<SistemiPrestitoInterbibliotecarioModel>> callback) {
 				bibliotecheService.getListaSistemiPrestitoInterbibliotecario(id_biblioteca, callback);
 			}
 
 		};
 
 		ModelReader readerSistPrestInterbib = new ModelReader();
-		sistPrestInterbibLoader = 
-			new BaseListLoader<ListLoadResult<SistemiPrestitoInterbibliotecarioModel>>(proxySistPrestInterbib, readerSistPrestInterbib);
-		final ListStore<SistemiPrestitoInterbibliotecarioModel> store = new ListStore<SistemiPrestitoInterbibliotecarioModel>(
-				sistPrestInterbibLoader);
+		sistPrestInterbibLoader = new BaseListLoader<ListLoadResult<SistemiPrestitoInterbibliotecarioModel>>(proxySistPrestInterbib, readerSistPrestInterbib);
+		final ListStore<SistemiPrestitoInterbibliotecarioModel> store = new ListStore<SistemiPrestitoInterbibliotecarioModel>(sistPrestInterbibLoader);
 
 		grid = new Grid<SistemiPrestitoInterbibliotecarioModel>(store, cm);
 		grid.setBorders(true);
@@ -213,13 +208,18 @@ public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
 					if (modifica == false) {
 						grid.getStore().getAt(0).setIdSistemiPrestitoInterbibliotecario(se.getSelectedItem().getIdSistemiPrestitoInterbibliotecario());
 						grid.getStore().getAt(0).setUrl(se.getSelectedItem().getUrl());
-						urlField.setValue(se.getSelectedItem().getUrl());
 
 					} else {
 						grid.getSelectionModel().getSelectedItem().setIdSistemiPrestitoInterbibliotecario(se.getSelectedItem().getIdSistemiPrestitoInterbibliotecario());
 						grid.getSelectionModel().getSelectedItem().setUrl(se.getSelectedItem().getUrl());
 					}
-					urlField.setValue(se.getSelectedItem().getUrl());
+					
+					if (se.getSelectedItem().getUrl() != null) {
+						urlField.setValue(se.getSelectedItem().getUrl());
+						
+					} else {
+						urlField.clear();
+					}
 				}
 			}
 		});
@@ -239,9 +239,11 @@ public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				re.enable();
-				descrizione.setEmptyText("Seleziona una descrizione...");
+				descrizione.clear();
 				descrizione.setEditable(true);
 				descrizione.setEnabled(true);
+				urlField.clear();
+				urlField.disable();
 				remove.disable();
 
 				SistemiPrestitoInterbibliotecarioModel newSist = new SistemiPrestitoInterbibliotecarioModel();
@@ -348,32 +350,14 @@ public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
 							int id_nuovoSist;
-							String descr;
-							String url;
 
 							if (modifica == false) {
 								id_nuovoSist = store.getAt(0).getIdSistemiPrestitoInterbibliotecario();
-								descr = store.getAt(0).getDescrizione();
-
-								if (store.getAt(0).getUrl() != null && store.getAt(0).getUrl().length() > 0) {
-									url = store.getAt(0).getUrl();
-									
-								} else {
-									url = "";
-								}
 
 							} else {
 								id_nuovoSist = grid.getSelectionModel().getSelectedItem().getIdSistemiPrestitoInterbibliotecario();
-								descr = grid.getSelectionModel().getSelectedItem().getDescrizione();
-
-								if (grid.getSelectionModel().getSelectedItem().getUrl() != null && grid.getSelectionModel().getSelectedItem().getUrl().length() > 0) {
-									url = grid.getSelectionModel().getSelectedItem().getUrl();
-									
-								} else {
-									url = "";
-								}
-
 							}
+							
 							modifica = false;
 
 							bibliotecheService.addSistemaPrestitoInterbibliotecario(id_biblioteca, id_nuovoSist, new AsyncCallback<Void>() {
@@ -401,6 +385,7 @@ public class ListaSistemiPrestitoInterbibliotecarioPanel extends ContentPanel {
 								}
 
 							});
+							
 						} else {
 							if (modifica == false) {
 								store.remove(0);
