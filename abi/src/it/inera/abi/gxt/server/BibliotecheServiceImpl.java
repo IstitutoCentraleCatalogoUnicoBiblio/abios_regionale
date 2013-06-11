@@ -1381,19 +1381,28 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 	public void addNuovaVariazioneOrarioCustom(int id_biblioteca, Vector<Integer> id_days, OrariModel toSave) {
 		Date dalle = null;
 		Date alle = null;
-		String dalleOreString = toSave.getStartOre() + ":"+ toSave.getStartMin() + ":00";
-
-		String alleOreString = toSave.getStopOre() + ":" + toSave.getStopMin() + ":00";
+		
+		String dalleOreString = null;
+		if (toSave.getStartOre() != null && toSave.getStartOre().length() > 0 && toSave.getStartMin() != null && toSave.getStartMin().length() > 0) {
+			dalleOreString = toSave.getStartOre() + ":"+ toSave.getStartMin() + ":00";
+		}
+		
+		String alleOreString = null;
+		if (toSave.getStopOre() != null && toSave.getStopOre().length() > 0 && toSave.getStopMin() != null && toSave.getStopMin().length() > 0) {
+			alleOreString = toSave.getStopOre() + ":" + toSave.getStopMin() + ":00";
+		}
 
 		DateFormat df = new SimpleDateFormat("HH:mm:ss");
 
-		try {
-
-			dalle = (Date) df.parse(dalleOreString);
-			alle = (Date) df.parse(alleOreString);
-
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if (dalleOreString != null && dalleOreString.length() > 0 && alleOreString != null && alleOreString.length() > 0) {
+			try {
+	
+				dalle = (Date) df.parse(dalleOreString);
+				alle = (Date) df.parse(alleOreString);
+	
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		String periodo = (String) toSave.getPeriodo();
@@ -1989,14 +1998,14 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			partecipaCataloghoCollettivoMateriale.setPercentualeInformatizzata(tmpCatalogo.getPercentInformatizzato());
 		}
 
-		if ((Integer)tmpCatalogo.getAnnoDa() != null) {
+		if ((Integer) tmpCatalogo.getAnnoDa() != null) {
 			partecipaCataloghoCollettivoMateriale.setDaAnno(tmpCatalogo.getAnnoDa());
 			
 		} else {
 			partecipaCataloghoCollettivoMateriale.setDaAnno(null);
 		}
 		
-		if ((Integer)tmpCatalogo.getAnnoA() != null) {
+		if ((Integer) tmpCatalogo.getAnnoA() != null) {
 			partecipaCataloghoCollettivoMateriale.setAAnno(tmpCatalogo.getAnnoA());
 			
 		} else {

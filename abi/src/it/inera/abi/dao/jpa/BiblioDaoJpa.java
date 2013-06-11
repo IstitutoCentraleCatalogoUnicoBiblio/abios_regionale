@@ -1162,15 +1162,23 @@ public class BiblioDaoJpa implements BiblioDao {
 	public void addNuovaVariazioneOrarioCustom(int id_biblioteca, Vector<Integer> id_days, Date dalle, Date alle, String periodo) {
 		Biblioteca biblioteca = em.find(Biblioteca.class, id_biblioteca);
 
-		for (int i = 0; i < id_days.size(); i++) {
+		if (dalle != null && alle != null) {
+			for (int i = 0; i < id_days.size(); i++) {
+				OrarioVariazioni nuovaVariazione = new OrarioVariazioni();
+				nuovaVariazione.setDalle(dalle);
+				nuovaVariazione.setAlle(alle);
+				nuovaVariazione.setDescrizione(periodo);
+				nuovaVariazione.setGiorno(id_days.elementAt(i).intValue());
+				nuovaVariazione.setBiblioteca(biblioteca);
+				em.persist(nuovaVariazione);
+	
+			}
+			
+		} else {
 			OrarioVariazioni nuovaVariazione = new OrarioVariazioni();
-			nuovaVariazione.setDalle(dalle);
-			nuovaVariazione.setAlle(alle);
 			nuovaVariazione.setDescrizione(periodo);
-			nuovaVariazione.setGiorno(id_days.elementAt(i).intValue());
 			nuovaVariazione.setBiblioteca(biblioteca);
 			em.persist(nuovaVariazione);
-
 		}
 	}
 

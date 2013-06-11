@@ -1071,7 +1071,12 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 
 			model.setIdSistemiPrestitoInterbibliotecario(DTO.getId());
 			model.setDescrizione(DTO.getDescrizione());
-			model.setUrl(DTO.getUrl());
+			if (DTO.getUrl() != null && DTO.getUrl().equalsIgnoreCase("null")) {
+				model.setUrl(null);
+				
+			} else {
+				model.setUrl(DTO.getUrl());
+			}
 			
 			sublist.add(model);
 
