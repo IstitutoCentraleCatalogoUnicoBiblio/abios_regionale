@@ -80,12 +80,15 @@ div#footer {
 	background-color: whitesmoke;
 	text-align: center;
 	min-width: 800px;
-	padding:5px 0;
+	padding:10px 0 10px 0;
 	font-weight:bold;
 	font-size:100%;
 	border:silver solid 1px;
 }
-.textmiddle {vertical-align:middle;} 
+.textmiddle {
+	vertical-align:bottom;
+	padding: 0 0 3px 0;
+} 
 
 table {
 	font-size:100%;
