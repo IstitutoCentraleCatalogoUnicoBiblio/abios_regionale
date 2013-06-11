@@ -34,6 +34,7 @@
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.formatodiscambio.imports"/>
         <folder path="/abiregionale/src/META-INF"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.auth"/>
+        <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.logic.photo"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.view.center.utenti"/>
         <javaElement handleIdentifier="=abiregionale/src&lt;it.inera.abi.gxt.client.mvc.model.forms"/>
