@@ -43,7 +43,7 @@
 </form>
 </div>
 <center>
-Per ulteriori informazioni visita il sito <a href="http://www.iccu.sbn.it/genera.jsp?id=78" target="blank">Anagrafe delle biblioteche italiane</a> oppure scrivi a <a onclick="document.location.href='mailto:anagrafe@iccu.isbn.it'">anagrafe@iccu.isbn.it</a>
+Per ulteriori informazioni visita il sito <a href="http://www.iccu.sbn.it/genera.jsp?id=78" target="blank">Anagrafe delle biblioteche italiane</a> oppure scrivi a <a onclick="document.location.href='mailto:anagrafe@iccu.sbn.it'">anagrafe@iccu.sbn.it</a>
 </center>
 </div>
 </div>
