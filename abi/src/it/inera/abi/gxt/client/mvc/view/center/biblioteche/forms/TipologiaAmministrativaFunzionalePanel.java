@@ -754,7 +754,7 @@ public class TipologiaAmministrativaFunzionalePanel  extends ContentPanelForTabI
 		LayoutContainer dataFondazioneTable = new LayoutContainer();
 		dataFondazioneTable.setLayout(tableFondazione);
 		
-		dataFondazioneLabel = new Text("Data dell'edificio:");
+		dataFondazioneLabel = new Text("Data di fondazione:");
 		dataFondazioneLabel.setStyleAttribute("fontSize", "14px");
 		dataFondazioneTable.add(dataFondazioneLabel, new TableData("160px","30px"));
 
