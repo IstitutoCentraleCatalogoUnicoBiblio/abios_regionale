@@ -12,6 +12,9 @@ import it.inera.abi.persistence.AccessoModalita;
 import it.inera.abi.persistence.Bibliografia;
 import it.inera.abi.persistence.Biblioteca;
 import it.inera.abi.persistence.CataloghiCollettivi;
+import it.inera.abi.persistence.CataloghiCollettiviMaterialeUrl;
+import it.inera.abi.persistence.CataloghiGeneraliUrl;
+import it.inera.abi.persistence.CataloghiSpecialiMaterialeUrl;
 import it.inera.abi.persistence.CatalogoGeneraleTipo;
 import it.inera.abi.persistence.Codici;
 import it.inera.abi.persistence.CodiciTipo;
@@ -2084,6 +2087,20 @@ public class BiblioDaoJpa implements BiblioDao {
 			tmp.setCataloghiCollettivi(trovatoCatalogo);
 
 			em.persist(tmp);
+			
+			/* Caso ripristina con url esistenti -> INIZIO */
+			if (tmp.getCataloghiSupportoDigitaleTipo() != null && tmp.getCataloghiSupportoDigitaleTipo().getDescrizione().equalsIgnoreCase("Online")) {
+				if (tmp.getCataloghiCollettiviMaterialeUrls() != null && tmp.getCataloghiCollettiviMaterialeUrls().size() > 0) {
+					List<CataloghiCollettiviMaterialeUrl> urls = tmp.getCataloghiCollettiviMaterialeUrls();
+					
+					for (CataloghiCollettiviMaterialeUrl urlEntry : urls) {
+						urlEntry.setIdCataloghiCollettiviMaterialeUrl(null);
+						urlEntry.setPartecipaCataloghiCollettiviMateriale(tmp);
+						saveChild(urlEntry);
+					}
+				}
+			}
+			/* Caso ripristina con url esistenti -> FINE */
 		}
 
 	}
@@ -2205,6 +2222,20 @@ public class BiblioDaoJpa implements BiblioDao {
 			tmp.setBiblioteca(biblioteca);
 
 			em.persist(tmp);
+			
+			/* Caso ripristina con url esistenti -> INIZIO */
+			if (tmp.getCataloghiSupportoDigitaleTipo() != null && tmp.getCataloghiSupportoDigitaleTipo().getDescrizione().equalsIgnoreCase("Online")) {
+				if (tmp.getCataloghiSpecialiMaterialeUrls() != null && tmp.getCataloghiSpecialiMaterialeUrls().size() > 0) {
+					List<CataloghiSpecialiMaterialeUrl> urls = tmp.getCataloghiSpecialiMaterialeUrls();
+					
+					for (CataloghiSpecialiMaterialeUrl urlEntry : urls) {
+						urlEntry.setIdCataloghiSpecialiMaterialeUrl(null);
+						urlEntry.setPartecipaCataloghiSpecialiMateriale(tmp);
+						saveChild(urlEntry);
+					}
+				}
+			}
+			/* Caso ripristina con url esistenti -> FINE */
 		}
 
 	}
@@ -2497,6 +2528,20 @@ public class BiblioDaoJpa implements BiblioDao {
 			tmp.setBiblioteca(biblioteca);
 
 			em.persist(tmp);
+			
+			/* Caso ripristina con url esistenti -> INIZIO */
+			if (tmp.getCataloghiSupportoDigitaleTipo() != null && tmp.getCataloghiSupportoDigitaleTipo().getDescrizione().equalsIgnoreCase("Online")) {
+				if (tmp.getCataloghiGeneraliUrls() != null && tmp.getCataloghiGeneraliUrls().size() > 0) {
+					List<CataloghiGeneraliUrl> urls = tmp.getCataloghiGeneraliUrls();
+					
+					for (CataloghiGeneraliUrl urlEntry : urls) {
+						urlEntry.setIdCataloghiGeneraliUrl(null);
+						urlEntry.setPartecipaCataloghiGenerali(tmp);
+						saveChild(urlEntry);
+					}
+				}
+			}
+			/* Caso ripristina con url esistenti -> FINE */
 		}
 
 	}

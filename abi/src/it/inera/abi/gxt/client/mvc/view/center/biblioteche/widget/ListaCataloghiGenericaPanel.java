@@ -390,7 +390,8 @@ public class ListaCataloghiGenericaPanel extends ContentPanel {
 						});
 						remove.disable();
 
-
+						UIWorkflow.gridEnableEvent(gridUrls);
+						
 						if(UIWorkflow.isReadOnly()==false){
 							add.show();
 							remove.show();
