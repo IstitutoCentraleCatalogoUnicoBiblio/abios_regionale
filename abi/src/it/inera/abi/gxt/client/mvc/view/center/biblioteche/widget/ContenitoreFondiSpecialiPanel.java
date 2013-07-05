@@ -160,7 +160,6 @@ public class ContenitoreFondiSpecialiPanel extends FormPanel {
 		denominazioneFondoField.setTriggerAction(TriggerAction.ALL);
 		denominazioneFondoField.setAllowBlank(false);
 		denominazioneFondoField.setEditable(true);
-		denominazioneFondoField.setTypeAhead(true);
 		denominazioneFondoField.setMinChars(4);
 		denominazioneFondoField.setPageSize(10);
 		denominazioneFondoField.setStore(denominazioniFondiSpecialiStore);

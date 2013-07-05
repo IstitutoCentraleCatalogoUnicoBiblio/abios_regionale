@@ -6,7 +6,7 @@ import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.OrariModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.view.RowEditorCustom;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.OrarioUfficaleVariazioniPanel;
+import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.OrarioUfficialeVariazioniPanel;
 import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
@@ -390,11 +390,11 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 			public void selectionChanged(SelectionChangedEvent<SimpleComboValue<String>> se) {
 				if (se.getSelectedItem() != null) {
 					int	id_day=OrariModel.selectIdDay(se.getSelectedItem().getValue());
-					if (modifica==false){
+					if (modifica == false) {
 						variazioniOrariStore.getAt(0).setGiorno(id_day);
-					}else{
-						Integer o=	grid.getSelectionModel().getSelection().indexOf(grid.getSelectionModel().getSelectedItem());
-						variazioniOrariStore.getAt(o).setGiorno(id_day);
+						
+					} else {
+						grid.getSelectionModel().getSelectedItem().setGiorno(id_day);
 					}
 				}
 			}
@@ -409,12 +409,13 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
+				remove.disable();
 				OrariModel newVariazione = new OrariModel();
+				re.enable();
 				re.stopEditing(false);
 				variazioniOrariStore.insert(newVariazione, 0);
 				re.startEditing(variazioniOrariStore.indexOf(newVariazione), false);
-				remove.disable();
-
+				
 				periodoField.clearInvalid();
 				giorniField.clearInvalid();
 				startOreField.clearInvalid();
@@ -501,6 +502,7 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 					variazioniOrariStore.remove(0);
 				}
 				modifica = false;
+				loaderVariazioniOrari.load();
 			}	
 
 		});
@@ -510,26 +512,33 @@ public class ListaVariazioniOrarioPanel extends ContentPanel {
 			@Override
 			public void handleEvent(BaseEvent be) {
 
-				OrariModel tmpSave = null;
-
-				if (modifica == false) {
-					tmpSave = variazioniOrariStore.getAt(0);
-
-				} else {
-					tmpSave = grid.getSelectionModel().getSelectedItem();
-				}
-
-				final OrariModel toSave = tmpSave;
-
 				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>() {
-
 					@Override
 					public void handleEvent(MessageBoxEvent ce) {
 
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
+							OrariModel tmpSave = null;
 
-							if (OrarioUfficaleVariazioniPanel.checkOrarioFormat(toSave)) {
+							if (modifica == false) {
+								tmpSave = variazioniOrariStore.getAt(0);
+								tmpSave.setPeriodo(periodoField.getValue());
+								
+								/* Start */
+								tmpSave.setStartOre(startOreField.getValue() != null ? startOreField.getValue().getValue() : "00");
+								tmpSave.setStartMin(startMinField.getValue() != null ? startMinField.getValue().getValue() : "00");
+								
+								/* End */
+								tmpSave.setStopOre(stopOreField.getValue() != null ? stopOreField.getValue().getValue() : "00");
+								tmpSave.setStopMin(stopMinField.getValue() != null ? stopMinField.getValue().getValue() : "00");
+								
+							} else {
+								tmpSave = grid.getSelectionModel().getSelectedItem();
+							}
+
+							final OrariModel toSave = tmpSave;
+							
+							if (OrarioUfficialeVariazioniPanel.checkOrarioFormat(toSave)) {
 
 								bibliotecheServiceAsync.addNuovaVariazioneOrario(id_biblioteca, toSave, modifica, new AsyncCallback<Void>() {
 

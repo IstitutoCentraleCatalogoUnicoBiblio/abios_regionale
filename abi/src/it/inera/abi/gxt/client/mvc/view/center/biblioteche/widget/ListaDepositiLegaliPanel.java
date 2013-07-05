@@ -151,7 +151,7 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 
 		configs.add(columnTipo);
 
-		TextField<String> daAnno = new TextField<String>();
+		final TextField<String> daAnno = new TextField<String>();
 		ColumnConfig columnDaAnno = new ColumnConfig();
 		columnDaAnno.setId("depositoAnno");
 		columnDaAnno.setHeader("Da anno");
@@ -281,12 +281,16 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
+				remove.disable();
+				
 				if (modifica == false) {
 					storeGriglia.remove(0);
 				}
+				
 				modifica = false;
 				depositoLegaleType.enable();
-				remove.disable();
+				
+				loaderDepositoLegaleGriglia.load();
 			}	
 		});
 
@@ -304,13 +308,13 @@ public class ListaDepositiLegaliPanel extends ContentPanel {
 							int id_nuovoTipoDeposito;
 							String anno = null;
 							
-							if (modifica == false) {
-								id_nuovoTipoDeposito = grid.getStore().getAt(0).getIdDepositoTipo();
-								anno = grid.getStore().getAt(0).getDepositoAnno();
-								
-							} else {
+							if (modifica) {
 								id_nuovoTipoDeposito = grid.getSelectionModel().getSelectedItem().getIdDepositoTipo();
 								anno = grid.getSelectionModel().getSelectedItem().getDepositoAnno();
+								
+							} else {
+								id_nuovoTipoDeposito = grid.getStore().getAt(0).getIdDepositoTipo();
+								anno = daAnno.getValue();
 							}
 							
 							bibliotecheServiceAsync.addDepositoLegaleToBiblio(id_biblioteca, modifica, id_nuovoTipoDeposito,

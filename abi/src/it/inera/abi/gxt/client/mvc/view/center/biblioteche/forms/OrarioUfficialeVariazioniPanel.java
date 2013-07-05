@@ -50,7 +50,7 @@ import com.google.gwt.user.client.ui.RadioButton;
  * agli orari: ufficiali, variazioni e chiusure
  *
  */
-public class OrarioUfficaleVariazioniPanel extends ContentPanelForTabItem {
+public class OrarioUfficialeVariazioniPanel extends ContentPanelForTabItem {
 
 	public int id_biblio;
 	private ListaOrariUfficialiPanel lun;
@@ -73,7 +73,7 @@ public class OrarioUfficaleVariazioniPanel extends ContentPanelForTabItem {
 	private Button addUff;
 	private Button addVar;
 
-	public OrarioUfficaleVariazioniPanel() {
+	public OrarioUfficialeVariazioniPanel() {
 		super();
 
 		this.listaGiorni = new Vector<ListaOrariUfficialiPanel>();

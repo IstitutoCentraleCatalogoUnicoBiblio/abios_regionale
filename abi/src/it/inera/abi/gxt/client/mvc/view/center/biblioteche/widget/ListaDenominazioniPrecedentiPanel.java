@@ -138,10 +138,12 @@ public class ListaDenominazioniPrecedentiPanel extends ContentPanel {
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
 							VoceUnicaModel nuovaDenominazione =null;
-							if(modifica){
-								nuovaDenominazione=	grid.getSelectionModel().getSelectedItem();
-							}else{
-								nuovaDenominazione=	grid.getStore().getAt(0);
+							if (modifica) {
+								nuovaDenominazione = grid.getSelectionModel().getSelectedItem();
+								
+							} else {
+								nuovaDenominazione = grid.getStore().getAt(0);
+								nuovaDenominazione.setEntry(giaDenominazione.getValue());
 							}
 
 							bibliotecheServiceAsync.saveDenominazionePrecendente(nuovaDenominazione, modifica, new AsyncCallback<Void>() {

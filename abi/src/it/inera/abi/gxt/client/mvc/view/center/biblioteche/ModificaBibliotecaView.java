@@ -16,7 +16,7 @@ import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.DatiAnagraficiF
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.InfoCatalogazionePanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.ModalitaAccessoDestinazioneSocialePanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.NoteCatalogatorePanel;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.OrarioUfficaleVariazioniPanel;
+import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.OrarioUfficialeVariazioniPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.PatrimonioLibrarioPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.PersonalePanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.PhotoPanel;
@@ -65,7 +65,7 @@ public class ModificaBibliotecaView extends View {
 	private DatiAnagraficiFormPanel datiAnagrafici;
 	private TipologiaAmministrativaFunzionalePanel tipologiaAmministrativaFunzionalePanel;
 	private	ModalitaAccessoDestinazioneSocialePanel accessoDestinazioneSocialePanel; 
-	private OrarioUfficaleVariazioniPanel orarioUfficaleVariazioniPanel;
+	private OrarioUfficialeVariazioniPanel orarioUfficialeVariazioniPanel;
 	private PatrimonioLibrarioPanel patrimonioLibrarioPanel;
 	private SpecializzazioniFondiSpecialiPanel specializzazioniFondiSpecialiPanel;
 	private InfoCatalogazionePanel infoCatalogazionePanel;
@@ -174,7 +174,7 @@ public class ModificaBibliotecaView extends View {
 					datiAnagrafici.setGeolocalizzaText("Geolocalizza");
 				}
 				accessoDestinazioneSocialePanel.setIdBiblio(tmpBiblio.getIdBiblio());
-				orarioUfficaleVariazioniPanel.setIdBiblio(tmpBiblio.getIdBiblio());
+				orarioUfficialeVariazioniPanel.setIdBiblio(tmpBiblio.getIdBiblio());
 				patrimonioLibrarioPanel.setIdBiblio(tmpBiblio.getIdBiblio());
 				specializzazioniFondiSpecialiPanel.setIdBiblio(tmpBiblio.getIdBiblio());
 //				specializzazioniFondiSpecialiPanel.createSpecializzazioniEFondiSpecialiPanels();
@@ -355,14 +355,14 @@ public class ModificaBibliotecaView extends View {
 
 		orariUfficialeVariazione.setScrollMode(Scroll.AUTOY);
 
-		orarioUfficaleVariazioniPanel =new OrarioUfficaleVariazioniPanel();
-		orariUfficialeVariazione.add(orarioUfficaleVariazioniPanel);
+		orarioUfficialeVariazioniPanel =new OrarioUfficialeVariazioniPanel();
+		orariUfficialeVariazione.add(orarioUfficialeVariazioniPanel);
 
 		orariUfficialeVariazione.addListener(Events.Select,	new Listener<BaseEvent>() {
 			@Override
 			public void handleEvent(BaseEvent be) {
-				orarioUfficaleVariazioniPanel.setBiblioteca(tmpBiblio);
-				orarioUfficaleVariazioniPanel.setFieldsValues();
+				orarioUfficialeVariazioniPanel.setBiblioteca(tmpBiblio);
+				orarioUfficialeVariazioniPanel.setFieldsValues();
 			}
 		});
 

@@ -1633,16 +1633,23 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		FondiSpeciali fondoSpeciale = new FondiSpeciali();
 
 
-		fondoSpeciale.setDenominazione(	modelToSave.getDenominazione());
-		if(modelToSave.getDescrizione()!=null)
-			fondoSpeciale.setDescrizione(	modelToSave.getDescrizione());
-		if(modelToSave.getFondoDepositato()!=null){
-			if(modelToSave.getFondoDepositato().equalsIgnoreCase("Si")){
+		fondoSpeciale.setDenominazione(modelToSave.getDenominazione());
+		if (modelToSave.getDescrizione() != null) {
+			fondoSpeciale.setDescrizione(modelToSave.getDescrizione());
+		}
+		
+		if (modelToSave.getFondoDepositato() != null) {
+			if (modelToSave.getFondoDepositato().equalsIgnoreCase("Si")) {
 				fondoSpeciale.setFondoDepositato(true);
 			}
-		}else{
-			fondoSpeciale.setFondoDepositato(false);
+			if (modelToSave.getFondoDepositato().equalsIgnoreCase("No")) {
+				fondoSpeciale.setFondoDepositato(false);
+			}
+			
+		} else {
+			fondoSpeciale.setFondoDepositato(null);
 		}
+		
 		if(modelToSave.getIdCatalogoInventario()!=null) {
 			FondiSpecialiCatalogazioneInventario fondiSpecialiCatalogazioneInventario = new FondiSpecialiCatalogazioneInventario();
 			fondiSpecialiCatalogazioneInventario.setIdFondiSpecialiCatalogazioneInventario(modelToSave.getIdCatalogoInventario().intValue());

@@ -244,6 +244,7 @@ public class ListaSpogliMaterialeBibliografico extends ContentPanel {
 							VoceUnicaModel modelToSave = new VoceUnicaModel();
 							if (modifica == false) {
 								modelToSave = spogliStore.getAt(0);
+								modelToSave.setEntry(descrizioneField.getValue());
 
 							} else modelToSave = grid.getSelectionModel().getSelectedItem();
 

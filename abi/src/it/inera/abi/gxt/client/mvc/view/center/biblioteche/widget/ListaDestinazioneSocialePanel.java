@@ -161,7 +161,7 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 		columnNote.setHeader("Note");
 		columnNote.setWidth(350);
 
-		TextField<String> note = new TextField<String>();
+		final TextField<String> note = new TextField<String>();
 		columnNote.setEditor(new CellEditor(note));
 
 		configs.add(columnNote);
@@ -306,17 +306,17 @@ public class ListaDestinazioneSocialePanel extends ContentPanel {
 						
 						if (btn.getText().equalsIgnoreCase("Si")) {
 							int id_nuovaDestinazione;
-							String note = null;
+							String noteVal = null;
 							if (modifica == false) {
 								id_nuovaDestinazione = storeGriglia.getAt(0).getIdRecord();
-								note = storeGriglia.getAt(0).getNote();
+								noteVal = note.getValue();
 								
 							} else {
 								id_nuovaDestinazione = grid.getSelectionModel().getSelectedItem().getIdRecord();
-								note = grid.getSelectionModel().getSelectedItem().getNote();
+								noteVal = grid.getSelectionModel().getSelectedItem().getNote();
 							}
 							
-							bibliotecheServiceAsync.addDestinazioneSociale(id_biblioteca, modifica, id_nuovaDestinazione, note, new AsyncCallback<Boolean>() {
+							bibliotecheServiceAsync.addDestinazioneSociale(id_biblioteca, modifica, id_nuovaDestinazione, noteVal, new AsyncCallback<Boolean>() {
 
 								@Override
 								public void onSuccess(Boolean result) {

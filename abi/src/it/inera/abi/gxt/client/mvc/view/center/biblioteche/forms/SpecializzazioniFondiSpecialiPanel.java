@@ -60,7 +60,7 @@ public class SpecializzazioniFondiSpecialiPanel extends  ContentPanelForTabItem 
 	private	FieldSet fondiSpecialiSet;
 
 	private Button addSpecializzazioneButton = new Button("Aggiungi nuova specializzazione");
-	private Button 	addFondoSpecialeButton = new Button("Aggiungi nuovo fondo speciale");
+	private Button addFondoSpecialeButton = new Button("Aggiungi nuovo fondo speciale");
 
 	public SpecializzazioniFondiSpecialiPanel() {
 		super();

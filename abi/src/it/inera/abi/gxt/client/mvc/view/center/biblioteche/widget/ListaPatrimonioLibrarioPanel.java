@@ -218,6 +218,7 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 						grid.getStore().remove(0);
 						categoriaSelected = true;
 						re.stopEditing(true);
+						loaderPatrimonioGriglia.load();
 
 					} else {
 						grid.getStore().getAt(0).setIdRecord(se.getSelectedItem().getIdRecord());
@@ -355,20 +356,20 @@ public class ListaPatrimonioLibrarioPanel extends ContentPanel {
 							if (modifica == false) {
 								id_nuovoPatr = store.getAt(0).getIdRecord();
 
-								if (store.getAt(0).getQuantita() != null && store.getAt(0).getQuantita().intValue() != 0) {
-									quantita = store.getAt(0).getQuantita().intValue();
-
+								if (quantitaField.getValue() != null && quantitaField.getValue().intValue() != 0) {
+									quantita = quantitaField.getValue().intValue();
+									
 								} else {
 									quantita = 0;
 								}
-
-								if (store.getAt(0).getQuantitaUltimoAnno() != null && store.getAt(0).getQuantitaUltimoAnno().intValue() != 0) {
-									quantitaUltimoAnno = store.getAt(0).getQuantitaUltimoAnno().intValue();
-
+								
+								if (quantitaUltimoAnnoField.getValue() != null && quantitaUltimoAnnoField.getValue().intValue() != 0) {
+									quantitaUltimoAnno = quantitaUltimoAnnoField.getValue().intValue();
+									
 								} else {
 									quantitaUltimoAnno = 0;
 								}
-
+								
 							} else {
 								id_nuovoPatr = grid.getSelectionModel().getSelectedItem().getIdRecord();
 

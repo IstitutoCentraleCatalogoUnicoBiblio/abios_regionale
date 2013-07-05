@@ -6,7 +6,7 @@ import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.mvc.model.OrariModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.view.RowEditorCustom;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.OrarioUfficaleVariazioniPanel;
+import it.inera.abi.gxt.client.mvc.view.center.biblioteche.forms.OrarioUfficialeVariazioniPanel;
 import it.inera.abi.gxt.client.resources.Resources;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
@@ -461,7 +461,7 @@ public class ListaOrariUfficialiPanel extends ContentPanel {
 					tmpSave =grid.getSelectionModel().getSelectedItem();
 				}
 
-				if(	OrarioUfficaleVariazioniPanel.checkOrarioFormat(tmpSave)){
+				if(	OrarioUfficialeVariazioniPanel.checkOrarioFormat(tmpSave)){
 
 					final OrariModel toSave =tmpSave;
 

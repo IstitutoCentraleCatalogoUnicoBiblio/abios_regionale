@@ -90,13 +90,13 @@ public class ListaContattiPanel extends ContentPanel {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
+				remove.disable();
 				ContattiModel newRecapito = new ContattiModel();
 				newRecapito.setIdBiblioteca(id_biblio);
-				re.stopEditing(true);
+				re.enable();
+				re.stopEditing(false);
 				store.insert(newRecapito, 0);
 				re.startEditing(store.indexOf(newRecapito), false);
-				modifica = false;
-				remove.disable();
 				
 				tipo.clearInvalid();
 				valore.clearInvalid();
@@ -207,15 +207,12 @@ public class ListaContattiPanel extends ContentPanel {
 						
 					} else {
 						grid.getStore().getAt(0).setContattiTipo(se.getSelectedItem().getIdRecord());
+						
 						if (se.getSelectedItem().getIdRecord().intValue() == 1 || se.getSelectedItem().getIdRecord().intValue() == 2) {
-							if (valore != null) {
-								valore.setValue("+39 ");
-							}
+							valore.setValue("+39 ");
 							
 						} else {
-							if (valore != null) {
-								valore.clear();
-							}
+							valore.clear();
 						}
 					}
 
@@ -338,6 +335,7 @@ public class ListaContattiPanel extends ContentPanel {
 								
 							} else {
 								nuovoContatto = grid.getStore().getAt(0);
+								nuovoContatto.setValore(valore.getValue());
 							}
 
 							bibliotecheServiceAsync.saveContatti(nuovoContatto,

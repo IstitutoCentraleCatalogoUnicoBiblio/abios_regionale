@@ -323,11 +323,13 @@ public class ListaPrestitoLocalePanel extends ContentPanel {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
-				if(modifica==false){
+				remove.disable();
+				
+				if (modifica == false) {
 					prestitiLocaliStore.remove(0);	
 				}
-				remove.disable();
-
+				
+				prestitiLocaliLoader.load();
 			}
 		});
 
@@ -344,21 +346,18 @@ public class ListaPrestitoLocalePanel extends ContentPanel {
 						PrestitoLocaleModel tmpPrestito = new PrestitoLocaleModel();
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
-
-
-							tmpPrestito.setProcedureAuto(procedureAutomatizzateField.getValue().getValue());
-							if(durataGiorniField.getValue()!=null)
-								tmpPrestito.setDurataGiorni(durataGiorniField.getValue().intValue());
-
-							if (modifica==false) {
-								tmpPrestito.setProcedureAuto(grid.getStore().getAt(0).getProcedureAuto());
-								tmpPrestito.setDurataGiorni(grid.getStore().getAt(0).getDurataGiorni());
-							}else{
-
+							if (modifica) {
 								tmpPrestito.setIdPrestitoLocale(grid.getSelectionModel().getSelectedItem().getIdPrestitoLocale());
 								tmpPrestito.setProcedureAuto(grid.getSelectionModel().getSelectedItem().getProcedureAuto());
 								tmpPrestito.setDurataGiorni(grid.getSelectionModel().getSelectedItem().getDurataGiorni());
+								
+							} else {
+								tmpPrestito.setProcedureAuto(procedureAutomatizzateField.getValue().getValue());
+								if (durataGiorniField.getValue() != null) {
+									tmpPrestito.setDurataGiorni(durataGiorniField.getValue().intValue());
+								}
 							}
+							
 							bibliotecheService.addPrestitoLocaleToBiblio(id_biblioteca, tmpPrestito, modifica,	new AsyncCallback<Void>() {
 
 								@Override

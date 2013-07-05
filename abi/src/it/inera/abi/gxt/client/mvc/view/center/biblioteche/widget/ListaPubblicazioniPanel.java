@@ -221,12 +221,15 @@ public class ListaPubblicazioniPanel extends ContentPanel {
 			@Override
 			public void handleEvent(BaseEvent be) {
 				remove.disable();
-				if(modifica=false){
+				
+				if (modifica == false) {
 					pubblicazioniStore.remove(0);
 				}
+				
 				pubblicazioniGrigliaLoader.load();
 			}
 		});
+		
 		re.addListener(Events.AfterEdit, new Listener<BaseEvent>() {
 
 			@Override
@@ -240,16 +243,16 @@ public class ListaPubblicazioniPanel extends ContentPanel {
 
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
-
-							VoceUnicaModel modelToSave=new VoceUnicaModel();
-							if (modifica ==false){
-								modelToSave=pubblicazioniStore.getAt(0);
+							VoceUnicaModel modelToSave = new VoceUnicaModel();
+							if (modifica == false) {
+								modelToSave = pubblicazioniStore.getAt(0);
+								modelToSave.setEntry(descrizioneField.getValue());
+								
+							} else {
+								modelToSave = grid.getSelectionModel().getSelectedItem();
 							}
-							else{
-
-								modelToSave=grid.getSelectionModel().getSelectedItem();
-							}
-							bibliotecheService.addPubblicazioni(modelToSave,id_biblioteca,modifica, new AsyncCallback<Void>() {
+							
+							bibliotecheService.addPubblicazioni(modelToSave, id_biblioteca, modifica, new AsyncCallback<Void>() {
 
 								@Override
 								public void onSuccess(Void result) {

@@ -119,7 +119,7 @@ public class ListaDenominazioniAlternativePanel extends ContentPanel {
 				if (modifica == false) {
 					store.remove(0);
 				}
-				modifica=false;
+				modifica = false;
 				loaderDenominazioni.load();
 			}
 		});
@@ -137,10 +137,12 @@ public class ListaDenominazioniAlternativePanel extends ContentPanel {
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
 							VoceUnicaModel nuovaDenominazione =null;
-							if(modifica){
-								nuovaDenominazione=	grid.getSelectionModel().getSelectedItem();
-							}else{
-								nuovaDenominazione=	grid.getStore().getAt(0);
+							if (modifica) {
+								nuovaDenominazione = grid.getSelectionModel().getSelectedItem();
+								
+							} else {
+								nuovaDenominazione = grid.getStore().getAt(0);
+								nuovaDenominazione.setEntry(altraDenominazione.getValue());
 							}
 
 							bibliotecheServiceAsync.saveDenominazioneAlternativa(nuovaDenominazione, modifica, new AsyncCallback<Void>() {

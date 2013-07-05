@@ -205,9 +205,20 @@ public class TestoFondiSpecialiPanel extends LayoutContainer {
 			descrizioneFondoField.setText(model.getDescrizione());
 		else descrizioneFondoField.setText("");
 
-		if(model.getFondoDepositato()!=null)
-			fondoDepositatoField.setText(model.getFondoDepositato().compareToIgnoreCase("Si")==0?"Si":"No");
-		else fondoDepositatoField.setText("Non specificato");
+		if (model.getFondoDepositato() != null) {
+			if (model.getFondoDepositato().equalsIgnoreCase("Si")) {
+				fondoDepositatoField.setText("Si");
+				
+			} else if (model.getFondoDepositato().equalsIgnoreCase("No")) {
+				fondoDepositatoField.setText("No");
+				
+			} else {
+				fondoDepositatoField.setText("Non specificato");
+			}
+			
+		} else {
+			fondoDepositatoField.setText("Non specificato");
+		}
 
 		if(model.getCatalogoInventarioDescr()!=null)
 			catalogoInventarioTipoField.setText(model.getCatalogoInventarioDescr());

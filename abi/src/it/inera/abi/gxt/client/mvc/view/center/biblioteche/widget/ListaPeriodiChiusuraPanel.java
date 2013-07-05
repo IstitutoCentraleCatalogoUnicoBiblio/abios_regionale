@@ -47,10 +47,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  */
 public class ListaPeriodiChiusuraPanel extends ContentPanel {
-	
+
 	private int id_biblioteca;
 	private RowEditorCustom<VoceUnicaModel> re;
-	private boolean modifica =false;
+	private boolean modifica = false;
 	private BaseListLoader<ListLoadResult<VoceUnicaModel>> loaderPeriodiChiusura;
 	private BibliotecheServiceAsync bibliotecheServiceAsync ;
 
@@ -59,10 +59,10 @@ public class ListaPeriodiChiusuraPanel extends ContentPanel {
 	private Button remove;
 	private Grid<VoceUnicaModel> grid;
 
-	private TextField<String> giaDenominazione;
-	
+	private TextField<String> chiusuraDenominazione;
+
 	public ListaPeriodiChiusuraPanel() {
-		bibliotecheServiceAsync=(BibliotecheServiceAsync)Registry.get(Abi.BIBLIOTECHE_SERVICE);
+		bibliotecheServiceAsync = (BibliotecheServiceAsync) Registry.get(Abi.BIBLIOTECHE_SERVICE);
 		setBodyStyle("padding-bottom:10px");
 		setBodyBorder(false);
 		setBorders(false);
@@ -77,16 +77,16 @@ public class ListaPeriodiChiusuraPanel extends ContentPanel {
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
 
-		giaDenominazione = new TextField<String>();
-		giaDenominazione.setAllowBlank(false);
-		giaDenominazione.setEmptyText("Inserisci periodo di chiusura...");
+		chiusuraDenominazione = new TextField<String>();
+		chiusuraDenominazione.setAllowBlank(false);
+		chiusuraDenominazione.setEmptyText("Inserisci periodo di chiusura...");
 
 		ColumnConfig periodoChiusuraColumn = new ColumnConfig();
 		periodoChiusuraColumn.setId("entry");
 		periodoChiusuraColumn.setHeader("Periodo di chiusura");
 		periodoChiusuraColumn.setWidth(300);
 
-		periodoChiusuraColumn.setEditor(new CellEditor(giaDenominazione));
+		periodoChiusuraColumn.setEditor(new CellEditor(chiusuraDenominazione));
 		configs.add(periodoChiusuraColumn);
 
 		RpcProxy<List<VoceUnicaModel>> proxyPeriodiChiusura = new RpcProxy<List<VoceUnicaModel>>() {
@@ -110,19 +110,19 @@ public class ListaPeriodiChiusuraPanel extends ContentPanel {
 		re = new RowEditorCustom<VoceUnicaModel>();
 		re.setClicksToEdit(ClicksToEdit.TWO);
 		re.setErrorSummary(false);
-		
+
 		RowEditor<VoceUnicaModel>.RowEditorMessages rowEditorMessages = re.getMessages();
-        rowEditorMessages.setCancelText("Annulla");
-        rowEditorMessages.setSaveText("Salva");
-        re.setMessages(rowEditorMessages);
-		
+		rowEditorMessages.setCancelText("Annulla");
+		rowEditorMessages.setSaveText("Salva");
+		re.setMessages(rowEditorMessages);
+
 		grid = new Grid<VoceUnicaModel>(storePeriodiChiusura, cm);
 		grid.setAutoExpandColumn("entry");
 		grid.setBorders(true);
 		grid.addPlugin(re);
 		grid.setStripeRows(true);
 		grid.getView().setAutoFill(true);
-		
+
 		toolBar = new ToolBar();
 
 		toolBar.setWidth(300);
@@ -141,7 +141,7 @@ public class ListaPeriodiChiusuraPanel extends ContentPanel {
 				storePeriodiChiusura.insert(newVoce, 0);
 				re.startEditing(storePeriodiChiusura.indexOf(newVoce), false);
 
-				giaDenominazione.clearInvalid();
+				chiusuraDenominazione.clearInvalid();
 			}
 
 		});
@@ -233,6 +233,7 @@ public class ListaPeriodiChiusuraPanel extends ContentPanel {
 
 				}
 				modifica = false;
+				loaderPeriodiChiusura.load();
 			}	
 
 		});
@@ -241,8 +242,6 @@ public class ListaPeriodiChiusuraPanel extends ContentPanel {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
-				final	VoceUnicaModel tmpSave=(modifica==false)?storePeriodiChiusura.getAt(0):grid.getSelectionModel().getSelectedItem();
-
 				final Listener<MessageBoxEvent> l = new Listener<MessageBoxEvent>(){
 
 					@Override
@@ -250,55 +249,60 @@ public class ListaPeriodiChiusuraPanel extends ContentPanel {
 
 						Button btn = ce.getButtonClicked();
 						if (btn.getText().equalsIgnoreCase("Si")) {
+							VoceUnicaModel tmpSave = null;
+
+							if (modifica) {
+								tmpSave = grid.getSelectionModel().getSelectedItem();
+
+							} else {
+								tmpSave = storePeriodiChiusura.getAt(0);
+								tmpSave.setEntry(chiusuraDenominazione.getValue());
+							}
+							
+							bibliotecheServiceAsync.addNuovoPeriodoChiusura(id_biblioteca, tmpSave, modifica, new AsyncCallback<Void>() {
+
+								@Override
+								public void onSuccess(Void result) {
+									loaderPeriodiChiusura.load();	
+									modifica = false;
+									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+
+								}
+
+								@Override
+								public void onFailure(Throwable caught) {
+									if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
+										AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
+								}
 
 
-
-							bibliotecheServiceAsync.addNuovoPeriodoChiusura(
-									id_biblioteca,tmpSave,modifica,
-									new AsyncCallback<Void>() {
-
-										@Override
-										public void onSuccess(Void result) {
-											loaderPeriodiChiusura.load();	
-											modifica = false;
-											AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-
-										}
-
-										@Override
-										public void onFailure(Throwable caught) {
-											if (UIAuth.checkIsLogin(caught.toString())) // controllo se l'errore è dovuto alla richiesta di login
-												AbiMessageBox.messageErrorAlertBox(AbiMessageBox.ESITO_CREAZIONE_FAILURE_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
-										}
-
-
-									});
+							});
+							
 						} else {
-							if(modifica==false){
+							if (modifica == false) {
 								storePeriodiChiusura.remove(0);
-							}else{
+								
+							} else {
 								storePeriodiChiusura.rejectChanges();
 							}
 						}
-						modifica=false;
+						
+						modifica = false;
 					}
 
 				};
 				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE, AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE, l);
 
 			}
-
-
 		});
 
-
 	}
-	public void setIdBiblioteca(int idBiblioteca){
-		this.id_biblioteca=idBiblioteca;
+	
+	public void setIdBiblioteca(int idBiblioteca) {
+		this.id_biblioteca = idBiblioteca;
 	}
 
-
-	public BaseListLoader<ListLoadResult<VoceUnicaModel>> getLoader(){
+	public BaseListLoader<ListLoadResult<VoceUnicaModel>> getLoader() {
 
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, add);
 		UIWorkflow.addOrRemoveFromToolbar(toolBar, remove);
