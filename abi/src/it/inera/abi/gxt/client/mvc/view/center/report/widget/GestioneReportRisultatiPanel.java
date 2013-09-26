@@ -196,7 +196,6 @@ public class GestioneReportRisultatiPanel extends ContentPanel {
 		grid.setWidth("100%");
 		grid.setSelectionModel(sm);
 		grid.addPlugin(sm);
-		grid.setLoadMask(true);
 		grid.getView().setForceFit(true);
 		grid.getView().setAutoFill(true);
 		

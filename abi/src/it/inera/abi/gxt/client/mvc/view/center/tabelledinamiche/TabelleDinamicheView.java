@@ -51,8 +51,6 @@ public class TabelleDinamicheView extends View {
 		listaVociSingole = new ListaVoceSingolaTabelleDinamiche();
 		listaVociSingole.setTableType(-1);
 		listaVociSingole.setGrid();
-		listaVociSingole.setTopToolbar();
-		listaVociSingole.setBottomToolbar();
 		
 		/* Voce singola -> END */
 		

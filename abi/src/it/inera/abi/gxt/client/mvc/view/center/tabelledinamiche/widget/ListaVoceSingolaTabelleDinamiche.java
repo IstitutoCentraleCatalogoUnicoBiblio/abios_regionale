@@ -68,7 +68,7 @@ public class ListaVoceSingolaTabelleDinamiche extends ContentPanel {
 	public ListaVoceSingolaTabelleDinamiche() {
 		setLayout(new FitLayout());
 		modifica = false;
-		tabelleDinamicheService = Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
+		tabelleDinamicheService = (TabelleDinamicheServiceAsync) Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
 	}
 
 	public void setTitleHead(String heading) {
@@ -94,8 +94,6 @@ public class ListaVoceSingolaTabelleDinamiche extends ContentPanel {
 		columnDenominazione.setEditor(new CellEditor(descrizioneVoce));
 
 		configs.add(columnDenominazione);
-
-		final TabelleDinamicheServiceAsync tabelleDinamicheService = (TabelleDinamicheServiceAsync) Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
 
 		RpcProxy<PagingLoadResult<VoceUnicaModel>> proxy = new RpcProxy<PagingLoadResult<VoceUnicaModel>>() {
 			@Override
@@ -156,8 +154,7 @@ public class ListaVoceSingolaTabelleDinamiche extends ContentPanel {
 				loader.load(config);
 			}
 		});
-		grid.setLoadMask(true);
-
+		
 		re.addListener(Events.CancelEdit, new Listener<BaseEvent>() {
 
 			@Override
@@ -228,9 +225,7 @@ public class ListaVoceSingolaTabelleDinamiche extends ContentPanel {
 				AbiMessageBox.messageConfirmOperationAlertBox(AbiMessageBox.CONFERMA_CREAZIONE_VOCE_MESSAGE,AbiMessageBox.CONFERMA_CREAZIONE_VOCE_TITLE,l);
 			}
 		});
-	}
-
-	public void setTopToolbar() {
+		
 		ToolBar toolBar = new ToolBar();
 
 		toolBar.setWidth(300);
@@ -338,15 +333,13 @@ public class ListaVoceSingolaTabelleDinamiche extends ContentPanel {
 				modifica = true;
 			}
 		});
-	}
-
-	public void setBottomToolbar() {
+		
 		toolBarBottom = new PagingToolBar(TabelleDinamicheView.GRID_ROWS_NUMBER);
 		toolBarBottom.bind(loader);
 		toolBarBottom.enable();
 		setBottomComponent(toolBarBottom);
 	}
-	
+
 	public Grid<VoceUnicaModel> getGrid() {
 		return grid;
 	}

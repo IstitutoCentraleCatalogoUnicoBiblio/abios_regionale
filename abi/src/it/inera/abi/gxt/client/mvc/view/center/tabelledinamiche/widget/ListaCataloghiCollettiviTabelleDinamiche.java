@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
@@ -250,13 +249,11 @@ public class ListaCataloghiCollettiviTabelleDinamiche extends ContentPanel {
 				cataloghiCollettiviLoader.load(config);
 			}
 		});
-		grid.setLoadMask(true);
 		
 		ToolBar toolBar = new ToolBar();
 
 		toolBar.setWidth(300);
 		toolBar.setBorders(false);
-		toolBar.add(new Text("Cataloghi collettivi: "));
 
 		Button add = new Button("Aggiungi");
 		final Button edit = new Button("Modifica");
