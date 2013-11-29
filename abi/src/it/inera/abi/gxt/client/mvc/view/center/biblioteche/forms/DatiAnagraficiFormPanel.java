@@ -42,7 +42,6 @@ import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
-import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -86,7 +85,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 	private TextField<String> statoField; 
 
 	/*Geolocalizzazione variabili*/
-	private	GoogleGeoLocalizePanel  g; 
+	private	GoogleGeoLocalizePanel g;
 	private NumberField latField; 
 	private NumberField lngField;
 	/*Codici variabili*/
@@ -477,15 +476,115 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 
 		geolocalizza = new Button("Geolocalizza");		
 		Utils.setStylesButton(geolocalizza);
+		g = new GoogleGeoLocalizePanel();
+		g.layout();
+		g.hide();
+		geolocalizza.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// Utilizzo i valori del form dell'indirizzo per la visualizzazione della mappa
+				g.setViaPiazza(biblioteca.getIndirizzo() != null ? biblioteca.getIndirizzo() : "");
+				g.setLocalita(biblioteca.getFrazione() != null ? biblioteca.getFrazione() : "");
+				g.setCap(biblioteca.getCap() != null ? biblioteca.getCap() : "");
+				g.setCitta(biblioteca.getComune() != null ? biblioteca.getComune().getDenominazione() : "");
+				g.setStato(biblioteca.getStato() != null ? biblioteca.getStato() : "");
+				if (biblioteca.getGeoX() != null) {
+					g.setLatitudine(biblioteca.getGeoX());
+					
+				} else g.setLatitudine(null);
+
+				if (biblioteca.getGeoY() != null) {
+					g.setLongitudine(biblioteca.getGeoY());
+					
+				} else g.setLongitudine(null);
+				
+				g.show();g.hide();g.show();
+				
+			}
+		});
+		
+		g.addListener(Events.Update, new Listener<BaseEvent>() {
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				// Via / Piazza 
+				if (viaPiazzaNCivicoField.getValue() == null) {
+					if (g.getViaPiazza() != null) {
+						viaPiazzaNCivicoField.setValue(g.getViaPiazza());
+						Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
+					}
+					
+				} else {
+					if (g.getViaPiazza() != null) {
+						if (!(viaPiazzaNCivicoField.getValue().equalsIgnoreCase(g.getViaPiazza()))) {
+							viaPiazzaNCivicoField.setValue(g.getViaPiazza());
+							Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
+						}
+						
+					} else {
+						viaPiazzaNCivicoField.setValue(g.getViaPiazza());
+						Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
+					}
+				}
+				
+				// Frazione 
+				if (frazioneField.getValue() == null) {
+					if (g.getLocalita() != null) {
+						frazioneField.setValue(g.getLocalita());
+						Utils.setFontColorStyleRed(frazioneLabel);
+					}
+					
+				} else {
+					if (g.getLocalita() != null) {
+						if (!(frazioneField.getValue().equalsIgnoreCase(g.getLocalita()))) {
+							frazioneField.setValue(g.getLocalita());
+							Utils.setFontColorStyleRed(frazioneLabel);
+						}
+						
+					} else {
+						frazioneField.setValue(g.getLocalita());
+						Utils.setFontColorStyleRed(frazioneLabel);
+					}						
+				}
+				
+				// CAP 
+				if (capField.getValue() == null) {
+					if (g.getCap() != null) {
+						capField.setValue(g.getCap());
+						Utils.setFontColorStyleRed(capLabel);
+					}
+					
+				} else {
+					if (g.getCap() != null) {
+						if (!(capField.getValue().equalsIgnoreCase(g.getCap()))) {
+							capField.setValue(g.getCap());
+							Utils.setFontColorStyleRed(capLabel);
+						}
+						
+					} else {
+						capField.setValue(g.getCap());
+						Utils.setFontColorStyleRed(capLabel);
+					}
+				}
+				
+				latField.setValue(g.getLatitudine());
+				lngField.setValue(g.getLongitudine());
+				Utils.setFontColorStyleRed(latLabel);
+				Utils.setFontColorStyleRed(lngLabel);
+				geoxy.layout();
+			}
+		});			
+		
+		geoxy.add(geolocalizza, geoField);
 		// DISABILITATO PER DEBUG: senza rete non funziona
-		try {
+		/*try {
 			g = new GoogleGeoLocalizePanel();
 			g.hide();
 			geolocalizza.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					//	g =new GoogleGeoLocalize();
 
 					//		Utilizzo i valori del form dell'indirizzo per la visualizzazione della mappa
 					g.setViaPiazza(biblioteca.getIndirizzo()!=null?biblioteca.getIndirizzo():"");
@@ -514,7 +613,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 
 				@Override
 				public void handleEvent(BaseEvent be) {
-					/* Via / Piazza */
+					// Via / Piazza 
 					if (viaPiazzaNCivicoField.getValue() == null) {
 						if (g.getViaPiazza() != null) {
 							viaPiazzaNCivicoField.setValue(g.getViaPiazza());
@@ -534,7 +633,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 						}
 					}
 					
-					/* Frazione */
+					// Frazione 
 					if (frazioneField.getValue() == null) {
 						if (g.getLocalita() != null) {
 							frazioneField.setValue(g.getLocalita());
@@ -554,7 +653,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 						}						
 					}
 					
-					/* CAP */
+					// CAP 
 					if (capField.getValue() == null) {
 						if (g.getCap() != null) {
 							capField.setValue(g.getCap());
@@ -584,8 +683,9 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 
 			geoxy.add(geolocalizza, geoField);
 		} catch (Throwable th) {
+			GWT.log(th.toString());
 			geoxy.add(new Label("Geolocalizzatore non disponibile."));
-		}
+		}*/
 
 		/* FINE---GEOLOCALIZZAZIONE PARAMETRI X-Y */
 		/*

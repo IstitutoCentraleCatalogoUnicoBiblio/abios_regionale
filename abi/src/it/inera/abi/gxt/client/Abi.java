@@ -22,12 +22,16 @@ import it.inera.abi.gxt.client.services.TabelleDinamicheServiceAsync;
 import it.inera.abi.gxt.client.services.UtentiService;
 import it.inera.abi.gxt.client.services.UtentiServiceAsync;
 
+import java.util.ArrayList;
+
 import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.util.Theme;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.maps.client.LoadApi;
+import com.google.gwt.maps.client.LoadApi.LoadLibrary;
 
 /**
  * Classe che implementa EntryPoint permettendo l'inizializzazione e l'avvio dei 
@@ -37,54 +41,78 @@ import com.google.gwt.core.client.GWT;
 public class Abi implements EntryPoint {
 
 	public static final String USERLOGGED = "userlogged"; // key per utente loggato nel registry
-	
+
 	public static final String BIBLIOTECHE_SERVICE = "bibliotecheService";
 	public static final String TABELLE_DINAMICHE_SERVICE = "tabelleDinamicheService";
 	public static final String UTENTI_SERVICE = "utentiService";
 	public static final String LOCATION_SERVICE = "locationService";
 	public static final String FORMATO_SCAMBIO = "formatoScambio";
-	
+
 	public static final String AUTHSERVICE = "authservice"; // servizio per l'autenticazione
 	/* Servizio per i dati del report */
 	public static final String REPORTSERVICE = "reportservice"; 
-	
-	public void onModuleLoad() {
-		GXT.setDefaultTheme(Theme.GRAY, true);
 
-		BibliotecheServiceAsync bibliotecheServiceAsync = (BibliotecheServiceAsync) GWT.create(BibliotecheService.class);
-		
-		TabelleDinamicheServiceAsync tabelleDinamicheService = (TabelleDinamicheServiceAsync) GWT.create(TabelleDinamicheService.class);
-		UtentiServiceAsync utentiService = (UtentiServiceAsync) GWT.create(UtentiService.class);
-		LocationServiceAsync locationService =(LocationServiceAsync) GWT.create(LocationService.class);
-		FormatoScambioServiceAsync formatoScambio = (FormatoScambioServiceAsync) GWT.create(FormatoScambioService.class);
-		AuthServiceAsync authService = GWT.create(AuthService.class); // autenticazione
-		/* Report */
-		ReportServiceAsync reportService = (ReportServiceAsync) GWT.create(ReportService.class);
-		
-		
-		Registry.register(BIBLIOTECHE_SERVICE, bibliotecheServiceAsync);
-		Registry.register(TABELLE_DINAMICHE_SERVICE, tabelleDinamicheService);
-		Registry.register(UTENTI_SERVICE, utentiService); 
-		Registry.register(LOCATION_SERVICE, locationService); 
-		Registry.register(FORMATO_SCAMBIO, formatoScambio); 
-		Registry.register(AUTHSERVICE, authService); // autenticazione
-		/* Report */
-		Registry.register(REPORTSERVICE, reportService);
-		
-		Dispatcher dispatcher = Dispatcher.get();
-		dispatcher.addController(new AppController());
-		dispatcher.addController(new GestioneBibliotecheController());
-		dispatcher.addController(new GestioneUtentiController());
-		dispatcher.addController(new TabelleDinamicheController());
-		dispatcher.addController(new StatisticheController());
-		dispatcher.addController(new GestioneReportController());
-		dispatcher.addController(new FormatoScambioController());
-		
-		
-		//dispatcher.dispatch(AppEvents.Init);
-		dispatcher.dispatch(AppEvents.AuthRequest); // invio al caricamento dei dati utente dopo autenticazione
-		
-		GXT.hideLoadingPanel("loading");
+	public void onModuleLoad() {
+		loadMapApi();
+	}
+
+
+	private void loadMapApi() {
+		boolean sensor = true;
+
+		// load all the libs for use in the maps
+		ArrayList<LoadLibrary> loadLibraries = new ArrayList<LoadApi.LoadLibrary>();
+		loadLibraries.add(LoadLibrary.ADSENSE);
+		loadLibraries.add(LoadLibrary.DRAWING);
+		loadLibraries.add(LoadLibrary.GEOMETRY);
+		loadLibraries.add(LoadLibrary.PANORAMIO);
+		loadLibraries.add(LoadLibrary.PLACES);
+		loadLibraries.add(LoadLibrary.WEATHER);
+
+
+		Runnable onLoad = new Runnable() {
+			@Override
+			public void run() {
+				GXT.setDefaultTheme(Theme.GRAY, true);
+
+				BibliotecheServiceAsync bibliotecheServiceAsync = (BibliotecheServiceAsync) GWT.create(BibliotecheService.class);
+
+				TabelleDinamicheServiceAsync tabelleDinamicheService = (TabelleDinamicheServiceAsync) GWT.create(TabelleDinamicheService.class);
+				UtentiServiceAsync utentiService = (UtentiServiceAsync) GWT.create(UtentiService.class);
+				LocationServiceAsync locationService =(LocationServiceAsync) GWT.create(LocationService.class);
+				FormatoScambioServiceAsync formatoScambio = (FormatoScambioServiceAsync) GWT.create(FormatoScambioService.class);
+				AuthServiceAsync authService = GWT.create(AuthService.class); // autenticazione
+				/* Report */
+				ReportServiceAsync reportService = (ReportServiceAsync) GWT.create(ReportService.class);
+
+
+				Registry.register(BIBLIOTECHE_SERVICE, bibliotecheServiceAsync);
+				Registry.register(TABELLE_DINAMICHE_SERVICE, tabelleDinamicheService);
+				Registry.register(UTENTI_SERVICE, utentiService); 
+				Registry.register(LOCATION_SERVICE, locationService); 
+				Registry.register(FORMATO_SCAMBIO, formatoScambio); 
+				Registry.register(AUTHSERVICE, authService); // autenticazione
+				/* Report */
+				Registry.register(REPORTSERVICE, reportService);
+
+				Dispatcher dispatcher = Dispatcher.get();
+				dispatcher.addController(new AppController());
+				dispatcher.addController(new GestioneBibliotecheController());
+				dispatcher.addController(new GestioneUtentiController());
+				dispatcher.addController(new TabelleDinamicheController());
+				dispatcher.addController(new StatisticheController());
+				dispatcher.addController(new GestioneReportController());
+				dispatcher.addController(new FormatoScambioController());
+
+
+				//dispatcher.dispatch(AppEvents.Init);
+				dispatcher.dispatch(AppEvents.AuthRequest); // invio al caricamento dei dati utente dopo autenticazione
+
+				GXT.hideLoadingPanel("loading");
+			}
+		};
+
+		LoadApi.go(onLoad, loadLibraries, sensor);
 	}
 
 }

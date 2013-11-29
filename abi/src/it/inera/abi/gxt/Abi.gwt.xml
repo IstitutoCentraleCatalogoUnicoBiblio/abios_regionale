@@ -12,8 +12,8 @@
   <!-- GOOGLE MAPS -->
   <inherits name='com.google.gwt.user.theme.standard.Standard'/>
   <!-- Include Google Maps and Inherit the Wrapper Module -->
-  <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.148&amp;key=ABQIAAAAjE9mmXphnWGc7G8D8HcfAhSxLrWv5CP3XtFZfzUG7WeTlOoEIhRH3vrEw2ZcKTeqU6LHp61jKVKVEg" />
-  <inherits name="com.google.gwt.maps.GoogleMaps" />
+  <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=3" />
+  <inherits name="com.google.gwt.maps.Apis_Google_Maps" />
   <!-- GOOGLE MAPS END -->
   
 </module>

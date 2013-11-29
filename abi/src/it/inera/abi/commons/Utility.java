@@ -4,10 +4,11 @@ import it.inera.abi.logic.formatodiscambio.castor.Biblioteca;
 import it.inera.abi.logic.formatodiscambio.imports.ImportFileBean;
 import it.inera.abi.logic.formatodiscambio.imports.ReportImport;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Time;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -403,6 +404,48 @@ public class Utility {
 		simpleEmail.setBounceAddress(emailBounceAddress);
 		simpleEmail.setCharset("UTF-8");
 		simpleEmail.send();
+	}
+	
+	/**
+	 * delete BOM data to be parsed by XML parser
+	 * 
+	 * @param inputStream
+	 * @return
+	 * @throws IOException
+	 */
+	public static InputStream getCleanInputStream(InputStream inputStream) throws IOException {
+		UnicodeInputStream stream = new UnicodeInputStream(inputStream, "UTF-8");
+		// Must be call to remove BOM char
+		stream.getEncoding();
+		return stream;
+	}
+
+	/**
+	 * Use this when BOM signature is set to UTF-8 XML File, Parser send an
+	 * error when signature is set.
+	 * 
+	 * @param xmlFile
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public static InputStream getCleanInputStream(File xmlFile) throws FileNotFoundException, IOException {
+		FileInputStream in = new FileInputStream(xmlFile);
+		return getCleanInputStream(in);
+	}
+
+	/**
+	 * Use it for process UTF-8 file with BOM signature. Parser send an error
+	 * when signature is set.
+	 * 
+	 * @param filename
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public static InputStream getCleanInputStream(String filename) throws FileNotFoundException, IOException {
+		File xmlFile = new File(filename);
+		return getCleanInputStream(xmlFile);
 	}
 
 

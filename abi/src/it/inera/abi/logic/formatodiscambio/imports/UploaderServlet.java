@@ -1,10 +1,12 @@
 package it.inera.abi.logic.formatodiscambio.imports;
 
+import it.inera.abi.commons.Utility;
 import it.inera.abi.logic.formatodiscambio.ImportLogic;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,11 +69,21 @@ public class UploaderServlet extends HttpServlet {
 				FileItem item = (FileItem) it.next();
 				if (!item.isFormField() && "uploadedfile".equals(item.getFieldName())) {
 					File uploadedFile = new File(System.getProperty("java.io.tmpdir") + File.separator + item.getName());
-					String prova = item.getString("UTF-8").replace("ISO-8859-1", "UTF-8");
+					
+					// clean BOM
+					InputStream input = Utility.getCleanInputStream(item.getInputStream());
+					String contentEncoded = IOUtils.toString(input);
+					input.close();
+					
 					FileWriter wr = new FileWriter(uploadedFile);
-					wr.write(prova);
+					wr.write(contentEncoded);
 					wr.flush();
-//					item.write(uploadedFile);
+					
+					/* sostituito con clean del BOM
+					String contentEncoded = item.getString("UTF-8").replace("ISO-8859-1", "UTF-8");
+					FileWriter wr = new FileWriter(uploadedFile);
+					wr.write(contentEncoded);
+					wr.flush();*/
 					pathUploadedFile = uploadedFile.getAbsolutePath();
 				} else if (item.isFormField()) {
 					String name = item.getFieldName();

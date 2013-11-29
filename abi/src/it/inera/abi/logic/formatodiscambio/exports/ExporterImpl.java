@@ -167,8 +167,9 @@ public class ExporterImpl implements Exporter {
 				}
 				// scrive l xml di export nel file temporaneo
 				FileWriter fileWriter = new FileWriter(tmpFile);
-				fileWriter.write(sw.toString().replaceAll("UTF-8", "ISO-8859-1"));
-//				fileWriter.write(sw.toString().replaceAll("ISO-8859-1", "UTF-8"));
+				// Ticket mantis: 0004292 su nazionale, problema relativo al charset, commentato qui di seguito e sostituito con la scrittura del solo sw.toString()
+//				fileWriter.write(sw.toString().replaceAll("UTF-8", "ISO-8859-1"));
+				fileWriter.write(sw.toString());
 				fileWriter.flush();
 				fileWriter.close();
 			}

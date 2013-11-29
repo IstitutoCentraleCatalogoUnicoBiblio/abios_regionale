@@ -1,7 +1,9 @@
 package it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget;
 
+import it.inera.abi.gxt.client.mvc.view.AppView;
 import it.inera.abi.gxt.client.workflow.UIWorkflow;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
@@ -21,20 +23,27 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableData;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
-import com.google.gwt.maps.client.InfoWindow;
-import com.google.gwt.maps.client.InfoWindowContent;
-import com.google.gwt.maps.client.MapType;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.maps.client.MapOptions;
+import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.event.MapClickHandler;
-import com.google.gwt.maps.client.event.MapDoubleClickHandler;
-import com.google.gwt.maps.client.event.MarkerClickHandler;
-import com.google.gwt.maps.client.event.MarkerDragEndHandler;
-import com.google.gwt.maps.client.event.MarkerDragStartHandler;
-import com.google.gwt.maps.client.geocode.Geocoder;
-import com.google.gwt.maps.client.geocode.LatLngCallback;
-import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.overlay.Marker;
-import com.google.gwt.maps.client.overlay.MarkerOptions;
+import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.events.MapEventType;
+import com.google.gwt.maps.client.events.MapHandlerRegistration;
+import com.google.gwt.maps.client.events.click.ClickMapEvent;
+import com.google.gwt.maps.client.events.click.ClickMapHandler;
+import com.google.gwt.maps.client.events.dblclick.DblClickMapEvent;
+import com.google.gwt.maps.client.events.dblclick.DblClickMapHandler;
+import com.google.gwt.maps.client.events.dragend.DragEndMapEvent;
+import com.google.gwt.maps.client.events.dragend.DragEndMapHandler;
+import com.google.gwt.maps.client.overlays.Animation;
+import com.google.gwt.maps.client.overlays.Marker;
+import com.google.gwt.maps.client.overlays.MarkerOptions;
+import com.google.gwt.maps.client.services.Geocoder;
+import com.google.gwt.maps.client.services.GeocoderRequest;
+import com.google.gwt.maps.client.services.GeocoderRequestHandler;
+import com.google.gwt.maps.client.services.GeocoderResult;
+import com.google.gwt.maps.client.services.GeocoderStatus;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -52,9 +61,7 @@ public class GoogleGeoLocalizePanel extends Dialog {
 
 	private Double latitudine;
 	private Double longitudine;
-	private Boolean edit = true;
 	private Boolean modified = false;
-	private Boolean caricato = false;
 
 	private TextField<String> indirizzoField;
 
@@ -67,38 +74,34 @@ public class GoogleGeoLocalizePanel extends Dialog {
 	private TextField<Double> lngField;
 
 	private VerticalPanel vp;
-	private MapWidget mapWidget;
-	private Geocoder geocoder;
-	private Marker marker;
-	private InfoWindow info;
 
 	private Button geolocalizzaButton;
 	private Button update;
 	private Button reset;
 
-	public GoogleGeoLocalizePanel() {
+	private MapWidget mapWidget;
+	private Marker marker;
+	private Geocoder geocoder;
 
+	LayoutContainer wrapper = (LayoutContainer) Registry.get(AppView.CENTER_PANEL);
+
+	public GoogleGeoLocalizePanel() {
 		this.indirizzo = null;
 		this.frazione = null;
 		this.cap = null;
 		this.latitudine = null;
 		this.longitudine = null;
 
-		geocoder = new Geocoder();
-
 		initialize();
 	}
 
 	public GoogleGeoLocalizePanel(String ruolo, String via, String numero, String localita, String cap, String citta, Double lat, Double lng) {
-
 		this.indirizzo = via;
-		this.frazione = (localita != null)?localita:"";
+		this.frazione = (localita != null) ? localita : "";
 		this.cap = cap;
 		this.codiceCitta = citta;
 		this.latitudine = lat;
 		this.longitudine = lng;
-
-		geocoder = new Geocoder();
 
 		initialize();
 	}
@@ -112,19 +115,20 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		geolocalizzaButton.setId(Dialog.CLOSE);
 		geolocalizzaButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			public void componentSelected(ButtonEvent ce) {
-//				modified = false;
-				showAddress(makeAddressString());
+				if (modified) {
+					showAddress(makeAddressString());
+				}
 			}
 		});		
 		addButton(geolocalizzaButton);	
-
 
 		update = new Button("Update");
 		update.setId(Dialog.OK);
 		update.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			public void componentSelected(ButtonEvent ce) {
-				if(modified)
+				if (modified) {
 					saveForm();
+				}
 			}
 		});
 		addButton(update);
@@ -134,14 +138,16 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		reset.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			public void componentSelected(ButtonEvent ce) {
 				loadForm();
-				if(latitudine != null && longitudine != null){
-					mapWidget.setCenter(LatLng.newInstance(latitudine, longitudine), 14);
-					marker.setLatLng(LatLng.newInstance(latitudine, longitudine));
-				} else 
+				if (latitudine != null && longitudine != null) {
+					LatLng latLong = LatLng.newInstance(latitudine.doubleValue(), longitudine.doubleValue());
+					mapWidget.setCenter(latLong);
+					placeMarker(latLong);
+					
+				} else {
 					showAddress(makeStartAddressString());
+				}
 				modified = false;
 			}
-
 		});
 		addButton(reset);
 
@@ -150,56 +156,48 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		close.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			public void componentSelected(ButtonEvent ce) {
 				modified = false;
-				caricato = false;
 				hide();
 			}
 		});
-		addButton(close);	
-
-
+		addButton(close);
 	}
 
 	@Override
 	protected void onShow() {
 		super.onShow();
+		loadForm();
 
-		if (!caricato) {
-			loadForm();
-
-			if (this.latitudine != null &&  this.longitudine != null) {
-				LatLng latLong = LatLng.newInstance(this.latitudine, this.longitudine);
-
-				mapWidget.setCenter(latLong, 14);
-				placeMarker(latLong);
-			} 
-			else {
-				showAddress(makeStartAddressString());
-				modified = true;
-			}
-
-			if (UIWorkflow.isReadOnly()) {
-				indirizzoField.setEnabled(false);
-				frazioneField.setEnabled(false);
-				capField.setEnabled(false);
-				comuneField.setEnabled(false);
-				statoField.setEnabled(false);
-				geolocalizzaButton.hide();
-				update.hide();
-				reset.hide();
-				
-			} else {
-				indirizzoField.setEnabled(true);
-				frazioneField.setEnabled(true);
-				capField.setEnabled(true);
-				comuneField.setEnabled(true);
-				statoField.setEnabled(true);
-				geolocalizzaButton.show();
-				update.show();
-				reset.show();
-			}
+		if (this.latitudine != null &&  this.longitudine != null) {
+			LatLng latLong = LatLng.newInstance(this.latitudine.doubleValue(), this.longitudine.doubleValue());
+			mapWidget.setCenter(latLong);
+			placeMarker(latLong);
 			
-			caricato = true;
+		} else {
+			showAddress(makeStartAddressString());
 		}
+
+		if (UIWorkflow.isReadOnly()) {
+			indirizzoField.setEnabled(false);
+			frazioneField.setEnabled(false);
+			capField.setEnabled(false);
+			comuneField.setEnabled(false);
+			statoField.setEnabled(false);
+			geolocalizzaButton.hide();
+			update.hide();
+			reset.hide();
+
+		} else {
+			indirizzoField.setEnabled(true);
+			frazioneField.setEnabled(true);
+			capField.setEnabled(true);
+			comuneField.setEnabled(true);
+			statoField.setEnabled(true);
+			geolocalizzaButton.show();
+			update.show();
+			reset.show();
+		}
+
+		MapHandlerRegistration.trigger(mapWidget, MapEventType.RESIZE);
 	}
 
 	@Override
@@ -214,9 +212,9 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		setBodyStyle("padding:10px;backgroundColor:#ffffff;");
 		setSize(700, -1);
 		setClosable(false);
-		
+
 		this.vp = new VerticalPanel();
-		this.vp.setSpacing(10);
+		//this.vp.setSpacing(10);
 		addMap();
 		addForm();
 
@@ -224,44 +222,38 @@ public class GoogleGeoLocalizePanel extends Dialog {
 	}
 
 
-	public void addMap(){
-		mapWidget = new MapWidget();
+	public void addMap() {
+		MapOptions opts = MapOptions.newInstance();
+		opts.setMapTypeId(MapTypeId.ROADMAP);
+		opts.setZoom(10);
+		opts.setMapTypeControl(true);
+		LatLng center = LatLng.newInstance(41.892916,12.48252);
+		opts.setCenter(center);
+		mapWidget = new MapWidget(opts);
 		mapWidget.setWidth("660px");
 		mapWidget.setHeight("210px");
-		mapWidget.setUIToDefault();
-		mapWidget.addMapType(MapType.getNormalMap());
-		mapWidget.setCurrentMapType(MapType.getNormalMap());
-		mapWidget.setContinuousZoom(true);
-		mapWidget.setScrollWheelZoomEnabled(true);
 
-		mapWidget.addMapDoubleClickHandler(new MapDoubleClickHandler() {
+		mapWidget.addDblClickHandler(new DblClickMapHandler() {
 
-			public void onDoubleClick(MapDoubleClickEvent event) {
-				if(event.getLatLng() != null){
-					mapWidget.setCenter(event.getLatLng());
-					marker.setLatLng(event.getLatLng());
-					latField.setValue(event.getLatLng().getLatitude());
-					lngField.setValue(event.getLatLng().getLongitude());
-				}
-				modified = true;
+			@Override
+			public void onEvent(DblClickMapEvent event) {
+				// TODO
 			}
 		});
-		mapWidget.addMapClickHandler(new MapClickHandler() {
 
-			public void onClick(MapClickEvent event) {
-				if(event.getLatLng() != null){
-					mapWidget.setCenter(event.getLatLng());
-					marker.setLatLng(event.getLatLng());
-					latField.setValue(event.getLatLng().getLatitude());
-					lngField.setValue(event.getLatLng().getLongitude());
-				}
-				modified = true;
+		mapWidget.addClickHandler(new ClickMapHandler() {
+
+			@Override
+			public void onEvent(ClickMapEvent event) {
+				// TODO
 			}
 		});
-		this.vp.add(mapWidget);
+
+
+		this.vp.add(mapWidget);		
 	}
 
-	public void addForm(){
+	public void addForm() {
 		FormPanel formIndirizzo = new FormPanel();
 		formIndirizzo.setHeaderVisible(false);
 		formIndirizzo.setBorders(false);
@@ -272,7 +264,7 @@ public class GoogleGeoLocalizePanel extends Dialog {
 
 		FormData data = new FormData();
 
-		//Tabella Indirizzo
+		// Tabella Indirizzo
 		LayoutContainer addressTable = new LayoutContainer(new TableLayout(3));
 		addressTable.setWidth("660px");
 
@@ -296,11 +288,12 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		indirizzoField.setFieldLabel("Via/Piazza n°civico");
 		indirizzoField.setEmptyText("Digita l'indirizzo...");
 		indirizzoField.setWidth(200);
-		indirizzoField.addListener(Events.OnKeyUp, new Listener<FieldEvent>(){
-			public void handleEvent(FieldEvent be) {
-				showAddress(makeAddressString());
+		indirizzoField.addListener(Events.OnKeyUp, new Listener<FieldEvent>() {
+			public void handleEvent(FieldEvent fe) {
 				modified = true;
-			}});
+			}
+		});
+
 		viaPiazzaContainer.add(indirizzoField, data);
 		addressTable.add(viaPiazzaContainer, colonna1);
 
@@ -314,11 +307,12 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		frazioneField.setFieldLabel("Localit&agrave;/Frazione");
 		frazioneField.setEmptyText("Digita la Località/Frazione...");
 		frazioneField.setWidth(200);
-		frazioneField.addListener(Events.OnKeyUp, new Listener<FieldEvent>(){
-			public void handleEvent(FieldEvent be) {
-				showAddress(makeAddressString());
+		frazioneField.addListener(Events.OnKeyUp, new Listener<FieldEvent>() {
+			public void handleEvent(FieldEvent fe) {
 				modified = true;
-			}});
+			}
+		});
+
 		frazioneContainer.add(frazioneField, data);
 		addressTable.add(frazioneContainer, colonna1);
 
@@ -331,11 +325,12 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		capField.setEmptyText("Digita il CAP...");
 		capField.setFieldLabel("CAP");
 		capField.setWidth(200);
-		capField.addListener(Events.OnKeyUp, new Listener<FieldEvent>(){
-			public void handleEvent(FieldEvent be) {
-				showAddress(makeAddressString());
+		capField.addListener(Events.OnKeyUp, new Listener<FieldEvent>() {
+			public void handleEvent(FieldEvent fe) {
 				modified = true;
-			}});
+			}
+		});
+		
 		capContainer.add(capField, data);
 		addressTable.add(capContainer, colonna1);
 
@@ -347,21 +342,15 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		comuneField = new TextField<String>();
 		comuneField.setFieldLabel("Comune");
 		comuneField.setEmptyText("Digita il comune...");
-
-		if(!this.edit){
-			comuneField.setEnabled(false);
-			comuneField.setReadOnly(true);			
-		}
 		comuneField.setWidth(200);
-		comuneField.addListener(Events.OnKeyUp, new Listener<FieldEvent>(){
-			public void handleEvent(FieldEvent be) {
-				showAddress(makeAddressString());
+		comuneField.addListener(Events.OnKeyUp, new Listener<FieldEvent>() {
+			public void handleEvent(FieldEvent fe) {
 				modified = true;
-			}});
+			}
+		});
+		
 		cittaContainer.add(comuneField, data);
 		addressTable.add(cittaContainer, colonna1);
-
-
 
 		LayoutContainer statoContainer = new LayoutContainer();
 		dataLayout = new FormLayout();
@@ -372,6 +361,12 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		statoField.setEmptyText("Digita lo stato...");
 		statoField.setFieldLabel("Stato");
 		statoField.setWidth(200);
+		statoField.addListener(Events.OnKeyUp, new Listener<FieldEvent>() {
+			public void handleEvent(FieldEvent fe) {
+				modified = true;
+			};
+		});
+		
 		statoContainer.add(statoField, data);
 		addressTable.add(statoContainer, colonna1);
 
@@ -410,15 +405,14 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		formIndirizzo.add(addressTable, data);
 		formIndirizzo.add(geoLocationTable, data);
 		this.vp.add(formIndirizzo);
-
 	}
 
 	private void loadForm() {
-		indirizzoField.setValue((indirizzo != null)?indirizzo:"");
-		frazioneField.setValue((frazione != null)?frazione:"");
-		capField.setValue((cap != null)?cap:"");
-		comuneField.setValue(comune!=null?comune:"");
-		statoField.setValue(stato!=null?stato:"");
+		indirizzoField.setValue((indirizzo != null) ? indirizzo : "");
+		frazioneField.setValue((frazione != null) ? frazione : "");
+		capField.setValue((cap != null) ? cap : "");
+		comuneField.setValue(comune != null ? comune : "");
+		statoField.setValue(stato != null ? stato : "");
 		latField.setValue(latitudine);
 		lngField.setValue(longitudine);
 
@@ -428,10 +422,10 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		indirizzo = indirizzoField.getValue();
 		frazione = frazioneField.getValue();
 		cap = capField.getValue();
-		latitudine = (latField.getRawValue() != null)?new Double(latField.getRawValue()):0;
-		longitudine = (lngField.getRawValue() != null)?new Double(lngField.getRawValue()):0;
+		latitudine = (latField.getRawValue() != null) ? new Double(latField.getRawValue()) : 0;
+		longitudine = (lngField.getRawValue() != null) ? new Double(lngField.getRawValue()) : 0;
 		fireEvent(Events.Update);
-		//		comune = comuneField.getValue();
+		// comune = comuneField.getValue();
 	}
 
 	public void cleanUp() {
@@ -453,94 +447,84 @@ public class GoogleGeoLocalizePanel extends Dialog {
 
 	private String makeStartAddressString() {
 		String res = "";
-		res += (indirizzo != null)?indirizzo+", ":"";
-		res += ((frazione != null)?frazione+", ":"");
-		res += ((cap != null)?cap+", ":"");
-		res += ((comune != null)?comune+", ":"");
-		res += ((stato != null)?stato+", ":"");
+		res += (indirizzo != null) ? indirizzo + ", " : "";
+		res += ((frazione != null) ? frazione + ", " : "");
+		res += ((cap != null) ? cap + ", " : "");
+		res += ((comune != null) ? comune + ", " : "");
+		res += ((stato != null) ? stato + ", " : "");
 		return res;
 	}
 
 	private String makeAddressString() {
 		String res = "";
-		res += (indirizzoField.getValue() != null)?indirizzoField.getValue()+ ", " :"";
-		res +=((frazioneField.getValue() != null)?frazioneField.getValue()+ ", ":"");
-		res +=((capField.getValue() != null)?capField.getValue()+ ", ":"");
-		res +=((comuneField.getValue() != null)?comuneField.getValue()+ ", ":"");
-		res +=((statoField.getValue() != null)?statoField.getValue()+ ", ":"");
-
+		res += (indirizzoField.getValue() != null) ? indirizzoField.getValue() + ", " : "";
+		res +=((frazioneField.getValue() != null) ? frazioneField.getValue() + ", " : "");
+		res +=((capField.getValue() != null) ? capField.getValue() + ", " : "");
+		res +=((comuneField.getValue() != null) ? comuneField.getValue() + ", " : "");
+		res +=((statoField.getValue() != null) ? statoField.getValue() + ", " : "");
 		return res;
 	}
 
-	/**
-	 * Nel caso in cui cambi uno dei parametri dell'indirizzo viene effettuato il
-	 * calcolo del punto corrispondente e ricentrata la mappa.
-	 * 
-	 * @param address
-	 */
-	private void showAddress(final String address) {
-		geocoder.getLatLng(address, new LatLngCallback() {
-			public void onFailure() {
-				//--> calback di google maps, nn passa il Throwable? UIAuth.checkIsLogin(caught.toString()); // controllo se l'errore è dovuto alla richiesta di login
-				MessageBox.alert("Attenzione", "L'indirizzo " + address + " non &egrave; stato trovato.", null);
-			}
+	private final GoogleGeoLocalizePanel thistmp = this;
 
-			public void onSuccess(final LatLng point) {
-				latField.setValue(point.getLatitude());
-				lngField.setValue(point.getLongitude());
-				modified = true;
-				mapWidget.setCenter(point, 14);
-				placeMarker(point);
+	private void showAddress(final String address) {
+		GeocoderRequest geocoderRequest = GeocoderRequest.newInstance();
+		geocoderRequest.setAddress(address);
+		geocoder = Geocoder.newInstance();
+		thistmp.mask("Attendere...", "x-mask-loading");
+		geocoder.geocode(geocoderRequest, new GeocoderRequestHandler() {
+			@Override
+			public void onCallback(JsArray<GeocoderResult> results,	GeocoderStatus status) {
+				if (GeocoderStatus.OK.compareTo(status) == 0 && results != null && results.length() > 0) {
+					GeocoderResult geocoderResult = results.get(0);
+					LatLng point = geocoderResult.getGeometry().getLocation();
+					latField.setValue(point.getLatitude());
+					lngField.setValue(point.getLongitude());
+					mapWidget.setCenter(point);
+					placeMarker(point);
+
+				} else {
+					MessageBox.alert("Attenzione", "L'indirizzo " + address + " non &egrave; stato trovato.", null);
+				}
+				thistmp.unmask();
 			}
 		});
 	}
 
-	private void placeMarker(LatLng point) {
-		MarkerOptions mo = MarkerOptions.newInstance();
-		mo.setClickable(true);
-		mo.setDraggable(true);
-		if(marker == null) {
-			marker = new Marker(mapWidget.getCenter(), mo);
+	private void placeMarker(LatLng center) {
+		if (marker == null) {
+			MarkerOptions options = MarkerOptions.newInstance();
+			options.setAnimation(Animation.DROP);
+			options.setPosition(center);
 
-			mapWidget.addOverlay(marker);
-			marker.addMarkerDragEndHandler(new MarkerDragEndHandler() {
-				public void onDragEnd(MarkerDragEndEvent event) {
-					LatLng point = event.getSender().getLatLng();
-					latField.setValue(point.getLatitude());
-					lngField.setValue(point.getLongitude());
+			marker = Marker.newInstance(options);
+
+			marker.setMap(mapWidget);
+
+			marker.addDragEndHandler(new DragEndMapHandler() {
+
+				@Override
+				public void onEvent(DragEndMapEvent event) {
+					latField.setValue(marker.getPosition().getLatitude());
+					lngField.setValue(marker.getPosition().getLongitude());
 					modified = true;
-				}
 
-			});
-			marker.addMarkerDragStartHandler(new MarkerDragStartHandler() {
-				public void onDragStart(MarkerDragStartEvent event) {
-					if(info != null && info.isVisible())
-						info.close();
-				}
-
-			});
-			marker.addMarkerClickHandler(new MarkerClickHandler() {
-				public void onClick(MarkerClickEvent event) {
-					LatLng point = event.getSender().getLatLng();
-					info = mapWidget.getInfoWindow();
-					info.open(marker,
-							new InfoWindowContent("<span style=\"font-weight:bold;font-size:1.3em;color:007DBC;padding-bottom:5px;\">Posizione Corrente ...</span><p><span style=\"font-style:italic;\">Lat:" + point.getLatitude() + " Long: " + point.getLongitude() + "</span></p>"));
 				}
 			});
 
 		} else {
-			marker.setLatLng(point);
+			marker.setPosition(center);
 		}
 
-		/* Se la geolocalizzazione è in sola lettura il marker non può essere spostato dalla posizione salvata. */
+		mapWidget.setCenter(center);
+
+		// Se la geolocalizzazione è in sola lettura il marker non può essere spostato dalla posizione salvata.
 		if (UIWorkflow.isReadOnly()) {
-			marker.setDraggingEnabled(false);
+			marker.setDraggable(false);
 		}
 		else {
-			marker.setDraggingEnabled(true);
+			marker.setDraggable(true);
 		}
-
-
 	}
 
 	public Double getLatitudine() {
@@ -558,7 +542,6 @@ public class GoogleGeoLocalizePanel extends Dialog {
 	public void setLongitudine(Double longitudine) {
 		this.longitudine = longitudine;
 	}
-
 
 	public String getViaPiazza() {
 		return indirizzo;
@@ -592,11 +575,11 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		this.comune = citta;
 	}
 
-	public void setStato(String stato){
-		this.stato=stato;
+	public void setStato(String stato) {
+		this.stato = stato;
 	}
 
-	public String getStato(){
+	public String getStato() {
 		return this.stato;
 	}
 
@@ -606,24 +589,6 @@ public class GoogleGeoLocalizePanel extends Dialog {
 
 	public void setCodiceCitta(String codiceCitta) {
 		this.codiceCitta = codiceCitta;
-	}
-
-
-
-	public Boolean isAddressEditable() {
-		return edit;
-	}
-
-	public void editAddressEnabled(Boolean edit) {
-		this.edit = edit;
-	}
-
-	public Boolean isModified() {
-		return modified;
-	}
-
-	public void setModified(Boolean modified) {
-		this.modified = modified;
 	}
 
 }
