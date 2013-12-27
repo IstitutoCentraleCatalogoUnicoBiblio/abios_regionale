@@ -1322,7 +1322,13 @@ public class DatabaseToCastorMapper {
 			}
 			//ID DEWEY
 			if (fSpecH.getDewey() != null) {
-				fSpec.setFondoSpecialeCdd(fSpecH.getDewey().getIdDewey());
+				String cdd = fSpecH.getDewey().getIdDewey();
+				if (cdd.length() > 3) {
+					log.debug("Codice dewey dal DB: " + cdd);
+					cdd = cdd.substring(0, 3) + "." + cdd.substring(3, cdd.length());
+					log.debug("Codice dewey modificato: " + cdd);
+				}
+				fSpec.setFondoSpecialeCdd(cdd);
 			}			
 			log.debug("Aggiunto fondo speciale inventario: " + fSpec.getNome());
 			fondiSpe.add(fSpec);

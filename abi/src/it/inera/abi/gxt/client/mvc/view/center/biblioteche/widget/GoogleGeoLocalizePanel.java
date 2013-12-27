@@ -126,9 +126,7 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		update.setId(Dialog.OK);
 		update.addSelectionListener(new SelectionListener<ButtonEvent>() {
 			public void componentSelected(ButtonEvent ce) {
-				if (modified) {
-					saveForm();
-				}
+				saveForm();
 			}
 		});
 		addButton(update);

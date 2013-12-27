@@ -1048,6 +1048,9 @@ public class ImporterImpl implements Importer {
 					}
 					if (fs.getFondoSpecialeCdd() != null) {
 						String cdd = fs.getFondoSpecialeCdd().trim();
+						
+						cdd = StringUtils.replace(cdd, ".", "");
+						
 						Dewey dewey = (Dewey) dynaTabDao.searchRecord(Dewey.class, cdd);
 						if (dewey == null) {
 							String msg = "Dewey non trovato in fondo speciale:" + cdd;

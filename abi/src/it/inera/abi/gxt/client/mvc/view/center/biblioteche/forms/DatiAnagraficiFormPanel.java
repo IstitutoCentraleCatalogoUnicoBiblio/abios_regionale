@@ -6,6 +6,7 @@ import it.inera.abi.gxt.client.Utils;
 import it.inera.abi.gxt.client.auth.UIAuth;
 import it.inera.abi.gxt.client.costants.CostantiTabelleDinamiche;
 import it.inera.abi.gxt.client.mvc.model.ComuniModel;
+import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.view.NumberFieldCustom;
 import it.inera.abi.gxt.client.mvc.view.TextFieldCustom;
@@ -80,7 +81,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 	private TextField<String> frazioneField;
 	private TextFieldCustom<String> capField;
 	private ComboBoxForBeans<ComuniModel> comuneField;
-	private TextField<String> provinciaField;
+	private ComboBoxForBeans<ProvinceModel> provinciaField;
 	private TextField<String> regioneField;
 	private TextField<String> statoField; 
 
@@ -130,6 +131,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 	private	Text frazioneLabel;
 	private	Text capLabel;
 	private	Text comuneLabel;
+	private	Text provinciaLabel;
 	private	Text latLabel;
 	private	Text lngLabel;
 
@@ -151,6 +153,8 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 	private FormPanel formStatoCatalogazione;
 	private FormPanel formCodici;
 	private FormPanel formCodiciOthers;
+	
+	private BaseListLoader<ListLoadResult<ModelData>> loaderprovince;
 	
 	public DatiAnagraficiFormPanel() {
 		super();
@@ -360,13 +364,13 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		RpcProxy<PagingLoadResult<ComuniModel>> proxyComuni = new RpcProxy<PagingLoadResult<ComuniModel>>() {
 			@Override
 			protected void load(Object loadConfig, AsyncCallback<PagingLoadResult<ComuniModel>> callback) {
-				locationService.getComuniByDenominazioneProvinciaFiltered(provinciaField.getValue(), (ModelData) loadConfig, callback);
+				locationService.getComuniByDenominazioneProvinciaFiltered(provinciaField.getValue().getDenominazione(), (ModelData) loadConfig, callback);
 			}
 
 		};
 		ModelReader comuniReader = new ModelReader();
 
-		PagingLoader<PagingLoadResult<ComuniModel>> loaderComuni = new BasePagingLoader<PagingLoadResult<ComuniModel>>(proxyComuni, comuniReader);
+		final PagingLoader<PagingLoadResult<ComuniModel>> loaderComuni = new BasePagingLoader<PagingLoadResult<ComuniModel>>(proxyComuni, comuniReader);
 		loaderComuni.setLimit(10);
 
 		ListStore<ComuniModel> listStoreComuni = new ListStore<ComuniModel>(loaderComuni);
@@ -407,13 +411,75 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		indirizzoTable.add(comuneLabel, indirizzoColonna1);
 		indirizzoTable.add(comuneField, indirizzoColonna2);
 
-		Text provinciaLabel = new Text("Provincia:");
+		provinciaLabel = new Text("Provincia:");
 		provinciaLabel.setStyleAttribute("fontSize", "14px");
 
-		provinciaField = new TextField<String>();
-		provinciaField.setEnabled(false);
+		RpcProxy<List<ProvinceModel>> proxyProvince = new RpcProxy<List<ProvinceModel>>() {
+
+			@Override
+			protected void load(Object loadConfig, AsyncCallback<List<ProvinceModel>> callback) {
+				String query = (String) ((ModelData) loadConfig).get("query");
+				if (query != null && query.length() > 0) {
+					locationService.getProvince(biblioteca.getProvincia().getIdRegione(), query, callback);
+					
+				} else {
+					locationService.getProvince(biblioteca.getProvincia().getIdRegione(), callback);
+				}
+			}
+
+		};
+
+		ModelReader provinceReader = new ModelReader();
+
+		loaderprovince = new BaseListLoader<ListLoadResult<ModelData>>(
+				proxyProvince, provinceReader);
+
+		final ListStore<ProvinceModel> provinceStore = new ListStore<ProvinceModel>(loaderprovince);
+		
+		provinciaField = new ComboBoxForBeans<ProvinceModel>();
+		provinciaField.setStore(provinceStore);
+		provinciaField.setDisplayField("denominazione");
+		provinciaField.setFieldLabel("Provincia");
+		provinciaField.setFireChangeEventOnSetValue(true);
+		provinciaField.setEmptyText("Scegli una provincia...");
+		provinciaField.setLazyRender(false);
+		provinciaField.setTriggerAction(TriggerAction.ALL);
+		provinciaField.setForceSelection(true);
+		provinciaField.setEditable(true);
+		provinciaField.setAllowBlank(false);
+		provinciaField.setTypeAhead(false);
+		provinciaField.setMinChars(1);
 		provinciaField.setWidth(400);
-		provinciaField.setReadOnly(true);
+
+		provinciaField.addSelectionChangedListener(new SelectionChangedListener<ProvinceModel>() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent<ProvinceModel> se) {
+				if (se.getSelectedItem() != null) {
+					loaderComuni.load();
+				}
+				
+			}
+		});
+		
+		/**Aggiunge un listener ad un combobox, e se modificato ne cambia il colore
+		 * della textLabel (rosso), se il valore modificato ritorna uguale al valore originale la label
+		 * torna al colore di non modificato (nero)*/
+		provinciaField.addListener(Events.Change, new Listener<BaseEvent>() {
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				if (provinciaField.getValue() != null && provinciaField.getOriginalValue() != null) {
+					if (provinciaField.getValue().getIdProvincia() == (provinciaField.getOriginalValue().getIdProvincia())) {
+						Utils.setFontColorStyleBlack(provinciaLabel);
+						
+					} else {
+						Utils.setFontColorStyleRed(provinciaLabel);
+					}
+				}
+			}
+		});
+		
 		indirizzoTable.add(provinciaLabel, indirizzoColonna1);
 		indirizzoTable.add(provinciaField, indirizzoColonna2);
 
@@ -568,10 +634,38 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 					}
 				}
 				
-				latField.setValue(g.getLatitudine());
-				lngField.setValue(g.getLongitudine());
-				Utils.setFontColorStyleRed(latLabel);
-				Utils.setFontColorStyleRed(lngLabel);
+				// LATITUDINE
+				if (latField.getValue() == null) {
+					if (g.getLatitudine() != null) {
+						latField.setValue(g.getLatitudine());
+						Utils.setFontColorStyleRed(latLabel);
+					}
+					
+				} else {
+					if (g.getLatitudine() != null) {
+						if (latField.getValue().doubleValue() != g.getLatitudine().doubleValue()) {
+							latField.setValue(g.getLatitudine());
+							Utils.setFontColorStyleRed(latLabel);
+						}
+					}
+				}
+				
+				// LONGITUDINE
+				if (lngField.getValue() == null) {
+					if (g.getLongitudine() != null) {
+						lngField.setValue(g.getLongitudine());
+						Utils.setFontColorStyleRed(lngLabel);
+					}
+					
+				} else {
+					if (g.getLongitudine() != null) {
+						if (lngField.getValue().doubleValue() != g.getLongitudine().doubleValue()) {
+							lngField.setValue(g.getLongitudine());
+							Utils.setFontColorStyleRed(lngLabel);
+						}
+					}
+				}
+				
 				geoxy.layout();
 			}
 		});			
@@ -1306,14 +1400,14 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 	}
 
 
-	public void hideIsilComponents(){
+	public void hideIsilComponents() {
 		codiceIsilLabel.hide();
 		isilNumero.hide();
 		isilProvincia.hide();
 		isilStato.hide();
 	}
 
-	public void showIsilComponents(){
+	public void showIsilComponents() {
 		codiceIsilLabel.show();
 		isilNumero.show();
 		isilProvincia.show();
@@ -1349,17 +1443,22 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 			regioneField.setOriginalValue(biblioteca.getRegione());
 			statoField.setOriginalValue(biblioteca.getStato());
 
-			if(biblioteca.getGeoX()!=null){
+			if (loaderprovince != null) loaderprovince.load();
+			
+			if (biblioteca.getGeoX() != null) {
 				latField.setValue(biblioteca.getGeoX());
 				latField.setOriginalValue(biblioteca.getGeoX());
-			}else{
+				
+			} else {
 				latField.setValue(null);
 				latField.setValue(null);
 			}
-			if(biblioteca.getGeoY()!=null){
+			
+			if (biblioteca.getGeoY() != null) {
 				lngField.setValue(biblioteca.getGeoY());
 				lngField.setOriginalValue(biblioteca.getGeoY());
-			}else{
+				
+			} else {
 				lngField.setValue(null);
 				lngField.setOriginalValue(null);
 			}
@@ -1548,6 +1647,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		Utils.setFontColorStyleBlack(frazioneLabel);
 		Utils.setFontColorStyleBlack(capLabel);
 		Utils.setFontColorStyleBlack(comuneLabel);
+		Utils.setFontColorStyleBlack(provinciaLabel);
 		Utils.setFontColorStyleBlack(latLabel);
 		Utils.setFontColorStyleBlack(lngLabel);
 

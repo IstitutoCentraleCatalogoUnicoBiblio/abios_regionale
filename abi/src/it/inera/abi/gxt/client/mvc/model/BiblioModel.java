@@ -21,6 +21,7 @@ public class BiblioModel extends BaseModel implements Serializable {
 	 * Variabili per serializzazione
 	 */
 	ComuniModel c;
+	ProvinceModel p;
 	EnteModel e;
 	VoceUnicaModel v;
 	RegolamentoModel r;
@@ -212,7 +213,7 @@ public class BiblioModel extends BaseModel implements Serializable {
 		return get("utenteUltimaModifica");
 	}
 
-	public String getProvincia() {
+	public ProvinceModel getProvincia() {
 		return get("provincia");
 	}
 
@@ -257,7 +258,7 @@ public class BiblioModel extends BaseModel implements Serializable {
 		set("utenteUltimaModifica", utenteUltimaModifica);
 	}
 
-	public void setProvincia(String provincia) {
+	public void setProvincia(ProvinceModel provincia) {
 		set("provincia", provincia);
 	}
 

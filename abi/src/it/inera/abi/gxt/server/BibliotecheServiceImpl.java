@@ -20,6 +20,7 @@ import it.inera.abi.gxt.client.mvc.model.PatrimonioLibrarioModel;
 import it.inera.abi.gxt.client.mvc.model.PhotoModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoInterbibliotecarioRuoloModel;
 import it.inera.abi.gxt.client.mvc.model.PrestitoLocaleModel;
+import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
 import it.inera.abi.gxt.client.mvc.model.RegolamentoModel;
 import it.inera.abi.gxt.client.mvc.model.ServiziRiproduzioniModel;
 import it.inera.abi.gxt.client.mvc.model.SistemiPrestitoInterbibliotecarioModel;
@@ -718,7 +719,14 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		tmpComune.setIdComune(biblioteca.getComune().getIdComune());
 		tmpComune.setIdProvincia(biblioteca.getComune().getProvincia().getIdProvincia());
 		biblioModel.setComune(tmpComune);
-
+		
+		// Provincia
+		ProvinceModel tmpProvincia = new ProvinceModel();
+		tmpProvincia.setIdProvincia(biblioteca.getComune().getProvincia().getIdProvincia());
+		tmpProvincia.setDenominazione(biblioteca.getComune().getProvincia().getDenominazione());
+		tmpProvincia.setIdRegione(biblioteca.getComune().getProvincia().getRegione().getIdRegione());
+		biblioModel.setProvincia(tmpProvincia);
+		
 		biblioModel.setComuneDenominazione(tmpComune);
 		// Utente ultima modifica
 		biblioModel.setUtenteUltimaModifica((biblioteca.getUtenteUltimaModifica() == null ? null : biblioteca.getUtenteUltimaModifica().getLogin()));
@@ -749,7 +757,6 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 		// Indirizzo
 		biblioModel.setFrazione(biblioteca.getFrazione());
 		biblioModel.setCap(biblioteca.getCap());
-		biblioModel.setProvincia(biblioteca.getComune().getProvincia().getDenominazione());
 		biblioModel.setRegione(biblioteca.getComune().getProvincia().getRegione().getDenominazione());
 		biblioModel.setStato(biblioteca.getComune().getProvincia().getRegione().getStato().getDenominazione());
 		// Geo
