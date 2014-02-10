@@ -32,7 +32,7 @@
   <xsl:variable name="totBib">
       <xsl:value-of select="//ROW[tipo1 = $des]/tot" />
   </xsl:variable>
-
+<xsl:if test="$totBib != ''">
 <ROW>
 <column num="1"><xsl:value-of select="$des" /></column>
 <column num="2">
@@ -144,6 +144,7 @@
 </xsl:choose>
 </column>
 </ROW>
+</xsl:if>
 </xsl:for-each>
 <xsl:variable name="totBib">
       <xsl:value-of select="sum(//ROW/tot)" />
