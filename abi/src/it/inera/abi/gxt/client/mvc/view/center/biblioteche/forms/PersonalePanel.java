@@ -43,7 +43,8 @@ public class PersonalePanel extends ContentPanelForTabItem {
 	private NumberField esternoField;
 	private NumberField ingressiRegistraUltimi12MesiField;
 	private NumberField iscrittiPrestitoUltimi12MesiField;
-	private NumberField utentiIscrittiField;
+	// Tolto in seguito al ticket mantis : 4499
+//	private NumberField utentiIscrittiField;
 	private BibliotecheServiceAsync bibliotecheService;
 
 	private Button personaleAggiorna;
@@ -57,7 +58,8 @@ public class PersonalePanel extends ContentPanelForTabItem {
 	private Text esternoLabel;
 	private Text ingressiRegistratiUltimi12MesiLabel;
 	private Text iscrittiPrestitoUltimi12MesiLabel;
-	private Text utentiIscrittiLabel;
+	// Tolto in seguito al ticket mantis : 4499
+//	private Text utentiIscrittiLabel;
 	
 	private FormPanel personaleForm;
 	private FormPanel utentiForm;
@@ -277,7 +279,7 @@ public class PersonalePanel extends ContentPanelForTabItem {
 		utentiTable.add(ingressiRegistratiUltimi12MesiLabel, d);
 		utentiTable.add(ingressiRegistraUltimi12MesiField, d2);
 
-		iscrittiPrestitoUltimi12MesiLabel = new Text("Iscritti al perstito negli ultimi 12 mesi:");
+		iscrittiPrestitoUltimi12MesiLabel = new Text("Iscritti al prestito negli ultimi 12 mesi:");
 		iscrittiPrestitoUltimi12MesiLabel.setStyleAttribute("fontSize", "14px");
 
 		iscrittiPrestitoUltimi12MesiField = new NumberField();
@@ -288,16 +290,18 @@ public class PersonalePanel extends ContentPanelForTabItem {
 		utentiTable.add(iscrittiPrestitoUltimi12MesiLabel, d);
 		utentiTable.add(iscrittiPrestitoUltimi12MesiField, d2);
 
-		utentiIscrittiLabel = new Text("Utenti iscritti:");
-		utentiIscrittiLabel.setStyleAttribute("fontSize", "14px");
-
-		utentiIscrittiField = new NumberField();
-		utentiIscrittiField.setWidth(100);
-		utentiIscrittiField.setFormat(NumberFormat.getDecimalFormat());
-		Utils.addListenerToChangeLabelColorIfModifiedNumberFieldInt(utentiIscrittiField, utentiIscrittiLabel);
-		
-		utentiTable.add(utentiIscrittiLabel, d);
-		utentiTable.add(utentiIscrittiField, d2);
+		// TOLTO IN SEGUITO AL TICKET MANTIS : 4499 -> INIZIO
+//		utentiIscrittiLabel = new Text("Utenti iscritti:");
+//		utentiIscrittiLabel.setStyleAttribute("fontSize", "14px");
+//
+//		utentiIscrittiField = new NumberField();
+//		utentiIscrittiField.setWidth(100);
+//		utentiIscrittiField.setFormat(NumberFormat.getDecimalFormat());
+//		Utils.addListenerToChangeLabelColorIfModifiedNumberFieldInt(utentiIscrittiField, utentiIscrittiLabel);
+//		
+//		utentiTable.add(utentiIscrittiLabel, d);
+//		utentiTable.add(utentiIscrittiField, d2);
+		// Tolto in seguito al ticket mantis : 4499 -> FINE
 
 		utentiAggiorna = new Button("Aggiorna");
 		Utils.setStylesButton(utentiAggiorna);
@@ -324,10 +328,12 @@ public class PersonalePanel extends ContentPanelForTabItem {
 							}
 							else utentiValues.put("iscrittiPrestitoUltimi12Mesi", null);
 							
-							if (utentiIscrittiField.getValue() != null) {
-								utentiValues.put("utentiIscritti", utentiIscrittiField.getValue().intValue());
-							}
-							else utentiValues.put("utentiIscritti", null);
+							// TOLTO IN SEGUITO AL TICKET MANTIS : 4499 -> INIZIO
+//							if (utentiIscrittiField.getValue() != null) {
+//								utentiValues.put("utentiIscritti", utentiIscrittiField.getValue().intValue());
+//							}
+//							else utentiValues.put("utentiIscritti", null);
+							// TOLTO IN SEGUITO AL TICKET MANTIS : 4499 -> FINE
 							
 							bibliotecheService.setInfoUtenti(id_biblio,utentiValues,new AsyncCallback<Void>() {
 
@@ -335,10 +341,12 @@ public class PersonalePanel extends ContentPanelForTabItem {
 								public void onSuccess(Void result) {
 									ingressiRegistraUltimi12MesiField.setOriginalValue(ingressiRegistraUltimi12MesiField.getValue());
 									iscrittiPrestitoUltimi12MesiField.setOriginalValue(iscrittiPrestitoUltimi12MesiField.getValue());
-									utentiIscrittiField.setOriginalValue(utentiIscrittiField.getValue());
+									// TOLTO IN SEGUITO AL TICKET MANTIS : 4499
+//									utentiIscrittiField.setOriginalValue(utentiIscrittiField.getValue());
 									Utils.setFontColorStyleBlack(ingressiRegistratiUltimi12MesiLabel);
 									Utils.setFontColorStyleBlack(iscrittiPrestitoUltimi12MesiLabel);
-									Utils.setFontColorStyleBlack(utentiIscrittiLabel);
+									// TOLTO IN SEGUITO AL TICKET MANTIS : 4499
+//									Utils.setFontColorStyleBlack(utentiIscrittiLabel);
 									AbiMessageBox.messageSuccessAlertBox(AbiMessageBox.ESITO_CREAZIONE_SUCCESS_VOCE_MESSAGE, AbiMessageBox.ESITO_CREAZIONE_VOCE_TITLE);
 									fireReloadBiblioDataEvent();
 								}
@@ -366,7 +374,8 @@ public class PersonalePanel extends ContentPanelForTabItem {
 				utentiForm.reset();
 				Utils.setFontColorStyleBlack(ingressiRegistratiUltimi12MesiLabel);
 				Utils.setFontColorStyleBlack(iscrittiPrestitoUltimi12MesiLabel);
-				Utils.setFontColorStyleBlack(utentiIscrittiLabel);								
+				// TOLTO IN SEGUITO AL TICKET MANTIS : 4499
+//				Utils.setFontColorStyleBlack(utentiIscrittiLabel);								
 			}
 		});
 
@@ -415,9 +424,11 @@ public class PersonalePanel extends ContentPanelForTabItem {
 		ingressiRegistraUltimi12MesiField.setOriginalValue(biblioteca.getIngressiUltimi12Mesi());
 		Utils.setFontColorStyleBlack(ingressiRegistratiUltimi12MesiLabel);
 		
-		utentiIscrittiField.setValue(biblioteca.getUtentiIscrittii());
-		utentiIscrittiField.setOriginalValue(biblioteca.getUtentiIscrittii());
-		Utils.setFontColorStyleBlack(utentiIscrittiLabel);
+		// TOLTO IN SEGUITO AL TICKET MANTIS : 4499 -> INIZIO
+//		utentiIscrittiField.setValue(biblioteca.getUtentiIscrittii());
+//		utentiIscrittiField.setOriginalValue(biblioteca.getUtentiIscrittii());
+//		Utils.setFontColorStyleBlack(utentiIscrittiLabel);
+		// TOLTO IN SEGUITO AL TICKET MANTIS : 4499 -> FINE
 
 		UIWorkflow.setReadOnly(personaleField);
 		UIWorkflow.setReadOnly(partTimeField);
@@ -425,7 +436,8 @@ public class PersonalePanel extends ContentPanelForTabItem {
 		UIWorkflow.setReadOnly(temporaneoField);
 		UIWorkflow.setReadOnly(iscrittiPrestitoUltimi12MesiField);
 		UIWorkflow.setReadOnly(ingressiRegistraUltimi12MesiField);
-		UIWorkflow.setReadOnly(utentiIscrittiField);
+		// TOLTO IN SEGUITO AL TICKET MANTIS : 4499
+//		UIWorkflow.setReadOnly(utentiIscrittiField);
 
 		UIWorkflow.hideView(personaleAggiorna);
 		UIWorkflow.hideView(resetPersonale);

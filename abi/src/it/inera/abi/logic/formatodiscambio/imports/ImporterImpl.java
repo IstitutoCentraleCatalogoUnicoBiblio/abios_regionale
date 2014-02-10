@@ -841,11 +841,17 @@ public class ImporterImpl implements Importer {
 		}
 
 		// UTENTI
+		// MODIFICATO IN SEGUITO AL TICKET MANTIS : 4499 -> INIZIO
 		if (biblioteca.getAmministrativa().getUtenti() != null) {
+			if (biblioteca.getAmministrativa().getUtenti().getUltimoAnno() > 0) {
+				int ultimoAnno = (int) biblioteca.getAmministrativa().getUtenti().getUltimoAnno();
+				bibliotecaDb.setUtenti(ultimoAnno);
+				log.debug("Modificati NUMERO UTENZE utenti:" + ultimoAnno);
+			}
 			if (biblioteca.getAmministrativa().getUtenti().getIscrittiPrestito() > 0) {
-				int utentiIscritti = (int) biblioteca.getAmministrativa().getUtenti().getIscrittiPrestito();
-				bibliotecaDb.setUtentiIscritti(utentiIscritti);
-				log.debug("Modificati NUMERO UTENZE utentiIscritti:" + utentiIscritti);
+				int iscrittiPrestito = (int) biblioteca.getAmministrativa().getUtenti().getIscrittiPrestito();
+				bibliotecaDb.setUtentiIscrittiPrestitoAnno(iscrittiPrestito);
+				log.debug("Modificati NUMERO UTENZE utentiIscrittiPrestitoAnno:" + iscrittiPrestito);
 			}
 
 			if (biblioteca.getAmministrativa().getUtenti().getMinoriQuattordiciAnni() > 0) {
@@ -854,12 +860,8 @@ public class ImporterImpl implements Importer {
 				log.debug("Modificati NUMERO UTENZE utentiUnder14:" + utentiUnder14);
 			}
 
-			if (biblioteca.getAmministrativa().getUtenti().getUltimoAnno()>0) {
-				int utentiIscrittiPrestitoAnno = (int) biblioteca.getAmministrativa().getUtenti().getUltimoAnno();
-				bibliotecaDb.setUtentiIscrittiPrestitoAnno(utentiIscrittiPrestitoAnno);
-				log.debug("Modificati NUMERO UTENZE utentiIscrittiPrestitoAnno:" + utentiIscrittiPrestitoAnno);
-			}
 		}
+		// MODIFICATO IN SEGUITO AL TICKET MANTIS : 4499 -> FINE
 
 		//ORARI
 		//Totali orari

@@ -903,7 +903,8 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 
 		biblioModel.setIscrittiPrestitoUltimi12Mesi(biblioteca.getUtentiIscrittiPrestitoAnno());
 		biblioModel.setIngressiUltimi12Mesi(biblioteca.getUtenti());
-		biblioModel.setUtentiIscritti(biblioteca.getUtentiIscritti());
+		// TOLTO IN SEGUITO AL TICKET MANTIS : 4499
+//		biblioModel.setUtentiIscritti(biblioteca.getUtentiIscritti());
 		//BILANCIO
 		biblioModel.setUsciteTotali(biblioteca.getBilancioUscite());
 		biblioModel.setUscitePersonale(biblioteca.getBilancioUscitePersonale());

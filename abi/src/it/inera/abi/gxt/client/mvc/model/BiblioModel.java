@@ -626,13 +626,15 @@ public class BiblioModel extends BaseModel implements Serializable {
 		return get("iscrittiPrestitoUltimi12Mesi");
 	}
 	
-	public void setUtentiIscritti(Integer utentiIscritti){
-		set("utentiIscritti",utentiIscritti);
-	}
-	
-	public Integer getUtentiIscrittii(){
-		return get("utentiIscritti");
-	}
+	// TOLTO IN SEGUITO AL TICKET MANTIS : 4499 -> INIZIO
+//	public void setUtentiIscritti(Integer utentiIscritti){
+//		set("utentiIscritti",utentiIscritti);
+//	}
+//	
+//	public Integer getUtentiIscrittii(){
+//		return get("utentiIscritti");
+//	}
+	// TOLTO IN SEGUITO AL TICKET MANTIS : 4499 -> FINE
 	
 	public void setUsciteTotali(Integer usciteTotali){
 		set("usciteTotali",usciteTotali);

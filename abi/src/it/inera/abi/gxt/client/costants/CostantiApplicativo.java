@@ -5,6 +5,6 @@ package it.inera.abi.gxt.client.costants;
  */
 public class CostantiApplicativo {
 
-	public static final String VERSION_NUMBER = "1.7.7";
+	public static final String VERSION_NUMBER = "1.7.8";
 
 }

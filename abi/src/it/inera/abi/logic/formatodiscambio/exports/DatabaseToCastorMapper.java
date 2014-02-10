@@ -1661,22 +1661,24 @@ public class DatabaseToCastorMapper {
 			amministrativa.setStrutture(strutture);
 	}
 
+	// MODIFICATO IN SEGUITO AL TICKET MANTIS : 4499 -> INIZIO
 	private static void Amministrativa_setUtenti(Amministrativa amministrativa, Biblioteca bibliotecaDb) {
 		Utenti utenti = null;
-		if (isNullSafeNotZero(bibliotecaDb.getUtentiIscritti())){
+		if (isNullSafeNotZero(bibliotecaDb.getUtenti())) {
 			if(utenti == null) utenti = new Utenti();
-			utenti.setIscrittiPrestito(bibliotecaDb.getUtentiIscritti());
+			utenti.setUltimoAnno(bibliotecaDb.getUtenti());
 		}
-		if (isNullSafeNotZero(bibliotecaDb.getUtentiUnder14())){
+		if (isNullSafeNotZero(bibliotecaDb.getUtentiIscrittiPrestitoAnno())) {
+			if (utenti == null) utenti = new Utenti();
+			utenti.setIscrittiPrestito(bibliotecaDb.getUtentiIscrittiPrestitoAnno());
+		}
+		if (isNullSafeNotZero(bibliotecaDb.getUtentiUnder14())) {
 			if (utenti == null) utenti = new Utenti();
 			utenti.setMinoriQuattordiciAnni(bibliotecaDb.getUtentiUnder14());
 		}
-		if (isNullSafeNotZero(bibliotecaDb.getUtentiIscrittiPrestitoAnno())) {
-			if (utenti == null)	utenti = new Utenti();
-			utenti.setUltimoAnno(bibliotecaDb.getUtentiIscrittiPrestitoAnno());
-		}
 		if (utenti != null)	amministrativa.setUtenti(utenti);
 	}
+	// MODIFICATO IN SEGUITO AL TICKET MANTIS : 4499 -> FINE
 
 	private static void Servizi_setAccesso(Servizi servizi, Biblioteca bibliotecaDb) {
 

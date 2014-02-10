@@ -4788,12 +4788,14 @@ public class BiblioDaoJpa implements BiblioDao {
 			else
 				biblioteca.setUtenti(null);
 		}
-		if (utentiValues.containsKey("utentiIscritti")) {
-			if (utentiValues.get("utentiIscritti") != null)
-				biblioteca.setUtentiIscritti((Integer) utentiValues.get("utentiIscritti"));
-			else
-				biblioteca.setUtentiIscritti(null);
-		}
+		// TOLTO IN SEGUITO AL TICKET MANTIS : 4499 -> INIZIO
+//		if (utentiValues.containsKey("utentiIscritti")) {
+//			if (utentiValues.get("utentiIscritti") != null)
+//				biblioteca.setUtentiIscritti((Integer) utentiValues.get("utentiIscritti"));
+//			else
+//				biblioteca.setUtentiIscritti(null);
+//		}
+		// TOLTO IN SEGUITO AL TICKET MANTIS : 4499 -> FINE
 		em.merge(biblioteca);
 	}
 
