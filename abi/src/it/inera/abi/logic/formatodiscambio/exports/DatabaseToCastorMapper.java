@@ -1664,15 +1664,18 @@ public class DatabaseToCastorMapper {
 	// MODIFICATO IN SEGUITO AL TICKET MANTIS : 4499 -> INIZIO
 	private static void Amministrativa_setUtenti(Amministrativa amministrativa, Biblioteca bibliotecaDb) {
 		Utenti utenti = null;
-		if (isNullSafeNotZero(bibliotecaDb.getUtenti())) {
+		// Inserito controllo se not null E >= 0 per poter valutare anche lo 0 (modifica richiesta in seguito al ticket 4499 di cui sopra)
+		if (isNullSafeNonNegative(bibliotecaDb.getUtenti())) {
 			if(utenti == null) utenti = new Utenti();
 			utenti.setUltimoAnno(bibliotecaDb.getUtenti());
 		}
-		if (isNullSafeNotZero(bibliotecaDb.getUtentiIscrittiPrestitoAnno())) {
+		// Inserito controllo se not null E >= 0 per poter valutare anche lo 0 (modifica richiesta in seguito al ticket 4499 di cui sopra)
+		if (isNullSafeNonNegative(bibliotecaDb.getUtentiIscrittiPrestitoAnno())) {
 			if (utenti == null) utenti = new Utenti();
 			utenti.setIscrittiPrestito(bibliotecaDb.getUtentiIscrittiPrestitoAnno());
 		}
-		if (isNullSafeNotZero(bibliotecaDb.getUtentiUnder14())) {
+		// Inserito controllo se not null E >= 0 per poter valutare anche lo 0 (modifica richiesta in seguito al ticket 4499 di cui sopra)
+		if (isNullSafeNonNegative(bibliotecaDb.getUtentiUnder14())) {
 			if (utenti == null) utenti = new Utenti();
 			utenti.setMinoriQuattordiciAnni(bibliotecaDb.getUtentiUnder14());
 		}
@@ -2443,6 +2446,14 @@ public class DatabaseToCastorMapper {
 			return false;
 		}
 		return num > 0;
+	}
+	
+	// Creato nuovo metodo per il controllo se not null E >= 0 (modifica effettuata in merito al ticket 4499)
+	public static boolean isNullSafeNonNegative(Integer num) {
+		if (num == null) {
+			return false;
+		}
+		return num >= 0;
 	}
 
 	public static void main(String[] args) {

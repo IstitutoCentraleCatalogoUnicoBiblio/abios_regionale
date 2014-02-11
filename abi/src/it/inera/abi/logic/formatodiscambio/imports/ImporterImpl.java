@@ -843,18 +843,20 @@ public class ImporterImpl implements Importer {
 		// UTENTI
 		// MODIFICATO IN SEGUITO AL TICKET MANTIS : 4499 -> INIZIO
 		if (biblioteca.getAmministrativa().getUtenti() != null) {
-			if (biblioteca.getAmministrativa().getUtenti().getUltimoAnno() > 0) {
+			// Inserito controllo se >= 0 per poter azzerare precedenti valori (modifica richiesta in seguito al ticket 4499 di cui sopra)
+			if (biblioteca.getAmministrativa().getUtenti().getUltimoAnno() >= 0) {
 				int ultimoAnno = (int) biblioteca.getAmministrativa().getUtenti().getUltimoAnno();
 				bibliotecaDb.setUtenti(ultimoAnno);
 				log.debug("Modificati NUMERO UTENZE utenti:" + ultimoAnno);
 			}
-			if (biblioteca.getAmministrativa().getUtenti().getIscrittiPrestito() > 0) {
+			// Inserito controllo se >= 0 per poter azzerare precedenti valori (modifica richiesta in seguito al ticket 4499 di cui sopra)
+			if (biblioteca.getAmministrativa().getUtenti().getIscrittiPrestito() >= 0) {
 				int iscrittiPrestito = (int) biblioteca.getAmministrativa().getUtenti().getIscrittiPrestito();
 				bibliotecaDb.setUtentiIscrittiPrestitoAnno(iscrittiPrestito);
 				log.debug("Modificati NUMERO UTENZE utentiIscrittiPrestitoAnno:" + iscrittiPrestito);
 			}
-
-			if (biblioteca.getAmministrativa().getUtenti().getMinoriQuattordiciAnni() > 0) {
+			// Inserito controllo se >= 0 per poter azzerare precedenti valori (modifica richiesta in seguito al ticket 4499 di cui sopra)
+			if (biblioteca.getAmministrativa().getUtenti().getMinoriQuattordiciAnni() >= 0) {
 				int utentiUnder14 = (int) biblioteca.getAmministrativa().getUtenti().getMinoriQuattordiciAnni();
 				bibliotecaDb.setUtentiUnder14(utentiUnder14);
 				log.debug("Modificati NUMERO UTENZE utentiUnder14:" + utentiUnder14);
