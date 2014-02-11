@@ -83,6 +83,7 @@ chiusa
 
 <column num="1">Totale</column>
 <xsl:for-each select="$unique-tip-num">
+<xsl:sort select="." order="ascending"/>
 <xsl:variable name="tipo" select="." />
 <xsl:variable name="valtot" select="format-number((100 * sum(//ROW[stato_accesso = $tipo]/count) div sum(//ROW/count)),'###.###.###,#','european')" />
 <column>

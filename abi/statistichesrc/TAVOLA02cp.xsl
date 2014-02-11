@@ -82,6 +82,7 @@ Totale</column>
 
 <column num="1">TRENTINO ALTO ADIGE</column>
 <xsl:for-each select="$unique-tip-num">
+<xsl:sort select="." order="ascending" data-type="number"/>
 <xsl:variable name="tipo" select="." />
 <xsl:variable name="amm_tot" select="count(//ROW[(floor(tipologia_amministrativa_id div 100) = ($tipo div 100))])"/>
 <xsl:if test="$amm_tot>0">

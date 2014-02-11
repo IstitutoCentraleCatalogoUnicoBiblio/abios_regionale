@@ -86,6 +86,7 @@ Totale</column>
 
 <column num="1">Totale</column>
 <xsl:for-each select="$unique-tip-num">
+<xsl:sort select="." order="ascending"/>
 <xsl:variable name="tipo" select="."/>
 <column>
 	<xsl:attribute name="num">
