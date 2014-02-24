@@ -81,7 +81,7 @@ public class RicercaBiblioFormPanel extends FormPanel {
 	private ComboBox<VoceUnicaModel> tipFunz;
 	private ComboBox<VoceUnicaModel> tipAmm;
 	private ComboBox<PartecipaCataloghiCollettiviModel> denominazioneCatalogoField;
-	protected final SimpleComboBox<String> codiciTipo = new SimpleComboBox<String>();
+	protected ComboBox<VoceUnicaModel> codiciTipologia;
 	protected final TextField<String> codice = new TextField<String>();
 	
 	protected TabelleDinamicheServiceAsync tdsa = Registry.get(Abi.TABELLE_DINAMICHE_SERVICE);
@@ -156,7 +156,6 @@ public class RicercaBiblioFormPanel extends FormPanel {
 				denominazioneCatalogoField.clearSelections();
 				denominazioneCatalogoField.clearState();
 				denominazioneCatalogoField.clear();
-				codiciTipo.setRawValue("");
 				codice.clearState();
 				codice.clear();
 				codice.disable();
@@ -193,12 +192,12 @@ public class RicercaBiblioFormPanel extends FormPanel {
 				if (denominazioneCatalogoField.getValue() != null) {
 					keys.put("cataloghiCollettivi", denominazioneCatalogoField.getValue().getIdCatalogo());
 				}
-				if (codiciTipo.getValue() != null && codice.getValue() != null) {
-					if (codiciTipo.getValue().getValue().equalsIgnoreCase("Codice ABI (PRxxxx)")) {
+				if (codiciTipologia.getValue() != null && codice.getValue() != null) {
+					if (codiciTipologia.getValue().getEntry().equalsIgnoreCase("Codice ABI (PRxxxx)")) {
 						keys.put("codiciTipo", "ABI");
 					}
 					else {
-						keys.put("codiciTipo", codiciTipo.getValue().getValue());
+						keys.put("codiciTipo", codiciTipologia.getValue().getEntry());
 					}
 					keys.put("codice", codice.getValue());
 				}
@@ -411,27 +410,38 @@ public class RicercaBiblioFormPanel extends FormPanel {
 		/** FINE CATALOGHI COLLETTIVI **/
 		
 		
-		codiciTipo.setFieldLabel("Tipo codice");
-		codiciTipo.setTriggerAction(TriggerAction.ALL);
-		codiciTipo.setEditable(false);
-		codiciTipo.setFireChangeEventOnSetValue(true);
-		codiciTipo.add("<option class=\"x-combo-list-item\" style=\"height:18px;\">&nbsp;</option>");
-		codiciTipo.add("Codice ABI (PRxxxx)");
-		codiciTipo.add("ACNP");
-		codiciTipo.add("CEI");
-		codiciTipo.add("CMBS");
-		codiciTipo.add("RISM");
-		codiciTipo.add("SBN");
-		codiciTipo.addSelectionChangedListener(new SelectionChangedListener<SimpleComboValue<String>>() {
+		ListStore<VoceUnicaModel> listStoreTipi = new ListStore<VoceUnicaModel>();
+		listStoreTipi.insert(new VoceUnicaModel(-1, ""), 0);
+		listStoreTipi.insert(new VoceUnicaModel(0, "Codice ABI (PRxxxx)"), 1);
+		listStoreTipi.insert(new VoceUnicaModel(1, "ACNP"), 2);
+		listStoreTipi.insert(new VoceUnicaModel(2, "CEI"), 3);
+		listStoreTipi.insert(new VoceUnicaModel(3, "CMBS"), 4);
+		listStoreTipi.insert(new VoceUnicaModel(4, "RISM"), 5);
+		listStoreTipi.insert(new VoceUnicaModel(5, "SBN"), 6);
+		
+		codiciTipologia = new ComboBox<VoceUnicaModel>();
+		codiciTipologia.setFieldLabel("Tipo codice");
+		codiciTipologia.setDisplayField("entry");
+		codiciTipologia.setStore(listStoreTipi);
+		codiciTipologia.setFireChangeEventOnSetValue(true);
+		codiciTipologia.setEmptyText("Tipo codice...");		
+		codiciTipologia.setLazyRender(false);
+		codiciTipologia.setTriggerAction(TriggerAction.ALL);
+		codiciTipologia.setForceSelection(false);
+		codiciTipologia.setEditable(false);
+		codiciTipologia.setTemplate(getTemplateEmptyRowVoceUnicaModel());
+		codiciTipologia.addSelectionChangedListener(new SelectionChangedListener<VoceUnicaModel>() {
+			
 			@Override
-			public void selectionChanged(SelectionChangedEvent<SimpleComboValue<String>> se) {
-				if (se.getSelectedItem() != null && se.getSelectedItem().getValue() != null) {
-					String s = (String) se.getSelectedItem().getValue();
+			public void selectionChanged(SelectionChangedEvent<VoceUnicaModel> se) {
+				if (se.getSelectedItem() != null && se.getSelectedItem().getEntry() != null) {
+					String s = (String) se.getSelectedItem().getEntry();
 					if (!s.equalsIgnoreCase("Codice ABI (PRxxxx)") && !s.equalsIgnoreCase("ACNP")
 							&& !s.equalsIgnoreCase("CEI") && !s.equalsIgnoreCase("CMBS")
 							&& !s.equalsIgnoreCase("RISM") && !s.equalsIgnoreCase("SBN")) {
-						codiciTipo.setRawValue("");
-						codiciTipo.clear();
+						codiciTipologia.clear();
+						codice.clear();
+						codice.setAllowBlank(true);
 						codice.disable();
 					}
 					else {
@@ -440,12 +450,21 @@ public class RicercaBiblioFormPanel extends FormPanel {
 							codice.setMaxLength(6);
 						}
 						else {
-							codice.setAllowBlank(false);
+							codice.setMinLength(1);
+							codice.setMaxLength(10);
 							
 						}
+						codice.setAllowBlank(false);
 						codice.enable();
 					}
+					
+				} else {
+					codiciTipologia.clear();
+					codice.clear();
+					codice.setAllowBlank(true);
+					codice.disable();
 				}
+				
 			}
 		});
 		
@@ -454,8 +473,7 @@ public class RicercaBiblioFormPanel extends FormPanel {
 			@Override
 			public String validate(Field<?> field, String value) {
 				String res = null;
-				
-				if (codiciTipo.getValue().getValue().equalsIgnoreCase("Codice ABI (PRxxxx)")) {
+				if (codiciTipologia.getValue() != null && codiciTipologia.getValue().getEntry().equalsIgnoreCase("Codice ABI (PRxxxx)")) {
 					try {
 						if (((String) codice.getValue()).length() > 2) {
 							Integer i = Integer.valueOf(((String) codice.getValue()).substring(2, ((String) codice.getValue()).length()));
@@ -471,6 +489,7 @@ public class RicercaBiblioFormPanel extends FormPanel {
 				return res;
 			}
 		});
+		
 		left.add(provincia);
 		left.add(tipAmm);
 		left.add(denominazioneCatalogoField);
@@ -578,7 +597,7 @@ public class RicercaBiblioFormPanel extends FormPanel {
 		// Aggiunta per allineamento ricerca regionale
 		center.add(comune);
 		center.add(tipFunz);
-		center.add(codiciTipo);
+		center.add(codiciTipologia);
 		
 		main.add(left, dataCaratteristicheTreColonne1);
 		main.add(center, dataCaratteristicheTreColonne2);

@@ -12,6 +12,7 @@ import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.services.UtentiServiceAsync;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -76,6 +77,12 @@ public class AssegnaBiblioPanel extends ContentPanel {
 	private UtentiServiceAsync utentiServiceAsync = null;
 	protected Button assegna;
 	protected Button selectAll = new Button("Seleziona tutto");
+	
+	private boolean loading = false;
+	
+	protected PagingLoadConfig config = null;
+	protected HashMap<String, Object> keys = new HashMap<String, Object>();
+	
 	public AssegnaBiblioPanel() {
 		super();
 		utentiServiceAsync = Registry.get(Abi.UTENTI_SERVICE);
@@ -213,34 +220,10 @@ public class AssegnaBiblioPanel extends ContentPanel {
 		grid.getView().setForceFit(true);
 		grid.getView().setAutoFill(true);
 
-		grid.addListener(Events.Attach, new Listener<GridEvent<BiblioModel>>() {
-		
-			public void handleEvent(GridEvent<BiblioModel> be) {
-			
-				PagingLoadConfig config = new BasePagingLoadConfig();
-				config.setOffset(0);
-				config.setLimit(CostantiGestioneBiblio.BIBLIO_GRID_LIMIT);
-
-				Map<String, Object> state = grid.getState();
-				
-				if (state.containsKey("offset")) {
-				
-					int offset = (Integer) state.get("offset");
-					int limit = (Integer) state.get("limit");
-					config.setOffset(offset);
-					config.setLimit(limit);
-					
-				}
-				
-				if (state.containsKey("sortField")) {
-					
-					config.setSortField((String) state.get("sortField"));
-					config.setSortDir(SortDir.valueOf((String) state
-							.get("sortDir")));
-				}
-				
-				loader.load(config);
-				
+		grid.addListener(BaseLoader.BeforeLoad, new Listener<BaseEvent>() {
+			@Override
+			public void handleEvent(BaseEvent be) {
+				loading = true;
 			}
 		});
 		
@@ -470,8 +453,11 @@ public class AssegnaBiblioPanel extends ContentPanel {
 		RpcProxy<PagingLoadResult<BiblioModel>> proxy = new RpcProxy<PagingLoadResult<BiblioModel>>() {
 			@Override
 			public void load(Object loadConfig, AsyncCallback<PagingLoadResult<BiblioModel>> callback) {
-
 				/* Servizio getBiblioteche */
+				if (((PagingLoadConfig) loadConfig).get("keys") == null) {
+					((PagingLoadConfig) loadConfig).set("keys",	keys);
+				}
+				
 				biblioService.getBiblioteche((PagingLoadConfig) loadConfig, callback);
 								
 			}
@@ -480,6 +466,16 @@ public class AssegnaBiblioPanel extends ContentPanel {
 		
 		/* Loader */
 		loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
+		loader.addListener(BaseLoader.Load, new Listener<BaseEvent>() {
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DeferredCommand.addCommand(new Command() {
+					public void execute() {
+						loading = false;
+					}
+				});
+			}
+		});
 		loader.setRemoteSort(true);
 		
 	}
@@ -497,5 +493,35 @@ public class AssegnaBiblioPanel extends ContentPanel {
 		biblioSelected.clear();
 		assegna.disable();
 	}
+	
+	public void setKeys(HashMap<String, Object> parametriRicerca) {
+
+		config = new BasePagingLoadConfig();
+
+		/** PARAMETRI RICERCA **/
+		keys = parametriRicerca;
+		config.set("keys", keys);
+
+		config.setOffset(0);
+		config.setLimit(CostantiGestioneBiblio.BIBLIO_GRID_LIMIT);
+
+		Map<String, Object> state = grid.getState();
+		if (state.containsKey("offset")) {
+			int offset = (Integer) state.get("offset");
+			int limit = (Integer) state.get("limit");
+			config.setOffset(offset);
+			config.setLimit(limit);
+		}
+		if (state.containsKey("sortField")) {
+			config.setSortField((String) state.get("sortField"));
+			config.setSortDir(SortDir.valueOf((String) state.get("sortDir")));
+		}
+
+		if (!loading) {
+			loading = true;
+			loader.load(config);
+		}
+	}
+	
 }
 

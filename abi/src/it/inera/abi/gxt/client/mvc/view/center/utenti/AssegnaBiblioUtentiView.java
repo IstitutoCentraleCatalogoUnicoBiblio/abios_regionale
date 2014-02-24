@@ -127,13 +127,8 @@ public class AssegnaBiblioUtentiView extends View {
 			List<Integer> userslist = (List<Integer>) event.getData("idUsers");
 			assegnaBiblioPanel.setUsersList(userslist);
 			final HashMap<String, Object> keys = (HashMap<String, Object>) (event.getData("parametriRicerca"));
-			final PagingLoadConfig config = new BasePagingLoadConfig();
-			config.setOffset(0);
-			config.setLimit(CostantiGestioneBiblio.BIBLIO_GRID_LIMIT);
-			config.set("keys", keys);
-			assegnaBiblioPanel.setService();
+			assegnaBiblioPanel.setKeys(keys);
 			assegnaBiblioPanel.clearBib();
-			assegnaBiblioPanel.getGrid().getStore().getLoader().load(config);
 			
 			layout.setActiveItem(assegnaBiblioPanel);
 			wrapper.layout();
