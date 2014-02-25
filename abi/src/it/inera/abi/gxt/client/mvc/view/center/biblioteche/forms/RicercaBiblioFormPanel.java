@@ -451,7 +451,7 @@ public class RicercaBiblioFormPanel extends FormPanel {
 						}
 						else {
 							codice.setMinLength(1);
-							codice.setMaxLength(10);
+							codice.setMaxLength(15);
 							
 						}
 						codice.setAllowBlank(false);

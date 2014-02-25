@@ -375,7 +375,7 @@ public class BiblioDaoJpa implements BiblioDao {
 					criteria.add("b.isilProvincia = :ipr");
 					criteria.add("b.isilNumero = :inr");
 				} else {
-					criteria.add("c.valore = :codice");
+					criteria.add("c.valore like :codice");
 					criteria.add("c.codiciTipo = :codiciTipo");
 				}
 			}
@@ -464,7 +464,9 @@ public class BiblioDaoJpa implements BiblioDao {
 					q.setParameter("ipr", s.substring(0, 2));
 					q.setParameter("inr", Integer.valueOf((String) s.substring(2, 6)));
 				} else {
-					q.setParameter("codice", keys.get("codice"));
+					String tmpFilter = "%".concat((String) keys.get("codice")).concat("%");
+					q.setParameter("codice", tmpFilter);
+					
 					if (((String) keys.get("codiciTipo")).equalsIgnoreCase("ACNP")) {
 						CodiciTipo ct = em.find(CodiciTipo.class, 1);
 						q.setParameter("codiciTipo", ct);
@@ -589,7 +591,7 @@ public class BiblioDaoJpa implements BiblioDao {
 					criteria.add("b.isilProvincia = :ipr");
 					criteria.add("b.isilNumero = :inr");
 				} else {
-					criteria.add("c.valore = :codice");
+					criteria.add("c.valore like :codice");
 					criteria.add("c.codiciTipo = :codiciTipo");
 				}
 			}
@@ -711,7 +713,9 @@ public class BiblioDaoJpa implements BiblioDao {
 					q.setParameter("ipr", s.substring(0, 2));
 					q.setParameter("inr", Integer.valueOf((String) s.substring(2, s.length())));
 				} else {
-					q.setParameter("codice", keys.get("codice"));
+					String tmpFilter = "%".concat((String) keys.get("codice")).concat("%");
+					q.setParameter("codice", tmpFilter);
+					
 					if (((String) keys.get("codiciTipo")).equalsIgnoreCase("ACNP")) {
 						CodiciTipo ct = em.find(CodiciTipo.class, 1);
 						q.setParameter("codiciTipo", ct);
