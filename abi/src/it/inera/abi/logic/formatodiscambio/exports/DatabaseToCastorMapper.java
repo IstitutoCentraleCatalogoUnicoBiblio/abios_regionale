@@ -376,15 +376,16 @@ public class DatabaseToCastorMapper {
 				telefonico.setTipo(TelefonicoTipoType.TELEFONO);
 				telefonico.setNumero(contatto.getValore());
 				telefonico.setPrefisso("");
+				telefonico.setNote(contatto.getNote());
 				log.debug("Aggiunto contatto telefonico: " + telefonico.getNumero() + " (" + telefonico.getTipo().toString() + ")");
 				telefoniC.add(telefonico);
 			}
 			if ("Fax".equalsIgnoreCase(contDescr)) {
-				contatto.getValore();
 				Telefonico telefonico = new Telefonico();
 				telefonico.setTipo(TelefonicoTipoType.FAX);
 				telefonico.setNumero(contatto.getValore());
 				telefonico.setPrefisso("");
+				telefonico.setNote(contatto.getNote());
 				log.debug("Aggiunto contatto telefonico: " + telefonico.getNumero() + " (" + telefonico.getTipo().toString() + ")");
 				telefoniC.add(telefonico);
 			}
@@ -392,6 +393,7 @@ public class DatabaseToCastorMapper {
 				Altro altro = new Altro();
 				altro.setTipo(AltroTipoType.E_MAIL);
 				altro.setValore(contatto.getValore());
+				altro.setNote(contatto.getNote());
 				log.debug("Aggiunto altro contatto: " + altro.getValore() + " (" + altro.getTipo().toString() + ")");
 				altriC.add(altro);
 			}
@@ -399,6 +401,7 @@ public class DatabaseToCastorMapper {
 				Altro altro = new Altro();
 				altro.setTipo(AltroTipoType.TELEX);
 				altro.setValore(contatto.getValore());
+				altro.setNote(contatto.getNote());
 				log.debug("Aggiunto altro contatto: " + altro.getValore() + " (" + altro.getTipo().toString() + ")");
 				altriC.add(altro);
 			}
@@ -406,6 +409,7 @@ public class DatabaseToCastorMapper {
 				Altro altro = new Altro();
 				altro.setTipo(AltroTipoType.URL);
 				altro.setValore(contatto.getValore());
+				altro.setNote(contatto.getNote());
 				log.debug("Aggiunto altro contatto: " + altro.getValore() + " (" + altro.getTipo().toString() + ")");
 				altriC.add(altro);
 			}

@@ -334,6 +334,7 @@ public class ImporterImpl implements Importer {
 					if (contattiTipo != null) {
 						Contatti temp = new Contatti();
 						temp.setValore(t.getPrefisso() + " " +  t.getNumero());
+						temp.setNote(t.getNote());
 						temp.setContattiTipo(contattiTipo);
 						temp.setBiblioteca(bibliotecaDb);
 						biblioDao.saveChild(temp);
@@ -732,25 +733,27 @@ public class ImporterImpl implements Importer {
 						}
 					}
 
-					AccessoModalita accessoModalita = (AccessoModalita) dynaTabDao.searchRecord(AccessoModalita.class, ma[j]);
+					if ((ma[j] != null) && (ma[j].trim().length() > 0)) {
+						String modacc = ma[j];
+						AccessoModalita accessoModalita = (AccessoModalita) dynaTabDao.searchRecord(AccessoModalita.class, modacc);
 
-					if (accessoModalita != null) {
-						if (!bibliotecaDb.getAccessoModalitas().contains(accessoModalita)) {
-							bibliotecaDb.getAccessoModalitas().add(accessoModalita);
-							log.debug("Inserita CONDIZIONE DI ACCESSO: " + ma[j]);	
+						if (accessoModalita != null) {
+							if (!bibliotecaDb.getAccessoModalitas().contains(accessoModalita)) {
+								bibliotecaDb.getAccessoModalitas().add(accessoModalita);
+								log.debug("Inserita CONDIZIONE DI ACCESSO: " + modacc);
+
+							} else {
+								String msg = "Accesso Modalita duplicato: " + modacc;
+								reportImport.addWarn(msg);
+								log.warn(msg);
+							}
 
 						} else {
-							String msg = "Accesso Modalita duplicato: " + ma[j];
+							String msg = "Condizione di accesso non trovata: " + modacc;
 							reportImport.addWarn(msg);
 							log.warn(msg);
 						}
-
-					} else {
-						String msg = "Condizione di accesso non trovata: " + ma[j];
-						reportImport.addWarn(msg);
-						log.warn(msg);
 					}
-
 				}
 			}
 		}
@@ -1262,7 +1265,7 @@ public class ImporterImpl implements Importer {
 		if (biblioteca.getServizi() != null && biblioteca.getServizi().getInformazioniBibliografiche() != null) {
 			if (biblioteca.getServizi().getInformazioniBibliografiche().getAttivo() == SiNoType.S) {
 				bibliotecaDb.setAttivoInformazioniBibliografiche(true);
-				log.debug("AttivoInformazioniBibliografiche(: " + true);
+				log.debug("AttivoInformazioniBibliografiche: " + true);
 
 				/* Servizio in sede */
 				if (biblioteca.getServizi().getInformazioniBibliografiche().getServizioInterno() != null 
@@ -1311,12 +1314,19 @@ public class ImporterImpl implements Importer {
 
 				} else {
 					bibliotecaDb.setGestisceServizioBibliograficoEsterno(null);
-					biblioDao.removeModalitaAccessoFromBiblio(bibliotecaDb);
+					if (bibliotecaDb.getServiziInformazioniBibliograficheModalitas() != null 
+							&& bibliotecaDb.getServiziInformazioniBibliograficheModalitas().size() > 0) {
+						bibliotecaDb.getServiziInformazioniBibliograficheModalitas().clear();
+						log.debug("Cancellati SERVIZI ESTERNI...");
+
+					} else {
+						bibliotecaDb.setServiziInformazioniBibliograficheModalitas(new ArrayList<ServiziInformazioniBibliograficheModalita>());
+					}
 				}
 
 			} else if (biblioteca.getServizi().getInformazioniBibliografiche().getAttivo() == SiNoType.N) {
 				bibliotecaDb.setAttivoInformazioniBibliografiche(false);
-				log.debug("AttivoInformazioniBibliografiche(: " + false);
+				log.debug("AttivoInformazioniBibliografiche: " + false);
 
 				/* Servizio in sede */
 				bibliotecaDb.setGestisceServizioBibliograficoInterno(false);
