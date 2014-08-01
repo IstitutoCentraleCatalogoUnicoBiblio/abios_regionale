@@ -589,4 +589,7 @@ public class GoogleGeoLocalizePanel extends Dialog {
 		this.codiceCitta = codiceCitta;
 	}
 
+	public void setModified(Boolean modified) {
+		this.modified = modified;
+	}
 }

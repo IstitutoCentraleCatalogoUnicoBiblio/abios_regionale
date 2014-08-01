@@ -823,6 +823,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 									if (latField.getValue() != null) latField.setOriginalValue(latField.getValue().doubleValue());
 									if (lngField.getValue() != null) lngField.setOriginalValue(lngField.getValue().doubleValue());
 									setBlackLabelsFormIndirizzo();
+									g.setModified(true);
 									fireReloadBiblioDataEvent();
 								}
 								
@@ -849,6 +850,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 			public void componentSelected(ButtonEvent ce) {
 				formIndirizzo.reset();
 				setBlackLabelsFormIndirizzo();
+				g.setModified(false);
 			}
 		});
 
@@ -1424,13 +1426,11 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 			frazioneField.setValue(biblioteca.getFrazione());
 			frazioneField.setOriginalValue(biblioteca.getFrazione());
 			if (biblioteca.getCap() != null) {
-				if (biblioteca.getCap() != null) {
-					capField.setValue(biblioteca.getCap());
-					capField.setOriginalValue(biblioteca.getCap());
-				}else{
-					capField.setValue(null);
-					capField.setOriginalValue(null);
-				}
+				capField.setValue(biblioteca.getCap());
+				capField.setOriginalValue(biblioteca.getCap());
+			} else {
+				capField.setValue(null);
+				capField.setOriginalValue(null);
 			}
 			comuneField.setValue(biblioteca.getComune());
 			comuneField.setOriginalValue(biblioteca.getComune());
