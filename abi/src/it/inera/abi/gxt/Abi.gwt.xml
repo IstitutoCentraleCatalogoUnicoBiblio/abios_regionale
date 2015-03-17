@@ -13,7 +13,7 @@
   <inherits name='com.google.gwt.user.theme.standard.Standard'/>
   <!-- Include Google Maps and Inherit the Wrapper Module -->
   <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=3" />
-  <inherits name="com.google.gwt.maps.Apis_Google_Maps" />
+  <inherits name="com.google.gwt.maps.Maps" />
   <!-- GOOGLE MAPS END -->
   
 </module>

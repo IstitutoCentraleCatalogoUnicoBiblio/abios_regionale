@@ -28,6 +28,8 @@ import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.util.Theme;
+import com.google.gwt.ajaxloader.client.AjaxLoader;
+import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.LoadApi;
@@ -53,12 +55,58 @@ public class Abi implements EntryPoint {
 	public static final String REPORTSERVICE = "reportservice"; 
 
 	public void onModuleLoad() {
-		loadMapApi();
+		// ticket mantis 0005559: commentata la chiamata loadMapApi e caricate le api di google tramite ajaxloader
+//		loadMapApi();
+		AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
+		options.setOtherParms("sensor=false");
+		Runnable callback = new Runnable() {
+			public void run() {
+				GXT.setDefaultTheme(Theme.GRAY, true);
+
+				BibliotecheServiceAsync bibliotecheServiceAsync = (BibliotecheServiceAsync) GWT.create(BibliotecheService.class);
+
+				TabelleDinamicheServiceAsync tabelleDinamicheService = (TabelleDinamicheServiceAsync) GWT.create(TabelleDinamicheService.class);
+				UtentiServiceAsync utentiService = (UtentiServiceAsync) GWT.create(UtentiService.class);
+				LocationServiceAsync locationService =(LocationServiceAsync) GWT.create(LocationService.class);
+				FormatoScambioServiceAsync formatoScambio = (FormatoScambioServiceAsync) GWT.create(FormatoScambioService.class);
+				AuthServiceAsync authService = GWT.create(AuthService.class); // autenticazione
+				/* Report */
+				ReportServiceAsync reportService = (ReportServiceAsync) GWT.create(ReportService.class);
+
+
+				Registry.register(BIBLIOTECHE_SERVICE, bibliotecheServiceAsync);
+				Registry.register(TABELLE_DINAMICHE_SERVICE, tabelleDinamicheService);
+				Registry.register(UTENTI_SERVICE, utentiService); 
+				Registry.register(LOCATION_SERVICE, locationService); 
+				Registry.register(FORMATO_SCAMBIO, formatoScambio); 
+				Registry.register(AUTHSERVICE, authService); // autenticazione
+				/* Report */
+				Registry.register(REPORTSERVICE, reportService);
+
+				Dispatcher dispatcher = Dispatcher.get();
+				dispatcher.addController(new AppController());
+				dispatcher.addController(new GestioneBibliotecheController());
+				dispatcher.addController(new GestioneUtentiController());
+				dispatcher.addController(new TabelleDinamicheController());
+				dispatcher.addController(new StatisticheController());
+				dispatcher.addController(new GestioneReportController());
+				dispatcher.addController(new FormatoScambioController());
+
+
+				//dispatcher.dispatch(AppEvents.Init);
+				dispatcher.dispatch(AppEvents.AuthRequest); // invio al caricamento dei dati utente dopo autenticazione
+
+				GXT.hideLoadingPanel("loading");
+
+			}
+		};
+
+		AjaxLoader.loadApi("maps", "3", callback, options);
 	}
 
 
 	private void loadMapApi() {
-		boolean sensor = true;
+		boolean sensor = false;
 
 		// load all the libs for use in the maps
 		ArrayList<LoadLibrary> loadLibraries = new ArrayList<LoadApi.LoadLibrary>();

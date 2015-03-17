@@ -10,10 +10,10 @@ import it.inera.abi.gxt.client.mvc.model.ProvinceModel;
 import it.inera.abi.gxt.client.mvc.model.VoceUnicaModel;
 import it.inera.abi.gxt.client.mvc.view.NumberFieldCustom;
 import it.inera.abi.gxt.client.mvc.view.TextFieldCustom;
-import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.GoogleGeoLocalizePanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaContattiPanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaDenominazioniAlternativePanel;
 import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.ListaDenominazioniPrecedentiPanel;
+import it.inera.abi.gxt.client.mvc.view.center.biblioteche.widget.NewGoogleGeoLocalizePanel;
 import it.inera.abi.gxt.client.services.BibliotecheServiceAsync;
 import it.inera.abi.gxt.client.services.LocationServiceAsync;
 import it.inera.abi.gxt.client.services.TabelleDinamicheServiceAsync;
@@ -86,7 +86,8 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 	private TextField<String> statoField; 
 
 	/*Geolocalizzazione variabili*/
-	private	GoogleGeoLocalizePanel g;
+//	private	GoogleGeoLocalizePanel g;
+	private	NewGoogleGeoLocalizePanel googleGeoLocalizePanel;
 	private NumberField latField; 
 	private NumberField lngField;
 	/*Codici variabili*/
@@ -506,7 +507,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		geolocalizzazione.setStyleAttribute("fontSize", "14px");
 
 		/* GEOLOCALIZZAZIONE PARAMETRI X-Y */
-		final	LayoutContainer geoxy = new LayoutContainer(new TableLayout(5));
+		final LayoutContainer geoxy = new LayoutContainer(new TableLayout(5));
 
 		TableData geoLatLng = new TableData();
 		geoLatLng.setWidth("5%");
@@ -538,113 +539,117 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		lngField.setEnabled(false);
 		lngField.setAllowBlank(false);
 		geoxy.add(lngField, geoField);
-		//GoogleGeoLocalize
 
 		geolocalizza = new Button("Geolocalizza");		
 		Utils.setStylesButton(geolocalizza);
-		g = new GoogleGeoLocalizePanel();
-		g.layout();
-		g.hide();
+		
+		googleGeoLocalizePanel = new NewGoogleGeoLocalizePanel();
+		googleGeoLocalizePanel.hide();
+		
 		geolocalizza.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
+			
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				// Utilizzo i valori del form dell'indirizzo per la visualizzazione della mappa
-				g.setViaPiazza(biblioteca.getIndirizzo() != null ? biblioteca.getIndirizzo() : "");
-				g.setLocalita(biblioteca.getFrazione() != null ? biblioteca.getFrazione() : "");
-				g.setCap(biblioteca.getCap() != null ? biblioteca.getCap() : "");
-				g.setCitta(biblioteca.getComune() != null ? biblioteca.getComune().getDenominazione() : "");
-				g.setStato(biblioteca.getStato() != null ? biblioteca.getStato() : "");
+				googleGeoLocalizePanel.setViaPiazza(biblioteca.getIndirizzo() != null ? biblioteca.getIndirizzo() : "");
+				googleGeoLocalizePanel.setLocalita(biblioteca.getFrazione() != null ? biblioteca.getFrazione() : "");
+				googleGeoLocalizePanel.setCap(biblioteca.getCap() != null ? biblioteca.getCap() : "");
+				googleGeoLocalizePanel.setCitta(biblioteca.getComune() != null ? biblioteca.getComune().getDenominazione() : "");
+				googleGeoLocalizePanel.setStato(biblioteca.getStato() != null ? biblioteca.getStato() : "");
+				
 				if (biblioteca.getGeoX() != null) {
-					g.setLatitudine(biblioteca.getGeoX());
+					googleGeoLocalizePanel.setLatitudine(biblioteca.getGeoX());
 					
-				} else g.setLatitudine(null);
+				} else {
+					googleGeoLocalizePanel.setLatitudine(null);
+				}
 
 				if (biblioteca.getGeoY() != null) {
-					g.setLongitudine(biblioteca.getGeoY());
+					googleGeoLocalizePanel.setLongitudine(biblioteca.getGeoY());
 					
-				} else g.setLongitudine(null);
+				} else {
+					googleGeoLocalizePanel.setLongitudine(null);
+				}
 				
-				g.show();g.hide();g.show();
-				
+				googleGeoLocalizePanel.show();
 			}
 		});
 		
-		g.addListener(Events.Update, new Listener<BaseEvent>() {
+		googleGeoLocalizePanel.addListener(Events.Update, new Listener<BaseEvent>() {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
 				// Via / Piazza 
 				if (viaPiazzaNCivicoField.getValue() == null) {
-					if (g.getViaPiazza() != null) {
-						viaPiazzaNCivicoField.setValue(g.getViaPiazza());
+					if (googleGeoLocalizePanel.getViaPiazza() != null) {
+						viaPiazzaNCivicoField.setValue(googleGeoLocalizePanel.getViaPiazza());
 						Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
 					}
 					
 				} else {
-					if (g.getViaPiazza() != null) {
-						if (!(viaPiazzaNCivicoField.getValue().equalsIgnoreCase(g.getViaPiazza()))) {
-							viaPiazzaNCivicoField.setValue(g.getViaPiazza());
+					if (googleGeoLocalizePanel.getViaPiazza() != null) {
+						if (!(viaPiazzaNCivicoField.getValue().equalsIgnoreCase(googleGeoLocalizePanel.getViaPiazza()))) {
+							viaPiazzaNCivicoField.setValue(googleGeoLocalizePanel.getViaPiazza());
 							Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
 						}
 						
 					} else {
-						viaPiazzaNCivicoField.setValue(g.getViaPiazza());
+						viaPiazzaNCivicoField.setValue(googleGeoLocalizePanel.getViaPiazza());
 						Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
 					}
 				}
 				
 				// Frazione 
 				if (frazioneField.getValue() == null) {
-					if (g.getLocalita() != null) {
-						frazioneField.setValue(g.getLocalita());
+					if (googleGeoLocalizePanel.getLocalita() != null) {
+						frazioneField.setValue(googleGeoLocalizePanel.getLocalita());
 						Utils.setFontColorStyleRed(frazioneLabel);
 					}
 					
 				} else {
-					if (g.getLocalita() != null) {
-						if (!(frazioneField.getValue().equalsIgnoreCase(g.getLocalita()))) {
-							frazioneField.setValue(g.getLocalita());
+					if (googleGeoLocalizePanel.getLocalita() != null) {
+						if (!(frazioneField.getValue().equalsIgnoreCase(googleGeoLocalizePanel.getLocalita()))) {
+							frazioneField.setValue(googleGeoLocalizePanel.getLocalita());
 							Utils.setFontColorStyleRed(frazioneLabel);
 						}
 						
 					} else {
-						frazioneField.setValue(g.getLocalita());
+						frazioneField.setValue(googleGeoLocalizePanel.getLocalita());
 						Utils.setFontColorStyleRed(frazioneLabel);
 					}						
 				}
 				
 				// CAP 
 				if (capField.getValue() == null) {
-					if (g.getCap() != null) {
-						capField.setValue(g.getCap());
+					if (googleGeoLocalizePanel.getCap() != null) {
+						capField.setValue(googleGeoLocalizePanel.getCap());
 						Utils.setFontColorStyleRed(capLabel);
 					}
 					
 				} else {
-					if (g.getCap() != null) {
-						if (!(capField.getValue().equalsIgnoreCase(g.getCap()))) {
-							capField.setValue(g.getCap());
+					if (googleGeoLocalizePanel.getCap() != null) {
+						if (!(capField.getValue().equalsIgnoreCase(googleGeoLocalizePanel.getCap()))) {
+							capField.setValue(googleGeoLocalizePanel.getCap());
 							Utils.setFontColorStyleRed(capLabel);
 						}
 						
 					} else {
-						capField.setValue(g.getCap());
+						capField.setValue(googleGeoLocalizePanel.getCap());
 						Utils.setFontColorStyleRed(capLabel);
 					}
 				}
 				
 				// LATITUDINE
 				if (latField.getValue() == null) {
-					if (g.getLatitudine() != null) {
-						latField.setValue(g.getLatitudine());
+					if (googleGeoLocalizePanel.getLatitudine() != null) {
+						latField.setValue(googleGeoLocalizePanel.getLatitudine());
 						Utils.setFontColorStyleRed(latLabel);
 					}
 					
 				} else {
-					if (g.getLatitudine() != null) {
-						if (latField.getValue().doubleValue() != g.getLatitudine().doubleValue()) {
-							latField.setValue(g.getLatitudine());
+					if (googleGeoLocalizePanel.getLatitudine() != null) {
+						if (latField.getValue().doubleValue() != googleGeoLocalizePanel.getLatitudine().doubleValue()) {
+							latField.setValue(googleGeoLocalizePanel.getLatitudine());
 							Utils.setFontColorStyleRed(latLabel);
 						}
 					}
@@ -652,15 +657,15 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 				
 				// LONGITUDINE
 				if (lngField.getValue() == null) {
-					if (g.getLongitudine() != null) {
-						lngField.setValue(g.getLongitudine());
+					if (googleGeoLocalizePanel.getLongitudine() != null) {
+						lngField.setValue(googleGeoLocalizePanel.getLongitudine());
 						Utils.setFontColorStyleRed(lngLabel);
 					}
 					
 				} else {
-					if (g.getLongitudine() != null) {
-						if (lngField.getValue().doubleValue() != g.getLongitudine().doubleValue()) {
-							lngField.setValue(g.getLongitudine());
+					if (googleGeoLocalizePanel.getLongitudine() != null) {
+						if (lngField.getValue().doubleValue() != googleGeoLocalizePanel.getLongitudine().doubleValue()) {
+							lngField.setValue(googleGeoLocalizePanel.getLongitudine());
 							Utils.setFontColorStyleRed(lngLabel);
 						}
 					}
@@ -671,126 +676,11 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 		});			
 		
 		geoxy.add(geolocalizza, geoField);
-		// DISABILITATO PER DEBUG: senza rete non funziona
-		/*try {
-			g = new GoogleGeoLocalizePanel();
-			g.hide();
-			geolocalizza.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
-				@Override
-				public void componentSelected(ButtonEvent ce) {
-
-					//		Utilizzo i valori del form dell'indirizzo per la visualizzazione della mappa
-					g.setViaPiazza(biblioteca.getIndirizzo()!=null?biblioteca.getIndirizzo():"");
-					g.setLocalita(biblioteca.getFrazione()!=null?biblioteca.getFrazione():"");
-					g.setCap(biblioteca.getCap()!=null?biblioteca.getCap():"");
-					g.setCitta(biblioteca.getComune()!=null?biblioteca.getComune().getDenominazione():"");
-					g.setStato(biblioteca.getStato()!=null?biblioteca.getStato():"");
-					if (biblioteca.getGeoX() != null) {
-						g.setLatitudine(biblioteca.getGeoX());
-						
-					} else {
-						g.setLatitudine(null);
-					}
-					if (biblioteca.getGeoY() != null) {
-						g.setLongitudine(biblioteca.getGeoY());
-						
-					} else {
-						g.setLongitudine(null);
-					}
-
-					g.show();
-				}
-			});
-			
-			g.addListener(Events.Update, new Listener<BaseEvent>() {
-
-				@Override
-				public void handleEvent(BaseEvent be) {
-					// Via / Piazza 
-					if (viaPiazzaNCivicoField.getValue() == null) {
-						if (g.getViaPiazza() != null) {
-							viaPiazzaNCivicoField.setValue(g.getViaPiazza());
-							Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
-						}
-						
-					} else {
-						if (g.getViaPiazza() != null) {
-							if (!(viaPiazzaNCivicoField.getValue().equalsIgnoreCase(g.getViaPiazza()))) {
-								viaPiazzaNCivicoField.setValue(g.getViaPiazza());
-								Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
-							}
-							
-						} else {
-							viaPiazzaNCivicoField.setValue(g.getViaPiazza());
-							Utils.setFontColorStyleRed(viaPiazzaNCivicoLabel);
-						}
-					}
-					
-					// Frazione 
-					if (frazioneField.getValue() == null) {
-						if (g.getLocalita() != null) {
-							frazioneField.setValue(g.getLocalita());
-							Utils.setFontColorStyleRed(frazioneLabel);
-						}
-						
-					} else {
-						if (g.getLocalita() != null) {
-							if (!(frazioneField.getValue().equalsIgnoreCase(g.getLocalita()))) {
-								frazioneField.setValue(g.getLocalita());
-								Utils.setFontColorStyleRed(frazioneLabel);
-							}
-							
-						} else {
-							frazioneField.setValue(g.getLocalita());
-							Utils.setFontColorStyleRed(frazioneLabel);
-						}						
-					}
-					
-					// CAP 
-					if (capField.getValue() == null) {
-						if (g.getCap() != null) {
-							capField.setValue(g.getCap());
-							Utils.setFontColorStyleRed(capLabel);
-						}
-						
-					} else {
-						if (g.getCap() != null) {
-							if (!(capField.getValue().equalsIgnoreCase(g.getCap()))) {
-								capField.setValue(g.getCap());
-								Utils.setFontColorStyleRed(capLabel);
-							}
-							
-						} else {
-							capField.setValue(g.getCap());
-							Utils.setFontColorStyleRed(capLabel);
-						}
-					}
-					
-					latField.setValue(g.getLatitudine());
-					lngField.setValue(g.getLongitudine());
-					Utils.setFontColorStyleRed(latLabel);
-					Utils.setFontColorStyleRed(lngLabel);
-					geoxy.layout();
-				}
-			});
-
-			geoxy.add(geolocalizza, geoField);
-		} catch (Throwable th) {
-			GWT.log(th.toString());
-			geoxy.add(new Label("Geolocalizzatore non disponibile."));
-		}*/
-
-		/* FINE---GEOLOCALIZZAZIONE PARAMETRI X-Y */
-		/*
-		 * Se la variabile biblioteca è diverso da null, setto i valori delle
-		 * field create
-		 */
-
-
+		
 		indirizzoTable.add(geolocalizzazione, indirizzoColonna1);
 		indirizzoTable.add(geoxy, indirizzoColonna2);
-
+		
 		aggiornaIndirizzo = new Button("Aggiorna");
 		Utils.setStylesButton(aggiornaIndirizzo);
 		aggiornaIndirizzo.addSelectionListener(new SelectionListener<ButtonEvent>() {
@@ -823,7 +713,6 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 									if (latField.getValue() != null) latField.setOriginalValue(latField.getValue().doubleValue());
 									if (lngField.getValue() != null) lngField.setOriginalValue(lngField.getValue().doubleValue());
 									setBlackLabelsFormIndirizzo();
-									g.setModified(true);
 									fireReloadBiblioDataEvent();
 								}
 								
@@ -850,7 +739,6 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 			public void componentSelected(ButtonEvent ce) {
 				formIndirizzo.reset();
 				setBlackLabelsFormIndirizzo();
-				g.setModified(false);
 			}
 		});
 
@@ -1451,7 +1339,7 @@ public class DatiAnagraficiFormPanel extends ContentPanelForTabItem {
 				
 			} else {
 				latField.setValue(null);
-				latField.setValue(null);
+				latField.setOriginalValue(null);
 			}
 			
 			if (biblioteca.getGeoY() != null) {
