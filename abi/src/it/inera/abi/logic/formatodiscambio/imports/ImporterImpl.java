@@ -464,64 +464,67 @@ public class ImporterImpl implements Importer {
 		}
 
 		// Codice fiscale e partita IVA
-		if (biblioteca.getAmministrativa().getCodiceFiscale() != null) {
-			String codiceFiscale = biblioteca.getAmministrativa().getCodiceFiscale();
-			bibliotecaDb.setCodiceFiscale(codiceFiscale);
-			log.debug("Modifica CODICE FISCALE: " + codiceFiscale);
-		}
-		if (biblioteca.getAmministrativa().getPartitaIVA() != null) {
-			String partitaIva = biblioteca.getAmministrativa().getPartitaIVA();
-			bibliotecaDb.setPartitaIva(partitaIva);
-			log.debug("Modifica PARTITA IVA: " + partitaIva);
-		}
+		if (biblioteca.getAmministrativa() != null) {
+			if (biblioteca.getAmministrativa().getCodiceFiscale() != null) {
+				String codiceFiscale = biblioteca.getAmministrativa().getCodiceFiscale();
+				bibliotecaDb.setCodiceFiscale(codiceFiscale);
+				log.debug("Modifica CODICE FISCALE: " + codiceFiscale);
+			}
+			if (biblioteca.getAmministrativa().getPartitaIVA() != null) {
+				String partitaIva = biblioteca.getAmministrativa().getPartitaIVA();
+				bibliotecaDb.setPartitaIva(partitaIva);
+				log.debug("Modifica PARTITA IVA: " + partitaIva);
+			}
+			
+			//TIPOLOGIA AMMINISTRATIVA E FUNZIONALE
+			//Autonomia amministrativa e struttura gerarchica
+			if (biblioteca.getAmministrativa().getAutonoma() != null) {
+				if (biblioteca.getAmministrativa().getAutonoma() == SiNoType.S) {
+					bibliotecaDb.setAutonomiaAmministrativa(true);
 
+				} else {
+					bibliotecaDb.setAutonomiaAmministrativa(false);
+				}
+				log.debug("Modificata AUTONOMIA AMMINISTRATIVA..." + bibliotecaDb.getAutonomiaAmministrativa());
+			}
+		}
 
 		//Indirizzo
-		if (biblioteca.getAnagrafica().getIndirizzo().getVia() != null) {
-			String via = biblioteca.getAnagrafica().getIndirizzo().getVia();
-			bibliotecaDb.setIndirizzo(via);
-			log.debug("Modifica via: " + via);
-		}
-		if (biblioteca.getAnagrafica().getIndirizzo().getCap() != null) {
-			String cap = biblioteca.getAnagrafica().getIndirizzo().getCap();
-			bibliotecaDb.setCap(cap);
-			log.debug("Modifica cap: " + cap);
-		}
-		if (biblioteca.getAnagrafica().getIndirizzo().getFrazione()!= null) {
-			String frazione = biblioteca.getAnagrafica().getIndirizzo().getFrazione();
-			bibliotecaDb.setFrazione(frazione);
-			log.debug("Modifica frazione: " + frazione);
-		}
-
-		// Coordinate
-		if (biblioteca.getAnagrafica().getIndirizzo().getCoordinate() != null) {
-			Double latitudine = Double.valueOf(biblioteca.getAnagrafica().getIndirizzo().getCoordinate().getLatitudine());
-			Double longitudine = Double.valueOf(biblioteca.getAnagrafica().getIndirizzo().getCoordinate().getLongitudine());
-
-			if (bibliotecaDb.getGeolocalizzazione() != null) {
-				bibliotecaDb.getGeolocalizzazione().setLatitudine(latitudine);
-				bibliotecaDb.getGeolocalizzazione().setLongitudine(longitudine);
-
-			} else {
-				Geolocalizzazione coordinate = new Geolocalizzazione();
-				coordinate.setLatitudine(latitudine);
-				coordinate.setLongitudine(longitudine);
-				coordinate.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
-				bibliotecaDb.setGeolocalizzazione(coordinate);
-				biblioDao.saveChild(coordinate);
+		if (biblioteca.getAnagrafica().getIndirizzo() != null) {
+			if (biblioteca.getAnagrafica().getIndirizzo().getVia() != null) {
+				String via = biblioteca.getAnagrafica().getIndirizzo().getVia();
+				bibliotecaDb.setIndirizzo(via);
+				log.debug("Modifica via: " + via);
 			}
-		}
-
-		//TIPOLOGIA AMMINISTRATIVA E FUNZIONALE
-		//Autonomia amministrativa e struttura gerarchica
-		if (biblioteca.getAmministrativa().getAutonoma() != null) {
-			if (biblioteca.getAmministrativa().getAutonoma() == SiNoType.S) {
-				bibliotecaDb.setAutonomiaAmministrativa(true);
-
-			} else {
-				bibliotecaDb.setAutonomiaAmministrativa(false);
+			if (biblioteca.getAnagrafica().getIndirizzo().getCap() != null) {
+				String cap = biblioteca.getAnagrafica().getIndirizzo().getCap();
+				bibliotecaDb.setCap(cap);
+				log.debug("Modifica cap: " + cap);
 			}
-			log.debug("Modificata AUTONOMIA AMMINISTRATIVA..." + bibliotecaDb.getAutonomiaAmministrativa());
+			if (biblioteca.getAnagrafica().getIndirizzo().getFrazione()!= null) {
+				String frazione = biblioteca.getAnagrafica().getIndirizzo().getFrazione();
+				bibliotecaDb.setFrazione(frazione);
+				log.debug("Modifica frazione: " + frazione);
+			}
+
+			// Coordinate
+			if (biblioteca.getAnagrafica().getIndirizzo().getCoordinate() != null) {
+				Double latitudine = Double.valueOf(biblioteca.getAnagrafica().getIndirizzo().getCoordinate().getLatitudine());
+				Double longitudine = Double.valueOf(biblioteca.getAnagrafica().getIndirizzo().getCoordinate().getLongitudine());
+
+				if (bibliotecaDb.getGeolocalizzazione() != null) {
+					bibliotecaDb.getGeolocalizzazione().setLatitudine(latitudine);
+					bibliotecaDb.getGeolocalizzazione().setLongitudine(longitudine);
+
+				} else {
+					Geolocalizzazione coordinate = new Geolocalizzazione();
+					coordinate.setLatitudine(latitudine);
+					coordinate.setLongitudine(longitudine);
+					coordinate.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
+					bibliotecaDb.setGeolocalizzazione(coordinate);
+					biblioDao.saveChild(coordinate);
+				}
+			}
 		}
 
 		//Data Fondazione
@@ -845,7 +848,7 @@ public class ImporterImpl implements Importer {
 
 		// UTENTI
 		// MODIFICATO IN SEGUITO AL TICKET MANTIS : 4499 -> INIZIO
-		if (biblioteca.getAmministrativa().getUtenti() != null) {
+		if (biblioteca.getAmministrativa() != null && biblioteca.getAmministrativa().getUtenti() != null) {
 			// Inserito controllo se >= 0 per poter azzerare precedenti valori (modifica richiesta in seguito al ticket 4499 di cui sopra)
 			if (biblioteca.getAmministrativa().getUtenti().getUltimoAnno() >= 0) {
 				int ultimoAnno = (int) biblioteca.getAmministrativa().getUtenti().getUltimoAnno();
@@ -2238,7 +2241,7 @@ public class ImporterImpl implements Importer {
 		}
 
 		/* DEPOSITI LEGALI */
-		if (biblioteca.getAmministrativa().getDepositiLegali() != null) {
+		if (biblioteca.getAmministrativa() != null && biblioteca.getAmministrativa().getDepositiLegali() != null) {
 			if (biblioteca.getAmministrativa().getDepositiLegali().getAttivo() == SiNoType.S) {
 				bibliotecaDb.setAttivoDepositoLegale(true);
 				log.debug("AttivoDepositoLegale: " + true);
@@ -2286,7 +2289,7 @@ public class ImporterImpl implements Importer {
 		}
 
 		// PERSONALE
-		if (biblioteca.getAmministrativa().getPersonale() != null) {
+		if (biblioteca.getAmministrativa() != null && biblioteca.getAmministrativa().getPersonale() != null) {
 			bibliotecaDb.setPersonaleEsterno((int) biblioteca.getAmministrativa().getPersonale().getEsterno());
 			bibliotecaDb.setPersonalePartTime((int) biblioteca.getAmministrativa().getPersonale().getPartTime());
 			bibliotecaDb.setPersonaleTemporaneo((int) biblioteca.getAmministrativa().getPersonale().getTemporaneo());
@@ -2610,17 +2613,24 @@ public class ImporterImpl implements Importer {
 			return true;
 			
 		} else {
-			/* Non essendo specificato un ente, viene assegnato quello di default (il primo della lista) */
-			Ente enteJpa = enteDao.retrieveDefaultEnte();
-			if (enteJpa != null) {
-				bibliotecaDb.setEnte(enteJpa);
+			
+			/** r.eschini ticket:0005387 controllo se esiste un ente sul database già associato a questa biblioteca **/
+			if (bibliotecaDb != null && bibliotecaDb.getEnte() != null && bibliotecaDb.getEnte().getIdEnte() != null) {
+				log.info("L'ente non è passato nel formato di scambio ma è presente sul database quindi non viene sovrascritto");
 				return true;
-
 			} else {
-				String msg = "Impossibile effettuare l'import della biblioteca poichè il valore Ente è nullo";
-				reportImport.addError(msg);
-				log.warn(msg);
-				return false;
+				/* Non essendo specificato un ente, viene assegnato quello di default (il primo della lista) */
+				Ente enteJpa = enteDao.retrieveDefaultEnte();
+				if (enteJpa != null) {
+					bibliotecaDb.setEnte(enteJpa);
+					return true;
+	
+				} else {
+					String msg = "Impossibile effettuare l'import della biblioteca poichè il valore Ente è nullo";
+					reportImport.addError(msg);
+					log.warn(msg);
+					return false;
+				}
 			}
 		}
 	}
