@@ -1553,6 +1553,10 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 		return sb.toString();
 	}
 
+	/*-----------VARIABILI AUTOWIRED---------*/
+	private @Value("${email.checkpassword.address}") String emailFrom;
+	private @Value("${email.checkpassword.name}") String nameFrom;
+	
 	/**
 	 * @param idBiblioteca
 	 * @param messaggio
@@ -1570,7 +1574,7 @@ public class AbiBiblioLogicImpl implements AbiBiblioLogic {
 			String subject = "Revisione biblioteca ".concat(Utility.buildIsil(biblioteca)).concat(".");
 			//CLICLO LA LISTA DEGLI UTENTI REVISORI
 			for(Utenti utente:utentiDao.getUsersByRole(5)){
-				sendEmail(subject, revisioneMessage, utente.getEmail(), username, "anagrafe@iccu.isbn.it", "ANAGRAFE BIBLIOTECHE ITALIANE");
+				sendEmail(subject, revisioneMessage, utente.getEmail(), username, emailFrom, nameFrom);
 			}
 
 
