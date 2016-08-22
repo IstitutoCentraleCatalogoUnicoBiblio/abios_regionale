@@ -726,8 +726,8 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 
 	@Override
 	public void addDeweyTabelleDinamiche(SpecializzazioneModel modelToSave,	 boolean modifica) throws DuplicatedEntryClientSideException {
-		String codiceDewey=modelToSave.getDewey();
-		String descrizione=modelToSave.getDecrizione();
+		String codiceDewey = modelToSave.getDewey().replace(".", "");
+		String descrizione = modelToSave.getDecrizione();
 		try {
 			abiTabelleDinamicheLogic.addDeweyTabelleDinamiche(codiceDewey, descrizione, modifica);
 		} catch (DuplicateEntryException e) {
@@ -739,11 +739,11 @@ public class TabelleDinamicheServiceImpl extends AutoinjectingRemoteServiceServl
 
 	@Override
 	public void removeDeweyTabelleDinamiche(String idr_removeRecord) {
-		if(idr_removeRecord.length()>3){
-			String tmpStr = rimuoviPuntoDalCodiceDewey(idr_removeRecord);
-			abiTabelleDinamicheLogic.removeDeweyTabelleDinamiche(tmpStr);
-		}else
-			abiTabelleDinamicheLogic.removeDeweyTabelleDinamiche(idr_removeRecord);
+//		if(idr_removeRecord.length()>3){
+//			String tmpStr = rimuoviPuntoDalCodiceDewey(idr_removeRecord);
+//			abiTabelleDinamicheLogic.removeDeweyTabelleDinamiche(tmpStr);
+//		}else
+			abiTabelleDinamicheLogic.removeDeweyTabelleDinamiche(idr_removeRecord.replace(".", ""));
 
 
 

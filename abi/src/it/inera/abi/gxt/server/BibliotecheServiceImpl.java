@@ -3066,7 +3066,7 @@ public class BibliotecheServiceImpl extends AutoinjectingRemoteServiceServlet im
 			photoModel.setIdBiblioteca(photoEntry.getBiblioteca().getIdBiblioteca());
 			photoModel.setIdPhoto(photoEntry.getIdPhoto());
 			photoModel.setCaption(photoEntry.getCaption());
-			if (StringUtils.contains(photoEntry.getUri(), "http://")) {
+			if (StringUtils.contains(photoEntry.getUri(), "http://") || StringUtils.contains(photoEntry.getUri(), "https://")) {
 				/* Foto remota */
 				photoModel.setIsRemote(Boolean.TRUE);
 				photoModel.setUri(photoEntry.getUri());

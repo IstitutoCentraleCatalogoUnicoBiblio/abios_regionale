@@ -564,7 +564,7 @@ public class DatabaseToCastorMapper {
 			
 			for (Photo phEntry : bibliotecaDb.getPhotos()) {
 				Immagine img = new Immagine();
-				if (phEntry.getUri().contains("http://")) {
+				if (phEntry.getUri().contains("http://") || phEntry.getUri().contains("https://")) {
 					img.setUrl(phEntry.getUri());
 					
 				} else {

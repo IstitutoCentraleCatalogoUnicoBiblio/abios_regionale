@@ -244,7 +244,7 @@ public class PhotoPanel extends ContentPanelForTabItem {
 							String caption = descrFotoField.getValue();
 
 							String uri2 = url.getValue();
-							if (!(uri2.contains("http://"))) {
+							if (!(uri2.contains("http://")) && !(uri2.contains("https://"))) {
 								AbiMessageBox.messageErrorAlertBox("ATTENZIONE: l'url inserita non è corretta.", AbiMessageBox.UPLOAD_TITLE);
 
 							} else {

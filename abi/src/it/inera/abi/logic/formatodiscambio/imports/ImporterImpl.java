@@ -406,6 +406,10 @@ public class ImporterImpl implements Importer {
 
 			if (biblioteca.getAnagrafica().getCodici().getSbn() != null) {
 				String valore = biblioteca.getAnagrafica().getCodici().getSbn();
+				// controllo se la lunghezza è > del limite consentito (5)
+				if (valore.length() > 5) {
+					valore = valore.substring(0, 5);
+				}
 				Codici codice = new Codici();
 				codice.setValore(valore);
 				CodiciTipo codiciTipo = (CodiciTipo) dynaTabDao.searchRecord(CodiciTipo.class, "sbn"); // carico il tipo di codice dal db
@@ -419,6 +423,10 @@ public class ImporterImpl implements Importer {
 
 			if (biblioteca.getAnagrafica().getCodici().getRism() != null) {
 				String valore = biblioteca.getAnagrafica().getCodici().getRism();
+				// controllo se la lunghezza è > del limite consentito (50)
+				if (valore.length() > 50) {
+					valore = valore.substring(0, 50);
+				}
 				Codici codice = new Codici();
 				codice.setValore(valore);
 				CodiciTipo codiciTipo = (CodiciTipo) dynaTabDao.searchRecord(CodiciTipo.class, "rism"); // carico il tipo di codice dal db
@@ -432,6 +440,10 @@ public class ImporterImpl implements Importer {
 
 			if (biblioteca.getAnagrafica().getCodici().getAcnp() != null) {
 				String valore = biblioteca.getAnagrafica().getCodici().getAcnp();
+				// controllo se la lunghezza è > del limite consentito (8)
+				if (valore.length() > 8) {
+					valore = valore.substring(0, 8);
+				}
 				Codici codice = new Codici();
 				codice.setValore(valore);
 				CodiciTipo codiciTipo = (CodiciTipo) dynaTabDao.searchRecord(CodiciTipo.class, "acnp"); // carico il tipo di codice dal db
@@ -445,6 +457,10 @@ public class ImporterImpl implements Importer {
 
 			if (biblioteca.getAnagrafica().getCodici().getCei() != null) {
 				String valore = biblioteca.getAnagrafica().getCodici().getCei();
+				// controllo se la lunghezza è > del limite consentito (20)
+				if (valore.length() > 20) {
+					valore = valore.substring(0, 20);
+				}
 				Codici codice = new Codici();
 				codice.setValore(valore);
 				CodiciTipo codiciTipo = (CodiciTipo) dynaTabDao.searchRecord(CodiciTipo.class, "cei"); // carico il tipo di codice dal db
@@ -458,6 +474,10 @@ public class ImporterImpl implements Importer {
 
 			if (biblioteca.getAnagrafica().getCodici().getCmbs() != null) {
 				String valore = biblioteca.getAnagrafica().getCodici().getCmbs();
+				// controllo se la lunghezza è > del limite consentito (20)
+				if (valore.length() > 20) {
+					valore = valore.substring(0, 20);
+				}
 				Codici codice = new Codici();
 				codice.setValore(valore);
 				CodiciTipo codiciTipo = (CodiciTipo) dynaTabDao.searchRecord(CodiciTipo.class, "cmbs"); // carico il tipo di codice dal db
@@ -1908,7 +1928,7 @@ public class ImporterImpl implements Importer {
 						String tipo = riprods[j].getTipo();
 						RiproduzioniTipo riproduzioniTipo = (RiproduzioniTipo) dynaTabDao.searchRecord(RiproduzioniTipo.class, tipo);
 
-						if (tipo != null) {
+						if (riproduzioniTipo != null) {
 							RiproduzioniPK riproduzioniPK = new RiproduzioniPK();
 							riproduzioniPK.setIdBiblioteca(bibliotecaDb.getIdBiblioteca());
 							riproduzioniPK.setIdRiproduzioniTipo(riproduzioniTipo.getIdRiproduzioniTipo());
