@@ -101,7 +101,9 @@ import it.inera.abi.persistence.TipologiaFunzionale;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
 
@@ -227,8 +229,14 @@ public class ImporterImpl implements Importer {
 			String temp = biblioteca.getAnagrafica().getDataCensimento().getContent();
 			Date formatted = null;
 			try {
-				formatted = DateUtils.parseDate(temp, new String[]{"yyyy"});
-			} catch (ParseException e) {
+				Integer anno = Integer.parseInt(temp);
+				if (anno != null) {
+					Calendar c = GregorianCalendar.getInstance();
+					c.set(anno, 0, 1, 5, 0, 0);
+					formatted = c.getTime();
+				}
+				
+			} catch (NumberFormatException e) {
 				String msg = "Data di censimento non nel formato YYYY:" + temp; 
 				log.error(msg, e);
 				reportImport.addError(msg);
