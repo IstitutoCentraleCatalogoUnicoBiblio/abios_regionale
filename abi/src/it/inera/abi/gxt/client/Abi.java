@@ -58,7 +58,7 @@ public class Abi implements EntryPoint {
 		// ticket mantis 0005559: commentata la chiamata loadMapApi e caricate le api di google tramite ajaxloader
 //		loadMapApi();
 		AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
-		options.setOtherParms("sensor=false");
+		options.setOtherParms("key=AIzaSyDlo0dxv9XSrIL2MgN6Kf1aGdtnZROU6SY");
 		Runnable callback = new Runnable() {
 			public void run() {
 				GXT.setDefaultTheme(Theme.GRAY, true);
