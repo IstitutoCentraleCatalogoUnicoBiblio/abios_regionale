@@ -1,3 +1,18 @@
+/*
+ * Author Inera srl https://www.inera.it
+ * Copyright (C) 2023  Inera srl https://www.inera.it/
+ *
+ * European Union Public Licence V. 1.2
+ * EUPL (c) the European Community 2017
+ *
+ * This European Union Public Licence (the "EUPL") applies to the Work or Software (as defined below) which is provided under the terms of this Licence.
+ * Any use of the Work, other than as authorised under this Licence is prohibited (to the extent such use is covered by a right of the copyright holder of the Work).
+ * The Original Work is provided under the terms of this Licence when the Licensor (as defined below) has placed the following notice immediately following the copyright notice for the Original Work:
+ * Licensed under the EUPL V.1.2 or has expressed by any other mean his willingness to license under the EUPL.
+ *
+ * You should have received a copy of the European Union Public Licence V. 1.2 along with this program.  If not, see https://eupl.eu/1.2/en/
+ */
+
 TAVOLA01_1 = select r.descrizione as regione, count(*), d.nabitanti from biblioteca as b, localita as l, regione as r, dati_regioni_istat as d where b.id_loc=l.id_loc and l.id_reg=r.id_reg and r.id_reg=d.id_reg and b.stato != 'CANCELLATA' group by r.descrizione, d.nabitanti, d.id_sort order by d.id_sort
 TAVOLA01p_1 = select p1.descrizione as regione, count(*), d.nabitanti from biblioteca as b, localita as l, regione as r, dati_regioni_istat as d, provincia as p1 where b.id_loc=l.id_loc and l.id_reg=r.id_reg and l.id_pro=p1.id_pro and r.id_reg=17 and r.id_reg=d.id_reg and b.stato != 'CANCELLATA' group by r.descrizione, d.nabitanti, d.id_sort order by d.id_sort
 TAVOLA01b_1 = select p.descrizione as provincia, r.descrizione as regione, count(*), d.nabitanti from biblioteca as b, localita as l, provincia as p, regione as r, dati_province_istat as d, dati_regioni_istat as dr where b.id_loc=l.id_loc and r.id_reg=l.id_reg and r.id_reg=dr.id_reg and l.id_pro=p.id_pro and dr.id_reg=l.id_reg and p.id_pro=d.id_pro and dr.descrizione_zona like '%NORD%'  and b.stato != 'CANCELLATA' group by p.descrizione, dr.id_sort, r.descrizione, d.nabitanti order by dr.id_sort, p.descrizione

@@ -1,3 +1,18 @@
+/*
+ * Author Inera srl https://www.inera.it
+ * Copyright (C) 2023  Inera srl https://www.inera.it/
+ *
+ * European Union Public Licence V. 1.2
+ * EUPL (c) the European Community 2017
+ *
+ * This European Union Public Licence (the "EUPL") applies to the Work or Software (as defined below) which is provided under the terms of this Licence.
+ * Any use of the Work, other than as authorised under this Licence is prohibited (to the extent such use is covered by a right of the copyright holder of the Work).
+ * The Original Work is provided under the terms of this Licence when the Licensor (as defined below) has placed the following notice immediately following the copyright notice for the Original Work:
+ * Licensed under the EUPL V.1.2 or has expressed by any other mean his willingness to license under the EUPL.
+ *
+ * You should have received a copy of the European Union Public Licence V. 1.2 along with this program.  If not, see https://eupl.eu/1.2/en/
+ */
+
 TAVOLA01_1 = select r.denominazione as regione, count(*) as count, d.totale_abitanti as nabitanti from biblioteca as b, comune as c, provincia as p, regione as r, dati_regioni_istat as d where b.id_comune=c.id_comune and c.id_provincia=p.id_provincia and p.id_regione=r.id_regione and r.id_regione=d.id_regione and b.id_stato_biblioteca_workflow != 4 group by r.denominazione, d.totale_abitanti, d.id_sort order by d.id_sort
 TAVOLA01a_1 = select p.denominazione as provincia, r.denominazione as regione, count(*) as count, d.totale_abitanti as nabitanti from biblioteca as b, comune as c, provincia as p, regione as r, dati_province_istat as d, dati_regioni_istat as dr where b.id_comune=c.id_comune and c.id_provincia=p.id_provincia and p.id_regione=r.id_regione and r.id_regione=dr.id_regione and p.id_provincia=d.id_provincia and (dr.descrizione_zona like '%SUD%' or dr.descrizione_zona like '%INSULARE%')  and b.id_stato_biblioteca_workflow != 4 group by p.denominazione, dr.id_sort, r.denominazione, d.totale_abitanti order by dr.id_sort, p.denominazione
 TAVOLA01b_1 = select r.denominazione as regione, count(*) as count, d.totale_abitanti as nabitanti from biblioteca as b, comune as c, provincia as p, regione as r, dati_regioni_istat as d, ente as e where b.id_tipologia_funzionale>0 and b.id_ente=e.id_ente and e.id_ente_tipologia_amministrativa>0 and not(b.id_biblioteca in (select sc.id_biblioteca from stato_catalogazione as sc)) and b.id_comune=c.id_comune and c.id_provincia=p.id_provincia and p.id_regione=r.id_regione and r.id_regione=d.id_regione and b.id_stato_biblioteca_workflow != 4 group by r.denominazione, d.totale_abitanti, d.id_sort order by d.id_sort
